@@ -63,14 +63,17 @@ MRECT ZPlayerListBoxLook::GetClientRect(MListBox* pListBox, MRECT& r)
 	return r;
 }
 
-float GetF(float _old,float _new)
-{
-	return _old/_new;
-}
-
 float GetF(float _new)
 {
-	return _new/800.f;
+	float adjustWidth = _new / 800.f;
+	if (RGetWidthScreen() != 0.75f)
+	{
+		if (RGetIsWidthScreen())
+			adjustWidth = _new / 960.f;
+		if (RGetIs16x9())
+			adjustWidth = _new / 1024.f;
+	}
+	return adjustWidth;
 }
 
 
@@ -397,22 +400,22 @@ void ZPlayerListBox::SetBitmap( MBitmap* pBitmap)
 
 void ZPlayerListBox::AddTestItems()
 {
-/*
-	switch (m_nMode)
+
+/*	switch (m_nMode)
 	{
 	case PLAYERLISTMODE_CHANNEL:
-		AddPlayer(MUID(0,0),PS_FIGHT,34,"아이디6글자1","클랜명여섯자",24401,MMUG_FREE,1);
-		AddPlayer(MUID(0,1),PS_WAIT ,10,"아이디6글자2","클랜명여섯자",24401,MMUG_FREE,2);
-		AddPlayer(MUID(0,2),PS_LOBBY,11,"아이디6글자3","클랜명여섯자",24401,MMUG_FREE,3);
-		AddPlayer(MUID(0,3),PS_LOBBY,99,"아이디6글자4","클랜명여섯자",24401,MMUG_FREE,4);
-		AddPlayer(MUID(0,4),PS_LOBBY, 3,"아이디6글자5","클랜명여섯자",24401,MMUG_FREE,5);
-		AddPlayer(MUID(0,5),PS_LOBBY, 1,"아이디6글자6","클랜명여섯자",24401,MMUG_FREE,6);
-		AddPlayer(MUID(0,6),PS_LOBBY,33,"아이디6글자7","클랜명여섯자",24401,MMUG_FREE,7);
-		AddPlayer(MUID(0,7),PS_LOBBY,45,"아이디6글자8","클랜명여섯자",24401,MMUG_FREE,8);
-		AddPlayer(MUID(0,8),PS_LOBBY,44,"아이디6글자9","클랜명여섯자",24401,MMUG_FREE,9);
+		AddPlayer(MUID(0,0),PS_FIGHT,34,"TestPlayer1","TestClan",24401,MMUG_FREE,1);
+		AddPlayer(MUID(0,1),PS_WAIT ,10,"TestPlayer2","TestClan",24401,MMUG_FREE,2);
+		AddPlayer(MUID(0,2),PS_LOBBY,11,"TestPlayer3","TestClan",24401,MMUG_FREE,3);
+		AddPlayer(MUID(0,3),PS_LOBBY,99,"TestPlayer4","TestClan",24401,MMUG_FREE,4);
+		AddPlayer(MUID(0,4),PS_LOBBY, 3,"TestPlayer5","TestClan",24401,MMUG_FREE,5);
+		AddPlayer(MUID(0,5),PS_LOBBY, 1,"TestPlayer6","TestClan",24401,MMUG_FREE,6);
+		AddPlayer(MUID(0,6),PS_LOBBY,33,"TestPlayer7","TestClan",24401,MMUG_FREE,7);
+		AddPlayer(MUID(0,7),PS_LOBBY,45,"TestPlayer8","TestClan",24401,MMUG_FREE,8);
+		AddPlayer(MUID(0,8),PS_LOBBY,44,"TestPlayer9","TestClan",24401,MMUG_FREE,9);
 		break;
 	}
-//*/
+*/
 }
 
 void GetRectMul(MRECT* rect,MRECT* org_rect,float f)
