@@ -1,0 +1,62 @@
+
+USE LogDB
+GO
+
+IF OBJECT_ID('spSetHackingBlock') IS NOT NULL
+ DROP PROC spSetHackingBlock
+GO
+
+CREATE PROC spSetHackingBlock  
+ @AID int  
+, @CID int  
+, @HackingType tinyint  
+, @IPPart1 tinyint  
+, @IPPart2 tinyint  
+, @IPPart3 tinyint  
+, @IPPart4 tinyint  
+, @EndHackingBlockDate smalldatetime  
+, @ServerID tinyint  
+, @ChannelName varchar(64)  
+, @Comment varchar(128)  
+, @HackingLevel tinyint  
+AS  
+BEGIN  
+ SET NOCOUNT ON  
+  
+ -- @HackingLevel : 1.Only log, 2.Set user state and log.  
+ IF (@HackingLevel < 1) OR (@HackingLevel > 2)  
+  RETURN   
+  
+ IF NOT EXISTS(SELECT AID FROM GunzDB..Account(NOLOCK) WHERE AID = @AID)   
+  RETURN  
+  
+ BEGIN TRAN   
+  
+ -- 1 : Log only.  
+ -- 2 : Set account block and log.  
+  
+ IF 1 = @HackingLevel BEGIN  
+  UPDATE GunzDB..Account  
+  SET HackingType = @HackingType, HackingRegTime = GETDATE()  
+   , EndHackingBlockTime = @EndHackingBlockDate   
+  WHERE AID = @AID  AND ISNULL(EndHackingBlockTime, '2000-01-01 00:00') < @EndHackingBlockDate
+  IF (0 <> @@ERROR) BEGIN  
+   ROLLBACK  
+   RETURN  
+  END  
+ END  
+  
+ INSERT INTO  LogDB..HackingBlockLog(AID, CID, HackingType, IPPart1, IPPart2, IPPart3, IPPart4  
+  , RegDate, ServerID, ChannelName, Comment)  
+ VALUES(@AID, @CID, @HackingType, @IPPart1, @IPPart2, @IPPart3, @IPPart4  
+  , GETDATE(), @ServerID, @ChannelName, @Comment)  
+ IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+  ROLLBACK TRAN   
+  RETURN  
+ END  
+   
+ COMMIT TRAN   
+END  
+
+---------------------------------------------------------------------	
+

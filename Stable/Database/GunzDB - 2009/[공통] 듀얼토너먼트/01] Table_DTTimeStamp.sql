@@ -1,0 +1,9 @@
+CREATE TABLE dbo.DTTimeStamp
+(
+	ID			INT		NOT NULL,	
+	TimeStamp	CHAR(8) NOT NULL,
+	Closed		TINYINT NOT NULL,
+	TotalUser	INT	
+	
+	CONSTRAINT DTTimeStamp_PK PRIMARY KEY CLUSTERED (TimeStamp ASC)
+)

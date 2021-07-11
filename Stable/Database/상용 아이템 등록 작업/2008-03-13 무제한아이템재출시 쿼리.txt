@@ -1,0 +1,62 @@
+- 무기 4종 아이템 가격, 기간(무제한) 정보 변경 쿼리문
+파이오니어
+UPDATE CashShop SET CashPrice = 12000, RentType = NULL WHERE CSID = 357
+
+피스메이커 x2
+UPDATE CashShop SET CashPrice = 12000, RentType = NULL WHERE CSID = 358
+
+가룸
+UPDATE CashShop SET CashPrice = 12000, RentType = NULL WHERE CSID = 359
+
+새크리파이스
+UPDATE CashShop SET CashPrice = 12000, RentType = NULL WHERE CSID = 360
+
+- 세트 2종 아이템 가격, 기간(무제한) 정보 변경 쿼리문
+남성용 카르페디엠 학생복 세트
+UPDATE CashSetShop SET CashPrice = 9500, RentType = NULL WHERE CSSID = 57
+
+여성용 카르페디엠 학생복 세트
+UPDATE CashSetShop SET CashPrice = 9500, RentType = NULL WHERE CSSID = 58
+
+남성 디바인핸즈 세트
+UPDATE CashSetShop SET CashPrice = 6900, RentType = NULL WHERE CSSID = 59
+
+여성 디바인핸즈 세트
+UPDATE CashSetShop SET CashPrice = 6900, RentType = NULL WHERE CSSID = 60
+
+* 220.90.199.149(게임용DB) SQL 연결 sa / 3dalok 쿼리수행후 220.90.199.145(웹용DB)에 꼭 미러링 하자.
+
+- 진행 아이템 웹 오픈 속성 변경 쿼리문 
+ = 0 : close
+ = 1 : open
+UPDATE CashShop SET Opened = 1 WHERE CSID = 357
+UPDATE CashShop SET Opened = 1 WHERE CSID = 358
+UPDATE CashShop SET Opened = 1 WHERE CSID = 359
+UPDATE CashShop SET Opened = 1 WHERE CSID = 360
+
+UPDATE CashSetShop SET Opened = 1 WHERE CSSID = 57
+UPDATE CashSetShop SET Opened = 1 WHERE CSSID = 58
+UPDATE CashSetShop SET Opened = 1 WHERE CSSID = 59
+UPDATE CashSetShop SET Opened = 1 WHERE CSSID = 60
+
+- 원상 복구 쿼리문
+UPDATE CashShop SET CashPrice = 3500, RentType = 1 WHERE CSID = 357
+UPDATE CashShop SET CashPrice = 3500, RentType = 1 WHERE CSID = 358
+UPDATE CashShop SET CashPrice = 3500, RentType = 1 WHERE CSID = 359
+UPDATE CashShop SET CashPrice = 3500, RentType = 1 WHERE CSID = 360
+
+UPDATE CashSetShop SET CashPrice = 5000, RentType = 1 WHERE CSSID = 57
+UPDATE CashSetShop SET CashPrice = 5000, RentType = 1 WHERE CSSID = 57
+UPDATE CashSetShop SET CashPrice = 3800, RentType = 1 WHERE CSSID = 57
+UPDATE CashSetShop SET CashPrice = 3800, RentType = 1 WHERE CSSID = 57
+
+- 기간별 아이템 구성 테이블 삭제 쿼리문 하루뒤에 작업하자
+DELETE * FROM RentCashShopPrice WHERE CSID = 357
+DELETE * FROM RentCashShopPrice WHERE CSID = 358
+DELETE * FROM RentCashShopPrice WHERE CSID = 359
+DELETE * FROM RentCashShopPrice WHERE CSID = 360
+
+DELETE * FROM RentCashSetShopPrice WHERE CSSID = 57
+DELETE * FROM RentCashSetShopPrice WHERE CSSID = 58
+DELETE * FROM RentCashSetShopPrice WHERE CSSID = 59
+DELETE * FROM RentCashSetShopPrice WHERE CSSID = 60

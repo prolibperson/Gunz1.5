@@ -1,0 +1,61 @@
+﻿<Application x:Class="ZLauncher.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ZLauncher"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="AllowsTransparency" Value="True"/>
+            <Setter Property="ResizeMode" Value="CanMinimize"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="WindowState" Value="Normal"/>
+            <Setter Property="AllowDrop" Value="False"/>
+            <Setter Property="Background" Value="#FF0591F1"/>
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Grid>
+                            <Border x:Name="MainBorder" BorderBrush="{DynamicResource MainWindowBorderBrush}" BorderThickness="1" CornerRadius="2" Background="{DynamicResource MainWindowBackgroundBrush}">
+                                <DockPanel LastChildFill="True">
+                                    <Rectangle x:Name="PART_LEFT_BORDER" Width="2" DockPanel.Dock="Left">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Rectangle x:Name="PART_RIGHT_BORDER" Width="2" DockPanel.Dock="Right">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Rectangle x:Name="PART_TOP_BORDER" DockPanel.Dock="Top" Height="2">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Rectangle x:Name="PART_BOTTOM_BORDER" Height="2" DockPanel.Dock="Bottom">
+                                        <Rectangle.Fill>
+                                            <SolidColorBrush Color="Transparent" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Border x:Name="PART_TITLEBAR" Margin="2,0,2,2" Height="40" DockPanel.Dock="Top" CornerRadius="2" Background="Transparent">
+                                        <DockPanel LastChildFill="False">
+                                            <TextBlock Margin="8,0,0,4" VerticalAlignment="Center" FontStretch="UltraExpanded" Foreground="Black" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Text="{TemplateBinding Title}" FontSize="16" />
+                                            <Button x:Name="PART_CLOSE" DockPanel.Dock="Right" Style="{DynamicResource FlatButton}" VerticalAlignment="Center" Margin="0,0,4,0">
+                                                <Image x:Name="Button_Close">
+                                                    
+                                                </Image>
+                                            </Button>
+                                        </DockPanel>
+                                    </Border>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Application.Resources>
+</Application>

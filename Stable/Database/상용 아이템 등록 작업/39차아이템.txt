@@ -1,0 +1,279 @@
+﻿--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_520038">남성용 핌블 윈터 머리띠</STR>
+<STR id="ZITEM_DESC_520038">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 머리띠. 남성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="520038" name="STR:ZITEM_NAME_520038" mesh_name="eq_head_winter" totalpoint="0" 
+		type="equip" iscashitem="true" res_sex="m" res_level="25" slot="head" weight="2" bt_price="500000" 
+		hp="2" ap="8" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520038" />
+
+INSERT INTO Item (ItemID, Name) Values (520038, '남성용 핌블 윈터 머리띠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=4, Weight=2, HP=2, AP=8, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 머리띠. 남성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 520038
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_520039">남성용 신의 오라 머리장식</STR>
+<STR id="ZITEM_DESC_520039">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 머리장식. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="520039" name="STR:ZITEM_NAME_520039" mesh_name="eq_head_aura" totalpoint="0" 
+		type="equip" iscashitem="true" res_sex="m" res_level="25" slot="head" weight="4" bt_price="500000" 
+		hp="3" ap="10" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520039" />
+
+INSERT INTO Item (ItemID, Name) Values (520039, '남성용 신의 오라 머리장식')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=4, Weight=4, HP=3, AP=10, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 머리장식. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 520039
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_520538">여성용 핌블 윈터 머리띠</STR>
+<STR id="ZITEM_DESC_520538">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 머리띠. 여성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="520538" name="STR:ZITEM_NAME_520538" mesh_name="eq_head_winter" totalpoint="0" 
+		type="equip" iscashitem="true" res_sex="f" res_level="25" slot="head" weight="2" bt_price="500000" 
+		hp="2" ap="8" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520538" />
+
+INSERT INTO Item (ItemID, Name) Values (520538, '여성용 핌블 윈터 머리띠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=4, Weight=2, HP=2, AP=8, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 머리띠. 여성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 520538
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_520539">여성용 신의 오라 머리장식</STR>
+<STR id="ZITEM_DESC_520539">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 머리장식. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="520539" name="STR:ZITEM_NAME_520539" mesh_name="eq_head_aura" totalpoint="0" 
+		type="equip" iscashitem="true" res_sex="f" res_level="25" slot="head" weight="4" bt_price="500000" 
+		hp="3" ap="10" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520539" />
+
+INSERT INTO Item (ItemID, Name) Values (520539, '여성용 신의 오라 머리장식')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=4, Weight=4, HP=3, AP=10, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 머리장식. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 520539
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_521030">남성용 핌블 윈터 코트</STR>
+<STR id="ZITEM_DESC_521030">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 코트. 남성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="521030" name="STR:ZITEM_NAME_521030" mesh_name="eq_chest_winter" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="m" res_level="25" slot="chest" weight="13" bt_price="500000" 
+		hp="3" ap="24" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521030" />
+
+INSERT INTO Item (ItemID, Name) Values (521030, '남성용 핌블 윈터 코트')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=5, Weight=13, HP=3, AP=24, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 코트. 남성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 521030
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_521031">남성용 신의 오라 상의</STR>
+<STR id="ZITEM_DESC_521031">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 상의. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="521031" name="STR:ZITEM_NAME_521031" mesh_name="eq_chest_aura" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="m" res_level="25" slot="chest" weight="16" bt_price="500000" 
+		hp="5" ap="26" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521031" />
+
+INSERT INTO Item (ItemID, Name) Values (521031, '남성용 신의 오라 상의')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=5, Weight=16, HP=5, AP=26, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 상의. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 521031
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_521530">여성용 핌블 윈터 코트</STR>
+<STR id="ZITEM_DESC_521530">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 코트. 여성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="521530" name="STR:ZITEM_NAME_521530" mesh_name="eq_chest_winter" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="f" res_level="25" slot="chest" weight="13" bt_price="500000" 
+		hp="3" ap="24" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521530" />
+
+INSERT INTO Item (ItemID, Name) Values (521530, '여성용 핌블 윈터 코트')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=5, Weight=13, HP=3, AP=24, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 코트. 여성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 521530
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_521531">여성용 신의 오라 상의</STR>
+<STR id="ZITEM_DESC_521531">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 상의. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="521531" name="STR:ZITEM_NAME_521531" mesh_name="eq_chest_aura" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="f" res_level="25" slot="chest" weight="16" bt_price="500000" 
+		hp="5" ap="26" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521531" />
+
+INSERT INTO Item (ItemID, Name) Values (521531, '여성용 신의 오라 상의')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=5, Weight=16, HP=5, AP=26, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 상의. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 521531
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_522025">남성용 핌블 윈터 장갑</STR>
+<STR id="ZITEM_DESC_522025">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 장갑. 남성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="522025" name="STR:ZITEM_NAME_522025" mesh_name="eq_hands_winter" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="m" res_level="25" slot="hands" weight="4" bt_price="500000" 
+		hp="2" ap="16" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522025" />
+
+INSERT INTO Item (ItemID, Name) Values (522025, '남성용 핌블 윈터 장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=6, Weight=4, HP=2, AP=16, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 장갑. 남성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 522025
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_522026">남성용 신의 오라 장갑</STR>
+<STR id="ZITEM_DESC_522026">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 장갑. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="522026" name="STR:ZITEM_NAME_522026" mesh_name="eq_hands_aura" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="m" res_level="25" slot="hands" weight="5" bt_price="500000" 
+		hp="3" ap="16" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522026" />
+
+INSERT INTO Item (ItemID, Name) Values (522026, '남성용 신의 오라 장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=6, Weight=5, HP=3, AP=16, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 장갑. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 522026
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_522525">여성용 핌블 윈터 장갑</STR>
+<STR id="ZITEM_DESC_522525">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 장갑. 여성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="522525" name="STR:ZITEM_NAME_522525" mesh_name="eq_hands_winter" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="f" res_level="25" slot="hands" weight="4" bt_price="500000" 
+		hp="2" ap="16" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522525" />
+
+INSERT INTO Item (ItemID, Name) Values (522525, '여성용 핌블 윈터 장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=6, Weight=4, HP=2, AP=16, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 장갑. 여성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 522525
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_522526">여성용 신의 오라 장갑</STR>
+<STR id="ZITEM_DESC_522526">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 장갑. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="522526" name="STR:ZITEM_NAME_522526" mesh_name="eq_hands_aura" totalpoint="0" iscashitem="true" 
+		type="equip" res_sex="f" res_level="25" slot="hands" weight="5" bt_price="500000" 
+		hp="3" ap="16" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522526" />
+
+INSERT INTO Item (ItemID, Name) Values (522526, '여성용 신의 오라 장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=6, Weight=5, HP=3, AP=16, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 장갑. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 522526
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_523028">남성용 핌블 윈터 바지</STR>
+<STR id="ZITEM_DESC_523028">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 바지. 남성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="523028" name="STR:ZITEM_NAME_523028" mesh_name="eq_legs_winter" totalpoint="0" type="equip"
+		res_sex="m" res_level="25" slot="legs" weight="12" bt_price="500000" hp="3" ap="24" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523028" />
+
+INSERT INTO Item (ItemID, Name) Values (523028, '남성용 핌블 윈터 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=7, Weight=12, HP=3, AP=24, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 바지. 남성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 523028
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_523029">남성용 신의 오라 바지</STR>
+<STR id="ZITEM_DESC_523029">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 바지. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="523029" name="STR:ZITEM_NAME_523029" mesh_name="eq_legs_aura" totalpoint="0" type="equip" 
+		res_sex="m" res_level="25" slot="legs" weight="15" bt_price="500000" hp="4" ap="28" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523029" />
+
+INSERT INTO Item (ItemID, Name) Values (523029, '남성용 신의 오라 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=7, Weight=15, HP=4, AP=28, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 바지. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 523029
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_523528">여성용 핌블 윈터 바지</STR>
+<STR id="ZITEM_DESC_523528">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 바지. 여성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="523528" name="STR:ZITEM_NAME_523528" mesh_name="eq_legs_winter" totalpoint="0" type="equip" 
+		res_sex="f" res_level="25" slot="legs" weight="12" bt_price="500000" hp="3" ap="24" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523528" />
+
+INSERT INTO Item (ItemID, Name) Values (523528, '여성용 핌블 윈터 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=7, Weight=12, HP=3, AP=24, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 바지. 여성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 523528
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_523529">여성용 신의 오라 치마</STR>
+<STR id="ZITEM_DESC_523529">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 치마. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="523529" name="STR:ZITEM_NAME_523529" mesh_name="eq_legs_aura" totalpoint="0" type="equip" 
+		res_sex="f" res_level="25" slot="legs" weight="15" bt_price="500000" hp="4" ap="28" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523529" />
+
+INSERT INTO Item (ItemID, Name) Values (523529, '여성용 신의 오라 치마')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=7, Weight=15, HP=4, AP=28, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 치마. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 523529
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_524028">남성용 핌블 윈터 부츠</STR>
+<STR id="ZITEM_DESC_524028">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 부츠. 남성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="524028" name="STR:ZITEM_NAME_524028" mesh_name="eq_feet_winter" totalpoint="0" type="equip" 
+		res_sex="m" res_level="25" slot="feet" weight="4" bt_price="500000" hp="2" ap="18" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524028" />
+
+INSERT INTO Item (ItemID, Name) Values (524028, '남성용 핌블 윈터 부츠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=8, Weight=4, HP=2, AP=18, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 부츠. 남성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 524028
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_524029">남성용 신의 오라 신발</STR>
+<STR id="ZITEM_DESC_524029">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 신발. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="524029" name="STR:ZITEM_NAME_524029" mesh_name="eq_feet_aura" totalpoint="0" type="equip" 
+		res_sex="m" res_level="25" slot="feet" weight="5" bt_price="500000" hp="2" ap="20" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524029" />
+
+INSERT INTO Item (ItemID, Name) Values (524029, '남성용 신의 오라 신발')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=8, Weight=5, HP=2, AP=20, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 신발. 남성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 524029
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_524528">여성용 핌블 윈터 부츠</STR>
+<STR id="ZITEM_DESC_524528">혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 부츠. 여성용 (NHN 건즈의 Azume가 디자인한 옷)</STR>
+
+	<ITEM id="524528" name="STR:ZITEM_NAME_524528" mesh_name="eq_feets_winter" totalpoint="0" type="equip" 
+		res_sex="f" res_level="25" slot="feet" weight="4" bt_price="500000" hp="2" ap="18" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524528" />
+
+INSERT INTO Item (ItemID, Name) Values (524528, '여성용 핌블 윈터 부츠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=8, Weight=4, HP=2, AP=18, MAXWT=0, 
+Description='혹독한 추위가 매몰아치는 대륙으로부터 멀리 떨어진 북방지역. 연중 무휴 겨울인 그곳에 살면서 추위에 내성을 가지게 된 민족이 사용한다는 부츠. 여성용 (NHN 건즈의 Azume가 디자인한 옷)' 
+WHERE ItemID = 524528
+
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_524529">여성용 신의 오라 신발</STR>
+<STR id="ZITEM_DESC_524529">신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 신발. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)</STR>
+
+	<ITEM id="524529" name="STR:ZITEM_NAME_524529" mesh_name="eq_feets_aura" totalpoint="0" type="equip" 
+		res_sex="f" res_level="25" slot="feet" weight="5" bt_price="500000" hp="2" ap="20" iscashitem="true" 
+		maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524529" />
+
+INSERT INTO Item (ItemID, Name) Values (524529, '여성용 신의 오라 신발')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=8, Weight=5, HP=2, AP=20, MAXWT=0, 
+Description='신에 대한 믿음을 세력 확장을 하는데 이용함으로써 빠른 속도로 세를 늘리고, 막대한 부를 축적했던 갱단 브라더후드. 그 갱단의 단원들이 사용하는 신발. 여성용 (NHN 건즈의 Xlll이 디자인한 옷)' 
+WHERE ItemID = 524529

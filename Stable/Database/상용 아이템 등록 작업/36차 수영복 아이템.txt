@@ -1,0 +1,170 @@
+--여자 
+eq_chest_swim
+eq_feet_swim
+eq_hands_swim
+eq_head_swim
+eq_legs_swim
+
+-- 남자
+알로아셔츠 eq_chest_swim
+쓰레빠 eq_feet_swim
+장갑 eq_hands_swim
+선캡 eq_head_swim
+수영복 eq_legs_swim
+
+--------------------------------------------------------------------------------------
+
+<STR id="ZITEM_NAME_520036">남성용 블루비치 모자</STR>
+<STR id="ZITEM_DESC_520036">차양이 달려 여름 해변의 따가운 햇빛에도 끄덕 없을 레저용 모자</STR>
+
+<ITEM id="520036" name="STR:ZITEM_NAME_520036" mesh_name="eq_head_swim" totalpoint="0"
+type="equip" iscashitem="true" res_sex="m" res_level="0" slot="head" weight="2" bt_price="500000"
+hp="0" ap="4" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520036" />
+
+INSERT INTO Item (ItemID, Name) Values (520036, '남성용 블루비치 모자')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=4, Weight=2, HP=0, AP=4, MAXWT=0, 
+Description='차양이 달려 여름 해변의 따가운 햇빛에도 끄덕 없을 레저용 모자' 
+WHERE ItemID = 520036
+
+<STR id="ZITEM_NAME_520536">여성용 블루비치 밀집모자</STR>
+<STR id="ZITEM_DESC_520536">해변의 따가운 햇빛에도 안심!</STR>
+
+<ITEM id="520536" name="STR:ZITEM_NAME_520536" mesh_name="eq_head_swim" totalpoint="0"
+type="equip" iscashitem="true" res_sex="f" res_level="0" slot="head" weight="2" bt_price="500000"
+hp="0" ap="4" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520536" />
+
+INSERT INTO Item (ItemID, Name) Values (520536, '여성용 블루비치 밀집모자')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=4, Weight=2, HP=0, AP=4, MAXWT=0, 
+Description='해변의 따가운 햇빛에도 안심!' 
+WHERE ItemID = 520536
+
+--------------------------------------------------------------------------------------
+
+<STR id="ZITEM_NAME_521028">남성용 블루비치 셔츠</STR>
+<STR id="ZITEM_DESC_521028">화려한 원색의 꽃무늬 프린트가 인상적인 셔츠</STR>
+
+<ITEM id="521028" name="STR:ZITEM_NAME_521028" mesh_name="eq_chest_swim" totalpoint="0" iscashitem="true"
+type="equip" res_sex="m" res_level="0" slot="chest" weight="10" bt_price="500000" 
+hp="5" ap="4" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521028" />
+
+INSERT INTO Item (ItemID, Name) Values (521028, '남성용 블루비치 셔츠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=5, Weight=10, HP=5, AP=4, MAXWT=0, 
+Description='화려한 원색의 꽃무늬 프린트가 인상적인 셔츠' 
+WHERE ItemID = 521028
+
+<STR id="ZITEM_NAME_521528">여성용 블루비치 비키니</STR>
+<STR id="ZITEM_DESC_521528">발랄한 느낌의 비키니 상의</STR>
+
+<ITEM id="521528" name="STR:ZITEM_NAME_521528" mesh_name="eq_chest_swim" totalpoint="0" iscashitem="true"
+type="equip" res_sex="f" res_level="0" slot="chest" weight="10" bt_price="500000"
+hp="5" ap="4" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521528" />	
+
+INSERT INTO Item (ItemID, Name) Values (521528, '여성용 블루비치 비키니')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=5, Weight=10, HP=5, AP=4, MAXWT=0, 
+Description='발랄한 느낌의 비키니 상의 ' 
+WHERE ItemID = 521528
+
+--------------------------------------------------------------------------------------
+
+<STR id="ZITEM_NAME_522023">남성용 블루비치 수영장갑</STR>
+<STR id="ZITEM_DESC_522023">손바닥 부분이 잘 미끄러지지 않게 되어 있는 수영용 장갑</STR>
+
+<ITEM id="522023" name="STR:ZITEM_NAME_522023" mesh_name="eq_hands_swim" totalpoint="0" iscashitem="true"
+type="equip" res_sex="m" res_level="0" slot="hands" weight="1" bt_price="500000"
+hp="2" ap="2" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522023" />
+
+INSERT INTO Item (ItemID, Name) Values (522023, '남성용 블루비치 수영장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=6, Weight=1, HP=2, AP=2, MAXWT=0, 
+Description='손바닥 부분이 잘 미끄러지지 않게 되어 있는 수영용 장갑' 
+WHERE ItemID = 522023
+
+<STR id="ZITEM_NAME_522523">여성용 블루비치 수영장갑</STR>
+<STR id="ZITEM_DESC_522523">천을 둘러 밋밋한 장갑에 포인트를 주었다.</STR>
+
+<ITEM id="522523" name="STR:ZITEM_NAME_522523" mesh_name="eq_hands_swim" totalpoint="0" iscashitem="true"
+type="equip" res_sex="f" res_level="0" slot="hands" weight="1" bt_price="500000"
+hp="2" ap="2" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522523" />
+
+INSERT INTO Item (ItemID, Name) Values (522523, '여성용 블루비치 수영장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=6, Weight=1, HP=2, AP=2, MAXWT=0, 
+Description='천을 둘러 밋밋한 장갑에 포인트를 주었다.' 
+WHERE ItemID = 522523
+
+--------------------------------------------------------------------------------------
+
+<STR id="ZITEM_NAME_523026">남성용 블루비치 수영바지</STR>
+<STR id="ZITEM_DESC_523026">짙은 청색의 수영용 바지</STR>
+
+<ITEM id="523026" name="STR:ZITEM_NAME_523026" mesh_name="eq_legs_swim" totalpoint="0" type="equip"
+res_sex="m" res_level="0" slot="legs" weight="10" bt_price="500000" hp="5" ap="4" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523026" />
+
+INSERT INTO Item (ItemID, Name) Values (523026, '남성용 블루비치 수영바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=7, Weight=10, HP=5, AP=4, MAXWT=0, 
+Description='짙은 청색의 수영용 바지' 
+WHERE ItemID = 523026
+
+<STR id="ZITEM_NAME_523526">여성용 블루비치 핫팬츠</STR>
+<STR id="ZITEM_DESC_523526">상의와 일체인 비키니 수영복 위에 핫팬츠를 입어 코디</STR>
+
+<ITEM id="523526" name="STR:ZITEM_NAME_523526" mesh_name="eq_legs_swim" totalpoint="0" type="equip"
+res_sex="f" res_level="0" slot="legs" weight="10" bt_price="500000" hp="5" ap="4" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523526" />
+
+INSERT INTO Item (ItemID, Name) Values (523526, '여성용 블루비치 핫팬츠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=7, Weight=10, HP=5, AP=4, MAXWT=0, 
+Description='상의와 일체인 비키니 수영복 위에 핫팬츠를 입어 코디' 
+WHERE ItemID = 523526
+
+--------------------------------------------------------------------------------------
+
+<STR id="ZITEM_NAME_524026">남성용 블루비치 샌들</STR>
+<STR id="ZITEM_DESC_524026">해변에서 활동하기 편하게 만들어진 샌들</STR>
+
+<ITEM id="524026" name="STR:ZITEM_NAME_524026" mesh_name="eq_feet_swim" totalpoint="0" type="equip"
+res_sex="m" res_level="0" slot="feet" weight="3" bt_price="500000" hp="0" ap="9" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524026" />
+
+INSERT INTO Item (ItemID, Name) Values (524026, '남성용 블루비치 샌들')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=8, Weight=3, HP=0, AP=9, MAXWT=0, 
+Description='해변에서 활동하기 편하게 만들어진 샌들' 
+WHERE ItemID = 524026
+
+<STR id="ZITEM_NAME_524526">여성용 블루비치 샌들</STR>
+<STR id="ZITEM_DESC_524526">해변에서 활동하기 편한 스트랩 샌들</STR>
+
+<ITEM id="524526" name="STR:ZITEM_NAME_524526" mesh_name="eq_feet_swim" totalpoint="0" type="equip"
+res_sex="f" res_level="0" slot="feet" weight="3" bt_price="500000" hp="0" ap="9" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524526" />	
+
+INSERT INTO Item (ItemID, Name) Values (524526, '여성용 블루비치 샌들')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=8, Weight=3, HP=0, AP=9, MAXWT=0, 
+Description='해변에서 활동하기 편한 스트랩 샌들' 
+WHERE ItemID = 524526
+
+--------------------------------------------------------------------------------------
+
+-- 남자 
+insert into characteritem(cid, itemid) values(1091, 520036)
+insert into characteritem(cid, itemid) values(1091, 521028)
+insert into characteritem(cid, itemid) values(1091, 522023)
+insert into characteritem(cid, itemid) values(1091, 523026)
+insert into characteritem(cid, itemid) values(1091, 524026)
+
+
+-- 여자
+insert into characteritem(cid, itemid) values(1178, 520536)
+insert into characteritem(cid, itemid) values(1178, 521528)
+insert into characteritem(cid, itemid) values(1178, 522523)
+insert into characteritem(cid, itemid) values(1178, 523526)
+insert into characteritem(cid, itemid) values(1178, 524526)

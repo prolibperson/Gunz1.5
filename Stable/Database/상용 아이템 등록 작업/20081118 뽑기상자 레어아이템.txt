@@ -1,0 +1,67 @@
+****************************************** String.xml ******************************************
+<STR id="ZITEM_NAME_4023">아일리스 권총 리미티드 x2</STR>
+<STR id="ZITEM_DESC_4023">(양손장비) 레이븐 시리즈의 고질적인 단점으로 지적되었던 경량화는 포기한 채, 화력과 연사력에 중점을 두고 제작된 모델</STR>
+
+<STR id="ZITEM_NAME_6009">아이언크로우 샷건 리미티드</STR>
+<STR id="ZITEM_DESC_6009">아이언크로우에서 사용하는 샷건의 초기 생산판으로 현재는 추가 생산되지 않아 수집가들 사이에 프리미엄이 붙었다. 위력은 현재의 것과 다를 것이 없지만 외형상 현재와 조금 다른 색상을 가지고 있다.</STR>
+
+<STR id="ZITEM_NAME_6010">크루얼리즌 리미티드</STR>
+<STR id="ZITEM_DESC_6010">크루얼리즌의 초기 생산판으로 현재는 추가 생산되지 않아 수집가들 사이에 프리미엄이 붙었다. 위력은 현재의 것과 다를 것이 없지만 외형상 현재와 조금 다른 색상을 가지고 있다.</STR>
+
+
+
+
+****************************************** zItem.xml ******************************************
+	<ITEM id="4023" name="STR:ZITEM_NAME_4023" mesh_name="pistol04_gold" totalpoint="0" type="range"
+		res_sex="a" res_level="7" slot="range" weapon="pistolx2" weight="12" bt_price="0"
+		delay="220" damage="20" ctrl_ability="36" magazine="12" maxbullet="72" reloadtime="4"
+		slug_output="true" gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0"
+		lr="0" color="#FFFFFFFF" image_id="1" bullet_image_id="0" magazine_image_id="0" snd_reload="we_pistol_reload"
+		snd_fire="we_pistol_fire" snd_dryfire="357magrevolver_dryfire" desc="STR:ZITEM_DESC_4023"
+		effect_id="4" rent_period="7" />
+	<ITEM id="6009" name="STR:ZITEM_NAME_6009" mesh_name="shotgun09_gold" totalpoint="0" type="range"
+		res_sex="a" res_level="15" slot="range" weapon="shotgun" weight="18" bt_price="0"
+		delay="900" damage="7" ctrl_ability="60" magazine="5" maxbullet="25" reloadtime="5"
+		slug_output="true" gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0"
+		lr="0" color="#FFFFFFFF" image_id="2" bullet_image_id="0" magazine_image_id="0" snd_reload="we_shotgunpa_reload"
+		snd_fire="we_shotgunpa_fire" snd_dryfire="762arifle_dryfire" desc="STR:ZITEM_DESC_6009"
+		effect_id="7" rent_period="7" />
+	<ITEM id="6010" name="STR:ZITEM_NAME_6010" mesh_name="shotgun06_silver" totalpoint="0" type="range"
+		res_sex="a" res_level="24" slot="range" weapon="shotgun" weight="18" bt_price="0"
+		delay="1100" damage="9" ctrl_ability="90" magazine="5" maxbullet="25" reloadtime="5"
+		slug_output="true" gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0"
+		lr="0" color="#FFFFFFFF" image_id="2" bullet_image_id="0" magazine_image_id="0" snd_reload="we_shotgunpa_reload"
+		snd_fire="we_shotgunpa_fire" snd_dryfire="762arifle_dryfire" desc="STR:ZITEM_DESC_6010"
+		effect_id="7" rent_period="7" />
+
+
+****************************************** item.sql ******************************************
+INSERT INTO Item (ItemID, Name) Values (4023, '아일리스 권총 리미티드 x2')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=20, Delay=220, Controllability=36, Magazine=12, ReloadTime=4, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=72, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=7, Slot=2, Weight=12, HP=0, AP=0, MAXWT=0, 
+Description='(양손장비) 공화국의 병사들이 사용하던 권총의 초기 생산판으로 현재는 추가 생산되지 않아 수집가들 사이에 프리미엄이 붙었다. 위력은 현재의 것과 다를 것이 없지만 외형상 현재와 조금 다른 색상을 가지고 있다.' 
+WHERE ItemID = 4023
+
+INSERT INTO Item (ItemID, Name) Values (6009, '아이언크로우 샷건 리미티드')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=7, Delay=900, Controllability=60, Magazine=5, ReloadTime=5, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=25, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=15, Slot=2, Weight=18, HP=0, AP=0, MAXWT=0, 
+Description='아이언크로우에서 사용하는 샷건의 초기 생산판으로 현재는 추가 생산되지 않아 수집가들 사이에 프리미엄이 붙었다. 위력은 현재의 것과 다를 것이 없지만 외형상 현재와 조금 다른 색상을 가지고 있다.' 
+WHERE ItemID = 6009
+
+INSERT INTO Item (ItemID, Name) Values (6010, '크루얼리즌 리미티드')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=9, Delay=1100, Controllability=90, Magazine=5, ReloadTime=5, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=25, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=24, Slot=2, Weight=18, HP=0, AP=0, MAXWT=0, 
+Description='크루얼리즌의 초기 생산판으로 현재는 추가 생산되지 않아 수집가들 사이에 프리미엄이 붙었다. 위력은 현재의 것과 다를 것이 없지만 외형상 현재와 조금 다른 색상을 가지고 있다.' 
+WHERE ItemID = 6010
+
+****************************************** weapon.xml ******************************************
+	<AddWeaponElu name="pistol04_gold" weapon_motion_type = "3" weapon_type = "3" >
+		<AddBaseModel name="pistol04_gold" filename="model/weapon/pistol/pistol04_gold.elu" />
+	</AddWeaponElu>
+
+	<AddWeaponElu name="shotgun09_gold" weapon_motion_type = "4" weapon_type = "4" >
+		<AddBaseModel name="shotgun09_gold" filename="model/weapon/shotgun/shotgun09_gold.elu" />
+	</AddWeaponElu>
+	<AddWeaponElu name="shotgun06_silver" weapon_motion_type = "4" weapon_type = "4" >
+		<AddBaseModel name="shotgun06_silver" filename="model/weapon/shotgun/shotgun06_silver.elu" />
+	</AddWeaponElu>

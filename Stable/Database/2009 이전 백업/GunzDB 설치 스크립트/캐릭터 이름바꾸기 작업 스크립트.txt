@@ -1,0 +1,703 @@
+ÀÌ¸§ ¹Ù²Ù±â ¾ÆÀÌÅÛ ÀÛ¾÷.
+
+
+2007-11-29ÀÏ. À¥¿¡¼­´Â CSID 329¹ø ¾ÆÀÌÅÛÀ» ÀÌ¸§¹Ù²Ù±â ¾ÆÀÌÅÛÀ¸·Î »ý°¢À» ÇÏ°í °ü¸®¸¦ ÇÑ´Ù.
+³ªÁß¿¡ Á¾·ù°¡ ¸¹¾ÆÁø´Ù¸é CSID°¡ ¾Æ´Ñ Á¾·ù¸¦ Ãß°¡ÇØ¼­ ºÐ·ùÇÒ ¼ö ÀÖµµ·Ï ÇØ¾ß ÇÑ´Ù.
+
+
+-------------------------------------------------------------
+
+IF OBJECT_ID('AbuseList') IS NOT NULL
+ DROP TABLE AbuseList
+GO
+
+CREATE TABLE AbuseList
+(
+ Word varchar(32) NOT NULL PRIMARY KEY CLUSTERED
+ , id int identity
+)
+go
+
+
+insert into AbuseList(word) values('%[ `>,''!&%.^|:/\"<;?]%');
+
+go
+
+
+-------------------------------------------------------------
+
+
+CREATE TABLE ChangeCharNameLog
+(
+id INT IDENTITY PRIMARY KEY CLUSTERED
+, CID INT NOT NULL 
+, OldName VARCHAR(24) NOT NULL
+, NewName VARCHAR(24) NOT NULL
+, RegDate DATETIME DEFAULT(GETDATE())
+);
+go
+
+CREATE NONCLUSTERED INDEX IX_ChangeCharNameLog_CID
+ON ChangeCharNameLog(CID)
+go
+
+
+-------------------------------------------------------------
+
+
+insert into abuselist(word) values('%18³â%');
+insert into abuselist(word) values('%18³ð%');
+insert into abuselist(word) values('%18»õ³¢%');
+insert into abuselist(word) values('%°¡½¿¸¸Á®%');
+insert into abuselist(word) values('%°¡½¿»¡¾Æ%');
+insert into abuselist(word) values('%°¡½¿»¡¾î%');
+insert into abuselist(word) values('%°¡½¿Á¶¹°¶ô%');
+insert into abuselist(word) values('%°¡½¿ÁÖ¹°·°%');
+insert into abuselist(word) values('%°¡½¿ÂÉ¹°µü%');
+insert into abuselist(word) values('%°¡½¿ÂÉ¹°¶ô%');
+insert into abuselist(word) values('%°¡½¿ÁC¾Æ%');
+insert into abuselist(word) values('%°­°£%');
+insert into abuselist(word) values('%°­°£ÇÑ´Ù%');
+insert into abuselist(word) values('%°³°¡Æ°³â%');
+insert into abuselist(word) values('%°³°¡Æ°´¤%');
+insert into abuselist(word) values('%°³°°Àº³â%');
+insert into abuselist(word) values('%°³°É·¹%');
+insert into abuselist(word) values('%°³°íÄ¡%');
+insert into abuselist(word) values('%°³³Ê¹Ì%');
+insert into abuselist(word) values('%°³³â%');
+insert into abuselist(word) values('%°³³ð%');
+insert into abuselist(word) values('%°³¶ó½»%');
+insert into abuselist(word) values('%°³º¸Áö%');
+insert into abuselist(word) values('%°³ºÎ´Þ%');
+insert into abuselist(word) values('%°³ºÎ¶ö%');
+insert into abuselist(word) values('%°³ºÒ¶ö%');
+insert into abuselist(word) values('%°³ºØ¾Ë%');
+insert into abuselist(word) values('%°³»õ…Ê%');
+insert into abuselist(word) values('%°³»õ³¢%');
+insert into abuselist(word) values('%°³¾²·¡±â%');
+insert into abuselist(word) values('%°³¾²·¹±â%');
+insert into abuselist(word) values('%°³¾¹³â%');
+insert into abuselist(word) values('%°³¾¹ºí%');
+insert into abuselist(word) values('%°³¾¹ÀÚÁö%');
+insert into abuselist(word) values('%°³¾¾¹ß%');
+insert into abuselist(word) values('%°³¾¾¹ß³Ñ%');
+insert into abuselist(word) values('%°³¾¾¹ßÀÚ½»%');
+insert into abuselist(word) values('%°³¾¾ºí%');
+insert into abuselist(word) values('%°³ÀÚÁö%');
+insert into abuselist(word) values('%°³ÀÛµÎ³Ñ%');
+insert into abuselist(word) values('%°³ÀÛµÎ³â%');
+insert into abuselist(word) values('%°³Àâ³â%');
+insert into abuselist(word) values('%°³ÀâÁö¶ö%');
+insert into abuselist(word) values('%°³Á£°¡Æ°³Ñ%');
+insert into abuselist(word) values('%°³Á¿%');
+insert into abuselist(word) values('%°³Áö¶ö%');
+insert into abuselist(word) values('%°³Áö¶ö³Ñ%');
+insert into abuselist(word) values('%°³Áö¶ö³ð%');
+insert into abuselist(word) values('%°³ÈÄ¶ó³â%');
+insert into abuselist(word) values('%°³ÈÄ¶óµé³ð%');
+insert into abuselist(word) values('%°³ÈÄ¶ó»õ³¢%');
+insert into abuselist(word) values('%°ÂÀâ³â%');
+insert into abuselist(word) values('%°ÂÀâÁö¶ö%');
+insert into abuselist(word) values('%°Å½Ã±â%');
+insert into abuselist(word) values('%°É·¡³â%');
+insert into abuselist(word) values('%°É·¹%');
+insert into abuselist(word) values('%°É·¹°°Àº³â%');
+insert into abuselist(word) values('%°É·¹³â%');
+insert into abuselist(word) values('%°É·¹ÇÉ³â%');
+insert into abuselist(word) values('%°ÔºÎ·²%');
+insert into abuselist(word) values('%°Ô¼¼³¢%');
+insert into abuselist(word) values('%°ÔÁö¶ö³ð%');
+insert into abuselist(word) values('%±ÍµÎ%');
+insert into abuselist(word) values('%±×Áö¾ß%');
+insert into abuselist(word) values('%±òµü%');
+insert into abuselist(word) values('%±õÄ¡%');
+insert into abuselist(word) values('%±ú½Ø³¢%');
+insert into abuselist(word) values('%²¨Á®%');
+insert into abuselist(word) values('%²Á´ë%');
+insert into abuselist(word) values('%²Ã±õ%');
+insert into abuselist(word) values('%²Ã¹Þ³Ä%');
+insert into abuselist(word) values('%³»²¨»¡¾Æ%');
+insert into abuselist(word) values('%³»²¨ÁC¾Æ%');
+insert into abuselist(word) values('%³»¹Ì¶ö%');
+insert into abuselist(word) values('%³»¹öÁö%');
+insert into abuselist(word) values('%³»¾¾¹ß%');
+insert into abuselist(word) values('%³»ÀÚÁö%');
+insert into abuselist(word) values('%³»ÀáÁö%');
+insert into abuselist(word) values('%³»Á¶Áö%');
+insert into abuselist(word) values('%³Ê°Å¾Öºñ%');
+insert into abuselist(word) values('%´©³ª°­°£%');
+insert into abuselist(word) values('%´À±×¸Å%');
+insert into abuselist(word) values('%´Ï±â¹Ì%');
+insert into abuselist(word) values('%´Ï¹Ì%');
+insert into abuselist(word) values('%´Ï¹Ì¶ö%');
+insert into abuselist(word) values('%´Ï¹Ì·²%');
+insert into abuselist(word) values('%´Ï¾¾ºê¶ö%');
+insert into abuselist(word) values('%´Ï¾Æ¹ü?%');
+insert into abuselist(word) values('%´Ï¾Æºñ%');
+insert into abuselist(word) values('%´Ï¾Ö¹Ì%');
+insert into abuselist(word) values('%´Ï¾Öºß%');
+insert into abuselist(word) values('%´Ï¾Öºñ%');
+insert into abuselist(word) values('%´ÏÇÒ¾Öºñ%');
+insert into abuselist(word) values('%´ÔÁñ%');
+insert into abuselist(word) values('%´ÚÃÄ%');
+insert into abuselist(word) values('%´âÀº³â%');
+insert into abuselist(word) values('%´ë°¡¸®%');
+insert into abuselist(word) values('%´úÀº»õ³¢%');
+insert into abuselist(word) values('%µ·³â%');
+insert into abuselist(word) values('%µ·»õ³¢%');
+insert into abuselist(word) values('%µ¹À¸³â%');
+insert into abuselist(word) values('%µ¹Àº³Ñ%');
+insert into abuselist(word) values('%µ¹Àº»õ³¢%');
+insert into abuselist(word) values('%µ¿»ý°­°£%');
+insert into abuselist(word) values('%µØÁ®%');
+insert into abuselist(word) values('%µÚÁ®¶ó%');
+insert into abuselist(word) values('%µÞÄ¡±â%');
+insert into abuselist(word) values('%µî½Å%');
+insert into abuselist(word) values('%µþµþÀÌ%');
+insert into abuselist(word) values('%¶Ç¶óÀÌ%');
+insert into abuselist(word) values('%¶Ë±¸³á%');
+insert into abuselist(word) values('%¶ì¹ß%');
+insert into abuselist(word) values('%¶ì¹ß´¤%');
+insert into abuselist(word) values('%¶ìºÒ%');
+insert into abuselist(word) values('%¶ìºí³Ñ%');
+insert into abuselist(word) values('%¸·°£³â%');
+insert into abuselist(word) values('%¸·´ë¾¥¼ÅÁà?%');
+insert into abuselist(word) values('%¸·´ëÁC¾ÆÁà%');
+insert into abuselist(word) values('%¸À°£³â%');
+insert into abuselist(word) values('%¸À¾ø´Â³â%');
+insert into abuselist(word) values('%¸ÀÀÌ°£³â%');
+insert into abuselist(word) values('%¸Á³ª´Ï%');
+insert into abuselist(word) values('%¹Ì¯Q%');
+insert into abuselist(word) values('%¹ÌÄ£%');
+insert into abuselist(word) values('%¹ÌÄ£±¸³ç%');
+insert into abuselist(word) values('%¹ÌÄ£±¸¸Û%');
+insert into abuselist(word) values('%¹ÌÄ£³Ñ%');
+insert into abuselist(word) values('%¹ÌÄ£³â%');
+insert into abuselist(word) values('%¹ÌÄ£³ð%');
+insert into abuselist(word) values('%¹ÌÄ£´®%');
+insert into abuselist(word) values('%¹ÌÄ£»õ³¢%');
+insert into abuselist(word) values('%¹ÌÄ£½¦ÀÌ%');
+insert into abuselist(word) values('%¹ÌÄ£¾¾ºÎ¶ö%');
+insert into abuselist(word) values('%¹ÌÆ¤%');
+insert into abuselist(word) values('%¹ÌÆ¼³Ñ%');
+insert into abuselist(word) values('%¹ÌÆ¾°Í%');
+insert into abuselist(word) values('%¹ÙÁÖÄ«ÀÚÁö%');
+insert into abuselist(word) values('%¹äÆÃ%');
+insert into abuselist(word) values('%¹éº¸Áö%');
+insert into abuselist(word) values('%¹öµû¸®ÀÚÁö%');
+insert into abuselist(word) values('%¹úÃ¢°°Àº³â%');
+insert into abuselist(word) values('%º¬½Å%');
+insert into abuselist(word) values('%º´´Ú%');
+insert into abuselist(word) values('%º´µü%');
+insert into abuselist(word) values('%º´½Å%');
+insert into abuselist(word) values('%º´½Å¼¼¸®%');
+insert into abuselist(word) values('%º´½Å¼Î¸®%');
+insert into abuselist(word) values('%º´½Å¾¾¹ß%');
+insert into abuselist(word) values('%º¸Áö±¸³ç%');
+insert into abuselist(word) values('%º¸Áö±¸¸Û%');
+insert into abuselist(word) values('%º¸Áö³à%');
+insert into abuselist(word) values('%º¸Áöµû¸Ô±â%');
+insert into abuselist(word) values('%º¸Áö¶Õ¾î%');
+insert into abuselist(word) values('%º¸Áö¶ß´õ%');
+insert into abuselist(word) values('%º¸Áö¸Ó¸®¹Ú±â%');
+insert into abuselist(word) values('%º¸Áö¹°%');
+insert into abuselist(word) values('%º¸Áö¹°¸¶¼Å%');
+insert into abuselist(word) values('%º¸Áö¹Ú¾î%');
+insert into abuselist(word) values('%º¸Áö¹ú·Á%');
+insert into abuselist(word) values('%º¸Áö¹ú·á%');
+insert into abuselist(word) values('%º¸Áö¹ú¸®%');
+insert into abuselist(word) values('%º¸Áö¹ú¸®ÀÚ%');
+insert into abuselist(word) values('%º¸Áöº¸Áö%');
+insert into abuselist(word) values('%º¸Áö»¡¾Æ%');
+insert into abuselist(word) values('%º¸Áö»¡¾î%');
+insert into abuselist(word) values('%º¸Áö¿¡ÀÚÁö²¸%');
+insert into abuselist(word) values('%º¸Áö¿¡ÀÚÁö³Ê%');
+insert into abuselist(word) values('%º¸ÁöÀÚÁö%');
+insert into abuselist(word) values('%º¸ÁöÁ¤¾×%');
+insert into abuselist(word) values('%º¸ÁöÁã¾îÂ¥%');
+insert into abuselist(word) values('%º¸ÁöÂîÁ®%');
+insert into abuselist(word) values('%º¸ÁöÂõ¾î%');
+insert into abuselist(word) values('%º¸ÁöÅÐ%');
+insert into abuselist(word) values('%º¸ÁöÅÐ»Ì¾Æ%');
+insert into abuselist(word) values('%º¸ÁöÅÐ¾î%');
+insert into abuselist(word) values('%º¸ÁöÆ²·¡±â%');
+insert into abuselist(word) values('%º¸ÁöÁC¾Æ%');
+insert into abuselist(word) values('%º¸ÁöÁC¾ÆÁà%');
+insert into abuselist(word) values('%º¸ÁöÁC¾î%');
+insert into abuselist(word) values('%º¸Áþ¹°%');
+insert into abuselist(word) values('%º¸Áþ¹°¸¶¼Å%');
+insert into abuselist(word) values('%ºÎ¶ö%');
+insert into abuselist(word) values('%ºÒ¾Ë%');
+insert into abuselist(word) values('%ºØ½Å%');
+insert into abuselist(word) values('%ºØ¾Ë%');
+insert into abuselist(word) values('%ºÛÁö%');
+insert into abuselist(word) values('%ºãµü%');
+insert into abuselist(word) values('%ºé½®%');
+insert into abuselist(word) values('%ºé½Å%');
+insert into abuselist(word) values('%ºù¶í%');
+insert into abuselist(word) values('%ºù½Å%');
+insert into abuselist(word) values('%ºù½Å½¦ÀÌ%');
+insert into abuselist(word) values('%ºü°¡½Ê»õ%');
+insert into abuselist(word) values('%ºü°¡¾Ã»õ%');
+insert into abuselist(word) values('%ºü±¸¸®%');
+insert into abuselist(word) values('%ºü±¼ÀÌ%');
+insert into abuselist(word) values('%»¶Å¥%');
+insert into abuselist(word) values('%»Ç¸£³ë%');
+insert into abuselist(word) values('%»ç±î½Ã%');
+insert into abuselist(word) values('%»ó³â%');
+insert into abuselist(word) values('%»ö°¼%');
+insert into abuselist(word) values('%»öÅ°%');
+insert into abuselist(word) values('%¼º±³%');
+insert into abuselist(word) values('%¼º±³ÇÏÀÚ%');
+insert into abuselist(word) values('%¼º±³ÇØ%');
+insert into abuselist(word) values('%¼ºÆøÇà%');
+insert into abuselist(word) values('%¼¼²¥%');
+insert into abuselist(word) values('%¼¼³¢%');
+insert into abuselist(word) values('%¼½½º%');
+insert into abuselist(word) values('%¼½½ºÇÏÀÚ%');
+insert into abuselist(word) values('%¼½½ºÇØ%');
+insert into abuselist(word) values('%¼½È÷%');
+insert into abuselist(word) values('%½¦³¢%');
+insert into abuselist(word) values('%½§°¼%');
+insert into abuselist(word) values('%½¬¹ë³â%');
+insert into abuselist(word) values('%½¬ÆÈ%');
+insert into abuselist(word) values('%½Ã´óÀÌ%');
+insert into abuselist(word) values('%½Ã¹ß%');
+insert into abuselist(word) values('%½Ã¹ß³â%');
+insert into abuselist(word) values('%½Ã¹ß³ð%');
+insert into abuselist(word) values('%½Ã¹ß»õ³¢%');
+insert into abuselist(word) values('%½Ã¹æ»õ%');
+insert into abuselist(word) values('%½Ã¹ë%');
+insert into abuselist(word) values('%½ÃÆÅ»õ³¢%');
+insert into abuselist(word) values('%½ÃÆÈ³Ñ%');
+insert into abuselist(word) values('%½ÃÆÈ³â%');
+insert into abuselist(word) values('%½ÃÆÈ³ð%');
+insert into abuselist(word) values('%½ÃÆÈ»õ³¢%');
+insert into abuselist(word) values('%½Ê³à%');
+insert into abuselist(word) values('%½Ê¹öÁö%');
+insert into abuselist(word) values('%½ÊºÎ¶ö%');
+insert into abuselist(word) values('%½ÊºÎ·²%');
+insert into abuselist(word) values('%½Ê»õ%');
+insert into abuselist(word) values('%½Ê¼¼ÀÌ%');
+insert into abuselist(word) values('%½Ê¼Î¸®%');
+insert into abuselist(word) values('%½ÊÀÚ¼®%');
+insert into abuselist(word) values('%½ÊÀÚ½»%');
+insert into abuselist(word) values('%½ÊÁö¶ö%');
+insert into abuselist(word) values('%½ÊÃ¢³à%');
+insert into abuselist(word) values('%½ÊÅÊ%');
+insert into abuselist(word) values('%½ÊÅÊ±¸¸®%');
+insert into abuselist(word) values('%½ÊÅÊ±¼ÀÌ%');
+insert into abuselist(word) values('%½ÊÆÈ»õ³¢%');
+insert into abuselist(word) values('%½Ö³â%');
+insert into abuselist(word) values('%½Ö³ð%');
+insert into abuselist(word) values('%½Öº¸Áö%');
+insert into abuselist(word) values('%½Ö½Öº¸Áö%');
+insert into abuselist(word) values('%½Ø³¢%');
+insert into abuselist(word) values('%½Ù½º%');
+insert into abuselist(word) values('%½Ù¾²%');
+insert into abuselist(word) values('%½à³â%');
+insert into abuselist(word) values('%½à´¤%');
+insert into abuselist(word) values('%½à´Æ%');
+insert into abuselist(word) values('%¾²¹Ù»õ³¢%');
+insert into abuselist(word) values('%¾²¹ß%');
+insert into abuselist(word) values('%¾²¹ú%');
+insert into abuselist(word) values('%¾²ºê¶ö½±¼¼%');
+insert into abuselist(word) values('%¾²ÆÄ%');
+insert into abuselist(word) values('%¾º¹ß%');
+insert into abuselist(word) values('%¾ºÆÈ%');
+insert into abuselist(word) values('%¾¾°¡·©³Ñ%');
+insert into abuselist(word) values('%¾¾°¡·©³â%');
+insert into abuselist(word) values('%¾¾°¡·©³ð%');
+insert into abuselist(word) values('%¾¾´ó%');
+insert into abuselist(word) values('%¾¾´óÀÌ%');
+insert into abuselist(word) values('%¾¾µ­%');
+insert into abuselist(word) values('%¾¾¤²%');
+insert into abuselist(word) values('%¾¾¹ß%');
+insert into abuselist(word) values('%¾¾¹ß³â%');
+insert into abuselist(word) values('%¾¾¹ß·Ò%');
+insert into abuselist(word) values('%¾¾¹ßº´½Å%');
+insert into abuselist(word) values('%¾¾¹æ»õ%');
+insert into abuselist(word) values('%¾¾¹æ¼¼%');
+insert into abuselist(word) values('%¾¾¹ë%');
+insert into abuselist(word) values('%¾¾¹ð°¡¸®%');
+insert into abuselist(word) values('%¾¾¹ú%');
+insert into abuselist(word) values('%¾¾¹ú³â%');
+insert into abuselist(word) values('%¾¾¹ú½¦ÀÌ%');
+insert into abuselist(word) values('%¾¾ºÎ%');
+insert into abuselist(word) values('%¾¾ºÎ¶ö%');
+insert into abuselist(word) values('%¾¾ºÎ·²%');
+insert into abuselist(word) values('%¾¾ºÒ¾Ë%');
+insert into abuselist(word) values('%¾¾ºê·²%');
+insert into abuselist(word) values('%¾¾ºí%');
+insert into abuselist(word) values('%¾¾ºí³â%');
+insert into abuselist(word) values('%¾¾•Š»õ³¢%');
+insert into abuselist(word) values('%¾¾¼½³¢%');
+insert into abuselist(word) values('%¾¾ÆÄ³Ñ%');
+insert into abuselist(word) values('%¾¾ÆÅ»õ³¢%');
+insert into abuselist(word) values('%¾¾ÆÅ¼¼³¢%');
+insert into abuselist(word) values('%¾¾ÆÈ%');
+insert into abuselist(word) values('%¾¾Æþ%');
+insert into abuselist(word) values('%¾¾Æþ³Ñ%');
+insert into abuselist(word) values('%¾¾Æþ´¤%');
+insert into abuselist(word) values('%¾¾Æþº¸Áö%');
+insert into abuselist(word) values('%¾¾ÆþÀÚÁö%');
+insert into abuselist(word) values('%¾Ã³â%');
+insert into abuselist(word) values('%¾Ã¹°%');
+insert into abuselist(word) values('%¾Ã¹Ì¶ö%');
+insert into abuselist(word) values('%¾Ã¹öÁö%');
+insert into abuselist(word) values('%¾Ãº¸Áö%');
+insert into abuselist(word) values('%¾ÃºÎ¶ö%');
+insert into abuselist(word) values('%¾Ãºê¶ö%');
+insert into abuselist(word) values('%¾Ã»§±¸%');
+insert into abuselist(word) values('%¾Ã»ÇÁö%');
+insert into abuselist(word) values('%¾Ã»õ%');
+insert into abuselist(word) values('%¾Ã»õ³¢%');
+insert into abuselist(word) values('%¾Ã¼¼%');
+insert into abuselist(word) values('%¾Ã½Ø³¢%');
+insert into abuselist(word) values('%¾ÃÀÚ¼®%');
+insert into abuselist(word) values('%¾ÃÀÚ½»%');
+insert into abuselist(word) values('%¾ÃÀÚÁö%');
+insert into abuselist(word) values('%¾ÃÁö¶ö%');
+insert into abuselist(word) values('%¾ÃÃ¢%');
+insert into abuselist(word) values('%¾ÃÃ¢³à%');
+insert into abuselist(word) values('%¾ÃÅÊ%');
+insert into abuselist(word) values('%¾ÃÅÊ±¼ÀÌ%');
+insert into abuselist(word) values('%¾ÃÅÊÀÌ%');
+insert into abuselist(word) values('%¾ÃÆÈ%');
+insert into abuselist(word) values('%¾Æ°¡¸®%');
+insert into abuselist(word) values('%¾Ö¹«%');
+insert into abuselist(word) values('%¾Ö¹Ì%');
+insert into abuselist(word) values('%¾Ö¹Ì¶ö%');
+insert into abuselist(word) values('%¾Ö¹Ìº¸Áö%');
+insert into abuselist(word) values('%¾Ö¹Ì¾¾¹ð%');
+insert into abuselist(word) values('%¾Ö¹ÌÀÚÁö%');
+insert into abuselist(word) values('%¾Ö¹ÌÀâ³â%');
+insert into abuselist(word) values('%¾Ö¹ÌÁ½¹°%');
+insert into abuselist(word) values('%¾Öºñ%');
+insert into abuselist(word) values('%¾î¹Ì°­°£%');
+insert into abuselist(word) values('%¾î¹Ìµû¸ÔÀÚ%');
+insert into abuselist(word) values('%¾î¹Ì¾¥½ÃÀÚ%');
+insert into abuselist(word) values('%¾ö¸¶°­°£%');
+insert into abuselist(word) values('%¾öÃ¢%');
+insert into abuselist(word) values('%¿¡¹Ì%');
+insert into abuselist(word) values('%¿¡ºñ%');
+insert into abuselist(word) values('%¿°º´%');
+insert into abuselist(word) values('%¿°º´ÇÒ%');
+insert into abuselist(word) values('%¿°”·%');
+insert into abuselist(word) values('%¿³%');
+insert into abuselist(word) values('%¿³¸Ô¾î¶ó%');
+insert into abuselist(word) values('%¿À¸£°¡Áò%');
+insert into abuselist(word) values('%¿Õ¹öÁö%');
+insert into abuselist(word) values('%¿ÕÀÚÁö%');
+insert into abuselist(word) values('%¿ÕÀáÁö%');
+insert into abuselist(word) values('%¿ÕÅÐ¹öÁö%');
+insert into abuselist(word) values('%¿ÕÅÐº¸Áö%');
+insert into abuselist(word) values('%¿ÕÅÐÀÚÁö%');
+insert into abuselist(word) values('%¿ÕÅÐÀáÁö%');
+insert into abuselist(word) values('%¿ä³â%');
+insert into abuselist(word) values('%¿åÁö¸®%');
+insert into abuselist(word) values('%¿ì¹Ì¾¥¼Å%');
+insert into abuselist(word) values('%À¯µÎ%');
+insert into abuselist(word) values('%À¯µÎ»¡¾î%');
+insert into abuselist(word) values('%À¯µÎÁC¾î%');
+insert into abuselist(word) values('%À¯¹ßÁ¶¹°¶ô%');
+insert into abuselist(word) values('%À¯¹æ%');
+insert into abuselist(word) values('%À¯¹æ¸¸Á®%');
+insert into abuselist(word) values('%À¯¹æ»¡¾Æ%');
+insert into abuselist(word) values('%À¯¹æÁÖ¹°·°%');
+insert into abuselist(word) values('%À¯¹æÂÉ¹°µü%');
+insert into abuselist(word) values('%À¯¹æÂÉ¹°·°%');
+insert into abuselist(word) values('%À¯¹æÁC¾Æ%');
+insert into abuselist(word) values('%À¯¹æÁC¾î%');
+insert into abuselist(word) values('%À°°©%');
+insert into abuselist(word) values('%ÀÚ±âÁC¾Æ%');
+insert into abuselist(word) values('%ÀÚÁö±¸³ç%');
+insert into abuselist(word) values('%ÀÚÁö±¸¸Û%');
+insert into abuselist(word) values('%ÀÚÁö²È¾Æ%');
+insert into abuselist(word) values('%ÀÚÁö³ÖÀÚ%');
+insert into abuselist(word) values('%ÀÚÁö¶ß´õ%');
+insert into abuselist(word) values('%ÀÚÁö¶â¾î%');
+insert into abuselist(word) values('%ÀÚÁö¹Ú¾î%');
+insert into abuselist(word) values('%ÀÚÁö»¡¾Æ%');
+insert into abuselist(word) values('%ÀÚÁö»¡¾ÆÁà%');
+insert into abuselist(word) values('%ÀÚÁö»¡¾î%');
+insert into abuselist(word) values('%ÀÚÁö¾¥¼Å%');
+insert into abuselist(word) values('%ÀÚÁö¾²·¹±â%');
+insert into abuselist(word) values('%ÀÚÁöÁ¤°³%');
+insert into abuselist(word) values('%ÀÚÁöÂ©¶ó%');
+insert into abuselist(word) values('%ÀÚÁöÅÐ%');
+insert into abuselist(word) values('%ÀÚÁöÁC¾Æ%');
+insert into abuselist(word) values('%ÀÚÁöÁC¾ÆÁà%');
+insert into abuselist(word) values('%ÀÚÁöÁC¾î%');
+insert into abuselist(word) values('%ÀÛÀºº¸Áö%');
+insert into abuselist(word) values('%ÀáÁö%');
+insert into abuselist(word) values('%ÀáÁö¶Õ¾î%');
+insert into abuselist(word) values('%ÀáÁö¹°¸¶¼Å%');
+insert into abuselist(word) values('%ÀáÁöÅÐ%');
+insert into abuselist(word) values('%ÀáÁþ¹°¸¶¼Å%');
+insert into abuselist(word) values('%Àâ°Í%');
+insert into abuselist(word) values('%Àâ³â%');
+insert into abuselist(word) values('%Àâ³ð%');
+insert into abuselist(word) values('%Àâ¾²·¹±×%');
+insert into abuselist(word) values('%Àç¼·%');
+insert into abuselist(word) values('%Á¡¹°%');
+insert into abuselist(word) values('%Á£°¡Æ°½¦ÀÌ%');
+insert into abuselist(word) values('%Á£°°³»%');
+insert into abuselist(word) values('%Á£±î%');
+insert into abuselist(word) values('%Á£³¿»õ%');
+insert into abuselist(word) values('%Á£´ë°¡¸®%');
+insert into abuselist(word) values('%Á£¶°%');
+insert into abuselist(word) values('%Á£¸¶¹«¸®%');
+insert into abuselist(word) values('%Á£¸¸ÀÌ%');
+insert into abuselist(word) values('%Á£¹°%');
+insert into abuselist(word) values('%Á£¹°³¿»õ%');
+insert into abuselist(word) values('%Á£¹ä%');
+insert into abuselist(word) values('%Á¤¾×¸¶¼Å%');
+insert into abuselist(word) values('%Á¤¾×¸Ô¾î%');
+insert into abuselist(word) values('%Á¤¾×¹ß»ç%');
+insert into abuselist(word) values('%Á¤¾×Â¥%');
+insert into abuselist(word) values('%Á¤¾×ÁC¾Æ%');
+insert into abuselist(word) values('%Á¤ÀÚ¸¶¼Å%');
+insert into abuselist(word) values('%Á¤ÀÚ¸Ô¾î%');
+insert into abuselist(word) values('%Á¤ÀÚÁC¾Æ%');
+insert into abuselist(word) values('%Á¥°°Àº%');
+insert into abuselist(word) values('%Á¥±î%');
+insert into abuselist(word) values('%Á¥ÅÊÀÌ%');
+insert into abuselist(word) values('%Á¦¼·%');
+insert into abuselist(word) values('%Á¶°³³ÐÀº³â%');
+insert into abuselist(word) values('%Á¶°³µûÁ¶?%');
+insert into abuselist(word) values('%Á¶°³¸¶¼ÅÁà?%');
+insert into abuselist(word) values('%Á¶°³¹ú·ÁÁ¶?%');
+insert into abuselist(word) values('%Á¶°³º¸Áö%');
+insert into abuselist(word) values('%Á¶°³¼Ó¹°%');
+insert into abuselist(word) values('%Á¶°³¾¥¼ÅÁà?%');
+insert into abuselist(word) values('%Á¶°³ÁC¾ÆÁà?%');
+insert into abuselist(word) values('%Á¶¶Ç%');
+insert into abuselist(word) values('%Á¶Áö%');
+insert into abuselist(word) values('%Á·°°³»%');
+insert into abuselist(word) values('%Á·±î%');
+insert into abuselist(word) values('%Á·±î³»%');
+insert into abuselist(word) values('%Á¸³ª%');
+insert into abuselist(word) values('%Á¸´Ï%');
+insert into abuselist(word) values('%Á¹¶ó%');
+insert into abuselist(word) values('%Á»¸¶´Ï%');
+insert into abuselist(word) values('%Á»¹°%');
+insert into abuselist(word) values('%Á»¾²·¹±â%');
+insert into abuselist(word) values('%Á¼¹ä%');
+insert into abuselist(word) values('%Á¼ºü¶ó¶ó%');
+insert into abuselist(word) values('%Á½%');
+insert into abuselist(word) values('%Á½°¡Æ°´¤%');
+insert into abuselist(word) values('%Á½°£³â%');
+insert into abuselist(word) values('%Á½±î%');
+insert into abuselist(word) values('%Á½±î¸®%');
+insert into abuselist(word) values('%Á½±ö³×%');
+insert into abuselist(word) values('%Á½³¿»õ%');
+insert into abuselist(word) values('%Á½³Ñ%');
+insert into abuselist(word) values('%Á½´ë°¡¸®%');
+insert into abuselist(word) values('%Á½µµ%');
+insert into abuselist(word) values('%Á½¶Ç%');
+insert into abuselist(word) values('%Á½¸¶¹«¸®%');
+insert into abuselist(word) values('%Á½¸¸¾Æ%');
+insert into abuselist(word) values('%Á½¸¸ÀÌ%');
+insert into abuselist(word) values('%Á½¸¸ÇÑ°Í%');
+insert into abuselist(word) values('%Á½¸¸ÇÑ½¦ÀÌ%');
+insert into abuselist(word) values('%Á½¹°%');
+insert into abuselist(word) values('%Á½¹°³¿»õ%');
+insert into abuselist(word) values('%Á½º¸Áö%');
+insert into abuselist(word) values('%Á½ºÎ¶ö%');
+insert into abuselist(word) values('%Á½ºü±¸¸®%');
+insert into abuselist(word) values('%Á½ºü³×%');
+insert into abuselist(word) values('%Á½ºü¶ó¶ó%');
+insert into abuselist(word) values('%Á½ÅÐ%');
+insert into abuselist(word) values('%Á¿%');
+insert into abuselist(word) values('%Á¿°°Àº³ð%');
+insert into abuselist(word) values('%Á¿°°Àº»õ³¢%');
+insert into abuselist(word) values('%Á¿±î%');
+insert into abuselist(word) values('%Á¿±î¶ó%');
+insert into abuselist(word) values('%Á¿³ª%');
+insert into abuselist(word) values('%Á¿³â%');
+insert into abuselist(word) values('%Á¿µµ%');
+insert into abuselist(word) values('%Á¿¸¸¾Æ%');
+insert into abuselist(word) values('%Á¿¸¸ÇÑ³â%');
+insert into abuselist(word) values('%Á¿¸¸ÇÑ³ð%');
+insert into abuselist(word) values('%Á¿¸¸ÇÑ»õ³¢%');
+insert into abuselist(word) values('%Á¿¸Ô¾î%');
+insert into abuselist(word) values('%Á¿¹°%');
+insert into abuselist(word) values('%Á¿¹ä%');
+insert into abuselist(word) values('%Á¿»¡¾Æ%');
+insert into abuselist(word) values('%Á¿»õ³¢%');
+insert into abuselist(word) values('%Á¿ÅÐ%');
+insert into abuselist(word) values('%ÁÁ¸¸ÇÑ°Í%');
+insert into abuselist(word) values('%ÁÖ±Û³â%');
+insert into abuselist(word) values('%ÁÖ±æ³â%');
+insert into abuselist(word) values('%ÁÖµÕ¾Æ¸®%');
+insert into abuselist(word) values('%Áã¶ö%');
+insert into abuselist(word) values('%Áö¶ö%');
+insert into abuselist(word) values('%ÁöŽU%');
+insert into abuselist(word) values('%Áö·²%');
+insert into abuselist(word) values('%ÁöŽú%');
+insert into abuselist(word) values('%ÂÉ´Ù%');
+insert into abuselist(word) values('%ÂÉ´Ù»õ³¢%');
+insert into abuselist(word) values('%Ã¢³²%');
+insert into abuselist(word) values('%Ã¢³à%');
+insert into abuselist(word) values('%Ã¢³à¹öÁö%');
+insert into abuselist(word) values('%Ã¢³â%');
+insert into abuselist(word) values('%Ã³¸Ô°í%');
+insert into abuselist(word) values('%Ã³¸ÔÀ»%');
+insert into abuselist(word) values('%ÃÄ¸Ô°í%');
+insert into abuselist(word) values('%ÃÄ¾¥¼Å¹Ú¾î%');
+insert into abuselist(word) values('%ÃÌ¾¾ºê¶ó¸®%');
+insert into abuselist(word) values('%ÃÌ¾¾ºê¶ûÀÌ%');
+insert into abuselist(word) values('%ÃÌ¾¾ºê·©ÀÌ%');
+insert into abuselist(word) values('%Å©¸®Åä¸®½º%');
+insert into abuselist(word) values('%Å«º¸Áö%');
+insert into abuselist(word) values('%Å¬¸®Åä¸®½º%');
+insert into abuselist(word) values('%Æä´Ï½º%');
+insert into abuselist(word) values('%Ç×¹®¼ö¼Å%');
+insert into abuselist(word) values('%Ç×¹®¾¥¼Å%');
+insert into abuselist(word) values('%Çã´þ%');
+insert into abuselist(word) values('%Çã¹ö¸®³â%');
+insert into abuselist(word) values('%Çã¹ú³â%');
+insert into abuselist(word) values('%Çã¹úº¸Áö%');
+insert into abuselist(word) values('%Çã¹úÀÚ½Ä%');
+insert into abuselist(word) values('%Çã¹úÀÚÁö%');
+insert into abuselist(word) values('%Çã¼·%');
+insert into abuselist(word) values('%ÇãÁ¢%');
+insert into abuselist(word) values('%Çã –%');
+insert into abuselist(word) values('%ÇãÁ²%');
+insert into abuselist(word) values('%ÇãÁ¼%');
+insert into abuselist(word) values('%Çæ··º¸Áö%');
+insert into abuselist(word) values('%Çô·Îº¸ÁöÁC±â%');
+insert into abuselist(word) values('%È£³É³â%');
+insert into abuselist(word) values('%È£·Î»õ³¢%');
+insert into abuselist(word) values('%È£·ÎÀÚ½»%');
+insert into abuselist(word) values('%È£·ÎÀÚ½Ä%');
+insert into abuselist(word) values('%È£·çÀÚ½»%');
+insert into abuselist(word) values('%È£Á²%');
+insert into abuselist(word) values('%È£Á¼%');
+insert into abuselist(word) values('%ÈÄ¶ó´ú³Ñ%');
+insert into abuselist(word) values('%ÈÄÀå%');
+insert into abuselist(word) values('%ÈÄÀå%');
+insert into abuselist(word) values('%ÈÄÀå²È¾Æ%');
+insert into abuselist(word) values('%ÈÄÀå¶Õ¾î%');
+insert into abuselist(word) values('%admin %');
+insert into abuselist(word) values('%ass%');
+insert into abuselist(word) values('%bitch%');
+insert into abuselist(word) values('%cum%');
+insert into abuselist(word) values('%damn%');
+insert into abuselist(word) values('%fuck%');
+insert into abuselist(word) values('%penis%');
+insert into abuselist(word) values('%pennis%');
+insert into abuselist(word) values('%pussy%');
+insert into abuselist(word) values('%sex%');
+insert into abuselist(word) values('%shit%');
+insert into abuselist(word) values('%suck%');
+insert into abuselist(word) values('%vulva%');
+go
+
+
+-------------------------------------------------------------
+
+
+CREATE PROC spWebChangeCharName
+ @UserID varchar(20)
+ , @OldName varchar(24)
+ , @NewName varchar(24)
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ IF (@UserID IS NULL) OR (@OldName IS NULL) 
+  OR (@NewName IS NULL) 
+ BEGIN 
+  RETURN -1
+ END 
+
+ DECLARE @AID int
+ DECLARE @CID int
+ 
+ SELECT @AID = c.AID, @CID = c.CID
+ FROM Account a(NOLOCK), Character c(NOLOCK)
+ WHERE a.UserID = @UserID AND c.AID = a.AID
+  AND c.Name = @OldName AND c.DeleteFlag <> 1
+ IF (@CID IS NULL) OR (@AID IS NULL)
+  RETURN -2
+
+ BEGIN TRAN ---------------------------------------------------
+
+ UPDATE dbo.Character SET Name = @NewName WHERE CID = @CID
+ IF (0 = @@ROWCOUNT) OR (0 <> @@ERROR)
+ BEGIN
+  ROLLBACK TRAN
+  RETURN -3
+ END
+
+ INSERT INTO LogDB.dbo.ChangeCharNameLog(CID, OldName, NewName, RegDate)
+ VALUES(@CID, @OldName, @NewName, GETDATE())
+ IF (0 = @@ROWCOUNT) OR (0 <> @@ERROR) 
+ BEGIN
+  ROLLBACK TRAN
+  RETURN -4
+ END
+
+ COMMIT TRAN --------------------------------------------------
+
+ RETURN 0
+END
+go
+
+
+-------------------------------------------------------------
+
+
+CREATE PROC spWebGetCharNameListByUserID
+ @UserID VARCHAR(20)
+AS
+BEGIN
+ SET NOCOUNT ON 
+
+ DECLARE @aid INT;
+ SELECT @aid = aid 
+ FROM dbo.account(nolock) 
+ WHERE userid = @userid
+ 
+ IF (@aid is null)
+  RETURN -1
+
+ SELECT NAME 
+ FROM dbo.Character(NOLOCK) 
+ WHERE AID = @aid AND DeleteFlag <> 1
+ ORDER BY cid
+
+ RETURN 0
+END
+go
+
+
+-------------------------------------------------------------
+
+
+CREATE PROC spWebIsValidCharName
+ @Name VARCHAR(20)
+AS
+BEGIN
+ IF @Name IS NULL RETURN -1
+
+ SET NOCOUNT ON
+
+ IF EXISTS(SELECT * FROM dbo.AbuseList al(NOLOCK) WHERE @Name like al.Word)
+ BEGIN
+  RETURN -2
+ END
+
+ IF EXISTS(SELECT * FROM Character(NOLOCK) WHERE Name = @Name)
+ BEGIN 
+  RETURN -3
+ END
+
+ RETURN 0
+END
+go
+
+
+-------------------------------------------------------------

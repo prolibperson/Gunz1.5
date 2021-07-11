@@ -1,0 +1,66 @@
+CREATE VIEW viewCashItemPresentLog
+AS
+
+SELECT cpl.id AS id, cpl.SenderUserID AS SenderUserID, a.UserID AS ReceiverUserID, 
+i.Name AS ItemName, cpl.Date AS Date FROM CashItemPresentLog cpl, Account a(nolock), CashShop cs(nolock), Item i(nolock)
+WHERE cpl.ReceiverAID=a.AID AND cpl.CSID IS Not NULL AND cpl.csid=cs.csid AND cs.ItemID=i.ItemID
+GO
+
+--------------------
+
+CREATE   VIEW viewCashSetItemPresentLog -- M
+AS
+
+SELECT cpl.id AS id, cpl.SenderUserID AS SenderUserID, a.UserID AS ReceiverUserID, 
+css.Name AS SetItemName, cpl.Date AS Date, MobileCode
+FROM CashItemPresentLog cpl, Account a(nolock), CashSetShop css(nolock)
+WHERE cpl.ReceiverAID=a.AID AND cpl.CSSID IS Not NULL AND cpl.cssid=css.cssid
+GO
+
+-----------------------
+
+CREATE VIEW viewEventGetCharacterLevel
+AS
+
+SELECT a.userid AS userid, c.name AS chr_name, c.level AS chr_level FROM Account a(nolock), Character c(nolock)
+WHERE 
+a.aid=c.aid AND c.DeleteFlag=0
+GO
+
+----------------------------
+
+CREATE  VIEW viewHonorRankGunzClan
+AS
+
+SELECT chr.CLID, chr.ClanName, chr.Point, chr.Wins, chr.Losses, c.EmblemUrl, chr.Ranking, chr.RankIncrease, chr.Year, chr.Month
+FROM ClanHonorRanking chr(nolock), Clan c(nolock)
+WHERE chr.CLID=c.CLID
+GO
+
+-----------------------------
+
+CREATE   VIEW viewItemPurchaseLogByCash  -- M
+AS
+SELECT ipl.id AS id, a.UserID AS UserID, i.Name AS ItemName, ipl.Date AS Date, ipl.Cash AS Cash, ipl.MobileCode
+FROM ItemPurchaseLogByCash ipl, Account a, Item i
+WHERE ipl.AID = a.AID AND ipl.ItemID=i.ItemID
+GO
+
+-------------------------------
+
+CREATE  VIEW viewRankGunzClan
+AS
+
+SELECT CLID, Name as ClanName, Point, Wins, Losses, EmblemUrl, Ranking, RankIncrease
+FROM Clan(nolock)
+WHERE DeleteFlag=0 and Ranking>0
+GO
+
+---------------------------------
+
+CREATE   VIEW viewSetItemPurchaseLogByCash -- M
+AS
+SELECT id, a.UserID AS UserID, css.Name AS SetItemName, sipl.Date AS Date, sipl.Cash, MobileCode
+FROM SetItemPurchaseLogByCash sipl, Account a, CashSetShop css
+WHERE sipl.AID = a.AID AND css.cssid = sipl.cssid
+GO

@@ -1,0 +1,11 @@
+﻿Build started 8/6/2014 1:54:19 AM.
+     1>Project "C:\Users\Misty's Laptop\Desktop\Visual Studio 2012\Stable\Utils\DownLoader\sha1\sha1.vcxproj" on node 3 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(1299,5): warning MSB8012: TargetPath(C:\Users\Misty's Laptop\Desktop\Visual Studio 2012\Stable\Utils\DownLoader\sha1\..\lib\sha1.lib) does not match the Library's OutputFile property value (C:\Users\Misty's Laptop\Desktop\Visual Studio 2012\Stable\Utils\DownLoader\lib\sha1d.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.CppBuild.targets(1301,5): warning MSB8012: TargetName(sha1) does not match the Library's OutputFile property value (sha1d). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+     1>Lib:
+         sha1.vcxproj -> C:\Users\Misty's Laptop\Desktop\Visual Studio 2012\Stable\Utils\DownLoader\sha1\..\lib\sha1.lib
+     1>Done Building Project "C:\Users\Misty's Laptop\Desktop\Visual Studio 2012\Stable\Utils\DownLoader\sha1\sha1.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.16

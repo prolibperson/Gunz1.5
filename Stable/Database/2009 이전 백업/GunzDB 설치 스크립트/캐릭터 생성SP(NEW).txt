@@ -1,0 +1,271 @@
+/* 캐릭터 추가 */  
+CREATE  PROC [spInsertChar]  
+ @AID  int,  
+ @CharNum smallint,  
+ @Name  varchar(24),  
+ @Sex  tinyint,  
+ @Hair  int,    
+ @Face  int,  
+ @Costume int  
+AS  
+BEGIN  
+ SET NOCOUNT ON  
+  
+ IF EXISTS (SELECT CID FROM Character where (AID=@AID AND CharNum=@CharNum) OR (Name=@Name))  
+ BEGIN   
+ return(-1)  
+ END  
+  
+ DECLARE @CharIdent  int  
+ DECLARE @ChestCIID int  
+ DECLARE @LegsCIID int  
+ DECLARE @MeleeCIID int  
+ DECLARE @PrimaryCIID int  
+ DECLARE @SecondaryCIID  int  
+ DECLARE @Custom1CIID int  
+ DECLARE @Custom2CIID int  
+  e
+ DECLARE @ChestItemID int  
+ DECLARE @LegsItemID int  
+ DECLARE @MeleeItemID int  
+ DECLARE @PrimaryItemID int  
+ DECLARE @SecondaryItemID  int  
+ DECLARE @Custom1ItemID int  
+ DECLARE @Custom2ItemID int  
+  
+ SET @SecondaryCIID = NULL  
+ SET @SecondaryItemID = NULL  
+  
+ SET @Custom1CIID = NULL  
+ SET @Custom1ItemID = NULL  
+  
+ SET @Custom2CIID = NULL  
+ SET @Custom2ItemID = NULL  
+  
+ BEGIN TRAN  
+  
+  INSERT INTO Character   
+ (AID, Name, CharNum, Level, Sex, Hair, Face, XP, BP, FR, CR, ER, WR,   
+         GameCount, KillCount, DeathCount, RegDate, PlayTime, DeleteFlag)  
+  Values  
+ (@AID, @Name, @CharNum, 1, @Sex, @Hair, @Face, 0, 0, 0, 0, 0, 0, 0, 0, 0, GETDATE(), 0, 0)  
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  
+  SET @CharIdent = SCOPE_IDENTITY()  
+  
+  /* Melee */  
+  SET @MeleeItemID =   
+    CASE @Costume  
+    WHEN 0 THEN 1  
+    WHEN 1 THEN 2  
+    WHEN 2 THEN 1  
+    WHEN 3 THEN 2  
+    WHEN 4 THEN 2  
+    WHEN 5 THEN 1  
+    END  
+  
+  INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @MeleeItemID)  
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  SET @MeleeCIID = SCOPE_IDENTITY()  
+  
+  /* Primary */  
+  SET @PrimaryItemID =   
+    CASE @Costume  
+    WHEN 0 THEN 5001  
+    WHEN 1 THEN 5002  
+    WHEN 2 THEN 4005  
+    WHEN 3 THEN 4001  
+    WHEN 4 THEN 4002  
+    WHEN 5 THEN 4006  
+    END  
+  
+  INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @PrimaryItemID)  
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  SET @PrimaryCIID = SCOPE_IDENTITY()  
+  
+  /* Secondary */  
+  IF @Costume = 0 OR @Costume = 2  
+  BEGIN  
+   SET @SecondaryItemID =  
+     CASE @Costume  
+     WHEN 0 THEN 4001  
+     WHEN 1 THEN 0  
+     WHEN 2 THEN 5001  
+     WHEN 3 THEN 4006  
+     WHEN 4 THEN 0  
+     WHEN 5 THEN 4006  
+     END  
+  
+   IF @SecondaryItemID <> 0  
+   BEGIN  
+    INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @SecondaryItemID)  
+    IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+     ROLLBACK TRAN  
+     RETURN (-1)  
+    END  
+  
+    SET @SecondaryCIID = SCOPE_IDENTITY()  
+   END  
+  END  
+  
+  SET @Custom1ItemID =   
+    CASE @Costume  
+    WHEN 0 THEN 30301  
+    WHEN 1 THEN 30301  
+    WHEN 2 THEN 30401  
+    WHEN 3 THEN 30401  
+    WHEN 4 THEN 30401  
+    WHEN 5 THEN 30101  
+    END  
+  
+  /* Custom1 */  
+  INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @Custom1ItemID)  
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  SET @Custom1CIID = SCOPE_IDENTITY()  
+  
+  /* Custom2 */  
+  IF @Costume = 4 OR @Costume = 5  
+  BEGIN  
+   SET @Custom2ItemID =  
+    CASE @Costume  
+    WHEN 0 THEN 0  
+    WHEN 1 THEN 0  
+    WHEN 2 THEN 0  
+    WHEN 3 THEN 0  
+    WHEN 4 THEN 30001  
+    WHEN 5 THEN 30001  
+    END  
+  
+   IF @Custom2ItemID <> 0  
+   BEGIN  
+    INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @Custom2ItemID)  
+    IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+     ROLLBACK TRAN  
+     RETURN (-1)  
+    END  
+  
+    SET @Custom2CIID = SCOPE_IDENTITY()  
+   END  
+  END  
+  
+  
+  IF @Sex = 0  /* 남자일 경우 */  
+  BEGIN  
+   /* Chest */  
+   SET @ChestItemID =  
+    CASE @Costume  
+    WHEN 0 THEN 21001  
+    WHEN 1 THEN 21001  
+    WHEN 2 THEN 21001  
+    WHEN 3 THEN 21001  
+    WHEN 4 THEN 21001  
+    WHEN 5 THEN 21001  
+    END  
+  
+  
+   INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @ChestItemID)  
+   IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+    ROLLBACK TRAN  
+    RETURN (-1)  
+   END  
+  
+   SET @ChestCIID = SCOPE_IDENTITY()  
+  
+   /* Legs */  
+   SET @LegsItemID =  
+    CASE @Costume  
+    WHEN 0 THEN 23001  
+    WHEN 1 THEN 23001  
+    WHEN 2 THEN 23001  
+    WHEN 3 THEN 23001  
+    WHEN 4 THEN 23001  
+    WHEN 5 THEN 23001  
+    END  
+  
+  
+   INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @LegsItemID)  
+   IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+    ROLLBACK TRAN  
+    RETURN (-1)  
+   END  
+   SET @LegsCIID = @@IDENTITY  
+  END  
+  ELSE  
+  BEGIN   /* 여자일 경우 */  
+  
+   /* Chest */  
+   SET @ChestItemID =  
+    CASE @Costume  
+    WHEN 0 THEN 21501  
+    WHEN 1 THEN 21501  
+    WHEN 2 THEN 21501  
+    WHEN 3 THEN 21501  
+    WHEN 4 THEN 21501  
+    WHEN 5 THEN 21501  
+    END  
+  
+   INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @ChestItemID)  
+   IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+    ROLLBACK TRAN  
+    RETURN (-1)  
+   END  
+   SET @ChestCIID = SCOPE_IDENTITY()  
+  
+   /* Legs */  
+   SET @LegsItemID =  
+    CASE @Costume  
+    WHEN 0 THEN 23501  
+    WHEN 1 THEN 23501  
+    WHEN 2 THEN 23501  
+    WHEN 3 THEN 23501  
+    WHEN 4 THEN 23501  
+    WHEN 5 THEN 23501  
+    END  
+  
+  
+   INSERT INTO CharacterItem (CID, ItemID) Values (@CharIdent, @LegsItemID)  
+   IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+    ROLLBACK TRAN  
+    RETURN (-1)  
+   END  
+   SET @LegsCIID = SCOPE_IDENTITY()  
+  END    
+  
+  UPDATE Character  
+  SET chest_slot = @ChestCIID, legs_slot = @LegsCIID, melee_slot = @MeleeCIID,  
+    primary_slot = @PrimaryCIID, secondary_slot = @SecondaryCIID, custom1_slot = @Custom1CIID,  
+    custom2_slot = @Custom2CIID,  
+    chest_itemid = @ChestItemID, legs_itemid = @LegsItemID, melee_itemid = @MeleeItemID,  
+    primary_itemid = @PrimaryItemID, secondary_itemid = @SecondaryItemID, custom1_itemid = @Custom1ItemID,  
+    custom2_itemid = @Custom2ItemID  
+  WHERE CID=@CharIdent  
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  INSERT INTO CharacterMakingLog(AID, CharName, Type, Date)  
+  VALUES( @AID, @Name, 'Create', GETDATE() )  
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+ COMMIT TRAN  
+END  

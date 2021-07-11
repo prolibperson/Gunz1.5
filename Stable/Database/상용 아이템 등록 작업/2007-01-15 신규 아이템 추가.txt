@@ -1,0 +1,260 @@
+Mesh name
+eq_katana_15  <== 철퇴
+eq_katana_14  <--- 목검
+eq_head_rabbit
+eq_head_cat
+
+브루마
+남자
+eq_chest_35
+eq_feet_35
+eq_hands_35
+eq_head_35
+eq_legs_35
+여자
+eq_chest_36
+eq_feet_36
+eq_hands_36
+eq_head_36
+eq_legs_36
+
+-------------------
+
+<STR id="ZITEM_NAME_502004">목검</STR>
+<STR id="ZITEM_DESC_502004">검을 배우는 자가 연습용으로 사용하기 적합한 가벼운 목제 검</STR>
+
+<ITEM id="502004" name="STR:ZITEM_NAME_502004" mesh_name="katana15" totalpoint="0" type="melee"
+res_sex="a" res_level="0" slot="melee" weapon="katana" weight="6" bt_price="500000"
+delay="329" damage="10" ctrl_ability="0" magazine="0" reloadtime="0" slug_output="false"
+gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF"
+image_id="0" bullet_image_id="0" magazine_image_id="0" iscashitem="true" desc="STR:ZITEM_DESC_502004" />
+
+INSERT INTO Item (ItemID, Name) Values (502004, '목검')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=10, Delay=329, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=3, ResLevel=0, Slot=1, Weight=6, HP=0, AP=0, MAXWT=0, 
+Description='검을 배우는 자가 연습용으로 사용하기 적합한 가벼운 목제 검' 
+WHERE ItemID = 502004
+
+-- csid : 268
+insert into cashshop(itemid, cashprice, opened, regdate)
+values(502004, 1500, 0, getdate())
+
+-------------------
+
+<STR id="ZITEM_NAME_502005">철퇴</STR>
+<STR id="ZITEM_DESC_502005">무시무시하게 생긴 쇠몽둥이. 위력은 강하지만 둔하고 무거워서 다루기는 힘들다.</STR>
+
+<ITEM id="502005" name="STR:ZITEM_NAME_502005" mesh_name="katana16" totalpoint="0" type="melee"
+res_sex="a" res_level="0" slot="melee" weapon="katana" weight="12" bt_price="500000"
+delay="370" damage="17" ctrl_ability="0" magazine="0" reloadtime="0" slug_output="false"
+gadget_id="0" hp="0" ap="2" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF"
+image_id="0" bullet_image_id="0" magazine_image_id="0" iscashitem="true" desc="STR:ZITEM_DESC_502005" />
+
+INSERT INTO Item (ItemID, Name) Values (502005, '철퇴')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=17, Delay=370, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=3, ResLevel=0, Slot=1, Weight=12, HP=0, AP=2, MAXWT=0, 
+Description='무시무시하게 생긴 쇠몽둥이. 위력은 강하지만 둔하고 무거워서 다루기는 힘들다.' 
+WHERE ItemID = 502005
+
+-- csid : 269
+insert into cashshop(itemid, cashprice, opened, regdate)
+values(502005, 1500, 0, getdate())
+
+-------------------
+
+<STR id="ZITEM_NAME_520033">남성 토끼 머리띠</STR>
+<STR id="ZITEM_DESC_520033">각종 행사에 소품으로 자주 사용되는 토끼 귀 모양의 헤어 밴드. 남성용</STR>
+
+<ITEM id="520033" name="STR:ZITEM_NAME_520033" mesh_name="eq_head_rabbit" totalpoint="0"
+type="equip" iscashitem="true" res_sex="m" res_level="0" slot="head" weight="4" bt_price="500000"
+hp="2" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520033" />
+
+<STR id="ZITEM_NAME_520533">여성 토끼 머리띠</STR>
+<STR id="ZITEM_DESC_520533">각종 행사에 소품으로 자주 사용되는 토끼 귀 모양의 헤어 밴드. 여성용</STR>
+
+<ITEM id="520533" name="STR:ZITEM_NAME_520533" mesh_name="eq_head_rabbit" totalpoint="0"
+type="equip" iscashitem="true" res_sex="f" res_level="0" slot="head" weight="4" bt_price="500000"
+hp="2" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520533" />
+
+INSERT INTO Item (ItemID, Name) Values (520033, '남성 토끼 머리띠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=4, Weight=4, HP=2, AP=0, MAXWT=0, 
+Description='각종 행사에 소품으로 자주 사용되는 토끼 귀 모양의 헤어 밴드. 남성용' 
+WHERE ItemID = 520033
+
+INSERT INTO Item (ItemID, Name) Values (520533, '여성 토끼 머리띠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=4, Weight=4, HP=2, AP=0, MAXWT=0, 
+Description='각종 행사에 소품으로 자주 사용되는 토끼 귀 모양의 헤어 밴드. 여성용' 
+WHERE ItemID = 520533
+
+-------------------
+
+<STR id="ZITEM_NAME_520034">남성 고양이 머리띠</STR>
+<STR id="ZITEM_DESC_520034">각종 행사에 소품으로 종종 사용되는 고양이 귀 모양의 헤어 밴드. 남성용</STR>
+
+<ITEM id="520034" name="STR:ZITEM_NAME_520034" mesh_name="eq_head_cat" totalpoint="0"
+type="equip" iscashitem="true" res_sex="m" res_level="0" slot="head" weight="3" bt_price="500000"
+hp="1" ap="1" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520034" />
+
+<STR id="ZITEM_NAME_520534">여성 고양이 머리띠</STR>
+<STR id="ZITEM_DESC_520534">각종 행사에 소품으로 종종 사용되는 고양이 귀 모양의 헤어 밴드. 여성용</STR>
+
+<ITEM id="520534" name="STR:ZITEM_NAME_520534" mesh_name="eq_head_cat" totalpoint="0"
+type="equip" iscashitem="true" res_sex="f" res_level="0" slot="head" weight="3" bt_price="500000"
+hp="1" ap="1" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520534" />
+
+INSERT INTO Item (ItemID, Name) Values (520034, '남성 고양이 머리띠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=4, Weight=3, HP=1, AP=1, MAXWT=0, 
+Description='각종 행사에 소품으로 종종 사용되는 고양이 귀 모양의 헤어 밴드. 남성용' 
+WHERE ItemID = 520034
+
+INSERT INTO Item (ItemID, Name) Values (520534, '여성 고양이 머리띠')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=4, Weight=3, HP=1, AP=1, MAXWT=0, 
+Description='각종 행사에 소품으로 종종 사용되는 고양이 귀 모양의 헤어 밴드. 여성용' 
+WHERE ItemID = 520534
+
+-------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------
+-- 체육복 세트
+
+<STR id="ZITEM_NAME_520035">남성 에너제틱 스포츠 모자</STR>
+<STR id="ZITEM_DESC_520035">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 모자</STR>
+
+<ITEM id="520035" name="STR:ZITEM_NAME_520035" mesh_name="eq_head_35" totalpoint="0"
+type="equip" iscashitem="true" res_sex="m" res_level="15" slot="head" weight="3" bt_price="500000"
+hp="2" ap="6" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520035" />
+
+<STR id="ZITEM_NAME_520535">여성 에너제틱 스포츠 모자</STR>
+<STR id="ZITEM_DESC_520535">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 모자</STR>
+
+<ITEM id="520535" name="STR:ZITEM_NAME_520535" mesh_name="eq_head_36" totalpoint="0"
+type="equip" iscashitem="true" res_sex="f" res_level="15" slot="head" weight="3" bt_price="500000"
+hp="2" ap="6" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_520535" />
+
+INSERT INTO Item (ItemID, Name) Values (520035, '남성 에너제틱 스포츠 모자')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=4, Weight=3, HP=2, AP=6, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 모자' 
+WHERE ItemID = 520035
+
+INSERT INTO Item (ItemID, Name) Values (520535, '여성 에너제틱 스포츠 모자')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=4, Weight=3, HP=2, AP=6, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 모자' 
+WHERE ItemID = 520535
+
+-------------------
+
+<STR id="ZITEM_NAME_522022">남성 에너제틱 스포츠 장갑</STR>
+<STR id="ZITEM_DESC_522022">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 장갑</STR>
+
+<ITEM id="522022" name="STR:ZITEM_NAME_522022" mesh_name="eq_hands_35" totalpoint="0" iscashitem="true"
+type="equip" res_sex="m" res_level="15" slot="hands" weight="3" bt_price="500000"
+hp="2" ap="12" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522022" />
+
+<STR id="ZITEM_NAME_522522">여성 에너제틱 스포츠 장갑</STR>
+<STR id="ZITEM_DESC_522522">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 장갑</STR>
+
+<ITEM id="522522" name="STR:ZITEM_NAME_522522" mesh_name="eq_hands_36" totalpoint="0" iscashitem="true"
+type="equip" res_sex="f" res_level="15" slot="hands" weight="3" bt_price="500000"
+hp="2" ap="12" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_522522" />
+
+INSERT INTO Item (ItemID, Name) Values (522022, '남성 에너제틱 스포츠 장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=6, Weight=3, HP=2, AP=12, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 장갑' 
+WHERE ItemID = 522022
+
+INSERT INTO Item (ItemID, Name) Values (522522, '여성 에너제틱 스포츠 장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=6, Weight=3, HP=2, AP=12, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 장갑' 
+WHERE ItemID = 522522
+
+-------------------
+
+<STR id="ZITEM_NAME_524025">남성 에너제틱 스포츠 운동화</STR>
+<STR id="ZITEM_DESC_524025">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 신발</STR>
+
+<ITEM id="524025" name="STR:ZITEM_NAME_524025" mesh_name="eq_feet_35" totalpoint="0" type="equip"
+res_sex="m" res_level="15" slot="feet" weight="4" bt_price="500000" hp="3" ap="14" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524025" />
+
+<STR id="ZITEM_NAME_524525">여성 에너제틱 스포츠 운동화</STR>
+<STR id="ZITEM_DESC_524525">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 신발</STR>
+
+<ITEM id="524525" name="STR:ZITEM_NAME_524525" mesh_name="eq_feet_36" totalpoint="0" type="equip"
+res_sex="f" res_level="15" slot="feet" weight="4" bt_price="500000" hp="3" ap="14" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_524525" />	
+
+INSERT INTO Item (ItemID, Name) Values (524025, '남성 에너제틱 스포츠 운동화')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=8, Weight=4, HP=3, AP=14, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 신발' 
+WHERE ItemID = 524025
+
+INSERT INTO Item (ItemID, Name) Values (524525, '여성 에너제틱 스포츠 운동화')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=8, Weight=4, HP=3, AP=14, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 신발' 
+WHERE ItemID = 524525
+
+-------------------
+
+<STR id="ZITEM_NAME_521027">남성 에너제틱 스포츠 상의</STR>
+<STR id="ZITEM_DESC_521027">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 상의</STR>
+
+<ITEM id="521027" name="STR:ZITEM_NAME_521027" mesh_name="eq_chest_35" totalpoint="0" iscashitem="true"
+type="equip" res_sex="m" res_level="15" slot="chest" weight="15" bt_price="500000" 
+hp="3" ap="24" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521027" />
+
+<STR id="ZITEM_NAME_521527">여성 에너제틱 스포츠 상의</STR>
+<STR id="ZITEM_DESC_521527">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 상의</STR>
+
+<ITEM id="521527" name="STR:ZITEM_NAME_521527" mesh_name="eq_chest_36" totalpoint="0" iscashitem="true"
+type="equip" res_sex="f" res_level="15" slot="chest" weight="15" bt_price="500000"
+hp="3" ap="24" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_521527" />	
+
+INSERT INTO Item (ItemID, Name) Values (521027, '남성 에너제틱 스포츠 상의')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=5, Weight=15, HP=3, AP=24, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 상의' 
+WHERE ItemID = 521027
+
+INSERT INTO Item (ItemID, Name) Values (521527, '여성 에너제틱 스포츠 상의')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=5, Weight=15, HP=3, AP=24, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 상의' 
+WHERE ItemID = 521527
+
+-------------------
+
+<STR id="ZITEM_NAME_523025">남성 에너제틱 스포츠 하의</STR>
+<STR id="ZITEM_DESC_523025">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 하의</STR>
+
+<ITEM id="523025" name="STR:ZITEM_NAME_523025" mesh_name="eq_legs_35" totalpoint="0" type="equip"
+res_sex="m" res_level="15" slot="legs" weight="13" bt_price="500000" hp="2" ap="24" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523025" />
+
+<STR id="ZITEM_NAME_523525">여성 에너제틱 스포츠 하의</STR>
+<STR id="ZITEM_DESC_523525">운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 하의</STR>
+
+<ITEM id="523525" name="STR:ZITEM_NAME_523525" mesh_name="eq_legs_36" totalpoint="0" type="equip"
+res_sex="f" res_level="15" slot="legs" weight="13" bt_price="500000" hp="2" ap="24" iscashitem="true"
+maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" desc="STR:ZITEM_DESC_523525" />
+
+INSERT INTO Item (ItemID, Name) Values (523025, '남성 에너제틱 스포츠 하의')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=7, Weight=13, HP=2, AP=24, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 남성용 스포츠 웨어의 하의' 
+WHERE ItemID = 523025
+
+INSERT INTO Item (ItemID, Name) Values (523525, '여성 에너제틱 스포츠 하의')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=7, Weight=13, HP=2, AP=24, MAXWT=0, 
+Description='운동복의 활동성과 평상복의 다기능성이란 두 마리 토끼를 모두 잡은 여성용 스포츠 웨어의 하의' 
+WHERE ItemID = 523525

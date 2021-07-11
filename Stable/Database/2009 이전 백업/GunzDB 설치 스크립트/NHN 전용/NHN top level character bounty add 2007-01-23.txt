@@ -1,0 +1,47 @@
+CREATE PROC spNHNAddTopLevelCharBountry
+ @UserID varchar(20)
+, @Bounty int
+, @Ret int OUTPUT
+AS
+BEGIN
+ IF (@UserID IS NULL) OR (0 >= @Bounty) BEGIN
+  SET @Ret = (-1)
+  RETURN
+ END
+
+ DECLARE @CID int
+ DECLARE @AID int
+
+ SELECT TOP 1 @AID = a.AID, @CID = c.CID
+ FROM Account a(NOLOCK), Character c(NOLOCK)
+ WHERE a.UserID = @UserID AND c.AID = a.AID 
+  AND c.DeleteFlag <> 1
+ ORDER BY c.Level DESC
+ IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) OR (@CID IS NULL) BEGIN
+  SET @Ret = (-2)
+  RETURN
+ END
+
+ BEGIN TRAN
+ UPDATE Character
+ SET BP = BP + @Bounty
+ WHERE CID = @CID
+ IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN
+  ROLLBACK TRAN
+  SET @Ret = (-3)
+  RETURN
+ END
+
+ INSERT INTO Event(AID, CID, RegDate, Checked, EventName, SubDescription)
+ VALUES (@AID, @CID, GETDATE(), 0, 'referral event', 'user''s top level character bounty add event')
+ IF (0 <> @@ERROR) OR ( 0 = @@ROWCOUNT) BEGIN
+  ROLLBACK TRAN
+  SET @Ret = (-4)
+  RETURN
+ END
+
+ COMMIT TRAN
+ 
+ SET @Ret = 1
+END
+GO

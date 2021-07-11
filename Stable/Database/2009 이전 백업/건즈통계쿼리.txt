@@ -1,0 +1,37 @@
+누적 가입자 통계 -- 2008년 1월말 기준 쿼리
+use gunzdb
+declare @checktime datetime
+set @checktime = '2008-02-01'
+select count(a.aid) as 'count'
+from Account a(nolock)
+where a.regdate < @checktime
+
+-- 실행 당일까지 총누적가입자
+use gunzdb
+exec sp_spaceused Account
+
+-- 월 유니크 접속자
+use logdb
+select count(distinct(aid)) as 'count'
+from connlog_200811 c(nolock) 			-- connlog는 해당하는 달의 테이블 이름
+
+-- 일별 유니크 접속자
+use logdb
+select t.day, count(t.aid) as 'count'
+from	(select aid, datepart(dd, time) as 'day'
+	from dbo.connlog_200811(nolock) 	-- connlog는 해당하는 달의 테이블 이름
+	group by aid, datepart(dd, time)) as t
+group by t.day
+order by t.day
+
+-- 일별 유니크 신규가입자
+use gunzdb
+declare @start datetime
+declare @end datetime
+set @start = '2008-01-01'
+set @end = '2008-02-01'
+select datepart(dd, a.regdate) as 'day', count(a.aid) as 'count'
+from account a(nolock)
+where a.regdate >= @start and a.regdate < @end
+group by datepart(dd, a.regdate)
+order by datepart(dd, a.regdate)

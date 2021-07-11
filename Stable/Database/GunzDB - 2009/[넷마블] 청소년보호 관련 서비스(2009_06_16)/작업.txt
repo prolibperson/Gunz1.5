@@ -1,0 +1,15 @@
+cur_date 	 char(8) 	일자		- getdate를 이용하여 구하면 될듯함
+CN		 varchar(12)	회원 CN		- Login Table(GunzDB)
+UserID		 nvarchar(50)	회원 아이디	- Account Table(GunzDB)
+ServerName	 varchar(20)	서버명 		- 저장 안함
+CharacName	 varchar(40)	캐릭터명	- Character Table(GunzDB)
+LoginDate	 datetime	로그인 시간	- 1번 참고
+LogoutDate	 datetime	로그아웃 시간	- 1번 참고
+PlayTime	 int		플레이타임(분)	- PlayerLog에 있다.
+IP		 varchar(15)	회원 IP		- ConnLog(LogDB)에 AID를 이용하여 구한다.
+ 
+
+1. 일별 배치로 할지, 아니면 실시간으로 할지?
+ -> 그에 따라 로그인 시간, 로그아웃 시간 구하는 것이 달라진다.
+  1) 일별 배치로 할 경우, PlayerLog 테이블을 이용하여 DisTime에서 PlayTime을 빼야한다.
+  2) 실시간으로 할 경우, Account에 Update 될 때, 업데이트한다. => 뭐야. 이런 비효율성?
