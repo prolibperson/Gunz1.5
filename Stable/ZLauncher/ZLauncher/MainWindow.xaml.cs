@@ -10,6 +10,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Navigation;
 using System.Windows.Input;
+using Microsoft.Web.WebView2;
+using System.Xml;
+using System.Windows.Media.Effects;
 
 namespace ZLauncher
 {
@@ -43,22 +46,13 @@ namespace ZLauncher
         public MainWindow()
         {
             InitializeComponent();
-            StartGame.Visibility = Visibility.Hidden;
-            CancelDownload.Visibility = Visibility.Hidden;
+            //StartGame.Visibility = Visibility.Hidden;
+            //CancelDownload.Visibility = Visibility.Hidden;
 
-            if(File.Exists("ZUpdater.exe"))
-                File.Delete("ZUpdater.exe");
+            //if(File.Exists("ZUpdater.exe"))
+            //    File.Delete("ZUpdater.exe");
 
 
-        }
-
-        public void OnNavigated(object sender,NavigationEventArgs e)
-        {
-            dynamic activeX = this.Browser.GetType().InvokeMember("ActiveXInstance",
-                                BindingFlags.GetProperty | BindingFlags.Instance | BindingFlags.NonPublic,
-                                null, this.Browser, new object[] { });
-
-            activeX.Silent = true;
         }
 
         protected override void OnClosed(EventArgs e)
@@ -85,13 +79,13 @@ namespace ZLauncher
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            button1.Visibility = Visibility.Hidden;
+            Start.Visibility = Visibility.Hidden;
             DownloadFile.Text = "Scanning existing files...";
 
             if (!parser.ParseXML())
             {
                 System.Windows.Forms.MessageBox.Show("Error reaching the patchserver, please try again later");
-                button1.Visibility = Visibility.Visible;
+                Start.Visibility = Visibility.Visible;
                 DownloadFile.Text = "";
                 return;
             }
@@ -104,7 +98,7 @@ namespace ZLauncher
 
                 Directory.CreateDirectory("PATCH");
                 downloader = new DownloadManager();
-                CancelDownload.Visibility = Visibility.Visible;
+                Cancel.Visibility = Visibility.Visible;
                 try
                 {
                     await downloader.DownloadFiles(filesToDownLoad);
@@ -120,9 +114,9 @@ namespace ZLauncher
             else
             {
                 DownloadFile.Text = "Patching Complete";
-                StartGame.Visibility = Visibility.Visible;
-                CancelDownload.Visibility = Visibility.Hidden;
-                button1.Visibility = Visibility.Hidden;
+                Launch.Visibility = Visibility.Visible;
+                Cancel.Visibility = Visibility.Hidden;
+                Start.Visibility = Visibility.Hidden;
                 return;
             }
 
@@ -130,37 +124,37 @@ namespace ZLauncher
             {
                 string exePath = AppDomain.CurrentDomain.BaseDirectory + "\\ZUpdater.exe";
 
-               var assembly = Assembly.GetExecutingAssembly();// ("ZUpdater.exe");
+                var assembly = Assembly.GetExecutingAssembly();// ("ZUpdater.exe");
                 using (Stream stream = assembly.GetManifestResourceStream("ZLauncher.ZUpdater.exe"))
                 {
-                     byte[] bytes = new byte[(int)stream.Length];
-                     stream.Read(bytes, 0, bytes.Length);
-                     File.WriteAllBytes(exePath, bytes);
-                     System.Diagnostics.Process.Start(exePath);
-                     Application.Current.Shutdown();
+                    byte[] bytes = new byte[(int)stream.Length];
+                    stream.Read(bytes, 0, bytes.Length);
+                    File.WriteAllBytes(exePath, bytes);
+                    System.Diagnostics.Process.Start(exePath);
+                    Application.Current.Shutdown();
                 }
             }
 
             if (downloader.isComplete)
             {
                 DownloadFile.Text = "Patching Complete";
-                StartGame.Visibility = Visibility.Visible;
-                CancelDownload.Visibility = Visibility.Hidden;
-                button1.Visibility = Visibility.Hidden;
+                Launch.Visibility = Visibility.Visible;
+                Cancel.Visibility = Visibility.Hidden;
+                Start.Visibility = Visibility.Hidden;
             }
             else
             {
                 DownloadFile.Text = "Patching Cancelled";
-                StartGame.Visibility = Visibility.Hidden;
-                CancelDownload.Visibility = Visibility.Hidden;
-                button1.Visibility = Visibility.Visible;
+                Launch.Visibility = Visibility.Hidden;
+                Cancel.Visibility = Visibility.Hidden;
+                Start.Visibility = Visibility.Visible;
             }
 
         }
 
         public async Task CheckFiles(List<FileList> files)
         {
-            await TaskEx.Run(() =>
+            await Task.Run(() =>
             {
                 string[] filesInDirectory = System.IO.Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*", SearchOption.AllDirectories);
 
@@ -235,13 +229,13 @@ namespace ZLauncher
         /// <param name="filesToDownLoad"></param>
         public void MoveFilesToBaseDir(List<string> filesToDownLoad)
         {
-            if (downloader.IsCancelled())
-                return;
-            TaskEx.Run(() =>
+            //if (downloader.IsCancelled())
+            //    return;
+            Task.Run(() =>
             {
                 foreach (string name in filesToDownLoad)
                 {
-                    string fileToMove = "PATCH\\" + name.Replace("/","\\");
+                    string fileToMove = "PATCH\\" + name.Replace("/", "\\");
                     string targetDir = AppDomain.CurrentDomain.BaseDirectory + name;
                     string absolutetargetDir = targetDir.Replace("/", "\\");
                     string actualPath = fileToMove.Replace("PATCH\\", "");
@@ -260,7 +254,7 @@ namespace ZLauncher
                         continue;
                     }
                     new System.IO.FileInfo(actualPath).Directory.Create();
-                    
+
 
                     if (File.Exists(absolutetargetDir))
                         File.Delete(absolutetargetDir);
@@ -270,7 +264,7 @@ namespace ZLauncher
                     {
                         File.Move(fileToMove, absolutetargetDir);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         System.Windows.Forms.MessageBox.Show(e.Message);
                         System.Windows.Forms.MessageBox.Show(e.InnerException.Message);
@@ -279,13 +273,13 @@ namespace ZLauncher
 
 
                 if (Directory.Exists("PATCH"))
-                    Directory.Delete("PATCH",true);
+                    Directory.Delete("PATCH", true);
             }).Wait();
         }
 
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            
+
         }
 
         /// <summary>
@@ -300,12 +294,12 @@ namespace ZLauncher
             var myProcess = new Process { StartInfo = new ProcessStartInfo("Gunz.exe", "01001001 00100000 01001100 01101111 01110110 01100101 00100000 01000100 01100001 01100101 01101101 01101111 01101110 01110011 01010010 01101001 01101110 01100111 00001010 ") };
             try
             {
-                if(myProcess.Start())
+                if (myProcess.Start())
                 {
                     System.Windows.Application.Current.Shutdown();
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 System.Windows.Forms.MessageBox.Show(exception.Message);
             }
@@ -318,56 +312,50 @@ namespace ZLauncher
         /// <param name="e"></param>
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (!downloader.IsCancelled())
+           if (!downloader.IsCancelled())
             {
                 downloader.Cancel();
-                button1.Visibility = Visibility.Visible;
-                CancelDownload.Visibility = Visibility.Hidden;
-                StartGame.Visibility = Visibility.Hidden;
+                Start.Visibility = Visibility.Visible;
+                Cancel.Visibility = Visibility.Hidden;
+                Launch.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void webView_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            webView.ExecuteScriptAsync("startPatch");
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void Config_Click(object sender, RoutedEventArgs e)
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.Load("config.xml");
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show("Error Opening Config.xml");
+               // return;
+            }
+
+            Effect = new BlurEffect();
+            Config configWindow = new Config();
+            configWindow.Owner = this;
+          //  configWindow.LoadConfig(doc);
+            configWindow.Show();
         }
 
         /// <summary>
         /// Optional search bar, I wouldn't recommend it
         /// </summary>
-        private void SearchURI_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (SearchURI.Text.Contains("http://") == false)
-                {
-                    SearchURI.Text = "http://" + SearchURI.Text;
-                }
-                Browser.Navigate(SearchURI.Text);
-            }
-        }
-
-        private void PreviousButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Browser.GoBack();
-            }
-            catch(Exception ex)
-            {
-                return;
-            }
-            SearchURI.Text = Browser.Source.AbsoluteUri;
-
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Browser.GoForward();
-            }
-            catch (Exception ex)
-            {
-                return;
-            }
-            SearchURI.Text = Browser.Source.AbsoluteUri;
-
-        }
     }
 }

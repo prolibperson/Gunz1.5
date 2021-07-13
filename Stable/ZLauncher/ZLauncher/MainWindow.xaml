@@ -3,23 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ZLauncher"
+        xmlns:local="clr-namespace:ZLauncher" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
-        Title="GunZ Launcher" Height="600" Width="800" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
-    <!--  Style="{StaticResource CustomWindowStyle}">-->
-    <Viewbox Name="MainView" Width="Auto" Height="Auto" Stretch="Fill">
+        Title="" Height="480" Width="1024" WindowStyle="None" Background="#333333" ResizeMode="NoResize" BorderBrush="#333333" 
+        BorderThickness="2" MouseDown="Window_MouseDown">
+    <Grid>
+        <StackPanel Orientation="Vertical" Width="1024" Height="56" Background="{StaticResource Banner_Top}" VerticalAlignment="Top" Opacity="0.5"/>
+        <StackPanel Orientation="Vertical" Width="1024" Height="56" Background="{StaticResource Banner_Bottom}" VerticalAlignment="Bottom" Opacity="0.5"/>
 
-        <Grid>
-            <WebBrowser x:Name="Browser" VerticalAlignment="Top" Source="http://duelists.online" HorizontalAlignment="Left" Height="678" Width="1008" Navigated="OnNavigated" Margin="0,23,0,0"/>
-            <Button x:Name="button1" Content="Start Patch" HorizontalAlignment="Left" Margin="912,722,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" FontStretch="Expanded"/>
-            <ProgressBar x:Name="progBar1" HorizontalAlignment="Left" Height="20" Margin="0,722,0,0" VerticalAlignment="Top" Width="895" Foreground="#FF0591F1"/>
-            <Button x:Name="StartGame" Content="Start Game" HorizontalAlignment="Left" Margin="912,722,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-            <TextBox x:Name="DownloadFile" HorizontalAlignment="Left" Height="21" Margin="10,701,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" BorderThickness="0" FontStretch="Expanded"/>
-            <TextBox x:Name="progPercentage" HorizontalAlignment="Left" Height="21" Margin="230,701,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" BorderThickness="0" FontStretch="Expanded"/>
-            <Button x:Name="CancelDownload" Content="Cancel" HorizontalAlignment="Left" Margin="912,722,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_2"/>
-            <TextBox x:Name="SearchURI" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="943" KeyDown="SearchURI_KeyDown" Panel.ZIndex="0" Margin="65,0,0,0"/>
-            <Button x:Name="PreviousButton" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="23" Content="bk" Click="PreviousButton_Click"/>
-            <Button x:Name="NextButton" HorizontalAlignment="Left" Width="23" Content="fd" Margin="23,0,0,719" Click="NextButton_Click"/>
-        </Grid>
-    </Viewbox>
+        <DockPanel Width="1024" Opacity="1" Margin="0,0,-3.556,0.444">
+            <Grid DockPanel.Dock="Bottom" Height="auto"  Opacity="1">
+                <TextBlock x:Name="DownloadFile"  Foreground="#CF5300" Width="auto" Height="auto" VerticalAlignment="Top" Margin="0,-17,0,0"/>
+                <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" VerticalAlignment="Center" Width="900" Height="24" Foreground="#CF5300" Background="#80FFFFFF"
+                         BorderBrush="Black" BorderThickness="3" Visibility="Hidden"/>
+                <Button x:Name="Start" Width="64" Height="20" HorizontalAlignment="Right" Visibility="Visible" Background="#CF5300" Content="Start" Click="Button_Click">
+                </Button>
+                <Button x:Name="Cancel" Width="64" Height="20" HorizontalAlignment="Right" Background="#CF5300" Content="Cancel" Visibility="Hidden" Click="Button_Click_2">
+                </Button>
+                <Button x:Name="Launch" Width="64" Height="20" HorizontalAlignment="Right"  Background="#CF5300" Content="Launch" Visibility="Hidden" Click="Button_Click_1">
+                </Button>
+            </Grid>
+
+            <wv2:WebView2 Name="webView"
+                  Source="https://google.com" DefaultBackgroundColor="#333333" Width="1024"  Margin="0,56,0,34"/>
+
+        </DockPanel>
+        <Button x:Name="Config" DockPanel.Dock="Top" Height="57" Width="205" Background="#80FFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Click="Config_Click">
+            <TextBlock Text="Settings" Opacity="1"/>
+        </Button>
+
+    </Grid>
+
 </Window>

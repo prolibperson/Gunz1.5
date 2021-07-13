@@ -33,7 +33,7 @@ namespace ZLauncher
                 WebClient client = new WebClient();
                 string targetpath = "";
 
-                TaskEx.Run(() =>
+                Task.Run(() =>
                 {
                     client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.33 Safari/537.36");
                     if (!cancel.IsCancellationRequested)
@@ -41,14 +41,14 @@ namespace ZLauncher
                         client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
                         if (file.Contains('\\'))
                         {
-                            if(!Directory.Exists("PATCH\\" + file))
-                            Directory.CreateDirectory(System.IO.Path.GetDirectoryName("PATCH\\" + file));
+                            if (!Directory.Exists("PATCH\\" + file))
+                                Directory.CreateDirectory(System.IO.Path.GetDirectoryName("PATCH\\" + file));
                             targetpath = "PATCH\\" + file;
                         }
                         else
                             targetpath = "PATCH\\" + file;
                     }
-                }).Wait(200,cancel.Token);
+                }).Wait(200, cancel.Token);
                 mainWindow.DownloadFile.Text = "Downloading : " + System.IO.Path.GetFileName(targetpath);
                 if (cancel.IsCancellationRequested == true)
                 {
@@ -81,15 +81,15 @@ namespace ZLauncher
         {
             if (!cancel.IsCancellationRequested)
             {
-                mainWindow.progBar1.Value = e.ProgressPercentage;
+                mainWindow.ProgressBar.Value = e.ProgressPercentage;
                 double percentage = Math.Round(Convert.ToDouble(e.BytesReceived) / Convert.ToDouble(e.TotalBytesToReceive) * 100);
-                mainWindow.progPercentage.Clear();
-                mainWindow.progPercentage.Text = percentage.ToString();
+                //mainWindow.progPercentage.Clear();
+                //mainWindow.progPercentage.Text = percentage.ToString();
             }
             else
             {
-                mainWindow.progBar1.Value = 0;
-                mainWindow.progPercentage.Clear();
+                mainWindow.ProgressBar.Value = 0;
+                //mainWindow.progPercentage.Clear();
             }
         }
 

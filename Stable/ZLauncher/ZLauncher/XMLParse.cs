@@ -3,7 +3,6 @@ using System.Xml;
 using System.Net;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 
 public enum FILE_ERR
 {
@@ -38,10 +37,6 @@ namespace ZLauncher
         public List<FileList> files = new List<FileList>();
         MemoryStream xmlPatch = null;
 
-        /// <summary>
-        /// read patch.xml, store values in List of files
-        /// </summary>
-        /// <returns></returns>
         public bool ParseXML()
         {
             WebClient client = new WebClient();
@@ -50,13 +45,13 @@ namespace ZLauncher
             {
                 try
                 {
-                    byte[] downloadData = client.DownloadData("https://updates.duelists.online/patch.xml");
+                    byte[] downloadData = client.DownloadData("todo");
                 }
                 catch(Exception ex)
                 {
                     return false;
                 }
-              xmlPatch = new MemoryStream(client.DownloadData("https://updates.duelists.online/patch.xml"));
+              xmlPatch = new MemoryStream(client.DownloadData("todo"));
             }
             catch(ArgumentNullException e)
             {
@@ -93,8 +88,10 @@ namespace ZLauncher
 
             foreach (FileList file in files.ToArray())
             {
-                if (file.name.Contains("ZLauncher"))
+                if (file.name.Contains("Launcher"))
+                {
                     files.MoveItemAtIndexToFront(files.IndexOf(file));
+                }
             }
             return true;
 

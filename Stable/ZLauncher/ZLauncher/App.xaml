@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:ZLauncher"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <ImageBrush x:Key="Banner_Top" ImageSource="\Images\banner_top.jpg"/>
+        <ImageBrush x:Key="Banner_Bottom" ImageSource="\Images\banner_bottom.jpg"/>
         <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
             <Setter Property="WindowStyle" Value="None"/>
             <Setter Property="AllowsTransparency" Value="True"/>
