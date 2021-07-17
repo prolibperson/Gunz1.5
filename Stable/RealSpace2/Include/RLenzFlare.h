@@ -83,8 +83,8 @@ public:
 	void		Initialize();									// 플레어 엘레멘트의 순서와 갯수를 결정
 	bool		Render( rvector& light_pos,		// 광원
 					rvector& centre_,					// 화면 중앙(카메라 위치) 혹은 캐릭터 눈 위치(???)
-					ABspObject* pbsp_ );				
-	bool		Render( rvector& centre_ , ABspObject* pbsp_ );
+					RBspObject* pbsp_ );				
+	bool		Render( rvector& centre_ , RBspObject* pbsp_ );
 	bool		SetLight( rvector& pos_ );
 	void		Clear() { miNumLight	= 0;	}
 	int			GetNumLight() const { return miNumLight; }

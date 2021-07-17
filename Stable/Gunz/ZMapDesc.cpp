@@ -412,7 +412,7 @@ ZMapDesc::~ZMapDesc()
 	m_SmokeDummyMgr.Destroy();
 }
 
-bool ZMapDesc::Open(ABspObject* pBspObject)
+bool ZMapDesc::Open(RBspObject* pBspObject)
 {
 	m_SpawnManager.Clear();
 

@@ -103,7 +103,7 @@ bool ZShadow::setMatrix(ZCharacterObject& char_, float size_  )
 	return setMatrix( *char_.m_pVMesh ,size_);
 }
 
-bool ZShadow::setMatrix( ZObjectVMesh& vmesh, float size_ /* = 100.f  */, ABspObject* p_map /* = 0 */)
+bool ZShadow::setMatrix( ZObjectVMesh& vmesh, float size_ /* = 100.f  */, RBspObject* p_map /* = 0 */)
 {
 	// 캐릭터의 발의 위치 얻어오기
 	rvector footPosition[2];

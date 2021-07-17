@@ -115,7 +115,7 @@ public:
 	DWORD m_dwReturnMaxTime;
 };
 
-#define VISUAL_LIGHT_MAX 6
+#define VISUAL_LIGHT_MAX 3
 
 class RVisualLightMgr
 {

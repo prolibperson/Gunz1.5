@@ -1209,7 +1209,7 @@ void ZCharacter::UpdateHeight(float fDelta)
 
 				}
 
-				ABspObject* r_map = ZGetGame()->GetWorld()->GetBsp();
+				RBspObject* r_map = ZGetGame()->GetWorld()->GetBsp();
 
 				// 점프 착지시 먼지..
 				rvector vPos = GetPosition();

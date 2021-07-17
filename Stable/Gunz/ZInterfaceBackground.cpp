@@ -304,10 +304,7 @@ void ZInterfaceBackground::LoadMesh()
 {
 	if (m_pChurch == NULL)
 	{
-		if (!ZGetConfiguration()->GetVideo()->bNewRenderer)
-			m_pChurch = new RBspObject();
-		else
-			m_pChurch = new XBspObject();
+		m_pChurch = new RBspObject();
 
 		m_pChurch->Open(DIR_LOGIN"/church_b.rs", "xml");
 
@@ -318,10 +315,7 @@ void ZInterfaceBackground::LoadMesh()
 
 	if (m_pChurchEnd == NULL)
 	{
-		if (!ZGetConfiguration()->GetVideo()->bNewRenderer)
-			m_pChurchEnd = new RBspObject();
-		else
-			m_pChurchEnd = new XBspObject();
+		m_pChurchEnd = new RBspObject();
 
 		m_pChurchEnd->Open(DIR_LOGIN"/church_a.rs", "xml");
 
@@ -506,10 +500,7 @@ void ZInterfaceBackground::LoadMesh( void)
 
 	if ( m_pLogin == NULL)
 	{
-		if (!ZGetConfiguration()->GetVideo()->bNewRenderer)
-			m_pLogin = new RBspObject();
-		else
-			m_pLogin = new XBspObject();
+		m_pLogin = new RBspObject();
 
 #ifndef _DEBUG
 		const char* descExt = "xml";

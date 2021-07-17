@@ -327,10 +327,7 @@ void ZStencilLight::Render()
 		light.Diffuse.g		= .5*fPower;
 		light.Diffuse.b		= .25*fPower;
 
-//		if (!ZGetConfiguration()->GetVideo()->bNewRenderer)
-			((RBspObject*)ZGetGame()->GetWorld()->GetBsp())->DrawLight(&light);
-		//else
-		//	((XBspObject*)ZGetGame()->GetWorld()->GetBsp())->DrawLight(&light);
+		ZGetGame()->GetWorld()->GetBsp()->DrawLight(&light);
 	}
 	
 	PostRender();

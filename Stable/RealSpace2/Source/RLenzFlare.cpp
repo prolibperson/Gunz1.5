@@ -63,7 +63,7 @@ RLenzFlare				RLenzFlare::msInstance;
 //	2. 광원과 중심과의 거리를 구하고 그것을 엘레멘트의 수로 나누어 
 //		엘레멘트간의 간격을 구하고 엘레멘트들을 그려준다.
 //////////////////////////////////////////////////////////////////////////
-bool RLenzFlare::Render( rvector& light_pos_, rvector& centre_, ABspObject* pbsp_  ) 
+bool RLenzFlare::Render( rvector& light_pos_, rvector& centre_, RBspObject* pbsp_  ) 
 {
 	rvector rDir	= light_pos_ - centre_;
 	rvector cDir	= RCameraDirection;
@@ -172,7 +172,7 @@ bool RLenzFlare::Render( rvector& light_pos_, rvector& centre_, ABspObject* pbsp
 //////////////////////////////////////////////////////////////////////////
 //	Render
 //////////////////////////////////////////////////////////////////////////
-bool	RLenzFlare::Render( rvector& centre_, ABspObject* pbsp_  )
+bool	RLenzFlare::Render( rvector& centre_, RBspObject* pbsp_  )
 {
 	for( int i = 0 ; i < miNumLight; ++i )
 	{

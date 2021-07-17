@@ -7827,7 +7827,7 @@ void ZGame::OnExplosionDynamite(MUID uidOwner, rvector pos, float fDamage, float
 
 bool ZGame::PickWorld( const rvector &pos, const rvector &dir,RBSPPICKINFO *pOut,DWORD dwPassFlag)
 {
-	ABspObject* r_map = GetWorld()->GetBsp();
+	RBspObject*  r_map = GetWorld()->GetBsp();
 	return r_map->Pick(pos, dir, pOut, dwPassFlag);
 }
 

@@ -40,7 +40,7 @@ private:
 
 public:
 	bool setMatrix( ZCharacterObject& char_, float size_ = 100.0f );	// 매 프레임마다 불려져야 함
-	bool setMatrix( ZObjectVMesh& vmesh, float size_ = 100.f, ABspObject* p_map  = 0 );
+	bool setMatrix( ZObjectVMesh& vmesh, float size_ = 100.f, RBspObject* p_map  = 0 );
 	void draw(bool bForced=false);
 
 private:

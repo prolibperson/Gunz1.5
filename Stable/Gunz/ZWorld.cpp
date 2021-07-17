@@ -81,16 +81,10 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 #ifdef _MAP_CACHING
 	if (!ZGetMapCache()->Find(m_szName))
 	{
-		if (!ZGetConfiguration()->GetVideo()->bNewRenderer)
-			m_pBsp = new RBspObject;
-		else
-			m_pBsp = new XBspObject;
+		m_pBsp = new RBspObject;
 	}
 #else
-	if (!ZGetConfiguration()->GetVideo()->bNewRenderer)
 		m_pBsp = new RBspObject;
-	else
-		m_pBsp = new XBspObject;
 #endif
 
 #ifndef _MAP_CACHING

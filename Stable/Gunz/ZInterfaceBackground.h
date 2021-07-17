@@ -14,8 +14,8 @@ using namespace RealSpace2;
 
 class ZInterfaceBackground {
 private:
-	ABspObject* m_pChurch;
-	ABspObject* m_pChurchEnd;
+	RBspObject* m_pChurch;
+	RBspObject* m_pChurchEnd;
 	ZMapDesc*   m_pMapDesc;
 	RMesh*		m_pPigeonMesh;
 	RVisualMeshMgr* m_VMeshMgr;
@@ -50,7 +50,7 @@ public:
 	bool  CreatePigeon(int nNumPigeon);
 	void UpdatePigeon();
 	int  SetRandomPigeon(RVisualMesh* pVMesh, float fAdd);
-	ABspObject*	GetChurchEnd() { return m_pChurchEnd; }
+	RBspObject* const	GetChurchEnd() { return m_pChurchEnd; }
 	rvector& GetCharPos() { return m_vCharPos; }
 	rvector& GetCharDir() { return m_vCharDir; }
 
@@ -65,7 +65,7 @@ public:
 
 class ZInterfaceBackground{
 private:
-	ABspObject*	m_pLogin;					// 배경
+	RBspObject*	m_pLogin;					// 배경
 	ZMapDesc* m_pMapDesc;
 
 	rmatrix		m_matWorld;					// 월드 맵
@@ -92,7 +92,7 @@ public:
 	ZInterfaceBackground( void);
 	virtual ~ZInterfaceBackground( void);
 
-	ABspObject*	GetChurchEnd() { return m_pLogin; }
+	RBspObject*	const GetChurchEnd() { return m_pLogin; }
 	int GetScene() { return m_nSceneNumber; }
 	void SetScene(int nSceneNumber);
 

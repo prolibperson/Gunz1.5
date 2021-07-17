@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <list>
-#include <thread>
+
 #include "RTypes.h"
 //#include "RPath.h"
 #include "RLightList.h"
@@ -11,16 +11,236 @@
 #include "RAnimationMgr.h"
 #include "RMaterialList.h"
 #include "ROcclusionList.h"
+#include "RDummyList.h"
 #include "RSolidBsp.h"
 #include "RNavigationMesh.h"
-#include "ABspObject.h"
+
 class MZFile;
 class MZFileSystem;
+class MXmlElement;
 
 _NAMESPACE_REALSPACE2_BEGIN
 
-///TODO: finish sorting this mess of a file, group all the bools/voids/etc together
-class RBspObject : public ABspObject
+struct RMATERIAL;
+class RMaterialList;
+class RDummyList;
+class RBaseTexture;
+class RSBspNode;
+
+
+struct RDEBUGINFO {
+	int nCall,nPolygon;
+	int nMapObjectFrustumCulled;
+	int nMapObjectOcclusionCulled;
+	RSolidBspNode		*pLastColNode;
+};
+
+struct BSPVERTEX {
+
+	float x, y, z;		// world position
+//	float nx,ny,nz;		// normal				// 지금은 의미없다
+    float tu1, tv1;		// texture coordinates
+	float tu2, tv2;
+
+	rvector *Coord() { return (rvector*)&x; }
+//	rvector *Normal() { return (rvector*)&nx; }
+}; 
+
+//#define BSP_FVF	(D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX2)
+#define BSP_FVF	(D3DFVF_XYZ | D3DFVF_TEX2)
+
+#define LIGHT_BSP_FVF	(D3DFVF_XYZ | D3DFVF_TEX2 | D3DFVF_DIFFUSE)
+
+struct RPOLYGONINFO {
+	rplane	plane;
+	int		nMaterial;
+	int		nConvexPolygon;
+	int		nLightmapTexture;
+	int		nPolygonID;
+	DWORD	dwFlags;
+
+	BSPVERTEX *pVertices;
+	int		nVertices;
+	int		nIndicesPos;
+};
+
+struct RCONVEXPOLYGONINFO {
+	rplane	plane;
+	rvector *pVertices;
+	rvector *pNormals;
+	int	nVertices;
+	int	nMaterial;
+	float fArea;
+	DWORD	dwFlags;
+};
+
+struct ROBJECTINFO {
+	string		name;
+	int			nMeshID;
+	RVisualMesh *pVisualMesh;
+	RLIGHT		*pLight;
+	float		fDist;
+};
+
+struct RBSPPICKINFO {
+	RSBspNode* pNode;
+	int nIndex;
+	rvector PickPos;
+	RPOLYGONINFO	*pInfo;
+};
+
+class RMapObjectList : public list<ROBJECTINFO*> {
+public:
+	virtual ~RMapObjectList();
+
+	iterator Delete(iterator i);
+};
+
+class RDrawInfo {
+public:
+	RDrawInfo() {
+		nVertice = 0;
+		pVertices = NULL;
+		nIndicesOffset = 0;
+		nTriangleCount = 0;
+		pPlanes = NULL;
+		pUAxis = NULL;
+		pVAxis = NULL;
+
+	}
+
+	~RDrawInfo() {
+		SAFE_DELETE(pVertices);
+		SAFE_DELETE(pPlanes);
+		SAFE_DELETE(pUAxis);
+		SAFE_DELETE(pVAxis);
+	}
+
+	int				nVertice;		// 버텍스 수
+	BSPVERTEX		*pVertices;		// 버텍스
+	int				nIndicesOffset;	// index가 시작하는곳의 옵셋
+	int				nTriangleCount;	// 삼각형 갯수
+	rplane			*pPlanes;		// 평면의 방정식(삼각형개수만큼)
+	rvector			*pUAxis;		// uv 계산에 필요한 기준축
+	rvector			*pVAxis;		// uv 계산에 필요한 기준축
+};
+
+class RSBspNode
+{
+public:
+	int				nPolygon;
+//	int				nPosition;		// vertex buffer 내의 위치.
+	RPOLYGONINFO	*pInfo;			// 폴리곤 정보의 배열 시작위치
+	RPOLYGONINFO	**ppInfoSorted;	// 소팅된 폴리곤 정보의 배열
+	RDrawInfo		*pDrawInfo;		// material별 해당 폴리곤을 그리기위한 정보
+
+	int				nFrameCount;		// 마지막 렌더링된 프레임..
+	int				m_nBaseVertexIndex;	///< 인덱스들의 base vertex index
+	int				m_nVertices;		///< 버텍스 수
+
+//	bool			bVisibletest;		// pvs 테스트용 . 임시.
+//	bool			bSolid;
+
+	RSBspNode		*m_pPositive,*m_pNegative;
+
+	rplane plane;
+	rboundingbox	bbTree;
+
+	RSBspNode();
+	virtual ~RSBspNode();
+
+	RSBspNode *GetLeafNode(rvector &pos);
+	void DrawWireFrame(int nFace,DWORD color);
+	void DrawBoundingBox(DWORD color);
+};
+
+// 자잘한 lightmap 을 큰 텍스쳐에 한번에 올리는걸 도와준다.
+
+typedef list<POINT> RFREEBLOCKLIST;
+struct RLIGHTMAPTEXTURE {
+	int nSize;
+	DWORD *data;
+	bool bLoaded;
+	POINT position;
+	int	nLightmapIndex;
+};
+
+struct RBSPMATERIAL : public RMATERIAL {
+	RBSPMATERIAL() {	texture=NULL; }
+	RBSPMATERIAL(RMATERIAL *mat)
+	{
+		Ambient=mat->Ambient;
+		Diffuse=mat->Diffuse;
+		DiffuseMap=mat->DiffuseMap;
+		dwFlags=mat->dwFlags;
+		Name=mat->Name;
+		Power=mat->Power;
+		Specular=mat->Specular;
+	};
+	RBaseTexture *texture;
+};
+
+class RBspLightmapManager {
+
+public:
+	RBspLightmapManager();
+	virtual ~RBspLightmapManager();
+
+	void Destroy();
+
+	int GetSize() { return m_nSize; }
+	DWORD *GetData() { return m_pData; }
+
+	void SetSize(int nSize) { m_nSize=nSize; }
+	void SetData(DWORD *pData) { Destroy(); m_pData=pData; }
+
+	bool Add(DWORD *data,int nSize,POINT *retpoint);
+	// 2^nLevel 크기의 사용되지않은 RECT를 빼내준다..
+	bool GetFreeRect(int nLevel,POINT *pt);
+
+	void Save(const char *filename);
+
+	// 실행과는 관계가 없고. 단순히 참고하기 위한 데이터임
+	// 남은 양 0~1 을 계산해서 m_fUnused로 넣는다
+	float CalcUnused();
+	float m_fUnused;
+
+protected:
+	RFREEBLOCKLIST *m_pFreeList;
+	DWORD *m_pData;
+	int m_nSize;
+};
+
+struct FogInfo
+{
+	bool bFogEnable;
+	DWORD dwFogColor;
+	float fNear;
+	float fFar;
+	FogInfo(){ bFogEnable = false; }
+};
+
+struct AmbSndInfo
+{
+	int itype;
+	char szSoundName[64];
+	rvector min;
+	rvector center;	
+	rvector max;
+	float radius;
+};
+
+#define AS_AABB		0x01
+#define AS_SPHERE	0x02
+#define AS_2D		0x10
+#define AS_3D		0x20
+
+// 에디터에서 Generate Lightmap에 쓰일 Progress bar 나타낼때 쓰는 콜백펑션 타입. 취소되었으면 리턴 = false
+typedef bool (*RGENERATELIGHTMAPCALLBACK)(float fProgress);
+
+
+
+class RBspObject
 { 
 public:
 	ROpenFlag m_OpenMode;
@@ -31,17 +251,17 @@ public:
 	void ClearLightmaps();
 
 	// open 을 수행하면 기본 확장자로 다음의 Open...펑션들을 순서대로 부른다.
-	virtual bool Open(const char *, const char* descExtension, ROpenFlag nOpenFlag=ROF_RUNTIME,RFPROGRESSCALLBACK pfnProgressCallback=NULL, void *CallbackParam=NULL) override;
-	virtual bool IsVisible(rboundingbox &bb) override;		// occlusion 에 의해 가려져있으면 false 를 리턴.
-	virtual bool Draw() override;
-	virtual bool Pick(const rvector &pos, const rvector &dir, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) override;
-	virtual bool PickTo(const rvector &pos, const rvector &to, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) override;
-	virtual bool PickOcTree(rvector &pos, rvector &dir, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) override;
+	bool Open(const char *, const char* descExtension, ROpenFlag nOpenFlag=ROF_RUNTIME,RFPROGRESSCALLBACK pfnProgressCallback=NULL, void *CallbackParam=NULL);
+	bool IsVisible(rboundingbox &bb);		// occlusion 에 의해 가려져있으면 false 를 리턴.
+	bool Draw() ;
+	bool Pick(const rvector &pos, const rvector &dir, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) ;
+	bool PickTo(const rvector &pos, const rvector &to, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) ;
+	 bool PickOcTree(rvector &pos, rvector &dir, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) ;
 	// origin 에서 targetpos 로 이동하는데 미끄러짐을 감안해서 targetpos 를 조절해서 리턴해준다.
-	virtual bool CheckWall(rvector &origin, rvector &targetpos, float fRadius, float fHeight = 0.f, RCOLLISIONMETHOD method = RCW_CYLINDER, int nDepth = 0, rplane *pimpactplane = NULL) override;
+	 bool CheckWall(rvector &origin, rvector &targetpos, float fRadius, float fHeight = 0.f, RCOLLISIONMETHOD method = RCW_CYLINDER, int nDepth = 0, rplane *pimpactplane = NULL) ;
 	// solid 영역 안에 있는지 ?
-	virtual bool CheckSolid(rvector &pos, float fRadius, float fHeight = 0.f, RCOLLISIONMETHOD method = RCW_CYLINDER) override;
-	virtual bool GetShadowPosition(rvector& pos_, rvector& dir_, rvector* outNormal_, rvector* outPos_) override;
+	 bool CheckSolid(rvector &pos, float fRadius, float fHeight = 0.f, RCOLLISIONMETHOD method = RCW_CYLINDER) ;
+	 bool GetShadowPosition(rvector& pos_, rvector& dir_, rvector* outNormal_, rvector* outPos_) ;
 
 	bool OpenDescription(const char *);				// 디스크립션 파일		.xml 파일을 연다.
 	bool OpenRs(const char *);						// 실제 월드 정보파일	.rs 파일을 연다. 
@@ -55,16 +275,16 @@ public:
 	bool GetWireframeMode() { return m_bWireframe; }
 	bool GetShowLightmapMode() { return m_bShowLightmap; }
 
-	virtual void OptimizeBoundingBox() override;	// 게임의 런타임에서는 실제바운딩박스로 타이트하게 잡아준다.
-	virtual void DrawObjects() override;
+	 void OptimizeBoundingBox() ;	// 게임의 런타임에서는 실제바운딩박스로 타이트하게 잡아준다.
+	 void DrawObjects() ;
 	//Custom: Sky
 	void DrawSky();
 	void DrawFlags();
-	virtual void DrawLight(D3DLIGHT9 *pLight) override;			// 광원 처리를.. 멀티 패스로 덧그린다.
-	virtual void SetWireframeMode(bool bWireframe) override { m_bWireframe = bWireframe; }
-	virtual void OnInvalidate() override;
-	virtual void OnRestore() override;
-	virtual void LightMapOnOff(bool b) override;
+	 void DrawLight(D3DLIGHT9 *pLight) ;			// 광원 처리를.. 멀티 패스로 덧그린다.
+	 void SetWireframeMode(bool bWireframe)  { m_bWireframe = bWireframe; }
+	 void OnInvalidate() ;
+	 void OnRestore() ;
+	 void LightMapOnOff(bool b) ;
 
 	void SetObjectLight(rvector pos);
 	void SetCharactorLight(rvector pos);
@@ -83,7 +303,7 @@ public:
 	void DrawNavi_Links();
 	void GetNormal(int nConvexPolygon, rvector &position, rvector *normal);
 	void test_MakePortals();
-	virtual void SetMapObjectOcclusion(bool b) override { m_bNotOcclusion = b; }
+	 void SetMapObjectOcclusion(bool b)  { m_bNotOcclusion = b; }
 	void SetShowLightmapMode(bool bShowLightmap) { m_bShowLightmap = bShowLightmap; }
 
 	//bool GeneratePathData(const char *filename,float fAngle, float fToler);
@@ -113,25 +333,25 @@ public:
 	DWORD GetLightmap(rvector &Pos,RSBspNode *pNode,int nIndex);
 
 	// 해당 폴리곤의 Material을 얻어낸다.
-	virtual RBSPMATERIAL *GetMaterial(RSBspNode *pNode,int nIndex) override		{ return GetMaterial(pNode->pInfo[nIndex].nMaterial); }
-	virtual RBSPMATERIAL *GetMaterial(int nIndex) override;
+	 RBSPMATERIAL *GetMaterial(RSBspNode *pNode,int nIndex) 		{ return GetMaterial(pNode->pInfo[nIndex].nMaterial); }
+	 RBSPMATERIAL *GetMaterial(int nIndex) ;
 
 	// material 을 얻어낸다.
 	int	GetMaterialCount()	{ return m_nMaterial; }
 
-	virtual RMapObjectList	*GetMapObjectList() override { return &m_ObjectList; }
+	 RMapObjectList	*GetMapObjectList()  { return &m_ObjectList; }
 	//Custom: SkyBox
 	RMapObjectList			*GetSkyBoxList() {return &m_SkyList;}
 	void SetMapObjectList(RMapObjectList* objectList) { m_ObjectList =  *objectList; }
-	virtual RDummyList		*GetDummyList()	override	 { return &m_DummyList; }
+	 RDummyList		*GetDummyList()		 { return &m_DummyList; }
 	RBaseTexture *GetBaseTexture(int n) { if(n>=0 && n<m_nMaterial) return m_pMaterials[n].texture; return NULL; }
 
 	RLightList *GetMapLightList() { return &m_StaticMapLightList; }
-	virtual RLightList *GetObjectLightList() override { return &m_StaticObjectLightList; }
-	virtual RLightList *GetSunLightList() override { return &m_StaticSunLigthtList; }
+	 RLightList *GetObjectLightList()  { return &m_StaticObjectLightList; }
+	 RLightList *GetSunLightList()  { return &m_StaticSunLigthtList; }
 
 	RSBspNode *GetOcRootNode() { return m_pOcRoot; }
-	virtual RSBspNode *GetRootNode() override { return m_pBspRoot; }
+	 RSBspNode *GetRootNode()  { return m_pBspRoot; }
 
 	rvector GetDimension();
 
@@ -147,7 +367,7 @@ public:
 
 	
 	// 위치에서 바닥에 닿는 점을 구한다.
-	virtual rvector GetFloor(rvector &origin,float fRadius,float fHeight,rplane *pimpactplane=NULL) override;
+	 rvector GetFloor(rvector &origin,float fRadius,float fHeight,rplane *pimpactplane=NULL) ;
 	
 
 
@@ -155,7 +375,7 @@ public:
 
 
 
-	virtual RMeshMgr*	GetMeshManager() override {
+	 RMeshMgr*	GetMeshManager()  {
 		return &m_MeshList;
 	}
 
@@ -167,14 +387,14 @@ public:
 	RSolidBspNode *GetColRoot() { return m_pColRoot; }
 
 
-	virtual FogInfo GetFogInfo() override { return m_FogInfo;}
-	virtual list<AmbSndInfo*> GetAmbSndList() override { return m_AmbSndInfoList;	}
+	 FogInfo GetFogInfo()  { return m_FogInfo;}
+	 list<AmbSndInfo*> GetAmbSndList()  { return m_AmbSndInfoList;	}
 
 
 	static bool CreateShadeMap(const char *szShadeMap);
 
 	RDEBUGINFO *GetDebugInfo() { return &m_DebugInfo; }
-	virtual RNavigationMesh* GetNavigationMesh() override { return &m_NavigationMesh; }
+	 RNavigationMesh* GetNavigationMesh()  { return &m_NavigationMesh; }
 
 	string m_filename;
 private:

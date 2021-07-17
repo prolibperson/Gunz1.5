@@ -262,7 +262,7 @@ public:
 
 	ZMapDesc();
 	virtual ~ZMapDesc();
-	bool Open(ABspObject* pBspObject);
+	bool Open(RBspObject* pBspObject);
 
 	ZMapSpawnManager*	GetSpawnManager()	{ return &m_SpawnManager; }
 	ZMapSmokeDummyMgr*	GetSmokeDummyMgr()	{ return &m_SmokeDummyMgr; }

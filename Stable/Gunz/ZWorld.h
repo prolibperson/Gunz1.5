@@ -39,7 +39,7 @@ private:
 
 	char		m_szName[64];
 	char		m_szBspName[_MAX_PATH];
-	ABspObject	*m_pBsp;
+	RBspObject	*m_pBsp;
 	ZMapDesc	*m_pMapDesc;
 
 	int		m_nRefCount;	// 레퍼런스 카운트
@@ -57,7 +57,7 @@ public:
 	void OnInvalidate();
 	void OnRestore();
 
-	ABspObject	*GetBsp() { return m_pBsp; }
+	RBspObject* const GetBsp() { return m_pBsp; }
 	ZMapDesc	*GetDesc() { return m_pMapDesc; }
 	ZEmblemList	*GetFlags() { return &m_flags; }
 	ZWaterList	*GetWaters() { return &m_waters; }

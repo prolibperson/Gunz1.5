@@ -180,12 +180,6 @@
     <ClCompile Include="Source\RBspObject.cpp">
       <Filter>Map\BspObject</Filter>
     </ClCompile>
-    <ClCompile Include="Source\XBspObject.cpp">
-      <Filter>Map\BspObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ABspObject.cpp">
-      <Filter>Map\BspObject\Interface</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\RHalfEdgeMesh.h">
@@ -319,12 +313,6 @@
     <ClInclude Include="Include\stdafx.h" />
     <ClInclude Include="Include\RBspObject.h">
       <Filter>Map\BspObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\XBspObject.h">
-      <Filter>Map\BspObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\ABspObject.h">
-      <Filter>Map\BspObject\Interface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
