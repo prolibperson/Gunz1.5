@@ -1231,9 +1231,9 @@ void ZEffectManager::AddDashEffect(rvector& Target, rvector& TargetNormal, ZObje
 
 
 	if (!pObj->IsVisible()) return;
-	ZItem* dashItem = pObj->GetItems()->GetItem(MMCIP_DASH);
-	if(dashItem != nullptr)
+	if(pObj->GetItems()->GetItem(MMCIP_DASH)->IsEmpty() == false)
 	{
+		ZItem* dashItem = pObj->GetItems()->GetItem(MMCIP_DASH);
 		pNew = new ZEffectDash(m_pEffectMeshMgr->Get(dashItem->GetDesc()->m_pMItemName->Ref().m_szMeshName),Target,TargetNormal,pObj->GetUID());
 	}
 	else
