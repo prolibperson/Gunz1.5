@@ -7,7 +7,6 @@
 #include "MQuestItem.h"
 #include "MQuestConst.h"
 #include "MMatchDBFilter.h"
-#include "MCountryFilterDBMgr.h"
 
 #include "MMatchBRMachine.h"
 #include "MMatchCharBRInfo.h"
@@ -38,7 +37,6 @@ protected:
 	MDatabase	m_DB;
 	CString		m_strDSNConnect;
 
-	MCountryFilterDBMgr m_CountryFilterDBMgr;
 
 	MMatchDBFilter m_DBFilter;
 
@@ -263,15 +261,6 @@ public:
 	bool GetCID( const char* pszCharName, int& outCID );
 	bool GetCharName( const int nCID, string& outCharName );
 
-	// Country filter.
-	bool GetIPContryCode( const string& strIP, 
-		DWORD& dwOutIPFrom, 
-		DWORD& dwOutIPTo, 
-		string& strOutCountryCode );
-	bool GetBlockCountryCodeList( BlockCountryCodeList& rfBlockCountryCodeList );
-	bool GetIPtoCountryList( IPtoCountryList& rfIPtoCountryList );
-	bool GetCustomIP( const string& strIP, DWORD& dwIPFrom, DWORD& dwIPTo, bool& bIsBlock, string& strCountryCode3, string& strComment );
-	bool GetCustomIPList( CustomIPList& rfCustomIPList );
 
 	// Event
 	bool InsertEvent( const DWORD dwAID,  const DWORD dwCID, const string& strEventName );

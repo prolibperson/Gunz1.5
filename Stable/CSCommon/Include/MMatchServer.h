@@ -131,10 +131,6 @@ protected:
 	MMatchQuest				m_Quest;	// ??÷? ??g???
 	DWORD					m_checkMemory21;
 
-	MCountryFilter			m_CountryFilter;
-	IPtoCountryList			m_TmpIPtoCountryList;
-	BlockCountryCodeList	m_TmpBlockCountryCodeList;
-	CustomIPList			m_TmpCustomIPList;
 	DWORD					m_dwBlockCount;
 	DWORD					m_dwNonBlockCount;
 
@@ -758,16 +754,12 @@ protected:
 protected :
 	friend bool StageKick(MMatchServer* pServer, const MUID& uidPlayer, const MUID& uidStage, char* pszChat);
 	// fitler
-	MCountryFilter& GetCountryFilter()					{ return m_CountryFilter; }
 	bool InitCountryFilterDB();
 	const CUSTOM_IP_STATUS	CheckIsValidCustomIP( const MUID& CommUID, const string& strIP, string& strCountryCode3, const bool bUseFilter );
 	const COUNT_CODE_STATUS CheckIsNonBlockCountry( const MUID& CommUID, const string& strIP, string& strCountryCode3, const bool bUseFilter );
 
 public :
 	bool CheckUpdateItemXML();
-	IPtoCountryList& GetTmpIPtoCountryList()			{ return m_TmpIPtoCountryList; }
-	BlockCountryCodeList& GetTmpBlockCountryCodeList()	{ return m_TmpBlockCountryCodeList; }
-	CustomIPList& GetTmpCustomIPList()					{ return m_TmpCustomIPList; }
 	void SetUseCountryFilter();
 	void SetAccetpInvalidIP();
 	void UpdateIPtoCountryList();

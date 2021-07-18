@@ -536,9 +536,6 @@
     <ClInclude Include="Include\MAsyncDBJob_CharFinalize.h">
       <Filter>AsyncProxy</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MAsyncDBJob_CountryFilter.h">
-      <Filter>AsyncProxy</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MAsyncDBJob_DuelTournament.h">
       <Filter>AsyncProxy</Filter>
     </ClInclude>
@@ -1098,9 +1095,6 @@
       <Filter>AsyncProxy</Filter>
     </ClCompile>
     <ClCompile Include="Source\MAsyncDBJob_CharFinalize.cpp">
-      <Filter>AsyncProxy</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MAsyncDBJob_CountryFilter.cpp">
       <Filter>AsyncProxy</Filter>
     </ClCompile>
     <ClCompile Include="Source\MAsyncDBJob_DuelTournament.cpp">

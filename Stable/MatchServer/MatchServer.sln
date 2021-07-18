@@ -12,8 +12,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MatchServer", "MatchServer.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MDatabase", "..\MDatabase\MDatabase.vcxproj", "{98475FA7-BEA2-42EE-9B1C-31D9684D237B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MCountryFilter", "..\MCountryFilter\MCountryFilter.vcxproj", "{43FAAF56-EA88-4D3F-95B7-14A0582F3290}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		_Encrypt_BRZ_Debug|Win32 = _Encrypt_BRZ_Debug|Win32

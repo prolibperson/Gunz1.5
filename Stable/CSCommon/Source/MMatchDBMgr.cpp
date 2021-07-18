@@ -560,7 +560,6 @@ bool MMatchDBMgr::Connect(CString strDSNConnect)
 {
 	if( m_DB.Connect(strDSNConnect) )
 	{
-		m_CountryFilterDBMgr.SetDB( &m_DB );
 		return true;
 	}
 
@@ -2896,93 +2895,7 @@ bool MMatchDBMgr::CheckPremiumIP(const char* szIP, bool& outbResult)
 	return true;
 }
 
-bool MMatchDBMgr::GetIPContryCode( const string& strIP, 
-								  DWORD& dwOutIPFrom, 
-								  DWORD& dwOutIPTo, 
-								  string& strOutCountryCode )
-{
-	_STATUS_DB_START;
-	try 
-	{
-		m_CountryFilterDBMgr.GetIPContryCode( strIP, dwOutIPFrom, dwOutIPTo, strOutCountryCode );
-	}
-	catch( CDBException* e )
-	{
-		Log( "MMatchDBMgr::GetIPContryCode - %s\n", e->m_strError );
-		return false;
-	}
-	_STATUS_DB_END(58);
-	return true;
-}
 
-
-bool MMatchDBMgr::GetBlockCountryCodeList( BlockCountryCodeList& rfBlockCountryCodeList )
-{
-	_STATUS_DB_START;
-	try
-	{
-		m_CountryFilterDBMgr.GetBlockCountryCodeList( rfBlockCountryCodeList );
-	}
-	catch( CDBException* e )
-	{
-		Log( "MMatchDBMgr::GetBlockCountryCodeList - %s\n", e->m_strError );
-		return false;
-	}
-	_STATUS_DB_END(60);
-	return true;
-}
-
-
-bool MMatchDBMgr::GetCustomIP( const string& strIP, DWORD& dwIPFrom, DWORD& dwIPTo, bool& bIsBlock, string& strCountryCode3, string& strComment )
-{
-	_STATUS_DB_START;
-	try
-	{
-		m_CountryFilterDBMgr.GetCustomIP( strIP, dwIPFrom, dwIPTo, bIsBlock, strCountryCode3, strComment );
-	}
-	catch( CDBException* e )
-	{
-		Log( "MMatchDBMgr::GetCustomIP - %s\n", e->m_strError );
-		return false;
-	}
-	_STATUS_DB_END(59);
-	return true;
-
-}
-
-
-bool MMatchDBMgr::GetIPtoCountryList( IPtoCountryList& rfIPtoCountryList )
-{
-	_STATUS_DB_START;
-	try
-	{
-		m_CountryFilterDBMgr.GetIPtoCountryList( rfIPtoCountryList );
-	}
-	catch( CDBException* e )
-	{
-		Log( "MMatchDBMgr::GetIPtoCountryList - %s\n", e->m_strError );
-		return false;
-	}
-	_STATUS_DB_END(61);
-	return true;
-}
-
-
-bool MMatchDBMgr::GetCustomIPList( CustomIPList& rfCustomIPList )
-{
-	_STATUS_DB_START;
-	try
-	{
-		m_CountryFilterDBMgr.GetCustomIPList( rfCustomIPList );
-	}
-	catch( CDBException* e )
-	{
-		Log( "MMatchDBMgr::GetCustomIPList - %s\n", e->m_strError );
-		return false;
-	}
-	_STATUS_DB_END(62);
-	return true;
-}
 
 bool MMatchDBMgr::InsertEvent( const DWORD dwAID,  const DWORD dwCID, const string& strEventName )
 {

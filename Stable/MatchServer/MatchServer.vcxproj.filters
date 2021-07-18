@@ -117,9 +117,6 @@
     <ClCompile Include="MBMatchServer_AntiHack.cpp">
       <Filter>Server\MBMatchServerOnCommand</Filter>
     </ClCompile>
-    <ClCompile Include="MBMatchServer_CountryFilter.cpp">
-      <Filter>Server\MBMatchServerOnCommand</Filter>
-    </ClCompile>
     <ClCompile Include="MBMatchServer_Item.cpp">
       <Filter>Server\MBMatchServerOnCommand</Filter>
     </ClCompile>

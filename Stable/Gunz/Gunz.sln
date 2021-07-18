@@ -12,8 +12,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RealSpace2", "..\RealSpace2
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gunz", "Gunz.vcxproj", "{8041EB15-6294-4BD7-A597-C2AF493F6340}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MCountryFilter", "..\MCountryFilter\MCountryFilter.vcxproj", "{43FAAF56-EA88-4D3F-95B7-14A0582F3290}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cml", "..\cml\cml.vcxproj", "{8D451493-65C2-49C3-ADAE-ACB17E6B0650}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MDatabase", "..\MDatabase\MDatabase.vcxproj", "{98475FA7-BEA2-42EE-9B1C-31D9684D237B}"

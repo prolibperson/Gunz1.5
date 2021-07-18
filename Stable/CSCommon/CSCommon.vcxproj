@@ -1676,7 +1676,6 @@
     <ClInclude Include="Include\MAsyncDBJob.h" />
     <ClInclude Include="Include\MAsyncDBJob_BuyQuestItem.h" />
     <ClInclude Include="Include\MAsyncDBJob_CharFinalize.h" />
-    <ClInclude Include="Include\MAsyncDBJob_CountryFilter.h" />
     <ClInclude Include="Include\MAsyncDBJob_DuelTournament.h" />
     <ClInclude Include="Include\MAsyncDBJob_Event.h" />
     <ClInclude Include="Include\MAsyncDBJob_FriendList.h" />
@@ -1880,7 +1879,6 @@
     <ClCompile Include="Source\MAsyncDBJob.cpp" />
     <ClCompile Include="Source\MAsyncDBJob_BuyQuestItem.cpp" />
     <ClCompile Include="Source\MAsyncDBJob_CharFinalize.cpp" />
-    <ClCompile Include="Source\MAsyncDBJob_CountryFilter.cpp" />
     <ClCompile Include="Source\MAsyncDBJob_DuelTournament.cpp" />
     <ClCompile Include="Source\MAsyncDBJob_Event.cpp" />
     <ClCompile Include="Source\MAsyncDBJob_FriendList.cpp" />

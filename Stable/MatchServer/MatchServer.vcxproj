@@ -1605,7 +1605,6 @@
     <ClCompile Include="MBMatchAsyncDBJob_BringBackAccountItem.cpp" />
     <ClCompile Include="MBMatchAsyncDBJob_BringBackAccountItemStackable.cpp" />
     <ClCompile Include="MBMatchServer_AntiHack.cpp" />
-    <ClCompile Include="MBMatchServer_CountryFilter.cpp" />
     <ClCompile Include="MBMatchServer_Item.cpp" />
     <ClCompile Include="MBMatchServer_Login.cpp" />
     <ClCompile Include="MBMatchServer_OnCommand.cpp" />

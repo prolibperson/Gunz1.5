@@ -129,18 +129,6 @@ void MMatchServer::ProcessAsyncJob()
 			}
 			break;
 
-		case MASYNCJOB_UPDATEIPTOCOUNTRYLIST :
-			{
-				OnAsyncUpdateIPtoCoutryList( pJob );
-			};
-			break;
-
-		case MASYNCJOB_UPDATEBLOCKCOUNTRYCODELIST :
-			{
-				OnAsyncUpdateBlockCountryCodeList( pJob );
-			}
-			break;
-
 		case MASYNCJOB_UPDATECUSTOMIPLIST :
 			{
 				OnAsyncUpdateCustomIPList( pJob );

@@ -151,15 +151,6 @@ protected :
 
 	int ValidateStageJoin(const MUID& uidPlayer, const MUID& uidStage);
 
-	// filter
-	void OnLocalUpdateUseCountryFilter();
-	void OnLocalGetDBIPtoCountry();
-	void OnLocalGetDBBlockCountryCode();
-	void OnLocalGetDBCustomIP();
-	void OnLocalUpdateIPtoCountry();
-	void OnLocalUpdateBlockCountryCode();
-	void OnLocalUpdateCustomIP();
-	void OnLocalUpdateAcceptInvaildIP();
 
 	// 
 //	void OnRequestLoginNetmarble(const MUID& CommUID, const char* szAuthCookie, const char* szDataCookie, const char* szCPCookie, const char* szSpareData, int nCmdVersion, unsigned long nChecksumPack);
