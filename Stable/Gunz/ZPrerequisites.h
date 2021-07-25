@@ -35,12 +35,7 @@ _USING_NAMESPACE_REALSPACE2
 #include "ZGlobal.h"
 #include "ZMessages.h"
 
-//#define _BIRDCAMERA
-
-
 #ifndef _PUBLISH
-	#define _FASTDEBUG
-//	#define _BIRDTEST
 
 
 
