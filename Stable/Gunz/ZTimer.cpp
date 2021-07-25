@@ -55,8 +55,6 @@ ZTimer::ZTimer()
 	m_pThistime = new DWORD;
 	m_pLasttime = new DWORD;
 	m_pElapsed = new DWORD;
-	m_lastShiftTime.Set_MakeCrc(timeGetTime());
-
 }
 
 ZTimer::~ZTimer()
@@ -80,6 +78,11 @@ ZTimer::~ZTimer()
 void ZTimer::ResetFrame()
 {
 	m_bInitialized=false;
+}
+
+void ZTimer::ShiftBytesOnStart()
+{
+	m_lastShiftTime.Set_MakeCrc(timeGetTime());
 }
 
 float ZTimer::UpdateFrame()

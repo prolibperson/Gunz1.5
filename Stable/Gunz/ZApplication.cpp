@@ -1065,6 +1065,7 @@ void ZApplication::SetSystemValue(const char* szField, const char* szData)
 void ZApplication::ShiftBytesOnStart()
 {
 	m_lastShiftTime.Set_MakeCrc(timeGetTime());
+	m_Timer.ShiftBytesOnStart();
 }
 
 void ZApplication::InitFileSystem()

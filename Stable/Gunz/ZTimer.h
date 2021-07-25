@@ -34,6 +34,9 @@ public:
 	ZTimer();
 	virtual ~ZTimer();
 
+	//Init
+	void ShiftBytesOnStart();
+
 	float UpdateFrame();
 	void ResetFrame();
 
