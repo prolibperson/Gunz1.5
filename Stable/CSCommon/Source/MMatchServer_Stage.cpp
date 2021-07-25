@@ -3361,14 +3361,14 @@ void MMatchServer::ResponseSkillMapBestTime(const MUID& player, const char* mapN
 	if (!MGetSkillMap()->FindMap(mapName))
 		return;
 
-	unsigned int* outBestTime;
+	unsigned int outBestTime = 0;
 
-	if (!GetDBMgr()->GetSkillMapBestTime(playerObj->GetCharInfo()->m_nCID, MGetMapDescMgr()->GetMapID(mapName),outBestTime))
+	if (!GetDBMgr()->GetSkillMapBestTime(playerObj->GetCharInfo()->m_nCID, MGetMapDescMgr()->GetMapID(mapName),&outBestTime))
 		return;
 
 	MCommand* command = CreateCommand(MC_MATCH_RESPONSE_SKILLMAP_BESTTIME, MUID(0, 0));
 	command->AddParameter(new MCmdParamUID(playerObj->GetUID()));
-	command->AddParameter(new MCmdParamUInt(*outBestTime));
+	command->AddParameter(new MCmdParamUInt(outBestTime));
 
 	MGetMatchServer()->RouteToBattle(stage->GetUID(), command);
 }
