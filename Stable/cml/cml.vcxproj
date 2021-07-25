@@ -126,7 +126,7 @@
     </ClCompile>
     <Lib>
       <AdditionalDependencies>lib\zlib64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>Lib\cmld.lib</OutputFile>
+      <OutputFile>Lib\cml64d.lib</OutputFile>
       <AdditionalLibraryDirectories>Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>

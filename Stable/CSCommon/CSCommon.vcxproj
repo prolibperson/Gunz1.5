@@ -112,7 +112,7 @@
     </ClCompile>
     <Lib>
       <AdditionalOptions>/y3 %(AdditionalOptions)</AdditionalOptions>
-      <OutputFile>$(OutDir)CSCommonD.lib</OutputFile>
+      <OutputFile>$(OutDir)CSCommon64d.lib</OutputFile>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
     </Lib>
   </ItemDefinitionGroup>
