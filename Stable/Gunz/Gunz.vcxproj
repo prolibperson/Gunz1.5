@@ -136,7 +136,7 @@
       <AdditionalLibraryDirectories>../sdk/dx9/lib/x64;../RealSound/Lib;Dxerr8.lib;Lib;../../sdk/crypto/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc.lib;libci.lib;LIBCMT.lib;commsupp.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)Gunzd.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)Gunz64d.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -197,7 +197,7 @@
       <AdditionalLibraryDirectories>../sdk/dx9/lib/x64;../RealSound/Lib;Dxerr8.lib;Lib;../../sdk/crypto/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>libc.lib;libci.lib;comsuppw.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)Gunz.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(OutDir)Gunz64.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
