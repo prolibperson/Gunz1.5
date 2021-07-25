@@ -632,7 +632,7 @@ bool ZGameInterface::InitInterface(const char* szSkinName, ZLoadingProgress *pLo
 	ZGetOptionInterface()->InitInterfaceOption();
 
 #ifdef _FASTDEBUG
-//	m_IDLResource.FindWidget("LoginPassword")->SetText("1111");
+	m_IDLResource.FindWidget("LoginPassword")->SetText("1111");
 //	m_IDLResource.FindWidget("LoginPassword")->SetText("2708");
 #endif
 	InitMaps(m_IDLResource.FindWidget("MapSelection"));
