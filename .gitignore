@@ -82,4 +82,5 @@ Stable/SafeUDP/LIB/*
 
 #Don't commit exes in GunZ/ folder
 GunZ/*.exe
-
+GunZ/*.ilk
+GunZ/*.pdb
