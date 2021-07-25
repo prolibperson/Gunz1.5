@@ -4559,7 +4559,7 @@ void ZCharacter::OnDamagedAntilead(ZObject* pAttacker, ZDAMAGETYPE damageType, M
 
 	ZObject::OnDamaged(pAttacker, pAttacker->GetPosition(), damageType, weaponType, fDamage, piercingRatio);
 
-	int meleeType = pAttacker->GetItems()->GetSelectedWeaponType() == MMatchWeaponType::MWT_DUAL_DAGGER <= MMatchWeaponType::MWT_DOUBLE_KATANA;
+	int meleeType = (pAttacker->GetItems()->GetSelectedWeaponType() >= MMatchWeaponType::MWT_DAGGER && pAttacker->GetItems()->GetSelectedWeaponType() <= MMatchWeaponType::MWT_DOUBLE_KATANA) ? ZD_MELEE : ZD_BULLET;
 	if (damageType == ZD_MELEE) OnDamagedAnimation(pAttacker, meleeType);
 
 	ZCharacter* pCharacter = dynamic_cast<ZCharacter*>(pAttacker);
