@@ -693,8 +693,6 @@ bool MXmlDocument::LoadFromFile(const char* m_sFileName)
 //		OutputDebugString(szBuf);
 //#endif
 
-		_ASSERT(0);
-
 		return false;
 	}
 

@@ -86,8 +86,12 @@ bool MEmblemMgr::LoadCache()
 
 	if (!xmlDoc.LoadFromFile(GetEmblemDataFile()))
 	{
-		xmlDoc.Destroy();
-		return false;
+		xmlDoc.SaveToFile(GetEmblemDataFile());
+		if (!xmlDoc.LoadFromFile(GetEmblemDataFile()))
+		{
+			xmlDoc.Destroy();
+			return false;
+		}
 	}
 
 	MXmlElement rootElement,emblemElement,childElement;
