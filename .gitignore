@@ -85,3 +85,6 @@ GunZ/*.exe
 GunZ/*.ilk
 GunZ/*.pdb
 GunZ/mlog.txt
+GunZ/abuse_db.txt
+GunZ/Gunz.dmp
+GunZ/profile_loading.txt
