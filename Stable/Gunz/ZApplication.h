@@ -107,6 +107,8 @@ public:
 	bool GetSystemValue(const char* szField, char* szData);		///< 레지스트리의 값을 읽어옴
 	void SetSystemValue(const char* szField, const char* szData);		///< 레지스트리에 저장
 
+	//Init
+	void ShiftBytesOnStart();
 	void InitFileSystem();
 
 	bool OnCreate(ZLoadingProgress *pLoadingProgress);

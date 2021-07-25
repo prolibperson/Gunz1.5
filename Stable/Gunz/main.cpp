@@ -1131,7 +1131,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	// Initialize MZFileSystem - MUpdate 
 	MRegistry::szApplicationName=APPLICATION_NAME;
-
+	g_App.ShiftBytesOnStart();
 	g_App.InitFileSystem();
 
 #ifdef _PUBLISH

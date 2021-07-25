@@ -86,7 +86,6 @@ ZApplication::ZApplication()
 	m_bLaunchTest = false;
 
 	SetLaunchMode(ZLAUNCH_MODE_DEBUG);
-	m_lastShiftTime.Set_MakeCrc(timeGetTime());
 
 #ifdef _ZPROFILER
 	m_pProfiler = new ZProfiler;
@@ -1063,7 +1062,10 @@ void ZApplication::SetSystemValue(const char* szField, const char* szData)
 	MRegistry::Write(HKEY_CURRENT_USER, szField, szData);
 }
 
-
+void ZApplication::ShiftBytesOnStart()
+{
+	m_lastShiftTime.Set_MakeCrc(timeGetTime());
+}
 
 void ZApplication::InitFileSystem()
 {
