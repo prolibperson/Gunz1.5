@@ -44,3 +44,10 @@
 //#define _REPLAY_TEST_LOG
 
 //#define _LOCATOR
+
+//Quickly debug and skip login process. Commented by default.
+//#define _FASTDEBUG
+
+//MAIET BirdKR test defines.
+//#define _BIRDTEST
+//#define _BIRDCAMERA
