@@ -103,7 +103,7 @@ bool const ZEmoji::Find(const char* text, const char* emojiInput)
 	return false;
 }
 
-void ZEmoji::AddEmoji(const char* inputText, int& const nX,int& const nY)
+void ZEmoji::AddEmoji(const char* inputText, int& nX,int& nY)
 {
 	for (auto& itor  = m_EmojiList.begin(); itor != m_EmojiList.end(); ++itor)
 	{

@@ -350,9 +350,6 @@ void ZCmdXmlParser::ParseCmd(rapidxml::xml_node<>* pElement)
 {
 	char szTemp[256] = "";
 	int n = 0;
-	char szAttrValue[256];
-	char szAttrName[64];
-	char szTagName[128];
 
 	_CmdStr* pCmdStr = new _CmdStr;
 

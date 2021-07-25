@@ -1,1 +1,10 @@
-﻿
+﻿cl : command line warning D9002: ignoring unknown option '/arch:IA32'
+  stdafx.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+cl : command line warning D9002: ignoring unknown option '/arch:IA32'
+  MDatabase.cpp
+  ODBCRecordset.cpp
+  Generating Code...
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1551,5): warning MSB8012: TargetPath(C:\Users\espau\Documents\classless-dll\Gunz1.5\Stable\Gunz\x64\Release\MDatabase.lib) does not match the Library's OutputFile property value (C:\Users\espau\Documents\classless-dll\Gunz1.5\Stable\Gunz\x64\Release\MDatabase64.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1553,5): warning MSB8012: TargetName(MDatabase) does not match the Library's OutputFile property value (MDatabase64). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+  MDatabase.vcxproj -> C:\Users\espau\Documents\classless-dll\Gunz1.5\Stable\Gunz\x64\Release\MDatabase.lib

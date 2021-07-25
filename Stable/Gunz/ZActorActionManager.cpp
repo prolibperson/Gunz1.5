@@ -173,8 +173,6 @@ bool ZActorActionManager::ParseXml_Action(ZActorAction* pOutAction, rapidxml::xm
 
 bool ZActorActionManager::ParseXml_ActionShotCommonAttributes(ZActorActionShotCommon* pOutShot, rapidxml::xml_node<>* elem)
 {
-	float fDamage;
-	int nDelay, nPierce, nKnockback;
 	string strSound;
 
 	pOutShot->SetDelay(atoi(elem->first_attribute("delay")->value()) * 0.001f);
@@ -313,9 +311,6 @@ bool ZActorActionManager::ParseXml_ActionGrenadeShot(ZActorActionGrenadeShot* pO
 bool ZActorActionManager::ParseXml_ActionSummon(ZActorActionSummon* pOutSummon, rapidxml::xml_node<>* elem)
 {
 	string name,item;
-	int range, angle, route;
-	bool adjust;
-	float delay;
 	pOutSummon->SetName(elem->first_attribute("name")->value());
 	pOutSummon->SetDelay(atoi(elem->first_attribute("delay")->value()) * 0.001f);
 	pOutSummon->SetRange(atoi(elem->first_attribute("range")->value()));

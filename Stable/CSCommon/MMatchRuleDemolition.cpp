@@ -208,7 +208,12 @@ bool MMatchRuleDemolition::OnRun()
 		{
 			return false;
 		}
+		default:
+		{
+			return true;
+		}
 	}
+	return true;
 }
 
 //TODO: Change >= 1

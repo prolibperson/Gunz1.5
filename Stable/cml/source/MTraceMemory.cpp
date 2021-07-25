@@ -231,8 +231,11 @@ void MDumpCallStack(int lRequest)
 			pSymbol = (PIMAGEHLP_SYMBOL)szSymBuffer;
 			pSymbol->SizeOfStruct = sizeof(IMAGEHLP_SYMBOL);
 			pSymbol->MaxNameLength = sizeof(buffer) - sizeof(IMAGEHLP_SYMBOL) + 1;
-
+#if defined(_WIN64)
+			PDWORD64           dwDisplacement = 0;
+#else
 			PDWORD           dwDisplacement = 0;
+#endif
 			PDWORD			displace = 0;
 
 			if (SymGetSymFromAddr(GetCurrentProcess(), address, dwDisplacement, pSymbol))

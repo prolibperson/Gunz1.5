@@ -61,7 +61,7 @@ bool ROcclusionList::Open(MXmlElement* pElement)
 				}
 			}
 
-			poc->nCount = winding.size();
+			poc->nCount = (int)winding.size();
 			poc->pVertices = new rvector[poc->nCount];
 			list<rvector>::iterator k = winding.begin();
 			for (j = 0; j < poc->nCount; j++)

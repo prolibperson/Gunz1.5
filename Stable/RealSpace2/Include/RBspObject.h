@@ -89,11 +89,15 @@ struct RBSPPICKINFO {
 	RPOLYGONINFO	*pInfo;
 };
 
-class RMapObjectList : public list<ROBJECTINFO*> {
+class RMapObjectList {
 public:
+	RMapObjectList() { };
 	virtual ~RMapObjectList();
 
-	iterator Delete(iterator i);
+	std::list<ROBJECTINFO*> m_MapObjectList;
+
+	std::list<ROBJECTINFO*>::iterator Delete(std::list<ROBJECTINFO*>::iterator mapObjItr);
+
 };
 
 class RDrawInfo {

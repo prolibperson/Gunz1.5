@@ -1,1 +1,64 @@
-﻿
+﻿cl : command line warning D9002: ignoring unknown option '/arch:IA32'
+  stdafx.cpp
+cl : command line warning D9002: ignoring unknown option '/arch:IA32'
+  MBButtonLook.cpp
+  MBEditLook.cpp
+  MBFrameLook.cpp
+  MBGroupLook.cpp
+  MBitmapDrawer.cpp
+  MBLabelLook.cpp
+  MBListBoxLook.cpp
+  MBMultiColListBoxLook.cpp
+  MBPopupMenu.cpp
+  MBScrollBarLook.cpp
+  MBSliderLook.cpp
+  MBTabCtrlLook.cpp
+  MBTextAreaLook.cpp
+  MAniBmButton.cpp
+  MAnimation.cpp
+  MBmButton.cpp
+  MBmLabel.cpp
+  MButton.cpp
+  MComboBox.cpp
+  MConsoleFrame.cpp
+  Generating Code...
+  Compiling...
+  MDragObject.cpp
+  MEdit.cpp
+  MEvent.cpp
+  MFileBox.cpp
+  MFileDialog.cpp
+  MFrame.cpp
+  MFrameDrawer.cpp
+  MGroup.cpp
+  MHotKey.cpp
+  MHyperText.cpp
+  Mint.cpp
+  MLabel.cpp
+  MLayoutManager.cpp
+  MListBox.cpp
+  MMsgBox.cpp
+  MMultiColListBox.cpp
+  MPanel.cpp
+  MPicture.cpp
+  MPopupMenu.cpp
+  MScrollBar.cpp
+  Generating Code...
+  Compiling...
+  MSlider.cpp
+  MTabCtrl.cpp
+  MTextArea.cpp
+  MToolTip.cpp
+  MTypes.cpp
+  MWidget.cpp
+  MBitmap.cpp
+  MCursor.cpp
+  MDrawContext.cpp
+  MFont.cpp
+  MIDLResource.cpp
+  MResourceManager.cpp
+  MStringTable.cpp
+  Generating Code...
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1551,5): warning MSB8012: TargetPath(C:\Users\espau\Documents\classless-dll\Gunz1.5\Stable\Gunz\x64\Release\Mint2.lib) does not match the Library's OutputFile property value (C:\Users\espau\Documents\classless-dll\Gunz1.5\Stable\Mint2\Lib\Mint264.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(1553,5): warning MSB8012: TargetName(Mint2) does not match the Library's OutputFile property value (Mint264). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+  Mint.vcxproj -> C:\Users\espau\Documents\classless-dll\Gunz1.5\Stable\Gunz\x64\Release\Mint2.lib

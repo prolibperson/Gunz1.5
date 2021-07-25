@@ -105,15 +105,11 @@ void MClient::OnRegisterCommand(MCommandManager* pCommandManager)
 
 bool MClient::OnCommand(MCommand* pCommand)
 {
-	char szMessage[256];
 	switch(pCommand->GetID()){
 		case MC_LOCAL_INFO:
 			OutputLocalInfo();
 			break;
 		case MC_LOCAL_ECHO:
-			// Custom: Exploit fix (Fake echo from different player)
-			//if(pCommand->GetParameter(szMessage, 0, MPT_STR, sizeof(szMessage))==false) break;
-			//OutputMessage(szMessage, MZMOM_LOCALREPLY);
 			break;
 		case MC_HELP:
 			OutputMessage("MAIET Default Help :", MZMOM_LOCALREPLY);

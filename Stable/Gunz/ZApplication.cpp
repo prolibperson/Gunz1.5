@@ -838,7 +838,7 @@ void ZApplication::OnUpdate()
 
 	// 실행중 메모리 조작으로 item 속성값을 변경하는 해킹대응
 		unsigned long dwCurTime = timeGetTime();
-		if (dwCurTime - m_lastShiftTime.Ref() >= (15000 / RandomNumber(1,3)))
+		if (dwCurTime - m_lastShiftTime.Ref() >= ((unsigned long)15000 / RandomNumber(1,3)))
 		{
 			MGetMatchItemDescMgr()->ShiftMemoryGradually();
 			m_lastShiftTime.Set_CheckCrc(dwCurTime);

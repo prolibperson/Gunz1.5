@@ -116,16 +116,28 @@ bool ZPostCommand(MCommand* pCmd)
 			break;
 		default:
 			delete pCmd;
+#if defined(_WIN64)
+			// do nothing
+#else
 			CHECK_RETURN_CALLSTACK(ZPostCommand);
+#endif
 			return false;
 		};
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ZPostCommand);
+#endif
 		return ZGetGameClient()->Post(pCmd);
 	} 
 	else
 	{
 		// 평상시 모든 커맨드 전송 허용
+#if defined(_WIN64)
+			// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ZPostCommand);
+#endif
 		bool bRet = ZGetGameClient()->Post(pCmd); 
 
 		// 미국핵 대응 메인스레드에서 보내져야 하는 커맨드들의 스레드 검사
@@ -801,7 +813,7 @@ void ZGameClient::OnStageJoin(const MUID& uidChar, const MUID& uidStage, unsigne
 		else
 		{
 			sprintf(kill, "? %s", ZMsg(MSG_CHARINFO_KILL));
-			sprintf(death, "? %s", pInfo->GetDeath(), ZMsg(MSG_CHARINFO_DEATH));
+			sprintf(death, "%i %s", pInfo->GetDeath(), ZMsg(MSG_CHARINFO_DEATH));
 			sprintf(winning, "0.0%%");
 		}
 
@@ -900,7 +912,7 @@ MMatchCharItemParts RecommendEquipParts(MMatchItemSlotType slot)
 	{
 		if (ZGetMyInfo()->GetItemList()->GetEquipedItemID(MMCIP_DASH) == 0)
 		{
-			parts == MMCIP_DASH;
+			parts = MMCIP_DASH;
 		}
 	}
 
@@ -1941,7 +1953,12 @@ void ZGameClient::OnResponseGameInfo(const MUID& uidStage, void* pGameInfoBlob, 
 
 		ZGetGame()->GetMatch()->OnResponseRuleInfo(pRuleInfoHeader);
 	}
+
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(OnResponseGameInfo);
+#endif
 }
 
 void ZGameClient::OnObtainWorldItem(const MUID& uidChar, const int nItemUID)

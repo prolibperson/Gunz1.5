@@ -26,7 +26,7 @@ bool ZRuleSkillMap::OnCommand(MCommand* command)
 		{
 			MUID targetPlayer;
 			int xp, bp;
-			DWORD chestRespawnTime;
+			//DWORD chestRespawnTime;
 			command->GetParameter(&targetPlayer, 0, MPT_UID);
 			command->GetParameter(&xp, 1, MPT_INT);
 			command->GetParameter(&bp, 2, MPT_INT);

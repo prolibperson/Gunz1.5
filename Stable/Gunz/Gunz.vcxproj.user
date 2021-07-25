@@ -3,19 +3,4 @@
   <PropertyGroup>
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='BRZ_Release_publish|x64'">
-    <LocalDebuggerWorkingDirectory>.\Runtime\x64</LocalDebuggerWorkingDirectory>
-    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommand>D:\GunZ\GunZ\Gunz.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>dummy town 0</LocalDebuggerCommandArguments>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='BRZ_Release_publish|Win32'">
-    <LocalDebuggerCommand>D:\GunZ\GunZ\Gunz.exe</LocalDebuggerCommand>
-    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-    <LocalDebuggerCommandArguments>dummy mansion 0</LocalDebuggerCommandArguments>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='BRZ_Debug|Win32'">
-    <LocalDebuggerCommand>C:\Users\Jeff\Desktop\GunZ\GunZ\thedueld.exe</LocalDebuggerCommand>
-    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
-  </PropertyGroup>
 </Project>

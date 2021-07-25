@@ -111,7 +111,7 @@ void MMatchActiveTrapMgr::Update( unsigned long nClock )
 		if (pTrap->IsActivated())
 		{
 			// 발동 후 수명이 다한 트랩을 제거
-			if (nClock - pTrap->m_nTimeActivated > pTrap->m_nLifeTime)
+			if (nClock - pTrap->m_nTimeActivated > (unsigned long)pTrap->m_nLifeTime)
 			{
 				it = m_listTrap.erase(it);
 				OutputDebugString("Trap deactivated\n");

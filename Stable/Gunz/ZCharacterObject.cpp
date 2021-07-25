@@ -360,7 +360,7 @@ void ZCharacterObject::Draw_SetLight(const rvector& vPosition)
 	RLIGHT* pSelectedLight = 0;
 	float SelectedLightDistance = FLT_MAX;
 	RLightList* pLightList = ZGetGame()->GetWorld()->GetBsp()->GetSunLightList();
-	int nLight = pLightList->size();
+	size_t nLight = pLightList->size();
 
 	Light.Specular.r = 1.f;
 	Light.Specular.g = 1.f;

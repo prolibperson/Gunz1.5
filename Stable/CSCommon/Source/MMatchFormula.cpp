@@ -98,7 +98,7 @@ void MMatchFormula::ParseNeedExpLM(rapidxml::xml_node<>* element)
 			nUpper = atoi(itor->first_attribute("upper")->value());
 			nLower = atoi(itor->first_attribute("lower")->value());
 
-			fLM = atoi(itor->value());
+			fLM = atof(itor->value());
 
 			for (int i = nLower; i <= nUpper; i++)
 			{
@@ -125,7 +125,7 @@ void MMatchFormula::ParseGettingExpLM(rapidxml::xml_node<>* element)
 			nUpper = atoi(itor->first_attribute("upper")->value());
 			nLower = atoi(itor->first_attribute("lower")->value());
 
-			fLM = atoi(itor->value());
+			fLM = atof(itor->value());
 
 			for (int i = nLower; i <= nUpper; i++)
 			{
@@ -152,7 +152,7 @@ void MMatchFormula::ParseGettingBountyLM(rapidxml::xml_node<>* element)
 			nUpper = atoi(itor->first_attribute("upper")->value());
 			nLower = atoi(itor->first_attribute("lower")->value());
 
-			fLM = atoi(itor->value());
+			fLM = atof(itor->value());
 
 			for (int i = nLower; i <= nUpper; i++)
 			{

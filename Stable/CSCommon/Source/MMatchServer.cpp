@@ -127,7 +127,7 @@ public:
 	}
 };
 
-constexpr auto NUM_CHECKPOINTER = 3;
+constexpr auto NUM_CHECKPOINTER = 2;
 static MPointerChecker g_PointerChecker[NUM_CHECKPOINTER];
 
 
@@ -135,7 +135,6 @@ void _CheckValidPointer(void* pPointer1, void* pPointer2, void* pPointer3, int n
 {
 	if (pPointer1 != NULL) g_PointerChecker[0].Check(pPointer1, nState, nValue);
 	if (pPointer2 != NULL) g_PointerChecker[1].Check(pPointer2, nState, nValue);
-	if (pPointer3 != NULL) g_PointerChecker[2].Check(pPointer3, nState, nValue);
 }
 
 
@@ -396,8 +395,6 @@ MMatchServer::MMatchServer(void) : m_pScheduler( 0 ), m_pDTMgr(new MMatchDuelTou
 
 	m_bCreated = false;
 
-	m_pAuthBuilder = NULL;
-
 	// m_pScheduler = 0;
 
 	// 스트링 리소스는 제일 먼저 인스턴스를 생성해놔야 한다.
@@ -454,11 +451,6 @@ MMatchServer::~MMatchServer(void)
 	delete m_pDTMgr;
 
 	CheckMemoryTest();
-
-	if (m_pAuthBuilder) {
-		delete m_pAuthBuilder;
-		m_pAuthBuilder = NULL;
-	}
 
 	Destroy();
 
@@ -948,7 +940,6 @@ bool MMatchServer::Create(int nPort)
 	// 디버그용
 	g_PointerChecker[0].Init(NULL);
 	g_PointerChecker[1].Init(m_pScheduler);
-	g_PointerChecker[2].Init(m_pAuthBuilder);
 
 	return true;
 }
@@ -2225,7 +2216,7 @@ bool MMatchServer::CheckBridgeFault()
 
 
 #include <fstream>
-char* Time( )
+const char* Time( )
 {
 	char sztemph[512];
 	time_t currentTime;
@@ -2233,7 +2224,8 @@ char* Time( )
 	currentTime= time(NULL);
 	localtime_s(&timeinfo, &currentTime);
 	strftime (sztemph, 30, "////////////////////%H:%M:%S" , &timeinfo);
-	return sztemph;
+	std::string timeStampStr = sztemph;
+	return timeStampStr.c_str();
 }
 void MMatchServer::OnReportPlayer(char* pszSenderName, char* pszTargetName, char* pszMessage)
 {

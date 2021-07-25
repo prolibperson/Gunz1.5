@@ -1811,9 +1811,9 @@ void ZStageInterface::CreateSpyBanMapList()
 	if (pListBox->GetCount() > 0)
 		pListBox->RemoveAll();
 
-	int playerCount = ZGetGameClient()->GetMatchStageSetting()->m_CharSettingList.size();
+	size_t playerCount = ZGetGameClient()->GetMatchStageSetting()->m_CharSettingList.size();
 
-	for (int i = 0; i < MGetSpyMode()->GetSpyMapList().size(); ++i)
+	for (unsigned int i = 0; i < MGetSpyMode()->GetSpyMapList().size(); ++i)
 	{
 		char mapInfo[256] = "";
 		auto map = MGetSpyMode()->GetSpyMapList().at(i);

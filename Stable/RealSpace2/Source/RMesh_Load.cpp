@@ -1017,7 +1017,7 @@ bool RMesh::ReadOldElu(MZFile* mzf, ex_hd_t* m_phd_t)
 		}
 
 		if (node->m_name[0]) {
-			int	 len = strlen(node->m_name);
+			size_t len = strlen(node->m_name);
 			char _temp[5];
 
 			strncpy(_temp, &node->m_name[len - 4], 4);
@@ -1277,7 +1277,7 @@ bool RMesh::ReadElu(char* fname)
 
 	GetPath(fname, Path);
 
-	int len = strlen(Path);
+	size_t len = strlen(Path);
 
 	if (strncmp(&fname[len], "ef_", 3) == 0) {
 		m_bEffectSort = true;
@@ -1743,7 +1743,7 @@ void RMesh::ClearVoidMtrl()
 	RMtrl* pMtrl = NULL;
 	RMtrl* pSMtrl = NULL;
 
-	int mtrl_size = m_mtrl_list_ex.size();
+	size_t mtrl_size = m_mtrl_list_ex.size();
 
 	if (!mtrl_size)
 		return;

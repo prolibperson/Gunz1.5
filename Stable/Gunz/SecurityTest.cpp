@@ -4,8 +4,8 @@
 
 
 
-void testCallstack()
-{
-	mlog( "Call testCallstack.\n" );
-	CHECK_RETURN_CALLSTACK(testCallstack);
-}
+//void testCallstack()
+//{
+//	mlog( "Call testCallstack.\n" );
+//	CHECK_RETURN_CALLSTACK(testCallstack);
+//}

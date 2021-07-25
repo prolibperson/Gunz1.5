@@ -510,8 +510,8 @@ TCHAR g_szDB_GET_ACHIEVEMENT_BYCID[] = _T("{CALL spGetAchievementByCID (%d, %d, 
 
 bool FilterSQL(std::string& target,const char* illegalcharacters)
 {
-	const int charLength = strlen(illegalcharacters);
-	for (int i = 0; i < charLength; ++i)
+	const size_t charLength = strlen(illegalcharacters);
+	for (size_t i = 0; i < charLength; ++i)
 	{
 		char illegalCharacter = illegalcharacters[i];
 		if (target.find_first_of(illegalCharacter) != std::string::npos)

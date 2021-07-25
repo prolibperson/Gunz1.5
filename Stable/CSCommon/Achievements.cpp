@@ -53,7 +53,7 @@ bool Achievements::readXml(const char* fileName)
 	mzf.Close();
 
 	MXmlElement rootElement, chrElement, attrElement, subElement;
-	char szTagName[256], szChildName[256], szSubChildName[256];
+	char szTagName[256];
 
 	rootElement = xmlIniData.GetDocumentElement();
 	int Count = rootElement.GetChildNodeCount();

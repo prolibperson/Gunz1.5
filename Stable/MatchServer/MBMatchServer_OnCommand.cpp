@@ -86,7 +86,7 @@ bool MBMatchServer::OnCommand(MCommand* pCommand)
 			if (pCommand->GetParameter(&nChecksumPack, 5, MPT_UINT)==false) break;
 
 			//todok mark
-			OnRequestLoginNetmarble(pCommand->GetSenderUID(), szAuthCookie, szDataCookie, szCPCookie, szSpareParam, nCommandVersion, nChecksumPack);
+			//OnRequestLoginNetmarble(pCommand->GetSenderUID(), szAuthCookie, szDataCookie, szCPCookie, szSpareParam, nCommandVersion, nChecksumPack);
 			//OnRequestLoginNetmarble(pCommand->GetSenderUID(), szCPCookie, szSpareParam, nCommandVersion, nChecksumPack);
 #endif
 		}

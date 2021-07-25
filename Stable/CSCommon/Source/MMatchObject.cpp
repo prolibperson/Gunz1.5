@@ -633,7 +633,7 @@ bool MMatchObject::IsEnabledRespawnDeathTime(unsigned int nNowTime)
 	MMatchBuffSummary* pBuffSummary = GetCharBuff()->GetBuffSummary();
 	int nDelayAfterDying = pBuffSummary->GetRespawnTime(RESPAWN_DELAYTIME_AFTER_DYING);
 
-	if ((nNowTime - m_nDeadTime) > (nDelayAfterDying - 500)) return true;
+	if ((nNowTime - m_nDeadTime) > ((unsigned int)nDelayAfterDying - (unsigned int)500)) return true;
 	return false;
 }
 

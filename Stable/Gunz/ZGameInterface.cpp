@@ -285,7 +285,7 @@ bool InitItemList(MWidget* pWidget)
 		char szName[256], szItem[256];
 		int d = i % 6;
 		sprintf(szItem, "item%03d.png", d);
-		sprintf(szName, "�������쨬i����AI��a%d", i);
+		sprintf(szName, "Item Name %d", i);
 		AddListItem(pList, MBitmapManager::Get(szItem), szName, "Command Something");
 	}
 
@@ -1100,7 +1100,7 @@ bool ZGameInterface::OnGameCreate(void)
 //#ifndef _DEBUG
 	HMODULE hMod = GetModuleHandle( "ws2_32.dll"); 
 	FARPROC RetVal = GetProcAddress( hMod, "recv"); 
-	if ( (BYTE)RetVal == 0xE9)
+	if ( (BYTE)RetVal == (BYTE)0xE9)
 	{
 //		mlog( "Hacking detected");
 
@@ -1210,12 +1210,9 @@ bool ZGameInterface::OnGameCreate(void)
 #else
 	if (!m_pGame->Create(ZApplication::GetFileSystem(), ZGetMapCache()->Find(ZGetGameClient()->GetMatchStageSetting()->GetMapIndex()) ? nullptr : &gameLoading))
 	{
-		mlog("ZGame ��y���� ��C����\n");
+		mlog("Failed to create game. Could not find map.\n");
 		SAFE_DELETE(m_pGame);
 		m_bLoading = false;
-		//m_pLoadingInterface->OnDestroy();
-		//delete m_pLoadingInterface; m_pLoadingInterface = NULL;
-		// �����O������I��u ��C������iAC ��e���� ��AAU ��C����CO��A ������o���� ����A��AIAo �ҡƩ�����U��A ����A��A�� ���������i ��I��n��I ��������ơ̢�U.
 		ZPostStageLeave(ZGetGameClient()->GetPlayerUID());
 		ZApplication::GetGameInterface()->SetState(GUNZ_LOBBY);
 
@@ -3512,25 +3509,6 @@ void ZGameInterface::OnDraw(MDrawContext *pDC)
 		break;
 	}
 
-	// A���O��a AUA�� ��OA| Au��e��E(������u������u������u...). 1��A�ơ̢��Ң�U ������AAo A�ҩ��� ��?���碥A��A��U...
-#ifdef LOCALE_KOREA			// CN���������������� AIA����A���� CN��c...
-	if ( timeGetTime() >= m_dwTimeCount)
-	{
-		m_dwTimeCount += 3600000;
-		m_dwHourCount++;
-
-		char szText[ 256];
-		if ( m_dwHourCount > 3)
-			sprintf( szText, "%d ��A�ơ�AI �Ʃ���uC����A��I��U. Aa��A E����AA�� AeCI��A��a ��U�ҩ���I��U.", m_dwHourCount);
-		else
-			sprintf( szText, "%d ��A�ơ�AI �Ʃ���u CI������A��I��U.", m_dwHourCount);
-		ZChatOutput( MCOLOR(ZCOLOR_CHAT_SYSTEM), szText);
-
-
-		ZChatOutput( MCOLOR(ZCOLOR_CHAT_SYSTEM), "���� ��OAOA�� 15���� AI��e�Ƣ���I���� ���� 15���� ��I����A�� AI��eCO ��o ������A��I��U.");
-	}
-#endif
-
 	__EP(11);
 }
 
@@ -3714,33 +3692,34 @@ bool ZGameInterface::OnGlobalEvent(MEvent* pEvent)
 	switch(pEvent->nMessage){
 		case MWM_CHAR:
 		{
-			switch (pEvent->nKey) {
-			//case '`' :
-			//	if (ZGetMyInfo()->IsAdminGrade() && pEvent->GetShiftState())
-			//	{
-			//		ZGetConsole()->Show(!ZGetConsole()->IsVisible());
-			//		ZGetConsole()->SetZOrder(MZ_TOP);
-			//		return true;
-			//		//				m_pLogFrame->Show(ZGetConsole()->IsVisible());
-			//	}
-			//	break;
-			}
-		}break;
+			//switch (pEvent->nKey) {
+			////case '`' :
+			////	if (ZGetMyInfo()->IsAdminGrade() && pEvent->GetShiftState())
+			////	{
+			////		ZGetConsole()->Show(!ZGetConsole()->IsVisible());
+			////		ZGetConsole()->SetZOrder(MZ_TOP);
+			////		return true;
+			////		//				m_pLogFrame->Show(ZGetConsole()->IsVisible());
+			////	}
+			////	break;
+			//}
+			break;
+		}
 
 		case MWM_KEYDOWN:
 			{
-				// Ctrl+R UI �����O���� ���硤I��u - ����A|�Ƣ� ������U. ��U��� ������E UI �쩣AUAI��e ����A�� ��a��EAI��I��i ������E ������A��c..
-				// (800*600AI��U����������A E����eAI AI��oC��Au, A����a��A �����������碬? ��oA�� ����, ��OAOA������ ���硤I��a AU�좯��E��E)
-				if (pEvent->GetCtrlState() && pEvent->nKey == 'R') {
-					//GunzState state = ZGetGameInterface()->GetState();
-					//m_sbRemainClientConnectionForResetApp = true;
-					//ZLoadingProgress progress("");
-					//ZGetGameInterface()->OnDestroy();
-					//ZGetGameInterface()->OnCreate(&progress);
-					////OnRestore();
-					//ZGetGameInterface()->SetState(state);
-					//m_sbRemainClientConnectionForResetApp = false;
-				}
+				//// Ctrl+R UI �����O���� ���硤I��u - ����A|�Ƣ� ������U. ��U��� ������E UI �쩣AUAI��e ����A�� ��a��EAI��I��i ������E ������A��c..
+				//// (800*600AI��U����������A E����eAI AI��oC��Au, A����a��A �����������碬? ��oA�� ����, ��OAOA������ ���硤I��a AU�좯��E��E)
+				//if (pEvent->GetCtrlState() && pEvent->nKey == 'R') {
+				//	//GunzState state = ZGetGameInterface()->GetState();
+				//	//m_sbRemainClientConnectionForResetApp = true;
+				//	//ZLoadingProgress progress("");
+				//	//ZGetGameInterface()->OnDestroy();
+				//	//ZGetGameInterface()->OnCreate(&progress);
+				//	////OnRestore();
+				//	//ZGetGameInterface()->SetState(state);
+				//	//m_sbRemainClientConnectionForResetApp = false;
+				//}
 				break;
 			}
 	}
@@ -5060,7 +5039,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nWeight.Ref()){
 		if(bAdd) str += " / ";
-		sprintf(temp,"+Weight : %d",pItemDesc->m_nWeight);
+		sprintf(temp,"+Weight : %d",pItemDesc->m_nWeight.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5071,7 +5050,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nMaxBullet.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"Max Bullets : %d",pItemDesc->m_nMaxBullet);
+		sprintf(temp,"Max Bullets : %d",pItemDesc->m_nMaxBullet.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5083,7 +5062,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 	
 	if(pItemDesc->m_nMagazine.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+Magazine : %d",pItemDesc->m_nMagazine);
+		sprintf(temp,"+Magazine : %d",pItemDesc->m_nMagazine.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5094,7 +5073,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nDamage.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+Damage : %d",pItemDesc->m_nDamage);
+		sprintf(temp,"+Damage : %d",pItemDesc->m_nDamage.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5105,7 +5084,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nDelay.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+Delay : %d",pItemDesc->m_nDelay);
+		sprintf(temp,"+Delay : %d",pItemDesc->m_nDelay.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5116,7 +5095,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nReloadTime.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+Reload Time : %d",pItemDesc->m_nReloadTime);
+		sprintf(temp,"+Reload Time : %d",pItemDesc->m_nReloadTime.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5127,7 +5106,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nHP.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+HP : %d",pItemDesc->m_nHP);
+		sprintf(temp,"+HP : %d",pItemDesc->m_nHP.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5138,7 +5117,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nAP.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+AP : %d",pItemDesc->m_nAP);
+		sprintf(temp,"+AP : %d",pItemDesc->m_nAP.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5149,7 +5128,7 @@ bool GetItemDescStr(string& str,DWORD nItemID) {
 
 	if(pItemDesc->m_nMaxWT.Ref()) {
 		if(bAdd) str += " / ";
-		sprintf(temp,"+MaxWT : %d",pItemDesc->m_nMaxWT);
+		sprintf(temp,"+MaxWT : %d",pItemDesc->m_nMaxWT.Ref());
 
 		nLen = (int)strlen(temp);
 		if((int)str.size() + nLen > (nLine+1) * MAX_TOOLTIP_LINE_STRING+3) { str += "\n"; nLine++; }
@@ -5294,8 +5273,6 @@ void ZGameInterface::ShowShopDialog(bool bShow)
 
 		//pPicture = (MPicture*)ZApplication::GetGameInterface()->GetIDLResource()->FindWidget("Shop_ItemIcon");
 		//pPicture->SetBitmap( NULL);
-
-		char buf[256];
 		MButton* pButton = (MButton*)pResource->FindWidget("Shop_to_Equipment");
 		MLabel* pLabel = (MLabel*)pResource->FindWidget("Shop_Message");
 		if ( pButton && pLabel)
@@ -6363,8 +6340,7 @@ void ZGameInterface::OnResponseBuyQuestItem( const int nResult, const int nBP)
 	}
 	else
 	{
-		mlog( "ZGameInterface::OnCommand::MC_MATCH_RESPONSE_BUY_QUEST_ITEM - A��AC��CAo ��EA�� ��a��uA������.\n" );
-		ASSERT( 0 );				
+		mlog( "ZGameInterface::OnCommand::MC_MATCH_RESPONSE_BUY_QUEST_ITEM UNKNOWN ERROR.\n" );				
 	}
 	// ��oA���������� A����?AI UI Text A��������| �������AI���� C��A����U (��������, ��U��i����, A����A, ������i, �����O)
 	GetShopEquipInterface()->DrawCharInfoText();
@@ -6518,7 +6494,7 @@ void ZGameInterface::OnResponseServerStatusInfoList( const int nListCount, void*
 			MTD_ServerStatusInfo* pss = (MTD_ServerStatusInfo*)MGetBlobArrayElement( pBlob, i );
 			if( 0 == pss )
 			{
-				mlog( "ZGameInterface::OnResponseServerStatusInfoList - %d����A�Ƣ������� NULL����AIAI ������y.", i );
+				mlog( "ZGameInterface::OnResponseServerStatusInfoList SERVER NOT FOUND IN LIST.", i );
 				continue;
 			}
 

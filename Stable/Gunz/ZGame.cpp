@@ -6546,7 +6546,7 @@ void ZGame::StartRecording()
 
 	else if (ZGetGameClient()->GetMatchStageSetting()->GetGameType() == MMATCH_GAMETYPE_GUNGAME) {
 		ZRuleGunGame* pRule = (ZRuleGunGame*)ZGetGame()->GetMatch()->GetRule();
-		int itemCount = pRule->GetMatchSet().size();
+		int itemCount = (int)pRule->GetMatchSet().size();
 		nWritten = zfwrite(&itemCount, sizeof(int), 1, m_pReplayFile);
 		if (nWritten == 0)
 			goto RECORDING_FAIL;
@@ -6567,7 +6567,7 @@ void ZGame::StartRecording()
 	else if (ZGetGameClient()->GetMatchStageSetting()->GetGameType() == MMATCH_GAMETYPE_SPYMODE) {
 		ZRuleSpyMode* pRule = dynamic_cast<ZRuleSpyMode*>(ZGetGame()->GetMatch()->GetRule());
 
-		int Count = pRule->GetSpies().size();
+		size_t Count = pRule->GetSpies().size();
 		nWritten = zfwrite(&Count, sizeof(int), 1, m_pReplayFile);
 		if (nWritten == 0)
 			goto RECORDING_FAIL;
@@ -6576,7 +6576,7 @@ void ZGame::StartRecording()
 		if (nWritten == 0)
 			goto RECORDING_FAIL;
 
-		int spyItemCount = pRule->GetSpyItems().size();
+		size_t spyItemCount = pRule->GetSpyItems().size();
 		nWritten = zfwrite(&spyItemCount, sizeof(int), 1, m_pReplayFile);
 		if (nWritten == 0)
 			goto RECORDING_FAIL;

@@ -154,7 +154,7 @@ void RMtrl::CheckAniTexture()
 			if(dir[0]) {
 				strcpy(m_name_ani_tex,dir);
 				strncat(m_name_ani_tex,texname,n-2);
-				int pos = strlen(dir) + n - 2;
+				size_t pos = strlen(dir) + n - 2;
 				m_name_ani_tex[ pos ] = NULL;
 			}
 			else {
@@ -457,7 +457,7 @@ void RMtrlMgr::ClearUsedMtrl()
 		}
 	}
 
-	int _size = size();
+	size_t _size = size();
 
 }
 
@@ -585,7 +585,7 @@ RMtrl* RMtrlMgr::GetToolMtrl(char* name)
 	return NULL;
 }
 
-int	RMtrlMgr::GetNum()
+size_t	RMtrlMgr::GetNum()
 {
 	return size();
 }

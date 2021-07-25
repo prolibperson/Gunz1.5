@@ -22,12 +22,11 @@
     <ProjectGuid>{52E0F2E1-25FE-4F22-B82C-B000972D8F5A}</ProjectGuid>
     <RootNamespace>Locator</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -254,10 +253,6 @@
     </ProjectReference>
     <ProjectReference Include="..\CSCommon\CSCommon.vcxproj">
       <Project>{cbd109c1-1aa3-4a57-b439-9919c08faaa5}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\MCountryFilter\MCountryFilter.vcxproj">
-      <Project>{43faaf56-ea88-4d3f-95b7-14a0582f3290}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\MDatabase\MDatabase.vcxproj">

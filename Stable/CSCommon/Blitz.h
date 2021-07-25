@@ -34,8 +34,8 @@ struct PlayerKillReward {
 
 struct HonorReward {
 	string actorType; 
-	int singleKillReward; //auto 0
-	int allKillReward;//auto 0 //idk what this is for????
+	int singleKillReward = 0; //auto 0
+	int allKillReward = 0;//auto 0 //idk what this is for????
 };
 
 struct HonorRewardSound {
@@ -236,24 +236,27 @@ public:
 		return m_helpMessage;
 	}
 
-	const HonorReward& GetHonorKillReward(const char* actorType) {
+	const HonorReward GetHonorKillReward(const char* actorType) {
 		auto itor = std::find_if(m_honorKillReward.begin(), m_honorKillReward.end(), [&](const HonorReward& item) {
-			return( _stricmp(actorType,item.actorType.c_str())==0);});
+			return(_stricmp(actorType, item.actorType.c_str()) == 0); });
 		if (itor != m_honorKillReward.end())
 		{
 			return *itor;
 		}
-		return {};
+		HonorReward noReward;
+		return noReward;
 	}
 	
-	const RouteList& GetRouteListByID(int routeID) {
+	RouteList GetRouteListByID(int routeID) {
 		for (auto itor = m_routeList.begin(); itor != m_routeList.end(); ++itor)
 		{
 			RouteList route = *itor;
 			if (route.routeID == routeID)
 				return route;
 		}
-		return {0};
+		RouteList list;
+		memset(&list, 0, sizeof(RouteList));
+		return list;
 	}
 
 	const auto& GetWeaponDPS() {

@@ -5,8 +5,7 @@
 
 void MSysInfoLog_CPU()
 {
-	LARGE_INTEGER ulFreq, ulTicks, ulValue, ulStartCounter,
-		ulEAX_EDX, ulResult;
+	LARGE_INTEGER ulFreq, ulTicks, ulValue;
 
 	// it is number of ticks per seconds
 	QueryPerformanceFrequency(&ulFreq);

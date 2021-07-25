@@ -533,7 +533,7 @@ void ZInterfaceBackground::LoadMesh( void)
 			}
 		}
 
-		for (list<ROBJECTINFO*>::iterator& itor =  ((RBspObject*)m_pLogin)->GetSkyBoxList()->begin(); itor != ((RBspObject*)m_pLogin)->GetSkyBoxList()->end(); ++itor)
+		for (list<ROBJECTINFO*>::iterator& itor =  ((RBspObject*)m_pLogin)->GetSkyBoxList()->m_MapObjectList.begin(); itor != ((RBspObject*)m_pLogin)->GetSkyBoxList()->m_MapObjectList.end(); ++itor)
 		{
 			ROBJECTINFO* skyBox = *itor;
 

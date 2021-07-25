@@ -158,8 +158,11 @@ inline void ZPostPeerChat(char* szMsg, int nTeam=0)
 		strncpy( szSendMsg, szMsg, 255 );
 		ZPOSTCMD2(MC_PEER_CHAT, MCmdParamInt(nTeam), MCommandParameterString(szSendMsg))
 	}
-
+#if defined(_WIN64)
+	//do nothing
+#else
 	CHECK_RETURN_CALLSTACK(ZPostPeerChat);
+#endif
 }
 
 inline void ZPostPeerChatIcon(bool bShow)
@@ -343,13 +346,21 @@ inline void ZPostStageSetting(const MUID& uidChar, const MUID& uidStage, MSTAGE_
 inline void ZPostStageTeam(const MUID& uidChar, const MUID& uidStage, int nTeam)
 {
 	ZPOSTCMD3(MC_MATCH_STAGE_TEAM, MCommandParameterUID(uidChar), MCommandParameterUID(uidStage), MCommandParameterUInt(nTeam));
+#if defined(_WIN64)
+	//do nothing
+#else
 	CHECK_RETURN_CALLSTACK(ZPostStageTeam);
+#endif
 }
 
 inline void ZPostStageState(const MUID& uidChar, const MUID& uidStage, MMatchObjectStageState nStageState)
 { 	
 	ZPOSTCMD3(MC_MATCH_STAGE_PLAYER_STATE, MCommandParameterUID(uidChar), MCommandParameterUID(uidStage), MCommandParameterInt(int(nStageState)));
+#if defined(_WIN64)
+	//do nothing
+#else
 	CHECK_RETURN_CALLSTACK(ZPostStageState);
+#endif
 }
 
 //DLL Injection 핵에서 fShotTime을 조작해 무기의 딜레이 타임을 무시하고 겁나 빠른 속도로 shot이 가능하게 만든다. 
@@ -524,8 +535,11 @@ inline void ZPostCreateMyChar(const MUID& uidChar, const int nCharIndex, char* s
 	ZPOSTCMD7(MC_MATCH_REQUEST_CREATE_CHAR, MCommandParameterUID(uidChar), MCommandParameterUInt(nCharIndex),
 		MCommandParameterString(szCharName), MCommandParameterUInt(nSex), MCommandParameterUInt(nHair),
 		MCommandParameterUInt(nFace), MCommandParameterUInt(nCostume));
-
+#if defined(_WIN64)
+	//do nothing
+#else
 	CHECK_RETURN_CALLSTACK(ZPostCreateMyChar);
+#endif
 }
 
 inline void ZPostSimpleCharInfo(const MUID& uidChar)
@@ -1224,9 +1238,9 @@ inline void ZPostNewQuestRequestNpcSpawn(const MUID& uid, const MUID& uid2, cons
 }
 
 //Custom: Blitz request upgrade
-inline void ZPostRequestBlitzUpgrade(const int keyIndex, const unsigned int playerHonor,const int currUpgradeLevel)
+inline void ZPostRequestBlitzUpgrade(const int keyIndex, const unsigned int playerHonor)
 {
-	ZPOSTCMD2(MC_BLITZ_REQUEST_UPGRADE, MCmdParamInt(keyIndex), MCmdParamUInt(playerHonor),MCmdParamInt(currUpgradeLevel));
+	ZPOSTCMD2(MC_BLITZ_REQUEST_UPGRADE, MCmdParamInt(keyIndex), MCmdParamUInt(playerHonor));
 }
 
 inline void ZPostRequestBlitzClass(const int classID)

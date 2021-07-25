@@ -566,7 +566,6 @@ void ZOptionInterface::InitInterfaceOption(void)
 		pComboBox = (MComboBox*)pResource->FindWidget("AntiAlias");
 		if (pComboBox != nullptr)
 		{
-			D3DMULTISAMPLE_TYPE type;
 			{
 				if (Z_VIDEO_ANTIALIAS >= pComboBox->GetCount())
 					Z_VIDEO_ANTIALIAS = 0;
@@ -2017,9 +2016,9 @@ BEGIN_IMPLEMENT_LISTENER(ZGetSongPositionListener,MLIST_VALUE_CHANGED)
 	{
 		unsigned int trackTime;
 		ZGetSoundFMod()->GetTrackTime(trackTime);
-		if (trackTime / 1000 < pSlider->GetValue())
+		if ((int)trackTime / 1000 < pSlider->GetValue())
 			ZGetSoundFMod()->FastForward(pSlider->GetValue() + (trackTime / 1000));
-		else if (trackTime / 1000 > pSlider->GetValue())
+		else if ((int)trackTime / 1000 > pSlider->GetValue())
 			ZGetSoundFMod()->Rewind((trackTime ) - (pSlider->GetValue() / 1000));
 	}
 

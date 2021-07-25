@@ -12,8 +12,8 @@
 #include "dxerr.h"
 #pragma comment(lib, "dxerr.lib")
 #else
-#include "DxErr9.h"
-#pragma comment(lib, "dxerr9.lib")
+#include "DxErr.h"
+#pragma comment(lib, "dxerr.lib")
 #endif
 #ifdef _USE_GDIPLUS
 #include "unknwn.h"
@@ -228,15 +228,15 @@ bool RFontTexture::MakeFontBitmap(HFONT hFont, RCHARINFO *pInfo, const TCHAR* sz
 	HFONT hPrevFont = (HFONT)SelectObject(m_hDC, hFont);
 
 	SIZE size;
-	GetTextExtentPoint32(m_hDC, szText, _tcslen(szText), &size);
+	GetTextExtentPoint32(m_hDC, szText, (int)_tcslen(szText), &size);
 
 	int nWidth = min(size.cx,m_nCellSize);
 
 #ifdef _USE_GDIPLUS
 	// GDI+ Font
 	WCHAR wstrText[256];
-	int nTextLen = strlen(szText)+1;
-	MultiByteToWideChar(CP_ACP, 0, szText, -1, wstrText, nTextLen-1);
+	size_t nTextLen = strlen(szText)+1;
+	MultiByteToWideChar(CP_ACP, 0, szText, -1, wstrText, (int)nTextLen-1);
 	wstrText[nTextLen-1] = 0;
 
 	Graphics graphics(m_hDC);
@@ -310,7 +310,7 @@ int RFontTexture::GetCharWidth(HFONT hFont, const TCHAR* szChar)
 {
 	SIZE size;
 	HFONT hPrevFont = (HFONT)SelectObject(m_hDC, hFont);
-	GetTextExtentPoint32(m_hDC, szChar, _tcslen(szChar), &size);
+	GetTextExtentPoint32(m_hDC, szChar, (int)_tcslen(szChar), &size);
 	SelectObject(m_hDC, hPrevFont);
 	return size.cx;
 }

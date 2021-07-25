@@ -18,7 +18,7 @@ public:
 	static ZEmoji* GetInstance();
 
 	void Destroy();
-	void AddEmoji(const char* input, int& const nX,int& const nY);
+	void AddEmoji(const char* input, int& nX,int& nY);
 
 	bool ParseXml(const char* fileName, MZFileSystem* fileSystem);
 	bool ParseXml_EmojiTag(rapidxml::xml_node<>* xmlNode, Emoji& node);

@@ -398,7 +398,7 @@ void MCommandParameterBlob::GetValue(void* p)
 int MCommandParameterBlob::GetData(char* pData, int nSize)
 {
 	if(m_Value==NULL) return 0;
-	if(m_nSize+(int)sizeof(m_nSize)>nSize) return 0;
+	if((int)m_nSize+(int)(sizeof(m_nSize))>(int)nSize) return 0;
 
 	memcpy(pData, &m_nSize, sizeof(m_nSize));
 	memcpy(pData+sizeof(m_nSize), m_Value, m_nSize);

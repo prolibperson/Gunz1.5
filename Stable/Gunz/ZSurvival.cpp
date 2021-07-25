@@ -1216,7 +1216,7 @@ bool ZSurvival::OnSurvivalPrivateRanking(MCommand* pCmd)
 	pWidgetName->Clear();
 	pWidgetPoint->Clear();
 
-	unsigned int nRank, nPoint;
+	unsigned int nRank = 0, nPoint = 0;
 	pCmd->GetParameter( &nRank, 0, MPT_UINT );
 	pCmd->GetParameter( &nPoint, 1, MPT_UINT );
 
@@ -1225,7 +1225,7 @@ bool ZSurvival::OnSurvivalPrivateRanking(MCommand* pCmd)
 	if (nRank != 0)
 		sprintf(szText, "%d", nRank);
 	else
-		sprintf(szText, "--", nRank);
+		sprintf(szText, "%d", nRank);
 	pWidgetRank->AddText(szText, MCOLOR( 0xFFFFFFCC));
 
 	sprintf(szText, "%d", nPoint);

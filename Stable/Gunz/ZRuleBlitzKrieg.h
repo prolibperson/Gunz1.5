@@ -64,7 +64,7 @@ public:
 	void DrawAnnouncement(SPECIAL_ANNOUNCEMENT announcementType);
 	void UpdateClassSelectDesc(const MMatchObjectClass& classID);
 	void UpdateHPTopInfo(MDrawContext* pDC);
-	void UpdateUpgradeUI(int& const index, int& const upgradeLevel);
+	void UpdateUpgradeUI(int& index, int& upgradeLevel);
 
 	const int& GetBlueBarricadeCount() { return m_blueBarricades; }
 	const int& GetRedBarricateCount() { return m_redBarricades; }

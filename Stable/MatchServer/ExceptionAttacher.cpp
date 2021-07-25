@@ -65,10 +65,6 @@ int AFXAPI AfxWinMain(HINSTANCE hInstance,
 		MLOGSTYLE_DEBUGSTRING|
 		MLOGSTYLE_FILE, szLogFileName);
 
-#ifdef _DEBUG
-	if(!RunUnitTest())
-		return 0;
-#endif
 //	return 0;	//TDD 작업할땐 이걸로 조기종료시키면 좋음
 
 

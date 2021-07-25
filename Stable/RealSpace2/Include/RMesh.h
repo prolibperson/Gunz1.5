@@ -2,7 +2,7 @@
 #define AFX_RMESH_H__6FD23F3A_D138_4F55_B03F_A629D35788CB__INCLUDED_
 
 #include <vector>
-#include <hash_map>
+#include <map>
 
 #include "RMeshNode.h"
 #include "RAnimationMgr.h"

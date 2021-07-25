@@ -285,7 +285,12 @@ bool MMatchRuleSpyMode::OnRun()
 		{
 			return false;
 		}
+		default:
+		{
+			return true;
+		}
 	}
+	return true;
 }
 
 bool MMatchRuleSpyMode::GetAliveCount(int* blueCount,int redCount)

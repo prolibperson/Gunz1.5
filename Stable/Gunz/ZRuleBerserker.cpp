@@ -125,7 +125,11 @@ void ZRuleBerserker::BonusHealth(ZCharacter* pBerserker)
 	{
 		if (pBerserker->IsDie()) 
 		{
+#if defined(_WIN64)
+			// do nothing
+#else
 			CHECK_RETURN_CALLSTACK(BonusHealth);
+#endif
 			return;
 		}
 
@@ -142,7 +146,11 @@ void ZRuleBerserker::BonusHealth(ZCharacter* pBerserker)
 		pBerserker->SetHP(pBerserker->GetHP() + fBonusHP);
 		pBerserker->SetAP(pBerserker->GetAP() + fBonusAP);
 	}
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(BonusHealth);
+#endif
 }
 
 void ZRuleBerserker::PenaltyHealth(ZCharacter* pBerserker)

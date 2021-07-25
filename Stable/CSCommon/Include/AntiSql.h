@@ -1,8 +1,8 @@
 inline bool SqlCheckString(char *str)
 {
 	string szString = str;
-	int len = szString.length();
-	for(int i = 0 ; i < len ; i++)
+	size_t len = szString.length();
+	for(size_t i = 0 ; i < len ; i++)
 	{
 		if(szString[i] == '\'')
 		{
@@ -28,8 +28,8 @@ inline void CleanTSQLString(string& szString)
 inline bool StringCheckFormat(char *str)
 {
 	string szString = str;
-	int len = szString.length();
-	for(int i = 0 ; i < len ; i++)
+	size_t len = szString.length();
+	for(size_t i = 0 ; i < len ; i++)
 	{
 		if(szString[i] == '%')
 		{
@@ -42,8 +42,8 @@ inline bool StringCheckFormat(char *str)
 inline bool StringCheckName(char *str)
 {
 	string szString = str;
-	int len = szString.length();
-	for(int i = 0 ; i < len ; i++)
+	size_t len = szString.length();
+	for(size_t i = 0 ; i < len ; i++)
 	{
 		if(szString[i] == '^' || szString[i] == '\t' || szString[i] == '\n')
 		{

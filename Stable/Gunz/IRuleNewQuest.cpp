@@ -180,10 +180,10 @@ bool IRuleNewQuest::OnCommand(MCommand* pCommand)
 		}break;
 		case MC_NEWQUEST_LATE_NPC_SPAWN:
 		{
-			MUID uidLateJoiner;
-			MUID uidNpc;
+			MUID uidLateJoiner = MUID();
+			MUID uidNpc = MUID();
 			char szActorDefName[128];
-			unsigned char nCustomSpawnTypeIndex, nSpawnIndex;
+			unsigned char nCustomSpawnTypeIndex = 0, nSpawnIndex = 0;
 			pCommand->GetParameter(&uidLateJoiner, 0, MPT_UID);
 			pCommand->GetParameter(&uidNpc, 1, MPT_UID);
 			pCommand->GetParameter(szActorDefName, 2, MPT_STR, sizeof(szActorDefName));

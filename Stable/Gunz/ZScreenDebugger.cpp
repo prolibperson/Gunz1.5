@@ -50,7 +50,7 @@ void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 		//int zcr_cnt = ZGetObjectManager()->GetRenderedCount();
 		//int zco_cnt = ZGetObjectManager()->GetDrawCount();
 		float fMs = 1000.f/g_fFPS;
-		sprintf_s(buffer, "Fps : %g", g_fFPS, fMs);
+		sprintf_s(buffer, "FPS: %.2f", fMs);
 		int x;
 	//	pDC->BeginFont();
 	//	pDC->Text(0,sy,buffer);
@@ -121,15 +121,15 @@ void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 		OUTTEXT();
 		NEXTLINE();
 
-		sprintf(buffer, "observer cmd q=%d , effect 0=%d ,1=%d, 2=%d   seffect = %d, dynlight = %d",ZGetGame()->GetObserverCommandListCount(),
+		sprintf(buffer, "observer cmd q=%i , effect 0=%i ,1=%i, 2=%i   seffect = %i, dynlight = %i",ZGetGame()->GetObserverCommandListCount(),
 			ZGetEffectManager()->GetEffectCount(0),ZGetEffectManager()->GetEffectCount(1),ZGetEffectManager()->GetEffectCount(2),
-			ZGetScreenEffectManager()->GetCount(),ZGetStencilLight()->GetCount());
+			ZGetScreenEffectManager()->GetCount(),(int)ZGetStencilLight()->GetCount());
 		OUTTEXT();
 		NEXTLINE();
 
 		RBspObject* bspObj = dynamic_cast<RBspObject*>(ZGetGame()->GetWorld()->GetBsp());
-		sprintf(buffer, "mapobject = %d , frustum culled = %d , occlusion culled = %d",
-			ZGetGame()->GetWorld()->GetBsp()->GetMapObjectList()->size(),bspObj->GetDebugInfo()->nMapObjectFrustumCulled,bspObj->GetDebugInfo()->nMapObjectOcclusionCulled);
+		sprintf(buffer, "mapobject = %i , frustum culled = %i , occlusion culled = %i",
+			(int)(ZGetGame()->GetWorld()->GetBsp()->GetMapObjectList()->m_MapObjectList.size()),bspObj->GetDebugInfo()->nMapObjectFrustumCulled,bspObj->GetDebugInfo()->nMapObjectOcclusionCulled);
 		OUTTEXT();
 		NEXTLINE();
 

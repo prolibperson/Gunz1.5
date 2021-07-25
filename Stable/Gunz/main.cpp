@@ -11,7 +11,7 @@
 #include <shlwapi.h>
 #include <shellapi.h>
 
-#include "dxerr9.h"
+#include "dxerr.h"
 
 #include "main.h"
 #include "resource.h"

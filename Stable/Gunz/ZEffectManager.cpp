@@ -26,7 +26,7 @@
 #include "MDebug.h"
 
 #ifndef _WIN64
-#include <dxerr9.h>
+#include <dxerr.h>
 #else
 #include "DxErr.h"
 #endif

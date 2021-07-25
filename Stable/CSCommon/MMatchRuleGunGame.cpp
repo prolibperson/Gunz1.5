@@ -127,7 +127,7 @@ void MMatchRuleGunGame::OnEnterBattle(MUID& uidPlayer)
 	}
 
 	MCommand* pCmd = MGetMatchServer()->CreateCommand(MC_MATCH_GUNGAME_SET, MUID(0, 0));
-	void* weaponSet = MMakeBlobArray(sizeof(GGWeaponSet), m_MatchSet.size());
+	void* weaponSet = MMakeBlobArray(sizeof(GGWeaponSet), (int)m_MatchSet.size());
 	vector<GGSet> items;
 	for (int i = 0; i < MGetBlobArrayCount(weaponSet); ++i)
 	{

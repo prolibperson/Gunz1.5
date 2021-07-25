@@ -9,9 +9,9 @@
 #pragma comment(lib,"cmld.lib")
 #pragma comment(lib,"mint2d.lib")
 #pragma comment(lib,"RealSpace2d.lib")
-#pragma comment(lib,"CSCommonDE.lib")
+#pragma comment(lib,"CSCommonD.lib")
 #pragma comment(lib,"SafeUDPd.lib")
-#pragma comment(lib, "dxerr8.lib")
+#pragma comment(lib, "dxerr.lib")
 
 #else
 
@@ -19,7 +19,7 @@
 #pragma comment(lib,"cml64.lib")
 #pragma comment(lib,"mint264.lib")
 #pragma comment(lib,"RealSpace264.lib")
-#pragma comment(lib,"CSCommonE64.lib")
+#pragma comment(lib,"CSCommon64.lib")
 #pragma comment(lib,"SafeUDP64.lib")
 #pragma comment(lib, "dxerr.lib")
 #else
@@ -28,7 +28,7 @@
 #pragma comment(lib,"RealSpace2.lib")
 #pragma comment(lib,"CSCommonE.lib")
 #pragma comment(lib,"SafeUDP.lib")
-#pragma comment(lib, "dxerr8.lib")
+#pragma comment(lib, "dxerr.lib")
 #endif
 #endif
 

@@ -361,7 +361,7 @@ bool ZGameInput::OnEvent(MEvent* pEvent)
 					if (pEvent->nKey >= ZACTION_NEWERWEAPON)
 					{
 						int index = ZACTION_COUNT - pEvent->nKey;
-						ZPostRequestBlitzUpgrade(index, ZGetGame()->m_pMyCharacter->GetHonor(),ZGetGame()->m_pMyCharacter->m_blitzUpgradeLevel[index].at(0));
+						ZPostRequestBlitzUpgrade(index, ZGetGame()->m_pMyCharacter->GetHonor());
 					}
 					return true;
 				}

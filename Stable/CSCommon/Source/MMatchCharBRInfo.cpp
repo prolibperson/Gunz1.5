@@ -62,7 +62,7 @@ BRRESULT MMatchCharBRInfo::CheckBattleTimeReward(unsigned long int nTick, MMatch
 		m_nBattleTime += nAddedTime;
 
 		if( pDesc->GetRewardkillCount() > m_nKillCount ) 							return BRRESULT_NO_REWARD;
-		if( pDesc->GetRewardMinutePeriod() * MINUTE_PERIOD_UNIT > m_nBattleTime )	return BRRESULT_NO_REWARD;
+		if( pDesc->GetRewardMinutePeriod() * MINUTE_PERIOD_UNIT > (int)m_nBattleTime )	return BRRESULT_NO_REWARD;
 
 		if( pDesc->GetRewardCount() == 0 )					return BRRESULT_DO_REWARD;
 		else if( m_nRewardCount < pDesc->GetRewardCount() ) return BRRESULT_DO_REWARD;

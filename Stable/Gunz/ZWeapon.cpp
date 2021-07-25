@@ -130,7 +130,11 @@ void ZWeaponRocket::Create(RMesh* pMesh, rvector &pos, rvector &dir, ZObject* pO
 		_ASSERT(m_SLSid==0);
 		m_SLSid = ZGetStencilLight()->AddLightSource( m_Position, 2.0f );
 	}
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(Create);
+#endif
 	//ZGetEffectManager()->AddRocketSmokeEffect(m_Position,-RealSpace2::RCameraDirection);
 }
 

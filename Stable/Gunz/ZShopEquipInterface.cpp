@@ -206,7 +206,7 @@ MMatchCharItemParts ZShopEquipInterface::RecommendEquipParts(MMatchItemSlotType 
 	{
 		if (ZGetMyInfo()->GetItemList()->GetEquipedItemID(MMCIP_DASH) == 0)
 		{
-			parts == MMCIP_DASH;
+			parts = MMCIP_DASH;
 		}
 	}
 

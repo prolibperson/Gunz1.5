@@ -235,11 +235,12 @@ ZActorWithFSM* ZRuleBlitzKrieg::SpawnActor(const char* szActorDefName, MUID& uid
 	ApplyActorName(pActor);
 	if (_stricmp(pActor->GetActorDef()->GetActorType(), "terminator") == 0)
 	{
-		if (pActor->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID())
+		if (pActor->GetTeamID() == (ZGetGame() ? ZGetGame()->m_pMyCharacter->GetTeamID() : MMatchTeam::MMT_END))
 			DrawAnnouncement(SPECIAL_ANNOUNCEMENT::SA_EVNTMSG15);
 		else
 			DrawAnnouncement(SPECIAL_ANNOUNCEMENT::SA_EVNTMSG14);
 	}
+	return pActor;
 }
 
 ZActorWithFSM* ZRuleBlitzKrieg::SpawnActorSummon(const char* szActorName, MUID& uid, int nNum, bool bMyControl, MShortVector vec, MShortVector vec2,
@@ -611,7 +612,7 @@ ZActorWithFSM* ZRuleBlitzKrieg::SpawnLateJoinNpc(const char* szActorDefName, MUI
 	///TODO: do i want latejoin? probably not, wont work well b/c no class selection, unless i default the user
 
 	ZMapSpawnManager* pMSM = ZGetGame()->GetMapDesc()->GetSpawnManager();
-	ZMapSpawnData* pSpawnData;
+	ZMapSpawnData* pSpawnData = nullptr;
 	if (pMSM)
 	{
 		if (_stricmp(szActorDefName, "radar_red") == 0)
@@ -653,11 +654,14 @@ ZActorWithFSM* ZRuleBlitzKrieg::SpawnLateJoinNpc(const char* szActorDefName, MUI
 			m_tresureChests++;
 		}
 	}
-	pActor->SetPosition(pSpawnData->m_Pos);
-	pActor->SetDirection(pSpawnData->m_Dir);
+	if (pSpawnData)
+	{
+		pActor->SetPosition(pSpawnData->m_Pos);
+		pActor->SetDirection(pSpawnData->m_Dir);
+	}
 	pActor->SetMyControl(false);
 	ApplyActorName(pActor);
-
+	return pActor;
 }
 
 MBitmap* ZRuleBlitzKrieg::GetClassBitmap(const int& classID, const MMatchTeam& teamID)
@@ -830,7 +834,7 @@ void ZRuleBlitzKrieg::UpdateHPTopInfo(MDrawContext* pDC)
 
 }
 
-void ZRuleBlitzKrieg::UpdateUpgradeUI(int& const index, int& const upgradeLevel)
+void ZRuleBlitzKrieg::UpdateUpgradeUI(int& index, int& upgradeLevel)
 {
 
 }

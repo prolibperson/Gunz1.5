@@ -127,7 +127,7 @@ float ZTimer::UpdateFrame()
 	UpdateEvents();			// 타이머 이벤트들 업데이트
 	unsigned long dwCurTime = timeGetTime();
 
-	if (dwCurTime - m_lastShiftTime.Ref() >= (15000 / RandomNumber(1,3)))
+	if (dwCurTime - m_lastShiftTime.Ref() >= ((unsigned long)15000 / RandomNumber(1,3)))
 	{
 		m_lastShiftTime.Set_CheckCrc(dwCurTime);
 		ShiftFugitiveValues();

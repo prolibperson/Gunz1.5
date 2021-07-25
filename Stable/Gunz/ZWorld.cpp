@@ -158,7 +158,7 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 	RMapObjectList* map_object_list		= m_pBsp->GetMapObjectList();
 	RMeshMgr* mesh_mgr					= m_pBsp->GetMeshManager();
 
-	for( RMapObjectList::iterator iter = map_object_list->begin(); iter != map_object_list->end(); )
+	for( auto iter = map_object_list->m_MapObjectList.begin(); iter != map_object_list->m_MapObjectList.end(); )
 	{
 		ROBJECTINFO* object_info		= *iter;
 		RMesh* pMesh						= mesh_mgr->GetFast( object_info->nMeshID );

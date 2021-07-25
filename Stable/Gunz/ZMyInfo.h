@@ -135,13 +135,13 @@ public:
 
 	void AddAchievement(MTD_Achievement achievement) { m_achievements.push_back(achievement); }
 	void SetAchievements(std::vector<MTD_Achievement> achievements) { m_achievements = achievements; }
-	std::vector<MTD_Achievement>&  const GetAchievements() { return m_achievements; }
+	std::vector<MTD_Achievement>&  GetAchievements() { return m_achievements; }
 	void AddStageModRemovedItem(int itemID,MMatchCharItemParts parts)
 	{ 
 		m_stageModRemovedItems.push_back(std::make_pair(itemID,parts));
 	}
 	void RemoveStageModItems() { m_stageModRemovedItems.clear(); }
-	std::vector<std::pair<int,MMatchCharItemParts> >& const GetStageModItems() { return m_stageModRemovedItems; }
+	std::vector<std::pair<int,MMatchCharItemParts> >& GetStageModItems() { return m_stageModRemovedItems; }
 };
 
 inline ZMyInfo* ZGetMyInfo() { return ZMyInfo::GetInstance(); }

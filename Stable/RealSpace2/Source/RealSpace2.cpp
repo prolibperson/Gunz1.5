@@ -8,7 +8,7 @@
 #include "RMeshUtil.h"
 #include "RFont.h"
 #ifndef _WIN64
-#include "dxerr9.h"
+#include "dxerr.h"
 #else
 #include "DxErr.h"
 #endif
@@ -942,8 +942,8 @@ bool SaveMemoryBmp(int x,int y,void *data,void **retmemory,int *nsize)
 
 		// Make WFileName
 		WCHAR wstrName[256];
-		int nNameLen = strlen(szFilename) + 1;
-		MultiByteToWideChar(CP_ACP, 0, szFilename, -1, wstrName, nNameLen - 1);
+		size_t nNameLen = strlen(szFilename) + 1;
+		MultiByteToWideChar(CP_ACP, 0, szFilename, -1, wstrName, (int)nNameLen - 1);
 		wstrName[nNameLen - 1] = 0;
 
 		// Save Bitmap

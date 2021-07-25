@@ -998,7 +998,7 @@ void ZScreenEffectManager::DrawGauges()
 		color = 0x60ef0000;
 
 		float x = min(1.f,m_fGaugeHP) * 138.f/adjustWidth;
-		float w = (m_fCurGaugeHP-m_fGaugeHP) * 138.f/00.f;
+		float w = (m_fCurGaugeHP-m_fGaugeHP) * 138.f;
 
 		DrawGauge( 70.f/adjustWidth+x, 23.f/600.f , w , 13.f/600.f , 1.f ,color);
 	}	
@@ -1104,9 +1104,7 @@ void ZCombatInterface::DrawHPAPNumbers(MDrawContext* pDC)
 		if (pCharacter->GetHP() == 0) return;
 		if (pCharacter->IsDie()) return;
 
-		char hp[128];
-		char ap[128];
-
+		char hp[128] = { 0 };
 		MFont *pFont = GetGameFont();
 		pFont = MFontManager::Get("FONTa10_O2Wht");
 		pDC->SetFont(pFont);
@@ -1123,8 +1121,7 @@ void ZCombatInterface::DrawHPAPNumbers(MDrawContext* pDC)
 		if (pCharacter->GetHP() == 0) return;
 		if (pCharacter->IsDie()) return;
 
-		char hp[128];
-		char ap[128];
+		char ap[128] = { 0 };
 
 		MFont *pFont = GetGameFont();
 		pFont = MFontManager::Get("FONTa10_O2Wht");

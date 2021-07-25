@@ -19,12 +19,20 @@ ZCharacterObject* ZCharacterManagerBase::Find(MUID uid)
 		iterator itor = find(uid);
 		if (itor->second != nullptr && itor != end())
 		{
+#if defined(_WIN64)
+			// do nothing
+#else
 			CHECK_RETURN_CALLSTACK(Find);
+#endif
 			return (*itor).second;
 		}
 	}
 
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(Find);
+#endif
 	return NULL;
 }
 

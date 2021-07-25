@@ -13,52 +13,70 @@ Stable/MatchServer/x64/*
 Stable/MatchServer/Runtime/*
 Stable/MatchServer/.vs/*
 Stable/MatchServer/lib/*
+Stable/MatchServer/lib/*
+Stable/MatchServer/LIB/*
 
 Stable/MatchAgent/Debug/*
 Stable/MatchAgent/Release/*
 Stable/MatchAgent/x64/*
 Stable/MatchAgent/Runtime/*
 Stable/MatchAgent/.vs/*
+Stable/MatchAgent/lib/*
+Stable/MatchAgent/LIB/*
 
 Stable/Locator/Debug/*
 Stable/Locator/Release/*
 Stable/Locator/x64/*
 Stable/Locator/Runtime/*
 Stable/Locator/.vs/*
+Stable/Locator/lib/*
+Stable/Locator/LIB/*
 
 Stable/CSCommon/Debug/*
 Stable/CSCommon/Release/*
 Stable/CSCommon/x64/*
 Stable/CSCommon/Runtime/*
 Stable/CSCommon/.vs/*
+Stable/CSCommon/lib/*
+Stable/CSCommon/LIB/*
 
 Stable/cml/Debug/*
 Stable/cml/Release/*
 Stable/cml/x64/*
 Stable/cml/Runtime/*
 Stable/cml/.vs/*
+Stable/cml/lib/*
+Stable/cml/LIB/*
 
 Stable/RealSpace2/Debug/*
 Stable/RealSpace2/Release/*
 Stable/RealSpace2/x64/*
 Stable/RealSpace2/Runtime/*
 Stable/RealSpace2/.vs/*
+Stable/RealSpace2/lib/*
+Stable/RealSpace2/LIB/*
 
 Stable/MDatabase/Debug/*
 Stable/MDatabase/Release/*
 Stable/MDatabase/x64/*
 Stable/MDatabase/Runtime/*
 Stable/MDatabase/.vs/*
+Stable/MDatabase/lib/*
+Stable/MDatabase/LIB/*
 
 Stable/Mint2/Debug/*
 Stable/Mint2/Release/*
 Stable/Mint2/x64/*
 Stable/Mint2/Runtime/*
 Stable/Mint2/.vs/*
+Stable/Mint2/lib/*
+Stable/Mint2/LIB/*
 
 Stable/SafeUDP/Debug/*
 Stable/SafeUDP/Release/*
 Stable/SafeUDP/x64/*
 Stable/SafeUDP/Runtime/*
 Stable/SafeUDP/.vs/*
+Stable/SafeUDP/lib/*
+Stable/SafeUDP/LIB/*
 

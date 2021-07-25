@@ -728,7 +728,6 @@ bool ZGameInterface::OnCommand(MCommand* pCommand)
 		{
 			int nResult;
 			int nBP;
-			int nLC;
 
 			pCommand->GetParameter( &nResult, 0, MPT_INT );
 			pCommand->GetParameter( &nBP, 1, MPT_INT );

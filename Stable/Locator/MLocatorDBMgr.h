@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MDatabase.h"
-#include "MCountryFilterDBMgr.h"
+#include "MDatabase.h" 
+
 
 #include <string>
 #include <map>
@@ -9,7 +9,7 @@ using namespace std;
 
 class MServerStatusMgr;
 
-class MLocatorDBMgr : public MCountryFilterDBMgr
+class MLocatorDBMgr : public MDatabase
 {
 public:
 	MLocatorDBMgr(void);

@@ -142,7 +142,6 @@ public:
 	void	DelAll();
 	void	Restore(LPDIRECT3DDEVICE9 dev,char* path=NULL);
 
-	void	CheckUsed(bool b);
 	void	ClearUsedCheck();
 	void	ClearUsedMtrl();
 
@@ -159,7 +158,7 @@ public:
 	RMtrl*  GetToolMtrl(char* name);
 
 	void	Del(RMtrl* tex);
-	int		GetNum();
+	size_t	GetNum();
 
 	vector<RMtrl*>	m_node_table;
 

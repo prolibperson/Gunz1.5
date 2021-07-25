@@ -324,7 +324,7 @@ bool ZSoundEngine::OpenMusic(const char* szFileName, MZFileSystem* pfs)
 	{
 		if (CustomMusic::m_customMusic.size() > 0)
 		{
-			for (int i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
+			for (unsigned int i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
 			{
 				if (CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].at(i).find(szFileName) != std::string::npos)
 				{
@@ -938,8 +938,8 @@ const char* ZSoundEngine::GetBGMFileName(int nBgmIndex)
 	constexpr auto BGM_FOLDER = "Sound/BGM/";
 
 
-	if (ZGetConfiguration()->GetAudio()->bCustomMusicEnabled && ZGetConfiguration()->GetAudio()->nCustomMusicFolders <=
-		CustomMusic::m_customMusic.size() && CustomMusic::m_customMusic.size() > 0 && ZGetConfiguration()->GetAudio()->nCustomMusicFolders != -1)
+	if (ZGetConfiguration()->GetAudio()->bCustomMusicEnabled && (size_t)ZGetConfiguration()->GetAudio()->nCustomMusicFolders <=
+		CustomMusic::m_customMusic.size() && CustomMusic::m_customMusic.size() > (size_t)0 && ZGetConfiguration()->GetAudio()->nCustomMusicFolders != (size_t)-1)
 	{
 		if (CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size() > 0)
 		{
@@ -1012,7 +1012,7 @@ bool ZSoundEngine::LoadResource(char* pFileName_, ZLoadingProgress *pLoading)
 
 	int i = 0;
 	rapidxml::xml_node<>* rootNode = doc.first_node();
-	int iCount = rapidxml::count_children(rootNode);
+	size_t iCount = rapidxml::count_children(rootNode);
 	for (auto itor = rootNode->first_node(); itor; itor = itor->next_sibling(), ++i)
 	{
 		// loading 화면 갱신. 가끔 한번씩만.
@@ -1412,7 +1412,7 @@ bool ZSoundEngine::LoadNPCResource(MQUEST_NPC nNPC, ZLoadingProgress* pLoading)
 	FSOUND_SAMPLE* pFS = NULL;
 	FSOUND_SAMPLE* pFS2 = NULL;
 
-	int flag = FSOUND_SIGNED|FSOUND_MONO | m_b8Bits ? FSOUND_8BITS : FSOUND_16BITS;
+	int flag = FSOUND_SIGNED|FSOUND_MONO | (int)(m_b8Bits ? FSOUND_8BITS : FSOUND_16BITS);
 	if (m_bHWMixing) flag |= FSOUND_HW3D;
 
 	for (int i = 0; i < NPC_SOUND_END; i++)

@@ -457,23 +457,29 @@ void ZSoundFMod::pause()
 #include <chrono>
 const char* ZSoundFMod::GetTrackLength()
 {
+	std::string curTrack;
+
 	if (CustomMusic::m_customMusic.size() > 0)
 	{
 		char buffer[64];
 		std::chrono::milliseconds ms(FSOUND_Stream_GetLength(m_pStream));
 		sprintf_s(buffer, 64, "%02d:%02d", (FSOUND_Stream_GetLengthMs(m_pStream) / 1000) / 60, (FSOUND_Stream_GetLengthMs(m_pStream) / 1000) % 60);
-		return buffer;
+		curTrack = buffer;
+		return curTrack.c_str();
 	}
 	return "";
 }
 
 const char* ZSoundFMod::GetTrackTime()
 {
+	std::string curTrack;
+
 	if (CustomMusic::m_customMusic.size() > 0)
 	{
-		char buffer[64] = "";
+		char buffer[64]{ 0 };
 		sprintf_s(buffer, 64, "%02d:%02d", (FSOUND_Stream_GetTime(m_pStream) / 1000) / 60, (FSOUND_Stream_GetTime(m_pStream) / 1000) % 60);
-		return buffer;
+		curTrack = buffer;
+		return curTrack.c_str();
 	}
 	return "";
 }

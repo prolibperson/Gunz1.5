@@ -26,7 +26,11 @@ void ZChatOutput(const char* szMsg, ZChat::ZCHAT_MSG_TYPE msgtype, ZChat::ZCHAT_
 	ZGetGameInterface()->GetChat()->Output(szMsg, msgtype, loc , _color);
 	void(*thisCall)(const char* , ZChat::ZCHAT_MSG_TYPE , ZChat::ZCHAT_LOC ,MCOLOR );
 	thisCall = ZChatOutput;
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(thisCall);
+#endif
 }
 
 void ZChatOutput(MCOLOR color, const char* szMsg, ZChat::ZCHAT_LOC loc)
@@ -91,7 +95,11 @@ bool ZChat::CheckRepeatInput(char* szMsg)
 			CMT_SYSTEM);
 		return false;
 	}
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(CheckRepeatInput);
+#endif
 	return true;
 }
 

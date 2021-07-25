@@ -1032,7 +1032,11 @@ void ZMyCharacter::OnShotItem()
 	{
 		type = ZC_WEAPON_SP_POTION;
 		ZPostShotSp(/*g_pGame->GetTime(),*/rvector(0,0,0),rvector(0,0,1),type,sel_type);
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(OnShotItem);
+#endif
 		return;
 	}
 	// ¹Ù´Ú¿¡ ¶³±¸´Â ¾ÆÀÌÅÛÀÎ °æ¿ì
@@ -1068,7 +1072,11 @@ void ZMyCharacter::OnShotItem()
 
 		rvector velocity = (GetVelocity() * 0.5f) + m_TargetDir*100;
 		ZPostShotSp(/*g_pGame->GetTime(),*/pos,velocity,ZC_WEAPON_SP_ITEMKIT,sel_type);
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(OnShotItem);
+#endif
 		return;
 	}
 
@@ -1126,7 +1134,11 @@ void ZMyCharacter::OnShotItem()
 
 	Normalize(dir);
 	ZPostShotSp(/*g_pGame->GetTime(),*/v1,dir,type,sel_type);
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(OnShotItem);
+#endif
 }
 
 void ZMyCharacter::OnShotCustom()
@@ -1464,33 +1476,53 @@ void ZMyCharacter::ProcessGuard()
 		uStatus.m_bBlast || uStatus.m_bBlastFall || uStatus.m_bBlastDrop || uStatus.m_bBlastStand || uStatus.m_bBlastAirmove ||
 		zStatus.m_bSlash || zStatus.m_bJumpSlash || zStatus.m_bJumpSlashLanding ) 
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 		return;
 	}
 
 	ZItem* pSItem = GetItems()->GetSelectedWeapon();
 	if(!pSItem)
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 		return;
 	}
 
 	if (pSItem->IsEmpty() || pSItem->GetDesc()==NULL)
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 		return;
 	}
 
 	if(pSItem->GetDesc()->m_nType.Ref()!=MMIT_MELEE)
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 		return;
 	}
 
 	MMatchWeaponType type = pSItem->GetDesc()->m_nWeaponType.Ref();
 	if(type!=MWT_KATANA && type!=MWT_DOUBLE_KATANA && type != MWT_SPYCASE) 
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 		return; 
 	}
 
@@ -1533,13 +1565,21 @@ void ZMyCharacter::ProcessGuard()
 
 //			m_bGuardKey = false;
             
+#if defined(_WIN64)
+	// do nothing
+#else
 			CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 			return;
 		}
 		ReleaseLButtonQueue();
 	}
 
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(ProcessGuard);
+#endif
 }
 
 void ZMyCharacter::OnChangeWeapon(MMatchItemDesc* pWeapon)
@@ -2134,7 +2174,11 @@ void ZMyCharacter::WallJump2()
 
 	MEMBER_SET_CHECKCRC(m_timeInfo, m_fJump2Time, ZGetGame()->GetTime());
 
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(WallJump2);
+#endif
 }
 
 void ZMyCharacter::UpdateLimit()

@@ -601,7 +601,6 @@ void	ZInitialLoading::DrawTips()
 
 void	ZInitialLoading::SetRandomTipsText()
 {
-	const char* szTips;
 	if (ZGetMyInfo()->IsNewbie())
 	{
 		// Custom: Just show normal tips

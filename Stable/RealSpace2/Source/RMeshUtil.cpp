@@ -457,7 +457,7 @@ void GetPath(const char* str,char* path)
 		return;
 	}
 
-	int i=0;
+	size_t i=0;
 
 	for(i=strlen(str)-1; i>=0; i--) {
 		if( (str[i]=='\\') || (str[i]=='/')) {

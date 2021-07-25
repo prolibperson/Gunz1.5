@@ -34,7 +34,6 @@
 #include <vector>
 using namespace std;
 
-class MMatchAuthBuilder;
 class MMatchScheduleMgr;
 class MNJ_DBAgentClient;
 class MBMatchMonitor;
@@ -126,7 +125,6 @@ protected:
 	DWORD					m_checkMemory18;
 	MMatchScheduleMgr*		m_pScheduler;
 	DWORD					m_checkMemory19;
-	MMatchAuthBuilder*		m_pAuthBuilder;
 	DWORD					m_checkMemory20;
 	MMatchQuest				m_Quest;	// ??÷? ??g???
 	DWORD					m_checkMemory21;
@@ -163,11 +161,6 @@ public:
 	virtual void Shutdown();
 	/// ????? UID ?????
 	virtual MUID UseUID(void);
-
-	MMatchAuthBuilder* GetAuthBuilder()					{ return m_pAuthBuilder; }
-#ifndef NEW_AUTH_MODULE
-	void SetAuthBuilder(MMatchAuthBuilder* pBuilder)	{ m_pAuthBuilder = pBuilder; }
-#endif
 
 	MMatchChatRoomMgr* GetChatRoomMgr()					{ return &m_ChatRoomMgr; }
 

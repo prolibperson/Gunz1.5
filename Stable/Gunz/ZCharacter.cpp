@@ -2308,12 +2308,20 @@ void ZCharacter::OnDie()
 {
 	if (m_bInitialized==false) 
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(OnDie);
+#endif
 		return;
 	}
 	if (!IsVisible())
 	{
+#if defined(_WIN64)
+		// do nothing
+#else
 		CHECK_RETURN_CALLSTACK(OnDie);
+#endif
 		return;
 	}
 /*
@@ -2354,7 +2362,11 @@ void ZCharacter::OnDie()
 			ZGetSoundEngine()->PlaySound("fx2/FEM08",GetPosition(),IsObserverTarget());
 	}
 
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(OnDie);
+#endif
 }
 
 // 부활 - 이것은 게임룰에 따라 달라질 수도 있다.
@@ -2375,8 +2387,11 @@ void ZCharacter::Revival()
 		uStatus.m_bDie = true;
 
 	SetAnimationLower(ZC_STATE_LOWER_IDLE1);
-
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(Revival);
+#endif
 }
 
 
@@ -4198,12 +4213,20 @@ void ZCharacter::OnLevelUp()
 void ZCharacter::LevelUp()
 {
 	OnLevelUp();
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(LevelUp);
+#endif
 }
 void ZCharacter::LevelDown()
 {
 	OnLevelDown();
+#if defined(_WIN64)
+	// do nothing
+#else
 	CHECK_RETURN_CALLSTACK(LevelDown);
+#endif
 }
 
 
@@ -4536,7 +4559,7 @@ void ZCharacter::OnDamagedAntilead(ZObject* pAttacker, ZDAMAGETYPE damageType, M
 
 	ZObject::OnDamaged(pAttacker, pAttacker->GetPosition(), damageType, weaponType, fDamage, piercingRatio);
 
-	int meleeType = pAttacker->GetItems()->GetSelectedWeaponType() == MMatchWeaponType::MWT_DUAL_DAGGER <= 5;
+	int meleeType = pAttacker->GetItems()->GetSelectedWeaponType() == MMatchWeaponType::MWT_DUAL_DAGGER <= MMatchWeaponType::MWT_DOUBLE_KATANA;
 	if (damageType == ZD_MELEE) OnDamagedAnimation(pAttacker, meleeType);
 
 	ZCharacter* pCharacter = dynamic_cast<ZCharacter*>(pAttacker);

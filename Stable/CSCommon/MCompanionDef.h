@@ -49,7 +49,7 @@ public:
 	bool AddCompanionDef(MCompanionDef* companionDef);
 
 
-	int GetCount() { return m_actorDefMgr.size(); }
+	int GetCount() { return (int)m_actorDefMgr.size(); }
 
 	MCompanionDef* GetCompanion(const char* companionName);
 

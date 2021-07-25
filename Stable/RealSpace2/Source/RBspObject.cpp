@@ -22,7 +22,7 @@
 #ifdef _WIN64
 #include "DxErr.h"
 #else
-#include "DxErr9.h"
+#include "DxErr.h"
 #endif
 #include "RNavigationNode.h"
 
@@ -236,21 +236,32 @@ void RBspLightmapManager::Save(const char *filename)
 
 RMapObjectList::~RMapObjectList()
 {
-	while(size())
+
+	for (auto mapObj : m_MapObjectList)
 	{
-		Delete(begin());
+		delete mapObj->pVisualMesh;
+		delete mapObj;
+		mapObj = nullptr;
 	}
+
+	m_MapObjectList.clear();
 }
 
-RMapObjectList::iterator RMapObjectList::Delete(iterator i)
+std::list<ROBJECTINFO*>::iterator RMapObjectList::Delete(std::list<ROBJECTINFO*>::iterator mapObjItr)
 {
-	ROBJECTINFO *info=*i;
-	if (info != nullptr)
+	if (mapObjItr != m_MapObjectList.end())
 	{
-		delete info->pVisualMesh;
-		delete info;
-		return erase(i);
+		auto mapObj = *(mapObjItr);
+		auto nextItr = m_MapObjectList.erase(mapObjItr);
+		if (mapObj)
+		{
+			delete mapObj->pVisualMesh;
+			delete mapObj;
+			mapObj = nullptr;
+		}
+		return nextItr;
 	}
+	return mapObjItr;
 }
 
 ////////////////////////////
@@ -859,7 +870,7 @@ bool e_mapobject_sort_float(ROBJECTINFO* _a,ROBJECTINFO* _b) {
 //Custom: Draw sky and flags here, don't do it in zworld and remove from the mapobjectlist like maiet -_-
 void RBspObject::DrawSky()
 {
-	for (const auto& itor : m_SkyList)
+	for (const auto& itor : m_SkyList.m_MapObjectList)
 	{
 		rmatrix identity;
 		D3DXMatrixIdentity(&identity);
@@ -875,7 +886,7 @@ void RBspObject::DrawFlags()
 	rvector t_vec;
 	rvector t_pos;
 
-	for (const auto& itor : m_FlagList)
+	for (const auto& itor : m_FlagList.m_MapObjectList)
 	{
 
 		ROBJECTINFO* pCurr = itor;
@@ -890,9 +901,9 @@ void RBspObject::DrawFlags()
 		pCurr->fDist = Magnitude(t_vec);
 	}
 
-	m_FlagList.sort(e_mapobject_sort_float);
+	m_FlagList.m_MapObjectList.sort(e_mapobject_sort_float);
 
-	for (const auto& iter : m_FlagList)
+	for (const auto& iter : m_FlagList.m_MapObjectList)
 	{
 
 		if (iter != 0)	iter->pVisualMesh->Render();
@@ -920,7 +931,7 @@ void RBspObject::DrawObjects()
 	rvector camera_pos = RealSpace2::RCameraPosition;
 	rvector t_vec;
 
-	for(list<ROBJECTINFO*>::iterator i=m_ObjectList.begin();i!=m_ObjectList.end();i++) {
+	for(list<ROBJECTINFO*>::iterator i=m_ObjectList.m_MapObjectList.begin();i!=m_ObjectList.m_MapObjectList.end();i++) {
 
 		ROBJECTINFO *pInfo = *i;
 		if(!pInfo->pVisualMesh) continue;
@@ -934,9 +945,9 @@ void RBspObject::DrawObjects()
 		}
 	}
 
-	m_ObjectList.sort(e_mapobject_sort_float);
+	m_ObjectList.m_MapObjectList.sort(e_mapobject_sort_float);
 
-	for(list<ROBJECTINFO*>::iterator i=m_ObjectList.begin();i!=m_ObjectList.end();i++)
+	for(list<ROBJECTINFO*>::iterator i=m_ObjectList.m_MapObjectList.begin();i!=m_ObjectList.m_MapObjectList.end();i++)
 	{
 		ROBJECTINFO *pInfo=*i;
 		if(!pInfo->pVisualMesh) continue;
@@ -1389,7 +1400,7 @@ bool RBspObject::Open_MaterialList(MXmlElement *pElement)
 
 	// 0번 디폴트 매터리얼을 하나 만든다..  NULL texture
 	// 또 렌더링 하지 않는 (dwFlags에 HIDE 가 켜져있으면) material 은 -1번.
-	m_nMaterial=ml.size();
+	m_nMaterial=(int)ml.size();
 	m_nMaterial=m_nMaterial+1;
 
 	m_pMaterials=new RBSPMATERIAL[m_nMaterial];
@@ -1581,7 +1592,7 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 				if (objName.find("sky") != std::string::npos)
 				{
 					pInfo->pVisualMesh->GetMesh()->mbSkyBox = true;
-					m_SkyList.push_back(pInfo);
+					m_SkyList.m_MapObjectList.push_back(pInfo);
 					continue;
 				}
 
@@ -1600,7 +1611,7 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 				//	continue;
 				//}
 
-				m_ObjectList.push_back(pInfo);
+				m_ObjectList.m_MapObjectList.push_back(pInfo);
 				pInfo->pLight=NULL;
 			}
 			else
@@ -1610,10 +1621,10 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 
 	///// objectlist 를 처리한다.
 
-	mlog("RBspObject::Open_ObjectList : size %d \n",m_ObjectList.size());
+	mlog("RBspObject::Open_ObjectList : size %d \n",m_ObjectList.m_MapObjectList.size());
 
 
-	for(list<ROBJECTINFO*>::iterator it=m_ObjectList.begin();it!=m_ObjectList.end();it++) {
+	for(list<ROBJECTINFO*>::iterator it=m_ObjectList.m_MapObjectList.begin();it!=m_ObjectList.m_MapObjectList.end();it++) {
 
 		ROBJECTINFO *pInfo=*it;
 
@@ -3000,11 +3011,11 @@ bool RBspObject::GenerateLightmap(const char *filename,int nMaxlightmapsize,int 
 
 		if(bNeedInsert)
 		{
-			int nLightmap=sourcelightmaplist.size();
+			size_t nLightmap=sourcelightmaplist.size();
 
-			pSourceLightmap[i]=nLightmap;
+			pSourceLightmap[i]=(int)nLightmap;
 			if(bConstmap)
-				ConstmapTable.insert(map<DWORD,int>::value_type(lightmapdata[0],nLightmap));
+				ConstmapTable.insert(map<DWORD,int>::value_type(lightmapdata[0],(int)nLightmap));
 
 #ifdef GENERATE_TEMP_FILES   // 파일로 라이트맵을 저장한다.
 			
@@ -3045,7 +3056,7 @@ bool RBspObject::GenerateLightmap(const char *filename,int nMaxlightmapsize,int 
 	fwrite(&m_nNodeCount,sizeof(int),1,file);
 
 	// 적당한 크기에 합쳐져 넣어진 라이트맵을 저장한다.
-	m_nLightmap=m_LightmapList.size();
+	m_nLightmap=(int)m_LightmapList.size();
 	fwrite(&m_nLightmap,sizeof(int),1,file);
 	for(size_t i=0;i<m_LightmapList.size();i++)
 	{
@@ -3058,7 +3069,7 @@ bool RBspObject::GenerateLightmap(const char *filename,int nMaxlightmapsize,int 
 //		/*
 		// 합쳐진 큰 라이트맵 저장
 		char lightfilename[256];
-		sprintf(lightfilename,"%s.light%d.bmp",filename,i);
+		sprintf(lightfilename,"%s.light%i.bmp",filename,(int)i);
 		RSaveAsBmp(m_LightmapList[i]->GetSize(),m_LightmapList[i]->GetSize(),m_LightmapList[i]->GetData(),lightfilename);
 		//*/
 
@@ -3196,7 +3207,7 @@ void RBspObject::CalcLightmapUV(RSBspNode *pNode,int *pSourceLightmap,vector<RLI
 				}
 				pDestLightmap->bLoaded=true;
 				pDestLightmap->position=pt;
-				pDestLightmap->nLightmapIndex=m_LightmapList.size()-1;
+				pDestLightmap->nLightmapIndex=(int)(m_LightmapList.size()) - 1;
 			}
 
 			pNode->pInfo[i].nLightmapTexture=pDestLightmap->nLightmapIndex;

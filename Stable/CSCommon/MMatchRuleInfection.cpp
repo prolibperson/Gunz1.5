@@ -293,5 +293,10 @@ bool MMatchRuleInfection::OnRun()
 		{
 			return false;
 		}
+		default:
+		{
+			return true;
+		}
 	}
+	return true;
 }
