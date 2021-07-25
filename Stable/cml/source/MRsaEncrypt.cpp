@@ -14,7 +14,6 @@ using namespace std;
 //using namespace CryptoPP;
 
 #ifdef _DEBUG
-#pragma comment (lib,"cryptlib2003d.lib")
 #else
 #pragma comment (lib,"cryptlib2003.lib")
 #endif
