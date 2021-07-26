@@ -1,0 +1,197 @@
+//------------------------------------------------
+//--- 010 Editor v9.0.2 Binary Template
+//
+//      File: GunZ 1.0 Elu.Ani
+//   Authors: Secrets
+//   Version: 0.1
+//   Purpose: Load old elu.ani (1.0) GunZ Files
+//  Category: RealSpace2 Engine Animations
+// File Mask: Sig
+//  ID Bytes: Ver
+//   History: Initial Revision
+//------------------------------------------------
+
+
+enum <int> AnimationType{
+	RAniType_TransForm = 0,
+	RAniType_Vertex,
+	RAniType_Bone,
+	RAniType_Tm,
+};
+
+enum <int> AnimationLoopType {
+	RAniLoopType_Normal = 0,
+	RAniLoopType_Loop,
+	RAniLoopType_OnceIdle,
+	RAniLoopType_HoldLastFrame,
+	RAniLoopType_OnceLowerBody,
+};
+
+
+enum <int> AnimationFileType {
+
+	RAniFileType_None = 0,
+
+	RAniFileType_Idle,
+	RAniFileType_Run,
+	RAniFileType_RunB,
+	RAniFileType_RunW,
+	RAniFileType_RunW_downF,
+	RAniFileType_RunW_downB,
+	RAniFileType_RunLW,
+	RAniFileType_RunLW_down,
+	RAniFileType_RunRW,
+	RAniFileType_RunRW_down,
+	RAniFileType_JumpU,
+	RAniFileType_JumpD,
+	RAniFileType_Bind,
+	RAniFileType_Die,
+	RAniFileType_Die2,
+	RAniFileType_Load,
+	RAniFileType_TumbleF,
+	RAniFileType_TumbleB,
+	RAniFileType_TumbleR,
+	RAniFileType_TumbleL,
+	RAniFileType_JumpwallB,
+	RAniFileType_JumpwallF,
+	RAniFileType_JumpwallL,
+	RAniFileType_JumpwallR,
+	RAniFileType_Blast,
+	RAniFileType_Blast_fall,
+	RAniFileType_Blast_drop,
+	RAniFileType_Blast_stand,
+	RAniFileType_Blast_dagger,
+	RAniFileType_Blast_drop_dagger,
+	RAniFileType_Attack1,
+	RAniFileType_Attack1_ret,
+	RAniFileType_Attack2,
+	RAniFileType_Attack2_ret,
+	RAniFileType_Attack3,
+	RAniFileType_Attack3_ret,
+	RAniFileType_Attack4,
+	RAniFileType_Attack_Jump,
+	RAniFileType_Uppercut,
+	RAniFileType_Damage,
+	RAniFileType_Damage2,
+	RAniFileType_Damage_down,
+	RAniFileType_Blast_airmove,
+	RAniFileType_Login_intro,
+	RAniFileType_Login_idle,
+	RAniFileType_Login_walk,
+	RAniFileType_Guard_start,
+	RAniFileType_Guard_idle,
+	RAniFileType_Guard_block1,
+	RAniFileType_Guard_block1_ret,
+	RAniFileType_Guard_block2,
+	RAniFileType_Guard_cancel,
+	RAniFileType_Taunt,
+	RAniFileType_Pit,
+	RAniFileType_Bow,
+	RAniFileType_Wave,
+	RAniFileType_Cry,
+	RAniFileType_Laugh,
+	RAniFileType_Dance,
+
+	RAniFileType_End
+};
+
+typedef struct {
+	DWORD	sig;
+	DWORD	ver;
+	int		maxframe;
+	int		model_num;
+	AnimationType ani_type;
+} ex_ani_t;
+
+typedef struct
+{
+    float x;
+    float y;
+    float z;
+} D3DXVECTOR3;
+
+typedef struct
+{
+    float x;
+    float y;
+    float z;
+    float w;
+} D3DXQUATERNION;
+
+
+typedef struct 
+{
+    float row[16];
+} 
+D3DXMATRIX;
+
+typedef struct 
+{
+    D3DXMATRIX m_mat;
+    int frame;
+} 
+RTMKey;
+
+typedef struct 
+{
+    D3DXVECTOR3 m_key;
+    int frame;
+} 
+RPosKey;
+
+typedef struct {
+	float v;
+	int frame;
+} RVisKey;
+
+typedef struct {
+	D3DXQUATERNION v;
+	int frame;
+} RQuatKey;
+
+typedef struct
+{
+    char t_mesh_name[40]; // mzf.Read(t_mesh_name ,MAX_NAME_LEN );
+	int m_vertex_cnt; // mzf.Read(&pANode->m_vertex_cnt,4 );//frame¼ö¸¸Å­
+    int m_vertex_vcnt; // mzf.Read(&vcnt,4 );
+    D3DXVECTOR3 m_vertex[m_vertex_vcnt];
+    int m_vis_cnt;
+    RVisKey m_vis[m_vis_cnt];
+} RAnimationNode_Vertex;
+
+typedef struct
+{
+    char t_mesh_name[40]; // mzf.Read(t_mesh_name ,MAX_NAME_LEN );
+	D3DXMATRIX m_mat_base; // mzf.Read(&pANode->m_vertex_cnt,4 );//frame¼ö¸¸Å­
+    int m_pos_cnt;
+    RPosKey m_pos[m_pos_cnt];
+    int rot_key_num;
+    RQuatKey rot[rot_key_num];
+    int m_vis_cnt;
+    RVisKey m_vis[m_vis_cnt];
+} RAnimationNode_BoneOrTransform;
+
+typedef struct
+{
+    char t_mesh_name[40]; // mzf.Read(t_mesh_name ,MAX_NAME_LEN );
+	int m_mat_cnt; // mzf.Read(&pANode->m_vertex_cnt,4 );//frame¼ö¸¸Å­
+    RTMKey m_mat[m_mat_cnt];
+    int m_vis_cnt;
+    RVisKey m_vis[m_vis_cnt];
+
+} RAnimationNode_Tm;
+
+ex_ani_t anim;
+
+if(anim.ani_type == RAniType_Tm)
+{
+    RAnimationNode_Tm tmAni;
+}
+else if(anim.ani_type == RAniType_Vertex)
+{
+    RAnimationNode_Vertex vertexAni;
+}
+else
+{
+    RAnimationNode_BoneOrTransform bnAni[anim.model_num];
+}
