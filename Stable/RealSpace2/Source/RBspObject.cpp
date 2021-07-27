@@ -1034,7 +1034,7 @@ void RBspObject::DrawOcclusions()
 	RSetWBuffer(true);
 }
 
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 void RBspObject::DrawColNodePolygon(rvector &pos)
 { 
 	m_pColRoot->DrawPos(pos); 
@@ -2052,7 +2052,7 @@ bool RBspObject::OpenCol(const char *filename)
 	_ASSERT(m_pColRoot+nBspNodeCount>g_pLPColNode);
 
 	file.Close();
-#ifndef _PUBLISH	
+#ifdef _DEBUGBSP
 	m_pColRoot->ConstructBoundingBox();
 #endif
 	return true;
@@ -3248,7 +3248,7 @@ rvector RBspObject::GetDimension()
 
 void RBspObject::DrawSolid()					// 모든 solid 노드들을 그린다
 {
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 
 	LPDIRECT3DDEVICE9 pLPDIRECT3DDEVICE9=RGetDevice();
 
@@ -3282,7 +3282,7 @@ void RBspObject::DrawSolid()					// 모든 solid 노드들을 그린다
 void RBspObject::DrawSolidNode()
 {
 	if(!m_DebugInfo.pLastColNode) return;
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 	LPDIRECT3DDEVICE9 pLPDIRECT3DDEVICE9=RGetDevice();
 	
 	pLPDIRECT3DDEVICE9->SetFVF( D3DFVF_XYZ );

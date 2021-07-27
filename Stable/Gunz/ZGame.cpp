@@ -1444,10 +1444,10 @@ void ZGame::OnCommand_Observer(MCommand* pCommand)
 	}
 
 
-	ZObserverCommandItem *pZCommand=new ZObserverCommandItem;
-	pZCommand->pCommand=pCommand->Clone();
-	pZCommand->fTime=GetTime();
-	m_ObserverCommandList.push_back(pZCommand);
+	ZObserverCommandItem pZCommand;
+	pZCommand.pCommand=pCommand->Clone();
+	pZCommand.fTime=GetTime();
+	m_ObserverCommandList.m_List.push_back(pZCommand);
 	
 #ifdef _LOG_ENABLE_OBSERVER_COMMAND_BUSH_
 	if(pCommand->GetID() != 10012 && pCommand->GetID() != 10014)
@@ -1475,48 +1475,44 @@ void ZGame::OnCommand_Observer(MCommand* pCommand)
 
 void ZGame::ProcessDelayedCommand()
 {
-	for(ZObserverCommandList::iterator i = m_DelayedCommandList.begin(); i != m_DelayedCommandList.end();i++)
+	for(auto pItem : m_DelayedCommandList.m_List)
 	{
-		ZObserverCommandItem *pItem = *i;
-
 		// 실행할 시간이 지났으면 실행한다
-		if(GetTime() > pItem->fTime) 
+		if(GetTime() > pItem.fTime) 
 		{
-			OnCommand_Immidiate(pItem->pCommand);
-			i = m_DelayedCommandList.erase(i);
-			delete pItem->pCommand;
-			delete pItem;
+			OnCommand_Immidiate(pItem.pCommand);
+			delete pItem.pCommand;
 		}
 	}
 }
 
 void ZGame::OnReplayRun()
 {
-	if(m_ReplayCommandList.size()==0 && m_bReplaying.Ref()) {
+	if(m_ReplayCommandList.m_List.size()==0 && m_bReplaying.Ref()) {
 		m_bReplaying.Set_CheckCrc(false);
 		EndReplay();
 		return;
 	}
 
 	//	static float fLastTime = 0;
-	while(m_ReplayCommandList.size())
+	for(auto it = m_ReplayCommandList.m_List.begin(); it != m_ReplayCommandList.m_List.end();)
 	{
-		ZObserverCommandItem *pItem=*m_ReplayCommandList.begin();
-
+		auto pItem = (*it);
 
 		//		_ASSERT(pItem->fTime>=fLastTime);
 #ifdef _REPLAY_TEST_LOG
 		 m_ReplayLogTime = pItem->fTime;
 #else
-		if(GetTime() < pItem->fTime)
+		if (GetTime() < pItem.fTime)
+		{
+			++it;
 			return;
+		}
 #endif
 
 		//		mlog("curtime = %d ( %3.3f ) time = %3.3f , id %d \n",timeGetTime(),GetTime(),pItem->fTime,pItem->pCommand->GetID());
 
-		m_ReplayCommandList.erase(m_ReplayCommandList.begin());
-
-		OnCommand_Observer(pItem->pCommand);
+		OnCommand_Observer(pItem.pCommand);
 
 #ifdef _LOG_ENABLE_REPLAY_COMMAND_DELETE_
 		if(pItem->pCommand->GetID() != 10012 && pItem->pCommand->GetID() != 10014)
@@ -1554,27 +1550,29 @@ void ZGame::OnReplayRun()
 			break;
 		}
 #endif
-
-		delete pItem->pCommand;
-		delete pItem;
+		it = m_ReplayCommandList.m_List.erase(it);
+		delete pItem.pCommand;
 	}
 }
 
 void ZGame::OnObserverRun()
 {
-	while(m_ObserverCommandList.begin() != m_ObserverCommandList.end())
+	for (auto it = m_ObserverCommandList.m_List.begin(); it != m_ObserverCommandList.m_List.end();)
 	{
-		ZObserverCommandItem *pItem=*m_ObserverCommandList.begin();
-		if(GetTime()-pItem->fTime < ZGetGameInterface()->GetCombatInterface()->GetObserver()->GetDelay())
+		auto pItem = (*it);
+
+		if (GetTime() - pItem.fTime < ZGetGameInterface()->GetCombatInterface()->GetObserver()->GetDelay())
+		{
+			it++;
 			return;
+		}
+		it = m_ObserverCommandList.m_List.erase(it);
 
-		m_ObserverCommandList.erase(m_ObserverCommandList.begin());
-
-		if(pItem->pCommand->GetID()==MC_PEER_BASICINFO)
-			OnPeerBasicInfo(pItem->pCommand,false,true);
+		if(pItem.pCommand->GetID()==MC_PEER_BASICINFO)
+			OnPeerBasicInfo(pItem.pCommand,false,true);
 		else
 		{
-			OnCommand_Immidiate(pItem->pCommand);
+			OnCommand_Immidiate(pItem.pCommand);
 
 #ifdef _LOG_ENABLE_OBSERVER_COMMAND_DELETE_
 			char buf[256];
@@ -1582,9 +1580,6 @@ void ZGame::OnObserverRun()
 			OutputDebugString(buf);
 #endif
 		}
-
-		delete pItem->pCommand;
-		delete pItem;
 	}
 
 #ifdef _REPLAY_TEST_LOG
@@ -1607,29 +1602,22 @@ void ZGame::OnObserverRun()
 
 void ZGame::FlushObserverCommands()
 {
-	while(m_ObserverCommandList.begin() != m_ObserverCommandList.end())
+	for (auto pItem : m_ObserverCommandList.m_List)
 	{
-		ZObserverCommandItem *pItem=*m_ObserverCommandList.begin();
-
-		m_ObserverCommandList.erase(m_ObserverCommandList.begin());
-
-		if(pItem->pCommand->GetID()!=MC_PEER_BASICINFO)
-			OnCommand_Immidiate(pItem->pCommand);
-
-		delete pItem->pCommand;
-		delete pItem;
+		delete pItem.pCommand;
 	}
+	m_ObserverCommandList.m_List.clear();
 }
 
 bool ZGame::OnCommand(MCommand* pCommand)
 {
 	if(m_bRecording)
 	{
-		ZObserverCommandItem *pItem = new ZObserverCommandItem;
-		pItem->fTime = m_fTime.Ref();
-		pItem->pCommand = pCommand->Clone();
+		ZObserverCommandItem pItem;
+		pItem.fTime = m_fTime.Ref();
+		pItem.pCommand = pCommand->Clone();
 
-		m_ReplayCommandList.push_back(pItem);
+		m_ReplayCommandList.m_List.push_back(pItem);
 
 #ifdef _LOG_ENABLE_RELAY_COMMAND_BUSH_
 		if(pCommand->GetID() != 10012 && pCommand->GetID() != 10014)
@@ -6643,19 +6631,16 @@ void ZGame::StopRecording()
 	bool bError = false;
 
 	m_bRecording=false;
-
-	ZObserverCommandList::iterator itr = m_ReplayCommandList.begin();
-	for(size_t i=0;i<m_ReplayCommandList.size();i++)
+	for(auto pItem : m_ReplayCommandList.m_List)
 	{
-		ZObserverCommandItem *pItem = *itr;
-		MCommand *pCommand = pItem->pCommand;
+		MCommand *pCommand = pItem.pCommand;
 
 		const int BUF_SIZE = 1024;
 		char CommandBuffer[BUF_SIZE];
 		int nSize = pCommand->GetData(CommandBuffer, BUF_SIZE);
 
 		int nWritten;
-		nWritten = zfwrite(&pItem->fTime,sizeof(pItem->fTime),1,m_pReplayFile);
+		nWritten = zfwrite(&pItem.fTime,sizeof(pItem.fTime),1,m_pReplayFile);
 		if(nWritten==0) { bError=true; break; }
 		nWritten = zfwrite(&pCommand->m_Sender,sizeof(pCommand->m_Sender),1,m_pReplayFile);
 		if(nWritten==0) { bError=true; break; }
@@ -6663,17 +6648,13 @@ void ZGame::StopRecording()
 		if(nWritten==0) { bError=true; break; }
 		nWritten = zfwrite(CommandBuffer,nSize,1,m_pReplayFile);
 		if(nWritten==0) { bError=true; break; }
-
-		itr++;
 	}
 
-	while(m_ReplayCommandList.size())
+	for(auto pItem : m_ReplayCommandList.m_List)
 	{
-		ZObserverCommandItem *pItem = *m_ReplayCommandList.begin();
-		delete pItem->pCommand;
-		delete pItem;
-		m_ReplayCommandList.pop_front();
+		delete pItem.pCommand;
 	}
+	m_ReplayCommandList.m_List.clear();
 
 	if(!zfclose(m_pReplayFile))
 		bError = true;
@@ -7242,10 +7223,10 @@ bool ZGame::FilterDelayedCommand(MCommand *pCommand)
 	
 	if(bFiltered)
 	{
-		ZObserverCommandItem *pZCommand=new ZObserverCommandItem;
-		pZCommand->pCommand=pCommand->Clone();
-		pZCommand->fTime=GetTime()+fDelayTime;
-		m_DelayedCommandList.push_back(pZCommand);
+		ZObserverCommandItem pZCommand;
+		pZCommand.pCommand=pCommand->Clone();
+		pZCommand.fTime=GetTime()+fDelayTime;
+		m_DelayedCommandList.m_List.push_back(pZCommand);
 		return true;
 	}
 

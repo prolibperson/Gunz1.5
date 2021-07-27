@@ -12,17 +12,15 @@ _USING_NAMESPACE_REALSPACE2
 
 _NAMESPACE_REALSPACE2_BEGIN
 
-/*
+
 #ifndef _PUBLISH
 
 #define __BP(i,n)	MBeginProfile(i,n);
 #define __EP(i)		MEndProfile(i);
-
 #else
-*/
 #define __BP(i,n) ;
 #define __EP(i) ;
-//#endif
+#endif
 
 //////////////////////////////////////////////////////////////
 // AniFrameInfo : frame 기능을 나눠주자

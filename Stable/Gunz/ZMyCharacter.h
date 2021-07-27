@@ -45,7 +45,7 @@ struct OVERLAP_FLOOR
 	bool	bJumpActivity;
 };
 
-typedef list<ZDELAYEDWORKITEM*> ZDELAYEDWORKLIST;
+typedef list<ZDELAYEDWORKITEM> ZDELAYEDWORKLIST;
 
 // 패킹되는 플래그들
 struct ZMyCharaterStatusBitPacking
@@ -225,7 +225,7 @@ private:
 	// 일정 시간 뒤에 처리해야 하는 일들이다
 	ZDELAYEDWORKLIST m_DelayedWorkList;
 
-	void OnDelayedWork(ZDELAYEDWORKITEM *pItem);
+	void OnDelayedWork(ZDELAYEDWORKITEM pItem);
 	void AddDelayedWork(float fTime,ZDELAYEDWORK nWork);
 	void ProcessDelayedWork();
 	virtual void	OnDie();

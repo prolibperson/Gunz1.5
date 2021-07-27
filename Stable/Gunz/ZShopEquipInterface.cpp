@@ -896,7 +896,7 @@ int ZShopEquipInterface::GetArmorWeaponTabIndexContainItemParts(MMatchCharItemPa
 	if (parts < MMCIP_MELEE || parts == MMCIP_AVATAR)
 		return 0;
 	// ¹«±âÅÇ
-	if (parts >= MMCIP_MELEE && parts < MMCIP_LONGBUFF2 + 1 && parts != MMCIP_AVATAR)
+	if (parts >= MMCIP_MELEE && parts < MMCIP_LONGBUFF2 + 1 && parts != MMCIP_AVATAR || parts == MMCIP_DASH)
 		return 1;
 
 	_ASSERT(0);

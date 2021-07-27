@@ -774,6 +774,9 @@ void ZGameInput::GameCheckSequenceKeyCommand()
 			ZKEYSEQUENCEACTION action=m_SequenceActions.at(ai);
 
 			list<ZACTIONKEYITEM>::iterator itr=m_ActionKeyHistory.end();
+
+			if (itr == m_ActionKeyHistory.begin())
+				break;
 			itr--;
 			bool bAction=true;
 			for(int i=action.nKeyCount-1;i>=0;i--)

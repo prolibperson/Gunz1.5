@@ -773,11 +773,13 @@ void ZApplication::OnDestroy()
 	ZGetMapCache()->Clear();
 	mlog("Clear mapcache.\n");
 
-	for (auto itor = rBspMaps.begin(); itor != rBspMaps.end(); ++itor)
+	for (auto itor : rBspMaps)
 	{
-		delete itor->second;
-		itor->second = nullptr;
-		rBspMaps.erase(itor);
+		if (itor.second)
+		{
+			delete itor.second;
+			itor.second = nullptr;
+		}
 	}
 	rBspMaps.clear();
 #endif

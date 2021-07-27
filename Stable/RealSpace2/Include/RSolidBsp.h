@@ -54,7 +54,7 @@ public:
 	static bool CheckWall(RSolidBspNode *pRootNode,rvector &origin,rvector &targetpos,float fRadius,float fHeight=0.f,RCOLLISIONMETHOD method=RCW_CYLINDER,int nDepth=0,rplane *pimpactplane=NULL);
 	static bool CheckWall2(RSolidBspNode *pRootNode,RImpactPlanes &impactPlanes,rvector &origin,rvector &targetpos,float fRadius,float fHeight,RCOLLISIONMETHOD method);
 
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 	int				nPolygon;
 	rvector			*pVertices;
 	rvector			*pNormals;

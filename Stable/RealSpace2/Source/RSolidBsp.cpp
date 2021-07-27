@@ -31,7 +31,7 @@ RSolidBspNode::RSolidBspNode()
 {
 	m_pPositive=NULL;
 	m_pNegative=NULL;
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 	pVertices=NULL;
 	pNormals=NULL;
 #endif
@@ -39,12 +39,12 @@ RSolidBspNode::RSolidBspNode()
 
 RSolidBspNode::~RSolidBspNode()
 {
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 	SAFE_DELETE(pNormals);
 #endif
 }
 
-#ifndef _PUBLISH
+#ifdef _DEBUGBSP
 void RSolidBspNode::DrawPolygon()
 {
 	//	if(!isInViewFrustum(&m_bb,RGetViewFrustum())) return;

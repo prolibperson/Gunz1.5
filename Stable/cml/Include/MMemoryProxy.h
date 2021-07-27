@@ -56,8 +56,8 @@ public:
 	MProtectValue()		 { m_pValue = ToMaskedPtr(new T); }
 
 	~MProtectValue()	 { 
-		delete ToNormalPtr(m_pValue);
 		::GetCrcContainer()->Remove(this);
+		delete ToNormalPtr(m_pValue);
 	}
 
 	// 값을 레퍼런스로 얻는다

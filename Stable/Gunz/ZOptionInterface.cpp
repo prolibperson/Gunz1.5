@@ -159,17 +159,19 @@ void ZOptionInterface::InitInterfaceOption(void)
 			// 만약 등록된 해상도가 하나도 없을경우 강제로 등록
 			if (gDisplayMode.size() == 0)
 			{
-				for (int i = 0; i < 13; ++i)
+				int i = 0;
+				for (auto dDMItr : gDisplayMode)
 				{
-					ddm.Width = widths[i / 2];
-					ddm.Height = heights[i / 2];
-					ddm.RefreshRate = DEFAULT_REFRESHRATE;
-					ddm.Format = ((i % 2 == 1) ? D3DFMT_X8R8G8B8 : D3DFMT_R5G6B5);
+					ddm.Width = dDMItr.second.Width;
+					ddm.Height = dDMItr.second.Height;
+					ddm.RefreshRate = dDMItr.second.RefreshRate;
+					ddm.Format = ((dDMItr.second.Format % 2 == 1) ? D3DFMT_X8R8G8B8 : D3DFMT_R5G6B5);
 
-					int bpp = (i % 2 == 1) ? 32 : 16;
+					int bpp = 32;
 					gDisplayMode.insert(map<int, D3DDISPLAYMODE>::value_type(i, ddm));
 					sprintf(szBuf, "%dx%d  %d bpp", ddm.Width, ddm.Height, bpp);
 					pWidget->Add(szBuf);
+					i++;
 				}
 			}
 			ddm.Width = RGetScreenWidth();
@@ -177,7 +179,9 @@ void ZOptionInterface::InitInterfaceOption(void)
 			ddm.RefreshRate = DEFAULT_REFRESHRATE;
 			ddm.Format = RGetPixelFormat();
 			map< int, D3DDISPLAYMODE>::iterator iter = find_if(gDisplayMode.begin(), gDisplayMode.end(), value_equals<int, D3DDISPLAYMODE>(ddm));
-			pWidget->SetSelIndex(iter->first);
+			
+			if(iter != gDisplayMode.end())
+				pWidget->SetSelIndex(iter->first);
 		}
 
 		pWidget = (MComboBox*)pResource->FindWidget("CharTexLevel");

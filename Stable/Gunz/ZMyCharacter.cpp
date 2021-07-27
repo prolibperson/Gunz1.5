@@ -144,12 +144,7 @@ ZMyCharacter::~ZMyCharacter()
 	}
 #endif
 
-	while(m_DelayedWorkList.size())
-	{
-		ZDELAYEDWORKITEM *pItem = *m_DelayedWorkList.begin();
-		delete pItem;
-		m_DelayedWorkList.pop_front();
-	}
+	m_DelayedWorkList.clear();
 }
 
 void ZMyCharacter::InitRound()
@@ -3452,34 +3447,30 @@ bool ZMyCharacter::IsGuard()
 
 void ZMyCharacter::ProcessDelayedWork()
 {
-	for(ZDELAYEDWORKLIST::iterator i = m_DelayedWorkList.begin(); i != m_DelayedWorkList.end();i++)
+	for(auto pItem : m_DelayedWorkList)
 	{
-		ZDELAYEDWORKITEM *pItem = *i;
-
 		// ½ÇÇàÇÒ ½Ã°£ÀÌ Áö³µÀ¸¸é ½ÇÇàÇÑ´Ù
-		if(ZGetGame()->GetTime() > pItem->fTime) 
+		if(ZGetGame()->GetTime() > pItem.fTime) 
 		{
 			OnDelayedWork(pItem);
-			i = m_DelayedWorkList.erase(i);
-			delete pItem;
 		}
 	}
 }
 
 void ZMyCharacter::AddDelayedWork(float fTime,ZDELAYEDWORK nWork)
 {
-	ZDELAYEDWORKITEM *pItem = new ZDELAYEDWORKITEM;
-	pItem->fTime = fTime;
-	pItem->nWork = nWork;
+	ZDELAYEDWORKITEM pItem;
+	pItem.fTime = fTime;
+	pItem.nWork = nWork;
 
 	m_DelayedWorkList.push_back(pItem);
 }
 
-void ZMyCharacter::OnDelayedWork(ZDELAYEDWORKITEM *pItem)
+void ZMyCharacter::OnDelayedWork(ZDELAYEDWORKITEM pItem)
 {
 	ZMyCharaterStatusBitPacking & zStatus = m_statusFlags.Ref();
 
-	switch(pItem->nWork) {
+	switch(pItem.nWork) {
 	case ZDW_SHOT :
 //		if(m_bShot) 
 		{

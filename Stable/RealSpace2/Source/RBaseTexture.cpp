@@ -112,7 +112,7 @@ LPDIRECT3DTEXTURE9	RBaseTexture::GetTexture()
 		return m_pTex;
 	}
 
-#ifndef _PUBLISH
+#ifdef _INVALIDATETEXTURES
 
 	else {//없다면..
 	
@@ -586,7 +586,7 @@ RBaseTexture *RTextureManager::CreateBaseTextureSub(bool Mg,const char* filename
 
 	strcpy(pnew->m_szTextureName,texturefilename);
 
-#ifndef _PUBLISH
+#ifdef _TEXTUREDEBUG
 
 	if(Mg==false) {// .elu 계열...
 		if(!pnew->OnRestore(Mg)) {
