@@ -16,12 +16,6 @@ void MAsyncDBJob_CharFinalize::Run(void* pContext)
 		nResult = MASYNC_RESULT_FAILED;
 	}
 
-#ifdef LOCALE_KOREA
-	if (!pDBMgr->InsertNetmarbleTPLog(m_nCID, m_nPlayTime)) {
-		nResult = MASYNC_RESULT_FAILED;
-	}
-#endif
-
 	if( 0 != m_nAID ) {
 		if( !pDBMgr->UpdateAccountLastLoginTime(m_nAID) ) {
 			nResult = MASYNC_RESULT_FAILED;

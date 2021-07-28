@@ -1688,20 +1688,12 @@ void ZGameInterface::OnLoginDestroy(void)
 
 void ZGameInterface::OnDirectLoginCreate(void)
 {
-#ifdef LOCALE_KOREA
-
 	OnNetmarbleLoginCreate();
-
-#endif
 }
 
 void ZGameInterface::OnDirectLoginDestroy(void)
 {
-#ifdef LOCALE_KOREA
-
 	OnNetmarbleLoginDestroy();
-
-#endif
 }
 
 #include "ZNetmarble.h"

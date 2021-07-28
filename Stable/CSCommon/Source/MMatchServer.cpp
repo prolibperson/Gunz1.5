@@ -1388,19 +1388,8 @@ void MMatchServer::UpdateServerStatusDB()
 		static int st_ErrCounter = 0;
 
 
-#ifdef LOCALE_KOREA		
-		int nNatePlayer = 0;
 
-		for(MMatchObjectList::iterator iter = m_Objects.begin(); iter != m_Objects.end(); iter++) 
-		{
-			MMatchObject* pObj = (MMatchObject*)iter->second;
-			if( pObj->GetAccountInfo()->m_nCCode == 30 ) { nNatePlayer++; }
-		}
-
-		bResult = m_MatchDBMgr.UpdateServerStatus_Netmarble(MGetServerConfig()->GetServerID(), nCurPlayer, nNatePlayer);
-#else
 		bResult = m_MatchDBMgr.UpdateServerStatus(MGetServerConfig()->GetServerID(), nCurPlayer);
-#endif
 
 		if (bResult == false) 
 		{
@@ -2598,7 +2587,6 @@ int MMatchServer::ValidateMakingName(const char* szCharName, int nMinLength, int
 
 	// 특정 국가에서 사용하는 특수 기호 중에 공백으로 표시될 만한 문자를 필터링한다.
 
-#ifdef LOCALE_KOREA
 	// 한국어에서는 2바이트 문자중에 0xC9xx 또는 0xFExx , 0xA1A1, 0xA4D4인 글자는 이름에 넣을 수 없다
 	int nCur = 0;
 	while (nCur < (nNameLen - 1))
@@ -2632,7 +2620,6 @@ int MMatchServer::ValidateMakingName(const char* szCharName, int nMinLength, int
 			nCur++;
 		}
 	}
-#endif
 
 	return MOK;
 }
