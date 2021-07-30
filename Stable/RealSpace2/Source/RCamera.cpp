@@ -34,9 +34,15 @@ void ComputeZPlane(rplane *plane,float z,int sign)
 	plane->d=-plane->a*t.x-plane->b*t.y-plane->c*t.z;
 }
 
+//TODO: calculate for 16:9/5:4/etc
 void UpdateViewFrustrum()
 {
 	float fovh2=RFov_horiz/2.0f,fovv2=RFov_vert/2.0f;
+	if (RGetWidthScreen() != 0.75f)
+	{
+		fovh2 = RFov_horiz / (2.0 * atan(16.0 / 10.0) / (4.0 / 3.0));
+		fovv2 = RFov_vert  / (2.0 * atan(16.0 / 10.0) / (4.0 / 3.0));
+	}
 	float ch=cosf(fovh2),sh=sinf(fovh2);
 	float cv=cosf(fovv2),sv=sinf(fovv2);
 
@@ -74,19 +80,6 @@ void RSetProjection(float fFov,float fAspect,float fNearZ,float fFarZ)
 {
 //	FLOAT fAspect = (FLOAT)RGetScreenWidth() / (FLOAT)RGetScreenHeight();
 
-	///TODO: fix interface before doing this
-	/*
-	if (RGetIsWidthScreen() || RGetIs16x9()) {
-		fFov = (90.0f / 180.0f) * pi;
-	}*/
-	//if (RGetIs16x9())
-	//{
-	//	fFov = 2.0 * atan((16.0 / 9.0) / (4.0 / 3.0) * tan(70.0 / D3DXToDegree(2)));
-	//}
-	//if (RGetIsWidthScreen())
-	//{
-	//	fFov = 2.0 * atan((16.0 / 10.0) / (4.0 / 3.0) * tan(70.0 / D3DXToDegree(2)));
-	//}
 	RFov_horiz=fFov;
 	RFov_vert=atanf(tanf(RFov_horiz/2.0f)/fAspect)*2.0f;
 	RNearZ=fNearZ;RFarZ=fFarZ;
@@ -100,20 +93,7 @@ void RSetProjection(float fFov,float fAspect,float fNearZ,float fFarZ)
 void RSetProjection(float fFov,float fNearZ,float fFarZ)
 {
 	FLOAT fAspect = (FLOAT)RGetScreenWidth() / (FLOAT)RGetScreenHeight();
-
-	/*
-	if (RGetIsWidthScreen() || RGetIs16x9()) {
-		fFov = (90.0f / 180.0f) * pi;
-	}
-	*/
-	//if (RGetIs16x9())
-	//{
-	//	fFov = 2.0 * atan((16.0 / 9.0) / (4.0 / 3.0) * tan(70.0 / D3DXToDegree(2)));
-	//}
-	//if (RGetIsWidthScreen())
-	//{
-	//	fFov = 2.0 * atan((16.0 / 10.0) / (4.0 / 3.0) * tan(70.0 / D3DXToDegree(2)));
-	//}
+	
 	RFov_horiz=fFov;
 	RFov_vert=atanf(tanf(RFov_horiz/2.0f)/fAspect)*2.0f;
 	RNearZ=fNearZ;RFarZ=fFarZ;
