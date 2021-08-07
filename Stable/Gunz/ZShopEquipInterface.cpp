@@ -513,16 +513,10 @@ void ZShopEquipInterface::SelectShopTab(int nTabIndex)
 		nTabIndex = m_nShopTabNum;
 
 	ZIDLResource* pResource = GetIDLResource();
+	//TODO: Create Cash Shop
+	if (nTabIndex == 2)
+		return;
 
-	// 프리미엄 샵 - 설정되는 국가대로 하나씩 지워나간다
-#ifndef _DEBUG
-#if defined(LOCALE_BRAZIL) || defined(LOCALE_INDIA) || defined(LOCALE_US) || defined(LOCALE_JAPAN) || defined(LOCALE_KOREA) || defined(LOCALE_NHNUSA)
-	{
-		if ( nTabIndex == 2)
-			return;
-	}
-#endif
-#endif
 
 	MWidget* pWidget = pResource->FindWidget("AllEquipmentList");
 	if (pWidget != NULL) pWidget->Show(nTabIndex==0 ? true : false);

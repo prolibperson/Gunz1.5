@@ -3,35 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ZLauncher" xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="" Height="480" Width="1024" WindowStyle="None" Background="#333333" ResizeMode="NoResize" BorderBrush="#333333" 
         BorderThickness="2" MouseDown="Window_MouseDown">
     <Grid>
-        <StackPanel Orientation="Vertical" Width="1024" Height="56" Background="{StaticResource Banner_Top}" VerticalAlignment="Top" Opacity="0.5"/>
-        <StackPanel Orientation="Vertical" Width="1024" Height="56" Background="{StaticResource Banner_Bottom}" VerticalAlignment="Bottom" Opacity="0.5"/>
+        <WebBrowser Name="webView"  Margin="0,56,0.444,56.444" Source="https://launcher2.fgunz.net"/>
+
+        <StackPanel Orientation="Vertical" Height="56" Background="{StaticResource Banner_Top}" VerticalAlignment="Top" Opacity="0.5" Margin="0,0,0.444,0"/>
+        <StackPanel Orientation="Vertical" Height="56" Background="{StaticResource Banner_Bottom}" VerticalAlignment="Bottom" Opacity="0.5" Margin="0,0,0.444,0.444"/>
+
 
         <DockPanel Width="1024" Opacity="1" Margin="0,0,-3.556,0.444">
             <Grid DockPanel.Dock="Bottom" Height="auto"  Opacity="1">
                 <TextBlock x:Name="DownloadFile"  Foreground="#CF5300" Width="auto" Height="auto" VerticalAlignment="Top" Margin="0,-17,0,0"/>
-                <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" VerticalAlignment="Center" Width="900" Height="24" Foreground="#CF5300" Background="#80FFFFFF"
+                <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="900" Height="24" Foreground="#CF5300" Background="#80FFFFFF"
                          BorderBrush="Black" BorderThickness="3" Visibility="Hidden"/>
-                <Button x:Name="Start" Width="64" Height="20" HorizontalAlignment="Right" Visibility="Visible" Background="#CF5300" Content="Start" Click="Button_Click">
-                </Button>
-                <Button x:Name="Cancel" Width="64" Height="20" HorizontalAlignment="Right" Background="#CF5300" Content="Cancel" Visibility="Hidden" Click="Button_Click_2">
-                </Button>
-                <Button x:Name="Launch" Width="64" Height="20" HorizontalAlignment="Right"  Background="#CF5300" Content="Launch" Visibility="Hidden" Click="Button_Click_1">
-                </Button>
+
             </Grid>
-
-            <wv2:WebView2 Name="webView"
-                  Source="https://google.com" DefaultBackgroundColor="#333333" Width="1024"  Margin="0,56,0,34"/>
-
         </DockPanel>
-        <Button x:Name="Config" DockPanel.Dock="Top" Height="57" Width="205" Background="#80FFFFFF" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity="1" Click="Config_Click">
-            <TextBlock Text="Settings" Opacity="1"/>
-        </Button>
+        <Button x:Name="Menu" Background="{StaticResource Menu}" Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Menu_Click"/>
+        <StackPanel x:Name="SettingsPanel" Style="{StaticResource MenuGrow}" Width="0" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,32,0" Visibility="Collapsed">
+            <Button x:Name="Config"  Background="{StaticResource Settings}" Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Config_Click"/>
+            <Button x:Name="Exit" Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top"  Content="X"  Margin="0,-32,32,0" Click="Exit_Click"/>
+        </StackPanel>
 
+        <Button x:Name="Patch" Style="{StaticResource PatchButton}" Width="100" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Visible" Click="StartPatch"/>
+        <Button x:Name="Launch" Style="{StaticResource LaunchButton}" Width="100" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom" Visibility="Hidden" Click="StartGame"/>
     </Grid>
 
 </Window>

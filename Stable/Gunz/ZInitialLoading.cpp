@@ -70,9 +70,9 @@ bool ZInitialLoading::Initialize( int numScene_,
 	// Ã»¼Ò³EÀÚÀ² ±ÔÁ¦ Àû¿EÈ(¾²¹ú¾²¹ú¾²¹E..)...
 #ifdef LOCALE_KOREA
 	if ( (rand() % 2) == 0)
-		sprintf( m_szNotice, "Àå½Ã°£ÀÇ °ÔÀÓ ÀÌ¿Eº °Ç°­À» ÇØÄ¥ ¼EÀÖ½À´Ï´Ù.");
+		sprintf( m_szNotice, "Prolonged gaming can be detrimental to your health.");
 	else
-		sprintf( m_szNotice, "°øºÎ¿Í ÀÏ¿¡ ÈÞ½ÄÀÌ ÇÊ¿äÇÏµúÜÌ, °ÔÀÓ ÀÌ¿E¡µµ ÀûÀýÇÑ ÈÞ½ÄÀÌ ÇÊ¿EÇÕ´Ï´Ù.");
+		sprintf( m_szNotice, "Just as studying and work require a break, you also need a break when playing games. ");
 	
 	SAFE_DELETE_ARRAY( mBitmap_Grade );
 	mBitmap_Grade			= new MBitmapR2[numScene_];
