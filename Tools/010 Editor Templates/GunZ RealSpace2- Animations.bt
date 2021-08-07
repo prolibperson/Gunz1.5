@@ -11,6 +11,7 @@
 //   History: Initial Revision
 //------------------------------------------------
 
+local int version;
 
 enum <int> AnimationType{
 	RAniType_TransForm = 0,
@@ -149,6 +150,12 @@ typedef struct {
 	int frame;
 } RQuatKey;
 
+typedef struct {
+	RQuatKey v1;
+	RQuatKey v2;
+} R2QuatKey;
+
+
 typedef struct
 {
     char t_mesh_name[40]; // mzf.Read(t_mesh_name ,MAX_NAME_LEN );
@@ -166,7 +173,16 @@ typedef struct
     int m_pos_cnt;
     RPosKey m_pos[m_pos_cnt];
     int rot_key_num;
-    RQuatKey rot[rot_key_num];
+    
+    if(version >= 0x00001002)
+    {
+        RQuatKey rot[rot_key_num];
+    }
+    else
+    {
+        R2QuatKey rot[rot_key_num];
+    }
+
     int m_vis_cnt;
     RVisKey m_vis[m_vis_cnt];
 } RAnimationNode_BoneOrTransform;
@@ -182,6 +198,8 @@ typedef struct
 } RAnimationNode_Tm;
 
 ex_ani_t anim;
+
+version = anim.ver;
 
 if(anim.ani_type == RAniType_Tm)
 {
