@@ -1,5 +1,3 @@
-USE [GunzDB15]
-GO
 
 /****** Object:  StoredProcedure [dbo].[spOnBanPlayer]    Script Date: 07/29/2018 21:36:48 ******/
 SET ANSI_NULLS ON
