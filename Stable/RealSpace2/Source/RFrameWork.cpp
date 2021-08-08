@@ -337,6 +337,14 @@ void RFrame_UpdateRender()
 	__EP(5006);
 }
 
+void RFrame_UpdateInput()
+{
+	if (g_pFunctions[RF_UPDATEINPUT])
+		g_pFunctions[RF_UPDATEINPUT](NULL);
+}
+
+
+
 int RRun()
 {
 	if(g_pFunctions[RF_CREATE])
@@ -347,6 +355,8 @@ int RRun()
 			return -1;
 		}
 	}
+
+	double lastTime = timeGetTime();
 
 	RFrame_Init();
 
@@ -378,19 +388,23 @@ int RRun()
         }
 		else
 		{
-			///TODO: decouple gameinput
-			RFrame_UpdateRender();
-	/*		if (g_nFrameLimitValue != 0)
+			if (g_nFrameLimitValue != 0)
 			{
-				auto currTime = std::chrono::high_resolution_clock::now();
-				auto timeDiff = std::chrono::duration_cast<std::chrono::milliseconds>(currTime - startTime).count();
-				while(static_cast<double>(timeDiff) < static_cast<double>(1000) / static_cast<double>(g_nFrameLimitValue))
+				const double maxPeriod = 1000.f / (float)g_nFrameLimitValue;
+				double time = timeGetTime();
+
+				double deltaTime = time - lastTime;
+				if (deltaTime >= maxPeriod)
 				{
-					std::this_thread::sleep_for(std::chrono::milliseconds(1));
-					++timeDiff;
+					g_fFPS = time - lastTime;
+					lastTime = time;
+					RFrame_UpdateRender();
 				}
-				startTime = currTime;
-			}*/
+			}
+			else
+			{
+				RFrame_UpdateRender();
+			}
 		}
 
 		if(!g_bActive)

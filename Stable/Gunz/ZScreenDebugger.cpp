@@ -50,7 +50,7 @@ void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 		//int zcr_cnt = ZGetObjectManager()->GetRenderedCount();
 		//int zco_cnt = ZGetObjectManager()->GetDrawCount();
 		float fMs = 1000.f/g_fFPS;
-		sprintf_s(buffer, "FPS: %.2f", fMs);
+		sprintf_s(buffer, "FPS: %2f", fMs);
 		int x;
 	//	pDC->BeginFont();
 	//	pDC->Text(0,sy,buffer);

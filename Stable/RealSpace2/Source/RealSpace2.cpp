@@ -44,10 +44,9 @@ DWORD g_dwFogColor;
 bool g_bFog = false;
 
 int	g_nVidioMemory = 0;
-double currentTime = timeGetTime();
 
 int g_nFrameCount=0,g_nLastFrameCount=0;
-float g_fFPS=0;
+double g_fFPS=0;
 int g_nFrameLimitValue=0;
 DWORD g_dwLastTime=timeGetTime();
 DWORD g_dwLastFPSTime=timeGetTime();
@@ -752,43 +751,6 @@ bool RFlip()
 
 	RBeginScene();	
 
-	{
-		g_nFrameCount++;
-
-		double fFrameLimit = 0;
-		if (g_nFrameLimitValue > 0)
-		{
-			fFrameLimit = 1000.0 / g_nFrameLimitValue;
-		}
-
-		double newTime = timeGetTime();
-		double frameTime = newTime - currentTime;
-		double waitTime = fFrameLimit - frameTime;
-
-		if (frameTime > 100.0)
-		{
-			//due to some machines disliking the timegettime being added whit a float rather than a double, i made it a double
-			currentTime = timeGetTime() + fFrameLimit;
-		}
-
-		while (waitTime > 0.0)
-		{
-			double deltaTime = min(waitTime, fFrameLimit);
-			Sleep(deltaTime);
-			waitTime -= deltaTime;
-		}
-		currentTime += fFrameLimit;
-
-
-		double currentTimeFPS = timeGetTime();
-		if (g_dwLastFPSTime + FPS_INTERVAL < currentTimeFPS)
-		{
-			g_fFPS = (g_nFrameCount - g_nLastFrameCount)*(float)FPS_INTERVAL / ((float)(currentTimeFPS - g_dwLastFPSTime)*(FPS_INTERVAL / 1000.f));
-			g_dwLastFPSTime = currentTimeFPS;
-			g_nLastFrameCount = g_nFrameCount;
-		}
-	}
-
 	return true;
 
 }
@@ -1120,8 +1082,8 @@ void RSetFrameLimitPerSeceond(unsigned short nFrameLimit)
 	switch( nFrameLimit )
 	{
 	case 0:	{	g_nFrameLimitValue = 0;		}	break;
-	case 1:	{	g_nFrameLimitValue = 67;	}	break;
-	case 2:	{	g_nFrameLimitValue = 125;	}	break;
+	case 1:	{	g_nFrameLimitValue = 60;	}	break;
+	case 2:	{	g_nFrameLimitValue = 120;	}	break;
 	case 3:	{	g_nFrameLimitValue = 250;	}	break;
 	default:{	g_nFrameLimitValue = 0;		}	break;
 	}

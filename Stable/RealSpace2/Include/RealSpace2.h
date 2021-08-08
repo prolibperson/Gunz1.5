@@ -47,7 +47,7 @@ RParticleSystem *RGetParticleSystem();
 
 
 extern int g_nFrameCount,g_nLastFrameCount;
-extern float g_fFPS;
+extern double g_fFPS;
 extern int g_nFrameLimitValue;
 extern HWND	g_hWnd;
 extern MZFileSystem *g_pFileSystem;
