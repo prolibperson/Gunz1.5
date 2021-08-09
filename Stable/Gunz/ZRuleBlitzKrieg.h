@@ -63,11 +63,27 @@ public:
 	void AddPlayerKillReward(const MUID& uidKiller, const MUID& uidVictim);
 	void DrawAnnouncement(SPECIAL_ANNOUNCEMENT announcementType);
 	void UpdateClassSelectDesc(const MMatchObjectClass& classID);
-	void UpdateHPTopInfo(MDrawContext* pDC);
-	void UpdateUpgradeUI(int& index, int& upgradeLevel);
+	void UpdateUpgradeUI(int& const index, int& const upgradeLevel);
 
 	const int& GetBlueBarricadeCount() { return m_blueBarricades; }
 	const int& GetRedBarricateCount() { return m_redBarricades; }
+	const int& GetRedBossHP()
+	{
+		ZActorWithFSM* pRedBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossRedUID));
+		if (pRedBoss == nullptr)
+			return 0;
+
+		return pRedBoss->GetActualHP();
+	}
+
+	const int& GetBlueBossHP()
+	{
+		ZActorWithFSM* pBlueBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossBlueUID));
+		if (pBlueBoss == nullptr)
+			return 0;
+
+		return pBlueBoss->GetActualHP();
+	}
 
 	MBitmap* GetClassBitmap(const int& classID, const MMatchTeam& teamID);
 };

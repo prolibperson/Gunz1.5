@@ -380,7 +380,7 @@ bool RSolidBspNode::GetColPlanes_Recurse(int nDepth)
 			for(int i=0;i<nDepth;i++) {
 				rplane *pPlane=m_SolidPlanes+i;
 				if(D3DXPlaneDotNormal(pPlane,&dir)>0) continue;	// µÞ¸é Á¦°Å
-				if(fabs(D3DXPlaneDotCoord(pPlane,&colPos))<0.1f) {
+				if(fabs(D3DXPlaneDotCoord(pPlane,&colPos))<0.1001f) {
 					m_pOutList->Add(*pPlane);
 					if(fDist<fImpactDist)
 					{

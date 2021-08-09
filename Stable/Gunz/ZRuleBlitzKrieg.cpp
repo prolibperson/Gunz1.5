@@ -315,8 +315,7 @@ void ZRuleBlitzKrieg::OnDraw(MDrawContext* pDC)
 				DrawMap(pDC, ZGetCombatInterface()->GetShowBlitzMap());
 				DrawHelpScreen(pDC, ZGetCombatInterface()->GetShowBlitzHelp());
 				DrawClassSelect(pDC, ZGetGame()->GetMatch()->GetRoundState() == MMATCH_ROUNDSTATE_COUNTDOWN);
-				//DrawUpgradeList(pDC, ZGetCombatInterface()->GetShowUpgradeList());
-				UpdateHPTopInfo(pDC);
+				DrawUpgradeList(pDC, ZGetCombatInterface()->GetShowUpgradeList());
 		}
 	}
 }
@@ -450,27 +449,15 @@ void ZRuleBlitzKrieg::DrawClassSelect(MDrawContext* pDC, bool draw)
 
 void ZRuleBlitzKrieg::DrawUpgradeList(MDrawContext* pDC, bool draw)
 {
-	///TODO: fill the rest of this
-
-	MFrame* abilityMainFrame = dynamic_cast<MFrame*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzkriegAbilityList"));
-	if (abilityMainFrame)
+	if (!ZGetCombatInterface()->GetShowUpgradeList())
 	{
-		abilityMainFrame->SetVisible(true);
+		MPicture* abilityMainFrame = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close"));
 		abilityMainFrame->Show(true);
-	}
-
-/*	if (ZGetCombatInterface()->GetShowUpgradeList())
-	{
-		abilityFrame = (MFrame*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzkriegAbilityList_Close");
-		abilityFrame->SetVisible(false);
-		abilityFrame->Show(false);
 	}
 	else
 	{
-		abilityFrame = (MFrame*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Open");
-		abilityFrame->SetVisible(true);
-		abilityFrame->Show(true);
-	}*/
+
+	}
 
 }
 
@@ -828,13 +815,7 @@ void ZRuleBlitzKrieg::UpdateClassSelectDesc(const MMatchObjectClass& classID)
 	return;
 }
 
-///TODO: split into multiple functions that way not everything gets updated constantly
-void ZRuleBlitzKrieg::UpdateHPTopInfo(MDrawContext* pDC)
-{
-
-}
-
-void ZRuleBlitzKrieg::UpdateUpgradeUI(int& index, int& upgradeLevel)
+void ZRuleBlitzKrieg::UpdateUpgradeUI(int& const index, int& const upgradeLevel)
 {
 
 }

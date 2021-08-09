@@ -562,7 +562,7 @@ void TextRelative(MDrawContext* pDC,float x,float y,const char *szText,bool bCen
     pDC->Text(screenx,y*MGetWorkspaceHeight(),szText);
 }
 
-void BitmapRelative(MDrawContext* pDC, float x, float y, float w, float h, MBitmap* pBitmap, bool bCenter=false)
+void BitmapRelative(MDrawContext* pDC, float x, float y, float w, float h, MBitmap* pBitmap, bool bCenter=false, bool bInverse = false)
 {
     pDC->SetBitmap( pBitmap);
 #ifndef _EXTRESOLUTION
@@ -4161,6 +4161,10 @@ void ZCombatInterface::DrawBlitzScoreBoard(MDrawContext* pDC)
 
 void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 {
+	if (IsShowUI() == false || ZGetGame()->GetMatch()->GetRoundState() != MMATCH_ROUNDSTATE_PLAY)
+	{
+		return;
+	}
 	ZRuleBlitzKrieg* pRule = dynamic_cast<ZRuleBlitzKrieg*>(ZGetGame()->GetMatch()->GetRule());
 	bool isUIVisible = ZGetCombatInterface()->IsShowUI();
 	MPicture* pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzSelClassPlayer");
@@ -4184,33 +4188,57 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 
 	//HP/AP frame
 	{
+		//TODO: Get BitmapRelative positions correct
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHPBarPlayerFrame");
 		if (pPicture)
 		{
-			BitmapRelative(pDC, (int)((56.f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((27.f / 600.0f) * (float)MGetWorkspaceHeight()), (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), MBitmapManager::Get("BlitzHPBarPlayerFrame"));
+			BitmapRelative(pDC, 55.f / 800.f, 27.f / 600.f, (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
 		}
 		// Current HP %
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHPBarPlayer");
 		if (pPicture)
 		{
-			pPicture->SetBounds((int)((56.f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((27.f / 600.0f) * (float)MGetWorkspaceHeight()), (int)((ZGetCombatInterface()->GetTargetCharacter()->GetHP() / ZGetCombatInterface()->GetTargetCharacter()->GetMaxHP() * 100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight())); // x, y, w, h
-			pPicture->Show(true);
+			BitmapRelative(pDC, 55.f / 800.f, 27.f / 600.f, 0, 0, pPicture->GetBitmap());
 		}
 
 		// AP Background
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarPlayerFrame");
 		if (pPicture)
 		{
-			pPicture->SetBounds((int)((56.f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((43.f / 600.0f) * (float)MGetWorkspaceHeight()), (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight())); // x, y, w, h
-			pPicture->Show(true);
+			BitmapRelative(pDC, 55.f / 800.f, 43.f / 600.f, (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
 		}
 
 		// Current AP %
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarPlayer");
 		if (pPicture)
 		{
-			pPicture->SetBounds((int)((56.f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((43.f / 600.0f) * (float)MGetWorkspaceHeight()), (int)((ZGetCombatInterface()->GetTargetCharacter()->GetAP() / ZGetCombatInterface()->GetTargetCharacter()->GetMaxAP() * 100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight())); // x, y, w, h
-			pPicture->Show(true);
+			BitmapRelative(pDC, 55.f / 800.f, 43.f / 600.f, 0, 0, pPicture->GetBitmap());
+		}
+
+		//Enemy HP/AP Frame
+
+		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHPBarTargetFrame");
+		if (pPicture)
+		{
+			BitmapRelative(pDC, 645.f / 800.f, 27.f / 600.f, (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
+		}
+
+		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHPBarTarget");
+		if (pPicture)
+		{
+			//TODO:
+		}
+
+		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarTargetFrame");
+		if (pPicture)
+		{
+			BitmapRelative(pDC, 645.f / 800.f, 43.f / 600.f, (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
+		}
+
+		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarTarget");
+		if (pPicture)
+		{
+			//TODO:
 		}
 	}
 
@@ -4243,14 +4271,31 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		pLabel = (MLabel*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBarricadeCount_First");
 		if (pLabel)
 		{
-			pLabel->SetText(ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED ? to_string(pRule->GetRedBarricateCount()).c_str() :
-				to_string(pRule->GetBlueBarricadeCount()).c_str());
+			string barricadeLabelText = "No. of Barricades ";
+
+			if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED)
+			{
+				barricadeLabelText += to_string(pRule->GetRedBarricateCount());
+			}
+			else if(ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_BLUE)
+			{
+				barricadeLabelText += to_string(pRule->GetBlueBarricadeCount());
+			}
+			pLabel->SetText(barricadeLabelText.c_str());
 		}
 		pLabel = (MLabel*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBarricadeCount_Second");
 		if (pLabel)
 		{
-			pLabel->SetText(ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED ? to_string(pRule->GetBlueBarricadeCount()).c_str() :
-				to_string(pRule->GetRedBarricateCount()).c_str());
+			string barricadeEnemyText = "No. of Barricades ";
+			if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED)
+			{
+				barricadeEnemyText += to_string(pRule->GetBlueBarricadeCount());
+			}
+			else if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_BLUE)
+			{
+				barricadeEnemyText += to_string(pRule->GetRedBarricateCount());
+			}
+			pLabel->SetText(barricadeEnemyText.c_str());
 		}
 		pLabel = (MLabel*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzTeamKillCount_MyTeam");
 		if (pLabel)
@@ -4280,32 +4325,36 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		MPicture* picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzRedTeamLogo"));
 		if (picture)
 		{
-			picture->Show(isUIVisible);
+			BitmapRelative(pDC, 340.f / 800.f, 20.f / 600.f,picture->GetBitmap()->GetWidth(), picture->GetBitmap()->GetHeight(), picture->GetBitmap());
 		}
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBlueTeamLogo"));
 		if (picture)
 		{
-			picture->Show(isUIVisible);
+			BitmapRelative(pDC, 435.f / 800.f, 20.f / 600.f, picture->GetBitmap()->GetWidth(), picture->GetBitmap()->GetHeight(), picture->GetBitmap());
 		}
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzRedHPBar"));
 		if (picture)
 		{
-			picture->Show(isUIVisible);
+			//TODO: figure out how to adjust the width of the hp bar based on npc health
+			int redBossHP = pRule->GetRedBossHP();
+			BitmapRelative(pDC, 225.f / 800.f, 35.f / 600.f, (115.f / 800.f) * (float)MGetWorkspaceWidth(), (10.f / 600.f)* MGetWorkspaceHeight(), picture->GetBitmap(),false,true);
 		}
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzRedHPBarFrame"));
 		if (picture)
 		{
-			picture->Show(isUIVisible);
+			BitmapRelative(pDC, 225.f / 800.f, 35.f / 600.f, (115.f / 800.f) * MGetWorkspaceWidth(), (10.f / 600.f) * MGetWorkspaceHeight(), picture->GetBitmap());
 		}
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBlueHPBar"));
 		if (picture)
 		{
-			picture->Show(isUIVisible);
+			//TODO: figure out how to adjust the width of the hp bar based on npc health.
+			int blueBossHP = pRule->GetBlueBossHP();
+			BitmapRelative(pDC, 460.f / 800.f, 35.f / 600.f, (115.f / 800.f)* MGetWorkspaceWidth(), (10.f / 600.f)* MGetWorkspaceHeight(), picture->GetBitmap());
 		}
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBlueHPBarFrame"));
 		if (picture)
 		{
-			picture->Show(isUIVisible);
+			BitmapRelative(pDC, 460.f / 800.f, 35.f / 600.f, (115.f / 800.f)* MGetWorkspaceWidth(), (10.f / 600.f)* MGetWorkspaceHeight(), picture->GetBitmap());
 		}
 	}
 }
