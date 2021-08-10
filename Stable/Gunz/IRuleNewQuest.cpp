@@ -82,6 +82,7 @@ bool IRuleNewQuest::OnCommand(MCommand* pCommand)
 				{
 					ZGetScreenEffectManager()->AddKO();
 				}
+				pCharacter->SetLastTarget(MUID(0, 0));
 
 				ZModule_QuestStatus* pMod = (ZModule_QuestStatus*)pCharacter->GetModule(ZMID_QUESTSTATUS);
 				if (pMod)

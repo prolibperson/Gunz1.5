@@ -4159,6 +4159,7 @@ void ZCombatInterface::DrawBlitzScoreBoard(MDrawContext* pDC)
 	}*/
 }
 
+//TODO: get bitmaps to drqaw backwards on the opposite side of the screen.
 void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 {
 	if (IsShowUI() == false || ZGetGame()->GetMatch()->GetRoundState() != MMATCH_ROUNDSTATE_PLAY)
@@ -4194,11 +4195,14 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		{
 			BitmapRelative(pDC, 55.f / 800.f, 27.f / 600.f, (int)((100.0f / 800.0f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
 		}
+
 		// Current HP %
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHPBarPlayer");
 		if (pPicture)
 		{
-			BitmapRelative(pDC, 55.f / 800.f, 27.f / 600.f, 0, 0, pPicture->GetBitmap());
+			float maxHP = ZGetGame()->m_pMyCharacter->GetMaxHP();
+			float currHP = ZGetGame()->m_pMyCharacter->GetHP();
+			BitmapRelative(pDC, 55.f / 800.f, 27.f / 600.f, (currHP/maxHP) *  ((100.f / 800.f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
 		}
 
 		// AP Background
@@ -4212,11 +4216,12 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarPlayer");
 		if (pPicture)
 		{
-			BitmapRelative(pDC, 55.f / 800.f, 43.f / 600.f, 0, 0, pPicture->GetBitmap());
+			float maxAP = ZGetGame()->m_pMyCharacter->GetMaxAP();
+			float currAP = ZGetGame()->m_pMyCharacter->GetAP();
+			BitmapRelative(pDC, 55.f / 800.f, 43.f / 600.f, (currAP / maxAP) * ((100.f / 800.f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
 		}
 
 		//Enemy HP/AP Frame
-
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHPBarTargetFrame");
 		if (pPicture)
 		{
@@ -4227,6 +4232,22 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		if (pPicture)
 		{
 			//TODO:
+			if (ZGetGame()->m_pMyCharacter->GetLastTarget().IsValid())
+			{
+				float maxHP = 0;
+				float currHP = 0;
+				ZObject* targetObj = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(ZGetGame()->m_pMyCharacter->GetLastTarget()));
+				if (targetObj->IsNPC())
+				{
+					ZActorWithFSM* actorObj = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(ZGetGame()->m_pMyCharacter->GetLastTarget()));
+					if (actorObj != nullptr)
+					{
+						maxHP = actorObj->GetActualMaxHP();
+						currHP = actorObj->GetActualHP();
+						BitmapRelative(pDC, 645.f / 800.f, 27.f / 600.f, (currHP / maxHP) * ((100.f / 800.f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
+					}
+				}
+			}
 		}
 
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarTargetFrame");
@@ -4327,34 +4348,47 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		{
 			BitmapRelative(pDC, 340.f / 800.f, 20.f / 600.f,picture->GetBitmap()->GetWidth(), picture->GetBitmap()->GetHeight(), picture->GetBitmap());
 		}
+
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBlueTeamLogo"));
 		if (picture)
 		{
 			BitmapRelative(pDC, 435.f / 800.f, 20.f / 600.f, picture->GetBitmap()->GetWidth(), picture->GetBitmap()->GetHeight(), picture->GetBitmap());
 		}
+
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzRedHPBar"));
 		if (picture)
 		{
 			//TODO: figure out how to adjust the width of the hp bar based on npc health
-			int redBossHP = pRule->GetRedBossHP();
-			BitmapRelative(pDC, 225.f / 800.f, 35.f / 600.f, (115.f / 800.f) * (float)MGetWorkspaceWidth(), (10.f / 600.f)* MGetWorkspaceHeight(), picture->GetBitmap(),false,true);
+			int maxHP = pRule->GetRedBossMaxHP();
+			int currHP = pRule->GetRedBossHP();
+			if (currHP != 0)
+			{
+				BitmapRelative(pDC, 225.f / 800.f, 35.f / 600.f, ((float)currHP / (float)maxHP) * ((115.f / 800.f) * (float)MGetWorkspaceWidth()), (10.f / 600.f) * MGetWorkspaceHeight(), picture->GetBitmap());
+			}
 		}
+
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzRedHPBarFrame"));
 		if (picture)
 		{
 			BitmapRelative(pDC, 225.f / 800.f, 35.f / 600.f, (115.f / 800.f) * MGetWorkspaceWidth(), (10.f / 600.f) * MGetWorkspaceHeight(), picture->GetBitmap());
 		}
+
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBlueHPBar"));
 		if (picture)
 		{
 			//TODO: figure out how to adjust the width of the hp bar based on npc health.
-			int blueBossHP = pRule->GetBlueBossHP();
-			BitmapRelative(pDC, 460.f / 800.f, 35.f / 600.f, (115.f / 800.f)* MGetWorkspaceWidth(), (10.f / 600.f)* MGetWorkspaceHeight(), picture->GetBitmap());
+			int maxHP = pRule->GetBlueBossMaxHP();
+			int currHP = pRule->GetBlueBossHP();
+			if (currHP != 0)
+			{
+				BitmapRelative(pDC, 460.f / 800.f, 35.f / 600.f, ((float)currHP / (float)maxHP) * ((115.f / 800.f) * (float)MGetWorkspaceWidth()), (10.f / 600.f) * MGetWorkspaceHeight(), picture->GetBitmap());
+			}
 		}
+
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzBlueHPBarFrame"));
 		if (picture)
 		{
-			BitmapRelative(pDC, 460.f / 800.f, 35.f / 600.f, (115.f / 800.f)* MGetWorkspaceWidth(), (10.f / 600.f)* MGetWorkspaceHeight(), picture->GetBitmap());
+			BitmapRelative(pDC, 460.f / 800.f, 35.f / 600.f, (115.f / 800.f) * MGetWorkspaceWidth(), (10.f / 600.f) * MGetWorkspaceHeight(), picture->GetBitmap());
 		}
 	}
 }

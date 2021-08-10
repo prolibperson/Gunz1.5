@@ -75,6 +75,14 @@ public:
 
 		return pRedBoss->GetActualHP();
 	}
+	const int& GetRedBossMaxHP()
+	{
+		ZActorWithFSM* pRedBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossRedUID));
+		if (pRedBoss == nullptr)
+			return 0;
+
+		return pRedBoss->GetActualMaxHP();
+	}
 
 	const int& GetBlueBossHP()
 	{
@@ -83,6 +91,15 @@ public:
 			return 0;
 
 		return pBlueBoss->GetActualHP();
+	}
+
+	const int& GetBlueBossMaxHP()
+	{
+		ZActorWithFSM* pBlueBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossBlueUID));
+		if (pBlueBoss == nullptr)
+			return 0;
+
+		return pBlueBoss->GetActualMaxHP();
 	}
 
 	MBitmap* GetClassBitmap(const int& classID, const MMatchTeam& teamID);
