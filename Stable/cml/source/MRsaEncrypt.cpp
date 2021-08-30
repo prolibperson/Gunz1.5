@@ -13,10 +13,10 @@
 using namespace std;
 //using namespace CryptoPP;
 
-#ifdef _DEBUG
-#else
-#pragma comment (lib,"cryptlib2003.lib")
-#endif
+//#ifdef _DEBUG
+//#else
+//#pragma comment (lib,"cryptlib2003.lib")
+//#endif
 
 
 //RandomNumberGenerator & GlobalRNG()
