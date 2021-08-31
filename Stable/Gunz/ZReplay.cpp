@@ -591,11 +591,11 @@ bool ZReplayLoader::LoadCommandStream(ZFile* file)
 		zfread(CommandBuffer, nSize, 1, file);
 
 
-		ZObserverCommandItem pZCommand;
-		pZCommand.pCommand= CreateCommandFromStream(CommandBuffer);
-		pZCommand.pCommand->m_Sender=uidSender;
-		pZCommand.fTime=fTime;
-		ZGetGame()->GetReplayCommandList().m_List.push_back(pZCommand);
+		ZObserverCommandItem *pZCommand=new ZObserverCommandItem;
+		pZCommand->pCommand= CreateCommandFromStream(CommandBuffer);
+		pZCommand->pCommand->m_Sender=uidSender;
+		pZCommand->fTime=fTime;
+		ZGetGame()->GetReplayCommandList()->push_back(pZCommand);
 
 	}
 

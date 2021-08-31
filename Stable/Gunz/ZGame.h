@@ -53,26 +53,21 @@ enum ZGAME_READYSTATE {
 
 
 struct ZObserverCommandItem {
-	float fTime = 0.0f;
-	MCommand *pCommand = nullptr;
+	float fTime;
+	MCommand *pCommand;
 };
 
-class ZObserverCommandList {
+class ZObserverCommandList : public list<ZObserverCommandItem*> {
 public:
-	std::list<ZObserverCommandItem> m_List;
-
-
 	~ZObserverCommandList() { Destroy(); }
 	void Destroy() {
-		
-		auto ourList = this;
-
-		for (auto pItem : m_List)
+		while(!empty())
 		{
-			delete pItem.pCommand;
+			ZObserverCommandItem *pItem=*begin();
+			delete pItem->pCommand;
+			delete pItem;
+			erase(begin());
 		}
-
-		m_List.clear();
 	}
 };
 
@@ -241,7 +236,7 @@ public:
 	void OnObserverRun();
 	void OnCommand_Observer(MCommand* pCommand);
 	void FlushObserverCommands();
-	int	GetObserverCommandListCount() { return (int)m_ObserverCommandList.m_List.size(); }
+	int	GetObserverCommandListCount() { return (int)m_ObserverCommandList.size(); }
 
 	void ReserveObserver();
 	void ReleaseObserver();
@@ -399,7 +394,7 @@ public:
     void ReserveSuicide( void);
 	bool IsReservedSuicide( void)		{ return m_bSuicide; }
 	void CancelSuicide( void)			{ m_bSuicide = false; }
-	ZObserverCommandList GetReplayCommandList()  { return m_ReplayCommandList;} 
+	ZObserverCommandList* GetReplayCommandList()  { return &m_ReplayCommandList;} 
 
 	void MakeResourceCRC32( const DWORD dwKey, DWORD& out_crc32, DWORD& out_xor );
 
