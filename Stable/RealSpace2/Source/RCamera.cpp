@@ -38,11 +38,11 @@ void ComputeZPlane(rplane *plane,float z,int sign)
 void UpdateViewFrustrum()
 {
 	float fovh2=RFov_horiz/2.0f,fovv2=RFov_vert/2.0f;
-	if (RGetWidthScreen() != 0.75f)
-	{
-		fovh2 = RFov_horiz / (2.0 * atan(16.0 / 10.0) / (4.0 / 3.0));
-		fovv2 = RFov_vert  / (2.0 * atan(16.0 / 10.0) / (4.0 / 3.0));
-	}
+	//if (RGetWidthScreen() != 0.75f)
+	//{
+	//	fovh2 = RFov_horiz / (2.0 * atan(16.0 / 10.0) / (4.0 / 3.0));
+	//	fovv2 = RFov_vert  / (2.0 * atan(16.0 / 10.0) / (4.0 / 3.0));
+	//}
 	float ch=cosf(fovh2),sh=sinf(fovh2);
 	float cv=cosf(fovv2),sv=sinf(fovv2);
 

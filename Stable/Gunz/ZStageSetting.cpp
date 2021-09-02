@@ -556,27 +556,18 @@ void ZStageSetting::InitStageSettingGameType()
 		pCB->Add(ZGetGameTypeManager()->GetGameTypeStr(MMATCH_GAMETYPE(nGameType)));
 	}
 
-	#ifdef _QUEST // 퀘스트 개발용 디파인
+
+	// 테스트 서버는 퀘스트,서바이벌 활성화
+	if ((ZGetGameClient()) && (ZGetGameClient()->GetServerMode() == MSM_CLAN)) // server.ini에서 MODE="test"로 세팅으로 추가
 	{
-		// 테스트 서버는 퀘스트,서바이벌 활성화
-		if ((ZGetGameClient()) && (ZGetGameClient()->GetServerMode() == MSM_CLAN)) // server.ini에서 MODE="test"로 세팅으로 추가
-		{
-			pCB->Add(ZGetGameTypeManager()->GetGameTypeStr(MMATCH_GAMETYPE(MMATCH_GAMETYPE_QUEST)));
+		pCB->Add(ZGetGameTypeManager()->GetGameTypeStr(MMATCH_GAMETYPE(MMATCH_GAMETYPE_QUEST)));
 
-			pCB->Add(ZGetGameTypeManager()->GetGameTypeStr(MMATCH_GAMETYPE(MMATCH_GAMETYPE_SURVIVAL)));
-			
-#ifdef LOCALE_BRAZIL
-#else
-			// 브라질에서는 아직 서바이벌모드를 서비스 안함....나중에 서비스 할때 #ifdef를 풀어줘야함
-			// server.ini에서 SURVIVALENABLE=0이면 비활성화
-			if (ZGetGameClient()->IsEnabledSurvivalMode())
-				pCB->Add(ZGetGameTypeManager()->GetGameTypeStr(MMATCH_GAMETYPE(MMATCH_GAMETYPE_SURVIVAL)));
-#endif
-		}
+		pCB->Add(ZGetGameTypeManager()->GetGameTypeStr(MMATCH_GAMETYPE(MMATCH_GAMETYPE_SURVIVAL)));
+
 	}
-	#endif
 
-	pCB->SetSelIndex(MMATCH_GAMETYPE_DEFAULT);									
+
+	pCB->SetSelIndex(MMATCH_GAMETYPE_DEFAULT);
 }
 
 

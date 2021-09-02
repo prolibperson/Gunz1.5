@@ -4,27 +4,15 @@
 //#include "RMesh.h"
 #include "ZApplication.h"
 
-// 전역적으로 사용하는 것은 이곳에다 넣도록 하자
-#ifdef LOCALE_BRAZIL
 #define APPLICATION_NAME		"Gunz"
-#else
-#define APPLICATION_NAME		"Gunz"
-#endif
+#define GUNZ_FOLDER			"/Gunz"
 
-// 저장되는 폴더
-#ifdef LOCALE_BRAZIL
-#define GUNZ_FOLDER			"/Gunz"
-#elif LOCALE_JAPAN
-#define GUNZ_FOLDER			"/GUNZWEI"
-#else
-#define GUNZ_FOLDER			"/Gunz"
-#endif
 
 #define SCREENSHOT_FOLDER	"/Screenshots"
 #define REPLAY_FOLDER		"/Replay"
 #define EMBLEM_FOLDER		"/Emblem"
 
-#define _MAP_CACHING
+//#define _MAP_CACHING
 
 
 
