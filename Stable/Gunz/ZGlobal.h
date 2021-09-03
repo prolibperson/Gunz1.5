@@ -12,6 +12,7 @@
 #define REPLAY_FOLDER		"/Replay"
 #define EMBLEM_FOLDER		"/Emblem"
 
+//TODO: incomplete map caching, need to finish before implementing it. maybe assign to a game option instead of a define???
 //#define _MAP_CACHING
 
 

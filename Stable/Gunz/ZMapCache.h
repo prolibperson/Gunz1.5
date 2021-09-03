@@ -14,11 +14,11 @@ public:
 	static ZMapCache* GetInstance();
 	bool ReadXML(const char* fileName, MZFileSystem* fileSystem);
 	bool ParseXML_Map(mapCache& cache, rapidxml::xml_node<>* elem);
-	vector<mapCache>& GetMapCache() { return m_normalMaps; }
+	vector<mapCache> const& GetMapCache() { return m_normalMaps; }
 
 	bool Find(int id)
 	{
-		for (auto& item : m_normalMaps)
+		for (auto const& item : m_normalMaps)
 		{
 			if (item.mapID == id)
 				return true;
@@ -28,9 +28,9 @@ public:
 
 	bool Find(const char* mapName)
 	{
-		for (auto& item : m_normalMaps)
+		for (auto const& item : m_normalMaps)
 		{
-			if (StrStrI(mapName, item.mapName))
+			if (strcmpi(mapName, item.mapName) == 0)
 				return true;
 		}
 		return false;

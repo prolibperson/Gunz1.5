@@ -35,6 +35,7 @@
 #include "RTypes.h"
 #include "RMesh.h"
 
-#define _MAP_CACHING
+//TODO: incomplete map caching, need to finish before implementing it. maybe assign to a game option instead of a define???
+//#define _MAP_CACHING
 
 #endif
