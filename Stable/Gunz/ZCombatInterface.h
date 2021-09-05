@@ -213,6 +213,8 @@ public:
 	void SetShowUpgradeList(bool b) { m_showUpgradeList = b; }
 	bool GetPickTarget() { return m_bPickTarget; }
 	int const& GetDamageDealt() { return m_damageDealt; }
+	//Custom: Used for resetting damage each round/death
+	void SetDamageDealt(int const& damage) { m_damageDealt = damage; }
 	void AddDamageDealt(int const& damage) { m_damageDealt += damage; }
 	ZCombatInterface(const char* szName=NULL, MWidget* pParent=NULL, MListener* pListener=NULL);
 	virtual ~ZCombatInterface();

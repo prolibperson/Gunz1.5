@@ -3233,6 +3233,8 @@ void ZMyCharacter::OnDie()
 
 	zStatus.m_bWallHang=false;
 	uStatus.m_bWallJump=false;
+	//Reset damage when player dies
+	ZGetCombatInterface()->SetDamageDealt(0);
 }
 
 #define DAMAGE_VELOCITY		1700.f			// ¼Óµµ°¡ ÀÌ ÀÌ»óµÇ¸é Æú¸µµ¥¹ÌÁö¸¦ ¹Þ´Â´Ù.

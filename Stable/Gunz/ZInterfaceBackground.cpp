@@ -343,7 +343,7 @@ void ZInterfaceBackground::LoadMesh()
 
 		ROBJECTINFO* pInfo = NULL;
 
-		for (it = pMapObject->begin(); it != pMapObject->end(); it++) {
+		for (it = pMapObject->m_MapObjectList.begin(); it != pMapObject->m_MapObjectList.end(); it++) {
 
 			pInfo = (*it);
 

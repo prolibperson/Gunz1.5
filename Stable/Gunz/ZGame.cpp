@@ -4139,19 +4139,22 @@ void ZGame::OnPeerShot_Range_Damaged(ZObject* pOwner, float fShotTime, const rve
 	}
 	else
 	{
-		MTD_AntiLeadShot rangeShot;
-		rangeShot.victimLowUID = pickinfo.pObject->GetUID().Low;
-		rangeShot.attackerLowUID = pOwner->GetUID().Low;
-		rangeShot.damageType = dt;
-		rangeShot.weaponType = pDesc->m_nWeaponType.Ref();
-		rangeShot.damageAmount = fActualDamage;
-		rangeShot.meshParts = pickinfo.info.parts;
-		rangeShot.piercingRatio = fRatio;
+		if (pOwner->GetUID() == ZGetMyUID())
+		{
+			MTD_AntiLeadShot rangeShot;
+			rangeShot.victimLowUID = pickinfo.pObject->GetUID().Low;
+			rangeShot.attackerLowUID = pOwner->GetUID().Low;
+			rangeShot.damageType = dt;
+			rangeShot.weaponType = pDesc->m_nWeaponType.Ref();
+			rangeShot.damageAmount = fActualDamage;
+			rangeShot.meshParts = pickinfo.info.parts;
+			rangeShot.piercingRatio = fRatio;
 
-		void* blobArray = MMakeBlobArray(sizeof(MTD_AntiLeadShot), 1);
-		*(MTD_AntiLeadShot*)MGetBlobArrayElement(blobArray, 0) = rangeShot;
-		ZPostAntileadShot(blobArray);
-		MEraseBlobArray(blobArray);
+			void* blobArray = MMakeBlobArray(sizeof(MTD_AntiLeadShot), 1);
+			*(MTD_AntiLeadShot*)MGetBlobArrayElement(blobArray, 0) = rangeShot;
+			ZPostAntileadShot(blobArray);
+			MEraseBlobArray(blobArray);
+		}
 	}
 
 	if(pOwner == m_pMyCharacter) 
@@ -4436,7 +4439,6 @@ void ZGame::OnPeerShot_Shotgun(ZItem *pItem, ZCharacter* pOwnerCharacter, float 
 		ZGetStencilLight()->AddLightSource(v1, 2.0f, 200 );
 }
 
-//jintriple3 디버그 레지스터 해킹 방지 코드 삽입
 void ZGame::OnPeerShotgun_Damaged(ZObject* pOwner, float fShotTime, const rvector& pos, rvector& dir, ZPICKINFO pickinfo, DWORD dwPickPassFlag, rvector& v1, rvector& v2, ZItem *pItem, rvector& BulletMarkNormal, bool& bBulletMark, ZTargetType& nTargetType, bool& bHitEnemy)
 {
 	ZCharacter *pTargetCharacter = ZGetGameInterface()->GetCombatInterface()->GetTargetCharacter();
@@ -4561,25 +4563,29 @@ void ZGame::OnPeerShotgun_Damaged(ZObject* pOwner, float fShotTime, const rvecto
 	{
 		pObject->OnDamaged(pOwner, pOwner->GetPosition(), dt, pDesc->m_nWeaponType.Ref(), fActualDamage, fRatio);
 	}
-	else {
-		MTD_AntiLeadShot sgShot;
-
-		sgShot.victimLowUID = pObject->GetUID().Low;
-		sgShot.attackerLowUID = pOwner->GetUID().Low;
-		sgShot.damageType = dt;
-		sgShot.weaponType = pDesc->m_nWeaponType.Ref();
-		sgShot.damageAmount = fActualDamage;
-		sgShot.meshParts = pickinfo.info.parts;
-		sgShot.piercingRatio = fRatio;
-
-		void* blobArray = MMakeBlobArray(sizeof(MTD_AntiLeadShot), 1);
-		*(MTD_AntiLeadShot*)MGetBlobArrayElement(blobArray, 0) = sgShot;
-		ZPostAntileadShot(blobArray);
-		MEraseBlobArray(blobArray);
-
-		if (!m_Match.IsTeamPlay() || (pTargetCharacter->GetTeamID() != pObject->GetTeamID()))
+	else
+	{
+		if (pOwner->GetUID() == ZGetMyUID())
 		{
-			bHitEnemy = true;
+			MTD_AntiLeadShot sgShot;
+
+			sgShot.victimLowUID = pObject->GetUID().Low;
+			sgShot.attackerLowUID = pOwner->GetUID().Low;
+			sgShot.damageType = dt;
+			sgShot.weaponType = pDesc->m_nWeaponType.Ref();
+			sgShot.damageAmount = fActualDamage;
+			sgShot.meshParts = pickinfo.info.parts;
+			sgShot.piercingRatio = fRatio;
+
+			void* blobArray = MMakeBlobArray(sizeof(MTD_AntiLeadShot), 1);
+			*(MTD_AntiLeadShot*)MGetBlobArrayElement(blobArray, 0) = sgShot;
+			ZPostAntileadShot(blobArray);
+			MEraseBlobArray(blobArray);
+
+			if (!m_Match.IsTeamPlay() || (pTargetCharacter->GetTeamID() != pObject->GetTeamID()))
+			{
+				bHitEnemy = true;
+			}
 		}
 		return;
 	}

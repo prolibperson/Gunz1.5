@@ -402,7 +402,8 @@ void ZMatch::InitRound()
 
 	InitCharactersPosition();
 	InitCharactersProperties();
-
+	//Custom: Reset damage on each new round
+	ZGetCombatInterface()->SetDamageDealt(0);
 	// 월드아이템 초기화
 	ZGetWorldItemManager()->Reset();
 

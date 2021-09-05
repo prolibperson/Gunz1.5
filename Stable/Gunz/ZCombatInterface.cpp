@@ -232,7 +232,7 @@ bool ZCombatInterface::OnCreate()
 	m_pWeaponScreenEffect->Create();
 
 	if (ZGetGameTypeManager()->IsQuestDerived(ZGetGame()->GetMatch()->GetMatchType())||
-		ZGetGameTypeManager()->IsNewQuestDerived(ZGetGame()->GetMatch()->GetMatchType()))
+		ZGetGame()->GetMatch()->GetMatchType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
 	{
 		m_pQuestScreen = new ZCombatQuestScreen();
 	}
