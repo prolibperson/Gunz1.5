@@ -1291,4 +1291,10 @@ inline void ZPostCreateAccount(const char* Username, const char* Password, const
 	ZPOSTCMD3(MC_MATCH_REQUEST_CREATE_ACCOUNT, MCmdParamStr(Username),
 		MCmdParamStr(Password), MCmdParamStr(Email));
 }
+
+//Custom: user mail
+inline void ZPostRequestUserMail()
+{
+	ZPOSTCMD0(MC_MATCH_REQUEST_USERMAIL);
+}
 #endif

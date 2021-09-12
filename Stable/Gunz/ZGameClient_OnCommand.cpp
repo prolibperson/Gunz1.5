@@ -1564,6 +1564,31 @@ bool ZGameClient::OnCommand(MCommand* pCommand)
 			}
 		}
 		break;//end
+
+		//Custom: UserMail
+		case MC_MATCH_RESPONSE_USERMAIL:
+		{
+			std::vector<MTD_UserMail> userMail;
+
+			//Mail Blob
+			MCommandParameter* pParam = pCommand->GetParameter(0);
+			if (pParam->GetType() != MPT_BLOB)
+				break;
+
+			void* userMailBlob = pParam->GetPointer();
+			int mailCount = MGetBlobArrayCount(userMailBlob);
+			for (int i = 0; i < mailCount; ++i)
+			{
+				MTD_UserMail mail = *(MTD_UserMail*)MGetBlobArrayElement(userMailBlob, i);
+				userMail.push_back(mail);
+			}
+
+			ZGetMyInfo()->LoadMail(userMail);
+
+			MTD_UserMail mail = userMail.at(0);
+
+			mlog("%d,%s,%s,%s\n", mail.messageID, mail.sender, mail.receiver, mail.message);
+		}
 		default:
 			if (!ret)
 			{

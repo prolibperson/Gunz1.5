@@ -63,7 +63,7 @@ public:
 	void AddPlayerKillReward(const MUID& uidKiller, const MUID& uidVictim);
 	void DrawAnnouncement(SPECIAL_ANNOUNCEMENT announcementType);
 	void UpdateClassSelectDesc(const MMatchObjectClass& classID);
-	void UpdateUpgradeUI(int& const index, int& const upgradeLevel);
+	void UpdateUpgradeUI(int const& index, int const& upgradeLevel);
 
 	const int& GetBlueBarricadeCount() { return m_blueBarricades; }
 	const int& GetRedBarricateCount() { return m_redBarricades; }

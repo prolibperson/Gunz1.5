@@ -4162,16 +4162,25 @@ void ZCombatInterface::DrawBlitzScoreBoard(MDrawContext* pDC)
 //TODO: get bitmaps to drqaw backwards on the opposite side of the screen.
 void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 {
-	if (IsShowUI() == false || ZGetGame()->GetMatch()->GetRoundState() != MMATCH_ROUNDSTATE_PLAY)
+	MWidget* pWidget = (MWidget*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitrzKriegTopInfo");
+	if (pWidget)
 	{
-		return;
+		if (ZGetGame()->GetMatch()->GetRoundState() != MMATCH_ROUNDSTATE_PLAY)
+		{
+			pWidget->Show(false);
+			return;
+		}
+		else
+		{
+			pWidget->Show(true);
+		}
 	}
+
 	ZRuleBlitzKrieg* pRule = dynamic_cast<ZRuleBlitzKrieg*>(ZGetGame()->GetMatch()->GetRule());
-	bool isUIVisible = ZGetCombatInterface()->IsShowUI();
 	MPicture* pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzSelClassPlayer");
 	if (pPicture)
 	{
-		pPicture->Show(isUIVisible);
+		pPicture->Show(true);
 		pPicture->SetBitmap(pRule->GetClassBitmap(ZGetGame()->m_pMyCharacter->GetBlitzClass(), ZGetGame()->m_pMyCharacter->GetTeamID()));
 
 	}
@@ -4182,7 +4191,7 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		ZCharacter* pObj = dynamic_cast<ZCharacter*>(ZGetCharacterManager()->Find(ZGetGame()->m_pMyCharacter->GetLastAttacker()));
 		if (pObj)
 		{
-			pPicture->Show(isUIVisible);
+			pPicture->Show(true);
 			pPicture->SetBitmap(pRule->GetClassBitmap(pObj->GetBlitzClass(), pObj->GetTeamID()));
 		}
 	}
@@ -4234,17 +4243,15 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 			//TODO:
 			if (ZGetGame()->m_pMyCharacter->GetLastTarget().IsValid())
 			{
-				float maxHP = 0;
-				float currHP = 0;
-				ZObject* targetObj = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(ZGetGame()->m_pMyCharacter->GetLastTarget()));
-				if (targetObj->IsNPC())
+				ZCharacterObject* targetObj = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(ZGetGame()->m_pMyCharacter->GetLastTarget()));
+				if (targetObj != nullptr)
 				{
-					ZActorWithFSM* actorObj = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(ZGetGame()->m_pMyCharacter->GetLastTarget()));
-					if (actorObj != nullptr)
+					ZModule_HPAP* healthModule = dynamic_cast<ZModule_HPAP*>(targetObj->GetModule(ZMID_HPAP));
+					float maxHP = healthModule->GetMaxHP();
+					float currHP = healthModule->GetHP();
+					if (currHP != 0.0f)
 					{
-						maxHP = actorObj->GetActualMaxHP();
-						currHP = actorObj->GetActualHP();
-						BitmapRelative(pDC, 645.f / 800.f, 27.f / 600.f, (currHP / maxHP) * ((100.f / 800.f) * (float)MGetWorkspaceWidth()), (int)((10.0f / 600.0f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
+						BitmapRelative(pDC, 645.f / 800.f, 27.f / 600.f, ((float)currHP / (float)maxHP) * (100.f / 800.f * (float)MGetWorkspaceWidth()), (int)((10.f / 600.f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
 					}
 				}
 			}
@@ -4259,7 +4266,20 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAPBarTarget");
 		if (pPicture)
 		{
-			//TODO:
+			if (ZGetGame()->m_pMyCharacter->GetLastTarget().IsValid())
+			{
+				ZCharacterObject* targetObj = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(ZGetGame()->m_pMyCharacter->GetLastTarget()));
+				if (targetObj != nullptr)
+				{
+					ZModule_HPAP* healthModule = dynamic_cast<ZModule_HPAP*>(targetObj->GetModule(ZMID_HPAP));
+					float maxAP = healthModule->GetMaxAP();
+					float currAP = healthModule->GetAP();
+					if (currAP != 0.0f)
+					{
+						BitmapRelative(pDC, 645.f / 800.f, 43.f / 600.f, ((float)currAP / (float)maxAP) * (100.f/800.f * (float)MGetWorkspaceWidth()), (int)((10.f / 600.f) * (float)MGetWorkspaceHeight()), pPicture->GetBitmap());
+					}
+				}
+			}
 		}
 	}
 
@@ -4358,7 +4378,6 @@ void ZCombatInterface::DrawBlitzHP(MDrawContext* pDC)
 		picture = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzRedHPBar"));
 		if (picture)
 		{
-			//TODO: figure out how to adjust the width of the hp bar based on npc health
 			int maxHP = pRule->GetRedBossMaxHP();
 			int currHP = pRule->GetRedBossHP();
 			if (currHP != 0)

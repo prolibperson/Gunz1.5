@@ -2767,3 +2767,20 @@ END_IMPLEMENT_LISTENER();
 BEGIN_IMPLEMENT_LISTENER(ZGetAchievementExitButtonListener, MBTN_CLK_MSG)
 	ZGetGameInterface()->ShowAchievementDialog(false);
 END_IMPLEMENT_LISTENER();
+
+//Custom: Achievements
+BEGIN_IMPLEMENT_LISTENER(ZGetMailCallerButtonListener, MBTN_CLK_MSG)
+ZGetGameInterface()->ShowMailDialog(true);
+END_IMPLEMENT_LISTENER();
+
+BEGIN_IMPLEMENT_LISTENER(ZGetMailCloseButtonListener, MBTN_CLK_MSG)
+ZGetGameInterface()->ShowMailDialog(false);
+END_IMPLEMENT_LISTENER();
+
+BEGIN_IMPLEMENT_LISTENER(ZGetMailOpenButtonListener, MBTN_CLK_MSG)
+ZGetGameInterface()->ShowSelectedMail();
+END_IMPLEMENT_LISTENER();
+
+BEGIN_IMPLEMENT_LISTENER(ZGetMailCloseReadListener, MBTN_CLK_MSG)
+ZGetGameInterface()->CloseMailReader();
+END_IMPLEMENT_LISTENER();

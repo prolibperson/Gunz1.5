@@ -72,6 +72,7 @@ protected:
 
 	std::vector<MTD_Achievement> m_achievements;
 	std::vector<std::pair<int,MMatchCharItemParts>> m_stageModRemovedItems;
+	std::vector<MTD_UserMail> m_userMail;
 
 #ifdef _QUEST_ITEM
 	//ZMyQuestItemMap	m_QuestItemMap;
@@ -133,15 +134,31 @@ public:
 	void SetClanInfo(const char* szClanName, const MMatchClanGrade nClanGrade);
 	void SetNewbie(bool bNewbie)				{ m_bNewbie = bNewbie; }
 
+	//Custom: Achievements
 	void AddAchievement(MTD_Achievement achievement) { m_achievements.push_back(achievement); }
 	void SetAchievements(std::vector<MTD_Achievement> achievements) { m_achievements = achievements; }
 	std::vector<MTD_Achievement> const&  GetAchievements() { return m_achievements; }
+	//Custom: Add removed items to a vector in case the stagemods remove an item. this will add them back on leaving the stage.
 	void AddStageModRemovedItem(int itemID,MMatchCharItemParts parts)
 	{ 
 		m_stageModRemovedItems.push_back(std::make_pair(itemID,parts));
 	}
 	void RemoveStageModItems() { m_stageModRemovedItems.clear(); }
 	std::vector<std::pair<int,MMatchCharItemParts> > const& GetStageModItems() { return m_stageModRemovedItems; }
+
+	//Custom: User Mail
+	void LoadMail(vector<MTD_UserMail> const& mail) { m_userMail = mail; }
+	void AddMail(MTD_UserMail const& mail) { m_userMail.push_back(mail); }
+	void RemoveMail(int const& index)
+	{
+		m_userMail.erase(remove_if(m_userMail.begin(), m_userMail.end(), [&](MTD_UserMail const& mail) {return mail.messageID == index; }), m_userMail.end());
+	}
+	vector<MTD_UserMail> const& GetMail()
+	{
+		return m_userMail;
+	}
+
+	
 };
 
 inline ZMyInfo* ZGetMyInfo() { return ZMyInfo::GetInstance(); }

@@ -978,6 +978,11 @@ bool ZGameInterface::InitInterfaceListener()
 	SetListenerWidget("CreateAccountBtn", ZGetCreateAccountBtnListener());
 	////End 
 
+	//Custom: Mail
+	SetListenerWidget("MailCaller", ZGetMailCallerButtonListener());
+	SetListenerWidget("MailClose", ZGetMailCloseButtonListener());
+	SetListenerWidget("MailOpen", ZGetMailOpenButtonListener());
+	SetListenerWidget("ReadMailClose", ZGetMailCloseReadListener());
 
 	// ����AA��E A����?AI A�좬����o��I ������碬c ������a
 
@@ -6116,7 +6121,131 @@ void ZGameInterface::ShowAchievementDialog(bool bShow)
 	}
 }
 
+//TODO: handle read/not read mail
 
+
+class MailListBoxItem : public MListItem
+{
+public:
+	int mailIndex;
+	string sender;
+	string message;
+	bool isRead;
+public:
+	MailListBoxItem(int const& index, string const& sendername, string const& messagetext, bool const& read) noexcept
+	{
+		mailIndex = index;
+		sender = sendername;
+		message = messagetext;
+		isRead = read;
+	}
+
+	virtual const char* GetString(void)
+	{
+		return sender.c_str();
+	}
+	virtual const char* GetString(int i) override
+	{
+
+		if (i == 0)
+			return sender.c_str();
+		else if (i == 1)
+			return message.c_str();
+
+
+		return NULL;
+	}
+	virtual MBitmap* GetBitmap(int i)
+	{
+		return NULL;
+	}
+
+	virtual const MCOLOR GetColor(void) { return GetColor(isRead); }
+	virtual const MCOLOR GetColor(int i)
+	{
+		if (isRead)
+		{
+			return MCOLOR(0x80, 205, 205, 205);
+		}
+		else
+		{
+			return MCOLOR(DEFCOLOR_MLIST_TEXT);
+		}
+	}
+};
+
+
+//Custom: mail
+
+void ZGameInterface::ShowMailDialog(bool bShow)
+{
+	if (bShow)			// ����AI��aAI��e...
+	{
+		// ����CA����AI E����e ����AI��a
+		MWidget* pWidget;
+		pWidget = (MWidget*)m_IDLResource.FindWidget("MailFrame");
+		if (pWidget)
+			pWidget->Show(true, true);
+
+
+
+		// ��AAI ����������� AE��aE��
+		MListBox* pListBox = (MListBox*)m_IDLResource.FindWidget("MailListBox");
+		if (pListBox)
+		{
+			pListBox->RemoveAll();
+
+			///TODO: send achievements to client
+			std::vector<MTD_UserMail> userMail = ZGetMyInfo()->GetMail();
+			for (int i = 0; i < userMail.size(); ++i)
+			{
+				MTD_UserMail mail = userMail.at(i);
+				pListBox->Add(new MailListBoxItem(mail.messageID, mail.sender, mail.message, mail.read));
+
+			}
+
+			pListBox->Sort();		// Sorting
+		}
+	}
+	else				// �ơ�A����aAI��e...
+	{
+		// ����CA����AI E����e �ơ�A����a
+		ShowWidget("MailFrame", false);
+	}
+}
+
+void ZGameInterface::ShowSelectedMail()
+{
+	MListBox* pListBox = (MListBox*)m_IDLResource.FindWidget("MailListBox");
+	if (pListBox)
+	{
+		MailListBoxItem* selItem = dynamic_cast<MailListBoxItem*>(pListBox->GetSelItem());
+		string sender = selItem->sender;
+		string message = selItem->message;
+
+		MWidget* pWidget;
+		pWidget = (MWidget*)m_IDLResource.FindWidget("ReadMail");
+		if (pWidget)
+			pWidget->Show(true, true);
+
+		MEdit* edit = (MEdit*)m_IDLResource.FindWidget("MailSender");
+		if (edit)
+			edit->SetText(string("Sender: " + sender).c_str());
+
+		MTextArea* textArea = (MTextArea*)m_IDLResource.FindWidget("MailMessage");
+		if (textArea)
+			textArea->SetText(message.c_str());
+	}
+}
+
+void ZGameInterface::CloseMailReader()
+{
+	MWidget* pWidget = (MWidget*)m_IDLResource.FindWidget("ReadMail");
+	if (pWidget && pWidget->IsVisible())
+	{
+		pWidget->Show(false);
+	}
+}
 
 
 

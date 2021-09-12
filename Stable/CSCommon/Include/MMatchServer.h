@@ -823,6 +823,7 @@ public :
 
 	virtual void Log(unsigned int nLogLevel, const char* szLog);
 
+
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	// 2009. 9. 21 - Added By Hong KiJu
 	// Duel Tournament ?????? ???
@@ -906,6 +907,10 @@ public:
 
 	void OnAsyncRequest_RewardCharBP(const MUID& uidPlayer, int nBRID, int nBRTID, int nRewardCount, int nBattleTime, int nKillCount, int nItemID, int nItemCnt, int nRentHourPeriod);
 	void OnAsyncRequest_UpdateCharBRInfo(const MUID& uidPlayer, int nBRID, int nBRTID, int nRewardCount, int nBattleTime, int nKillCount);
+
+private:
+//Custom: UserMail
+	void OnResponseUserMail(MUID const& sender);
 
 };
 

@@ -25,6 +25,7 @@ struct MMatchAccountInfo;
 struct MTD_CharInfo;
 struct MTD_AccountCharInfo;
 struct MAccountItemNode;
+struct MTD_UserMail;
 
 class MMatchGambleItem;
 class MMatchGambleRewardItem;
@@ -392,6 +393,9 @@ public:
 	bool GetSkillMapBestTime(int CID, const int& mapName, unsigned int* outValue);
 	bool FindAchievements(int cid, achievementNode& outValue);
 	bool GetCharacterAchievements(int CID, MMatchCharInfo* pOutCharInfo);
+
+	//Custom: UserMail
+	bool GetUserMail(const char* userName, std::vector<MTD_UserMail>& userMail);
 
 #ifdef _DEBUG
 	bool test();

@@ -244,7 +244,11 @@ DECLARE_LISTENER(ZGetReplayFileListBoxListener);
 DECLARE_LISTENER(ZGetAchievementCallerButtonListener);
 DECLARE_LISTENER(ZGetAchievementExitButtonListener);
 
-
+//Custom: Mail
+DECLARE_LISTENER(ZGetMailCallerButtonListener);
+DECLARE_LISTENER(ZGetMailCloseButtonListener);
+DECLARE_LISTENER(ZGetMailOpenButtonListener);
+DECLARE_LISTENER(ZGetMailCloseReadListener);
 // 게임 종료 관련
 DECLARE_LISTENER(ZGetGameResultQuit);
 

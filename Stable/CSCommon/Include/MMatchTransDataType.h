@@ -27,6 +27,16 @@ struct MTD_Achievement {
 	char desc[128];
 };
 
+//custom: antilead
+struct MTD_UserMail
+{
+	char message[1000];
+	char sender[MAX_USERID_STRING_LEN];
+	char receiver[MAX_USERID_STRING_LEN];
+	unsigned int messageID;
+	bool read;
+};
+
 struct MTD_AntiLeadShot
 {
 	unsigned long victimLowUID;

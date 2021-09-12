@@ -416,6 +416,10 @@ public:
 	///Custom: Achievement Interface
 	void ShowAchievementDialog(bool bShow);
 
+	//Custom: mail
+	void ShowMailDialog(bool bShow);
+	void ShowSelectedMail();
+	void CloseMailReader();
 
 	void ShowMenu(bool bEnable);
 	void Show112Dialog(bool bShow);

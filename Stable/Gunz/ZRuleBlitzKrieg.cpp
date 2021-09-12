@@ -177,7 +177,7 @@ ZActorWithFSM* ZRuleBlitzKrieg::SpawnActor(const char* szActorDefName, MUID& uid
 		return nullptr;
 
 	ZMapSpawnManager* pMSM = ZGetGame()->GetMapDesc()->GetSpawnManager();
-	ZMapSpawnData* pSpawnData;
+	ZMapSpawnData* pSpawnData = nullptr;
 	if (pMSM)
 	{
 		if (_stricmp(szActorDefName, "radar_red") == 0)
@@ -815,7 +815,7 @@ void ZRuleBlitzKrieg::UpdateClassSelectDesc(const MMatchObjectClass& classID)
 	return;
 }
 
-void ZRuleBlitzKrieg::UpdateUpgradeUI(int& const index, int& const upgradeLevel)
+void ZRuleBlitzKrieg::UpdateUpgradeUI(int const& upgradeIndex, int const& upgradeLevel)
 {
 
 }

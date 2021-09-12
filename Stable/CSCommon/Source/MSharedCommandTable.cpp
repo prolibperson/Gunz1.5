@@ -1839,6 +1839,11 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType)
 		P(MPT_STR, "Message");
 		P(MPT_BOOL, "response");
 
+	//Custom: UserMail
+	C(MC_MATCH_REQUEST_USERMAIL,"Request.UserMail","Sends a request to get all mail after character selection",MCDT_MACHINE2MACHINE);
+	C(MC_MATCH_RESPONSE_USERMAIL,"Response.UserMail","Sends all mail to the user with the matching UID",MCDT_MACHINE2MACHINE);
+		P(MPT_BLOB,"MailBlob");
+
 	END_CMD_DESC();
 }
 	

@@ -1944,6 +1944,11 @@ bool MMatchServer::OnCommand(MCommand* pCommand)
 			CreateAccount(pCommand->GetSenderUID(), szUserID, szPassword, szEmail);
 		}
 		break;
+		//Custom: UserMail
+		case MC_MATCH_REQUEST_USERMAIL:
+		{
+			OnResponseUserMail(pCommand->GetSenderUID());
+		}
 
 
 		default:

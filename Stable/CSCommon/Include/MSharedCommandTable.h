@@ -718,4 +718,8 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType);
 //Custom: Create account
 #define MC_MATCH_REQUEST_CREATE_ACCOUNT		50052
 #define MC_MATCH_RESPONSE_CREATE_ACCOUNT	50053
+
+//Custom: USer Mail
+#define MC_MATCH_REQUEST_USERMAIL			50054
+#define MC_MATCH_RESPONSE_USERMAIL			50055
 #endif

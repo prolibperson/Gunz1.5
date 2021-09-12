@@ -4083,5 +4083,57 @@ void MMatchServer::Log(unsigned int nLogLevel, const char* szLog)
 	}
 }
 
+//Custom: UserMail
+void MMatchServer::OnResponseUserMail(MUID const& sender)
+{
+	MMatchObject* senderObj = GetObject(sender);
+	if (senderObj == nullptr)
+	{
+		return;
+	}
+	//TODO: hack checks
+	std::vector<MTD_UserMail> userMail;
 
 
+	//TODO: uncomment, test send mail for now, then print it in a txt file on client to ensure functionality
+	//bool result = MGetMatchServer()->GetDBMgr()->GetUserMail(senderObj->GetCharInfo()->m_szName,userMail);
+	//if (result == false)
+	//{
+	//	//TODO: handle a hack check or errors if youw ant?
+	//	return;
+	//}
+
+	MTD_UserMail mail;
+	mail.messageID = 0;
+	strcpy(mail.sender, "Jetman82");
+	strcpy(mail.receiver, "Jetman82");
+	strcpy(mail.message, "This is a test send");
+	mail.read = false;
+
+	userMail.push_back(mail);
+
+	mail.messageID = 1;
+	strcpy(mail.sender, "Jetman82");
+	strcpy(mail.receiver, "Jetman82");
+	strcpy(mail.message, "This is to test if read");
+	mail.read = true;
+
+	userMail.push_back(mail);
+
+	
+
+	MCommand* pNew = CreateCommand(MC_MATCH_RESPONSE_USERMAIL, MUID(0, 0));
+
+	void* mailBlob = MMakeBlobArray(sizeof(MTD_UserMail), userMail.size());
+	int mailCount = MGetBlobArrayCount(mailBlob);
+
+	for (int i = 0; i < mailCount; ++i)
+	{
+		*(MTD_UserMail*)MGetBlobArrayElement(mailBlob, i) = userMail.at(i);
+
+	}
+	pNew->AddParameter(new MCmdParamBlob(mailBlob, MGetBlobArraySize(mailBlob)));
+
+	MGetMatchServer()->RouteToListener(senderObj, pNew);
+	MEraseBlobArray(mailBlob);
+}

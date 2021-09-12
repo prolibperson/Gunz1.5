@@ -125,13 +125,16 @@ struct RSPAWNPOSITION {
 	rvector position;
 };
 
-struct UserProp {
-	enum VALUE_TYPE { STRING, INT, FLOAT	};
+struct UserProp
+{
+	enum VALUE_TYPE { STRING, INT, FLOAT,END	};
 	string	key;
-	void* pValue;
+	string value;
 	VALUE_TYPE type;
-	UserProp() { pValue = NULL; }
-	~UserProp() { if (pValue!=NULL) delete pValue; }
+	UserProp(VALUE_TYPE defaultvaltype = END, string defaultKey = "null", string defaultval ="nullptr")
+	{ 
+	}
+	~UserProp() { }
 };
 
 #define MAX_USERPROP	10
@@ -140,83 +143,75 @@ struct RDUMMY {
 	string name;
 	rvector position;
 	rvector direction;
-	map<string, UserProp*>	UserPropMap;
+	map<string, UserProp>	UserPropMap;
 
 	void SetUserPropValue(const char* szKey, float value)
 	{
-		UserProp* up = new UserProp;
-		up->type = UserProp::FLOAT;
-		up->pValue = new float;
-		*((float*)up->pValue) = value;
+		UserProp up = {};
+		up.type = UserProp::FLOAT;
+		up.value = to_string(value);
 
-		UserPropMap.insert(map<string, UserProp*>::value_type(string(szKey), up));
+		UserPropMap.insert(map<string, UserProp>::value_type(string(szKey), up));
 	}
 	void SetUserPropValue(const char* szKey, int value)
 	{
-		UserProp* up = new UserProp;
-		up->type = UserProp::INT;
-		up->pValue = new int;
-		*((int*)up->pValue) = value;
+		UserProp up;
+		up.type = UserProp::INT;
+		up.value = to_string(value);
 
-		UserPropMap.insert(map<string, UserProp*>::value_type(string(szKey), up));
+		UserPropMap.insert(map<string, UserProp>::value_type(string(szKey), up));
 	}
 	void SetUserPropValue(const char* szKey, char* value)
 	{
-		UserProp* up = new UserProp;
-		up->type = UserProp::STRING;
-		up->pValue = new char[strlen(value)+2];
-		strcpy((char*)up->pValue, value);
+		string temp(value);
+		UserProp up = {};
+		up.type = UserProp::STRING;
+		up.value = value;
 
-		UserPropMap.insert(map<string, UserProp*>::value_type(string(szKey), up));
+		UserPropMap.insert(map<string, UserProp>::value_type(string(szKey), up));
 	}
-	bool GetUserPropValue(const char* szKey, float* out)
+	bool GetUserPropValue(const char* szKey, float& out)
 	{
-		map<string, UserProp*>::iterator itor = UserPropMap.find(string(szKey));
+		map<string, UserProp>::iterator itor = UserPropMap.find(string(szKey));
 		if (itor != UserPropMap.end())
 		{
-			UserProp* p = (*itor).second;
-			if (p->type != UserProp::FLOAT)	return false;
-			if (p->pValue == NULL) return false;
-			*out = *((float*)(p->pValue));
+			UserProp p = (*itor).second;
+			if (p.type != UserProp::FLOAT)	return false;
+			if (p.value == "nullptr")
+				return false;
+			out = atof(p.value.c_str());
 			return true;
 		}
 		return false;
 	}
-	bool GetUserPropValue(const char* szKey, int* out)
+	bool GetUserPropValue(const char* szKey, int& out)
 	{
-		map<string, UserProp*>::iterator itor = UserPropMap.find(string(szKey));
+		map<string, UserProp>::iterator itor = UserPropMap.find(string(szKey));
 		if (itor != UserPropMap.end())
 		{
-			UserProp* p = (*itor).second;
-			if (p->type != UserProp::INT)	return false;
-			if (p->pValue == NULL) return false;
-			*out = *((int*)(p->pValue));
+			UserProp p = (*itor).second;
+			if (p.type != UserProp::INT)	return false;
+			if (p.value == "nullptr") return false;
+			out = atoi(p.value.c_str());
 			return true;
 		}
 		return false;
 	}
-	bool GetUserPropValue(const char* szKey, char* out, int nMaxLen)
+	bool GetUserPropValue(const char* szKey, string& out, int nMaxLen)
 	{
-		map<string, UserProp*>::iterator itor = UserPropMap.find(string(szKey));
+		map<string, UserProp>::iterator itor = UserPropMap.find(string(szKey));
 		if (itor != UserPropMap.end())
 		{
-			UserProp* p = (*itor).second;
-			if (p->type != UserProp::STRING) return false;
-			if (p->pValue == NULL) return false;
-			if (nMaxLen < (int)strlen((char*)(p->pValue))+1) return false;
-			strcpy(out, (char*)(p->pValue));
+			UserProp p = (*itor).second;
+			if (p.type != UserProp::STRING) return false;
+			if (p.value == "nullptr") return false;
+			out = p.value;
 			return true;
 		}
 		return false;
 	}
 	~RDUMMY()
 	{
-		while (!UserPropMap.empty())
-		{
-			map<string, UserProp*>::iterator i = UserPropMap.begin();
-			delete (*i).second;
-			UserPropMap.erase(i);
-		}
 	}
 };
 

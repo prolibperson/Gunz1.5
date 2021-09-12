@@ -5,7 +5,7 @@
 struct MPOINT{
 	int x, y;
 public:
-	MPOINT(void){}
+	MPOINT(void) = default;
 	MPOINT(int x, int y){ MPOINT::x = x, MPOINT::y = y; }
 
 	void Scale(float x, float y);

@@ -375,7 +375,7 @@ bool RSBspExporter::SaveSpawn(const char* name)
 				aElement.AddAttribute("item", szItemName);
 
 				int nTimeSec = 0;
-				if (!psp->GetUserPropValue("time", &nTimeSec))
+				if (!psp->GetUserPropValue("time", nTimeSec))
 				{
 					nTimeSec = 0;
 				}
@@ -416,7 +416,7 @@ bool RSBspExporter::SaveSmoke(const char* name)
 	aXml.AppendChild(aRootElement);
 
 	const char* cszDummyName = "smk_";
-	char strBuffer[256];
+	string  strBuffer;
 	int		iBuffer;
 	float	fBuffer;
 
@@ -433,52 +433,60 @@ bool RSBspExporter::SaveSmoke(const char* name)
 
 			MXmlElement SmokeElement = aRootElement.CreateChildElement(RTOK_SMOKE);
 
-			strcpy(strBuffer, psp->name.c_str());
-			strcat(strBuffer, ".elu");
+			strBuffer = psp->name.c_str();
+			strBuffer.append(".elu");
 
-			SmokeElement.AddAttribute(RTOK_SMOKE_NAME, strBuffer);
+			SmokeElement.AddAttribute(RTOK_SMOKE_NAME, strBuffer.c_str());
 
-			if (psp->GetUserPropValue(RTOK_SMOKE_DIRECTION, &iBuffer)) {
+			if (psp->GetUserPropValue(RTOK_SMOKE_DIRECTION, iBuffer)) {
 				SmokeElement.AddAttribute(RTOK_SMOKE_DIRECTION, iBuffer);
 			}
 
-			if (psp->GetUserPropValue(RTOK_SMOKE_POWER, &fBuffer))
+			if (psp->GetUserPropValue(RTOK_SMOKE_POWER, fBuffer))
 			{
 				int up = (int)fBuffer;
 				int down = (int)((fBuffer - up) * 1000);
-				sprintf(strBuffer, "%d.%d", up, down);
-				SmokeElement.AddAttribute(RTOK_SMOKE_POWER, strBuffer);
+				strBuffer = to_string(up);
+				strBuffer.append(".");
+				strBuffer.append(to_string(down));
+				SmokeElement.AddAttribute(RTOK_SMOKE_POWER, strBuffer.c_str());
 			}
 
-			if (psp->GetUserPropValue(RTOK_SMOKE_DELAY, &iBuffer))
+			if (psp->GetUserPropValue(RTOK_SMOKE_DELAY, iBuffer))
 				SmokeElement.AddAttribute(RTOK_SMOKE_DELAY, iBuffer);
 
-			if (psp->GetUserPropValue(RTOK_SMOKE_SIZE, &fBuffer))
+			if (psp->GetUserPropValue(RTOK_SMOKE_SIZE, fBuffer))
 			{
 				int up = (int)fBuffer;
 				int down = (int)((fBuffer - up) * 1000);
-				sprintf(strBuffer, "%d.%d", up, down);
-				SmokeElement.AddAttribute(RTOK_SMOKE_SIZE, strBuffer);
+				strBuffer = to_string(up);
+				strBuffer.append(".");
+				strBuffer.append(to_string(down));
+				SmokeElement.AddAttribute(RTOK_SMOKE_SIZE, strBuffer.c_str());
 			}
 
 			if (psp->GetUserPropValue(RTOK_SMOKE_COLOR, strBuffer, 256)) {
-				SmokeElement.AddAttribute(RTOK_SMOKE_COLOR, strBuffer);
+				SmokeElement.AddAttribute(RTOK_SMOKE_COLOR, strBuffer.c_str());
 			}
 
-			if (psp->GetUserPropValue(RTOK_SMOKE_LIFE, &fBuffer))
+			if (psp->GetUserPropValue(RTOK_SMOKE_LIFE, fBuffer))
 			{
 				int up = (int)fBuffer;
 				int down = (int)((fBuffer - up) * 1000);
-				sprintf(strBuffer, "%d.%d", up, down);
-				SmokeElement.AddAttribute(RTOK_SMOKE_LIFE, strBuffer);
+				strBuffer = to_string(up);
+				strBuffer.append(".");
+				strBuffer.append(to_string(down));
+				SmokeElement.AddAttribute(RTOK_SMOKE_LIFE, strBuffer.c_str());
 			}
 
-			if (psp->GetUserPropValue(RTOK_SMOKE_TOGMINTIME, &fBuffer))
+			if (psp->GetUserPropValue(RTOK_SMOKE_TOGMINTIME, fBuffer))
 			{
 				int up = (int)fBuffer;
 				int down = (int)((fBuffer - up) * 1000);
-				sprintf(strBuffer, "%d.%d", up, down);
-				SmokeElement.AddAttribute(RTOK_SMOKE_TOGMINTIME, strBuffer);
+				strBuffer = to_string(up);
+				strBuffer.append(".");
+				strBuffer.append(to_string(down));
+				SmokeElement.AddAttribute(RTOK_SMOKE_TOGMINTIME, strBuffer.c_str());
 			}
 
 			SmokeElement.AppendText("\t");
@@ -531,9 +539,9 @@ bool RSBspExporter::SaveFlag( const char* name )
 
 			FlagElement.AddAttribute(RTOK_FLAG_NAME, strBuffer);
 
-			if (psp->GetUserPropValue(RTOK_FLAG_DIRECTION, &iBuffer))
+			if (psp->GetUserPropValue(RTOK_FLAG_DIRECTION, iBuffer))
 				FlagElement.AddAttribute(RTOK_FLAG_DIRECTION, iBuffer);
-			if (psp->GetUserPropValue(RTOK_FLAG_POWER, &fBuffer))
+			if (psp->GetUserPropValue(RTOK_FLAG_POWER, fBuffer))
 			{
 				int up = (int)fBuffer;
 				int down = (int)((fBuffer - up) * 1000);
@@ -541,7 +549,7 @@ bool RSBspExporter::SaveFlag( const char* name )
 				FlagElement.AddAttribute(RTOK_FLAG_POWER, strBuffer);
 			}
 
-			if (psp->GetUserPropValue(RTOK_RESTRICTION, &nTemp))
+			if (psp->GetUserPropValue(RTOK_RESTRICTION, nTemp))
 			{
 				for (int i = 0; i < nTemp; ++i)
 				{
@@ -549,11 +557,11 @@ bool RSBspExporter::SaveFlag( const char* name )
 					MXmlElement RestrictionElement = FlagElement.CreateChildElement(RTOK_RESTRICTION);
 					sprintf(strBuffer2, "%s%d", RTOK_RESTRICTION_AXIS, i);
 					log("%s\n", strBuffer2);
-					if (psp->GetUserPropValue(strBuffer2, &iBuffer))
+					if (psp->GetUserPropValue(strBuffer2, iBuffer))
 						RestrictionElement.AddAttribute(RTOK_RESTRICTION_AXIS, iBuffer);
 					sprintf(strBuffer2, "%s%d", RTOK_RESTRICTION_POSITION, i);
 					log("%s\n", strBuffer2);
-					if (psp->GetUserPropValue(strBuffer2, &fBuffer))
+					if (psp->GetUserPropValue(strBuffer2, fBuffer))
 					{
 						int up = (int)fBuffer;
 						int down = (int)(fabs((fBuffer - up) * 1000));
@@ -562,17 +570,17 @@ bool RSBspExporter::SaveFlag( const char* name )
 					}
 					sprintf(strBuffer2, "%s%d", RTOK_RESTRICTION_COMPARE, i);
 					log("%s\n", strBuffer2);
-					if (psp->GetUserPropValue(strBuffer2, &iBuffer))
+					if (psp->GetUserPropValue(strBuffer2, iBuffer))
 						RestrictionElement.AddAttribute(RTOK_RESTRICTION_COMPARE, iBuffer);
 				}
 			}
 
-			if (psp->GetUserPropValue(RTOK_WINDTYPE, &iBuffer))
+			if (psp->GetUserPropValue(RTOK_WINDTYPE, iBuffer))
 			{
 				FlagElement.AppendText("\n\t\t");
 				MXmlElement WindElement = FlagElement.CreateChildElement("WINDTYPE");
 				WindElement.AddAttribute(RTOK_WINDTYPE, iBuffer);
-				if (psp->GetUserPropValue(RTOK_WINDDELAY, &iBuffer))
+				if (psp->GetUserPropValue(RTOK_WINDDELAY, iBuffer))
 					WindElement.AddAttribute(RTOK_WINDDELAY, iBuffer);
 			}
 			FlagElement.AppendText("\n\t");
@@ -729,7 +737,7 @@ bool RSBspExporter::SaveFog(MXmlElement& Root)
 
 bool RSBspExporter::SaveSoundProp(MXmlElement& Root)
 {
-	char szBuffer[256];
+	string szBuffer;
 	const char* cszDummyName = "snd_amb";
 
 	Root.AppendText("\n\t");
@@ -754,18 +762,18 @@ bool RSBspExporter::SaveSoundProp(MXmlElement& Root)
 
 			if (psp->GetUserPropValue("type", szBuffer, 256))
 			{
-				ambSndElement.AddAttribute("type", szBuffer);
+				ambSndElement.AddAttribute("type", szBuffer.c_str());
 				if (szBuffer[1] == '1') // ?? ?? ??? ??
 				{
 					ambSndElement.AppendText("\n\t\t\t");
 					MXmlElement posElement = ambSndElement.CreateChildElement("CENTER");
-					posElement.SetContents(Format(szBuffer, psp->position));
+					posElement.SetContents(Format((char*)szBuffer.c_str(), psp->position));
 				}
 			}
 
 			if (psp->GetUserPropValue("min_point", szBuffer, 256))
 			{
-				token = strtok(szBuffer, ",");
+				token = strtok((char*)szBuffer.c_str(), ",");
 				vec_max.x = -atof(token);
 				token = strtok(NULL, ",");
 				vec_min.y = atof(token);
@@ -776,7 +784,7 @@ bool RSBspExporter::SaveSoundProp(MXmlElement& Root)
 			}
 			if (psp->GetUserPropValue("max_point", szBuffer, 256))
 			{
-				token = strtok(szBuffer, ",");
+				token = strtok((char*)szBuffer.c_str(), ",");
 				vec_min.x = -atof(token);
 				token = strtok(NULL, ",");
 				vec_max.y = atof(token);
@@ -789,21 +797,21 @@ bool RSBspExporter::SaveSoundProp(MXmlElement& Root)
 			{
 				ambSndElement.AppendText("\n\t\t\t");
 				MXmlElement posElement = ambSndElement.CreateChildElement("RADIUS");
-				posElement.SetContents(szBuffer);
+				posElement.SetContents(szBuffer.c_str());
 			}
 			if (psp->GetUserPropValue("file", szBuffer, 256))
 			{
-				ambSndElement.AddAttribute("filename", szBuffer);
+				ambSndElement.AddAttribute("filename", szBuffer.c_str());
 			}
 			if (bmax & bmin)
 			{
 				ambSndElement.AppendText("\n\t\t\t");
 				MXmlElement posElement = ambSndElement.CreateChildElement("MIN_POSITION");
-				posElement.SetContents(Format(szBuffer, vec_min));
+				posElement.SetContents(Format((char*)szBuffer.c_str(), vec_min));
 
 				ambSndElement.AppendText("\n\t\t\t");
 				posElement = ambSndElement.CreateChildElement("MAX_POSITION");
-				posElement.SetContents(Format(szBuffer, vec_max));
+				posElement.SetContents(Format((char*)szBuffer.c_str(), vec_max));
 
 				bmin = bmax = false;
 			}

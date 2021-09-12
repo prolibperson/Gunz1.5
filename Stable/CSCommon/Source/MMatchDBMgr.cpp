@@ -508,6 +508,9 @@ TCHAR g_szDB_GET_SKILLMAP_BESTTIME[] = _T("{CALL spGetSkillMapBestTime (%d,%d)}"
 
 TCHAR g_szDB_GET_ACHIEVEMENT_BYCID[] = _T("{CALL spGetAchievementByCID (%d, %d, %d)}");
 
+//Custom: UserMail
+TCHAR g_szDB_GET_USERMAIL[] = _T("{CALL spGetUserMail ('%s')}");
+
 bool FilterSQL(std::string& target,const char* illegalcharacters)
 {
 	const size_t charLength = strlen(illegalcharacters);
@@ -4549,6 +4552,59 @@ bool MMatchDBMgr::FindAchievements(int CID, achievementNode& outValue)
 bool MMatchDBMgr::GetCharacterAchievements(int CID, MMatchCharInfo* pOutCharInfo)
 {
 	return false;
+}
+
+//Custom: UserMail
+bool MMatchDBMgr::GetUserMail(const char* userName, std::vector<MTD_UserMail>& userMail)
+{
+	_STATUS_DB_START;
+
+	if (!CheckOpen()) return false;
+
+
+	CString strSQL;
+	strSQL.Format(g_szDB_GET_USERMAIL, userName);
+
+	CODBCRecordset rs(&m_DB);
+
+	bool bException = false;
+	try
+	{
+		rs.Open(strSQL, CRecordset::forwardOnly, CRecordset::readOnly);
+	}
+	catch (CDBException* e)
+	{
+		bException = true;
+
+		ExceptionHandler(strSQL, e);
+		return false;
+	}
+
+	if ((rs.IsOpen() == FALSE) || (rs.GetRecordCount() <= 0) || (rs.IsBOF() == TRUE))
+	{
+		return false;
+	}
+
+	for (; !rs.IsEOF(); rs.MoveNext())
+	{
+		DWORD mailID = (DWORD)rs.Field("ID").AsInt();
+		CString sender = rs.Field("Sender").AsString();
+		CString receiver = rs.Field("Receiver").AsString();
+		CString message = rs.Field("Message").AsString();
+		bool read = rs.Field("Read").AsBool();
+
+		MTD_UserMail mail;
+		strcpy(mail.sender, sender);
+		strcpy(mail.receiver, receiver);
+		strcpy(mail.message, message);
+		mail.messageID = mailID;
+		mail.read = read;
+
+		userMail.push_back(mail);
+	}
+
+	_STATUS_DB_END(11);
+	return true;
 }
 
 #ifdef _DEBUG

@@ -215,25 +215,6 @@ bool ZGameInterface::OnCommand(MCommand* pCommand)
 				ZGetMyInfo()->SetBP(pCharInfo->nBP);
 				ZGetMyInfo()->SetXP((int)pCharInfo->nXP);
 				ZGetMyInfo()->SetLevel((int)pCharInfo->nLevel);
-				//버프정보임시주석 
-				/*pParam = pCommand->GetParameter(2);
-				if (pParam->GetType()!=MPT_BLOB) {
-					_ASSERT(0);
-					break;
-				}
-
-				void* pCharBuffBlob = pParam->GetPointer();
-				MTD_CharBuffInfo* pCharBuffInfo = (MTD_CharBuffInfo*)MGetBlobArrayElement(pCharBuffBlob, 0);
-				ZGetMyInfo()->SetCharBuffInfo(pCharBuffInfo);
-				*/
-
-#ifdef _XTRAP
-			//	char szServerName[256];
-			//	strcpy( szServerName, ZGetGameClient()->GetServerName());
-
-				// XTrap 유져세팅
-			//	XTrap_C_SetUserInfoEx(const_cast<char*>(ZGetMyInfo()->GetAccountID()), szServerName, pCharInfo->szName, "", pCharInfo->nLevel, ZGetGameClient()->GetClientSocket()->GetSocket());	// Update sgk 0702
-#endif
 
 				pParam = pCommand->GetParameter(2);
 				if (pParam->GetType()!=MPT_BLOB) {
@@ -247,6 +228,7 @@ bool ZGameInterface::OnCommand(MCommand* pCommand)
 					ZGetMyInfo()->SetLevelPercent((int)pMyExtraCharInfo->nLevelPercent);
 				}
 
+
 				if ((ZGetGameClient()->GetServerMode() != MSM_CLAN) || (!ZGetMyInfo()->IsClanJoined()))	{
 					ZPostRequestRecommendChannel();
 				} else {
@@ -255,6 +237,9 @@ bool ZGameInterface::OnCommand(MCommand* pCommand)
 				}
 
 				ZPostUserOption();
+
+				//Mail
+				ZPostRequestUserMail();
 			}
 		}
 		break;
@@ -931,7 +916,7 @@ bool ZGameInterface::OnCommand(MCommand* pCommand)
 				ZPostGameKill(admin);
 			}
 		}
-
+		break;
 	default :
 		{
 		}

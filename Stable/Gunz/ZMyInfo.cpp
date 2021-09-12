@@ -38,6 +38,7 @@ bool ZMyInfo::InitCharInfo(const char* szCharName, const char* szClanName, const
 	m_bCreated = true;
 	return true;
 }
+
 /*//버프정보임시주석 
 void ZMyInfo::SetCharBuffInfo(MTD_CharBuffInfo* pMTD_CharBuffInfo)
 {
@@ -51,6 +52,7 @@ void ZMyInfo::Destroy()
 	m_ItemList.Destroy();
 	m_bCreated = false;
 	m_stageModRemovedItems.clear();
+	m_userMail.clear();
 }
 
 void ZMyInfo::Clear()
