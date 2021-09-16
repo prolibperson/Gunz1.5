@@ -395,7 +395,7 @@ public:
 	bool GetCharacterAchievements(int CID, MMatchCharInfo* pOutCharInfo);
 
 	//Custom: UserMail
-	bool GetUserMail(const char* userName, std::vector<MTD_UserMail>& userMail);
+	bool GetUserMail(int const& CID, std::vector<MTD_UserMail>& userMail);
 
 #ifdef _DEBUG
 	bool test();

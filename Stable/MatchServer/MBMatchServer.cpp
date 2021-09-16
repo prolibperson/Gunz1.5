@@ -559,27 +559,12 @@ void MBMatchServer::OnRun(void)
 	const DWORD dwGlobalClock = GetGlobalClockCount();
 
 	MGetCheckLoopTimeInstance()->SetNHNUSAAuthTick();
-#ifdef LOCALE_NHNUSA
-	if( MGetServerConfig()->IsUseNHNUSAAuth() )
-	{
-		if( GetNHNRTA().IsElapsed(dwGlobalClock) )
-		{
-			GetNHNRTA().RTA( GetClientCount(), dwGlobalClock );
-		}
-	}
-#endif
 
 	MGetServerStatusSingleton()->SetRunStatus(113);
 
 	MGetCheckLoopTimeInstance()->SetGameGuardTick();
-#ifdef _GAMEGUARD
-	OnRun_GameGuard(dwGlobalClock);
-#endif
 
 	MGetCheckLoopTimeInstance()->SetXTrapTick();
-#ifdef _XTRAP
-	OnRun_XTrap(dwGlobalClock);
-#endif
 
 	MGetServerStatusSingleton()->SetRunStatus(114);
 
@@ -856,52 +841,6 @@ bool MBMatchServer::InitXtrap()
 
 bool MBMatchServer::InitNHNAuth()
 {
-
-	// move - by SungE 2007-05-04
-#ifdef LOCALE_NHNUSA
-	if( MGetServerConfig()->IsUseNHNUSAAuth() )
-	{
-		bool bInitAuth = false;
-		if( NSM_REAL == MGetServerConfig()->GetNHNServerMode() )
-		{
-			if( !GetNHNModule().InitAuthReal() )
-			{
-				mlog( "init nhn usa auth is fail(real).\n" );
-				return false;
-			}
-		}
-		else if( NSM_ALPHA == MGetServerConfig()->GetNHNServerMode() )
-		{
-			if( !GetNHNModule().InitAuthAlpha() )
-			{
-				mlog( "init nhn usa auth is fail(alpha).\n" );
-				return false;
-			}
-		}
-
-		mlog( "success init nhn auth.\n" );
-
-		if( NSM_REAL == MGetServerConfig()->GetNHNServerMode() )
-		{
-			if( !GetNHNRTA().InitRTAReal(MGetServerConfig()->GetServerName()) )
-			{
-				mlog( "init nhn usa report is fail(real).\n" );
-				return false;
-			}
-		}
-		else if( NSM_ALPHA == MGetServerConfig()->GetNHNServerMode() )
-		{
-			if( !GetNHNRTA().InitRTAAlpha(MGetServerConfig()->GetServerName()) )
-			{
-				mlog( "init nhn usa report is fail(alpha).\n" );
-				return false;
-			}
-		}
-
-		mlog( "success init nhn usa report.\n" );
-	}
-#endif
-
 	return true;
 }
 
@@ -937,35 +876,10 @@ bool MBMatchServer::InitGameguard()
 
 bool MBMatchServer::InitGameOn()
 {
-#ifdef LOCALE_JAPAN
-	if ( GetGameOnModule().InitModule() == false)
-	{
-		mlog( "init GameOn fail.\n" );
-		return false;
-	}
-#endif
 
 	mlog( "init GameOn success.\n" );
 	return true;
 }
-
-#ifdef NEW_AUTH_MODULE
-bool MBMatchServer::InitNetmarble()
-{
-#ifdef LOCALE_KOREA
-	if ( MGetNetmarbleModule().InitModule() == false)
-	{
-		mlog( "init Netmarble failed.\n");
-		return false;
-	}
-
-	mlog( "init Netmarble success.\n");
-#endif
-
-	return true;
-}
-#endif
-
 
 void MBMatchServer::SafePushMonitorUDP( const DWORD dwIP, const WORD wPort, const char* pData, const DWORD dwDataSize )
 {

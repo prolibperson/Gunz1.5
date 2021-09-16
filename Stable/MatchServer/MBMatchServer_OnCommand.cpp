@@ -24,10 +24,6 @@
 #include "MMatchUtil.h"
 #include "MMatchShop.h"
 
-#ifdef LOCALE_NHNUSA
-#include "MBMatchNHNAuth.h"
-#endif
-
 
 bool MBMatchServer::OnCommand(MCommand* pCommand)
 {
@@ -71,74 +67,18 @@ bool MBMatchServer::OnCommand(MCommand* pCommand)
 
 	case MC_MATCH_LOGIN_NETMARBLE:
 		{
-#ifdef LOCALE_KOREA
-			char szAuthCookie[4096];
-			char szDataCookie[4096];
-			char szCPCookie[4096];
-			char szSpareParam[4096];
-			int nCommandVersion = 0;
-			unsigned long nChecksumPack = 0;
-			if (pCommand->GetParameter(szAuthCookie, 0, MPT_STR, sizeof(szAuthCookie) )==false) break;
-			if (pCommand->GetParameter(szDataCookie, 1, MPT_STR, sizeof(szDataCookie) )==false) break;
-			if (pCommand->GetParameter(szCPCookie, 2, MPT_STR, sizeof(szCPCookie) )==false) break;
-			if (pCommand->GetParameter(szSpareParam, 3, MPT_STR, sizeof(szSpareParam) )==false) break;
-			if (pCommand->GetParameter(&nCommandVersion, 4, MPT_INT)==false) break;
-			if (pCommand->GetParameter(&nChecksumPack, 5, MPT_UINT)==false) break;
 
-			//todok mark
-			//OnRequestLoginNetmarble(pCommand->GetSenderUID(), szAuthCookie, szDataCookie, szCPCookie, szSpareParam, nCommandVersion, nChecksumPack);
-			//OnRequestLoginNetmarble(pCommand->GetSenderUID(), szCPCookie, szSpareParam, nCommandVersion, nChecksumPack);
-#endif
 		}
 		break;
 
 	case MC_MATCH_LOGIN_NHNUSA :  
 		{
-#ifdef LOCALE_NHNUSA
-			char szUserID[ MAX_USERID_STRING_LEN ]	= {0,};
-			char szAuthStr[ NHN_AUTH_LENGTH ]		= {0,};
-			int  nCommandVersion = 0;
-			int  nCheckSumPack = 0;
 
-			pCommand->GetParameter( szUserID, 0, MPT_STR, MAX_USERID_STRING_LEN );
-			pCommand->GetParameter( szAuthStr, 1, MPT_STR, NHN_AUTH_LENGTH );
-			pCommand->GetParameter( &nCommandVersion, 2, MPT_INT );
-			pCommand->GetParameter( &nCheckSumPack, 3, MPT_UINT );
-			MCommandParameter* pLoginParam = pCommand->GetParameter(4);
-			if (pLoginParam->GetType() != MPT_BLOB) break;
-			void *pLoginBlob = pLoginParam->GetPointer();
-			if( NULL == pLoginBlob )
-				break;
-
-			char *szEncryptMD5Value = (char *)MGetBlobArrayElement(pLoginBlob, 0);
-
-			OnRequestLoginNHNUSA( pCommand->GetSenderUID(), szUserID, szAuthStr, nCommandVersion, nCheckSumPack, szEncryptMD5Value);
-#endif
 		}
 		break;
 
 		case MC_MATCH_LOGIN_GAMEON_JP :  
 		{
-#ifdef LOCALE_JAPAN
-			char szString[ 512 ] = {0,};
-			char szStatIndex[ 512 ] = {0,};
-			int  nCommandVersion = 0;
-			int  nCheckSumPack = 0;
-
-			pCommand->GetParameter( szString, 0, MPT_STR, 512 );
-			pCommand->GetParameter( szStatIndex, 1, MPT_STR, 512 );
-			pCommand->GetParameter( &nCommandVersion, 2, MPT_INT );
-			pCommand->GetParameter( &nCheckSumPack, 3, MPT_UINT );
-			MCommandParameter* pLoginParam = pCommand->GetParameter(4);
-			if (pLoginParam->GetType() != MPT_BLOB) break;
-			void *pLoginBlob = pLoginParam->GetPointer();
-			if( NULL == pLoginBlob )
-				break;
-
-			char *szEncryptMD5Value = (char *)MGetBlobArrayElement(pLoginBlob, 0);
-
-			OnRequestLoginGameOn( pCommand->GetSenderUID(), szString, szStatIndex, nCommandVersion, nCheckSumPack, szEncryptMD5Value);
-#endif
 		}
 		break;
 

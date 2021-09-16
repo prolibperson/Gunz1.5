@@ -48,11 +48,6 @@
 #include "ZProfiler.h"
 #endif
 
-#ifdef LOCALE_NHNUSA
-#include "ZNHN_USA.h"
-#endif
-
-
 ZApplication*	ZApplication::m_pInstance = NULL;
 MZFileSystem	ZApplication::m_FileSystem;    
 ZSoundEngine	ZApplication::m_SoundEngine;
@@ -702,10 +697,6 @@ bool ZApplication::OnCreate(ZLoadingProgress *pLoadingProgress)
 
 	ZSetupDataChecker_Global(&m_GlobalDataChecker);
 
-
-#ifdef LOCALE_NHNUSA
-	GetNHNUSAReport().ReportInitComplete();
-#endif
 
 	//if (!m_companionDefMgr.ReadXml("system/companion.xml", GetFileSystem())) {
 	//	mlog("Error reading companion.xml\n");

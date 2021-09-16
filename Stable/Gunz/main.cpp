@@ -712,19 +712,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-#ifdef LOCALE_JAPAN
-		case WM_COPYDATA:
-			{
-				ZBaseAuthInfo* pAuth = ZGetLocale()->GetAuthInfo();
-				if( ((ZGameOnJPAuthInfo*)pAuth)->NewLogin(wParam, lParam) )
-				{
-					MessageBox(g_hWnd, "Same id accessing from a different PC", NULL, MB_OK);
-					zexit(-1);
-				}
-			}
-			break;
-#endif
-
 		case WM_SYSCHAR:
 			if(ZIsLaunchDevelop() && wParam==VK_RETURN)
 			{
@@ -1009,32 +996,11 @@ DWORD g_dwMainThreadID;
 //------------------------------------------- nhn usa -------------------------------------------------------------
 bool InitReport()
 {
-#ifdef LOCALE_NHNUSA
-	mlog( "Init report start\n" );
-	if( !GetNHNUSAReport().InitReport(((ZNHN_USAAuthInfo*)(ZGetLocale()->GetAuthInfo()))->GetUserID().c_str(),
-		((ZNHN_USAAuthInfo*)(ZGetLocale()->GetAuthInfo()))->GetGameStr()) )
-	{
-		mlog( "Init nhn report fail.\n" );
-		return false;
-	}
-	GetNHNUSAReport().ReportStartGame();
-	mlog( "Init report success.\n" );
-#endif
-
 	return true;
 }
 
 bool InitPoll()
 {
-#ifdef LOCALE_NHNUSA
-	mlog( "Init poll start\n" );
-
-	((ZNHN_USAAuthInfo*)(ZGetLocale()->GetAuthInfo()))->ZUpdateGameString();
-
-	if( !GetNHNUSAPoll().ZHanPollInitGameString( ((ZNHN_USAAuthInfo*)(ZGetLocale()->GetAuthInfo()))->GetGameStr()) )
-		return false;
-#endif
-
 	return true;
 }
 
@@ -1051,10 +1017,6 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 	InitLog(MLOGSTYLE_DEBUGSTRING|MLOGSTYLE_FILE);
 
 	g_fpOnCrcFail = CrcFailExitApp;
-
-#ifdef LOCALE_JAPAN
-	ZGameOnJPAuthInfo::m_hLauncher = ::FindWindow( NULL, TITLE_PUBLAGENT );
-#endif
 
 	g_dwMainThreadID = GetCurrentThreadId();
 	
@@ -1291,10 +1253,6 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 	//__except(MFilterException(GetExceptionInformation())){
 	__except(CrashExceptionDump(GetExceptionInformation(), szDumpFileName, true))
 	{
-#ifdef LOCALE_NHNUSA
-		GetNHNUSAReport().ReportCrashedGame();
-#endif
-
 		//HandleExceptionLog();
 //		MessageBox(g_hWnd, "예상치 못한 오류가 발생했습니다.", APPLICATION_NAME , MB_ICONERROR|MB_OK);
 	}
@@ -1308,76 +1266,3 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	return 0;
 }
-
-#ifdef _HSHIELD
-int __stdcall AhnHS_Callback(long lCode, long lParamSize, void* pParam)
-{
-//	TCHAR szTitle[256];
-
-	switch(lCode)
-	{
-		//Engine Callback
-	case AHNHS_ENGINE_DETECT_GAME_HACK:
-		{
-			TCHAR szMsg[255];
-			wsprintf(szMsg, _T("다음 위치에서 해킹툴이 발견되어 프로그램을 종료시켰습니다.\n%s"), (char*)pParam);
-//			MessageBox(NULL, szMsg, szTitle, MB_OK);
-			mlog(szMsg);
-			PostThreadMessage(g_dwMainThreadID, WM_QUIT, 0, 0);
-			break;
-		}
-
-		//일부 API가 이미 후킹되어 있는 상태
-		//그러나 실제로는 이를 차단하고 있기 때문에 다른 후킹시도 프로그램은 동작하지 않습니다.
-		//이 Callback은 단지 경고 내지는 정보제공 차원에서 제공되므로 게임을 종료할 필요가 없습니다.
-	case AHNHS_ACTAPC_DETECT_ALREADYHOOKED:
-		{
-			PACTAPCPARAM_DETECT_HOOKFUNCTION pHookFunction = (PACTAPCPARAM_DETECT_HOOKFUNCTION)pParam;
-			TCHAR szMsg[255];
-			wsprintf(szMsg, _T("[HACKSHIELD] Already Hooked\n- szFunctionName : %s\n- szModuleName : %s\n"), 
-				pHookFunction->szFunctionName, pHookFunction->szModuleName);
-			OutputDebugString(szMsg);
-			break;
-		}
-
-		//Speed 관련
-	case AHNHS_ACTAPC_DETECT_SPEEDHACK:
-	case AHNHS_ACTAPC_DETECT_SPEEDHACK_APP:
-		{
-//			MessageBox(NULL, _T("현재 이 PC에서 SpeedHack으로 의심되는 동작이 감지되었습니다."), szTitle, MB_OK);
-			mlog("현재 이 PC에서 SpeedHack으로 의심되는 동작이 감지되었습니다.");
-			PostThreadMessage(g_dwMainThreadID, WM_QUIT, 0, 0);
-			break;
-		}
-
-		//디버깅 방지 
-	case AHNHS_ACTAPC_DETECT_KDTRACE:	
-	case AHNHS_ACTAPC_DETECT_KDTRACE_CHANGED:
-		{
-			TCHAR szMsg[255];
-			wsprintf(szMsg, _T("프로그램에 대하여 디버깅 시도가 발생하였습니다. (Code = %x)\n프로그램을 종료합니다."), lCode);
-//			MessageBox(NULL, szMsg, szTitle, MB_OK);
-			mlog(szMsg);
-			PostThreadMessage(g_dwMainThreadID, WM_QUIT, 0, 0);
-			break;
-		}
-
-		//그외 해킹 방지 기능 이상 
-	case AHNHS_ACTAPC_DETECT_AUTOMOUSE:
-	case AHNHS_ACTAPC_DETECT_DRIVERFAILED:
-	case AHNHS_ACTAPC_DETECT_HOOKFUNCTION:
-	case AHNHS_ACTAPC_DETECT_MESSAGEHOOK:
-	case AHNHS_ACTAPC_DETECT_MODULE_CHANGE:
-		{
-			TCHAR szMsg[255];
-			wsprintf(szMsg, _T("해킹 방어 기능에 이상이 발생하였습니다. (Code = %x)\n프로그램을 종료합니다."), lCode);
-//			MessageBox(NULL, szMsg, szTitle, MB_OK);
-			mlog(szMsg);
-			PostThreadMessage(g_dwMainThreadID, WM_QUIT, 0, 0);
-			break;
-		}
-	}
-
-	return 1;
-}
-#endif

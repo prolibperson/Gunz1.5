@@ -509,7 +509,7 @@ TCHAR g_szDB_GET_SKILLMAP_BESTTIME[] = _T("{CALL spGetSkillMapBestTime (%d,%d)}"
 TCHAR g_szDB_GET_ACHIEVEMENT_BYCID[] = _T("{CALL spGetAchievementByCID (%d, %d, %d)}");
 
 //Custom: UserMail
-TCHAR g_szDB_GET_USERMAIL[] = _T("{CALL spGetUserMail ('%s')}");
+TCHAR g_szDB_GET_USERMAIL[] = _T("{CALL spGetUserMail ('%d')}");
 
 bool FilterSQL(std::string& target,const char* illegalcharacters)
 {
@@ -4555,7 +4555,7 @@ bool MMatchDBMgr::GetCharacterAchievements(int CID, MMatchCharInfo* pOutCharInfo
 }
 
 //Custom: UserMail
-bool MMatchDBMgr::GetUserMail(const char* userName, std::vector<MTD_UserMail>& userMail)
+bool MMatchDBMgr::GetUserMail(int const& CID, std::vector<MTD_UserMail>& userMail)
 {
 	_STATUS_DB_START;
 
@@ -4563,7 +4563,7 @@ bool MMatchDBMgr::GetUserMail(const char* userName, std::vector<MTD_UserMail>& u
 
 
 	CString strSQL;
-	strSQL.Format(g_szDB_GET_USERMAIL, userName);
+	strSQL.Format(g_szDB_GET_USERMAIL, CID);
 
 	CODBCRecordset rs(&m_DB);
 

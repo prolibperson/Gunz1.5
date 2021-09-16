@@ -201,49 +201,28 @@ bool MChattingFilter::PreTranslateStr( const string& strInText, string& strOutTe
 
 
 	bool bAllowDoubleByteChar = true;
-	// 미국에서 2바이트 문자를 이용해 캐릭명에 빈칸을 넣는 방법이 유행해서 아예 미국에선 2바이트 문자를 허용하지 않음
-	// 이로써 미국에서는 캐릭명과 채팅에 2바이트 문자를 전혀 사용할 수 없게 됨.
-#ifdef LOCALE_NHNUSA
-	bAllowDoubleByteChar = false;
-#endif
-
-	while ( 1)
+	while (1)
 	{
 		// 사이즈를 벗어나면 종료
-		if ( nPos >= (int)strOutText.size())
+		if (nPos >= (int)strOutText.size())
 			break;
 
 		// 현재 위치의 캐릭터를 구함
-		ch = strOutText.at( nPos);
+		ch = strOutText.at(nPos);
 		u_ch = ch;
 
 
 		// 현재 캐릭터가 2바이트 문자의 첫 바이트이면 다음 바이트까지의 검사를 패스
-		if ( bAllowDoubleByteChar && IsDBCSLeadByte( ch))
+		if (bAllowDoubleByteChar && IsDBCSLeadByte(ch))
 		{
-#ifdef LOCALE_JAPAN   // 일본 전각 문자의 경우 특수문자도 전부 2바이트다. 
-			if ( ch == -127 && strOutText.at( nPos +1) == 64) // 일단 스페이스만 막음 
-			{
-				bHaveSpcChar = true;
-				m_strLastFilterdWord = strOutText.substr(nPos, 2);;
-			}
-#endif
 			nPos += 2;
 		}
+		else if (((ch >= 'a') && (ch <= 'z')) ||
+			((ch >= 'A') && (ch <= 'Z')) ||
+			((ch >= '0') && (ch <= '9')))
 
-		// 일반 ASCII 문자인지 확인
-#ifdef LOCALE_JAPAN   
-		else if ( ( (ch >= 'a') && (ch <= 'z') ) ||	
-				  ( (ch >= 'A') && (ch <= 'Z') ) ||
-				  ( (ch >= '0') && (ch <= '9') ) ||
-				  ( (u_ch >= 0xA1 ) && (u_ch <= 0xDF ) ) )  // 일본 반각 문자인지 확인
-#else 
-		else if ( ( (ch >= 'a') && (ch <= 'z') ) ||	
-			( (ch >= 'A') && (ch <= 'Z') ) ||
-			( (ch >= '0') && (ch <= '9') )  )  
-#endif
 		{
-			if( ( (ch >= 'A') && (ch <= 'Z') ) )  // 소문자 변환
+			if (((ch >= 'A') && (ch <= 'Z')))  // 소문자 변환
 			{
 				strOutText[nPos] += 0x20;
 			}
@@ -252,7 +231,7 @@ bool MChattingFilter::PreTranslateStr( const string& strInText, string& strOutTe
 		else
 		{
 			// 삭제하기 전에 해당 캐릭터가 비허용 특수문자인지 검사
-			if ( (ch != '_') && (ch != '[') && (ch != ']') )
+			if ((ch != '_') && (ch != '[') && (ch != ']'))
 			{
 				bHaveSpcChar = true;
 
@@ -260,7 +239,7 @@ bool MChattingFilter::PreTranslateStr( const string& strInText, string& strOutTe
 			}
 
 			// 캐릭터 삭제
-			strOutText.erase( nPos, 1);
+			strOutText.erase(nPos, 1);
 		}
 	}
 
