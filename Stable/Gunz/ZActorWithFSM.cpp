@@ -1517,7 +1517,7 @@ void ZActorWithFSM::Func_FindTargetInHeight(int height)
 	m_uidTarget = uidTarget;
 }
 
-void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist,float fDelta)
+void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist, float fDelta)
 {
 	if (!m_pGame) { _ASSERT(0); return; }
 
@@ -1525,8 +1525,6 @@ void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist,float fDelta)
 
 	ZCharacter* pTarget = (ZCharacter*)ZGetCharacterManager()->Find(m_uidTarget);
 	if (!pTarget) return;
-	m_listWaypoint.clear();
-
 	// Make path
 
 	ZNavigationMesh navMesh = m_pGame->GetNavigationMesh();
@@ -1535,30 +1533,22 @@ void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist,float fDelta)
 
 	// Make navigation path
 	rmatrix mat;
-	rvector tarpos = pTarget->GetPosition() - GetPosition();
+	rvector tarpos = pTarget->GetPosition();
 	tarpos.z = 0;
 	if (tarpos.x < 0)
 		D3DXMatrixRotationZ(&mat, -dist);
 	else
 		D3DXMatrixRotationZ(&mat, dist);
 	tarpos = tarpos * mat;
-	tarpos.z = 0;//we dont care about the height difference
-	if (tarpos.x < -dist || tarpos.x > dist)
-	{
-		m_listWaypoint.clear();
-		Func_BuildWaypointsToTarget();
-		Func_RunWaypoints(fDelta);
-	}
-	else
-	{
-		if (navMesh.BuildNavigationPath(GetPosition(), tarpos))
-		{
+	tarpos.z = 0;
 
-			m_listWaypoint.clear();
-			for (list<rvector>::iterator it = navMesh.GetWaypointList().begin(); it != navMesh.GetWaypointList().end(); ++it)
-				m_listWaypoint.push_back(*it);
-			Func_RunWaypoints(fDelta);
-		}
+	if (navMesh.BuildNavigationPath(GetPosition(), tarpos))
+	{
+
+		m_listWaypoint.clear();
+		for (list<rvector>::iterator it = navMesh.GetWaypointList().begin(); it != navMesh.GetWaypointList().end(); ++it)
+			m_listWaypoint.push_back(*it);
+		Func_RunWaypoints(fDelta);
 	}
 }
 

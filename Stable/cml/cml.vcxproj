@@ -97,7 +97,7 @@
       <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>lib\zlib.lib;comsuppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lib\zlibd.lib;comsuppd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Lib\cmld.lib</OutputFile>
       <AdditionalLibraryDirectories>Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>

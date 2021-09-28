@@ -133,13 +133,30 @@ struct Building
 ///TODO: read <REWARD/> Tag
 struct Reward
 {
-
+	unsigned char baseBounty;
+	unsigned char	baseExp;
+	unsigned short	minTime;
+	unsigned short	minHonor;
+	unsigned char	winnerMedal;
+	unsigned char	loserMedal;
+	unsigned char	minuteBonusMedal;
+	unsigned char	minuteBonusMedalMax;
+	unsigned char	minPlayCount;
+	unsigned char	minPlayCountBonusMedal;
+	unsigned char	WaitingTime;
+	unsigned char	WaitingRewardMedal;
+	unsigned char	WaitingRewardMax;
+	float	WinXPBonusMVP;
+	float	WinBPBonusMVP;
+	float	WinMedalBonusMVP;
+	float	LoseXPBonusMVP;
+	float	LoseBPBonusMVP;
+	float	LoseMedalBonusMVP;
 };
 
 ///TODO: read <EVENT_MESSAGE/> Tag
 struct EventMessage
 {
-
 };
 
 ///TODO: read <CLASS_TABLE/> Tag
@@ -195,6 +212,7 @@ public:
 	bool ParseXml_PlayerKillReward(rapidxml::xml_node<>* elem, PlayerKillReward& playerKillReward);
 	bool ParseXml_ClassBook(rapidxml::xml_node<>* elem, ClassBook& classBook);
 	bool ParseXml_Help(rapidxml::xml_node<>* elem, HelpMessage& helpMsg);
+	bool ParseXml_Reward(rapidxml::xml_node<>* elem, Reward& reward);
 	//new parse functions
 	void ParseXml_HonorTag(rapidxml::xml_node<>* elem);
 	void ParseXml_WeaponTag(rapidxml::xml_node<>* elem);
@@ -204,6 +222,7 @@ public:
 	void ParseXml_EventTag(rapidxml::xml_node<>* elem);
 	void ParseXml_UpgradeTag(rapidxml::xml_node<>* elem);
 	void ParseXml_HelpTag(rapidxml::xml_node<>* elem);
+	void ParseXml_RewardTag(rapidxml::xml_node<>* elem);
 
 	const auto& GetPlayerEnhancement() {
 		return m_playerEnhancement;

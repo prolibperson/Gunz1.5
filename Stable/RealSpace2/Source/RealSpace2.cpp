@@ -1085,6 +1085,7 @@ void RSetFrameLimitPerSeceond(unsigned short nFrameLimit)
 	case 1:	{	g_nFrameLimitValue = 60;	}	break;
 	case 2:	{	g_nFrameLimitValue = 120;	}	break;
 	case 3:	{	g_nFrameLimitValue = 250;	}	break;
+	case 4: {   g_nFrameLimitValue = 333;   }   break;
 	default:{	g_nFrameLimitValue = 0;		}	break;
 	}
 }

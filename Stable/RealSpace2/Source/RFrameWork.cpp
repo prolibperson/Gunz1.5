@@ -344,6 +344,7 @@ void RFrame_UpdateInput()
 }
 
 
+using namespace std::chrono;
 
 int RRun()
 {
@@ -356,7 +357,7 @@ int RRun()
 		}
 	}
 
-	double lastTime = timeGetTime();
+	double lastTime = duration<double,std::ratio<1,1000>>(high_resolution_clock::now().time_since_epoch()).count();
 
 	RFrame_Init();
 
@@ -390,15 +391,16 @@ int RRun()
 		{
 			if (g_nFrameLimitValue != 0)
 			{
-				const double maxPeriod = 1000.f / (float)g_nFrameLimitValue;
-				double time = timeGetTime();
+				const double maxPeriod = 1000.0 / static_cast<double>(g_nFrameLimitValue);
+				double currTime = duration<double,std::ratio<1,1000>>(high_resolution_clock::now().time_since_epoch()).count();
 
-				double deltaTime = time - lastTime;
+				double  deltaTime = duration<double>(currTime - lastTime).count();
 				if (deltaTime >= maxPeriod)
 				{
-					g_fFPS = time - lastTime;
-					lastTime = time;
-					RFrame_UpdateRender();
+					g_fFPS = deltaTime;
+					RFrame_UpdateRender();		
+					lastTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+
 				}
 			}
 			else

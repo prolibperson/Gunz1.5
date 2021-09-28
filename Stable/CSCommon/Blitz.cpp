@@ -75,6 +75,9 @@ bool Blitz::ReadXml(const char* fileName, MZFileSystem* fileSystem)
 
 		if (_stricmp(itor->name(), "HELP_MESSAGE") == 0)
 			ParseXml_HelpTag(itor);
+
+		if (_stricmp(itor->name(), "REWARD") == 0)
+			ParseXml_RewardTag(itor);
 	}
 
 	delete[] buffer;
@@ -338,6 +341,14 @@ void Blitz::ParseXml_HelpTag(rapidxml::xml_node<>* elem)
 	m_helpMessage = node;
 }
 
+void Blitz::ParseXml_RewardTag(rapidxml::xml_node<>* elem)
+{
+	Reward node = {};
+	if (!ParseXml_Reward(elem, node)) {
+		mlog("Error parsing reward tag.\n");
+	}
+}
+
 bool Blitz::ParseXml_NpcRewardInfo(rapidxml::xml_node<>* elem, HonorReward& honorReward)
 {
 	honorReward.actorType = elem->first_attribute("actorType")->value();
@@ -394,4 +405,19 @@ bool Blitz::ParseXml_Help(rapidxml::xml_node<>* elem, HelpMessage& helpMsg)
 	strcpy_s(helpMsg.sound, elem->first_attribute("sound")->value());
 
 	return true;
+}
+
+bool Blitz::ParseXml_Reward(rapidxml::xml_node<>* elem, Reward& reward)
+{
+	if (elem == nullptr)
+		return false;
+
+	reward.baseBounty = static_cast<unsigned char>(atoi(elem->first_attribute("baseBounty")->value()));
+	reward.baseExp = static_cast<unsigned char>(atoi(elem->first_attribute("baseExp")->value()));
+	reward.minTime = static_cast<unsigned short>(atoi(elem->first_attribute("minTime")->value()));
+	reward.minHonor = static_cast<unsigned short>(atoi(elem->first_attribute("minHonor")->value()));
+	reward.winnerMedal = static_cast<unsigned char>(atoi(elem->first_attribute("winnerMedal")->value()));
+	reward.loserMedal = static_cast<unsigned char>(atoi(elem->first_attribute("loserMedal")->value()));
+	reward.minuteBonusMedal = static_cast<unsigned char>(atoi(elem->first_attribute("minuteBonusMedal")->value()));
+	//TODO: Finish parsing the struct
 }

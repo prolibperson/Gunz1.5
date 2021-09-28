@@ -49,8 +49,8 @@ void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 		//float fScore = 100-(fMs-(1000.f/60.f))*2;
 		//int zcr_cnt = ZGetObjectManager()->GetRenderedCount();
 		//int zco_cnt = ZGetObjectManager()->GetDrawCount();
-		float fMs = 1000.f/g_fFPS;
-		sprintf_s(buffer, "FPS: %2f", fMs);
+		double fMs = 1000.0/g_fFPS;
+		sprintf_s(buffer, "FPS: %.0f", fMs);
 		int x;
 	//	pDC->BeginFont();
 	//	pDC->Text(0,sy,buffer);
