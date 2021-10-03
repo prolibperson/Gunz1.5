@@ -1852,10 +1852,6 @@ bool ZActorWithFSM::Load(ZFile* file, MTD_ZActorWithFSMInfo_v0 info)
 	SetVelocity(info.Velocity);
 	m_UID = info.uid;
 
-	//if (info.currAction != -1)
-	//{
-	//	ZActorAction* pAction = m_pActionMgr->GetActionByIndex(info.currAction);
-	//	this->SetAnimationInAction(pAction);
-	//}
+
 	return true;
 }

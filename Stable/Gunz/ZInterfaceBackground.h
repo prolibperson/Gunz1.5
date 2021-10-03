@@ -12,13 +12,57 @@ using namespace RealSpace2;
 #define LOGIN_SCENE_FIXEDSKY	0			// 하늘에 카메라 고정
 #define LOGIN_SCENE_FALLDOWN	1			// 카메라 내려오면서 로고 보임
 
+class RPigeonVisualMesh :public RVisualMesh {
+public:
+	RPigeonVisualMesh() {
+		m_fMoveSpeed = 0.f;
+		m_vPos = rvector(0, 0, 0);
+		m_back_time = timeGetTime();
+	}
+	~RPigeonVisualMesh() {
+
+	}
+
+	void SetPos(rvector& pos) {
+		m_vPos = pos;
+	}
+
+	void SetMoveSpeed(float s) {
+		m_fMoveSpeed = s;
+	}
+
+	void Move() {
+
+		DWORD this_time = timeGetTime();
+
+		float f = (this_time - m_back_time) / 30.f;//30fps 정도의 속도에서 정상속도
+
+		m_vPos.y -= m_fMoveSpeed * f;
+
+		m_back_time = this_time;
+	}
+
+	rmatrix GetMoveMatrix() {
+		rmatrix m;
+		MakeWorldMatrix(&m, m_vPos, rvector(0, -1, 0), rvector(0, 0, 1));
+		return m;
+	}
+
+public:
+
+	DWORD	m_back_time;
+	rvector m_vPos;
+
+	float m_fMoveSpeed;
+};
+
 class ZInterfaceBackground {
 private:
 	RBspObject* m_pChurch;
 	RBspObject* m_pChurchEnd;
 	ZMapDesc*   m_pMapDesc;
 	RMesh*		m_pPigeonMesh;
-	RVisualMeshMgr* m_VMeshMgr;
+	RVisualMeshMgr m_VMeshMgr;
 	RVisualMesh* m_pVMesh;
 	bool		m_bReverseCam;
 	bool		m_bForcedChange;
@@ -32,12 +76,14 @@ private:
 	rvector 	m_EndCamPos;
 	rvector		m_EndCamDir;
 	rmatrix		m_matWorld;
+	float		m_elapsedTime;
 protected:
 	void SetFogState(float fStart, float fEnd, unsigned long int nColor);
 public:
 	ZInterfaceBackground();
 	virtual ~ZInterfaceBackground();
 	void SetScene(int nSceneNumber);
+	void Reload(void);
 	void LoadMesh();
 	void Free();
 	void SetRenderState();
@@ -49,7 +95,7 @@ public:
 	void OnUpdate(float fElapsed);
 	bool  CreatePigeon(int nNumPigeon);
 	void UpdatePigeon();
-	int  SetRandomPigeon(RVisualMesh* pVMesh, float fAdd);
+	int  SetRandomPigeon(RPigeonVisualMesh* pVMesh, float fAdd = 0.f);
 	RBspObject* const	GetChurchEnd() { return m_pChurchEnd; }
 	rvector& GetCharPos() { return m_vCharPos; }
 	rvector& GetCharDir() { return m_vCharDir; }

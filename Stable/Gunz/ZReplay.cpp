@@ -89,20 +89,25 @@ bool ZReplayLoader::Load(const char* filename)
 	
 	if (!LoadHeader(file)) return false;
 	if (!LoadStageSetting(file)) return false;
+
+
+
 	ChangeGameState();
 
 	if(m_nVersion>=4)
 		if (!LoadStageSettingEtc(file)) return false;
 
-
 	//Custom: NewQuest Replays!
-	//if (m_StageSetting.nGameType == MMATCH_GAMETYPE_QUEST_CHALLENGE)
-	//{
-	//	if (!LoadNPCInfo(file))
-	//	{
-	//		return false;
-	//	}
-	//}
+	if (m_StageSetting.nGameType == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+	{
+		if (!LoadNPCInfo(file))
+		{
+			return false;
+		}
+	}
+
+
+
 
 	if (!LoadCharInfo(file)) return false;
 
@@ -121,8 +126,10 @@ void ZReplayLoader::ChangeGameState()
 	ZGetGameClient()->GetMatchStageSetting()->UpdateStageSetting(&stageSetting);
 	ZApplication::GetStageInterface()->SetMapName(ZGetGameClient()->GetMatchStageSetting()->GetMapName());
 	ZGetGameInterface()->SetState(GUNZ_GAME);
-	ZGetCharacterManager()->Clear();
-	ZGetObjectManager()->Clear();
+	if (ZGetCharacterManager() != nullptr)
+		ZGetCharacterManager()->Clear();
+	if (ZGetObjectManager() != nullptr)
+		ZGetObjectManager()->Clear();
 
 #ifdef _REPLAY_TEST_LOG
 	mlog("[Replay Start]\n");
@@ -276,6 +283,12 @@ bool ZReplayLoader::LoadStageSettingEtc(ZFile* file)
 
 		pRule->SetSpyItems(spyItems);
 
+	}
+
+	else if (m_StageSetting.nGameType == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+	{
+		ZRuleQuestChallenge* pRule = dynamic_cast<ZRuleQuestChallenge*>(ZGetGame()->GetMatch()->GetRule());
+		pRule->Init();
 	}
 	return true;
 }
@@ -530,7 +543,7 @@ bool ZReplayLoader::LoadCharInfo(ZFile* file)
 	return true;
 }
 
-
+#include <..\Gunz\ZActorAction.h>
 bool ZReplayLoader::LoadNPCInfo(ZFile* file)
 {
 	ZRuleQuestChallenge* pRule = dynamic_cast<ZRuleQuestChallenge*>(ZGetGame()->GetMatch()->GetRule());
@@ -541,23 +554,24 @@ bool ZReplayLoader::LoadNPCInfo(ZFile* file)
 
 	for (int i = 0; i < npcCount; i++)
 	{
-		//TODO: finish writing!
 
-		for (int i = 0; i < npcCount; ++i)
+		ZActorWithFSM* pActor = nullptr;
+		MTD_ZActorWithFSMInfo_v0 info;
+
+		int Read = zfread(&info, sizeof(MTD_ZActorWithFSMInfo_v0), 1, file);
+		if (Read != 1)
+			break;
+
+		pActor = new ZActorWithFSM(ZGetGame(), pRule->GetActorActionMgr());
+		pActor->Load(file, info);
+		pActor->InitWithActorDef(pRule->GetActorDefMgr()->GetDef(info.actorName), pRule->GetFSMMgr());							///< TodoH(상) - 리플레이 관련..
+		pActor->SetHero(false);
+		//pActor->SetAnimationInAction(reinterpret_cast<IActorAction*>(pRule->GetActorActionMgr()->GetActionByIndex(info.currAction)));
+		pActor->SetVisible(true);
+		if (info.currAction != -1)
 		{
-			ZActorWithFSM* pActor = nullptr;
-			MTD_ZActorWithFSMInfo_v0 info;
-
-			int Read = zfread(&info, sizeof(MTD_ZActorWithFSMInfo_v0), 1, file);
-			if (Read != 1)
-				break;
-
-			pActor = new ZActorWithFSM(ZGetGame(),pRule->GetActorActionMgr());
-			pActor->Load(file, info);
-			pActor->InitWithActorDef(pRule->GetActorDefMgr()->GetDef(info.actorName),pRule->GetFSMMgr());							///< TodoH(상) - 리플레이 관련..
-			pActor->SetHero(false);
-			//pActor->SetAnimationInAction(reinterpret_cast<IActorAction*>(pRule->GetActorActionMgr()->GetActionByIndex(info.currAction)));
-			pActor->SetVisible(true);
+			ZActorAction* pAction = pRule->GetActorActionMgr()->GetActionByIndex(info.currAction);
+			pActor->SetAnimationInAction(pAction);
 		}
 	}
 

@@ -23,7 +23,7 @@ ZInterfaceBackground::ZInterfaceBackground()
 	m_nPrevSceneNumber = NULL;
 	m_bReverseCam = false;
 	m_bForcedChange = false;
-	m_VMeshMgr = new RVisualMeshMgr;
+	m_elapsedTime = 0.f;
 }
 
 ZInterfaceBackground::~ZInterfaceBackground()
@@ -40,11 +40,11 @@ ZInterfaceBackground::~ZInterfaceBackground()
 		delete m_pMapDesc;
 	m_pMapDesc = NULL;
 
-	//if (m_pPigeonMesh != NULL)
-	//	delete m_pPigeonMesh;
-	//m_pPigeonMesh = NULL;
+	if (m_pPigeonMesh != NULL)
+		delete m_pPigeonMesh;
+	m_pPigeonMesh = NULL;
 
-	m_VMeshMgr->DelAll();
+	m_VMeshMgr.DelAll();
 }
 
 void ZInterfaceBackground::SetScene(int nSceneNumber)
@@ -81,11 +81,13 @@ void ZInterfaceBackground::SetFogState(float fStart, float fEnd, unsigned long i
 	RGetDevice()->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&fEnd));
 }
 
+
+
 void ZInterfaceBackground::OnUpdate(float fElapsed)
 {
 	//	ZGetEffectManager()->Update(fElapsed);
 	//	ZGetScreenEffectManager()->UpdateEffects();
-	fElapsed = timeGetTime() + fElapsed;
+	m_elapsedTime += fElapsed;
 }
 
 void ZInterfaceBackground::OnInvalidate()
@@ -135,147 +137,143 @@ void ZInterfaceBackground::Draw()
 	SetRenderState();
 
 
-	double v11; // st7@9
-	float v17; // eax@14
-	float v18; // ecx@14
-	float v19; // edx@14
-	double v22; // st7@15
-	double v23; // st6@15
-	double v24; // st7@17
-	double v27; // st7@24
-	double v28; // st7@24
-	float v29; // ST10_4@24
-	float t; // [sp+18h] [bp-7Ch]@13
-	int ia; // [sp+1Ch] [bp-78h]@9
-	float fDiffa; // [sp+24h] [bp-70h]@21
-	D3DXVECTOR3 cp; // [sp+28h] [bp-6Ch]@14
-	D3DXVECTOR3 vDiff; // [sp+40h] [bp-54h]@2
-	D3DXVECTOR3 up; // [sp+58h] [bp-3Ch]@19
-	D3DXVECTOR3 at; // [sp+70h] [bp-24h]@24
-	D3DXVECTOR3 cd;
-	float v45; // [sp+84h] [bp-10h]@24
-	float v46; // [sp+88h] [bp-Ch]@24
+	SetRenderState();
 
-	rvector CamPos = rvector(0, 0, 2000.250496f);
-	DWORD dwTime = timeGetTime();
+	const rvector CamPos(0, 0, 2200);	
+	const rvector CamDir(0, 1, 1.5f);
+
+	rvector ff = m_EndCamPos - (m_EndCamDir * 100);
+	ff.z += 1;
+#define BLOCK_SIZE			4000.0f		// ÀÏ¹Ý ¼º´ç ºí·°ÀÇ Å©±â
+#define END_BLOCK_OFFSET	3000		// ¸¶Áö¸· ¼º´ç ºí·°ÀÇ ¿ÀÇÁ¼Â
+	//static float fLastOffset = 0;
+	//static float fLastDiff = 0;
+
+	// Ä«¸Þ¶óÀÇ À§Ä¡´Â Ç×»ó YÃà(±íÀÌ ¹æÇâ) 0¿¡ À§Ä¡ÇÑ´Ù.
+#define CHURCH_BLOCK_COUNT		4		// ÀÏ¹Ý ¼º´ç ºí·°ÀÇ °¹¼ö
+#define TIME_PER_DISTANCE		20000	// ÃÊ±â ¼Óµµ
+#define END_TIME_PER_DISTANCE	2000		// ÃÖÁ¾ ¼Óµµ
+
+	unsigned long int nCurrTime = timeGetTime();
+	float fTimePerDistance = TIME_PER_DISTANCE;
 
 
-	switch (m_nSceneNumber)
-	{
-		case LOGIN_SCENE_FALLDOWN:
-		{
-			if (m_nPrevSceneNumber == LOGIN_SCENE_FIXEDSKY)
-			{
-				RSetProjection(1.0471976, RGetScreenWidth() / (float)RGetScreenHeight(), 10.0, 15000.0);
-				double nCurrChangeTime = 20000.0 - (double)(dwTime - m_nSceneChangedTime) * 5.0;
-				if (nCurrChangeTime <= 2000.0)
-					nCurrChangeTime = 2000.0;
-				*(float *)&ia = (double)(dwTime + m_nSceneChangedTime % 0x4E20 - m_nSceneChangedTime) / nCurrChangeTime;
-				v11 = 3.0 - (-m_EndCamPos.y - 3000.0) * 0.00025000001;
-				if (*(float *)&ia > v11)
-					*(float *)&ia = v11;
-				if (m_bForcedChange == true)
-					*(float *)&ia = v11;
-				t = *(float *)&ia / v11;
-				SetFogState((t * 8000) + 4000, (t * 8000) + 8000, 0x4073572E);
-				if (t == 1.0)
-				{
-					rvector vEndCamPos = rvector(m_EndCamPos.x, m_EndCamPos.y, m_EndCamPos.z);
-					cp.x = m_EndCamPos.x;
-					cp.y = vEndCamPos.y;
-					v17 = m_EndCamDir.x;
-					cp.z = vEndCamPos.z;
-					v18 = m_EndCamDir.y;
-					v19 = m_EndCamDir.z;
-					if (m_bReverseCam)
-					{
-						rvector vDiff = rvector(m_vCharDir.x, m_vCharDir.y, m_vCharDir.z);
-						v22 = (double)(dwTime - m_nReverseCamTime);
-						v23 = 140.0 - 5.0 * v22;
-						if (v23 <= 140.0)
-							v23 = 140.0;
-						v24 = v22 * v23 * 0.001;
-						if (v24 > 500.0)
-							v24 = 500.0;
-						up.y = vDiff.y * v24;
-						up.z = vDiff.z * v24;
-						vDiff.x = vDiff.x * v24 + cp.x;
-						cp = vDiff;
-						vDiff.y = cp.y + up.y;
-						vDiff.z = cp.z + up.z;
-					}
-					vDiff = m_EndCamPos + m_EndCamDir;
-					RSetCamera(cp, vDiff, rvector(0, 0, 1));
-					D3DXMatrixTranslation(&m_matWorld, 0, 0, 0);
-					RGetDevice()->SetTransform(D3DTS_WORLD, &m_matWorld);
-					m_pChurchEnd->Draw();
-					m_pChurchEnd->DrawObjects();
-				}
-				else
-				{
-					int n26 = 0;
-					fDiffa = 0.0;
-					do
-					{
-						int nEndOffset = 0;
-						if (n26 == 3)
-							nEndOffset = 3000;
-						v27 = m_EndCamPos.z;
-						up.x = m_EndCamPos.x - CamPos.x;
+	if (m_nSceneNumber == LOGIN_SCENE_FIXEDSKY) {	// ¼º´ç ³»ºÎ ¹Ýº¹
 
-						up.y = -CamPos.y;
-						cd.y = up.y * t;
-						cd.z = (v27 - CamPos.z) * t;
-						cp.x = up.x * t + CamPos.x;
-						cp.y = cd.y + CamPos.y;
-						cp.z = cd.z + CamPos.z;
-						v28 = m_EndCamDir.x;
-						vDiff.y = m_EndCamDir.y - 1.0;
-						vDiff.z = m_EndCamDir.z - 1.5;
-						v45 = vDiff.z * t;
-						v46 = v28 * t;
-						at.x = v46 + cp.x;
-						at.y = vDiff.y * t + 1.0 + cp.y;
-						at.z = v45 + 1.5 + cp.z;
-						RSetCamera(cp, at, rvector(0, 0, 1));
-						v29 = ((double)(fDiffa)-*(float *)&ia) * 4000.0 + (double)nEndOffset;
-						D3DXMatrixTranslation(&m_matWorld, 0, (v29), 0);
-						RGetDevice()->SetTransform(D3DTS_WORLD, &m_matWorld);
-						if (n26 == 3)
-						{
-							m_pChurchEnd->Draw();
-							m_pChurchEnd->DrawObjects();
-						}
-						else
-						{
-							m_pChurch->Draw();
-							m_pChurch->DrawObjects();
-						}
-						++n26;
-						fDiffa = n26;
-					} while (n26 < 4);
-				}
-			}
-			break;
+		void RSetProjection(float fFov, float fAspect, float fNearZ, float fFarZ);
+
+		RSetProjection(D3DX_PI * 55 / 180, RGetScreenWidth() / (float)RGetScreenHeight(), 10.0f, 10000.0f);
+		RSetCamera(CamPos, (CamPos + CamDir), rvector(0, 0, 1));
+
+		SetFogState(4000.0f, 8000.0f, 0x008C6636);
+
+		//		float fDiff = (nCurrTime%TIME_PER_DISTANCE)/(float)TIME_PER_DISTANCE;
+		float fDiff = (int(m_elapsedTime * 1000) % TIME_PER_DISTANCE) / (float)TIME_PER_DISTANCE;
+
+		for (int i = CHURCH_BLOCK_COUNT - 1; i >= 0; i--) {
+
+			D3DXMatrixTranslation(&m_matWorld, 0, BLOCK_SIZE * (i - fDiff), 0);
+			RGetDevice()->SetTransform(D3DTS_WORLD, &m_matWorld);
+
+			m_pChurch->Draw();
+
 		}
-		case LOGIN_SCENE_FIXEDSKY:
+
+		UpdatePigeon();
+
+		//fLastOffset = BLOCK_SIZE*(0-fDiff);
+		//fLastDiff = fDiff;
+	}
+	else if (m_nSceneNumber == LOGIN_SCENE_FALLDOWN) {	// ¼º´ç ³¡
+		//static bool m_bScrollToEnd = false;
+
+		if (m_nPrevSceneNumber == LOGIN_SCENE_FIXEDSKY)
 		{
-			RSetProjection(0.95993114, RGetScreenWidth() / (float)RGetScreenHeight(), 10.0, 10000.0);
-			RSetCamera(CamPos, rvector(CamPos.x,CamPos.y + 1.0,CamPos.z + 1.5), rvector(0, 0, 1));
-			SetFogState(4000.0, 8000.0, 0x4073572E);
-			double fDiff = (timeGetTime() % 20000) * 0.000049999999;
-			for (int i = 3; i >= 0; --i)
+			RSetProjection(D3DX_PI * 60 / 180, RGetScreenWidth() / (float)RGetScreenHeight(), 10.0f, 15000.0f);
+
+			fTimePerDistance = max(float(TIME_PER_DISTANCE) - float(nCurrTime - m_nSceneChangedTime) * 5, END_TIME_PER_DISTANCE);	// °¡¼Ó
+
+			float fDiff = (nCurrTime - m_nSceneChangedTime + (m_nSceneChangedTime % TIME_PER_DISTANCE)) / (float)fTimePerDistance;
+			float fLimit = (CHURCH_BLOCK_COUNT - 1) - (-m_EndCamPos.y - END_BLOCK_OFFSET) / BLOCK_SIZE;
+			if (fDiff > fLimit) fDiff = fLimit;
+
+			if (m_bForcedChange == true)
 			{
-				D3DXMatrixTranslation(&m_matWorld, 0, (i - fDiff) * 4000.0,0);
+				fTimePerDistance = END_TIME_PER_DISTANCE;
+				fDiff = fLimit;
+			}
+
+			float t = fDiff / fLimit;
+
+			// Fog
+			//RGetDevice()->SetRenderState(D3DRS_FOGENABLE, TRUE);
+			SetFogState(4000.0f + 8000.0f * t, 8000.0f + 8000.0f * t, 0x008C6636);
+
+
+			if (t == 1)
+			{
+				int yEndOffset = END_BLOCK_OFFSET;
+
+				rvector cp = m_EndCamPos;
+				rvector cd = m_EndCamDir;
+
+				if (m_bReverseCam)
+				{
+					rvector cd2 = m_vCharDir;
+
+					const float TIME_PER_DISTANCE_REV = 140.0f;
+					const float TIME_PER_DISTANCE_END = 400.0f;
+					const float fRevDiff = 500.0f;
+
+					float fTimePerDist = max(float(TIME_PER_DISTANCE_REV) - float(nCurrTime - m_nReverseCamTime) * 5, TIME_PER_DISTANCE_REV);
+
+
+					float fDiff;
+					fDiff = min(fRevDiff, (float(nCurrTime - m_nReverseCamTime) / 1000.0f * fTimePerDist));
+
+					rvector vDiff = cp + (fDiff * cd2);
+					cp = vDiff;
+				}
+
+				RSetCamera(cp, (cp + cd), rvector(0, 0, 1));
+
+				D3DXMatrixTranslation(&m_matWorld, 0, 0, 0);
 				RGetDevice()->SetTransform(D3DTS_WORLD, &m_matWorld);
-				m_pChurch->Draw();
-				m_pChurch->DrawObjects();
+
+				m_pChurchEnd->Draw();
 			}
-			UpdatePigeon();
-			break;
+			else
+			{
+				for (int i = ((t == 1) ? CHURCH_BLOCK_COUNT - 1 : 0); i < CHURCH_BLOCK_COUNT; i++) {
+					int yEndOffset = 0;
+					if (i == CHURCH_BLOCK_COUNT - 1) yEndOffset = END_BLOCK_OFFSET;
+
+					// EndCamPos±îÁö ¿òÁ÷ÀÌ¸é ¸ØÃá´Ù.
+					float fYPos = BLOCK_SIZE * (i - fDiff) + yEndOffset;
+
+					rvector ep(m_EndCamPos.x, 0, m_EndCamPos.z);	// ¿Å°ÜÁú Ä«¸Þ¶ó À§Ä¡
+					rvector cp = CamPos + (ep - CamPos) * t;
+
+					rvector cd = CamDir + (m_EndCamDir - CamDir) * t;
+
+					RSetCamera(cp, (cp + cd), rvector(0, 0, 1));
+
+					D3DXMatrixTranslation(&m_matWorld, 0, fYPos, 0);
+					RGetDevice()->SetTransform(D3DTS_WORLD, &m_matWorld);
+
+					if (i == CHURCH_BLOCK_COUNT - 1)
+					{
+						m_pChurchEnd->Draw();
+					}
+					else m_pChurch->Draw();
+				}
+
+			}
 		}
-		default:
-			break;
+		else {
+			_ASSERT(0);
+			// ¾ÆÁ÷ Ã³¸® ¾ÈÇßÀ½
+		}
 	}
 }
 
@@ -297,7 +295,7 @@ void ZInterfaceBackground::Free()
 		delete m_pPigeonMesh;
 	m_pPigeonMesh = NULL;
 
-	m_VMeshMgr->DelAll();
+	m_VMeshMgr.DelAll();
 }
 
 void ZInterfaceBackground::LoadMesh()
@@ -378,95 +376,89 @@ void ZInterfaceBackground::LoadMesh()
 
 	if (m_pPigeonMesh == NULL)
 	{
-		//m_pPigeonMesh = ZGetMeshMgr()->Get("dove");
-		//m_pPigeonMesh->ReloadAnimation();
-		//m_pPigeonMesh->SetTextureRenderOnOff(true);
-		//CreatePigeon(5);
+		m_pPigeonMesh = new RMesh();
+		m_pPigeonMesh->ReadXml(DIR_LOGIN"/dove.xml");
+		m_pPigeonMesh->ReloadAnimation();
+		m_pPigeonMesh->SetTextureRenderOnOff(true);
+		CreatePigeon(5);
 	}
 }
 
-bool ZInterfaceBackground::CreatePigeon(int nNumPigeon)
+int ZInterfaceBackground::SetRandomPigeon(RPigeonVisualMesh* pVMesh, float add)
 {
-	return false;
-	for (int i = 0; i < nNumPigeon; ++i)
+	if (pVMesh)
 	{
-		RVisualMesh* pMesh = new RVisualMesh();
-		if (!pMesh->Create(m_pPigeonMesh))
+
+		float x = -400.f + rand() % 800;
+		float y = (12000.f + add) + rand() % 3000;
+		float z = 6500.f - rand() % 200;
+
+		float speed = 25.f + rand() % 10;
+		pVMesh->m_vPos = rvector(x, y, z);
+		pVMesh->SetAnimation("fly2");
+		pVMesh->SetMoveSpeed(speed);
+		AniFrameInfo* pInfo = pVMesh->GetFrameInfo(ani_mode_lower);
+
+		if (pInfo->m_pAniSet)
 		{
-			mlog("Failed to create pigeon mesh\n");
-			return false;
+			pInfo->m_nFrame = (rand() * 160) % pInfo->m_pAniSet->GetMaxFrame();
 		}
-		else
-		{
-			pMesh->SetCheckViewFrustum(false);
-			pMesh->SetVisibility(1.0f);
-			m_VMeshMgr->Add(pMesh);
-			SetRandomPigeon(pMesh, 0.0f);
-		}
+		return 1;
 	}
-	return true;
+	return -1;
 }
 
-//will do this logically at a later date
-rmatrix GetMoveMatrix(RVisualMesh* pMesh,rmatrix& result)
+bool ZInterfaceBackground::CreatePigeon(int nCnt)
 {
-	rvector up = rvector(0, 4.575657221408423936f, 1);
-	rvector dir = rvector(0, 3.212836864f, 1);
-	rvector pos = rvector(pMesh->GetPosition().x, pMesh->GetPosition().y + 4, pMesh->GetPosition().z);
-	MakeWorldMatrix(&result, pos, dir, up);
+	RPigeonVisualMesh* node = NULL;
+	RPigeonVisualMesh* pVMesh = NULL;
+	int id = -1;
 
-	return result; 
+	for (int i = 0; i < nCnt; i++) {
+
+		node = new RPigeonVisualMesh;
+
+		if (!node->Create(m_pPigeonMesh)) {
+			//			mlog("VisualMesh Create failure !!!\n");
+			return -1;
+		}
+
+		id = m_VMeshMgr.Add(node);
+
+		pVMesh = (RPigeonVisualMesh*)m_VMeshMgr.GetFast(id);
+
+		pVMesh->SetCheckViewFrustum(false);// = false;
+
+		SetRandomPigeon(pVMesh);
+	}
+	return 1;
 }
 
 void ZInterfaceBackground::UpdatePigeon()
 {
-	return;
-	for (int i = 0; i < 5; ++i)
-	{
-		RVisualMesh* pMesh = m_VMeshMgr->GetFast(i);
-		D3DXMATRIX result;
-		if (pMesh)
-		{
-			DWORD dwTime = timeGetTime();
-			DWORD ScaleX = (double)dwTime * 0.033333335 * pMesh->GetScale().z;
-			rvector scale = rvector(pMesh->GetScale().x - ScaleX, pMesh->GetScale().y, pMesh->GetScale().z);
-			pMesh->SetScale(scale);
-			GetMoveMatrix(pMesh,result);
-			pMesh->SetWorldMatrix(result);
-			pMesh->Frame();
-			if (pMesh->GetPosition().x < -1200.0)
-				SetRandomPigeon(pMesh, 18000.0);
-			pMesh->Render();
+	int size = (int)m_VMeshMgr.m_list.size();
+
+	RPigeonVisualMesh* pVMesh = NULL;
+	rmatrix m;
+
+	for (int j = 0; j < size; j++) {
+
+		pVMesh = (RPigeonVisualMesh*)m_VMeshMgr.GetFast(j);
+
+		if (pVMesh) {
+
+			pVMesh->Move();
+			m = pVMesh->GetMoveMatrix();
+			pVMesh->SetWorldMatrix(m);
+
+			pVMesh->Frame();
+
+			if (pVMesh->m_vPos.y < -1200.f) {
+				SetRandomPigeon(pVMesh, 18000.f);
+			}
+			pVMesh->Render();
 		}
 	}
-}
-
-int ZInterfaceBackground::SetRandomPigeon(RVisualMesh* pVMesh, float fAdd)
-{
-	return 0;
-	int result;
-	if (pVMesh)
-	{
-
-		float x = (double)(rand() % 800) - 400.0;
-		float speed = (double)(rand() % 3000) + fAdd + 12000.0;
-		float z = 6500.0 - (double)(rand() % 200);
-		pVMesh->SetPosition(rvector(x, speed, z));
-		AniFrameInfo* pAniLow = pVMesh->GetFrameInfo(ani_mode_lower);
-		AniFrameInfo* pAniUp = pVMesh->GetFrameInfo(ani_mode_upper);
-		pVMesh->GetMesh()->SetAnimation("fly2");
-		pVMesh->GetMesh()->SetFrame(pAniLow->m_nFrame, pAniUp->m_nFrame);
-		pVMesh->GetMesh()->SetMeshVis(1.0f);
-
-		pVMesh->GetMesh()->RenderFrame();
-		pVMesh->Frame();
-		result = 1;
-	}
-	else
-	{
-		result = -1;
-	}
-	return result;
 }
 #else
 

@@ -5,7 +5,7 @@
 #include "MDebug.h"
 #include <string.h>
 #include <string>
-#include <algorithm>\
+#include <algorithm>
 using namespace std; 
 
 #ifdef _MSXML2

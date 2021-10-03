@@ -4077,7 +4077,7 @@ bool ZGameInterface::Update(float fElapsed)
 		}
 	}
 
-	if ( m_pBackground && ( ( GetState() == GUNZ_CHARSELECTION) || ( GetState() == GUNZ_CHARCREATION)) )
+	if ( m_pBackground)
 		m_pBackground->OnUpdate( fElapsed);
 
 

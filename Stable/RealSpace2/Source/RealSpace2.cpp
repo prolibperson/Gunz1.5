@@ -736,10 +736,7 @@ bool RFlip()
 	{
 		HRESULT hr = ((LPDIRECT3DDEVICE9)g_pd3dDevice)->Present(NULL, NULL, NULL, NULL);
 	}
-
-	// Custom: Replaced && to &, it's a bitwise flag. Stupid MAIET.
-	// k, did not touch it now
-	if (g_rsnRenderFlags & RRENDER_CLEAR_BACKBUFFER)
+	if (g_rsnRenderFlags && RRENDER_CLEAR_BACKBUFFER)
 	{
 		if (g_bStencilBuffer)
 			g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, g_clear_color, 1.0f, 0L);

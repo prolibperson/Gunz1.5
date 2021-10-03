@@ -6593,21 +6593,21 @@ void ZGame::StartRecording()
 	}
 
 	//TODO: fix  challengequest replays, currently not functioning correctly.
-	//if (ZGetGameClient()->GetMatchStageSetting()->GetGameType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
-	//{
-	//	ZRuleQuestChallenge* pRule = dynamic_cast<ZRuleQuestChallenge*>(ZGetGame()->GetMatch()->GetRule());
+	if (ZGetGameClient()->GetMatchStageSetting()->GetGameType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+	{
+		ZRuleQuestChallenge* pRule = dynamic_cast<ZRuleQuestChallenge*>(ZGetGame()->GetMatch()->GetRule());
 
-	//	int npcCount = ZGetObjectManager()->GetNPCObjectMap()->size();
-	//	nWritten = zfwrite(&npcCount, sizeof(int), 1, m_pReplayFile);
-	//	if (nWritten == 0)
-	//		goto RECORDING_FAIL;
+		int npcCount = ZGetObjectManager()->GetNPCObjectMap()->size();
+		nWritten = zfwrite(&npcCount, sizeof(int), 1, m_pReplayFile);
+		if (nWritten == 0)
+			goto RECORDING_FAIL;
 
-	//	for (auto itor = ZGetObjectManager()->GetNPCObjectMap()->begin(); itor != ZGetObjectManager()->GetNPCObjectMap()->end(); ++itor)
-	//	{
-	//		ZActorWithFSM* npcObj = (ZActorWithFSM*)(*itor).second;
-	//		if (!npcObj->Save(m_pReplayFile)) goto RECORDING_FAIL;
-	//	}
-	//}
+		for (auto itor = ZGetObjectManager()->GetNPCObjectMap()->begin(); itor != ZGetObjectManager()->GetNPCObjectMap()->end(); ++itor)
+		{
+			ZActorWithFSM* npcObj = (ZActorWithFSM*)(*itor).second;
+			if (!npcObj->Save(m_pReplayFile)) goto RECORDING_FAIL;
+		}
+	}
 
 
 	int nCharacterCount= (int)m_CharacterManager.size();
@@ -6708,8 +6708,8 @@ void ZGame::ToggleRecording()
 	if(m_bReplaying.Ref()) return;	// During playback, no recording -_-;
 
 	// 퀘스트는 녹화되지 않는다
-	if (ZGetGameTypeManager()->IsQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType())||
-		ZGetGameTypeManager()->IsNewQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType()))
+	if (ZGetGameTypeManager()->IsQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType()))
+	//	ZGetGameTypeManager()->IsNewQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType()))
 		return;
 
 	if(!m_bRecording)
