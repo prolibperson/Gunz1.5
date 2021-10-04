@@ -29,6 +29,8 @@ namespace ZLauncher
 {
     public class Patcher
     {
+        public bool isPatchNeeded = false;
+        public List<string> filesNeedingUpdate = new List<string>();
 
         public Patcher()
         {
@@ -47,13 +49,14 @@ namespace ZLauncher
                 return result;
             }
 
-            List<string> filesNeedingUpdate = new List<string>();
             result = CheckPatchToExistingFiles(patchFiles, ref filesNeedingUpdate);
             if(result == PatchResult.PR_NEEDUPDATE)
             {
+                isPatchNeeded = true;
+                //return result;
                 //TODO: handle downloads asynchronously
-                DownloadManager downloadManager = new DownloadManager();
-                result = await downloadManager.DownloadFilesAsync(filesNeedingUpdate);
+               // DownloadManager downloadManager = new DownloadManager();
+               // result = await downloadManager.DownloadFilesAsync(filesNeedingUpdate);
             }
 
             return result;

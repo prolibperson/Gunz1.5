@@ -5021,7 +5021,7 @@ void ZGame::OnPeerDieMessage(ZCharacter* pVictim, ZCharacter* pAttacker)
 }
 
 
-void ZGame::OnReloadComplete(ZCharacter *pCharacter)
+void ZGame::OnReloadComplete(ZCharacterObject *pCharacter)
 {
 	ZItem* pItem = pCharacter->GetItems()->GetSelectedWeapon();
 	
@@ -5113,7 +5113,7 @@ void ZGame::OnPeerSpMotion(MUID& uid,int nMotionType)
 
 void ZGame::OnPeerReload(MUID& uid)
 {
-	ZCharacter* pCharacter = (ZCharacter*) m_CharacterManager.Find(uid);
+	ZCharacterObject* pCharacter = m_CharacterManager.Find(uid);
 	//	if (uid == ZGetGameClient()->GetUID()) pCharacter = m_pMyCharacter;
 
 	if (pCharacter == NULL || pCharacter->IsDie() ) return;

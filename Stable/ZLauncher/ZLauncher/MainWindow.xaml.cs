@@ -23,34 +23,20 @@ namespace ZLauncher
             DownloadFile.Text = "Scanning existing files...";
             Patcher patcher = new Patcher();
             PatchResult result = await patcher.Run();
-            if (result == PatchResult.PR_NOCONN)
+            if(result != PatchResult.PR_OK)
             {
-                System.Windows.Forms.MessageBox.Show("Error reaching the patchserver, please try again later");
-                Patch.Visibility = Visibility.Visible;
-                DownloadFile.Text = "";
-                return;
+                PostErrorMsg(result);
             }
-            if (result == PatchResult.PR_CANTUPDATEFILES)
+            if(patcher.isPatchNeeded == true)
             {
-                System.Windows.Forms.MessageBox.Show("Error updating files, please run as adminsitrator and try again.");
-                Patch.Visibility = Visibility.Visible;
-                DownloadFile.Text = "";
-                return;
-            }
-            if (result == PatchResult.PR_LAUNCHERUPDATENEEDED)
-            {
-                string exePath = AppDomain.CurrentDomain.BaseDirectory + "\\ZUpdater.exe";
-
-                var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream("ZLauncher.ZUpdater.exe"))
+                DownloadManager downloadManager = new DownloadManager();
+                result = await downloadManager.DownloadFilesAsync(patcher.filesNeedingUpdate);
+                if(result == PatchResult.PR_LAUNCHERUPDATENEEDED)
                 {
-                    byte[] bytes = new byte[(int)stream.Length];
-                    stream.Read(bytes, 0, bytes.Length);
-                    File.WriteAllBytes(exePath, bytes);
-                    System.Diagnostics.Process.Start(exePath);
-                    Application.Current.Shutdown();
+                    UpdateLauncher();
                 }
             }
+
             if(result == PatchResult.PR_OK)
             {
                 Launch.Visibility = Visibility.Visible;
@@ -109,6 +95,39 @@ namespace ZLauncher
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void PostErrorMsg(PatchResult result)
+        {
+            if (result == PatchResult.PR_NOCONN)
+            {
+                System.Windows.Forms.MessageBox.Show("Error reaching the patchserver, please try again later");
+                Patch.Visibility = Visibility.Visible;
+                DownloadFile.Text = "";
+                return;
+            }
+            if (result == PatchResult.PR_CANTUPDATEFILES)
+            {
+                System.Windows.Forms.MessageBox.Show("Error updating files, please run as adminsitrator and try again.");
+                Patch.Visibility = Visibility.Visible;
+                DownloadFile.Text = "";
+                return;
+            }
+        }
+
+        private void UpdateLauncher()
+        {
+            string exePath = AppDomain.CurrentDomain.BaseDirectory + "\\ZUpdater.exe";
+
+            var assembly = Assembly.GetExecutingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream("ZLauncher.ZUpdater.exe"))
+            {
+                byte[] bytes = new byte[(int)stream.Length];
+                stream.Read(bytes, 0, bytes.Length);
+                File.WriteAllBytes(exePath, bytes);
+                System.Diagnostics.Process.Start(exePath);
+                Application.Current.Shutdown();
+            }
         }
     }
 }
