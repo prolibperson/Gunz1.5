@@ -16,10 +16,16 @@ namespace ZLauncher
             InitializeComponent();
         }
 
+        public void SetProgress(float f)
+        {
+            ProgressBar.Value = f;
+        }
+
         private async void StartPatch(object sender, RoutedEventArgs e)
         {
             Patch.Visibility = Visibility.Hidden;
             ProgressBar.Visibility = Visibility.Visible;
+            DownloadFile.Visibility = Visibility.Visible;
             DownloadFile.Text = "Scanning existing files...";
             Patcher patcher = new Patcher();
             PatchResult result = await patcher.Run();
@@ -30,7 +36,12 @@ namespace ZLauncher
             if(patcher.isPatchNeeded == true)
             {
                 DownloadManager downloadManager = new DownloadManager();
-                result = await downloadManager.DownloadFilesAsync(patcher.filesNeedingUpdate);
+                result = await downloadManager.DownloadFilesAsync(patcher.filesNeedingUpdate, ProgressBar,DownloadFile);
+                if(result != PatchResult.PR_OK && result != PatchResult.PR_LAUNCHERUPDATENEEDED)
+                {
+                    PostErrorMsg(result);
+                }
+
                 if(result == PatchResult.PR_LAUNCHERUPDATENEEDED)
                 {
                     UpdateLauncher();
@@ -41,11 +52,6 @@ namespace ZLauncher
             {
                 Launch.Visibility = Visibility.Visible;
             }
-        }
-
-        private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            ProgressBar.Value = e.ProgressPercentage;
         }
 
         private void StartGame(object sender, RoutedEventArgs e)

@@ -53,10 +53,6 @@ namespace ZLauncher
             if(result == PatchResult.PR_NEEDUPDATE)
             {
                 isPatchNeeded = true;
-                //return result;
-                //TODO: handle downloads asynchronously
-               // DownloadManager downloadManager = new DownloadManager();
-               // result = await downloadManager.DownloadFilesAsync(filesNeedingUpdate);
             }
 
             return result;
@@ -68,7 +64,7 @@ namespace ZLauncher
             byte[] patchData = null;
             try
             {
-               patchData =  client.DownloadData("http://launcher2.fgunz.net/Patch.xml");
+               patchData =  client.DownloadData("http://patch.tupac.gay/patch/patch.xml");
             }
             catch(WebException e)
             {
@@ -81,21 +77,21 @@ namespace ZLauncher
             XmlDocument xmlPatch = new XmlDocument();
             string xmlText = Encoding.UTF8.GetString(patchData);
             xmlPatch.LoadXml(xmlText);
-            XmlNode rootNode = xmlPatch.SelectSingleNode("/XML/PATCHINFO");//.SelectSingleNode("/PATCHINFO");
+            XmlNode rootNode = xmlPatch.SelectSingleNode("/files");//.SelectSingleNode("/PATCHINFO");
 
             foreach(XmlNode childNode in rootNode)
             {
-                if (childNode.Name == "PATCHFILE")
+                if (childNode.Name == "file")
                 {
                     FileInfo fileInfo = new FileInfo();
                     fileInfo.name = childNode.Attributes["name"].Value;
                     foreach (XmlNode node in childNode)
                     {
-                        if (node.Name == "SIZE")
+                        if (node.Name == "size")
                         {
                             fileInfo.size = Convert.ToInt64(node.InnerText);
                         }
-                        if(node.Name == "CHECKSUM")
+                        if(node.Name == "hash")
                         {
                             fileInfo.checksum = Convert.ToInt64(node.InnerText);
                         }

@@ -15,7 +15,7 @@
 
         <DockPanel Width="1024" Opacity="1" Margin="0,0,-3.556,0.444">
             <Grid DockPanel.Dock="Bottom" Height="auto"  Opacity="1">
-                <TextBlock x:Name="DownloadFile"  Foreground="#CF5300" Width="auto" Height="auto" VerticalAlignment="Top" Margin="0,-17,0,0"/>
+                <TextBlock x:Name="DownloadFile"  Foreground="#535353" Width="auto" Height="27" VerticalAlignment="Bottom" Margin="0,0,0,29"/>
                 <ProgressBar x:Name="ProgressBar" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="900" Height="24" Foreground="#CF5300" Background="#80FFFFFF"
                          BorderBrush="Black" BorderThickness="3" Visibility="Hidden"/>
 
