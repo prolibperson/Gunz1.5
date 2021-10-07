@@ -35,9 +35,23 @@ public:
 
 	bool InsertLocatorLog( const int nLocatorID, const map<string, DWORD>& CountryStatistics );
 
+	MDatabase* GetDB() { return m_pDB; }
+
+	void SetDB(MDatabase* pDB) { m_pDB = pDB; }
+
+	void ReleaseDB()
+	{
+		if (0 != m_pDB)
+		{
+			m_pDB->Disconnect();
+			delete m_pDB;
+		}
+	};
+
 private :
 	bool CheckOpen();
 
 private :
 	CString				m_strDSNConnect;
+	MDatabase* m_pDB;
 };

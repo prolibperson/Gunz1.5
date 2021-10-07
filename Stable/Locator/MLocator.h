@@ -2,6 +2,7 @@
 
 #include "MUID.h"
 #include "MCommandManager.h"
+#include "MCountryCodeFilter.h"
 
 
 class MCommand;
@@ -11,7 +12,7 @@ class MSafeUDP;
 class MServerStatusMgr;
 class MLocatorUDPInfo;
 class MUDPManager;
-class MCountryFilter;
+//class MCountryFilter;
 
 struct MPacketHeader;
 
@@ -57,7 +58,6 @@ private :
 	bool InitSafeUDP();
 	bool InitServerStatusMgr();
 	bool InitUDPManager();
-	bool InitCountryCodeFilter();
 	
 	MLocatorDBMgr* GetLocatorDBMgr() { return m_pDBMgr; }
 
@@ -78,14 +78,12 @@ private :
 	void ResetSendCount()		{ m_nSendCount = 0; }
 	void ResetDuplicatedCount()	{ m_nDuplicatedCount = 0; }
 
-	MCountryFilter* GetCountryFilter() { return m_pCountryFilter; }
 
 	void ReleaseDBMgr();
 	void ReleaseSafeUDP();
 	void ReleaseServerStatusMgr();
 	void ReleaseServerStatusInfoBlob();
 	void ReleaseUDPManager();
-	void ReleaseValidCountryCodeList();
 	void ReleaseCommand();
 
 	bool IsElapedServerStatusUpdatedTime( const DWORD dwEventTime );
@@ -103,10 +101,6 @@ private :
 	void CommandQueueUnlock()	{ LeaveCriticalSection( &m_csCommandQueueLock ); }
 
 	void ResponseServerStatusInfoList( DWORD dwIP, int nPort );
-	void ResponseBlockCountryCodeIP( DWORD dwIP, 
-									 int nPort, 
-									 const string& strCountryCode, 
-									 const string& strRoutingURL );
 
 	bool IsLiveUDP( const MLocatorUDPInfo* pRecvUDPInfo, const DWORD dwEventTime );
 	bool IskLIveBlockUDP( const MLocatorUDPInfo* pBlkRecvUDPInfo, const DWORD dwEventTime );
@@ -122,11 +116,6 @@ private :
 	void UpdateCountryCodeFilter( const DWORD dwEventTime );
 	void UpdateLogManager();
 
-	bool GetCustomIP( const string& strIP, string& strOutCountryCode, bool& bIsBlock, string& strOutComment );
-
-	bool IsValidCountryCodeIP( const string& strIP, 
-							   string& strOutCountryCode, 
-							   string& strOutRoutingURL );
 
 	void OnRegisterCommand(MCommandManager* pCommandManager);
 
@@ -135,7 +124,6 @@ private :
 									char* pPacket, 
 									DWORD dwSize );
 
-	void DeleteCountryFilter();
 
 private :
 	MCommandManager	m_CommandManager;	///< 커맨드 매니저
@@ -159,7 +147,6 @@ private :
 	DWORD m_nDuplicatedCount;
 
 	MLocatorDBMgr*	m_pDBMgr;
-	MCountryFilter* m_pCountryFilter;
 
 	void*		m_vpServerStatusInfoBlob;
 	int			m_nLastGetServerStatusCount;

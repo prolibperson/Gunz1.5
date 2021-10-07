@@ -9,7 +9,6 @@
 #include "MBlobArray.h"
 #include "MLocatorConfig.h"
 #include "MLocatorUDP.h"
-#include "MCountryFilter.h"
 #include "MCommandCommunicator.h"
 #include "MErrorTable.h"
 #include "MCommandBuilder.h"
@@ -42,8 +41,6 @@ MLocator::MLocator(void)
 	m_nSendCount						= 0;
 	m_nDuplicatedCount					= 0;
 	m_dwLastLocatorStatusUpdatedTime	= timeGetTime();
-	//m_pCountryCodeFilter = 0;
-	m_pCountryFilter					= 0;
 
 	m_This = GetLocatorConfig()->GetLocatorUID();
 
@@ -84,12 +81,6 @@ bool MLocator::Create()
 	if( !InitUDPManager() )
 	{
 		mlog( "MLocator::Create - UDP Manager 멤버 초기화 실패.\n" );
-		return false;
-	}
-
-	if( !InitCountryCodeFilter() )
-	{
-		mlog( "MLocator::Create - 접속 허용 국가 코드 리스트 초기화 실패.\n" );
 		return false;
 	}
 
@@ -202,57 +193,6 @@ bool MLocator::InitUDPManager()
 	return true;
 }
 
-
-bool MLocator::InitCountryCodeFilter()
-{
-	ASSERT( 0 != GetLocatorDBMgr() );
-
-	m_pCountryFilter = new MCountryFilter;
-	if( 0 == m_pCountryFilter ) {
-		mlog( "Fail to new MCountryFilter. \n" );
-		return false;
-	}
-
-	IPtoCountryList			ipcl;
-	BlockCountryCodeList	bcl;
-	CustomIPList			cil;
-
-	//if( !GetLocatorDBMgr()->GetIPtoCountryList(ipcl) )
-	//{
-	//	DeleteCountryFilter();
-	//	mlog( "Fail to init IPtoCountryList.\n" );
-	//	return false;
-	//}
-	
-	if( !GetLocatorDBMgr()->GetBlockCountryCodeList(bcl) )
-	{
-		DeleteCountryFilter();
-		mlog( "Fail to Init BlockCountryCode.\n" );
-		return false;
-	}
-	
-	if( !GetLocatorDBMgr()->GetCustomIPList(cil) )
-	{
-		DeleteCountryFilter();
-		mlog( "Fail to Init CustomIPList.\n" );
-		return false;
-	}
-
-	const DWORD s = timeGetTime();
-	if( !GetCountryFilter()->Create(bcl, ipcl, cil) )
-	{
-		DeleteCountryFilter();
-		mlog( "Fail to Create country filter.\n" );
-		return false;
-	}
-	const DWORD e = timeGetTime();
-
-	const float t = (e - s)/1000.0f;
-
-	return true;
-}
-
-
 void MLocator::Destroy()
 {
 	// MCommandCommunicator::Destroy();
@@ -260,7 +200,6 @@ void MLocator::Destroy()
 	ReleaseDBMgr();
 	ReleaseSafeUDP();
 	ReleaseUDPManager();
-	ReleaseValidCountryCodeList();
 	ReleaseServerStatusMgr();
 	ReleaseServerStatusInfoBlob();
 }
@@ -336,15 +275,6 @@ void MLocator::ReleaseUDPManager()
 	UninitMemPool( MLocatorUDPInfo );
 }
 
-
-void MLocator::ReleaseValidCountryCodeList()
-{
-	if( 0 != m_pCountryFilter )
-	{
-		delete m_pCountryFilter;
-		m_pCountryFilter = 0;
-	}
-}
 
 
 void MLocator::ReleaseCommand()
@@ -672,19 +602,6 @@ void MLocator::ResponseServerStatusInfoList( DWORD dwIP, int nPort )
 }
 
 
-void MLocator::ResponseBlockCountryCodeIP( DWORD dwIP, int nPort, const string& strCountryCode, const string& strRoutingURL )
-{
-	MCommand* pCmd = CreateCommand( MC_RESPONSE_BLOCK_COUNTRY_CODE_IP, MUID(0, 0) );
-	if( 0 != pCmd )
-	{
-		pCmd->AddParameter( new MCommandParameterString(strCountryCode.c_str()) );
-		pCmd->AddParameter( new MCommandParameterString(strRoutingURL.c_str()) );
-		SendCommandByUDP( dwIP, nPort, pCmd );
-		delete pCmd;
-	}
-}
-
-
 bool MLocator::IsLiveUDP( const MLocatorUDPInfo* pRecvUDPInfo, const DWORD dwEventTime )
 {
 	if( 0 == pRecvUDPInfo ) return false;
@@ -903,46 +820,13 @@ void MLocator::FlushRecvQueue( const DWORD dwEventTime )
 			}
 
 			// 국가 코드 필터를 사용할시, 접속한 IP가 접속 가능한 국가인지 검사.
-			if( GetLocatorConfig()->IsUseCountryCodeFilter() )
-			{
-				// custom ip검사후 ip country code검사.
-				if( GetCustomIP(pSendUDPInfo->GetStrIP(), strCountryCode, bIsBlock, strComment) )
-				{
-					if( !bIsBlock )
-					{
-						ResponseServerStatusInfoList( pSendUDPInfo->GetIP(), pSendUDPInfo->GetPort() );
-					}
-					else
-					{
-						ResponseBlockCountryCodeIP( pSendUDPInfo->GetIP(), 
-							pSendUDPInfo->GetPort(), 
-							strCountryCode, strComment );
-					}
-				}
-				else if( IsValidCountryCodeIP(pSendUDPInfo->GetStrIP(), strCountryCode, strRoutingURL) )
-				{
-					ResponseServerStatusInfoList( pSendUDPInfo->GetIP(), pSendUDPInfo->GetPort() );
-					GetLocatorStatistics().IncreaseCountryStatistics( strCountryCode );
-				}
-				else
-				{
-					ResponseBlockCountryCodeIP( pSendUDPInfo->GetIP(), 
-						pSendUDPInfo->GetPort(), 
-						strCountryCode, strRoutingURL );
 
-					GetLocatorStatistics().IncreaseBlockCountryCodeHitCount();
-					GetLocatorStatistics().IncreaseCountryStatistics( strCountryCode, -1 );
-				}
-			}
-			else
-			{
-				string CountryCode3;
+			string CountryCode3;
 
-				ResponseServerStatusInfoList( pSendUDPInfo->GetIP(), pSendUDPInfo->GetPort() );
+			ResponseServerStatusInfoList( pSendUDPInfo->GetIP(), pSendUDPInfo->GetPort() );
 
-				GetCountryFilter()->GetIPCountryCode( pSendUDPInfo->GetStrIP(), CountryCode3 );
-				GetLocatorStatistics().IncreaseCountryStatistics( CountryCode3 );
-			}
+			GetLocatorStatistics().IncreaseCountryStatistics( CountryCode3 );
+
 
 			pSendUDPInfo->IncreaseUsedCount( pSendUDPInfo->GetUseCount() );
 			pSendUDPInfo->SetUseCount( 0 );
@@ -952,108 +836,6 @@ void MLocator::FlushRecvQueue( const DWORD dwEventTime )
 		}
 		SendUDPMgr.MoveNext();
 	}
-}
-
-
-bool MLocator::GetCustomIP( const string& strIP, string& strOutCountryCode, bool& bIsBlock, string& strOutComment )
-{
-	if( (0 == GetLocatorDBMgr()) || (0 == GetCountryFilter()) )
-		return false;
-
-	// CustomIP테이블에 존재하는지 검사함.
-
-	if( !GetCountryFilter()->GetCustomIP(strIP, bIsBlock, strOutCountryCode, strOutComment) )
-	{
-		// 이부분에서 custom ip테이블을 조회해서 업데이트 하기에는 DB를 너무 자주 읽어야 해서
-		// custom ip는 여기서 업데이트하지 않고, CountryCodeIP검사 부분에서 업데이트 함.
-		return false;
-	}
-
-	return true;
-}
-
-
-bool MLocator::IsValidCountryCodeIP( const string& strIP, string& strOutCountryCode, string& strOutRoutingURL )
-{
-	if( (0 == GetLocatorDBMgr()) || (0 == GetCountryFilter()) )
-		return false;
-
-#ifdef _LOCATOR_TEST
-	DWORD	dwStart;
-	DWORD	dwEnd;
-	bool	bIsWriteLog = false;
-
-	dwStart =timeGetTime();
-#endif
-
-	// MCountryCodeFilter에 있는지 검사후 없으면 DB에서 검사.
-	// DB에서 검사한 정보는 Filter에 추가.
-	// 추가시 Key가 겹치는지 검사해야 함.
-	if( !GetCountryFilter()->GetIPCountryCode(strIP, strOutCountryCode) )
-	{
-		// 여기가지 내려오면 현제 locator에는 존제하지 않는 ip이기에 CustomIP테이블과 IPtoCountry테이블을 조회해서 
-		// 찾았을경우 업데이트 한다.
-		
-		DWORD	dwIPFrom;
-		DWORD	dwIPTo;
-		bool	bIsBlock;
-		string	strCountryCode;
-		string	strComment;
-
-		if( GetLocatorDBMgr()->GetCustomIP(strIP, dwIPFrom, dwIPTo, bIsBlock, strCountryCode, strComment) )
-		{
-			if( GetCountryFilter()->AddCustomIP(dwIPFrom, dwIPTo, bIsBlock, strCountryCode, strComment) )
-			{
-#ifdef _LOCATOR_TEST
-				mlog( "Add new custom ip(%s) from(%u), to(%u), IsBlock(%d), code(%s), comment(%s)\n",
-					strIP.c_str(), dwIPFrom, dwIPTo, bIsBlock, strCountryCode.c_str(), strComment.c_str() );
-				bIsWriteLog = true;
-#endif
-			}
-			else
-				mlog( "Fail to add new custom ip(%s) CountryCode(%s)\n", strIP.c_str(), strCountryCode.c_str() );
-		}
-		else if( GetLocatorDBMgr()->GetIPContryCode(strIP, dwIPFrom, dwIPTo, strCountryCode) )
-		{
-			if( GetCountryFilter()->AddIPtoCountry(dwIPFrom, dwIPTo, strCountryCode) )
-			{
-#ifdef _LOCATOR_TEST
-				mlog( "Add new country code ip(%s), dwIPFrom(%u), dwIPTo(%u), code(%s).\n",
-					strIP.c_str(), dwIPFrom, dwIPTo, strCountryCode.c_str() );
-				bIsWriteLog = true;
-#endif
-			}
-			else
-				mlog( "MLocator::IsValidCountryCodeIP - DB에서 읽어온 새로운 IPCountryCode정보를 Filter에 등록하는데 실패.\n" );
-		}
-		else
-		{
-			GetLocatorStatistics().IncreaseInvalidIPCount();
-
-			return GetLocatorConfig()->IsAcceptInvalidIP();
-		}
-
-		strOutCountryCode = strCountryCode;
-
-		GetLocatorStatistics().IncreaseCountryCodeCacheHitMissCount();
-	}
-
-#ifdef _LOCATOR_TEST
-	dwEnd = timeGetTime();
-
-	const float fInsertTime = (dwEnd - dwStart) / 1000.0f;
-
-	if( bIsWriteLog )
-	{
-		const IPtoCountryList&	icl = GetCountryFilter()->GetIPtoCountryList();
-		const CustomIPList&		cil = GetCountryFilter()->GetCustomIPList();
-
-		mlog( "IPtoCountrySize(%u), CustomIPSize(%u), UpdateElapsedTime(%f) \n",
-			icl.size(), cil.size(), fInsertTime );
-	}
-#endif
-
-	return GetCountryFilter()->IsNotBlockCode( strOutCountryCode, strOutRoutingURL );
 }
 
 
@@ -1112,15 +894,6 @@ void MLocator::UpdateLocatorStatus( const DWORD dwEventTime )
 	}
 }
 
-
-void MLocator::DeleteCountryFilter()
-{
-	if( 0 != m_pCountryFilter )
-	{
-		delete m_pCountryFilter;
-		m_pCountryFilter = 0;
-	}
-}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
