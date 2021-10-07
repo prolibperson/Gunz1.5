@@ -1477,7 +1477,7 @@ void MMatchServer::OnStageRelayMapListUpdate(const MUID& uidStage, int nRelayMap
 	pNew->AddParameter(new MCommandParameterBlob(relayMapListBlob, MGetBlobArraySize(relayMapListBlob)));
 	RouteToStage(uidStage, pNew);
 
-	MEraseBlobArray(pRelayMapListBlob);
+	MEraseBlobArray(relayMapListBlob);
 }
 void MMatchServer::OnStageRelayMapListInfo(const MUID& uidStage, const MUID& uidChar)
 {
