@@ -79,25 +79,9 @@ bool MLocatorDBMgr::GetServerStatus( MServerStatusMgr* pServerStatusMgr )
 
 		try
 		{
-			if (GetLocatorConfig()->IsTestServerOnly() == true) {
-				// TEST SERVER 목록만 가져옴.
-#if defined(LOCALE_NHNUSA)
-				rs.Open("SELECT ServerID, Type, CurrPlayer, MaxPlayer, CONVERT(varchar(20), Time, 20) AS Time, IP, Port, ServerName, Opened, AgentIP FROM ServerStatus(NOLOCK) WHERE (Opened <> 0) AND (Opened IS NOT NULL) AND Type=6", 
-					CRecordset::forwardOnly, CRecordset::readOnly);
-#else 
-				rs.Open("SELECT ServerID, Type, CurrPlayer, MaxPlayer, CONVERT(varchar(20), Time, 20) AS Time, IP, Port, ServerName, Opened FROM ServerStatus(NOLOCK) WHERE (Opened <> 0) AND (Opened IS NOT NULL) AND Type=6", 
-					CRecordset::forwardOnly, CRecordset::readOnly);
-#endif
-			} else {
-				// DB에서 가져올때 필터링해서 가져옴.
-#if defined(LOCALE_NHNUSA)
-				rs.Open("SELECT ServerID, Type, CurrPlayer, MaxPlayer, CONVERT(varchar(20), Time, 20) AS Time, IP, Port, ServerName, Opened, AgentIP FROM ServerStatus(NOLOCK) WHERE (Opened <> 0) AND (Opened IS NOT NULL) AND Type <> 6", 
-					CRecordset::forwardOnly, CRecordset::readOnly);
-#else 
+
 				rs.Open("SELECT ServerID, Type, CurrPlayer, MaxPlayer, CONVERT(varchar(20), Time, 20) AS Time, IP, Port, ServerName, Opened FROM ServerStatus(NOLOCK) WHERE (Opened <> 0) AND (Opened IS NOT NULL) AND Type <> 6", 
 					CRecordset::forwardOnly, CRecordset::readOnly);
-#endif
-			}
 		}
 		catch( CDBException* e )
 		{

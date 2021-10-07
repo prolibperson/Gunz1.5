@@ -38,7 +38,7 @@ bool MLocatorConfig::LoadDBConfig()
 {
 	char szVal[ 256 ];
 
-	GetPrivateProfileString( "DB", "DNS", "", szVal, 255, LOCATOR_CONFIG );
+	GetPrivateProfileString( "DB", "DNS", "", szVal, 255, LOCATOR_CONFIG);
 	if( (0 == strlen(szVal)) || !SetDBDSN(szVal) ) return false;
 	
 	GetPrivateProfileString( "DB", "USERNAME", "", szVal, 255, LOCATOR_CONFIG );

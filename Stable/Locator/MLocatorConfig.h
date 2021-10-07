@@ -3,12 +3,7 @@
 #include "MMatchTransDataType.h"
 
 
-#ifdef _DEBUG
-	#define LOCATOR_CONFIG "./DbgLocator.ini"
-#else 
-	#define LOCATOR_CONFIG "./Locator.ini"
-#endif
-
+constexpr LPCTSTR LOCATOR_CONFIG = _T(".\\Locator.ini");
 
 class MLocatorConfig
 {
@@ -37,7 +32,6 @@ public:
 	inline const DWORD	GetMarginOfErrorMin() const						{ return m_dwMarginOfErrorMin; }
 	inline const DWORD	GetElapsedTimeUpdateLocatorLog() const			{ return m_dwElapsedTimeUpdateLocatorLog; }
 
-	inline const bool IsUseCountryCodeFilter() const	{ return m_bIsUseCountryCodeFilter; }
 	inline const bool IsInitCompleted() const			{ return m_bIsInitCompleted; }
 	inline const bool IsAcceptInvalidIP() const			{ return m_bIsAcceptInvaildIP; }
 	inline const bool IsTestServerOnly() const			{ return m_bIsTestServerOnly; }
