@@ -154,7 +154,7 @@ public:
 
 
 	virtual void SetParts(RMeshPartsType parts,RMeshNode* pMN) { m_pVMesh->SetParts(parts, pMN); }
-	virtual void SetParts(RMeshPartsType parts,char* name) { m_pVMesh->SetParts(parts, name); }
+	virtual void SetParts(RMeshPartsType parts,char* name, const char* eluName) { m_pVMesh->SetParts(parts, name,eluName); }
 
 	virtual void ClearParts() { m_pVMesh->ClearParts(); }
 

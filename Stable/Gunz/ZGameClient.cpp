@@ -454,15 +454,65 @@ void ZGameClient::OnObjectCache(unsigned int nType, void* pBlob, int nCount)
 						vecClanID.push_back( pCache->GetCLID() );
 					}
 
+					for (int i = 0; i < MMCIP_END; ++i)
+					{
+						MMatchItemDesc* playerItem = MGetMatchItemDescMgr()->GetItemDesc(pCache->GetCostume()->nEquipedItemID[(MMatchCharItemParts)i]);
+						if (playerItem != nullptr)
+						{
+							if (playerItem->GetEluName() != nullptr)
+							{
+								if (ZGetMeshMgr()->Find(playerItem->m_szElu) == false)
+								{
+									string filePath = playerItem->m_szElu;
+									if (filePath.find("woman") != std::string::npos)
+									{
+										filePath = string("model/woman/") + playerItem->m_szElu;
+									}
+									else
+									{
+										filePath = string("model/man/") + playerItem->m_szElu;
+									}
+									ZGetMeshMgr()->Add((char*)filePath.c_str());
+								}
+							}
+						}
+					}
+
 					ZGetPlayerManager()->AddPlayer( pCache->GetUID(), pCache->GetName(), pCache->GetRank(), pCache->GetKillCount(), pCache->GetDeathCount());
 				}
 			}
-		} else if (nType == MATCHCACHEMODE_ADD) {
+		} else if (nType == MATCHCACHEMODE_ADD)
+		{
 			for(int i=0; i<nCount; i++){
 				MMatchObjCache* pCache = (MMatchObjCache*)MGetBlobArrayElement(pBlob, i);
-				if (pCache->CheckFlag(MTD_PlayerFlags_AdminHide) == false) {	//  Skip on AdminHide
+				if (pCache->CheckFlag(MTD_PlayerFlags_AdminHide) == false)
+				{	//  Skip on AdminHide
 					pList->AddPlayer(pCache->GetUID(),MOSS_NONREADY,pCache->GetLevel(),
 									 pCache->GetName(),pCache->GetClanName(),pCache->GetCLID(),false,MMT_ALL, pCache->GetDTGrade());
+
+					for (int i = 0; i < MMCIP_END; ++i)
+					{
+						MMatchItemDesc* playerItem = MGetMatchItemDescMgr()->GetItemDesc(pCache->GetCostume()->nEquipedItemID[(MMatchCharItemParts)i]);
+						if (playerItem != nullptr)
+						{
+							if (playerItem->GetEluName() != nullptr)
+							{
+								if (ZGetMeshMgr()->Find(playerItem->m_szElu) == false)
+								{
+									string filePath = playerItem->m_szElu;
+									if (filePath.find("woman") != std::string::npos)
+									{
+										filePath = string("model/woman/") + playerItem->m_szElu;
+									}
+									else
+									{
+										filePath = string("model/man/") + playerItem->m_szElu;
+									}
+									ZGetMeshMgr()->Add((char*)filePath.c_str());
+								}
+							}
+						}
+					}
 					
 					// Emblem // 클랜 URL이 없으면 Vector에 쌓는다
 					if (m_EmblemMgr.CheckEmblem(pCache->GetCLID(), pCache->GetEmblemChecksum())) {

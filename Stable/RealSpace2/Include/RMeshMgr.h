@@ -60,7 +60,7 @@ public:
 	void ReloadAllAnimation();
 
 	void GetPartsNode(RMeshPartsType parts,vector<RMeshNode*>& nodetable);
-	RMeshNode* GetPartsNode(char* name);
+	RMeshNode* GetPartsNode(char* name, const char* eluName);
 //	RMeshNode* GetParts(RMeshPartsType parts,char* name);
 
 	void SetMtrlAutoLoad(bool b) {
@@ -87,6 +87,8 @@ public:
 
 	vector<RMesh*> m_node_table;
 	DWORD	m_cur;
+
+	bool Find(const char* name);
 };
 
 _NAMESPACE_REALSPACE2_END

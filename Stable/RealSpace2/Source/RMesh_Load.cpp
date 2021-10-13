@@ -36,6 +36,8 @@ _NAMESPACE_REALSPACE2_BEGIN
 ////////////////////////////////////////////////////////////////////////////////
 //
 
+bool skipMesh = true;//TODO: write dynamic resource loader
+
 bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 {
 	char NodeName[256];
@@ -92,10 +94,18 @@ bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 			//			Node.GetAttribute(szSize,"size");//나중에 필요하면 살리자.. 지금은 그때그때 바꾸는것이 더 귀찮다..
 			m_ani_mgr.MakeListMap((int)eq_weapon_end);//최대모션타잎만큼 만들어준다..
 		}
-		else if (strcmp(NodeName, "AddParts") == 0) {
-			if (RMesh::m_parts_mesh_loading_skip == 0) {
+		else if (strcmp(NodeName, "AddParts") == 0)
+		{
+			if (RMesh::m_parts_mesh_loading_skip == 0)
+			{
 				Node.GetAttribute(IDName, "name");
 				Node.GetAttribute(FileName, "filename");
+				bool autoLoad = false;
+				//Custom: Dynamic Resource Loading. If you want to disable the feature, comment out node.getattribute(&autoLoad);todo: write config option
+				Node.GetAttribute(&autoLoad, "autoload");
+
+				if (autoLoad == false)
+					continue;
 
 				if (!m_parts_mgr) {
 					m_parts_mgr = new RMeshMgr;

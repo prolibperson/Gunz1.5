@@ -1832,7 +1832,7 @@ bool RBspObject::OpenDescription(const char *filename)
 	aXml.Create();
 	if(!aXml.LoadFromMemory(buffer))
 	{
-		delete buffer;
+		delete[] buffer;
 		return false;
 	}
 
@@ -1864,7 +1864,7 @@ bool RBspObject::OpenDescription(const char *filename)
 			Set_AmbSound(&aChild);
 	}
 
-	delete buffer;
+	delete[] buffer;
 	mzf.Close();
 
 	return true;

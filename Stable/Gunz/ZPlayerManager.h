@@ -56,7 +56,9 @@ public:
 	void AddPlayer( MUID& uID, const char* name, int rank, int kill, int death);
 	void RemovePlayer( MUID& uID);
 	void Clear();
-	ZPlayerInfo* Find( MUID& uID);
+	ZPlayerInfo* Find(MUID& uID);
+public:
+	map<MUID,ZPlayerInfo*> const GetPlayerList() {return m_PlayerList;}
 };
 
 

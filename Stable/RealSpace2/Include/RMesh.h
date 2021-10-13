@@ -486,8 +486,8 @@ public:
 	void TrimStr(const char* szSrcStr, char* outStr);
 
 	RMeshNode* GetMeshData(RMeshPartsType type);
-	RMeshNode* GetMeshData(char* name);
-	RMeshNode* GetPartsNode(char* name);
+	RMeshNode* GetMeshData(char* name, const char* eluName = nullptr);
+	RMeshNode* GetPartsNode(char* name, const char* eluName);
 
 	// 항상쓰는것도아니니까 나중에속도가 떨어진다면 사용
 //	RMeshNode* GetPartsNode(RMeshPartsType parts,char* name);

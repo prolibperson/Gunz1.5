@@ -1861,7 +1861,8 @@ void RVisualMesh::SetParts(RMeshPartsType parts,RMeshNode* pMN) {
 	}
 }
 
-void RVisualMesh::SetParts(RMeshPartsType parts,char* name)
+//Custom: Dynamic resource loading
+void RVisualMesh::SetParts(RMeshPartsType parts,char* name, const char* eluName)
 {
 	if(parts < 0 && parts >= eq_parts_end ) 
 		return;
@@ -1870,7 +1871,7 @@ void RVisualMesh::SetParts(RMeshPartsType parts,char* name)
 
 	if(!m_pMesh) return;
 
-	RMeshNode* pNode = m_pMesh->GetPartsNode(name);
+	RMeshNode* pNode = m_pMesh->GetPartsNode(name,eluName);
 
 	if(pNode) 
 	{

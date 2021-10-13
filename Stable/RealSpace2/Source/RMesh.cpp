@@ -344,25 +344,29 @@ RMeshNode* RMesh::GetMeshData(RMeshPartsType type)
 	return NULL;
 }
 
-RMeshNode* RMesh::GetMeshData(char* name)
+RMeshNode* RMesh::GetMeshData(char* name, const char* eluName)
 {
-	RMeshNode*	pMesh = NULL;
+	RMeshNode* pMesh = m_list.Find(name);
+	
 
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
+	return pMesh;
 
-	while (it_obj !=  m_list.end()) {
-		pMesh = (*it_obj);
-
-//#ifdef _DEBUG
-//		char szMeshName[256];
-//		sprintf(szMeshName, pMesh->GetName());
-//		TrimStr(szMeshName, szMeshName);
-//#endif
-		if(strcmp(pMesh->GetName(),name)==0)
-			return pMesh;
-		it_obj++;
-	}
-	return NULL;
+//	RMeshNodeHashList_Iter it_obj =  m_list.begin();
+//
+//	while (it_obj !=  m_list.end()) {
+//		pMesh = (*it_obj);
+//
+////#ifdef _DEBUG
+////		char szMeshName[256];
+////		sprintf(szMeshName, pMesh->GetName());
+////		TrimStr(szMeshName, szMeshName);
+////#endif
+//		string meshName = pMesh->GetName();
+//		if(meshName == name)
+//			return pMesh;
+//		it_obj++;
+//	}
+//	return NULL;
 }
 
 void RMesh::TrimStr(const char* szSrcStr, char* outStr)
@@ -407,12 +411,13 @@ void RMesh::TrimStr(const char* szSrcStr, char* outStr)
 	strcpy(outStr, szInputMapName);
 }
 
-RMeshNode* RMesh::GetPartsNode(char* name)
+//Custom: Dynamic resource loading
+RMeshNode* RMesh::GetPartsNode(char* name, const char* eluName)
 {
 	if(!m_parts_mgr)
 		return NULL;
 
-	return m_parts_mgr->GetPartsNode(name);
+	return m_parts_mgr->GetPartsNode(name,eluName);
 }
 
 void RMesh::GetPartsNode(RMeshPartsType type,vector<RMeshNode*>& nodetable)

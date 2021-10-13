@@ -677,19 +677,70 @@ void RMeshMgr::GetPartsNode(RMeshPartsType parts,vector<RMeshNode*>& nodetable)
 	}
 }
 
-RMeshNode* RMeshMgr::GetPartsNode(char* name)
+//Custom: Dynamic resource loading
+RMeshNode* RMeshMgr::GetPartsNode(char* name, const char* eluName)
 {
 	r_mesh_node node;
 	RMesh* pMesh = NULL;
 	RMeshNode* pMeshNode = NULL;
 
+	if (eluName != nullptr)
+	{
+		bool result = Find(eluName);
+		if (result == false)
+		{
+			mlog("%s", eluName);
+			std::string modelPath = "model/man/";
+			modelPath.append(eluName);
+
+			RMesh* node;
+			node = new RMesh;
+
+			Add((char*)modelPath.c_str());
+		}
+	}
+
 	for(node = m_list.begin(); node != m_list.end(); ++node)
 	{
 		pMesh = (*node);
-		pMeshNode = pMesh->GetMeshData(name);
+		pMeshNode = pMesh->GetMeshData(name,eluName);
 		if(pMeshNode)
 			return pMeshNode;
 	}
 	return NULL;
+}
+
+//Custom: Dynamic resource loading
+bool RMeshMgr::Find(const char* name)
+{
+	r_mesh_node node;
+	for (node = m_list.begin(); node != m_list.end(); ++node)
+	{
+		string modelName = (*node)->m_FileName.substr((*node)->m_FileName.find_last_of('/') + 1);
+		if (modelName == name)
+		{
+			return true;
+		}
+	}
+	return false;
+	/*
+	
+	RMeshNode* pMesh = m_list.Find(name);
+	
+	if (pMesh == nullptr)
+	{
+		if (eluName != nullptr)
+		{
+	
+
+
+			node->CalcBox();
+			return m_id_last - 1;
+		}
+	}
+	else
+		return pMesh;
+	*/
+	return nullptr;
 }
 _NAMESPACE_REALSPACE2_END

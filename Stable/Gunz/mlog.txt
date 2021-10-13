@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Sep 27 2021 19:50:19) 
-Log time (09/27/21 21:25:18)
+GUNZ 1,0,0,290 launched. build (Oct 13 2021 17:01:51) 
+Log time (10/13/21 17:06:30)
 Windows = 6.2 Build 9200 ,  (16701652KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
@@ -26,24 +26,24 @@ InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
-2(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
+1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
+2(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
 3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.614000 
+-------------------> Sound Engine Create : 0.613000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.589000 
+loading pictures : 1.653000 
 IDLResource Loading Success!!
-IDL resources : 0.109000 
+IDL resources : 0.114000 
 start InitInterface option
 Number of Display mode : 69
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.208000 
+Screen Effect Manager Create : 0.215000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -70,26 +70,18 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.366000 
+-------------------> GameInterface Create : 2.283000 
 
-model/man/man-parts_shunter.elu mesh eq_chest_shunter node 34 face 0 point -> physique 3 Greater than
-model/man/man-parts_dryad.elu mesh eq_chest_dryad node 680 face 0 point -> physique 3 Greater than
-model/man/man-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 2 point -> physique 3 Greater than
-model/man/man-parts_mummy.elu mesh eq_chest_mummy node 18 face 0 point -> physique 3 Greater than
-model/woman/woman-parts_blackdragon.elu mesh eq_legs_blackdragon node 301 face 1 point -> physique 3 Greater than
-model/woman/woman-parts_eskimo.elu mesh eq_chest_eskimo node 80 face 1 point -> physique 3 Greater than
-model/woman/woman-parts_bloodsuit.elu mesh eq_chest_bloodsuit node 129 face 0 point -> physique 3 Greater than
-model/woman/woman-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 1 point -> physique 3 Greater than
 Load character.xml success,
 
--------------------> Character Loading : 1.569000 
+-------------------> Character Loading : 0.175000 
 
 
--------------------> WeaponMesh Loading : 0.237000 
+-------------------> WeaponMesh Loading : 0.259000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.021000 
+-------------------> Worlditem Loading : 0.026000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -99,10 +91,10 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.244000 
+-------------------> ETC .. : 0.266000 
 
 
-LoginID: jetman82
+LoginID: jetman823
 BspObject open : begin interface/church/church_b.rs 
 RBspObject::Open : Open_MaterialList
 RBspObject::Open : Open_LightList
@@ -145,34 +137,10 @@ BspObject load lightmap : end
 RBspObject::Open : done
 ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
 main : OnCreate() done
-MExitListener !
-Destroy gunz
-Destroy sound engine.
-Destroy sound engine. success
-Destroy console.
-Destroy interface begin 
-destroy client.
-PeerInfoList Released
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-clear IDL resource end.
-Final interface end.
-Destroy game interface done.
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-Destroy mesh manager.
-Destroy weapon mesh manager.
-Clear SkillManager.
-Clear QuestItemDescMgr.
-Clear MatchItemDescMgr.
-Clear ChattingFilter.
-Clear ChannelRuleMgr.
-destroy game application done.
-interface finalize.
-game input destroy.
-game gonfiguration destroy.
-Bitmap manager destroy Animation bitmap.
-destroy gunz finish.
-Rframe_destory::closeDisplay
+Server Connected
+Login Successful. 
+Responsed Account Charlist
+Selected character name : Jetman823 (4A 65 74 6D 61 6E 38 32 33 )  (len = 9)
+0,Jetman82,Jetman82,This is a test send
+StageCreated
+StageCreated

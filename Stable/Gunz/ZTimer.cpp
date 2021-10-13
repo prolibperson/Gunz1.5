@@ -132,7 +132,6 @@ float ZTimer::UpdateFrame()
 
 	if (dwCurTime - m_lastShiftTime.Ref() >= ((unsigned long)15000 / RandomNumber(1,3)))
 	{
-		m_lastShiftTime.Set_CheckCrc(dwCurTime);
 		ShiftFugitiveValues();
 	}
 	return fElapsed;
@@ -159,6 +158,9 @@ void ZTimer::ShiftFugitiveValues()
 
 	DWORD* pDword3 = m_pElapsed;
 	m_pElapsed = new DWORD(*pDword3);
+
+	m_lastShiftTime.Set_CheckCrc(timeGetTime());
+
 
 	delete pBool1;
 	delete pll1;

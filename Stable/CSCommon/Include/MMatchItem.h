@@ -373,6 +373,9 @@ struct MMatchItemDesc
 	MProtectValue<int>		m_nMaxRentPeriod;	// 기간제 바운티 아이템의 최대 기간 정보 (날짜단위)
 
 	bool					m_bIsEnableMoveToAccountItem;
+	//Custom: Dynamic resource loading
+	char					m_szElu[256];
+	const char*				GetEluName();
 
 	MMatchItemDesc();
 	~MMatchItemDesc();

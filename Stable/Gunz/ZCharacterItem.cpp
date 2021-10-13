@@ -119,6 +119,25 @@ bool ZCharacterItem::EquipItem(MMatchCharItemParts parts, int nItemDescID, int n
 	MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(nItemDescID);
 
 	if (pDesc == NULL) { _ASSERT(0); return false; }
+
+	//TODO: find way to check if it's contained???
+	if (pDesc->GetEluName() != nullptr)
+	{
+		if (ZGetMeshMgr()->Find(pDesc->m_szElu) == false)
+		{
+			string filePath = pDesc->m_szElu;
+			if (filePath.find("woman") != std::string::npos)
+			{
+				filePath = string("model/woman/") + pDesc->m_szElu;
+			}
+			else
+			{
+				filePath = string("model/man/") + pDesc->m_szElu;
+			}
+			ZGetMeshMgr()->Add((char*)filePath.c_str());
+		}
+	}
+
 	if (!Confirm(parts, pDesc)) {
 //		_ASSERT(0);
 		return false;

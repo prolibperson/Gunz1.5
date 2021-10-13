@@ -6871,9 +6871,11 @@ void ZGame::RefreshCharacters()
 		MMatchPeerInfo* pPeerInfo = (*itor).second;
 		ZCharacter* pCharacter = (ZCharacter*) m_CharacterManager.Find(pPeerInfo->uidChar);
 
-		if (pCharacter == NULL) {
+		if (pCharacter == NULL) 
+		{
 
 			pCharacter = m_CharacterManager.Add(pPeerInfo->uidChar, rvector(0.0f, 0.0f, 0.0f));
+
 			pCharacter->Create(&pPeerInfo->CharInfo);
 
 			if (m_Match.GetRoundState() == MMATCH_ROUNDSTATE_PREPARE)

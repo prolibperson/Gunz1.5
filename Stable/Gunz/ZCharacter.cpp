@@ -218,7 +218,7 @@ void ChangeCharHair(ZObjectVMesh* pVMesh, MMatchSex nSex, int nHairIndex)
 	}
 
 	// 나중에 hair를 따로 만들어야 할듯..
-	pVMesh->SetParts(eq_parts_head, szMeshName);
+	pVMesh->SetParts(eq_parts_head, szMeshName,nullptr);
 }
 
 void ChangeEquipAvatarParts(ZObjectVMesh* pVMesh, const unsigned long int* pItemID, MMatchSex nSex, int nHairIndex)
@@ -229,23 +229,23 @@ void ChangeEquipAvatarParts(ZObjectVMesh* pVMesh, const unsigned long int* pItem
 	MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(pItemID[MMCIP_AVATAR]);
 	if( pDesc != NULL ) {
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szHeadMeshName;
-		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_head, szMeshName);
+		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_head, szMeshName,pDesc->GetEluName());
 		else							ChangeCharHair(pVMesh, nSex, nHairIndex);
 
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szChestMeshName;
-		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_chest, szMeshName);
+		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_chest, szMeshName, pDesc->GetEluName());
 		else							pVMesh->SetBaseParts(eq_parts_chest);
 
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szHandMeshName;
-		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_hands, szMeshName);
+		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_hands, szMeshName, pDesc->GetEluName());
 		else							pVMesh->SetBaseParts(eq_parts_hands);
 
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szLegsMeshName;
-		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_legs, szMeshName);
+		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_legs, szMeshName, pDesc->GetEluName());
 		else							pVMesh->SetBaseParts(eq_parts_legs);
 
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szFeetMeshName;
-		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_feet, szMeshName);
+		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_feet, szMeshName, pDesc->GetEluName());
 		else							pVMesh->SetBaseParts(eq_parts_feet);
 	}
 
@@ -271,11 +271,13 @@ void ChangeEquipParts(ZObjectVMesh* pVMesh, const unsigned long int* pItemID)
 		{eq_parts_feet,		MMCIP_FEET}
 	};
 
+	//Custom: Dynamic resource loading
 	for (int i = 0; i < 5; i++) {
 		if (pItemID[PartsPair[i].itemparts] != 0) {
 			MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(pItemID[PartsPair[i].itemparts]);
-			if (pDesc != NULL) {
-				pVMesh->SetParts(PartsPair[i].meshparts, pDesc->m_pMItemName->Ref().m_szMeshName);
+			if (pDesc != NULL)
+			{
+				pVMesh->SetParts(PartsPair[i].meshparts, pDesc->m_pMItemName->Ref().m_szMeshName, pDesc->GetEluName());
 			}
 		}
 		else {
@@ -302,7 +304,7 @@ void ChangeCharFace(ZObjectVMesh* pVMesh, MMatchSex nSex, int nFaceIndex)
 		strcpy(szMeshName, g_szFaceMeshName[nFaceIndex][MMS_FEMALE].c_str());
 	}
 
-	pVMesh->SetParts(eq_parts_face, szMeshName);
+	pVMesh->SetParts(eq_parts_face, szMeshName,nullptr);
 }
 
 void ZChangeCharParts(ZObjectVMesh* pVMesh, MMatchSex nSex, int nHair, int nFace, const unsigned long int* pItemID)
@@ -318,7 +320,8 @@ void ZChangeCharParts(ZObjectVMesh* pVMesh, MMatchSex nSex, int nHair, int nFace
 		// 아바타 착용시 face메쉬는 숨긴다
 		pVMesh->SetSkipRenderFaceParts(true);
 	} 
-	else {
+	else
+	{
 		ChangeEquipParts(pVMesh, pItemID);		// hair, face보다 장비를 먼저 바꿔야 한다.
 
 		// 지금은 머리아이템과 머리카락 메쉬를 서로 공유하고 있다. - 나중에 떼어놓도록 하자
@@ -1022,7 +1025,6 @@ void ZCharacter::OnDraw()
 	__BP(39,"ZCharacter::Draw");
 
 	if( m_pVMesh && !Enable_Cloth )	m_pVMesh->DestroyCloth();
-
 	//////////////
 	// 광원 세팅
 
@@ -3497,7 +3499,8 @@ void ZCharacter::InitMeshParts()
 				}
 
 				if (!GetItems()->GetItem(MMatchCharItemParts(i))->IsEmpty()) {
-					m_pVMesh->SetParts(mesh_parts_type, GetItems()->GetItem(MMatchCharItemParts(i))->GetDesc()->m_pMItemName->Ref().m_szMeshName);
+					m_pVMesh->SetParts(mesh_parts_type, GetItems()->GetItem(MMatchCharItemParts(i))->GetDesc()->m_pMItemName->Ref().m_szMeshName,GetItems()->GetItem(
+					MMatchCharItemParts(i))->GetDesc()->GetEluName());
 				}
 				else {
 					m_pVMesh->SetBaseParts(mesh_parts_type);
@@ -3520,23 +3523,23 @@ void ZCharacter::InitMeshParts()
 				m_pVMesh->ClearParts();
 
 				szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szHeadMeshName;
-				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_head, szMeshName);
+				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_head, szMeshName, pDesc->GetEluName());
 				else							ChangeCharHair(m_pVMesh, m_Property.nSex, m_Property.nHair);
 
 				szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szChestMeshName;
-				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_chest, szMeshName);
+				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_chest, szMeshName, pDesc->GetEluName());
 				else							m_pVMesh->SetBaseParts(eq_parts_chest);
 
 				szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szHandMeshName;
-				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_hands, szMeshName);
+				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_hands, szMeshName, pDesc->GetEluName());
 				else							m_pVMesh->SetBaseParts(eq_parts_hands);
 
 				szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szLegsMeshName;
-				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_legs, szMeshName);
+				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_legs, szMeshName, pDesc->GetEluName());
 				else							m_pVMesh->SetBaseParts(eq_parts_legs);
 
 				szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szFeetMeshName;
-				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_feet, szMeshName);
+				if( strlen(szMeshName) > 0 )	m_pVMesh->SetParts(eq_parts_feet, szMeshName, pDesc->GetEluName());
 				else							m_pVMesh->SetBaseParts(eq_parts_feet);
 
 				m_pVMesh->SetSkipRenderFaceParts(true);

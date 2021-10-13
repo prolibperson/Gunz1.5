@@ -145,6 +145,14 @@ RRESULT OnCreate(void *pParam)
 	{
 		RResetDevice(&modeParams);
 	}
+
+
+	//todo: write autoload config option
+	bool autoload = false;
+	if (autoload == true)
+	{
+		//todo: make rmesh skip autoload option
+	}
 	string strFileLenzFlare("System/LenzFlare.xml");
 	RCreateLenzFlare(strFileLenzFlare.c_str());
 	RGetLenzFlare()->Initialize();

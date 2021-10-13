@@ -246,7 +246,7 @@ public:
 	// weapon parts
 
 	void SetParts(RMeshPartsType parts,RMeshNode* pMN);
-	void SetParts(RMeshPartsType parts,char* name);
+	void SetParts(RMeshPartsType parts,char* name, const char* eluName);
 
 	void ClearParts();
 

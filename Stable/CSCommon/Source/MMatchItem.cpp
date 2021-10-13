@@ -11,7 +11,15 @@
 MUID MMatchItemMap::m_uidGenerate = MUID(0,0);
 MCriticalSection MMatchItemMap::m_csUIDGenerateLock;
 
-MMatchItemDesc::MMatchItemDesc() : m_nID(0), m_nSlot(MMIST_NONE), m_pEffect(NULL), m_bSlugOutput(0), 
+const char* MMatchItemDesc::GetEluName()
+{
+	if (strlen(m_szElu) > 0)
+		return m_szElu;
+
+	return nullptr;
+}
+
+MMatchItemDesc::MMatchItemDesc() : m_nID(0), m_nSlot(MMIST_NONE), m_pEffect(NULL), m_bSlugOutput(0),
 	m_nColor(0xFFFFFFFF), m_nImageID(0), m_nBulletImageID(0), m_nMagazineImageID(0), m_bIsCashItem(false), m_bIsSpendableItem(false)
 {
 	m_nTotalPoint.Set_MakeCrc(0);
@@ -58,7 +66,7 @@ MMatchItemDesc::MMatchItemDesc() : m_nID(0), m_nSlot(MMIST_NONE), m_pEffect(NULL
 	memset(m_szFireSndName, 0, sizeof(m_szFireSndName));
 	memset(m_szDryfireSndName, 0, sizeof(m_szDryfireSndName));
 	memset(m_szWeaponByFiber, 0, sizeof(m_szWeaponByFiber));
-
+	memset(m_szElu, 0, sizeof(m_szElu));
 	m_Bonus.m_fXP_SoloBonus = 0.0f;
 	m_Bonus.m_fXP_TeamBonus = 0.0f;
 	m_Bonus.m_fXP_QuestBonus = 0.0f;
@@ -476,8 +484,8 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 	int nAttrCount = element.GetAttributeCount();
 	for (int i = 0; i < nAttrCount; i++)
 	{
-		memset( szAttrValue, 0, 256 );
-		memset( szAttrName, 0, 64 );
+		memset(szAttrValue, 0, 256);
+		memset(szAttrName, 0, 64);
 
 		element.GetAttribute(i, szAttrName, szAttrValue);
 		if (!_stricmp(szAttrName, "ID"))
@@ -495,10 +503,10 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 			else if (!_stricmp(szAttrValue, "range"))		pNewDesc->m_nType.Set(MMIT_RANGE);
 			else if (!_stricmp(szAttrValue, "equip"))		pNewDesc->m_nType.Set(MMIT_EQUIPMENT);
 			else if (!_stricmp(szAttrValue, "custom"))		pNewDesc->m_nType.Set(MMIT_CUSTOM);
-			else if( !_stricmp(szAttrValue, "ticket") )	pNewDesc->m_nType.Set(MMIT_TICKET);
-			else if( !_stricmp(szAttrValue, "avatar") )	pNewDesc->m_nType.Set(MMIT_AVATAR);
-			else if( !_stricmp(szAttrValue, "community") )	pNewDesc->m_nType.Set(MMIT_COMMUNITY);
-			else if( !_stricmp(szAttrValue, "longbuff") )	pNewDesc->m_nType.Set(MMIT_LONGBUFF);
+			else if (!_stricmp(szAttrValue, "ticket"))	pNewDesc->m_nType.Set(MMIT_TICKET);
+			else if (!_stricmp(szAttrValue, "avatar"))	pNewDesc->m_nType.Set(MMIT_AVATAR);
+			else if (!_stricmp(szAttrValue, "community"))	pNewDesc->m_nType.Set(MMIT_COMMUNITY);
+			else if (!_stricmp(szAttrValue, "longbuff"))	pNewDesc->m_nType.Set(MMIT_LONGBUFF);
 			else _ASSERT(0);
 
 			pNewDesc->m_nType.MakeCrc();
@@ -513,7 +521,7 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		}
 		else if (!_stricmp(szAttrName, "res_level"))
 		{
-			pNewDesc->m_nResLevel.Set( atoi(szAttrValue));
+			pNewDesc->m_nResLevel.Set(atoi(szAttrValue));
 			pNewDesc->m_nResLevel.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "slot"))
@@ -590,7 +598,7 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 			else _ASSERT(0);
 
 			pNewDesc->m_nWeaponType.MakeCrc();
-		}		
+		}
 		else if (!_stricmp(szAttrName, "spendtype"))
 		{
 			if (strlen(szAttrValue) <= 0)									pNewDesc->m_nSpendType.Set(MMCT_NONE);
@@ -604,27 +612,27 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		else if (!_stricmp(szAttrName, "effect_level"))
 		{
 			// 이펙트레벨
-			pNewDesc->m_nEffectLevel.Set( atoi(szAttrValue));
+			pNewDesc->m_nEffectLevel.Set(atoi(szAttrValue));
 			pNewDesc->m_nEffectLevel.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "weight"))
 		{
-			pNewDesc->m_nWeight.Set( atoi(szAttrValue));
+			pNewDesc->m_nWeight.Set(atoi(szAttrValue));
 			pNewDesc->m_nWeight.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "bt_price"))
 		{
-			pNewDesc->m_nBountyPrice.Set( atoi(szAttrValue));
+			pNewDesc->m_nBountyPrice.Set(atoi(szAttrValue));
 			pNewDesc->m_nBountyPrice.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "damage"))
 		{
-			pNewDesc->m_nDamage.Set( atoi(szAttrValue));
+			pNewDesc->m_nDamage.Set(atoi(szAttrValue));
 			pNewDesc->m_nDamage.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "itempower"))
 		{
-			pNewDesc->m_nItemPower.Set( atoi(szAttrValue));
+			pNewDesc->m_nItemPower.Set(atoi(szAttrValue));
 			pNewDesc->m_nItemPower.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "damagetype"))
@@ -642,12 +650,12 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		}
 		else if (!_stricmp(szAttrName, "damagetime"))
 		{
-			pNewDesc->m_nDamageTime.Set( atoi(szAttrValue));
+			pNewDesc->m_nDamageTime.Set(atoi(szAttrValue));
 			pNewDesc->m_nDamageTime.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "lifetime"))
 		{
-			pNewDesc->m_nLifeTime.Set( atoi(szAttrValue));
+			pNewDesc->m_nLifeTime.Set(atoi(szAttrValue));
 			pNewDesc->m_nLifeTime.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "iscashitem"))
@@ -661,27 +669,27 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		}
 		else if (!_stricmp(szAttrName, "delay"))
 		{
-			pNewDesc->m_nDelay.Set( atoi(szAttrValue));
+			pNewDesc->m_nDelay.Set(atoi(szAttrValue));
 			pNewDesc->m_nDelay.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "ctrl_ability"))
 		{
-			pNewDesc->m_nControllability.Set( atoi(szAttrValue));
+			pNewDesc->m_nControllability.Set(atoi(szAttrValue));
 			pNewDesc->m_nControllability.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "magazine"))
 		{
-			pNewDesc->m_nMagazine.Set( atoi(szAttrValue));
+			pNewDesc->m_nMagazine.Set(atoi(szAttrValue));
 			pNewDesc->m_nMagazine.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "maxbullet"))
 		{
-			pNewDesc->m_nMaxBullet.Set( atoi(szAttrValue));
+			pNewDesc->m_nMaxBullet.Set(atoi(szAttrValue));
 			pNewDesc->m_nMaxBullet.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "reloadtime"))
 		{
-			pNewDesc->m_nReloadTime.Set( atoi(szAttrValue));
+			pNewDesc->m_nReloadTime.Set(atoi(szAttrValue));
 			pNewDesc->m_nReloadTime.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "slug_output"))
@@ -692,72 +700,72 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		else if (!_stricmp(szAttrName, "hp"))
 		{
 			//pNewDesc->m_nHP = atoi(szAttrValue);
-			pNewDesc->m_nHP.Set( atoi(szAttrValue));
+			pNewDesc->m_nHP.Set(atoi(szAttrValue));
 			pNewDesc->m_nHP.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "ap"))
 		{
-			pNewDesc->m_nAP.Set( atoi(szAttrValue));
+			pNewDesc->m_nAP.Set(atoi(szAttrValue));
 			pNewDesc->m_nAP.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "maxwt"))
 		{
-			pNewDesc->m_nMaxWT.Set( atoi(szAttrValue));
+			pNewDesc->m_nMaxWT.Set(atoi(szAttrValue));
 			pNewDesc->m_nMaxWT.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "sf"))
 		{
-			pNewDesc->m_nSF.Set( atoi(szAttrValue));
+			pNewDesc->m_nSF.Set(atoi(szAttrValue));
 			pNewDesc->m_nSF.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "fr"))
 		{
-			pNewDesc->m_nFR.Set( atoi(szAttrValue));
+			pNewDesc->m_nFR.Set(atoi(szAttrValue));
 			pNewDesc->m_nFR.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "cr"))
 		{
-			pNewDesc->m_nCR.Set( atoi(szAttrValue));
+			pNewDesc->m_nCR.Set(atoi(szAttrValue));
 			pNewDesc->m_nCR.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "pr"))
 		{
-			pNewDesc->m_nPR.Set( atoi(szAttrValue));
+			pNewDesc->m_nPR.Set(atoi(szAttrValue));
 			pNewDesc->m_nPR.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "lr"))
 		{
-			pNewDesc->m_nLR.Set( atoi(szAttrValue));
+			pNewDesc->m_nLR.Set(atoi(szAttrValue));
 			pNewDesc->m_nLR.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "limitspeed"))
 		{
-			pNewDesc->m_nLimitSpeed.Set( atoi(szAttrValue));
+			pNewDesc->m_nLimitSpeed.Set(atoi(szAttrValue));
 			pNewDesc->m_nLimitSpeed.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "limitjump"))
 		{
-			pNewDesc->m_nLimitJump.Set( atoi(szAttrValue));
+			pNewDesc->m_nLimitJump.Set(atoi(szAttrValue));
 			pNewDesc->m_nLimitJump.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "limittumble"))
 		{
-			pNewDesc->m_nLimitTumble.Set( atoi(szAttrValue));
+			pNewDesc->m_nLimitTumble.Set(atoi(szAttrValue));
 			pNewDesc->m_nLimitTumble.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "limitwall"))
 		{
-			pNewDesc->m_nLimitWall.Set( atoi(szAttrValue));
+			pNewDesc->m_nLimitWall.Set(atoi(szAttrValue));
 			pNewDesc->m_nLimitWall.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "range"))
 		{
-			pNewDesc->m_nRange.Set( atoi(szAttrValue));
+			pNewDesc->m_nRange.Set(atoi(szAttrValue));
 			pNewDesc->m_nRange.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "angle"))
 		{
-			pNewDesc->m_nAngle.Set( atoi(szAttrValue));
+			pNewDesc->m_nAngle.Set(atoi(szAttrValue));
 			pNewDesc->m_nAngle.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "color"))
@@ -766,11 +774,11 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		}
 		else if (!_stricmp(szAttrName, "desc"))
 		{
-		strcpy_s(pNewDesc->m_szDesc, MGetStringResManager()->GetStringFromXml(szAttrValue));
+			strcpy_s(pNewDesc->m_szDesc, MGetStringResManager()->GetStringFromXml(szAttrValue));
 		}
 		else if (!_stricmp(szAttrName, "mesh_name"))
 		{
-		strcpy_s(pNewDesc->m_pMItemName->Ref().m_szMeshName, szAttrValue);
+			strcpy_s(pNewDesc->m_pMItemName->Ref().m_szMeshName, szAttrValue);
 			pNewDesc->m_pMItemName->MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "image_id"))
@@ -787,23 +795,23 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		}
 		else if (!_stricmp(szAttrName, "snd_reload"))
 		{
-		strcpy_s(pNewDesc->m_szReloadSndName, szAttrValue);
+			strcpy_s(pNewDesc->m_szReloadSndName, szAttrValue);
 		}
 		else if (!_stricmp(szAttrName, "snd_fire"))
 		{
-		strcpy_s(pNewDesc->m_szFireSndName, szAttrValue);
+			strcpy_s(pNewDesc->m_szFireSndName, szAttrValue);
 		}
 		else if (!_stricmp(szAttrName, "snd_dryfire"))
 		{
-		strcpy_s(pNewDesc->m_szDryfireSndName, szAttrValue);
+			strcpy_s(pNewDesc->m_szDryfireSndName, szAttrValue);
 		}
 		else if (!_stricmp(szAttrName, "snd_weapon_fiber"))
 		{
-		strcpy_s(pNewDesc->m_szWeaponByFiber, szAttrValue);
+			strcpy_s(pNewDesc->m_szWeaponByFiber, szAttrValue);
 		}
 		else if (!_stricmp(szAttrName, "gadget_id"))
 		{
-			pNewDesc->m_nGadgetID.Set( atoi(szAttrValue));
+			pNewDesc->m_nGadgetID.Set(atoi(szAttrValue));
 			pNewDesc->m_nGadgetID.MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "xp_solo_bonus"))
@@ -818,68 +826,72 @@ bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
 		{
 			pNewDesc->m_Bonus.m_fXP_QuestBonus = (float)(atoi(szAttrValue)) / 100.0f;
 		}
-		else if( !_stricmp(szAttrName, "bp_solo_bonus") )
+		else if (!_stricmp(szAttrName, "bp_solo_bonus"))
 		{
-			pNewDesc->m_Bonus.m_fBP_SoloBonus = static_cast< float >( atoi(szAttrValue) ) / 100.0f;
+			pNewDesc->m_Bonus.m_fBP_SoloBonus = static_cast<float>(atoi(szAttrValue)) / 100.0f;
 		}
-		else if( !_stricmp(szAttrName, "bp_team_bonus") )
+		else if (!_stricmp(szAttrName, "bp_team_bonus"))
 		{
-			pNewDesc->m_Bonus.m_fBP_TeamBonus = static_cast< float >( atoi(szAttrValue) ) / 100.0f;
+			pNewDesc->m_Bonus.m_fBP_TeamBonus = static_cast<float>(atoi(szAttrValue)) / 100.0f;
 		}
-		else if( !_stricmp(szAttrName, "bp_quest_bonus") )
+		else if (!_stricmp(szAttrName, "bp_quest_bonus"))
 		{
-			pNewDesc->m_Bonus.m_fBP_QuestBonus = static_cast< float >( atoi(szAttrValue) ) / 100.0f;
+			pNewDesc->m_Bonus.m_fBP_QuestBonus = static_cast<float>(atoi(szAttrValue)) / 100.0f;
 		}
-		else if( !_stricmp(szAttrName, "spendable") )
+		else if (!_stricmp(szAttrName, "spendable"))
 		{
-			if( 0 == _stricmp("false", szAttrValue) )	pNewDesc->m_bIsSpendableItem = false;
+			if (0 == _stricmp("false", szAttrValue))	pNewDesc->m_bIsSpendableItem = false;
 			else											pNewDesc->m_bIsSpendableItem = true;
 		}
-		else if( !_stricmp(szAttrName, "ticket_type") )
+		else if (!_stricmp(szAttrName, "ticket_type"))
 		{
-			if( 0 == _stricmp(szAttrValue, "admission") )
+			if (0 == _stricmp(szAttrValue, "admission"))
 				pNewDesc->m_TicketType = MMTT_ADMISSION;
-			else if( 0 == _stricmp(szAttrValue, "change_head") )
+			else if (0 == _stricmp(szAttrValue, "change_head"))
 				pNewDesc->m_TicketType = MMIT_CHANGEHEAD;
 			else {
-				ASSERT( 0 && "머야? 이 종이는 머야?" );
+				ASSERT(0 && "머야? 이 종이는 머야?");
 			}
 		}
 		else if (!_stricmp(szAttrName, "rent_period"))
 		{
-			pNewDesc->m_nMaxRentPeriod.Set( atoi(szAttrValue));
+			pNewDesc->m_nMaxRentPeriod.Set(atoi(szAttrValue));
 			pNewDesc->m_nMaxRentPeriod.MakeCrc();
 		}
 		// 여기서부터는 아바타 관련된 것들... 추후에는 따로 XML로 관리하고 싶은데-_ㅠ
 		else if (!_stricmp(szAttrName, "avatar_head"))
 		{
-		strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szHeadMeshName
+			strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szHeadMeshName
 				, MGetStringResManager()->GetStringFromXml(szAttrValue));
 			pNewDesc->m_pAvatarMeshName->MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "avatar_chest"))
 		{
-		strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szChestMeshName
+			strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szChestMeshName
 				, MGetStringResManager()->GetStringFromXml(szAttrValue));
 			pNewDesc->m_pAvatarMeshName->MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "avatar_hand"))
 		{
-		strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szHandMeshName
+			strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szHandMeshName
 				, MGetStringResManager()->GetStringFromXml(szAttrValue));
-			pNewDesc->m_pAvatarMeshName->MakeCrc();			
+			pNewDesc->m_pAvatarMeshName->MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "avatar_legs"))
 		{
-		strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szLegsMeshName
+			strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szLegsMeshName
 				, MGetStringResManager()->GetStringFromXml(szAttrValue));
 			pNewDesc->m_pAvatarMeshName->MakeCrc();
 		}
 		else if (!_stricmp(szAttrName, "avatar_feet"))
 		{
-		strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szFeetMeshName
+			strcpy_s(pNewDesc->m_pAvatarMeshName->Ref().m_szFeetMeshName
 				, MGetStringResManager()->GetStringFromXml(szAttrValue));
-			pNewDesc->m_pAvatarMeshName->MakeCrc();			
+			pNewDesc->m_pAvatarMeshName->MakeCrc();
+		}
+		else if (!_stricmp(szAttrName, "elu"))
+		{
+			strcpy_s(pNewDesc->m_szElu, szAttrValue);
 		}
 	}
 
