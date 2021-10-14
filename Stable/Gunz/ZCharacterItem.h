@@ -22,7 +22,7 @@ public:
 	ZCharacterItem();
 	virtual ~ZCharacterItem();
 	void SelectWeapon(MMatchCharItemParts parts);
-	bool EquipItem(MMatchCharItemParts parts, int nItemDescID, int nItemCount = 1);
+	bool EquipItem(MMatchCharItemParts parts, int nItemDescID, int nItemCount = 1, MMatchSex playerSex = MMS_END);
 
 	bool Reload();
 

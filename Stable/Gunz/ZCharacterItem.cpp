@@ -109,7 +109,7 @@ bool ZCharacterItem::Confirm(MMatchCharItemParts parts, MMatchItemDesc* pDesc)
 	return true;
 }
 
-bool ZCharacterItem::EquipItem(MMatchCharItemParts parts, int nItemDescID, int nItemCount)
+bool ZCharacterItem::EquipItem(MMatchCharItemParts parts, int nItemDescID, int nItemCount, MMatchSex playerSex)
 {
 	if (nItemDescID == 0) {
 		m_Items[parts].Create(MUID(0,0), NULL, 0);
@@ -121,20 +121,32 @@ bool ZCharacterItem::EquipItem(MMatchCharItemParts parts, int nItemDescID, int n
 	if (pDesc == NULL) { _ASSERT(0); return false; }
 
 	//TODO: find way to check if it's contained???
-	if (pDesc->GetEluName() != nullptr)
+	if (playerSex != MMS_END)
 	{
-		if (ZGetMeshMgr()->Find(pDesc->m_szElu) == false)
+		if (pDesc->GetEluName() != nullptr)
 		{
-			string filePath = pDesc->m_szElu;
-			if (filePath.find("woman") != std::string::npos)
+			RMesh* playerMesh = nullptr;
+			if (playerSex == MMS_MALE)
 			{
-				filePath = string("model/woman/") + pDesc->m_szElu;
+				playerMesh = ZGetMeshMgr()->Get("heroman1");
 			}
 			else
 			{
-				filePath = string("model/man/") + pDesc->m_szElu;
+				playerMesh = ZGetMeshMgr()->Get("herowoman1");
 			}
-			ZGetMeshMgr()->Add((char*)filePath.c_str());
+			if (playerMesh->m_parts_mgr->Find(pDesc->m_szElu) == false)//Find(playerItem->m_szElu) == false)
+			{
+				string filePath = pDesc->m_szElu;
+				if (filePath.find("woman") != std::string::npos)
+				{
+					filePath = string("model/woman/") + pDesc->m_szElu;
+				}
+				else
+				{
+					filePath = string("model/man/") + pDesc->m_szElu;
+				}
+				playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
+			}
 		}
 	}
 

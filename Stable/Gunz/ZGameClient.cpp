@@ -437,7 +437,8 @@ void ZGameClient::OnObjectCache(unsigned int nType, void* pBlob, int nCount)
 	// 인터페이스 업데이트
 	if(pList)
 	{
-		if (nType == MATCHCACHEMODE_UPDATE) {
+		if (nType == MATCHCACHEMODE_UPDATE) 
+		{
 			pList->RemoveAll();
 			ZGetPlayerManager()->Clear();
 			for(int i=0; i<nCount; i++){
@@ -461,7 +462,16 @@ void ZGameClient::OnObjectCache(unsigned int nType, void* pBlob, int nCount)
 						{
 							if (playerItem->GetEluName() != nullptr)
 							{
-								if (ZGetMeshMgr()->Find(playerItem->m_szElu) == false)
+								RMesh* playerMesh = nullptr;
+								if (pCache->GetCostume()->nSex == MMS_MALE)
+								{
+									playerMesh = ZGetMeshMgr()->Get("heroman1");
+								}
+								else
+								{
+									playerMesh = ZGetMeshMgr()->Get("herowoman1");
+								}
+								if (playerMesh->m_parts_mgr->Find(playerItem->m_szElu) == false)//Find(playerItem->m_szElu) == false)
 								{
 									string filePath = playerItem->m_szElu;
 									if (filePath.find("woman") != std::string::npos)
@@ -472,7 +482,7 @@ void ZGameClient::OnObjectCache(unsigned int nType, void* pBlob, int nCount)
 									{
 										filePath = string("model/man/") + playerItem->m_szElu;
 									}
-									ZGetMeshMgr()->Add((char*)filePath.c_str());
+									playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
 								}
 							}
 						}
@@ -497,7 +507,16 @@ void ZGameClient::OnObjectCache(unsigned int nType, void* pBlob, int nCount)
 						{
 							if (playerItem->GetEluName() != nullptr)
 							{
-								if (ZGetMeshMgr()->Find(playerItem->m_szElu) == false)
+								RMesh* playerMesh = nullptr;
+								if (pCache->GetCostume()->nSex == MMS_MALE)
+								{
+									playerMesh = ZGetMeshMgr()->Get("heroman1");
+								}
+								else
+								{
+									playerMesh = ZGetMeshMgr()->Get("herowoman1");
+								}
+								if (playerMesh->m_parts_mgr->Find(playerItem->m_szElu) == false)//Find(playerItem->m_szElu) == false)
 								{
 									string filePath = playerItem->m_szElu;
 									if (filePath.find("woman") != std::string::npos)
@@ -508,7 +527,7 @@ void ZGameClient::OnObjectCache(unsigned int nType, void* pBlob, int nCount)
 									{
 										filePath = string("model/man/") + playerItem->m_szElu;
 									}
-									ZGetMeshMgr()->Add((char*)filePath.c_str());
+									playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
 								}
 							}
 						}

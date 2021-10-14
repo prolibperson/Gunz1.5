@@ -74,7 +74,9 @@ enum MMatchPremiumGradeID
 enum MMatchSex
 {
 	MMS_MALE = 0,		// 害切
-	MMS_FEMALE = 1		// 食切
+	MMS_FEMALE = 1,		// 食切
+
+	MMS_END
 };
 
 

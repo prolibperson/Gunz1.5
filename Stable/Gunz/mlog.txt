@@ -1,5 +1,5 @@
 GUNZ 1,0,0,290 launched. build (Oct 13 2021 17:01:51) 
-Log time (10/13/21 17:06:30)
+Log time (10/13/21 18:53:24)
 Windows = 6.2 Build 9200 ,  (16701652KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
@@ -26,24 +26,24 @@ InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
-2(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
+1(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
+2(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.613000 
+-------------------> Sound Engine Create : 0.666000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.653000 
+loading pictures : 1.641000 
 IDLResource Loading Success!!
-IDL resources : 0.114000 
+IDL resources : 0.110000 
 start InitInterface option
 Number of Display mode : 69
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.215000 
+Screen Effect Manager Create : 0.209000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -67,21 +67,22 @@ SFX/ef_haste ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater 
 SFX/ef_haste ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_haste ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 Effect manager create success.
+8059 upnp port forward initialized.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.283000 
+-------------------> GameInterface Create : 2.618000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.175000 
+-------------------> Character Loading : 0.162000 
 
 
--------------------> WeaponMesh Loading : 0.259000 
+-------------------> WeaponMesh Loading : 0.238000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.026000 
+-------------------> Worlditem Loading : 0.022000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -91,10 +92,10 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.266000 
+-------------------> ETC .. : 0.241000 
 
 
-LoginID: jetman823
+LoginID: jetman82
 BspObject open : begin interface/church/church_b.rs 
 RBspObject::Open : Open_MaterialList
 RBspObject::Open : Open_LightList
@@ -140,7 +141,9 @@ main : OnCreate() done
 Server Connected
 Login Successful. 
 Responsed Account Charlist
-Selected character name : Jetman823 (4A 65 74 6D 61 6E 38 32 33 )  (len = 9)
+man-parts03.eluSelected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
 0,Jetman82,Jetman82,This is a test send
-StageCreated
-StageCreated
+Shop Gamble item count : 2
+shop gitem : 1000003, Green Box
+shop gitem : 1000004, Gold Box
+Need to load man-parts03.elu elu in stage
