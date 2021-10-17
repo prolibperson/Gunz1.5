@@ -30,7 +30,7 @@ bool RDummyList::Open(MXmlElement* pElement)
 
 		if (szTagName[0] == '#') continue;
 
-		if (stricmp(szTagName, RTOK_DUMMY) == 0)
+		if (_stricmp(szTagName, RTOK_DUMMY) == 0)
 		{
 			RDummy* pNewDummy = new RDummy;
 			aDummyNode.GetAttribute(szContents, RTOK_NAME);
@@ -43,7 +43,7 @@ bool RDummyList::Open(MXmlElement* pElement)
 				aChild.GetTagName(szTagName);
 				aChild.GetContents(szContents);
 
-				if (stricmp(szTagName, RTOK_POSITION) == 0)
+				if (_stricmp(szTagName, RTOK_POSITION) == 0)
 				{
 					rvector temp;
 					int nCnt = sscanf(szContents, "%f %f %f", &temp.x, &temp.y, &temp.z);
@@ -52,7 +52,7 @@ bool RDummyList::Open(MXmlElement* pElement)
 						pNewDummy->Position = temp;
 					}
 				}
-				else if (stricmp(szTagName, RTOK_DIRECTION) == 0)
+				else if (_stricmp(szTagName, RTOK_DIRECTION) == 0)
 				{
 					rvector temp;
 					int nCnt = sscanf(szContents, "%f %f %f", &temp.x, &temp.y, &temp.z);

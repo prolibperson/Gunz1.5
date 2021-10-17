@@ -227,7 +227,8 @@ void ChangeEquipAvatarParts(ZObjectVMesh* pVMesh, const unsigned long int* pItem
 
 	char* szMeshName;
 	MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(pItemID[MMCIP_AVATAR]);
-	if( pDesc != NULL ) {
+	if( pDesc != NULL )
+	{
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szHeadMeshName;
 		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_head, szMeshName,pDesc->GetEluName());
 		else							ChangeCharHair(pVMesh, nSex, nHairIndex);
@@ -273,10 +274,36 @@ void ChangeEquipParts(ZObjectVMesh* pVMesh, const unsigned long int* pItemID)
 
 	//Custom: Dynamic resource loading
 	for (int i = 0; i < 5; i++) {
-		if (pItemID[PartsPair[i].itemparts] != 0) {
+		if (pItemID[PartsPair[i].itemparts] != 0)
+		{
 			MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(pItemID[PartsPair[i].itemparts]);
 			if (pDesc != NULL)
 			{
+				if (pDesc->GetEluName() != nullptr)
+				{
+					RMesh* playerMesh = nullptr;
+					if (_stricmp(pVMesh->GetMesh()->GetName(),"heroman1")==0)
+					{
+						playerMesh = ZGetMeshMgr()->Get("heroman1");
+					}
+					else
+					{
+						playerMesh = ZGetMeshMgr()->Get("herowoman1");
+					}
+					if (playerMesh->m_parts_mgr->Find(pDesc->m_szElu) == false)//Find(playerItem->m_szElu) == false)
+					{
+						string filePath = pDesc->m_szElu;
+						if (filePath.find("woman") != std::string::npos)
+						{
+							filePath = string("model/woman/") + pDesc->m_szElu;
+						}
+						else
+						{
+							filePath = string("model/man/") + pDesc->m_szElu;
+						}
+						playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
+					}
+				}
 				pVMesh->SetParts(PartsPair[i].meshparts, pDesc->m_pMItemName->Ref().m_szMeshName, pDesc->GetEluName());
 			}
 		}
@@ -2183,37 +2210,37 @@ char* GetPartsNextName(RMeshPartsType ptype,ZObjectVMesh* pVMesh,bool bReverse)
 
 void ZCharacter::OnChangeParts(RMeshPartsType partstype,int PartsID)
 {
-#ifndef _PUBLISH
-	if (m_bInitialized==false) return;
-	if( m_pVMesh ) {
-
-		// 기획서에 정해진 고유한 이름이 있어야 한다..
-
-		if(partstype > eq_parts_etc && partstype < eq_parts_left_pistol) {
-		
-			if(PartsID == 0) { // clear
-				m_pVMesh->SetBaseParts( partstype );
-			}
-			else {
-
-				char* Name = NULL;
-
-				if(MEvent::GetCtrlState()) {
-					Name = GetPartsNextName( partstype,m_pVMesh ,true);//이전옷...
-				}
-				else {
-					Name = GetPartsNextName( partstype,m_pVMesh ,false);
-				}
-
-				if(Name)
-					m_pVMesh->SetParts( partstype, Name );
-			}
-		}
-	}
-
-	if(Enable_Cloth)
-		m_pVMesh->ChangeChestCloth(1.f,1);
-#endif
+//#ifndef _PUBLISH
+//	if (m_bInitialized==false) return;
+//	if( m_pVMesh ) {
+//
+//		// 기획서에 정해진 고유한 이름이 있어야 한다..
+//
+//		if(partstype > eq_parts_etc && partstype < eq_parts_left_pistol) {
+//		
+//			if(PartsID == 0) { // clear
+//				m_pVMesh->SetBaseParts( partstype );
+//			}
+//			else {
+//
+//				char* Name = NULL;
+//
+//				if(MEvent::GetCtrlState()) {
+//					Name = GetPartsNextName( partstype,m_pVMesh ,true);//이전옷...
+//				}
+//				else {
+//					Name = GetPartsNextName( partstype,m_pVMesh ,false);
+//				}
+//
+//				if(Name)
+//					m_pVMesh->SetParts( partstype, Name );
+//			}
+//		}
+//	}
+//
+//	if(Enable_Cloth)
+//		m_pVMesh->ChangeChestCloth(1.f,1);
+//#endif
 }
 
 
@@ -3486,7 +3513,8 @@ void ZCharacter::InitMeshParts()
 			return;
 		}
 
-		if( pAvatarItem && pAvatarItem->IsEmpty() ) {
+		if( pAvatarItem && pAvatarItem->IsEmpty() )
+		{
 			for (int i = 0; i < MMCIP_END;i++) {
 				switch (MMatchCharItemParts(i))
 				{
@@ -3498,9 +3526,35 @@ void ZCharacter::InitMeshParts()
 				default: continue;
 				}
 
-				if (!GetItems()->GetItem(MMatchCharItemParts(i))->IsEmpty()) {
-					m_pVMesh->SetParts(mesh_parts_type, GetItems()->GetItem(MMatchCharItemParts(i))->GetDesc()->m_pMItemName->Ref().m_szMeshName,GetItems()->GetItem(
-					MMatchCharItemParts(i))->GetDesc()->GetEluName());
+				if (!GetItems()->GetItem(MMatchCharItemParts(i))->IsEmpty())
+				{
+					MMatchItemDesc* itemDesc = GetItems()->GetItem(MMatchCharItemParts(i))->GetDesc();
+					if (itemDesc->GetEluName() != nullptr)
+					{
+						RMesh* playerMesh = nullptr;
+						if (_stricmp(m_pVMesh->GetMesh()->GetName(), "heroman1") == 0)
+						{
+							playerMesh = ZGetMeshMgr()->Get("heroman1");
+						}
+						else
+						{
+							playerMesh = ZGetMeshMgr()->Get("herowoman1");
+						}
+						if (playerMesh->m_parts_mgr->Find(itemDesc->m_szElu) == false)
+						{
+							string filePath = itemDesc->m_szElu;
+							if (filePath.find("woman") != std::string::npos)
+							{
+								filePath = string("model/woman/") + itemDesc->m_szElu;
+							}
+							else
+							{
+								filePath = string("model/man/") + itemDesc->m_szElu;
+							}
+							playerMesh->m_parts_mgr->Add((char*)filePath.c_str());
+						}
+					}
+					m_pVMesh->SetParts(mesh_parts_type, itemDesc->m_pMItemName->Ref().m_szMeshName, itemDesc->m_szElu);
 				}
 				else {
 					m_pVMesh->SetBaseParts(mesh_parts_type);

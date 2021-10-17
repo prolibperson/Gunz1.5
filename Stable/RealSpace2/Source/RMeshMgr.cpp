@@ -684,21 +684,21 @@ RMeshNode* RMeshMgr::GetPartsNode(char* name, const char* eluName)
 	RMesh* pMesh = NULL;
 	RMeshNode* pMeshNode = NULL;
 
-	if (eluName != nullptr)
-	{
-		bool result = Find(eluName);
-		if (result == false)
-		{
-			mlog("%s", eluName);
-			std::string modelPath = "model/man/";
-			modelPath.append(eluName);
+	//if (eluName != nullptr)
+	//{
+	//	bool result = Find(eluName);
+	//	if (result == false)
+	//	{
+	//		mlog("%s", eluName);
+	//		std::string modelPath = "model/man/";
+	//		modelPath.append(eluName);
 
-			RMesh* node;
-			node = new RMesh;
+	//		RMesh* node;
+	//		node = new RMesh;
 
-			Add((char*)modelPath.c_str());
-		}
-	}
+	//		Add((char*)modelPath.c_str());
+	//	}
+	//}
 
 	for(node = m_list.begin(); node != m_list.end(); ++node)
 	{

@@ -146,7 +146,7 @@ const bool MQuestLevel::Make_MTDQuestGameInfo(MTD_QuestGameInfo* pout, MMATCH_GA
 	}
 
 	
-	pout->nNPCInfoCount = static_cast<int>(m_StaticInfo.NPCs.size());
+	pout->nNPCInfoCount = static_cast<unsigned char>(m_StaticInfo.NPCs.size());
 	int idx = 0;
 	for (set<MQUEST_NPC>::iterator itor = m_StaticInfo.NPCs.begin(); itor != m_StaticInfo.NPCs.end(); ++itor)
 	{
@@ -154,7 +154,7 @@ const bool MQuestLevel::Make_MTDQuestGameInfo(MTD_QuestGameInfo* pout, MMATCH_GA
 		idx++;
 	}
 
-	pout->nMapSectorCount = static_cast<int>(m_StaticInfo.SectorList.size());
+	pout->nMapSectorCount = static_cast<unsigned char>(m_StaticInfo.SectorList.size());
 	for (int i = 0; i < pout->nMapSectorCount; i++)
 	{
 		pout->nMapSectorID[i]			= m_StaticInfo.SectorList[i].nSectorID;

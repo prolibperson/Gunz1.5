@@ -160,7 +160,7 @@ void MZFileSystem::RefreshFileList(const char* szBasePath)
 				char szDrive[_MAX_PATH], szDir[_MAX_PATH], szFileName[_MAX_PATH], szExt[_MAX_PATH];
 				_splitpath(c_file.name, szDrive, szDir, szFileName, szExt);
 
-				if (stricmp(szExt, "." DEF_EXT) == 0 || stricmp(szExt, ".zip") == 0) {
+				if (_stricmp(szExt, "." DEF_EXT) == 0 || _stricmp(szExt, ".zip") == 0) {
 
 					char szZipFileName[_MAX_PATH], szBaseLocation[_MAX_PATH];
 					sprintf(szZipFileName, "%s%s", szBasePath, c_file.name);
@@ -271,7 +271,7 @@ unsigned int MZFileSystem::GetCRC32(const char* szFileName)
 	mzf.Close();
 
 	unsigned int crc = MGetCRC32(buffer, nFileLength);
-	delete buffer;
+	delete[] buffer;
 
 	return crc;
 }
@@ -288,6 +288,7 @@ MZFileSystem::MZFileSystem(void) : m_pCheckList(NULL)
 {
 	m_szBasePath[0] = 0;
 	m_szUpdateName[0] = 0;
+	m_nIndex = 0;
 }
 MZFileSystem::~MZFileSystem(void)
 {
@@ -434,7 +435,7 @@ void MZFileSystem::SetPrivateKey(const unsigned char* pPrivateKey, size_t length
 {
 	if (g_pPrivateKey != NULL)
 	{
-		delete g_pPrivateKey;
+		delete[] g_pPrivateKey;
 		g_pPrivateKey = NULL;
 
 		lenPrivateKey = 0;
@@ -461,6 +462,7 @@ MZFile::MZFile() : m_nIndexInZip(-1)
 
 	m_FileName[0] = 0;
 	m_ZipFileName[0] = 0;
+	m_crc32 = 0;
 }
 
 MZFile::~MZFile()
@@ -572,7 +574,7 @@ bool MZFile::Open(const char* szFileName, const char* szZipFileName, bool bFileC
 	Close();
 
 
-	if (stricmp(m_ZipFileName, szZipFileName) != 0)
+	if (_stricmp(m_ZipFileName, szZipFileName) != 0)
 	{
 		m_fp = fopen(szZipFileName, "rb");
 
@@ -686,7 +688,7 @@ bool MZFile::Read(void* pBuffer, int nMaxSize)
 {
 	if (m_IsBufferd)
 	{
-		if (nMaxSize > (GetLength() - m_nPos))
+		if (nMaxSize > static_cast<int>((GetLength() - m_nPos)))
 			return false;
 
 		if ((nMaxSize == GetLength()) && (m_nPos == 0))
@@ -735,12 +737,12 @@ bool MZFileCheckList::Open(const char* szFileName, MZFileSystem* pfs)
 	aXml.Create();
 	if (!aXml.LoadFromMemory(buffer))
 	{
-		delete buffer;
+		delete[] buffer;
 		return false;
 	}
 
 	m_crc32 = MGetCRC32(buffer, mzf.GetLength());
-	delete buffer;
+	delete[] buffer;
 
 	int iCount, i;
 	MXmlElement		aParent, aChild;
@@ -752,13 +754,13 @@ bool MZFileCheckList::Open(const char* szFileName, MZFileSystem* pfs)
 	{
 		aChild = aParent.GetChildNode(i);
 		aChild.GetTagName(szTagName);
-		if (stricmp(szTagName, "FILE") == 0)
+		if (_stricmp(szTagName, "FILE") == 0)
 		{
 			char szContents[256], szCrc32[256];
 			aChild.GetAttribute(szContents, "NAME");
 			aChild.GetAttribute(szCrc32, "CRC32");
 
-			if (stricmp(szContents, "config.xml") != 0)
+			if (_stricmp(szContents, "config.xml") != 0)
 			{
 				unsigned int crc32_current;
 				sscanf(szCrc32, "%x", &crc32_current);

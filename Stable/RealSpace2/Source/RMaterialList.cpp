@@ -137,7 +137,7 @@ bool RMaterialList::Open(MXmlElement* pElement)
 		aMaterialNode = pElement->GetChildNode(i);
 		aMaterialNode.GetTagName(szTagName);
 
-		if (stricmp(szTagName, RTOK_MATERIAL) == 0)
+		if (_stricmp(szTagName, RTOK_MATERIAL) == 0)
 		{
 			RMATERIAL* pMaterial = new RMATERIAL;
 			pMaterial->dwFlags = 0;
@@ -153,15 +153,15 @@ bool RMaterialList::Open(MXmlElement* pElement)
 
 #define READVECTOR(v) sscanf(szContents,"%f %f %f",&v.x,&v.y,&v.z)
 
-				if (stricmp(szTagName, RTOK_AMBIENT) == 0)		READVECTOR(pMaterial->Ambient); else
-					if (stricmp(szTagName, RTOK_DIFFUSE) == 0)		READVECTOR(pMaterial->Diffuse); else
-						if (stricmp(szTagName, RTOK_SPECULAR) == 0)		READVECTOR(pMaterial->Specular); else
-							if (stricmp(szTagName, RTOK_DIFFUSEMAP) == 0)	pMaterial->DiffuseMap = szContents; else
-								if (stricmp(szTagName, RTOK_POWER) == 0)		sscanf(szContents, "%f", &pMaterial->Power); else
-									if (stricmp(szTagName, RTOK_ADDITIVE) == 0)		pMaterial->dwFlags |= RM_FLAG_ADDITIVE; else
-										if (stricmp(szTagName, RTOK_USEOPACITY) == 0)	pMaterial->dwFlags |= RM_FLAG_USEOPACITY; else
-											if (stricmp(szTagName, RTOK_TWOSIDED) == 0)		pMaterial->dwFlags |= RM_FLAG_TWOSIDED; else
-												if (stricmp(szTagName, RTOK_USEALPHATEST) == 0)	pMaterial->dwFlags |= RM_FLAG_USEALPHATEST;
+				if (_stricmp(szTagName, RTOK_AMBIENT) == 0)		READVECTOR(pMaterial->Ambient); else
+					if (_stricmp(szTagName, RTOK_DIFFUSE) == 0)		READVECTOR(pMaterial->Diffuse); else
+						if (_stricmp(szTagName, RTOK_SPECULAR) == 0)		READVECTOR(pMaterial->Specular); else
+							if (_stricmp(szTagName, RTOK_DIFFUSEMAP) == 0)	pMaterial->DiffuseMap = szContents; else
+								if (_stricmp(szTagName, RTOK_POWER) == 0)		sscanf(szContents, "%f", &pMaterial->Power); else
+									if (_stricmp(szTagName, RTOK_ADDITIVE) == 0)		pMaterial->dwFlags |= RM_FLAG_ADDITIVE; else
+										if (_stricmp(szTagName, RTOK_USEOPACITY) == 0)	pMaterial->dwFlags |= RM_FLAG_USEOPACITY; else
+											if (_stricmp(szTagName, RTOK_TWOSIDED) == 0)		pMaterial->dwFlags |= RM_FLAG_TWOSIDED; else
+												if (_stricmp(szTagName, RTOK_USEALPHATEST) == 0)	pMaterial->dwFlags |= RM_FLAG_USEALPHATEST;
 			}
 
 			push_back(pMaterial);

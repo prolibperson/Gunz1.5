@@ -64,6 +64,7 @@ bool MMapDesc::Initialize(const char* szFileName, MZFileSystem* pFileSystem)
 
 	if (!xmlIniData.LoadFromMemory(buffer))
 	{
+		delete[] buffer;
 		xmlIniData.Destroy();
 		return false;
 	}
@@ -79,7 +80,7 @@ bool MMapDesc::Initialize(const char* szFileName, MZFileSystem* pFileSystem)
 	{
 		aChild = aParent.GetChildNode(i);
 		aChild.GetTagName(szTagName);
-		if (stricmp(szTagName, MMAP_MAP) == 0)
+		if (_stricmp(szTagName, MMAP_MAP) == 0)
 		{
 			if (szTagName[0] == '#') continue;
 
@@ -108,6 +109,7 @@ bool MMapDesc::Initialize(const char* szFileName, MZFileSystem* pFileSystem)
 		delete[] buffer;
 		buffer = NULL;
 	}
+	mzf.Close();
 
 	return true;
 }
@@ -159,7 +161,7 @@ int MMapDesc::GetMapID(const char* mapname)
 {
 	for (int i = 0; i < MMATCH_MAP_COUNT; ++i)
 	{
-		if (stricmp(mapname, m_MapVectors[i].szMapName))
+		if (_stricmp(mapname, m_MapVectors[i].szMapName))
 			return m_MapVectors[i].nMapID;
 	}
 	return -1;

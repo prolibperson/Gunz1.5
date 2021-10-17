@@ -271,7 +271,7 @@ bool MMatchEventFactoryManager::LoadEventListXML(const string& strFileName, MZFi
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(EL_LOCALE, szTagName))
+		if (!_stricmp(EL_LOCALE, szTagName))
 		{
 			ParseLocale(chrElement);
 		}
@@ -291,7 +291,7 @@ void MMatchEventFactoryManager::ParseLocale(MXmlElement& chrElement)
 	{
 		chrElement.GetAttribute(i, szAttrName, szAttrValue);
 
-		if (0 == stricmp(EL_COUNTRY, szAttrName))
+		if (0 == _stricmp(EL_COUNTRY, szAttrName))
 		{
 			/*  // MBaseLocale.h //
 			enum MCountry
@@ -351,7 +351,7 @@ void MMatchEventFactoryManager::ParseLocale(MXmlElement& chrElement)
 			}
 
 			// 현제 서버랑 같은 국가 타입만 파싱함.
-			// if( 0 == stricmp(strCountry.c_str(), szAttrValue) )
+			// if( 0 == _stricmp(strCountry.c_str(), szAttrValue) )
 			// 국가코드 구분 안함. 이미 국가별로 나눠줘 있음.
 			if (true)
 			{
@@ -363,7 +363,7 @@ void MMatchEventFactoryManager::ParseLocale(MXmlElement& chrElement)
 					chrNode = chrElement.GetChildNode(j);
 					chrNode.GetTagName(szTag);
 
-					if (0 == stricmp(EL_EVENT, szTag))
+					if (0 == _stricmp(EL_EVENT, szTag))
 					{
 						ParseEvent(chrNode);
 					}
@@ -401,14 +401,14 @@ void MMatchEventFactoryManager::ParseEvent(MXmlElement& chrElement)
 	{
 		chrElement.GetAttribute(i, szAttrName, szAttrValue);
 
-		if (0 == stricmp(EL_EVENT_LIST_ID, szAttrName))
+		if (0 == _stricmp(EL_EVENT_LIST_ID, szAttrName))
 		{
 			dwEventListID = static_cast<DWORD>(atoi(szAttrValue));
 			ASSERT(0 < dwEventListID);
 			continue;
 		}
 
-		if (0 == stricmp(EL_EVENTID, szAttrName))
+		if (0 == _stricmp(EL_EVENTID, szAttrName))
 		{
 			dwEventID = static_cast<DWORD>(atol(szAttrValue));
 			if (NULL == MMatchEventDescManager::GetInstance().Find(dwEventID))
@@ -421,49 +421,49 @@ void MMatchEventFactoryManager::ParseEvent(MXmlElement& chrElement)
 			continue;
 		}
 
-		if (0 == stricmp(EL_NAME, szAttrName))
+		if (0 == _stricmp(EL_NAME, szAttrName))
 		{
 			strEventName = MGetStringResManager()->GetString(string(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_EVENTTYPE, szAttrName))
+		if (0 == _stricmp(EL_EVENTTYPE, szAttrName))
 		{
 			EventType = static_cast<EVENT_TYPE>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_ELAPSEDTIME, szAttrName))
+		if (0 == _stricmp(EL_ELAPSEDTIME, szAttrName))
 		{
 			dwElapsedTime = static_cast<DWORD>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_PERCENT, szAttrName))
+		if (0 == _stricmp(EL_PERCENT, szAttrName))
 		{
 			dwPercent = static_cast<DWORD>(atol(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_RATE, szAttrName))
+		if (0 == _stricmp(EL_RATE, szAttrName))
 		{
 			dwRate = static_cast<DWORD>(atol(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_ANNOUNCE, szAttrName))
+		if (0 == _stricmp(EL_ANNOUNCE, szAttrName))
 		{
 			strAnnounce = MGetStringResManager()->GetString(string(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_XPBONUS_RATIO, szAttrName))
+		if (0 == _stricmp(EL_XPBONUS_RATIO, szAttrName))
 		{
 			fXPBonusRatio = static_cast<float>(atoi(szAttrValue)) / 100.0f;
 			continue;
 		}
 
-		if (0 == stricmp(EL_BPBONUS_RATIO, szAttrName))
+		if (0 == _stricmp(EL_BPBONUS_RATIO, szAttrName))
 		{
 			fBPBonusRatio = static_cast<float>(atoi(szAttrValue)) / 100.0f;
 			continue;
@@ -483,31 +483,31 @@ void MMatchEventFactoryManager::ParseEvent(MXmlElement& chrElement)
 
 		if (szTag[0] == '#') continue;
 
-		if (0 == stricmp(EL_SERVERTYPE, szTag))
+		if (0 == _stricmp(EL_SERVERTYPE, szTag))
 		{
 			ParseServerType(chrNode, vServerType);
 			continue;
 		}
 
-		if (0 == stricmp(EL_GAMETYPE, szTag))
+		if (0 == _stricmp(EL_GAMETYPE, szTag))
 		{
 			ParseGameType(chrNode, vGameType);
 			continue;
 		}
 
-		if (0 == stricmp(EL_STARTTIME, szTag))
+		if (0 == _stricmp(EL_STARTTIME, szTag))
 		{
 			ParseStartEndTime(chrNode, Start);
 			continue;
 		}
 
-		if (0 == stricmp(EL_ENDTIME, szTag))
+		if (0 == _stricmp(EL_ENDTIME, szTag))
 		{
 			ParseStartEndTime(chrNode, End);
 			continue;
 		}
 
-		if (0 == stricmp(EL_PART_TIME, szTag))
+		if (0 == _stricmp(EL_PART_TIME, szTag))
 		{
 			ParseEventPartTime(chrNode, EventPartTimeVec);
 			continue;
@@ -594,13 +594,13 @@ void MMatchEventFactoryManager::ParseServerType(MXmlElement& chrElement, vector<
 	{
 		chrElement.GetAttribute(i, szAttrName, szAttrValue);
 
-		if (0 == stricmp(EL_ORDER, szAttrName))
+		if (0 == _stricmp(EL_ORDER, szAttrName))
 		{
 			ServerType.dwOrder = static_cast<DWORD>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_TYPE, szAttrName))
+		if (0 == _stricmp(EL_TYPE, szAttrName))
 		{
 			ServerType.ServerType = static_cast<MMatchServerMode>(atoi(szAttrValue));
 			continue;
@@ -620,13 +620,13 @@ void MMatchEventFactoryManager::ParseGameType(MXmlElement& chrElement, vector< E
 	{
 		chrElement.GetAttribute(i, szAttrName, szAttrValue);
 
-		if (0 == stricmp(EL_ORDER, szAttrName))
+		if (0 == _stricmp(EL_ORDER, szAttrName))
 		{
 			GameType.dwOrder = static_cast<DWORD>(atol(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_TYPE, szAttrName))
+		if (0 == _stricmp(EL_TYPE, szAttrName))
 		{
 			GameType.GameType = static_cast<MMATCH_GAMETYPE>(atoi(szAttrValue));
 			continue;
@@ -647,25 +647,25 @@ void MMatchEventFactoryManager::ParseStartEndTime(MXmlElement& chrElement, SYSTE
 	{
 		chrElement.GetAttribute(i, szAttrName, szAttrValue);
 
-		if (0 == stricmp(EL_YEAR, szAttrName))
+		if (0 == _stricmp(EL_YEAR, szAttrName))
 		{
 			stTime.wYear = static_cast<WORD>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_MONTH, szAttrName))
+		if (0 == _stricmp(EL_MONTH, szAttrName))
 		{
 			stTime.wMonth = static_cast<WORD>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_DAY, szAttrName))
+		if (0 == _stricmp(EL_DAY, szAttrName))
 		{
 			stTime.wDay = static_cast<WORD>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_HOUR, szAttrName))
+		if (0 == _stricmp(EL_HOUR, szAttrName))
 		{
 			stTime.wHour = static_cast<WORD>(atoi(szAttrValue));
 			continue;
@@ -685,19 +685,19 @@ void MMatchEventFactoryManager::ParseEventPartTime(MXmlElement& chrElement, vect
 		chrElement.GetAttribute(i, szAttrName, szAttrValue);
 
 		/*
-		if( 0 == stricmp(EL_ORDER, szAttrName) )
+		if( 0 == _stricmp(EL_ORDER, szAttrName) )
 		{
 			continue;
 		}
 		*/
 
-		if (0 == stricmp(EL_START_HOUR, szAttrName))
+		if (0 == _stricmp(EL_START_HOUR, szAttrName))
 		{
 			ept.btStartHour = static_cast<BYTE>(atoi(szAttrValue));
 			continue;
 		}
 
-		if (0 == stricmp(EL_END_HOUR, szAttrName))
+		if (0 == _stricmp(EL_END_HOUR, szAttrName))
 		{
 			ept.btEndHour = static_cast<BYTE>(atoi(szAttrValue));
 			continue;

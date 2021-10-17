@@ -84,7 +84,7 @@ bool MMatchWorldItemDescMgr::ReadXml(const char* szFileName, MZFileSystem* pFile
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(szTagName, MWICTOK_WORLDITEM))
+		if (!_stricmp(szTagName, MWICTOK_WORLDITEM))
 		{
 			ParseWorldItem(chrElement);
 		}
@@ -222,7 +222,7 @@ bool MMatchMapsWorldItemSpawnInfo::ReadXml(const char* szFileName, int nMapID)
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(szTagName, MMSITOK_GAMETYPE))
+		if (!_stricmp(szTagName, MMSITOK_GAMETYPE))
 		{
 			ParseSpawnInfo(chrElement, nMapID);
 		}
@@ -269,7 +269,7 @@ void MMatchMapsWorldItemSpawnInfo::ParseSpawnInfo(MXmlElement& element, int nMap
 			itor != MGetMatchWorldItemDescMgr()->end(); ++itor)
 		{
 			MMatchWorldItemDesc* pDesc = (*itor).second;
-			if (!stricmp(pDesc->m_szDescName, szItemName))
+			if (!_stricmp(pDesc->m_szDescName, szItemName))
 			{
 				nItemID = (*itor).first;
 				break;

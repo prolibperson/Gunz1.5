@@ -63,7 +63,7 @@ bool SpyMode::ReadMapList(const char* fileName, MZFileSystem* fileSystem)
 		char tagName[32];
 		childElement.GetTagName(tagName);
 
-		if (stricmp("SPY_MAP", tagName) == 0)
+		if (_stricmp("SPY_MAP", tagName) == 0)
 		{
 			SpyMap Node;
 			if (!ParseXml_Map(childElement, Node))
@@ -138,7 +138,7 @@ bool SpyMode::ReadMode(const char* fileName, MZFileSystem* fileSystem)
 		MXmlElement childElement = rootElement.GetChildNode(i);
 		char tagName[32];
 		childElement.GetTagName(tagName);
-		if (stricmp(tagName, "SELECT_SPY") == 0) {
+		if (_stricmp(tagName, "SELECT_SPY") == 0) {
 			SpySelect Node = { 0 };
 			if (!ParseXml_SpySelect(childElement, Node))
 			{
@@ -147,7 +147,7 @@ bool SpyMode::ReadMode(const char* fileName, MZFileSystem* fileSystem)
 			}
 			m_SpySelect = Node;
 		}
-		if (stricmp(tagName, "SPY_ITEM_DESC") == 0)
+		if (_stricmp(tagName, "SPY_ITEM_DESC") == 0)
 		{
 			SpyItems node;
 			if (!ParseXml_SpyItems(childElement, node))
@@ -157,7 +157,7 @@ bool SpyMode::ReadMode(const char* fileName, MZFileSystem* fileSystem)
 			}
 			m_vSpyItems.push_back(node);
 		}
-		if (stricmp(tagName, "SPY_TABLE") == 0)
+		if (_stricmp(tagName, "SPY_TABLE") == 0)
 		{
 			SpyPlayerTable node = { 0 };
 			if (!ParseXml_SpyTable(childElement, node))
@@ -167,7 +167,7 @@ bool SpyMode::ReadMode(const char* fileName, MZFileSystem* fileSystem)
 			}
 			m_SpyPlayerTable.emplace(node.totalPlayers, node);
 		}
-		if (stricmp(tagName, "TRACER_TABLE") == 0)
+		if (_stricmp(tagName, "TRACER_TABLE") == 0)
 		{
 			TracerPlayerTable node = { 0 };
 			if (!ParseXml_TracerTable(childElement, node))

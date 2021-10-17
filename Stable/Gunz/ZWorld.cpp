@@ -13,6 +13,8 @@ ZWorld::ZWorld() : m_pBsp(NULL), m_pMapDesc(NULL), m_nRefCount(1), m_bCreated(fa
 #ifdef _MAP_CACHING
 	if (!ZGetMapCache()->Find(ZGetGameClient()->GetMatchStageSetting()->GetMapIndex()))
 		m_pBsp = nullptr;
+#else
+	m_pBsp = nullptr;
 #endif
 	m_szName[0]=0;
 
@@ -298,6 +300,7 @@ void ZWorld::Destroy()
 	m_flags.Clear();
 	m_flags.OnInvalidate();
 	m_waters.Clear();
+	m_waters.OnInvalidate();
 //	SAFE_DELETE(m_pSkyBox);
 
 }

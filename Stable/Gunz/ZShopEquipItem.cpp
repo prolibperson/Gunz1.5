@@ -459,6 +459,31 @@ int ZShopEquipItem_Match::GetLevelRes()
 void ZShopEquipItem_Match::UpdateCharacterView(ZCharacterView* pCharacterView)
 {
 	MMatchCharItemParts nCharItemParts = GetSuitableItemParts(m_pItemDesc->m_nSlot);
+	if (m_pItemDesc->GetEluName() != nullptr)
+	{
+		RMesh* playerMesh = nullptr;
+		if (pCharacterView->m_Info.nSex == MMS_MALE)
+		{
+			playerMesh = ZGetMeshMgr()->Get("heroman1");
+		}
+		else
+		{
+			playerMesh = ZGetMeshMgr()->Get("herowoman1");
+		}
+		if (playerMesh->m_parts_mgr->Find(m_pItemDesc->m_szElu) == false)
+		{
+			string filePath = m_pItemDesc->m_szElu;
+			if (filePath.find("woman") != std::string::npos)
+			{
+				filePath = string("model/woman/") + m_pItemDesc->m_szElu;
+			}
+			else
+			{
+				filePath = string("model/man/") + m_pItemDesc->m_szElu;
+			}
+			playerMesh->m_parts_mgr->Add((char*)filePath.c_str());
+		}
+	}
 
 	pCharacterView->SetSelectMyCharacter();
 	pCharacterView->SetParts(nCharItemParts, m_pItemDesc->m_nID);

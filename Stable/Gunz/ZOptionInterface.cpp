@@ -277,7 +277,7 @@ void ZOptionInterface::InitInterfaceOption(void)
 			{
 				if (CustomMusic::m_customMusic.size() > 0)
 				{
-					for (int i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
+					for (size_t i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
 					{
 						string songName, baseText;
 
@@ -1765,7 +1765,7 @@ void ZOptionInterface::OnUpdate()
 					{
 						pComboBox->RemoveAll();
 
-						for (int i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
+						for (size_t i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
 						{
 							string songName, baseText;
 
@@ -2181,7 +2181,7 @@ BEGIN_IMPLEMENT_LISTENER(ZGetEnableCustomMusicListener, MBTN_CLK_MSG)
 			{
 				if (CustomMusic::m_customMusic.size() > 0)
 				{
-					for (int i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
+					for (size_t i = 0; i < CustomMusic::m_customMusic[ZGetConfiguration()->GetAudio()->nCustomMusicFolders].size(); ++i)
 					{
 						string songName, baseText;
 

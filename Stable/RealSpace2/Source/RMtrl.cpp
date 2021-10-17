@@ -266,7 +266,7 @@ RMtrlMgr::RMtrlMgr()
 
 	if(m_node_table.size() > 0)
 	{
-		for(int i=0; i < m_node_table.size(); ++i)
+		for(size_t i=0; i < m_node_table.size(); ++i)
 		m_node_table[i] = NULL;
 	}
 	m_bObjectMtrl = false;

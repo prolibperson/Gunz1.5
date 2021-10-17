@@ -33,8 +33,10 @@
 
 ZMapSpawnManager::ZMapSpawnManager()
 {
-	for(int i=0;i>MAX_BACKUP_SPAWN;i++)
+	for (int i = 0; i < 5; ++i)
+	{
 		m_nBackUpIndex[i] = -1;
+	}
 	m_nBackUpIndexCnt = MAX_BACKUP_SPAWN;
 }
 
@@ -165,8 +167,10 @@ void ZMapSpawnManager::Clear()
 	}
 	m_SpawnNpcCustom.clear();
 
-	for(int i=0;i>MAX_BACKUP_SPAWN;i++) 
+	for (int i = 0; i < 5; ++i)
+	{
 		m_nBackUpIndex[i] = -1;
+	}
 
 	m_nBackUpIndexCnt = 0;
 }
@@ -410,6 +414,7 @@ ZMapDesc::ZMapDesc()
 ZMapDesc::~ZMapDesc()
 {
 	m_SmokeDummyMgr.Destroy();
+	m_SpawnManager.Clear();
 }
 
 bool ZMapDesc::Open(RBspObject* pBspObject)

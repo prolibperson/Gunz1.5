@@ -61,7 +61,7 @@ bool Achievements::readXml(const char* fileName)
 	{
 		chrElement = rootElement.GetChildNode(i);
 		chrElement.GetTagName(szTagName);
-		if (stricmp(szTagName, "ACHIEVEMENT") == 0)
+		if (_stricmp(szTagName, "ACHIEVEMENT") == 0)
 		{
 			achievementNode node = {};
 			if (!parseXml_Achievement(chrElement, node))

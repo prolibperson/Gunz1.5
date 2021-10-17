@@ -124,7 +124,7 @@ D3DXQUATERNION RAnimationNode::GetRotValue(int frame)
 		return rq;
 	}
 	int p = 0;
-	for (p;p<m_rot_cnt;p++) {
+	for (p=0;p<m_rot_cnt;p++) {
 		if ( m_quat[p].frame > frame) {
 			break;
 		}
@@ -157,7 +157,7 @@ D3DXVECTOR3 RAnimationNode::GetPosValue(int frame)
 	}
 
 	int p = 0;
-	for (p;p<m_pos_cnt;p++)	{
+	for (p=0;p<m_pos_cnt;p++)	{
 		if ( m_pos[p].frame > frame ) {
 			break;
 		}

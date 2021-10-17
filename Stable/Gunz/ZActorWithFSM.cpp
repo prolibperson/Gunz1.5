@@ -1291,8 +1291,8 @@ void ZActorWithFSM::Func_Disappear(float fFrameDelta, DWORD nDelay, float fRatio
 	if (!m_pVMesh) { _ASSERT(0); return; }
 	if (!m_pCurrState) { _ASSERT(0); return; }
 
-	if (!stricmp(this->GetActorDef()->GetActorType(), "barricade")) return;
-	if (!stricmp(this->GetActorDef()->GetActorType(), "radar")) return;
+	if (!_stricmp(this->GetActorDef()->GetActorType(), "barricade")) return;
+	if (!_stricmp(this->GetActorDef()->GetActorType(), "radar")) return;
 
 	DWORD elapsed = timeGetTime() - Cond_GetStateEnteredTime();
 

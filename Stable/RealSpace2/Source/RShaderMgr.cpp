@@ -96,13 +96,13 @@ bool RShaderMgr::Initialize()
 
 void RShaderMgr::Release()
 {
-	size_t i;
-	for (i = 0; i < m_ShaderVec.size(); ++i)
+
+	for( size_t i = 0 ; i < m_ShaderVec.size(); ++i )
 	{
 		SAFE_RELEASE(m_ShaderVec[i]);
 	}
 
-	for (i = 0; i < m_ShaderDeclVec.size(); ++i)
+	for( size_t i = 0 ; i < m_ShaderDeclVec.size(); ++i )
 	{
 		SAFE_RELEASE(m_ShaderDeclVec[i]);
 	}

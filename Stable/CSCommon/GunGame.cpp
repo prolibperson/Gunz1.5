@@ -47,7 +47,7 @@ bool GunGame::ReadXML(const char* szFileName, MZFileSystem* pFileSystem)
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (stricmp(szTagName, "SET") == 0)
+		if (_stricmp(szTagName, "SET") == 0)
 		{
 			vector<GGSet> ItemSets;
 			ItemSets.clear();
@@ -58,7 +58,7 @@ bool GunGame::ReadXML(const char* szFileName, MZFileSystem* pFileSystem)
 				attrElement = chrElement.GetChildNode(j);
 
 				attrElement.GetTagName(szTagName);
-				if (stricmp(szTagName, "ITEMSET") == 0)
+				if (_stricmp(szTagName, "ITEMSET") == 0)
 				{
 					GGSet Node = { 0 };
 

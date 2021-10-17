@@ -90,7 +90,7 @@ public:
 	{
 		for (auto Obj : m_vSpyMapList)
 		{
-			if (stricmp(GetMapName, Obj.name) == 0)
+			if (_stricmp(GetMapName, Obj.name) == 0)
 				return Obj;
 		}
 		return{};

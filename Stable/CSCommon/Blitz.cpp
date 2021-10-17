@@ -420,4 +420,6 @@ bool Blitz::ParseXml_Reward(rapidxml::xml_node<>* elem, Reward& reward)
 	reward.loserMedal = static_cast<unsigned char>(atoi(elem->first_attribute("loserMedal")->value()));
 	reward.minuteBonusMedal = static_cast<unsigned char>(atoi(elem->first_attribute("minuteBonusMedal")->value()));
 	//TODO: Finish parsing the struct
+
+	return true;
 }

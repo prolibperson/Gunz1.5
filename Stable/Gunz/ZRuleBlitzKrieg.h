@@ -65,9 +65,9 @@ public:
 	void UpdateClassSelectDesc(const MMatchObjectClass& classID);
 	void UpdateUpgradeUI(int const& index, int const& upgradeLevel);
 
-	const int& GetBlueBarricadeCount() { return m_blueBarricades; }
-	const int& GetRedBarricateCount() { return m_redBarricades; }
-	const int& GetRedBossHP()
+	const int GetBlueBarricadeCount() { return m_blueBarricades; }
+	const int GetRedBarricateCount() { return m_redBarricades; }
+	const int GetRedBossHP()
 	{
 		ZActorWithFSM* pRedBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossRedUID));
 		if (pRedBoss == nullptr)
@@ -75,7 +75,7 @@ public:
 
 		return pRedBoss->GetActualHP();
 	}
-	const int& GetRedBossMaxHP()
+	const int GetRedBossMaxHP()
 	{
 		ZActorWithFSM* pRedBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossRedUID));
 		if (pRedBoss == nullptr)
@@ -84,7 +84,7 @@ public:
 		return pRedBoss->GetActualMaxHP();
 	}
 
-	const int& GetBlueBossHP()
+	const int GetBlueBossHP()
 	{
 		ZActorWithFSM* pBlueBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossBlueUID));
 		if (pBlueBoss == nullptr)
@@ -93,7 +93,7 @@ public:
 		return pBlueBoss->GetActualHP();
 	}
 
-	const int& GetBlueBossMaxHP()
+	const int GetBlueBossMaxHP()
 	{
 		ZActorWithFSM* pBlueBoss = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(m_bossBlueUID));
 		if (pBlueBoss == nullptr)

@@ -133,11 +133,11 @@ void MQuestMapCatalogue::ParseMapset(MXmlElement& element)
 	for (int i = 0; i < nAttrCount; i++)
 	{
 		element.GetAttribute(i, szAttrName, szAttrValue);
-		if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_ID))
+		if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_ID))
 		{
 			pMapsetInfo->nID = atoi(szAttrValue);
 		}
-		else if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_TITLE))
+		else if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_TITLE))
 		{
 			strcpy(pMapsetInfo->szTitle, szAttrValue);
 		}
@@ -154,14 +154,14 @@ void MQuestMapCatalogue::ParseMapset(MXmlElement& element)
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(szTagName, MTOK_QUESTMAP_TAG_SECTOR))
+		if (!_stricmp(szTagName, MTOK_QUESTMAP_TAG_SECTOR))
 		{
 			int nAttrCount = chrElement.GetAttributeCount();
 			int nSectorID = -1;
 			for (int j = 0; j < nAttrCount; j++)
 			{
 				chrElement.GetAttribute(j, szAttrName, szAttrValue);
-				if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_ID))
+				if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_ID))
 				{
 					nSectorID = atoi(szAttrValue);
 					break;
@@ -196,7 +196,7 @@ void MQuestMapCatalogue::ParseSector(MXmlElement& element, MQuestMapSectorInfo* 
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(szTagName, MTOK_QUESTMAP_TAG_LINK))
+		if (!_stricmp(szTagName, MTOK_QUESTMAP_TAG_LINK))
 		{
 			int nLinkIndex = pSector->nLinkCount;
 
@@ -204,7 +204,7 @@ void MQuestMapCatalogue::ParseSector(MXmlElement& element, MQuestMapSectorInfo* 
 			for (int j = 0; j < nLinkAttrCount; j++)
 			{
 				chrElement.GetAttribute(j, szAttrName, szAttrValue);
-				if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_NAME))
+				if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_NAME))
 				{
 					strcpy(pSector->Links[nLinkIndex].szName, szAttrValue);
 				}
@@ -220,7 +220,7 @@ void MQuestMapCatalogue::ParseSector(MXmlElement& element, MQuestMapSectorInfo* 
 				elementTarget.GetTagName(szTargetTagName);
 				if (szTargetTagName[0] == '#') continue;
 
-				if (!stricmp(szTargetTagName, MTOK_QUESTMAP_TAG_TARGET))
+				if (!_stricmp(szTargetTagName, MTOK_QUESTMAP_TAG_TARGET))
 				{
 					elementTarget.GetAttribute(szAttrValue, MTOK_QUESTMAP_ATTR_SECTOR, "");
 					MQuestMapSectorInfo* pTargetSector = GetSectorInfoFromName(szAttrValue);
@@ -256,7 +256,7 @@ void MQuestMapCatalogue::ParseMapsetSector1Pass(MXmlElement& elementMapset, MQue
 		chrElement.GetTagName(szTagName);
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(szTagName, MTOK_QUESTMAP_TAG_SECTOR))
+		if (!_stricmp(szTagName, MTOK_QUESTMAP_TAG_SECTOR))
 		{
 			MQuestMapSectorInfo* pSectorInfo = new MQuestMapSectorInfo();
 
@@ -264,23 +264,23 @@ void MQuestMapCatalogue::ParseMapsetSector1Pass(MXmlElement& elementMapset, MQue
 			for (int j = 0; j < nAttrCount; j++)
 			{
 				chrElement.GetAttribute(j, szAttrName, szAttrValue);
-				if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_ID))
+				if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_ID))
 				{
 					pSectorInfo->nID = atoi(szAttrValue);
 				}
-				else if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_TITLE))
+				else if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_TITLE))
 				{
 					strcpy(pSectorInfo->szTitle, szAttrValue);
 				}
-				else if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_MELEE_SPAWN))
+				else if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_MELEE_SPAWN))
 				{
 					pSectorInfo->nSpawnPointCount[MNST_MELEE] = atoi(szAttrValue);
 				}
-				else if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_RANGE_SPAWN))
+				else if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_RANGE_SPAWN))
 				{
 					pSectorInfo->nSpawnPointCount[MNST_RANGE] = atoi(szAttrValue);
 				}
-				else if (!stricmp(szAttrName, MTOK_QUESTMAP_ATTR_BOSS_SPAWN))
+				else if (!_stricmp(szAttrName, MTOK_QUESTMAP_ATTR_BOSS_SPAWN))
 				{
 					pSectorInfo->nSpawnPointCount[MNST_BOSS] = atoi(szAttrValue);
 					if (pSectorInfo->nSpawnPointCount[MNST_BOSS] > 0) pSectorInfo->bBoss = true;
@@ -344,7 +344,7 @@ bool MQuestMapCatalogue::ReadXml(const char* szFileName,MZFileSystem* pFileSyste
 
 		if (szTagName[0] == '#') continue;
 
-		if (!stricmp(szTagName, MTOK_QUESTMAP_TAG_MAPSET)) {
+		if (!_stricmp(szTagName, MTOK_QUESTMAP_TAG_MAPSET)) {
 			ParseMapset(chrElement);
 		}
 	}

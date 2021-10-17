@@ -389,7 +389,7 @@ void RMesh::CheckNameToType(RMeshNode* pMeshNode)
 	char* pName = pMeshNode->GetName();
 
 #define NCMPNAME(name,n)	(strnicmp(pName,name,n)==0)
-#define CMPNAME(name)		(stricmp(pName,name)==0)
+#define CMPNAME(name)		(_stricmp(pName,name)==0)
 
 	if (NCMPNAME("Bip", 3)) {
 		pMeshNode->m_isDummyMesh = true;
@@ -921,7 +921,7 @@ bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 
 				_temp[4] = 0;
 
-				if( stricmp(_temp,".tga")==0 ) {
+				if( _stricmp(_temp,".tga")==0 ) {
 					node->m_bDiffuseMap = true;
 				}
 
@@ -1034,7 +1034,7 @@ bool RMesh::ReadOldElu(MZFile* mzf, ex_hd_t* m_phd_t)
 
 			_temp[4] = 0;
 
-			if (stricmp(_temp, ".tga") == 0) {
+			if (_stricmp(_temp, ".tga") == 0) {
 				node->m_bDiffuseMap = true;
 			}
 
@@ -1616,7 +1616,7 @@ void RMesh::ConnectMatrix()
 				pPN = m_data[id];
 
 			if (pPN) {
-				if (!stricmp(pPN->GetName(), "Bip01 L Hand") || !stricmp(pPN->GetName(), "Bip01 R Hand"))
+				if (!_stricmp(pPN->GetName(), "Bip01 L Hand") || !_stricmp(pPN->GetName(), "Bip01 R Hand"))
 					pMeshNode->m_bNpcWeaponMeshNode = true;
 			}
 		}

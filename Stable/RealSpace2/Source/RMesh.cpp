@@ -97,7 +97,7 @@ void RMesh::Init()
 	m_data.reserve(MAX_MESH_NODE_TABLE);//±âº»
 	if(m_data.size() > 0)
 	{
-		for(int i=0;i < m_data.size();++i)
+		for(size_t i=0;i < m_data.size();++i)
 		m_data[i] = NULL;
 	}
 	m_isScale = false;

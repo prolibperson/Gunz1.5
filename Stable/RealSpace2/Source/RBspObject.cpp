@@ -95,6 +95,9 @@ RSBspNode::RSBspNode()
 
 	nFrameCount=-1;
 	pDrawInfo = NULL;
+	//Custom: added missing initializers
+	m_nBaseVertexIndex = 0;
+	m_nVertices = 0;
 }
 
 RSBspNode::~RSBspNode()
@@ -151,7 +154,7 @@ RBspLightmapManager::~RBspLightmapManager()
 
 void RBspLightmapManager::Destroy()
 {
-	SAFE_DELETE(m_pData);
+	SAFE_DELETE_ARRAY(m_pData);
 	if(m_pFreeList){
 		delete []m_pFreeList;
 		m_pFreeList=NULL;
@@ -271,7 +274,6 @@ RBspObject::RBspObject()
 {
 	m_pBspRoot=NULL;
 	m_pOcRoot=NULL;
-	m_ppLightmapTextures=NULL;
 	m_pMaterials=NULL;
 	g_pLPVertices=NULL;
 	m_pVertexBuffer=NULL;
@@ -313,24 +315,31 @@ RBspObject::RBspObject()
 	m_DebugInfo.pLastColNode = NULL;
 
 	m_pDynLightVertexBuffer = NULL;
+	//Custom: missing initializers
+	m_OpenMode = ROpenFlag::ROF_RUNTIME;
+	m_nBspIndices = 0;
+	m_nBspVertices = 0;
+	m_nIndices = 0;
+	m_nVertices = 0;
 }
 
 void RBspObject::ClearLightmaps()
 {
-	while(m_LightmapList.size())
+
+	for (size_t i = 0; i < m_LightmapList.size(); ++i)
 	{
-		delete *m_LightmapList.begin();
-		m_LightmapList.erase(m_LightmapList.begin());
+		delete m_LightmapList[i];
+		m_LightmapList[i] = nullptr;
+	}
+	m_LightmapList.clear();
+
+	for (size_t i = 0; i < m_ppLightmapTextures.size(); ++i)
+	{
+		m_ppLightmapTextures[i]->Release();
+		m_ppLightmapTextures[i] = nullptr;
 	}
 
-	if(m_ppLightmapTextures)
-	{
-		for(int i=0;i<m_nLightmap;i++)
-			SAFE_RELEASE(m_ppLightmapTextures[i]);
-		SAFE_DELETE(m_ppLightmapTextures);
-	}
-
-	// 라이트맵이 여러장이었다면 폴리곤에 새겨진 번호도 없앰
+	m_ppLightmapTextures.clear();
 	if( m_nLightmap )
 	{
 		for(int i=0;i<m_nPolygon;i++)
@@ -375,15 +384,15 @@ RBspObject::~RBspObject()
 	SAFE_DELETE_ARRAY(m_pConvexVertices);
 	SAFE_DELETE_ARRAY(m_pConvexPolygons);
 
-	SAFE_DELETE(m_pColVertices);
+	SAFE_DELETE_ARRAY(m_pColVertices);
 	if(m_pColRoot)
 	{
 		delete []m_pColRoot;
 		m_pColRoot=NULL;
 	}
 
-	SAFE_DELETE(m_pBspInfo);
-	SAFE_DELETE(m_pBspVertices);
+	SAFE_DELETE_ARRAY(m_pBspInfo);
+	SAFE_DELETE_ARRAY(m_pBspVertices);
 	SAFE_DELETE(m_pBspIndices);
 	if(m_pBspRoot)
 	{
@@ -391,9 +400,9 @@ RBspObject::~RBspObject()
 		m_pBspRoot=NULL;
 	}
 
-	SAFE_DELETE(m_pOcInfo);
-	SAFE_DELETE(m_pOcVertices);
-	SAFE_DELETE(m_pOcIndices);
+	SAFE_DELETE_ARRAY(m_pOcInfo);
+	SAFE_DELETE_ARRAY(m_pOcVertices);
+	SAFE_DELETE_ARRAY(m_pOcIndices);
 	if(m_pOcRoot)
 	{
 		delete []m_pOcRoot;
@@ -420,6 +429,20 @@ RBspObject::~RBspObject()
 		iter = m_StaticSunLigthtList.erase( iter );
 	}
 
+	for (RLightList::iterator iter = m_StaticMapLightList.begin(); iter != m_StaticMapLightList.end();)
+	{
+		SAFE_DELETE(*iter);
+		iter = m_StaticMapLightList.erase(iter);
+
+	}
+
+	for (RLightList::iterator iter = m_StaticObjectLightList.begin(); iter != m_StaticObjectLightList.end();)
+	{
+		SAFE_DELETE(*iter);
+		iter = m_StaticObjectLightList.erase(iter);
+
+	}
+
 
 	for( list<AmbSndInfo*>::iterator iter = m_AmbSndInfoList.begin(); iter != m_AmbSndInfoList.end(); )
 	{
@@ -427,6 +450,25 @@ RBspObject::~RBspObject()
 		SAFE_DELETE(p);
 		iter = m_AmbSndInfoList.erase(iter);
 	}
+
+	//TODO: determine if this is necesary?
+	//Custom: Clear objs from memory
+	for (auto mapObj : m_ObjectList.m_MapObjectList)
+	{
+		delete mapObj->pVisualMesh;
+		delete mapObj;
+		mapObj = nullptr;
+	}
+	m_ObjectList.m_MapObjectList.clear();
+
+	for (auto mapObj : m_SkyList.m_MapObjectList)
+	{
+		delete mapObj->pVisualMesh;
+		delete mapObj;
+		mapObj = nullptr;
+	}
+	m_SkyList.m_MapObjectList.clear();	
+
 
 //	SAFE_DELETE_ARRAY(m_pSeqIndices);
 }
@@ -674,7 +716,7 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(m_ppLightmapTextures)
+			if(m_ppLightmapTextures.size() > 0)
 				RGetDevice()->SetTexture(1,m_ppLightmapTextures[nLightmap]);
 
 			SetDiffuseMap(nMaterial);
@@ -698,7 +740,7 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(m_ppLightmapTextures)
+			if(m_ppLightmapTextures.size() > 0)
 				RGetDevice()->SetTexture(1,m_ppLightmapTextures[nLightmap]);
 
 			if((m_pMaterials[nMaterial].dwFlags & RM_FLAG_USEALPHATEST) != 0 ) {
@@ -752,7 +794,7 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(m_ppLightmapTextures)
+			if(m_ppLightmapTextures.size() > 0)
 				RGetDevice()->SetTexture(1,m_ppLightmapTextures[nLightmap]);
 
 			SetDiffuseMap(nMaterial);
@@ -1519,7 +1561,7 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 		aObjectNode=pElement->GetChildNode(i);
 		aObjectNode.GetTagName(szTagName);
 
-		if(stricmp(szTagName,RTOK_OBJECT)==0)
+		if(_stricmp(szTagName,RTOK_OBJECT)==0)
 		{
 			ROBJECTINFO *pInfo=new ROBJECTINFO;
 			aObjectNode.GetAttribute(szContents,RTOK_NAME);
@@ -1689,7 +1731,7 @@ bool RBspObject::Make_LenzFalreList()
 	{
 		RDummy* pDummy = *itor;
 
-		if( stricmp( pDummy->szName.c_str(), "sun_dummy" ) == 0 )
+		if( _stricmp( pDummy->szName.c_str(), "sun_dummy" ) == 0 )
 		{
 			if( !RGetLenzFlare()->SetLight( pDummy->Position ))
 			{
@@ -1747,7 +1789,7 @@ bool RBspObject::Set_AmbSound(MXmlElement *pElement)
 	{
 		childElem = pElement->GetChildNode(i);
 		childElem.GetTagName(szBuffer);
-		if(stricmp(szBuffer,"AMBIENTSOUND")==0)
+		if(_stricmp(szBuffer,"AMBIENTSOUND")==0)
 		{
 			asinfo = new AmbSndInfo;
 			asinfo->itype = 0;
@@ -1772,7 +1814,7 @@ bool RBspObject::Set_AmbSound(MXmlElement *pElement)
 				char* token = NULL;
 				contentElem = childElem.GetChildNode(j);
 				contentElem.GetNodeName(szBuffer);
-				if(stricmp("MIN_POSITION", szBuffer)==0)
+				if(_stricmp("MIN_POSITION", szBuffer)==0)
 				{				
 					contentElem.GetContents(szBuffer);
 					token = strtok(szBuffer, " ");
@@ -1782,7 +1824,7 @@ bool RBspObject::Set_AmbSound(MXmlElement *pElement)
 					token = strtok(NULL, " ");
 					if(token!= NULL) asinfo->min.z = atof(token);
 				}	
-				else if(stricmp("MAX_POSITION", szBuffer)==0)
+				else if(_stricmp("MAX_POSITION", szBuffer)==0)
 				{
 					contentElem.GetContents(szBuffer);
 					token = strtok(szBuffer, " ");
@@ -1792,12 +1834,12 @@ bool RBspObject::Set_AmbSound(MXmlElement *pElement)
 					token = strtok(NULL, " ");
 					if(token!= NULL) asinfo->max.z = atof(token);
 				}
-				else if(stricmp("RADIUS", szBuffer)==0)
+				else if(_stricmp("RADIUS", szBuffer)==0)
 				{
 					contentElem.GetContents(szBuffer);
 					asinfo->radius = atof(szBuffer);
 				}
-				else if(stricmp("CENTER", szBuffer)==0)
+				else if(_stricmp("CENTER", szBuffer)==0)
 				{
 					contentElem.GetContents(szBuffer);
 					token = strtok(szBuffer, " ");
@@ -1846,21 +1888,21 @@ bool RBspObject::OpenDescription(const char *filename)
 	{
 		aChild = aParent.GetChildNode(i);
 		aChild.GetTagName(szTagName);
-		if(stricmp(szTagName,RTOK_MATERIALLIST)==0)
+		if(_stricmp(szTagName,RTOK_MATERIALLIST)==0)
 			Open_MaterialList(&aChild); else
-		if(stricmp(szTagName,RTOK_LIGHTLIST)==0)
+		if(_stricmp(szTagName,RTOK_LIGHTLIST)==0)
 			Open_LightList(&aChild); else
-		if(stricmp(szTagName,RTOK_OBJECTLIST)==0)
+		if(_stricmp(szTagName,RTOK_OBJECTLIST)==0)
 			Open_ObjectList(&aChild); else
-		if(stricmp(szTagName,RTOK_OCCLUSIONLIST)==0)
+		if(_stricmp(szTagName,RTOK_OCCLUSIONLIST)==0)
 			Open_OcclusionList(&aChild);
-		if(stricmp(szTagName,RTOK_DUMMYLIST)==0)
+		if(_stricmp(szTagName,RTOK_DUMMYLIST)==0)
 		{
 			Open_DummyList(&aChild);
 		}
-		if(stricmp(szTagName,RTOK_FOG)==0)
+		if(_stricmp(szTagName,RTOK_FOG)==0)
 			Set_Fog(&aChild);
-		if(stricmp(szTagName,"AMBIENTSOUNDLIST")==0)
+		if(_stricmp(szTagName,"AMBIENTSOUNDLIST")==0)
 			Set_AmbSound(&aChild);
 	}
 
@@ -2124,7 +2166,6 @@ bool RBspObject::OpenLightmap()
 		file.Close();
 		return false;
 	}
-	m_ppLightmapTextures=new LPDIRECT3DTEXTURE9[m_nLightmap];
 
 	mlog("BspObject load lightmap nCount = %d\n",m_nLightmap);
 	for (int i = 0; i < m_nLightmap; i++)
@@ -2148,7 +2189,7 @@ bool RBspObject::OpenLightmap()
 			return false;
 		}
 
-		m_ppLightmapTextures[i] = NULL;
+		LPDIRECT3DTEXTURE9 tex;
 
 		HRESULT hr;
 
@@ -2160,9 +2201,11 @@ bool RBspObject::OpenLightmap()
 			0, D3DFMT_UNKNOWN, g_isDirect3D9ExEnabled ? D3DPOOL_DEFAULT : D3DPOOL_MANAGED,
 			D3DX_FILTER_TRIANGLE | D3DX_FILTER_MIRROR,
 			D3DX_FILTER_TRIANGLE | D3DX_FILTER_MIRROR,
-			0, NULL, NULL, &m_ppLightmapTextures[i]);
+			0, NULL, NULL, &tex);
 
-		if (hr != D3D_OK) //mlog("lightmap texture 생성 실패 %s \n", DXGetErrorString(hr));
+		m_ppLightmapTextures.push_back(tex);
+
+		//if (hr != D3D_OK) //mlog("lightmap texture 생성 실패 %s \n", DXGetErrorString(hr));
 		delete[] bmpmemory;
 		//		delete memory;
 	}

@@ -1144,8 +1144,8 @@ bool ZGameInterface::OnGameCreate(void)
 	}
 #endif
 	// ��I��u AI��IAo ��I��a
-	char szFileName[256];
-	int nBitmap = rand() % 9;
+	//char szFileName[256];
+	//int nBitmap = rand() % 9;
 
 #if defined(LOCALE_NHNUSA) || defined(LOCALE_BRAZIL) || defined(LOCALE_JAPAN)
 	switch ( rand() % 3)
@@ -1199,7 +1199,7 @@ bool ZGameInterface::OnGameCreate(void)
 #ifndef _MAP_CACHING
 	if(!m_pGame->Create(ZApplication::GetFileSystem(), &gameLoading ))
 	{
-		mlog("ZGame ��y���� ��C����\n");
+		mlog("ZGame Failed to create.\n");
 		SAFE_DELETE(m_pGame);
 		m_bLoading = false;
 		//m_pLoadingInterface->OnDestroy();
@@ -6197,7 +6197,7 @@ void ZGameInterface::ShowMailDialog(bool bShow)
 
 			///TODO: send achievements to client
 			std::vector<MTD_UserMail> userMail = ZGetMyInfo()->GetMail();
-			for (int i = 0; i < userMail.size(); ++i)
+			for (size_t i = 0; i < userMail.size(); ++i)
 			{
 				MTD_UserMail mail = userMail.at(i);
 				pListBox->Add(new MailListBoxItem(mail.messageID, mail.sender, mail.message, mail.read));

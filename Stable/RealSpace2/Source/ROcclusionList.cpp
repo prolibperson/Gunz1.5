@@ -15,7 +15,7 @@ ROcclusion::ROcclusion()
 
 ROcclusion::~ROcclusion()
 {
-	SAFE_DELETE(pVertices);
+	SAFE_DELETE_ARRAY(pVertices);
 	SAFE_DELETE(pPlanes);
 }
 
@@ -36,7 +36,7 @@ bool ROcclusionList::Open(MXmlElement* pElement)
 		aOcclusionNode = pElement->GetChildNode(i);
 		aOcclusionNode.GetTagName(szTagName);
 
-		if (stricmp(szTagName, RTOK_OCCLUSION) == 0)
+		if (_stricmp(szTagName, RTOK_OCCLUSION) == 0)
 		{
 			ROcclusion* poc = new ROcclusion;
 			aOcclusionNode.GetAttribute(szContents, RTOK_NAME);
@@ -54,7 +54,7 @@ bool ROcclusionList::Open(MXmlElement* pElement)
 
 #define READVECTOR(v) sscanf(szContents,"%f %f %f",&v.x,&v.y,&v.z)
 
-				if (stricmp(szTagName, RTOK_POSITION) == 0) {
+				if (_stricmp(szTagName, RTOK_POSITION) == 0) {
 					rvector temp;
 					READVECTOR(temp);
 					winding.push_back(temp);

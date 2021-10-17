@@ -196,7 +196,7 @@ bool MXmlNode::AppendChild(MXmlNode node)
 void MXmlElement::SetContents(int iValue)
 {
 	char szTemp[20];
-	_itoa(iValue, szTemp, 10);
+	_itoa_s(iValue, szTemp, 10);
 
 	SetContents(szTemp);
 	
@@ -282,7 +282,7 @@ bool MXmlElement::GetAttribute(char* sOutText, const char* sAttrName, char* sDef
 	{
 		 pNode = pAttributes->item[i];
 		 
-		 if(!stricmp(_BSTRToAscii(pNode->nodeName), sAttrName))
+		 if(!_stricmp(_BSTRToAscii(pNode->nodeName), sAttrName))
 		 {
 			 strcpy(sOutText, _BSTRToAscii(pNode->text));
 			 return true;
@@ -351,11 +351,11 @@ bool MXmlElement::GetAttribute(bool* bOutValue, const char* sAttrName, bool bDef
 		return false;
 	}
 
-	if (!stricmp(szTemp, "true"))
+	if (!_stricmp(szTemp, "true"))
 	{
 		*bOutValue = true;
 	}
-	else if (!stricmp(szTemp, "false"))
+	else if (!_stricmp(szTemp, "false"))
 	{
 		*bOutValue = false;
 	}
@@ -454,7 +454,7 @@ bool MXmlElement::SetAttribute(const char* sAttrName, char* sAttrText)
 		for (int i = 0; i < pAttrs->length; i++)
 		{
 			pNode = pAttrs->item[i];
-			if (!stricmp(_BSTRToAscii(pNode->nodeName), sAttrName))
+			if (!_stricmp(_BSTRToAscii(pNode->nodeName), sAttrName))
 			{
 				BSTR pBSTRAttrText = _AsciiToBSTR(sAttrText);
 				pNode->Puttext(pBSTRAttrText);
@@ -469,7 +469,7 @@ bool MXmlElement::SetAttribute(const char* sAttrName, char* sAttrText)
 bool MXmlElement::SetAttribute(const char* sAttrName, int iAttrValue)
 {
 	char szTemp[20];
-	itoa(iAttrValue, szTemp, 10);
+	_itoa(iAttrValue, szTemp, 10);
 
 	return SetAttribute(sAttrName, szTemp);
 }
@@ -537,7 +537,7 @@ bool MXmlElement::GetChildContents(bool* bOutValue, const char* sChildTagName)
 	char szBuf[256];
 	if (GetChildContents(szBuf, sChildTagName))
 	{
-		if (!stricmp(szBuf, "true"))
+		if (!_stricmp(szBuf, "true"))
 		{
 			*bOutValue = true;
 		}
@@ -574,7 +574,7 @@ void MXmlElement::GetContents(bool* bpOutValue)
 	memset(sTemp, 0, 64);
 	MXmlNode::GetText(sTemp);
 
-	if (!stricmp(sTemp, "true"))
+	if (!_stricmp(sTemp, "true"))
 	{
 		*bpOutValue = true;
 	}
@@ -788,9 +788,9 @@ bool MXmlDocument::SaveToFile(const char* m_sFileName)
 	}
 	catch(_com_error& e)
     {
-//#ifdef _DEBUG
-//		OutputDebugString(e.ErrorMessage());
-//#endif
+#ifdef _DEBUG
+		OutputDebugString(e.ErrorMessage());
+#endif
     }
  
 	return true;
@@ -810,9 +810,9 @@ bool MXmlDocument::CreateProcessingInstruction( const char* szHeader)
 	}
 	catch(_com_error& e)
 	{
-//#ifdef _DEBUG
-//		OutputDebugString(e.ErrorMessage());
-//#endif
+#ifdef _DEBUG
+		OutputDebugString(e.ErrorMessage());
+#endif
 	}
 
 	if (pi != NULL) (*m_ppDom)->appendChild(pi);

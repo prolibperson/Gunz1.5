@@ -459,7 +459,7 @@ void MMatchServer::OnFriendAdd(const MUID& uidPlayer, const char* pszName)
 
 	if (pObj->GetFriendInfo() == NULL) return;
 
-	if (!stricmp(pObj->GetName(), pszName))
+	if (!_stricmp(pObj->GetName(), pszName))
 		return;
 
 	MMatchObject* pTargetObj = GetPlayerByName(pszName);

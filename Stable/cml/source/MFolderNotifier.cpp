@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#define _WIN32_WINNT 0x400
 #include "MFolderNotifier.h"
 #define MFOLDERNOTIFY_MAXQUEUE	1000
 

@@ -203,7 +203,7 @@ MCommandParameterString::MCommandParameterString(const char* Value)
 MCommandParameterString::~MCommandParameterString(void)
 {
 	if(m_Value!=NULL){
-		delete m_Value;
+		delete[] m_Value;
 		m_Value=NULL;
 	}
 }

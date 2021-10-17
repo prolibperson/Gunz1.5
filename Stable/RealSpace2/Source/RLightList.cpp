@@ -22,7 +22,7 @@ bool RLightList::Open(MXmlElement* pElement)
 		aLightNode = pElement->GetChildNode(i);
 		aLightNode.GetTagName(szTagName);
 
-		if (stricmp(szTagName, RTOK_LIGHT) == 0)
+		if (_stricmp(szTagName, RTOK_LIGHT) == 0)
 		{
 			RLIGHT* plight = new RLIGHT;
 			aLightNode.GetAttribute(szContents, RTOK_NAME);
@@ -38,12 +38,12 @@ bool RLightList::Open(MXmlElement* pElement)
 
 #define READVECTOR(v) sscanf(szContents,"%f %f %f",&v.x,&v.y,&v.z)
 
-				if (stricmp(szTagName, RTOK_POSITION) == 0)		READVECTOR(plight->Position); else
-					if (stricmp(szTagName, RTOK_COLOR) == 0)		READVECTOR(plight->Color); else
-						if (stricmp(szTagName, RTOK_INTENSITY) == 0)	sscanf(szContents, "%f", &plight->fIntensity); else
-							if (stricmp(szTagName, RTOK_ATTNSTART) == 0)	sscanf(szContents, "%f", &plight->fAttnStart); else
-								if (stricmp(szTagName, RTOK_ATTNEND) == 0)		sscanf(szContents, "%f", &plight->fAttnEnd); else
-									if (stricmp(szTagName, RTOK_CASTSHADOW) == 0)	plight->dwFlags |= RM_FLAG_CASTSHADOW;
+				if (_stricmp(szTagName, RTOK_POSITION) == 0)		READVECTOR(plight->Position); else
+					if (_stricmp(szTagName, RTOK_COLOR) == 0)		READVECTOR(plight->Color); else
+						if (_stricmp(szTagName, RTOK_INTENSITY) == 0)	sscanf(szContents, "%f", &plight->fIntensity); else
+							if (_stricmp(szTagName, RTOK_ATTNSTART) == 0)	sscanf(szContents, "%f", &plight->fAttnStart); else
+								if (_stricmp(szTagName, RTOK_ATTNEND) == 0)		sscanf(szContents, "%f", &plight->fAttnEnd); else
+									if (_stricmp(szTagName, RTOK_CASTSHADOW) == 0)	plight->dwFlags |= RM_FLAG_CASTSHADOW;
 			}
 
 			push_back(plight);

@@ -494,7 +494,7 @@ protected:
 
 // 실제로 텍스쳐 메모리에 올라가는 라이트맵
 	int							m_nLightmap;
-	LPDIRECT3DTEXTURE9			*m_ppLightmapTextures;
+	std::vector<LPDIRECT3DTEXTURE9> m_ppLightmapTextures;
 	vector<RBspLightmapManager*> m_LightmapList;
 
 // lightmap 텍스처로 생성시 필요한 것..

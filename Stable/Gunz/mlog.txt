@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Oct 13 2021 17:01:51) 
-Log time (10/13/21 18:53:24)
+GUNZ 1,0,0,290 launched. build (Oct 16 2021 23:56:15) 
+Log time (10/16/21 23:57:02)
 Windows = 6.2 Build 9200 ,  (16701652KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
@@ -26,24 +26,24 @@ InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
-2(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
+1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
+2(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
 3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.666000 
+-------------------> Sound Engine Create : 0.538000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.641000 
+loading pictures : 1.607000 
 IDLResource Loading Success!!
-IDL resources : 0.110000 
+IDL resources : 0.117000 
 start InitInterface option
 Number of Display mode : 69
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.209000 
+Screen Effect Manager Create : 0.205000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -67,22 +67,22 @@ SFX/ef_haste ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater 
 SFX/ef_haste ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_haste ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 Effect manager create success.
-8059 upnp port forward initialized.
+7930 upnp port forward initialized.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.618000 
+-------------------> GameInterface Create : 2.372000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.162000 
+-------------------> Character Loading : 0.160000 
 
 
--------------------> WeaponMesh Loading : 0.238000 
+-------------------> WeaponMesh Loading : 0.240000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.022000 
+-------------------> Worlditem Loading : 0.024000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -92,10 +92,10 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.241000 
+-------------------> ETC .. : 0.240000 
 
 
-LoginID: jetman82
+LoginID: jetman823
 BspObject open : begin interface/church/church_b.rs 
 RBspObject::Open : Open_MaterialList
 RBspObject::Open : Open_LightList
@@ -141,9 +141,317 @@ main : OnCreate() done
 Server Connected
 Login Successful. 
 Responsed Account Charlist
-man-parts03.eluSelected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
+Selected character name : Jetman823 (4A 65 74 6D 61 6E 38 32 33 )  (len = 9)
 0,Jetman82,Jetman82,This is a test send
-Shop Gamble item count : 2
-shop gitem : 1000003, Green Box
-shop gitem : 1000004, Gold Box
-Need to load man-parts03.elu elu in stage
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 23:57:49 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 23:57:57 )
+game interface destroy finished
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 23:58:23 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 23:58:28 )
+game interface destroy finished
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 23:58:32 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 23:58:38 )
+game interface destroy finished
+StageCreated
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 23:58:50 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 23:59:18 )
+game interface destroy finished
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 23:59:29 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 23:59:52 )
+game interface destroy finished
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Prison/Prison.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 10 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 1
+BspObject load lightmap 0
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 23:59:58 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 00:00:08 )
+game interface destroy finished
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Prison/Prison.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 10 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 1
+BspObject load lightmap 0
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 00:00:14 )
+Create character : Name=Jetman823 Level=1 
+game interface destory begin.
+game destroy begin
+Destroy sound engine()
+game destroy match destroy 
+------------------------ReleaseBuffer
+game destroyed ( 00:00:38 )
+game interface destroy finished
+StageCreated
+Destroy gunz
+Destroy sound engine.
+Destroy sound engine. success
+Destroy console.
+Destroy interface begin 
+destroy client.
+PeerInfoList Released
+clear looks end.
+Widget map clear end.
+desctroy cursor system end.
+clear IDL resource end.
+Final interface end.
+Destroy game interface done.
+clear looks end.
+Widget map clear end.
+desctroy cursor system end.
+Destroy mesh manager.
+Destroy weapon mesh manager.
+Clear SkillManager.
+Clear QuestItemDescMgr.
+Clear MatchItemDescMgr.
+Clear ChattingFilter.
+Clear ChannelRuleMgr.
+destroy game application done.
+interface finalize.
+game input destroy.
+game gonfiguration destroy.
+Bitmap manager destroy Animation bitmap.
+destroy gunz finish.
+Rframe_destory::closeDisplay

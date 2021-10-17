@@ -760,7 +760,7 @@ BEGIN_IMPLEMENT_LISTENER(ZGetStageCreateBtnListener, MBTN_CLK_MSG)
 	}
 	
 	void* stageModList = MMakeBlobArray(sizeof(int), (int)(mods.size()));
-	for (int i = 0; i < mods.size(); ++i) {
+	for (size_t i = 0; i < mods.size(); ++i) {
 		*(int*)MGetBlobArrayElement(stageModList, i) = mods.at(i);
 	}
 
