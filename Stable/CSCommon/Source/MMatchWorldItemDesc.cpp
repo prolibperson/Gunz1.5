@@ -286,16 +286,27 @@ void MMatchMapsWorldItemSpawnInfo::ParseSpawnInfo(MXmlElement& element, int nMap
 			_ASSERT(0);
 		}
 
+		char szDirection[128];
+		MVector3 dir = MVector3(0, 1, 0);
+		if (spawnElement.GetChildContents(szDirection, MMSITOK_DIRECTION))
+		{
+			int nCount = sscanf(szDirection, "%f %f %f", &dir.x,&dir.y,&dir.z);
+			if (nCount != 3)
+			{
+				_ASSERT(0);
+			}
+		}
+
 		if (nItemID > 0)
 		{
-			SetMapsSpawnInfo(nMapID, szGameTypeID, nItemID, x, y, z, (unsigned long int)nTime);
+			SetMapsSpawnInfo(nMapID, szGameTypeID, nItemID, x, y, z, (unsigned long int)nTime,dir.x,dir.y,dir.z);
 		}
 	}
 }
 
 void MMatchMapsWorldItemSpawnInfo::SetMapsSpawnInfo(int nMapID, char* szGameTypeID,
 													int nItemID, float x, float y, float z, 
-													unsigned long int nCoolTime)
+													unsigned long int nCoolTime, float dx,float dy,float dz)
 {
 	int nSpawnID;
 	if (nCoolTime == 0) nCoolTime = 99999999;
@@ -309,6 +320,9 @@ void MMatchMapsWorldItemSpawnInfo::SetMapsSpawnInfo(int nMapID, char* szGameType
 		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].x = x;
 		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].y = y;
 		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].z = z;
+		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].dx = dx;
+		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].dy = dy;
+		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].dz = dz;
 		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].nCoolTime = nCoolTime;
 
 		m_MapsSpawnInfo[nMapID].m_nSoloSpawnCount++;
@@ -322,6 +336,9 @@ void MMatchMapsWorldItemSpawnInfo::SetMapsSpawnInfo(int nMapID, char* szGameType
 		m_MapsSpawnInfo[nMapID].TeamSpawnInfo[nSpawnID].x = x;
 		m_MapsSpawnInfo[nMapID].TeamSpawnInfo[nSpawnID].y = y;
 		m_MapsSpawnInfo[nMapID].TeamSpawnInfo[nSpawnID].z = z;
+		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].dx = dx;
+		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].dy = dy;
+		m_MapsSpawnInfo[nMapID].SoloSpawnInfo[nSpawnID].dz = dz;
 		m_MapsSpawnInfo[nMapID].TeamSpawnInfo[nSpawnID].nCoolTime = nCoolTime;
 
 		m_MapsSpawnInfo[nMapID].m_nTeamSpawnCount++;

@@ -23,7 +23,7 @@ ZWorldItemManager ZWorldItemManager::msInstance;
 //////////////////////////////////////////////////////////////////////////
 //		ZWorldItem
 //////////////////////////////////////////////////////////////////////////
-void ZWorldItem::Initialize( int nID, short nItemID,MTD_WorldItemSubType SubType, ZWORLD_ITEM_STATE state, unsigned int nSpawnTypeFlags,  rvector& position, float fAmount)
+void ZWorldItem::Initialize( int nID, short nItemID,MTD_WorldItemSubType SubType, ZWORLD_ITEM_STATE state, unsigned int nSpawnTypeFlags,  rvector& position, float fAmount,rvector& dir)
 {
 	m_nID				= nID;
 	m_nItemID			= nItemID;
@@ -32,7 +32,7 @@ void ZWorldItem::Initialize( int nID, short nItemID,MTD_WorldItemSubType SubType
 	m_SubType			= SubType;
 	m_Position			= position;
 	m_fAmount			= fAmount;
-	m_Dir 				= rvector(0,1,0);
+	m_Dir 				= dir;
 	m_Up				= rvector(0,0,1);
 }
 
@@ -231,7 +231,7 @@ bool ZWorldItemManager::ApplyWorldItem( WIL_Iterator& iter, ZCharacter* pCharact
 	return true;
 }
 
-ZWorldItem *ZWorldItemManager::AddWorldItem( int nID, short nItemID,MTD_WorldItemSubType nItemSubType,rvector& pos)
+ZWorldItem *ZWorldItemManager::AddWorldItem( int nID, short nItemID,MTD_WorldItemSubType nItemSubType,rvector& pos,rvector& dir)
 {
 	ZWorldItem* pWorldItem = NULL;
 
@@ -253,7 +253,7 @@ ZWorldItem *ZWorldItemManager::AddWorldItem( int nID, short nItemID,MTD_WorldIte
 			SetBitSet(nSpawnTypeFlags, WORLD_ITEM_STAND_ALINE);
 
 		pWorldItem = new ZWorldItem();
-		pWorldItem->Initialize( nID, nItemID, nItemSubType,WORLD_ITEM_INVALIDATE, nSpawnTypeFlags, pos, pDesc->m_fAmount );
+		pWorldItem->Initialize( nID, nItemID, nItemSubType,WORLD_ITEM_INVALIDATE, nSpawnTypeFlags, pos, pDesc->m_fAmount,dir);
 		pWorldItem->SetName( pDesc->m_szDescName );
 		pWorldItem->SetModelName( pDesc->m_szModelName );
 		pWorldItem->SetType(pDesc->m_nItemType );
@@ -476,7 +476,7 @@ void ZWorldItemManager::Reset(bool bDrawRemoveEffect)
 void ZWorldItemManager::AddQuestPortal(rvector& pos)
 {
 	int id = GenStandAlondID();
-	AddWorldItem(id, WORLDITEM_PORTAL_ID,MTD_Static, pos);
+	AddWorldItem(id, WORLDITEM_PORTAL_ID,MTD_Static, pos,rvector(0,1,0));
 
 	ZGetSoundEngine()->PlaySound("fx_openportal",pos);
 }

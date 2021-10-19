@@ -261,6 +261,10 @@ struct MTD_WorldItem
 	short			x;
 	short			y;
 	short			z;
+	//Custom: direction for items (will default to 0,1,0)
+	short			dx;
+	short			dy;
+	short			dz;
 /*
 	float			x;
 	float			y;

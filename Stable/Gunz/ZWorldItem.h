@@ -66,7 +66,7 @@ public:
 public:
 	// 아이템 생성
 	void Initialize( int nID, short nItemID, MTD_WorldItemSubType SubType, ZWORLD_ITEM_STATE state, unsigned int nSpawnTypeFlags,	// 스폰 형식
-							rvector& position, float fAmount);
+							rvector& position, float fAmount,rvector& dir);
 
 	virtual bool ApplyWorldItem( ZCharacter* pCharacter );					// 먹히기
 
@@ -146,7 +146,7 @@ protected:
 public:
 	void update();	// 캐릭터와의 충돌 체크, 아이템 생성시간 체크
 	int GenStandAlondID();
-	ZWorldItem *AddWorldItem( int nID, short nItemID,MTD_WorldItemSubType nItemSubType, rvector& pos);	// 맵 로딩시 아이템 추가할때 호출하는 함수
+	ZWorldItem *AddWorldItem( int nID, short nItemID,MTD_WorldItemSubType nItemSubType, rvector& pos, rvector& dir);	// 맵 로딩시 아이템 추가할때 호출하는 함수
 			
 	bool DeleteWorldItem( int nID, bool bDrawRemoveEffect=false );
 

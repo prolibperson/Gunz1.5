@@ -26,6 +26,10 @@ struct MMatchWorldItem
 	float				y;
 	float				z;
 	int					nLifeTime;			// 아이템 활성 시간( -1이면 무한 )
+	//Custom: direction for items (optional, will default to 0,1,0
+	float				dx;
+	float				dy;
+	float				dz;
 
 	union {
 		struct {
@@ -69,6 +73,10 @@ struct MMatchWorldItemSpawnInfo
 	float x;
 	float y;
 	float z;
+	//Custom: direction for items
+	float dx;
+	float dy;
+	float dz;
 	bool				bExist;
 	bool				bUsed;
 };
@@ -92,7 +100,7 @@ private:
 	bool								m_bStarted;
 
 	void AddItem(const unsigned short nItemID, short nSpawnIndex, 
-				 const float x, const float y, const float z);
+				 const float x, const float y, const float z, const float dx, const float dy, const float dz);
 	void AddItem(const unsigned short nItemID, short nSpawnIndex, 
 				 const float x, const float y, const float z, int nLifeTime, int* pnExtraValues);
 	void DelItem(short nUID);

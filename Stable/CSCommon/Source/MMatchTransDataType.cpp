@@ -43,6 +43,9 @@ void Make_MTDWorldItem(MTD_WorldItem* pOut, MMatchWorldItem* pWorldItem)
 	pOut->x = (short)Roundf(pWorldItem->x);
 	pOut->y = (short)Roundf(pWorldItem->y);
 	pOut->z = (short)Roundf(pWorldItem->z);
+	pOut->dx = pWorldItem->dx;
+	pOut->dy = pWorldItem->dy;
+	pOut->dz = pWorldItem->dz;
 }
 
 

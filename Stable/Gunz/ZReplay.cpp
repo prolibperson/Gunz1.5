@@ -190,8 +190,8 @@ bool ZReplayLoader::LoadStageSettingEtc(ZFile* file)
 
 		// now do logic. flag spawns are always up. we keep the state for archival purposes.
 
-		ZGetWorldItemManager()->AddWorldItem(ZGetWorldItemManager()->GenStandAlondID(), CTF_RED_ITEM_ID,MTD_Static, rvector(pTeamCTF->GetRedFlagPos().x,pTeamCTF->GetRedFlagPos().y,pTeamCTF->GetRedFlagPos().z));
-		ZGetWorldItemManager()->AddWorldItem(ZGetWorldItemManager()->GenStandAlondID(), CTF_BLUE_ITEM_ID,MTD_Static, rvector(pTeamCTF->GetBlueFlagPos().x,pTeamCTF->GetBlueFlagPos().y,pTeamCTF->GetBlueFlagPos().z));
+		ZGetWorldItemManager()->AddWorldItem(ZGetWorldItemManager()->GenStandAlondID(), CTF_RED_ITEM_ID,MTD_Static, rvector(pTeamCTF->GetRedFlagPos().x,pTeamCTF->GetRedFlagPos().y,pTeamCTF->GetRedFlagPos().z),rvector(0,1,0));
+		ZGetWorldItemManager()->AddWorldItem(ZGetWorldItemManager()->GenStandAlondID(), CTF_BLUE_ITEM_ID,MTD_Static, rvector(pTeamCTF->GetBlueFlagPos().x,pTeamCTF->GetBlueFlagPos().y,pTeamCTF->GetBlueFlagPos().z),rvector(0,1,0));
 
 		if(nRead==0) return false;
 	}

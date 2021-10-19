@@ -82,7 +82,7 @@ class MMatchMapsWorldItemSpawnInfo
 private:
 	void ParseSpawnInfo(MXmlElement& element, int nMapID);
 	void SetMapsSpawnInfo(int nMapID, char* szGameTypeID, int nItemID, float x, float y, float z, 
-						  unsigned long int nCoolTime);
+						  unsigned long int nCoolTime, float dx = 0, float dy = 1, float dz = 0);
 	bool ReadXml(const char* szFileName, int nMapID);
 protected:
 public:

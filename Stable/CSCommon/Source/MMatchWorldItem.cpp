@@ -203,7 +203,7 @@ void MMatchWorldItemManager::Update()
 		{
 			if( nNowTime >= it->m_nDropDelayTime )
 			{
-				AddItem(it->m_nItemID, -1, it->m_x, it->m_y, it->m_z);
+				AddItem(it->m_nItemID, -1, it->m_x, it->m_y, it->m_z,0,1,0);
 				it = m_UserDropWorldItem.erase( it );
 			}
 			else
@@ -248,7 +248,7 @@ void MMatchWorldItemManager::RouteAllItems(MMatchObject* pObj)
 }
 
 void MMatchWorldItemManager::AddItem(const unsigned short nItemID, short nSpawnIndex, 
-									 const float x, const float y, const float z)
+									 const float x, const float y, const float z, const float dx, const float dy, const float dz)
 {
 	if (m_pMatchStage == NULL) return;
 	m_nUIDGenerate++;
@@ -262,6 +262,10 @@ void MMatchWorldItemManager::AddItem(const unsigned short nItemID, short nSpawnI
 	pNewWorldItem->x = x;
 	pNewWorldItem->y = y;
 	pNewWorldItem->z = z;
+	//Custom: direction for worlditems
+	pNewWorldItem->dx = dx;
+	pNewWorldItem->dy = dy;
+	pNewWorldItem->dz = dz;
 
 	pNewWorldItem->nLifeTime = -1;
 	for (int i = 0; i < WORLDITEM_EXTRAVALUE_NUM; i++) pNewWorldItem->nExtraValue[i] = 0;
@@ -366,6 +370,10 @@ void MMatchWorldItemManager::OnStageBegin(MMatchStageSetting* pStageSetting)
 					SpawnInfos.x = pSpawnInfoSet->TeamSpawnInfo[i].x;
 					SpawnInfos.y = pSpawnInfoSet->TeamSpawnInfo[i].y;
 					SpawnInfos.z = pSpawnInfoSet->TeamSpawnInfo[i].z;
+					//Custom: direction for worlditems
+					SpawnInfos.dx = pSpawnInfoSet->TeamSpawnInfo[i].dx;
+					SpawnInfos.dy = pSpawnInfoSet->TeamSpawnInfo[i].dy;
+					SpawnInfos.dz = pSpawnInfoSet->TeamSpawnInfo[i].dz;
 
 					SpawnInfos.nCoolTime = pSpawnInfoSet->TeamSpawnInfo[i].nCoolTime;
 					SpawnInfos.nItemID = pSpawnInfoSet->TeamSpawnInfo[i].nItemID;
@@ -388,7 +396,10 @@ void MMatchWorldItemManager::OnStageBegin(MMatchStageSetting* pStageSetting)
 					SpawnInfos.x = pSpawnInfoSet->SoloSpawnInfo[i].x;
 					SpawnInfos.y = pSpawnInfoSet->SoloSpawnInfo[i].y;
 					SpawnInfos.z = pSpawnInfoSet->SoloSpawnInfo[i].z;
-
+					//Custom: direction for world items
+					SpawnInfos.dx = pSpawnInfoSet->SoloSpawnInfo[i].dx;
+					SpawnInfos.dy = pSpawnInfoSet->SoloSpawnInfo[i].dy;
+					SpawnInfos.dz = pSpawnInfoSet->SoloSpawnInfo[i].dz;
 					SpawnInfos.nCoolTime = pSpawnInfoSet->SoloSpawnInfo[i].nCoolTime;
 					SpawnInfos.nItemID = pSpawnInfoSet->SoloSpawnInfo[i].nItemID;
 					m_SpawnInfos.push_back(SpawnInfos);
@@ -413,8 +424,10 @@ void MMatchWorldItemManager::Spawn(int nSpawnIndex)
 	m_SpawnInfos[nSpawnIndex].bExist = true;
 	m_SpawnInfos[nSpawnIndex].nElapsedTime = 0;
 
+	MVector3 dir = MVector3(m_SpawnInfos[nSpawnIndex].dx, m_SpawnInfos[nSpawnIndex].dy, m_SpawnInfos[nSpawnIndex].dz);
+
 	AddItem(m_SpawnInfos[nSpawnIndex].nItemID, nSpawnIndex, 
-		    m_SpawnInfos[nSpawnIndex].x, m_SpawnInfos[nSpawnIndex].y, m_SpawnInfos[nSpawnIndex].z);
+		    m_SpawnInfos[nSpawnIndex].x, m_SpawnInfos[nSpawnIndex].y, m_SpawnInfos[nSpawnIndex].z,dir.x,dir.y,dir.z);
 }
 
 void MMatchWorldItemManager::DelItem(short nUID)

@@ -2063,7 +2063,8 @@ void ZGameClient::OnSpawnWorldItem(void* pBlob)
 
 		pWorldItem = ZGetWorldItemManager()->AddWorldItem( pWorldItemNode->nUID, pWorldItemNode->nItemID, 
 			(MTD_WorldItemSubType)pWorldItemNode->nItemSubType,
-			rvector( (float)pWorldItemNode->x, (float)pWorldItemNode->y, (float)pWorldItemNode->z));
+			rvector( (float)pWorldItemNode->x, (float)pWorldItemNode->y, (float)pWorldItemNode->z),rvector((float)pWorldItemNode->dx,
+				(float)pWorldItemNode->dy,(float)pWorldItemNode->dz));
 
 
 		pMWeapon = ZGetGame()->m_WeaponManager.UpdateWorldItem(pWorldItemNode->nItemID,rvector( pWorldItemNode->x, pWorldItemNode->y, pWorldItemNode->z));

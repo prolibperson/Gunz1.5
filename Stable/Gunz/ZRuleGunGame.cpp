@@ -49,6 +49,21 @@ bool ZRuleGunGame::OnCommand(MCommand* pCommand)
 			return true;
 		}
 		break;
+		//TODO: go back a set if you die?
+		/*
+		case MC_MATCH_GUNGAME_DIE:
+		{
+			int WeaponSet[3];
+			MUID uidPlayer;
+			pCommand->GetParameter(&uidPlayer,0,MPT_UID);
+			pCommand->GetParameter(&WeaponSet[0],1,MPT_UINT);
+			pCommand->GetParameter(&WeaponSet[1],2,MPT_UINT);
+			pCommand->GetParameter(&WeaponSet[2],3,MPT_UINT);
+
+			SetPlayerWeapons(uidPlayer,WeaponSet);
+			return true;
+		}break;
+		*/
 		default:
 			break;
 	}
