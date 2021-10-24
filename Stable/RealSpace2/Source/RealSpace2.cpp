@@ -35,7 +35,7 @@ HWND					g_hWnd;
 MZFileSystem			*g_pFileSystem=NULL;
 RParticleSystem			g_ParticleSystem;
 HMODULE					g_hD3DLibrary=NULL;
-bool g_bStencilBuffer = true;
+bool g_bStencilBuffer = false;
 
 //Fog
 float g_fFogNear;
@@ -349,18 +349,23 @@ bool RInitDisplay(HWND hWnd, const RMODEPARAMS *params)
 		g_MultiSample = D3DMULTISAMPLE_NONE;
 	}
 	g_d3dpp.MultiSampleType =  g_MultiSample;
-	if (FAILED(g_pD3D->CheckDeviceFormat(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_X8R8G8B8, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24S8)))
+
+	if (g_bStencilBuffer == true)
 	{
-		mlog("Does not provide D24S8 DepthStencil Buffer Format\n");
-		g_bStencilBuffer = false;
+		if (FAILED(g_pD3D->CheckDeviceFormat(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_X8R8G8B8, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24S8)))
+		{
+			mlog("Gpu cannot use a 24bit zbuffer. defaulting to 16bit.\n");
+			g_bStencilBuffer = false;
+			g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+
+		}
+		else
+			g_d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 	}
 	else
-		g_bStencilBuffer = true;
-
-	if (g_bStencilBuffer)
-		g_d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
-	else
+	{
 		g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+	}
 	
 	g_d3dpp.Flags= NULL;//D3DPRESENTFLAG_LOCKABLE_BACKBUFFER;
 	g_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;  
@@ -571,19 +576,22 @@ void RResetDevice(const RMODEPARAMS* params)
 
 	g_d3dpp.MultiSampleType = g_MultiSample;
 
-
-	if (FAILED(g_pD3D->CheckDeviceFormat(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_X8R8G8B8, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24S8)))
+	if (g_bStencilBuffer == true)
 	{
-		mlog("Does not provide D24S8 DepthStencil Buffer Format\n");
-		g_bStencilBuffer = false;
+		if (FAILED(g_pD3D->CheckDeviceFormat(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, D3DFMT_X8R8G8B8, D3DUSAGE_DEPTHSTENCIL, D3DRTYPE_SURFACE, D3DFMT_D24S8)))
+		{
+			mlog("Gpu cannot use a 24bit zbuffer. defaulting to 16bit.\n");
+			g_bStencilBuffer = false;
+			g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+
+		}
+		else
+			g_d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 	}
 	else
-		g_bStencilBuffer = true;
-
-	if (g_bStencilBuffer)
-		g_d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
-	else
+	{
 		g_d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
+	}
 
 
 	HRESULT hr;

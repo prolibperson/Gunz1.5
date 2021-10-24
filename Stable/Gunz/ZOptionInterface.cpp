@@ -366,6 +366,11 @@ void ZOptionInterface::InitInterfaceOption(void)
 			pWidget->SetCheck(ZGetConfiguration()->GetVideo()->enableD3D9Ex);
 		}
 
+		pWidget = (MButton*)pResource->FindWidget("DYNAMICMODELS");
+		if (pWidget) {
+			pWidget->SetCheck(ZGetConfiguration()->GetEtc()->dynamicModels);
+		}
+
 
 		pWidget = (MButton*)pResource->FindWidget("BGMMute");
 		if(pWidget)
@@ -585,6 +590,12 @@ void ZOptionInterface::InitInterfaceOption(void)
 		if (pButton)
 		{
 			pButton->SetCheck(ZGetConfiguration()->GetVideo()->bFullScreen);
+		}
+
+		pButton = (MButton*)pResource->FindWidget("Stencil");
+		if (pButton)
+		{
+			pButton->SetCheck(ZGetConfiguration()->GetVideo()->bStencilBuffer);
 		}
 
 	}
@@ -883,6 +894,15 @@ bool ZOptionInterface::SaveInterfaceOption(void)
 			}
 		}
 
+		pWidget = (MButton*)pResource->FindWidget("DYNAMICMODELS");
+		if (pWidget)
+		{
+			if (Z_VIDEO_DYNAMIC_MODELS != pWidget->GetCheck())
+			{
+				Z_VIDEO_DYNAMIC_MODELS = pWidget->GetCheck();
+			}
+		}
+
 		pWidget	= (MButton*)pResource->FindWidget("BGMMute");
 		if( pWidget )
 		{
@@ -1134,6 +1154,16 @@ bool ZOptionInterface::SaveInterfaceOption(void)
 			}
 
 		}
+
+		fullScreen = (MButton*)pResource->FindWidget("Stencil");
+		if (fullScreen)
+		{
+			if (Z_VIDEO_STENCILBUFFER != fullScreen->GetCheck())
+			{
+				Z_VIDEO_STENCILBUFFER = fullScreen->GetCheck();
+				bResetDevice = true;
+			}
+		}
 	}
 
 	{
@@ -1195,6 +1225,7 @@ bool ZOptionInterface::SaveInterfaceOption(void)
 			type = D3DMULTISAMPLE_8_SAMPLES; break;
 		}
 
+		RSetStencilBuffer(Z_VIDEO_STENCILBUFFER);
 		RSetMultiSampling(type);
 		RResetDevice(&ModeParams);
 	}

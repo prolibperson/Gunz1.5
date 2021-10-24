@@ -142,7 +142,10 @@ struct ZCONFIG_ETC{
 	int			nFrameLimit_perSecond;
 	bool		bTrailOption;			//Trail Option
 	bool		bFpsOverlay;
-	bool		bDisableSW;
+	bool		bDisableSW;	
+	
+	bool dynamicModels;
+
 };
 
 /// 로케일과 관련된 설정값
@@ -484,6 +487,7 @@ ZLanguageSetting_forNHNUSA* ZGetLanguageSetting_forNHNUSA();
 #define Z_VIDEO_D3D9EX			(ZGetConfiguration()->GetVideo()->enableD3D9Ex)
 
 
+
 #define Z_ETC_NETWORKPORT1		(ZGetConfiguration()->GetEtc()->nNetworkPort1)
 #define Z_ETC_NETWORKPORT2		(ZGetConfiguration()->GetEtc()->nNetworkPort2)
 #define Z_ETC_BOOST				(ZGetConfiguration()->GetEtc()->bBoost)
@@ -497,6 +501,8 @@ ZLanguageSetting_forNHNUSA* ZGetLanguageSetting_forNHNUSA();
 #define Z_ETC_FRAMELIMIT_PERSECOND	(ZGetConfiguration()->GetEtc()->nFrameLimit_perSecond)
 #define Z_ETC_TRAIL_OPTION		(ZGetConfiguration()->GetEtc()->bTrailOption) //Trail Option
 #define Z_ETC_OVERLAY_OPTION	(ZGetConfiguration()->GetEtc()->bFpsOverlay)//fps overlay
+//Custom: dynamic model loading game option
+#define Z_VIDEO_DYNAMIC_MODELS	(ZGetConfiguration()->GetEtc()->dynamicModels)
 
 #define Z_LOCALE_DEFAULT_FONT	(ZGetConfiguration()->GetLocale()->szDefaultFont)
 #define Z_LOCALE_XML_HEADER		(ZGetConfiguration()->GetLocale()->szXmlHeader)

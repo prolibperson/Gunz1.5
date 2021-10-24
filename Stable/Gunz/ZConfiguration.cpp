@@ -499,6 +499,7 @@ bool ZConfiguration::LoadConfig(const char* szFileName)
 			m_Audio.bCustomMusicEnabled = atob(itor->first_node("ENABLECUSTOMMUSIC")->value());
 			m_Video.bNewRenderer = atob(itor->first_node("NEWRENDERER")->value());
 			m_Video.enableD3D9Ex = atob(itor->first_node("D3D9EX")->value());
+			m_Etc.dynamicModels = atob(itor->first_node("DYNAMICMODELS")->value());
 		}
 	}
 
@@ -837,6 +838,9 @@ bool ZConfiguration::SaveToFile(const char *szFileName, const char* szHeader)
 
 		childNode = doc.allocate_node(rapidxml::node_element, "D3D9EX", m_Video.enableD3D9Ex ? "true" : "false");
 		parentNode->insert_node(0, childNode);
+
+		childNode = doc.allocate_node(rapidxml::node_element, "DYNAMICMODELS", m_Etc.dynamicModels == true ? "true" : "false");
+		parentNode->insert_node(0, childNode);
 	}
 
 	std::string xml_as_string;
@@ -949,6 +953,7 @@ void ZConfiguration::Init()
 	m_Video.bStencilBuffer = false;
 	m_Video.nAntiAlias = 0;
 	m_Video.enableD3D9Ex = false;
+	m_Etc.dynamicModels = false;
 }
 
 void ZConfiguration::LoadDefaultKeySetting()

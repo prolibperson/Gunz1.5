@@ -118,40 +118,10 @@ RRESULT OnCreate(void *pParam)
 {
 	g_App.PreCheckArguments();
 
-	D3DMULTISAMPLE_TYPE type;
-	switch (Z_VIDEO_ANTIALIAS)
+	//Custom: skip loading dynamic models if config is set to true
+	if (Z_VIDEO_DYNAMIC_MODELS == true)
 	{
-	case 0:
-		type = D3DMULTISAMPLE_NONE; break;
-	case 1:
-		type = D3DMULTISAMPLE_2_SAMPLES; break;
-	case 2:
-		type = D3DMULTISAMPLE_4_SAMPLES; break;
-	case 3:
-		type = D3DMULTISAMPLE_8_SAMPLES; break;
-	}
-
-	RSetMultiSampling(type);
-	bool resetDevice = false;
-	RMODEPARAMS modeParams;
-
-	if (RealSpace2::RGetMultiSampling() > D3DMULTISAMPLE_NONE)
-	{
-		modeParams = { RGetScreenWidth(), RGetScreenHeight(), Z_VIDEO_FULLSCREEN, RGetPixelFormat() };
-		resetDevice = true;
-	}
-
-	if (resetDevice)
-	{
-		RResetDevice(&modeParams);
-	}
-
-
-	//todo: write autoload config option
-	bool autoload = false;
-	if (autoload == true)
-	{
-		//todo: make rmesh skip autoload option
+		RMesh::SetPartsMeshLoadingSkip(1);
 	}
 	string strFileLenzFlare("System/LenzFlare.xml");
 	RCreateLenzFlare(strFileLenzFlare.c_str());
@@ -1223,6 +1193,22 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 		return nRMainReturn;
 	}
 
+	D3DMULTISAMPLE_TYPE type;
+	switch (Z_VIDEO_ANTIALIAS)
+	{
+	case 0:
+		type = D3DMULTISAMPLE_NONE; break;
+	case 1:
+		type = D3DMULTISAMPLE_2_SAMPLES; break;
+	case 2:
+		type = D3DMULTISAMPLE_4_SAMPLES; break;
+	case 3:
+		type = D3DMULTISAMPLE_8_SAMPLES; break;
+	}
+
+	RSetStencilBuffer(Z_VIDEO_STENCILBUFFER);
+	RSetMultiSampling(type);
+	bool resetDevice = false;
 
 	if( 0 != RInitD3D(&g_ModeParams) )
 	{

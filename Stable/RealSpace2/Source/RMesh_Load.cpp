@@ -96,15 +96,16 @@ bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 		}
 		else if (strcmp(NodeName, "AddParts") == 0)
 		{
-			if (RMesh::m_parts_mesh_loading_skip == 0)
-			{
+			//if (RMesh::m_parts_mesh_loading_skip == 0)
+			//{
 				Node.GetAttribute(IDName, "name");
 				Node.GetAttribute(FileName, "filename");
 				bool autoLoad = false;
 				//Custom: Dynamic Resource Loading. If you want to disable the feature, comment out node.getattribute(&autoLoad);todo: write config option
 				Node.GetAttribute(&autoLoad, "autoload");
 
-				if (autoLoad == false)
+				//Customn: Skip autoload when m_parts_mesh_loading_skip is enabled via Z_VIDEO_DYNAMIC_MODELS
+				if (autoLoad == false && RMesh::m_parts_mesh_loading_skip == 1)
 					continue;
 
 				if (!m_parts_mgr) {
@@ -123,7 +124,7 @@ bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 				if (ret == -1) {
 					return false;
 				}
-			}
+		//	}
 		}
 		else if (strcmp(NodeName, "AddParticle") == 0) {
 			Node.GetAttribute(IDName, "name");
