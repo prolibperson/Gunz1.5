@@ -6,6 +6,12 @@
 
 MMatchRuleDemolition::MMatchRuleDemolition(MMatchStage* stage) : MMatchRule(stage)
 {
+	for (int i = 0; i < 2; ++i)
+	{
+		isBombPlanted[i] = false;
+		bombPlantedTime[i] = 0;
+		bombOwner[i] = MUID(0, 0);
+	}
 }
 
 MMatchRuleDemolition::~MMatchRuleDemolition()
@@ -45,12 +51,12 @@ void MMatchRuleDemolition::OnRoundBegin()
 
 void MMatchRuleDemolition::OnRoundEnd()
 {
-	for (int i = 0; i < 2; ++i)
-	{
-		isBombPlanted[i] = false;
-		bombPlantedTime[i] = 0;
-		bombOwner[i].SetInvalid();
-	}
+	//for (int i = 0; i < 2; ++i)
+	//{
+	//	isBombPlanted[i] = false;
+	//	bombPlantedTime[i] = 0;
+	//	bombOwner[i].SetInvalid();
+	//}
 }
 
 void MMatchRuleDemolition::OnEnterBattle(MUID& player)

@@ -1337,8 +1337,7 @@ void MMatchServer::OnStageMap(const MUID& uidStage, char* pszMapName, const MUID
 	if (strlen(pszMapName) < 2) return;
 
 	pStage->SetMapName( pszMapName );
-	pStage->SetIsRelayMap(strcmp(MMATCH_MAPNAME_RELAYMAP, pszMapName) == 0);
-	
+	pStage->SetIsRelayMap(strcmp(MMATCH_MAPNAME_RELAYMAP, pszMapName) == 0);	
 	MCommand* pNew = new MCommand(m_CommandManager.GetCommandDescByID(MC_MATCH_STAGE_MAP), MUID(0,0), m_This);
 	pNew->AddParameter(new MCommandParameterUID(uidStage));
 	pNew->AddParameter(new MCommandParameterString(pStage->GetMapName()));
@@ -1351,7 +1350,8 @@ void MMatchServer::OnStageMap(const MUID& uidStage, char* pszMapName, const MUID
 
 	if (pStage->GetStageSetting()->GetGameType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
 	{
-		//TODO:
+		MMatchRuleQuestChallenge* challengeQuest = reinterpret_cast<MMatchRuleQuestChallenge*>(pStage->GetRule());
+		challengeQuest->RefreshStageGameInfo();
 	}
 
     RouteToStage(uidStage, pNew);

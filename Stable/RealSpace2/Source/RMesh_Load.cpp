@@ -859,7 +859,7 @@ bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 		if (pMeshNode->m_point_color_num > 0 && pMeshNode->m_PartsType == eq_parts_chest)
 			pMeshNode->m_isClothMeshNode = true;
 
-		m_list.PushBack(pMeshNode);
+		m_list.push_back(pMeshNode);
 
 		m_data.push_back(pMeshNode);
 		m_data_num++;
@@ -1256,7 +1256,7 @@ bool RMesh::ReadOldElu(MZFile* mzf, ex_hd_t* m_phd_t)
 		if (pMeshNode->m_point_color_num > 0 && pMeshNode->m_PartsType == eq_parts_chest)
 			pMeshNode->m_isClothMeshNode = true;
 
-		m_list.PushBack(pMeshNode);
+		m_list.push_back(pMeshNode);
 
 		m_data.push_back(pMeshNode);
 		m_data_num++;
@@ -1417,21 +1417,18 @@ bool RMesh::ReadElu(char* fname)
 
 	ConnectMtrl();// Mtrl 연결..
 
-	if (m_bEffectSort) {
-		m_list.sort(e_sort_str);
-
-		RMeshNodeHashList_Iter it_obj = m_list.begin();
+	if (m_bEffectSort)
+	{
+		std::sort(m_list.begin(), m_list.end(), e_sort_str);
 
 		int cnt = 0;
 
-		while (it_obj != m_list.end()) {
-			RMeshNode* pMeshNode = (*it_obj);
-
-			m_data[cnt] = pMeshNode;
-			pMeshNode->m_id = cnt;
+		for (auto const& meshNode : m_list)
+		{
+			m_data[cnt] = meshNode;
+			meshNode->m_id = cnt;
 
 			cnt++;
-			it_obj++;
 		}
 	}
 
@@ -1481,7 +1478,7 @@ bool RMesh::AddNode(char* name, char* pname, rmatrix& base_mat)
 
 	D3DXMatrixInverse(&pMeshNode->m_mat_ref_inv, 0, &pMeshNode->m_mat_ref);
 
-	m_list.PushBack(pMeshNode);
+	m_list.push_back(pMeshNode);
 	m_data.push_back(pMeshNode);
 	m_data_num++;
 
@@ -1710,46 +1707,42 @@ bool RMesh::ConnectPhysiqueParent(RMeshNode* pNode)
 
 //파츠교환때문에 미리연산하는것이 의미가 없음..
 // 로딩시점에 자신의 머터리얼에 대해서 알파인가 조사..
-void RMesh::CheckNodeAlphaMtrl() {
-	RMeshNodeHashList_Iter it_obj = m_list.begin();
-
-	RMeshNode* pMeshNode = NULL;
+void RMesh::CheckNodeAlphaMtrl() 
+{
 	RMtrlMgr* pMtrlList = NULL;
 
 	RMtrl* pMtrl, * pSMtrl;
 
-	while (it_obj != m_list.end()) {
-		pMeshNode = (*it_obj);
+	for (auto const& meshObj : m_list)
+	{
 
-		if (pMeshNode->m_mtrl_id != -1) {
+		if (meshObj->m_mtrl_id != -1)
+		{
 			if (m_mtrl_list_ex.GetNum()) {
-				if (pMtrl = m_mtrl_list_ex.Get_s(pMeshNode->m_mtrl_id, -1)) {
+				if (pMtrl = m_mtrl_list_ex.Get_s(meshObj->m_mtrl_id, -1)) {
 					if (pMtrl->m_sub_mtrl_num) {
 						for (int i = 0; i < pMtrl->m_sub_mtrl_num; i++) {
-							pSMtrl = m_mtrl_list_ex.Get_s(pMeshNode->m_mtrl_id, i);
+							pSMtrl = m_mtrl_list_ex.Get_s(meshObj->m_mtrl_id, i);
 
 							if (pSMtrl->m_bAlphaMap || pSMtrl->m_bDiffuseMap) {
-								pMeshNode->m_isAlphaMtrl = true;
+								meshObj->m_isAlphaMtrl = true;
 								break;
 							}
 						}
 					}
 					else {
 						if (pMtrl->m_bAlphaMap || pMtrl->m_bDiffuseMap)
-							pMeshNode->m_isAlphaMtrl = true;
+							meshObj->m_isAlphaMtrl = true;
 					}
 				}
 			}
 		}
-
-		it_obj++;
 		continue;
 	}
 }
 
 void RMesh::ClearVoidMtrl()
 {
-	RMeshNode* pMeshNode = NULL;
 	RMtrl* pMtrl = NULL;
 	RMtrl* pSMtrl = NULL;
 
@@ -1760,20 +1753,18 @@ void RMesh::ClearVoidMtrl()
 
 	m_mtrl_list_ex.ClearUsedCheck();
 
-	RMeshNodeHashList_Iter it_obj = m_list.begin();
+	for (auto const& meshObj : m_list)
+	{
 
-	while (it_obj != m_list.end()) {
-		pMeshNode = (*it_obj);
-
-		if (pMeshNode) {
-			pMtrl = m_mtrl_list_ex.Get_s(pMeshNode->m_mtrl_id, -1);
+		if (meshObj) {
+			pMtrl = m_mtrl_list_ex.Get_s(meshObj->m_mtrl_id, -1);
 
 			if (pMtrl) {
 				pMtrl->m_bUse = true;
 
 				if (pMtrl->m_sub_mtrl_num) {//sub mtrl
 					for (int i = 0; i < pMtrl->m_sub_mtrl_num; i++) {
-						pSMtrl = m_mtrl_list_ex.Get_s(pMeshNode->m_mtrl_id, i);
+						pSMtrl = m_mtrl_list_ex.Get_s(meshObj->m_mtrl_id, i);
 
 						if (pSMtrl) {
 							pSMtrl->m_bUse = true;
@@ -1782,7 +1773,6 @@ void RMesh::ClearVoidMtrl()
 				}
 			}
 		}
-		it_obj++;
 	}
 
 	m_mtrl_list_ex.ClearUsedMtrl();

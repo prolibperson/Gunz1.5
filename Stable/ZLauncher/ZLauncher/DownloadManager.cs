@@ -10,6 +10,8 @@ namespace ZLauncher
     class DownloadManager
     {
         ProgressBar progressBar;
+        TextBlock dlText;
+        string dlFileName;
         public DownloadManager()
         {
 
@@ -18,6 +20,7 @@ namespace ZLauncher
         {
             WebClient client = new WebClient();
             progressBar = prog;
+            dlText = downloadText;
             client.DownloadProgressChanged += Client_DownloadProgressChanged;
             foreach (string fileName in filesToDownload)
             {
@@ -29,10 +32,11 @@ namespace ZLauncher
                         string folderPath = Path.GetDirectoryName(fileName);
                         if (Directory.Exists(folderPath) == false)
                         {
-                            System.IO.Directory.CreateDirectory(fileName.Substring(0, fileName.LastIndexOf('/')));
+                           Directory.CreateDirectory(fileName.Substring(0, fileName.LastIndexOf('/')));
                         }
                     }
-                    downloadText.Text = "Downloading: " + fileName;
+                    //downloadText.Text = "Downloading: " + fileName;
+                    dlFileName = "Downloading : " + fileName + " ";
                     await client.DownloadFileTaskAsync(webPath, fileName);
                 }
                 catch (WebException e)
@@ -52,6 +56,7 @@ namespace ZLauncher
 
         private void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
+            dlText.Text = dlFileName + e.BytesReceived / 1024 + "KB/" + e.TotalBytesToReceive / 1024 + "KB";
             progressBar.Value = e.ProgressPercentage;
         }
     }

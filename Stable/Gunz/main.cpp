@@ -503,7 +503,10 @@ void SetModeParams()
 void ResetAppResource()
 {
 	GunzState state = ZGetGameInterface()->GetState();
-	ZGetStringResManager()->ResetInstance();
+	ZGetStringResManager()->ReInit();
+
+	ZGetConfiguration()->Load_StringResDependent();
+
 	g_App.InitLocale(true);
 	g_App.ReInitializeGameInterface();
 	g_App.ReInitializeStageOptionInterface();

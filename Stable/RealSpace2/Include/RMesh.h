@@ -18,8 +18,8 @@ _NAMESPACE_REALSPACE2_BEGIN
 
 #pragma warning(disable : 4996)
 
-typedef RHashList<RMeshNode*>			RMeshNodeHashList;
-typedef RHashList<RMeshNode*>::iterator	RMeshNodeHashList_Iter;
+//typedef vector<RMeshNode*>			RMeshNodeHashVectr;
+//typedef vector<RMeshNode*>::iterator	RMeshNodeHashVectr_Iter;
 
 /*
 class AniTreeNodeMgr {
@@ -279,7 +279,8 @@ public:
 //		}
 //		알파만 소트..
 //		카메라와의 거리계산하고..
-		m_node_list[RRMT_Alpha].sort(render_alpha_sort);
+		std::sort(m_node_list[RRMT_Alpha].begin(), m_node_list[RRMT_Alpha].end(), render_alpha_sort);
+	//	m_node_list[RRMT_Alpha].sort(render_alpha_sort);
 	}
 
 	// alpha 거리 sort 포기?
@@ -302,7 +303,7 @@ public:
 		}
 	}
 
-	RMeshNodeHashList m_node_list[RRMT_End];
+	std::vector<RMeshNode*> m_node_list[RRMT_End];
 };
 
 class RParticleLinkInfo
@@ -544,7 +545,7 @@ public:
 
 	int		m_id;
 
-	RMeshNodeHashList	m_list;
+	std::vector<RMeshNode*>	m_list;
 
 //	RMeshNode*			m_data[MAX_MESH_NODE_TABLE];
 	vector<RMeshNode*>	m_data;

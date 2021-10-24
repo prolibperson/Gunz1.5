@@ -133,7 +133,7 @@ void RMesh::Init()
 	m_isMeshLoaded = false;
 
 	m_pToolSelectNode = NULL;
-
+	m_list.reserve(150);
 }
 
 void RMesh::Destroy()
@@ -318,55 +318,38 @@ void RMesh::GetMeshData(RMeshPartsType type,vector<RMeshNode*>& nodetable)
 {
 	RMeshNode*	pMesh = NULL;
 
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
+	auto it_obj =  m_list.begin();
 
-	while (it_obj !=  m_list.end()) {
-		pMesh = (*it_obj);
-		if(pMesh->m_PartsType==type) {
+	for (auto const& obj : m_list)
+	{
+		pMesh = obj;
+		if (pMesh->m_PartsType == type)
+		{
 			nodetable.push_back(pMesh);
 		}
-		it_obj++;
 	}
 }
 
 RMeshNode* RMesh::GetMeshData(RMeshPartsType type)
 {
-	RMeshNode*	pMesh = NULL;
-
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
-
-	while (it_obj !=  m_list.end()) {
-		pMesh = (*it_obj);
-		if(pMesh->m_PartsType==type)
-			return pMesh;
-		it_obj++;
+	auto pMesh = std::find_if(m_list.begin(), m_list.end(), [&](RMeshNode* node) {return node->m_PartsType == type; });
+	if (pMesh == m_list.end())
+	{
+		return nullptr;
 	}
-	return NULL;
+	return *pMesh;
 }
 
 RMeshNode* RMesh::GetMeshData(char* name, const char* eluName)
 {
-	RMeshNode* pMesh = m_list.Find(name);
+	auto pMesh = std::find_if(m_list.begin(), m_list.end(), [&](RMeshNode* node) {return node->m_Name == name; });
+	if (pMesh == m_list.end())
+	{
+		return nullptr;
+	}
 	
 
-	return pMesh;
-
-//	RMeshNodeHashList_Iter it_obj =  m_list.begin();
-//
-//	while (it_obj !=  m_list.end()) {
-//		pMesh = (*it_obj);
-//
-////#ifdef _DEBUG
-////		char szMeshName[256];
-////		sprintf(szMeshName, pMesh->GetName());
-////		TrimStr(szMeshName, szMeshName);
-////#endif
-//		string meshName = pMesh->GetName();
-//		if(meshName == name)
-//			return pMesh;
-//		it_obj++;
-//	}
-//	return NULL;
+	return *pMesh;
 }
 
 void RMesh::TrimStr(const char* szSrcStr, char* outStr)
@@ -435,12 +418,13 @@ void RMesh::DelMeshList()
 	if (m_list.empty())
 		return;
 
-	RMeshNodeHashList_Iter node =  m_list.begin();
-
-	while (node !=  m_list.end()) {
-		delete (*node);
-		node =  m_list.Erase(node);
+	for (auto& meshNode : m_list)
+	{
+		delete meshNode;
+		meshNode = nullptr;
 	}
+	m_list.clear();
+
 
 	m_data_num = 0;
 }
@@ -495,11 +479,10 @@ int RMesh::_FindMeshId(int e_name)
 
 	__BP(307, "RMesh::FindMeshId");
 
-	RMeshNode* pNode = m_list.Find(e_name);
-	if (pNode != NULL)
+	auto pNode = std::find_if(m_list.begin(), m_list.end(), [&](RMeshNode* const meshNode) {return meshNode->m_NameID == e_name; });// m_list.Find(e_name);
+	if (pNode != m_list.end())
 	{
-		__EP(307);
-		return pNode->m_id;
+		return (*pNode)->m_id;
 	}
 
 	__EP(307);
@@ -514,13 +497,11 @@ int RMesh::_FindMeshId(char* name)
 
 	__BP(306, "RMesh::FindMeshId");
 
-	RMeshNode* pNode = m_list.Find(name);
-	if (pNode != NULL)
+	auto pNode = std::find_if(m_list.begin(), m_list.end(), [&](RMeshNode* const meshNode) {return meshNode->m_Name == name; });// m_list.Find(e_name);
+	if (pNode != m_list.end())
 	{
-		__EP(306);
-		return pNode->m_id;
+		return (*pNode)->m_id;
 	}
-
 	__EP(306);
 
 	return -1;
@@ -569,17 +550,15 @@ bool RMesh::ConnectMtrl()
 {
 	RMeshNode*	pMeshNode = NULL;
 
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
-
-	while (it_obj !=  m_list.end()) {
-		pMeshNode = (*it_obj);
-
-		if(pMeshNode) {
-			if(pMeshNode->m_face_num)
-				pMeshNode->ConnectMtrl();
+	for (auto const& meshNode : m_list)
+	{
+		if (meshNode)
+		{
+			if (meshNode->m_face_num)
+			{
+				meshNode->ConnectMtrl();
+			}
 		}
-
-		it_obj++;
 	}
 
 	return NULL;
@@ -1051,21 +1030,13 @@ void RMesh::CalcBoxNode(D3DXMATRIX* world_mat)
 	m_vBBMax = D3DXVECTOR3(-9999.f,-9999.f,-9999.f);
 	m_vBBMin = D3DXVECTOR3( 9999.f, 9999.f, 9999.f);
 
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
-
 	RMeshNode* pTMeshNode = NULL;
 
-	while (it_obj !=  m_list.end()) {
-
-		RMeshNode*	pMeshNode = (*it_obj);
-
-		CalcNodeMatrixBBox(pMeshNode);//bbox
-
-		pTMeshNode = UpdateNodeAniMatrix(pMeshNode);
-
-		it_obj++;
+	for (auto const& meshNode : m_list)
+	{
+		CalcNodeMatrixBBox(meshNode);
+		pTMeshNode = UpdateNodeAniMatrix(meshNode);
 	}
-
 }
 
 void RMesh::CalcBoxFast(D3DXMATRIX* world_mat)
@@ -1082,27 +1053,24 @@ void RMesh::CalcBox(D3DXMATRIX* world_mat)
 	m_vBBMax = D3DXVECTOR3(-9999.f,-9999.f,-9999.f);
 	m_vBBMin = D3DXVECTOR3( 9999.f, 9999.f, 9999.f);
 
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
+	for (auto const& meshNode : m_list)
+	{
+		CalcNodeMatrixBBox(meshNode);
 
-	while (it_obj !=  m_list.end()) {
+		pTMeshNode = UpdateNodeAniMatrix(meshNode);
 
-		RMeshNode*	pMeshNode = (*it_obj);
-
-		CalcNodeMatrixBBox(pMeshNode);//bbox
-
-		pTMeshNode = UpdateNodeAniMatrix(pMeshNode);
-
-		if(pTMeshNode->m_isDummyMesh) {//Bip,Bone,Dummy Skip
-			it_obj++;
+		if (pTMeshNode->m_isDummyMesh)
+		{
 			continue;
 		}
 
-		if(pTMeshNode->m_face_num != 0) {// ´ëÃæ Á¡ * resultmat
-			if(world_mat)
-				pTMeshNode->CalcVertexBuffer(world_mat,true);
+		if (pTMeshNode->m_face_num != 0)
+		{
+			if (world_mat)
+			{
+				pTMeshNode->CalcVertexBuffer(world_mat, true);
+			}
 		}
-
-		it_obj++;
 	}
 }
 

@@ -32,32 +32,4 @@
   <MAP id="29" MapName="SkillMapV3" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
   <MAP id="30" MapName="SkillMapV4" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
   <MAP id="31" MapName="SuperFlip" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" />
-  <MAP id="32" MapName="Abandoned_Lab" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="33" MapName="Area_D-911" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="34" MapName="Asylum" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="35" MapName="Chaos" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="36" MapName="containment" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="37" MapName="CourtYard" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="38" MapName="darker" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="39" MapName="Dojo" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="40" MapName="DR_Dodgeball" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="41" MapName="DR_Laboratory" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="42" MapName="DR_Labyrinth" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="43" MapName="Elementary" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="44" MapName="FacingWorlds" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="45" MapName="hall2" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="46" MapName="MysticCore" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="47" MapName="MysticCoreV2" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="48" MapName="ObstacleCourse" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="49" MapName="ObstacleCourseV2" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="50" MapName="Pavilion" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="51" MapName="Precision" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="52" MapName="SkyLine" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="53" MapName="Sumo" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="54" MapName="DRDuelArena" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="55" MapName="DR_Sheep" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="56" MapName="Pool" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="57" MapName="PortalToHell" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="58" MapName="SpaceCraft" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
-  <MAP id="59" MapName="Tombs" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
 </XML>

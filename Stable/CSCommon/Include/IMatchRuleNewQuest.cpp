@@ -72,7 +72,7 @@ void IMatchRuleNewQuest::OnEnterBattle(MUID& uidChar)
 	else
 		m_pPlayerMgr->AddPlayer(pObj);
 
-	for (auto itor = m_pNpcMgr->GetNpcs()->begin(); itor != m_pNpcMgr->GetNpcs()->end(); ++itor)
+	for (auto& itor = m_pNpcMgr->GetNpcs()->begin(); itor != m_pNpcMgr->GetNpcs()->end(); ++itor)
 	{
 		RouteSpawnLateJoinNpc(uidChar, (*itor).first, (*itor).second->GetActorDef(), 0, 0);
 	}

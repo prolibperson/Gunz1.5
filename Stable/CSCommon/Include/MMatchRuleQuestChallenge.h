@@ -59,7 +59,7 @@ private:
 	void RouteXpBpBonus();
 	void OnSectorBonus(MMatchObject* pObj, const unsigned int nAddedXP, const unsigned int nAddedBP);
 	void MakeStageGameInfo();
-	void RouteStageGameInfo(int const& maxPlayers, int const& minLevel);
+	void RouteStageGameInfo();
 };
 
 #endif

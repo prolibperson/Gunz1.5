@@ -586,22 +586,13 @@ void RMesh::RenderFrame()
 	if (m_list.empty())
 		return;
 
-	RMeshNodeHashList_Iter it_obj =  m_list.begin();
-
-	if(!m_pAniSet[0]) // 연결된에니메이션이 없다면?
+	if (!m_pAniSet[0])
 		return;
 
-	RMeshNode* pHeadMeshNode = NULL;
-	RMeshNode* pSpine1MeshNode = NULL;
-	RMeshNode* pSpine2MeshNode = NULL;
-
-	while (it_obj !=  m_list.end()) {
-
-		RMeshNode* pMeshNode = (*it_obj);
-
-		UpdateNodeAniMatrix(pMeshNode);
-
-		it_obj++;
+	
+	for (auto const& meshNode : m_list)
+	{
+		UpdateNodeAniMatrix(meshNode);
 	}
 
 }

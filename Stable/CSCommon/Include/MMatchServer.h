@@ -328,8 +328,10 @@ protected:
 	bool StagePlayerState(const MUID& uidPlayer, const MUID& uidStage, MMatchObjectStageState nStageState);
 	bool StageMaster(const MUID& uidStage);
 
-protected:
+public:
 	MCommand* CreateCmdResponseStageSetting(const MUID& uidStage);
+protected:
+
 	MCommand* CreateCmdMatchResponseLoginOK(const MUID& uidComm, 
 		MUID& uidPlayer, 
 		const char* szUserID, 

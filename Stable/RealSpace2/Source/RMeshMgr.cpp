@@ -56,13 +56,15 @@ int RMeshMgr::Add(char* name,char* modelname,bool namesort)
 
 	if (!node->ReadElu(name))
 	{
-		mlog("elu %s file loading failure !!!\n",name);
+		//mlog("elu %s file loading failure !!!\n",name);
 		delete node;
 		return -1;
 	}
 
 	if(modelname)
 		node->SetName(modelname);
+
+//	mlog("node name %s, modelname %s\n", node->GetName(), node->GetFileName());
 
 	node->CalcBox();
 

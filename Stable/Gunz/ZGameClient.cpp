@@ -1509,8 +1509,15 @@ void ZGameClient::OnResponseStageSetting(const MUID& uidStage, void* pStageBlob,
 	if (GetStageUID() != uidStage) return;
 	if (nStageCount <= 0 || nCharCount<=0) return;
 
+
 	MSTAGE_SETTING_NODE* pNode = (MSTAGE_SETTING_NODE*)MGetBlobArrayElement(pStageBlob, 0);
+	if (pNode->nGameType == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+	{
+		ZApplication::GetGameInterface()->EnableWidget("StageMaxPlayer", true);
+	}
 	UpdateStageSetting(pNode, nStageState, uidMaster);
+
+
 
 	// Char Setting
 	m_MatchStageSetting.ResetCharSetting();
@@ -1522,6 +1529,10 @@ void ZGameClient::OnResponseStageSetting(const MUID& uidStage, void* pStageBlob,
 
 
 	ZApplication::GetGameInterface()->SerializeStageInterface();
+	if (pNode->nGameType == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+	{
+		ZApplication::GetGameInterface()->EnableWidget("StageMaxPlayer", false);
+	}
 }
 
 void ZGameClient::OnAgentError(int nError)

@@ -459,6 +459,8 @@ public:
 	MMatchItemDesc* GetItemDesc(unsigned long int nID);
 	static MMatchItemDescMgr* GetInstance();
 
+	MMatchItemDesc*  GetItemByMeshNameAndSex(const char* modelName,int sex);
+
 	unsigned long GetChecksum() { return m_nChecksum; }
 
 	void ShiftMemoryGradually();

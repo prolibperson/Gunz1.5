@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-
 public enum PatchResult
 {
     PR_OK = 0,
@@ -44,13 +43,13 @@ namespace ZLauncher
             List<FileInfo> patchFiles = new List<FileInfo>();
 
             result = GetPatchFiles(ref patchFiles);
-            if(result != PatchResult.PR_OK)
+            if (result != PatchResult.PR_OK)
             {
                 return result;
             }
 
-            result = CheckPatchToExistingFiles(patchFiles, ref filesNeedingUpdate);
-            if(result == PatchResult.PR_NEEDUPDATE)
+            result = await CheckPatchToExistingFiles(patchFiles, filesNeedingUpdate);
+            if (result == PatchResult.PR_NEEDUPDATE)
             {
                 isPatchNeeded = true;
             }
@@ -64,11 +63,11 @@ namespace ZLauncher
             byte[] patchData = null;
             try
             {
-               patchData =  client.DownloadData("http://patch.tupac.gay/patch/patch.xml");
+                patchData = client.DownloadData("http://patch.tupac.gay/patch/patch.xml");
             }
-            catch(WebException e)
+            catch (WebException e)
             {
-                if(e.Status == WebExceptionStatus.ConnectFailure)
+                if (e.Status == WebExceptionStatus.ConnectFailure)
                 {
                     return PatchResult.PR_NOCONN;
                 }
@@ -79,7 +78,7 @@ namespace ZLauncher
             xmlPatch.LoadXml(xmlText);
             XmlNode rootNode = xmlPatch.SelectSingleNode("/files");//.SelectSingleNode("/PATCHINFO");
 
-            foreach(XmlNode childNode in rootNode)
+            foreach (XmlNode childNode in rootNode)
             {
                 if (childNode.Name == "file")
                 {
@@ -91,7 +90,7 @@ namespace ZLauncher
                         {
                             fileInfo.size = Convert.ToInt64(node.InnerText);
                         }
-                        if(node.Name == "hash")
+                        if (node.Name == "hash")
                         {
                             fileInfo.checksum = Convert.ToInt64(node.InnerText);
                         }
@@ -104,45 +103,48 @@ namespace ZLauncher
         }
 
         //TODO: try/catch for checking if directory exists
-        public PatchResult CheckPatchToExistingFiles(List<FileInfo> patchFiles, ref List<string> updateFiles)
+        public async Task<PatchResult> CheckPatchToExistingFiles(List<FileInfo> patchFiles, List<string> updateFiles)
         {
             PatchResult result = PatchResult.PR_OK;
-
-            foreach (FileInfo patchFile in patchFiles)
+            await Task.Run(() =>
             {
-                string file = null;
-                try
+                foreach (FileInfo patchFile in patchFiles)
                 {
-                    file = Directory.GetFiles(Directory.GetCurrentDirectory(), patchFile.name, SearchOption.AllDirectories).FirstOrDefault();
-                }
-                catch(DirectoryNotFoundException exception)
-                {
-                    result = PatchResult.PR_NEEDUPDATE;
-                    updateFiles.Add(patchFile.name);
-                    continue;
-                }
-                if (file != null)
-                {
-                    FileStream fileData = File.OpenRead(file);
-                    FileInfo existingFile = new FileInfo();
-                    existingFile.name = file;
-                    existingFile.size = fileData.Length;
-                    byte[] array = new byte[fileData.Length];
-                    fileData.Read(array, 0, array.Length);
-                    existingFile.checksum = Force.Crc32.Crc32Algorithm.Compute(array);
+                    string file = null;
 
-                    if (existingFile.size != patchFile.size || existingFile.checksum != patchFile.checksum)
+                    try
+                    {
+                        file = Directory.GetFiles(Directory.GetCurrentDirectory(), patchFile.name, SearchOption.AllDirectories).FirstOrDefault();
+                    }
+                    catch (DirectoryNotFoundException exception)
+                    {
+                        result = PatchResult.PR_NEEDUPDATE;
+                        updateFiles.Add(patchFile.name);
+                        continue;
+                    }
+                    if (file != null)
+                    {
+                        FileStream fileData = File.OpenRead(file);
+                        FileInfo existingFile = new FileInfo();
+                        existingFile.name = file;
+                        existingFile.size = fileData.Length;
+                        byte[] array = new byte[fileData.Length];
+                        fileData.Read(array, 0, array.Length);
+                        existingFile.checksum = Force.Crc32.Crc32Algorithm.Compute(array);
+
+                        if (existingFile.size != patchFile.size || existingFile.checksum != patchFile.checksum)
+                        {
+                            updateFiles.Add(patchFile.name);
+                            result = PatchResult.PR_NEEDUPDATE;
+                        }
+                    }
+                    else
                     {
                         updateFiles.Add(patchFile.name);
                         result = PatchResult.PR_NEEDUPDATE;
                     }
                 }
-                else
-                {
-                    updateFiles.Add(patchFile.name);
-                    result = PatchResult.PR_NEEDUPDATE;
-                }
-            }
+            });
             return result;
         }
     }

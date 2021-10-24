@@ -1,9 +1,9 @@
-GUNZ 1,0,0,290 launched. build (Oct 16 2021 23:56:15) 
-Log time (10/16/21 23:57:02)
+GUNZ 1,0,0,290 launched. build (Oct 22 2021 21:17:13) 
+Log time (10/23/21 19:07:26)
 Windows = 6.2 Build 9200 ,  (16701652KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
-Display Driver Version = 30.0.13017.1004
+Display Driver Version = 30.0.13025.5005
 Load XML from memory : system/locale.xml- SUCCESS
 Country : (BRZ), Language : (BRZ)
 Load Config from file : config.xml- SUCCESS
@@ -26,24 +26,24 @@ InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
-2(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
+1(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
+2(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.538000 
+-------------------> Sound Engine Create : 0.617000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.607000 
+loading pictures : 1.601000 
 IDLResource Loading Success!!
-IDL resources : 0.117000 
+IDL resources : 0.110000 
 start InitInterface option
-Number of Display mode : 69
+Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.205000 
+Screen Effect Manager Create : 0.207000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -67,18 +67,25 @@ SFX/ef_haste ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater 
 SFX/ef_haste ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_haste ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 Effect manager create success.
-7930 upnp port forward initialized.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.372000 
+-------------------> GameInterface Create : 2.414000 
 
+model/man/man-parts_shunter.elu mesh eq_chest_shunter node 34 face 0 point -> physique 3 Greater than
+model/man/man-parts_dryad.elu mesh eq_chest_dryad node 680 face 0 point -> physique 3 Greater than
+model/man/man-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 2 point -> physique 3 Greater than
+model/man/man-parts_mummy.elu mesh eq_chest_mummy node 18 face 0 point -> physique 3 Greater than
+model/woman/woman-parts_blackdragon.elu mesh eq_legs_blackdragon node 301 face 1 point -> physique 3 Greater than
+model/woman/woman-parts_eskimo.elu mesh eq_chest_eskimo node 80 face 1 point -> physique 3 Greater than
+model/woman/woman-parts_bloodsuit.elu mesh eq_chest_bloodsuit node 129 face 0 point -> physique 3 Greater than
+model/woman/woman-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 1 point -> physique 3 Greater than
 Load character.xml success,
 
--------------------> Character Loading : 0.160000 
+-------------------> Character Loading : 1.656000 
 
 
--------------------> WeaponMesh Loading : 0.240000 
+-------------------> WeaponMesh Loading : 0.229000 
 
 Load weapon.xml success. 
 
@@ -92,10 +99,1024 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.240000 
+-------------------> ETC .. : 0.235000 
+
+model/man/man-parts02.elu begin
+model name eq_chest_01
+model name eq_legs_01
+model name eq_hands_01
+model name eq_head_01
+model name eq_face_01
+model/man/man-parts02.elu end
+
+model/man/man-parts03.elu begin
+model name eq_legs_02
+model name eq_hands_02
+model name eq_feet_02
+model name eq_face_02
+model name eq_head_02
+model name eq_chest_02
+model/man/man-parts03.elu end
+
+model/man/man-parts04.elu begin
+model name eq_chest_03
+model name eq_feet_03
+model name eq_head_20
+model name eq_legs_03
+model name eq_face_04
+model/man/man-parts04.elu end
+
+model/man/man-parts05.elu begin
+model name eq_legs_04
+model name eq_feet_05
+model name eq_chest_04
+model name eq_head_05
+model name eq_hands_09
+model name eq_face_03
+model/man/man-parts05.elu end
+
+model/man/man-parts06.elu begin
+model name eq_chest_07
+model name eq_head_04
+model name eq_hands_07
+model name eq_legs_07
+model name eq_feet_11
+model/man/man-parts06.elu end
+
+model/man/man-parts07.elu begin
+model name eq_hands_04
+model name eq_chest_05
+model name eq_feet_06
+model name eq_legs_05
+model name eq_head_16
+model/man/man-parts07.elu end
+
+model/man/man-parts08.elu begin
+model name eq_legs_06
+model name eq_chest_06
+model name eq_head_15
+model name eq_hands_03
+model name eq_feet_07
+model/man/man-parts08.elu end
+
+model/man/man-parts09.elu begin
+model name eq_feet_09
+model name eq_legs_09
+model name eq_head_08
+model name eq_chest_09
+model name eq_hands_08
+model/man/man-parts09.elu end
+
+model/man/man-parts10.elu begin
+model name eq_hands_10
+model name eq_feet_04
+model name eq_legs_10
+model name eq_head_07
+model name eq_chest_10
+model/man/man-parts10.elu end
+
+model/man/man-parts12.elu begin
+model name eq_hands_11
+model name eq_chest_12
+model name eq_feet_12
+model name eq_legs_12
+model name eq_head_06
+model/man/man-parts12.elu end
+
+model/man/man-parts13.elu begin
+model name eq_hands_13
+model name eq_chest_13
+model name eq_legs_13
+model name eq_head_14
+model name eq_feet_08
+model/man/man-parts13.elu end
+
+model/man/man-parts01.elu begin
+model name eq_chest_a001
+model name eq_hands_a001
+model name eq_head_a001
+model name eq_legs_a001
+model name eq_feet_a001
+model name eq_face_a01
+model/man/man-parts01.elu end
+
+model/man/man-parts16.elu begin
+model name eq_legs_16
+model name eq_chest_16
+model name eq_feet_16
+model name eq_hands_17
+model name eq_head_12
+model/man/man-parts16.elu end
+
+model/man/man-parts06_1.elu begin
+model name eq_chest_07_1
+model name eq_head_13
+model/man/man-parts06_1.elu end
+
+model/man/man-parts17.elu begin
+model name eq_feet_17
+model name eq_legs_17
+model name eq_chest_17
+model name eq_hands_15
+model name eq_head_10
+model/man/man-parts17.elu end
+
+model/man/man-parts20.elu begin
+model name eq_chest_20
+model name eq_head_21
+model name eq_legs_20
+model name eq_hands_20
+model name eq_feet_20
+model/man/man-parts20.elu end
+
+model/man/man-parts21.elu begin
+model name eq_chest_21
+model name eq_legs_21
+model name eq_hands_21
+model name eq_feet_21
+model/man/man-parts21.elu end
+
+model/man/man-parts22.elu begin
+model name eq_feet_22
+model name eq_legs_22
+model name eq_chest_22
+model name eq_hands_22
+model name eq_head_22
+model/man/man-parts22.elu end
+
+model/man/man-parts23.elu begin
+model name eq_feet_23
+model name eq_legs_23
+model name eq_hands_23
+model name eq_chest_23
+model name eq_head_23
+model/man/man-parts23.elu end
+
+model/man/man-parts_staff.elu begin
+model name eq_chest_staff
+model/man/man-parts_staff.elu end
+
+model/man/man-parts_santa.elu begin
+model name eq_hands_santa
+model name eq_chest_santa
+model name eq_legs_santa
+model name eq_feet_santa
+model name eq_head_santa
+model/man/man-parts_santa.elu end
+
+model/man/man-parts24.elu begin
+model name eq_legs_24
+model name eq_head_24
+model name eq_chest_24
+model name eq_hands_24
+model name eq_feet_24
+model/man/man-parts24.elu end
+
+model/man/man-parts25.elu begin
+model name eq_hands_25
+model name eq_chest_25
+model name eq_head_25
+model name eq_legs_25
+model name eq_feet_25
+model/man/man-parts25.elu end
+
+model/man/man-parts19.elu begin
+model name eq_feet_19
+model name eq_hands_19
+model name eq_chest_19
+model name eq_legs_19
+model name eq_head_19
+model/man/man-parts19.elu end
+
+model/man/man-parts18.elu begin
+model name eq_feet_18
+model name eq_chest_18
+model name eq_legs_18
+model name eq_head_11
+model name eq_hands_18
+model/man/man-parts18.elu end
+
+model/man/man-parts_bigi.elu begin
+model name eq_chest_bigi
+model name eq_head_bigi
+model/man/man-parts_bigi.elu end
+
+model/man/man-parts_ce.elu begin
+model name eq_chest_ce
+model/man/man-parts_ce.elu end
+
+model/man/man-parts27.elu begin
+model name eq_legs_27
+model name eq_hands_27
+model name eq_feet_27
+model name eq_chest_27
+model/man/man-parts27.elu end
+
+model/man/man-parts_hanbok.elu begin
+model name eq_chest_hanbok
+model name eq_legs_hanbok
+model name eq_hands_hanbok
+model name eq_head_hanbok
+model name eq_feet_hanbok
+model/man/man-parts_hanbok.elu end
+
+model/man/man-parts26.elu begin
+model name eq_legs_26
+model name eq_hands_26
+model name eq_chest_26
+model name eq_feet_26
+model name eq_head_26
+model/man/man-parts26.elu end
+
+model/man/man-parts_worldcup.elu begin
+model name eq_legs_brazil
+model name eq_chest_brazil
+model name eq_feet_brazil
+model name eq_legs_korea
+model name eq_chest_korea
+model name eq_feet_korea
+model name eq_head_korea
+model name eq_legs_japan
+model name eq_chest_japan
+model name eq_feet_japan
+model name eq_head_brazil
+model name eq_head_japan
+model/man/man-parts_worldcup.elu end
+
+model/man/man-parts14.elu begin
+model name eq_feet_14
+model name eq_chest_14
+model name eq_legs_14
+model name eq_hands_14
+model name eq_head_09
+model name eq_head_visor
+model/man/man-parts14.elu end
+
+model/man/man-parts_hat.elu begin
+model name eq_head_helmet2
+model name eq_head_musketeer3
+model/man/man-parts_hat.elu end
+
+model/man/man-parts_zeus.elu begin
+model name eq_chest_zeus
+model name eq_head_zeus
+model/man/man-parts_zeus.elu end
+
+model/man/man-parts_pumpkin.elu begin
+model name eq_head_pumpkin
+model/man/man-parts_pumpkin.elu end
+
+model/man/man-parts29.elu begin
+model name eq_feet_29
+model name eq_chest_29
+model name eq_legs_29
+model name eq_hands_29
+model name eq_head_29
+model/man/man-parts29.elu end
+
+model/man/man-parts32.elu begin
+model name eq_feet_33
+model name eq_chest_33
+model name eq_legs_33
+model name eq_hands_33
+model name eq_head_33
+model/man/man-parts32.elu end
+
+model/man/man-parts33.elu begin
+model name eq_feet_34
+model name eq_head_34
+model name eq_hands_34
+model name eq_chest_34
+model name eq_legs_34
+model/man/man-parts33.elu end
+
+model/man/man-parts_quest.elu begin
+model name eq_head_goblin
+model name eq_hands_skeleton
+model name eq_feet_wrapshoes
+model name eq_legs_dark
+model/man/man-parts_quest.elu end
+
+model/man/man-parts35.elu begin
+model name eq_feet_36
+model name eq_legs_36
+model name eq_hands_36
+model name eq_head_36
+model name eq_chest_36
+model/man/man-parts35.elu end
+
+model/man/man-parts_crown.elu begin
+model name eq_head_crown
+model/man/man-parts_crown.elu end
+
+model/man/man-parts34.elu begin
+model name eq_chest_35
+model name eq_hands_35
+model name eq_head_35
+model name eq_legs_35
+model name eq_feet_35
+model/man/man-parts34.elu end
+
+model/man/man-parts_cat.elu begin
+model name eq_head_cat
+model/man/man-parts_cat.elu end
+
+model/man/man-parts_rabbit.elu begin
+model name eq_head_rabbit
+model/man/man-parts_rabbit.elu end
+
+model/man/man-parts_swim.elu begin
+model name eq_legs_swim
+model name eq_hands_swim
+model name eq_chest_swim
+model name eq_feet_swim
+model name eq_head_swim
+model/man/man-parts_swim.elu end
+
+model/man/man-parts_guard.elu begin
+model name eq_legs_guard
+model name eq_feet_guard
+model name eq_hands_guard
+model name eq_chest_guard
+model/man/man-parts_guard.elu end
+
+model/man/man-parts_quest_lizard.elu begin
+model name eq_hands_lizard
+model name eq_head_android
+model name eq_head_mouse
+model/man/man-parts_quest_lizard.elu end
+
+model/man/man-parts_school.elu begin
+model name eq_legs_school
+model name eq_feet_school
+model name eq_hands_school
+model name eq_chest_school
+model name eq_head_school
+model/man/man-parts_school.elu end
+
+model/man/man-parts_winter.elu begin
+model name eq_legs_winter
+model name eq_feet_winter
+model name eq_hands_winter
+model name eq_chest_winter
+model name eq_head_winter
+model/man/man-parts_winter.elu end
+
+model/man/man-parts_aura.elu begin
+model name eq_feet_aura
+model name eq_legs_aura
+model name eq_hands_aura
+model name eq_head_aura
+model name eq_chest_aura
+model/man/man-parts_aura.elu end
+
+model/man/man-parts_clanmaster.elu begin
+model name eq_chest_clanmaster
+model/man/man-parts_clanmaster.elu end
+
+model/man/man-parts_sum08.elu begin
+model name eq_head_french
+model name eq_chest_canada
+model name eq_head_american
+model/man/man-parts_sum08.elu end
+
+model/man/man-parts_valkyrie.elu begin
+model name eq_legs_valkyrie
+model name eq_hands_valkyrie
+model name eq_feet_valkyrie
+model name eq_head_valkyrie
+model name eq_chest_valkyrie
+model/man/man-parts_valkyrie.elu end
+
+model/man/man-parts_quest_gold.elu begin
+model name eq_head_goblin_gold
+model name eq_hands_goblin
+model name eq_head_palmpou
+model name eq_hands_goblin_gold
+model name eq_chest_palmpou
+model/man/man-parts_quest_gold.elu end
+
+model/man/man-parts_gm.elu begin
+model name eq_chest_gm
+model/man/man-parts_gm.elu end
+
+model/man/man-parts_face.elu begin
+model name eq_face_newface08
+model name eq_face_newface09
+model name eq_face_newface07
+model name eq_face_newface06
+model name eq_face_newface05
+model name eq_face_newface04
+model name eq_face_newface03
+model name eq_face_newface02
+model name eq_face_newface01
+model name eq_face_newface10
+model name eq_face_newface11
+model name eq_face_newface12
+model name eq_face_newface13
+model/man/man-parts_face.elu end
+
+model/man/man-parts28.elu begin
+model name eq_chest_28
+model name eq_hands_28
+model name eq_legs_28
+model name eq_head_28
+model name eq_feet_28
+model/man/man-parts28.elu end
+
+model/man/man-parts30.elu begin
+model name eq_feet_30
+model name eq_legs_30
+model name eq_hands_30
+model name eq_head_30
+model name eq_chest_30
+model/man/man-parts30.elu end
+
+model/man/man-parts31.elu begin
+model name eq_feet_32
+model name eq_chest_32
+model name eq_legs_32
+model name eq_head_32
+model name eq_hands_32
+model/man/man-parts31.elu end
+
+model/man/man-parts_event08.elu begin
+model name eq_head_koala
+model name eq_chest_germany
+model name eq_chest_peru
+model/man/man-parts_event08.elu end
+
+model/man/man-parts_assassin.elu begin
+model name eq_head_Assassin
+model name eq_hands_Assassin
+model name eq_chest_Assassin
+model name eq_feet_Assassin
+model name eq_legs_Assassin
+model/man/man-parts_assassin.elu end
+
+model/man/man-parts_kungfu.elu begin
+model name eq_legs_kungfu
+model name eq_hands_kungfu
+model name eq_head_kungfu
+model name eq_feet_kungfu
+model name eq_chest_kungfu
+model/man/man-parts_kungfu.elu end
+
+model/man/man-parts_heavy.elu begin
+model name eq_head_heavymetal
+model name eq_legs_heavymetal
+model name eq_hands_heavymetal
+model name eq_feet_heavymetal
+model name eq_chest_heavymetal
+model/man/man-parts_heavy.elu end
+
+model/man/man-parts_wed.elu begin
+model name eq_head_wedding
+model name eq_legs_wedding
+model name eq_feet_wedding
+model name eq_hands_wedding
+model name eq_chest_wedding
+model/man/man-parts_wed.elu end
+
+model/man/man-parts_judge.elu begin
+model name eq_feet_judgement
+model name eq_head_judgement
+model name eq_legs_judgement
+model name eq_hands_judgement
+model name eq_chest_judgement
+model/man/man-parts_judge.elu end
+
+model/man/man-parts_royal.elu begin
+model name eq_feet_royal_children
+model name eq_legs_royal_children
+model name eq_head_royal_children
+model name eq_hands_royal_children
+model name eq_chest_royal_children
+model/man/man-parts_royal.elu end
+
+model/man/man-parts_navy.elu begin
+model name eq_head_US_Navy_Costume
+model name eq_chest_US_Navy_Costume
+model name eq_legs_US_Navy_Costume
+model name eq_hands_US_Navy_Costume
+model name eq_feet_US_Navy_Costume
+model/man/man-parts_navy.elu end
+
+model/man/man-parts_yohawk.elu begin
+model name eq_chest_clan_yohawk
+model name eq_feet_clan_yohawk
+model name eq_legs_clan_yohawk
+model name eq_hands_clan_yohawk
+model name eq_head_clan_yohawk
+model/man/man-parts_yohawk.elu end
+
+model/man/man-parts_magic.elu begin
+model name eq_head_magician
+model name eq_hands_magician
+model name eq_legs_magician
+model name eq_feet_magician
+model name eq_chest_magician
+model/man/man-parts_magic.elu end
+
+model/man/man-parts_devil.elu begin
+model name eq_head_devil
+model name eq_face_01
+model name eq_hands_devil
+model name eq_feet_devil
+model name eq_chest_devil
+model name eq_legs_devil
+model name eq_chest_devil_small
+model/man/man-parts_devil.elu end
+
+model/man/man-parts_police.elu begin
+model name eq_hands_police
+model name eq_head_police
+model name eq_feet_police
+model name eq_chest_police
+model name eq_legs_police
+model/man/man-parts_police.elu end
+
+model/man/man-parts_fenrir.elu begin
+model name eq_head_fenrir_guardian
+model name eq_feet_fenrir_guardian
+model name eq_legs_fenrir_guardian
+model name eq_hands_fenrir_guardian
+model name eq_chest_fenrir_guardian
+model name eq_legs_fenrir_guardian_s
+model name eq_chest_fenrir_guardian_s
+model/man/man-parts_fenrir.elu end
+
+model/man/man-parts_santa_w.elu begin
+model name eq_hands_santa_w
+model name eq_chest_santa_w
+model name eq_legs_santa_w
+model name eq_feet_santa_w
+model name eq_head_santa_w
+model/man/man-parts_santa_w.elu end
+
+model/man/man-parts_antler.elu begin
+model name eq_head_antler
+model/man/man-parts_antler.elu end
+
+model/man/man-parts_sunduk.elu begin
+model name eq_chest_sunduk
+model name eq_feet_sunduk
+model name eq_legs_sunduk
+model name eq_head_sunduk
+model name eq_hands_sunduk
+model/man/man-parts_sunduk.elu end
+
+model/man/man-parts_ach.elu begin
+model name eq_feet_ach
+model name eq_head_ach
+model name eq_legs_ach
+model name eq_hands_ach
+model name eq_chest_ach
+model/man/man-parts_ach.elu end
+
+model/man/man-parts_eola.elu begin
+model name eq_head_eola
+model name eq_legs_eola
+model name eq_hands_eola
+model name eq_chest_eola
+model name eq_feet_eola
+model/man/man-parts_eola.elu end
+
+model/man/man-parts_axium_high.elu begin
+model name eq_head_axium_high
+model name eq_legs_axium_high
+model name eq_hands_axium_high
+model name eq_chest_axium_high
+model name eq_feet_axium_high
+model/man/man-parts_axium_high.elu end
+
+model/man/man-parts_axium_uniform.elu begin
+model name eq_legs_axium_uniform
+model name eq_hands_axium_uniform
+model name eq_feet_axium_uniform
+model name eq_head_axium_uniform
+model name eq_chest_axium_uniform
+model/man/man-parts_axium_uniform.elu end
+
+model/man/man-parts_worldcup_hat.elu begin
+model name eq_head_worldcup2010
+model/man/man-parts_worldcup_hat.elu end
+
+model/man/man-parts_travia_suit.elu begin
+model name eq_legs_travia_suit
+model name eq_hands_travia_suit
+model name eq_feet_travia_suit
+model name eq_chest_travia_suit
+model name eq_head_travia_suit
+model/man/man-parts_travia_suit.elu end
+
+model/man/man-parts_pirate.elu begin
+model name eq_hands_pirate
+model name eq_feet_pirate
+model name eq_chest_pirate
+model name eq_head_pirate
+model name eq_legs_pirate
+model/man/man-parts_pirate.elu end
+
+model/man/man-parts_western.elu begin
+model name eq_chest_western
+model name eq_legs_western
+model name eq_hands_western
+model name eq_head_western
+model name eq_feet_western
+model/man/man-parts_western.elu end
+
+model/man/man-parts_halloweensuit.elu begin
+model name eq_head_halloween
+model/man/man-parts_halloweensuit.elu end
+
+model/man/man-parts_blackleather.elu begin
+model name eq_feet_blackleather
+model name eq_head_blackleather
+model name eq_chest_blackleather
+model name eq_legs_blackleather
+model name eq_hands_blackleather
+model/man/man-parts_blackleather.elu end
+
+model/man/man-parts_blackdragon.elu begin
+model name eq_feet_blackdragon
+model name eq_legs_blackdragon
+model name eq_hands_blackdragon
+model name eq_chest_blackdragon
+model name eq_head_blackdragon
+model/man/man-parts_blackdragon.elu end
+
+model/man/man-parts_ninja.elu begin
+model name eq_head_ninja
+model name eq_legs_ninja
+model name eq_chest_ninja
+model name eq_hands_ninja
+model name eq_feet_ninja
+model/man/man-parts_ninja.elu end
+
+model/man/man-parts_crusader.elu begin
+model name eq_legs_crusader
+model name eq_feet_crusader
+model name eq_hands_crusader
+model name eq_chest_crusader
+model name eq_head_crusader
+model/man/man-parts_crusader.elu end
+
+model/man/man-parts_divingsuit.elu begin
+model name eq_legs_divingsuit
+model name eq_head_divingsuit
+model name eq_feet_divingsuit
+model name eq_chest_divingsuit
+model name eq_hands_divingsuit
+model/man/man-parts_divingsuit.elu end
+
+model/man/man-parts_rabbitmask.elu begin
+model name eq_head_rabbitmask
+model/man/man-parts_rabbitmask.elu end
+
+model/man/man-parts_halem.elu begin
+model name eq_hands_halem
+model name eq_feet_halem
+model name eq_head_halem
+model name eq_chest_halem
+model name eq_legs_halem
+model/man/man-parts_halem.elu end
+
+model/man/man-parts_jhunter.elu begin
+model name eq_legs_jhunter
+model name eq_feet_jhunter
+model name eq_chest_jhunter
+model name eq_head_jhunter
+model name eq_hands_jhunter
+model/man/man-parts_jhunter.elu end
+
+model/man/man-parts_shadow.elu begin
+model name eq_chest_shadow
+model name eq_head_shadow
+model name eq_feet_shadow
+model name eq_legs_shadow
+model name eq_hands_shadow
+model/man/man-parts_shadow.elu end
+
+model/man/man-parts_polarhunter.elu begin
+model name eq_head_polarhunter
+model name eq_hands_polarhunter
+model name eq_feet_polarhunter
+model name eq_chest_polarhunter
+model name eq_legs_polarhunter
+model/man/man-parts_polarhunter.elu end
+
+model/man/man-parts_zombie.elu begin
+model name eq_feet_zombie
+model name eq_head_zombie
+model name eq_chest_zombie
+model name eq_hands_zombie
+model name eq_legs_zombie
+model/man/man-parts_zombie.elu end
+
+model/man/man-parts_eskimo.elu begin
+model name eq_head_eskimo
+model name eq_legs_eskimo
+model name eq_feet_eskimo
+model name eq_hands_eskimo
+model name eq_chest_eskimo
+model/man/man-parts_eskimo.elu end
+
+model/man/man-parts_battlesuit.elu begin
+model name eq_chest_battlesuit
+model name eq_head_battlesuit
+model name eq_hands_battlesuit
+model name eq_legs_battlesuit
+model name eq_feet_battlesuit
+model/man/man-parts_battlesuit.elu end
+
+model/man/man-parts_shunter.elu begin
+model name eq_feet_shunter
+model name eq_chest_shunter
+model name eq_head_shunter
+model name eq_legs_shunter
+model name eq_hands_shunter
+model/man/man-parts_shunter.elu end
+
+model/man/man-parts_magician_r.elu begin
+model name eq_head_magician_r
+model name eq_hands_magician_r
+model name eq_legs_magician_r
+model name eq_feet_magician_r
+model name eq_chest_magician_r
+model/man/man-parts_magician_r.elu end
+
+model/man/man-parts_dryad.elu begin
+model name eq_chest_dryad
+model name eq_hands_dryad
+model name eq_head_dryad
+model name eq_feet_dryad
+model name eq_legs_dryad
+model/man/man-parts_dryad.elu end
+
+model/man/man-parts_detective.elu begin
+model name eq_feet_detective
+model name eq_head_detective
+model name eq_legs_detective
+model name eq_chest_detective
+model name eq_hands_detective
+model/man/man-parts_detective.elu end
+
+model/man/man-parts_invisible.elu begin
+model name eq_chest_invisible
+model name eq_hands_invisible
+model name eq_feet_invisible
+model name eq_legs_invisible
+model name eq_head_invisible
+model/man/man-parts_invisible.elu end
+
+model/man/man-parts_resercher.elu begin
+model name eq_feet_resercher
+model name eq_chest_resercher
+model name eq_hands_resercher
+model name eq_legs_resercher
+model name eq_head_resercher
+model/man/man-parts_resercher.elu end
+
+model/man/man-parts_panda.elu begin
+model name eq_head_panda
+model/man/man-parts_panda.elu end
+
+model/man/man-parts_bloodsuit.elu begin
+model name eq_chest_bloodsuit
+model name eq_head_bloodsuit
+model name eq_feet_bloodsuit
+model name eq_legs_bloodsuit
+model name eq_hands_bloodsuit
+model/man/man-parts_bloodsuit.elu end
+
+model/man/man-parts_eaglehead.elu begin
+model name eq_head_eaglehead
+model/man/man-parts_eaglehead.elu end
+
+model/man/man-parts_gpunk.elu begin
+model name eq_hands_gpunk
+model name eq_feet_gpunk
+model name eq_head_gpunk
+model name eq_chest_gpunk
+model name eq_legs_gpunk
+model/man/man-parts_gpunk.elu end
+
+model/man/man-parts_lokva.elu begin
+model name eq_feet_lokva
+model name eq_chest_lokva
+model name eq_legs_lokva
+model name eq_head_lokva
+model name eq_hands_lokva
+model/man/man-parts_lokva.elu end
+
+model/man/man-parts_gunerva.elu begin
+model name eq_legs_gunerva
+model name eq_feet_gunerva
+model name eq_chest_gunerva
+model name eq_head_gunerva
+model name eq_hands_gunerva
+model/man/man-parts_gunerva.elu end
+
+model/man/man-parts_hitva.elu begin
+model name eq_feet_hitva
+model name eq_head_hitva
+model name eq_legs_hitva
+model name eq_hands_hitva
+model name eq_chest_hitva
+model/man/man-parts_hitva.elu end
+
+model/man/man-parts_drva.elu begin
+model name eq_chest_drva
+model name eq_feet_drva
+model name eq_head_drva
+model name eq_hands_drva
+model name eq_legs_drva
+model/man/man-parts_drva.elu end
+
+model/man/man-parts_eolava.elu begin
+model name eq_head_eolava
+model name eq_legs_eolava
+model name eq_hands_eolava
+model name eq_chest_eolava
+model name eq_feet_eolava
+model/man/man-parts_eolava.elu end
+
+model/man/man-parts_perub.elu begin
+model name eq_hands_perub
+model name eq_chest_perub
+model name eq_head_perub
+model name eq_legs_perub
+model name eq_feet_perub
+model/man/man-parts_perub.elu end
+
+model/man/man-parts_phantommask.elu begin
+model name eq_head_phantommask
+model/man/man-parts_phantommask.elu end
+
+model/man/man-parts_sknight.elu begin
+model name eq_chest_sknight
+model name eq_legs_sknight
+model name eq_head_sknight
+model name eq_hands_sknight
+model name eq_feet_sknight
+model/man/man-parts_sknight.elu end
+
+model/man/man-parts_gveteran.elu begin
+model name eq_legs_gveteran
+model name eq_chest_gveteran
+model name eq_head_gveteran
+model name eq_hands_gveteran
+model name eq_feet_gveteran
+model/man/man-parts_gveteran.elu end
+
+model/man/man-parts_vampire.elu begin
+model name eq_chest_vampire
+model name eq_feet_vampire
+model name eq_hands_vampire
+model name eq_head_vampire
+model name eq_legs_vampire
+model/man/man-parts_vampire.elu end
+
+model/man/man-parts_miner.elu begin
+model name eq_hands_miner
+model name eq_feet_miner
+model name eq_legs_miner
+model name eq_chest_miner
+model name eq_head_miner
+model/man/man-parts_miner.elu end
+
+model/man/man-parts_racoonhead.elu begin
+model name eq_head_racoonhead
+model/man/man-parts_racoonhead.elu end
+
+model/man/man-parts_doghead.elu begin
+model name eq_head_doghead
+model/man/man-parts_doghead.elu end
+
+model/man/man-parts_cleric.elu begin
+model name eq_head_cleric
+model name eq_legs_cleric
+model name eq_hands_cleric
+model name eq_chest_cleric
+model name eq_feet_cleric
+model/man/man-parts_cleric.elu end
+
+model/man/man-parts_scarecrow.elu begin
+model name eq_chest_scarecrow
+model name eq_feet_scarecrow
+model name eq_legs_scarecrow
+model name eq_head_scarecrow
+model name eq_hands_scarecrow
+model/man/man-parts_scarecrow.elu end
+
+model/man/man-parts_eagleheadblack.elu begin
+model name eq_head_eagleheadblack
+model/man/man-parts_eagleheadblack.elu end
+
+model/man/man-parts_bear.elu begin
+model name eq_head_bear
+model/man/man-parts_bear.elu end
+
+model/man/man-parts_robothead.elu begin
+model name eq_head_robothead
+model/man/man-parts_robothead.elu end
+
+model/man/man-parts_rabbitmaskdutch.elu begin
+model name eq_head_rabbitmaskdutch
+model/man/man-parts_rabbitmaskdutch.elu end
+
+model/man/man-parts_gleader.elu begin
+model name eq_hands_gleader
+model name eq_head_gleader
+model name eq_feet_gleader
+model name eq_face_01
+model name eq_chest_gleader
+model name eq_legs_gleader
+model/man/man-parts_gleader.elu end
+
+model/man/man-parts_wolfman.elu begin
+model name eq_chest_wolfman
+model name eq_feet_wolfman
+model name eq_hands_wolfman
+model name eq_head_wolfman
+model name eq_legs_wolfman
+model/man/man-parts_wolfman.elu end
+
+model/man/man-parts_monsterhand.elu begin
+model name eq_hands_monsterhand
+model/man/man-parts_monsterhand.elu end
+
+model/man/man-parts_metalhand.elu begin
+model name eq_hands_metalhand
+model/man/man-parts_metalhand.elu end
+
+model/man/man-parts_leopard.elu begin
+model name eq_hands_leopard
+model name eq_feet_leopard
+model name eq_head_leopard
+model name eq_legs_leopard
+model name eq_chest_leopard
+model/man/man-parts_leopard.elu end
+
+model/man/man-parts_holyarmor.elu begin
+model name eq_head_holyarmor
+model name eq_legs_holyarmor
+model name eq_feet_holyarmor
+model name eq_chest_holyarmor
+model name eq_hands_holyarmor
+model/man/man-parts_holyarmor.elu end
+
+model/man/man-parts_snowhead.elu begin
+model name eq_head_snowhead
+model/man/man-parts_snowhead.elu end
+
+model/man/man-parts_dragonhead.elu begin
+model name eq_head_dragonhead
+model/man/man-parts_dragonhead.elu end
+
+model/man/man-parts_vagrant.elu begin
+model name eq_feet_vagrant
+model name eq_legs_vagrant
+model name eq_chest_vagrant
+model name eq_hands_vagrant
+model name eq_head_vagrant
+model/man/man-parts_vagrant.elu end
+
+model/man/man-parts_mummy.elu begin
+model name eq_hands_mummy
+model name eq_chest_mummy
+model name eq_legs_mummy
+model name eq_feet_mummy
+model name eq_head_mummy
+model/man/man-parts_mummy.elu end
+
+model/man/man-parts_flowerhead.elu begin
+model name eq_head_flowerhead
+model/man/man-parts_flowerhead.elu end
+
+model/man/man-parts_froghead.elu begin
+model name eq_head_froghead
+model/man/man-parts_froghead.elu end
+
+model/man/man-parts_primehunter.elu begin
+model name eq_legs_primehunter
+model name eq_feet_primehunter
+model name eq_head_primehunter
+model name eq_chest_primehunter
+model name eq_hands_primehunter
+model/man/man-parts_primehunter.elu end
+
+model/man/man-parts_iceelemental.elu begin
+model name eq_chest_iceelemental
+model name eq_hands_iceelemental
+model name eq_feet_iceelemental
+model name eq_legs_iceelemental
+model name eq_head_iceelemental
+model/man/man-parts_iceelemental.elu end
 
 
-LoginID: jetman823
+LoginID: jetman82
 BspObject open : begin interface/church/church_b.rs 
 RBspObject::Open : Open_MaterialList
 RBspObject::Open : Open_LightList
@@ -138,293 +1159,6 @@ BspObject load lightmap : end
 RBspObject::Open : done
 ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
 main : OnCreate() done
-Server Connected
-Login Successful. 
-Responsed Account Charlist
-Selected character name : Jetman823 (4A 65 74 6D 61 6E 38 32 33 )  (len = 9)
-0,Jetman82,Jetman82,This is a test send
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Mansion/Mansion.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 4
-BspObject load lightmap 0
-BspObject load lightmap 1
-BspObject load lightmap 2
-BspObject load lightmap 3
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-create game enrvironment.
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 23:57:49 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 23:57:57 )
-game interface destroy finished
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Mansion/Mansion.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 4
-BspObject load lightmap 0
-BspObject load lightmap 1
-BspObject load lightmap 2
-BspObject load lightmap 3
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-create game enrvironment.
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 23:58:23 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 23:58:28 )
-game interface destroy finished
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Mansion/Mansion.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 4
-BspObject load lightmap 0
-BspObject load lightmap 1
-BspObject load lightmap 2
-BspObject load lightmap 3
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-create game enrvironment.
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 23:58:32 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 23:58:38 )
-game interface destroy finished
-StageCreated
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Mansion/Mansion.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 4
-BspObject load lightmap 0
-BspObject load lightmap 1
-BspObject load lightmap 2
-BspObject load lightmap 3
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-create game enrvironment.
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 23:58:50 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 23:59:18 )
-game interface destroy finished
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Mansion/Mansion.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 4
-BspObject load lightmap 0
-BspObject load lightmap 1
-BspObject load lightmap 2
-BspObject load lightmap 3
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-create game enrvironment.
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 23:59:29 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 23:59:52 )
-game interface destroy finished
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Prison/Prison.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 10 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
-BspObject load lightmap 0
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 23:59:58 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 00:00:08 )
-game interface destroy finished
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Prison/Prison.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 10 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
-BspObject load lightmap 0
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 00:00:14 )
-Create character : Name=Jetman823 Level=1 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 00:00:38 )
-game interface destroy finished
-StageCreated
 Destroy gunz
 Destroy sound engine.
 Destroy sound engine. success

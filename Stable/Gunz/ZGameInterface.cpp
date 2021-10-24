@@ -1399,6 +1399,56 @@ void ZGameInterface::OnLoginCreate(void)
 	}
 //#endif
 
+	//Custom: unnecessary now, but was used to grab the elu names for each item in zitem.xml
+	//for (auto const& meshNode : ZGetMeshMgr()->Get("heroman1")->m_parts_mgr->m_list)
+	//{
+	//	mlog("<MANPARTS name=\"%s\">\n", meshNode->m_FileName.c_str());
+	//	for (auto const& meshInfo : meshNode->m_list)
+	//	{
+	//		if (meshInfo->m_Name.length() <= 0)
+	//			continue;
+	//		if (meshInfo->m_Name.find("eq") == std::string::npos)
+	//			continue;
+
+	//		MMatchItemDesc* itemDesc = MGetMatchItemDescMgr()->GetItemByMeshNameAndSex(meshInfo->m_Name.c_str(),0);
+	//		if (itemDesc == nullptr)
+	//			continue;
+	//		mlog("<ITEM name=\"%s\" model=\"%s\"/> \n", itemDesc->m_pMItemName->Ref().m_szItemName, meshInfo->m_Name.c_str());
+	//	}
+	//	mlog("</MANPARTS>\n", meshNode->m_FileName.c_str());
+	//}
+
+	//for (auto const& meshNode : ZGetMeshMgr()->Get("herowoman1")->m_parts_mgr->m_list)
+	//{
+	//	mlog("<WOMANPARTS name=\"%s\">\n", meshNode->m_FileName.c_str());
+	//	for (auto const& meshInfo : meshNode->m_list)
+	//	{
+	//		if (meshInfo->m_Name.length() <= 0)
+	//			continue;
+	//		if (meshInfo->m_Name.find("eq") == std::string::npos)
+	//			continue;
+
+	//		MMatchItemDesc* itemDesc = MGetMatchItemDescMgr()->GetItemByMeshNameAndSex(meshInfo->m_Name.c_str(),1);
+	//		if (itemDesc == nullptr)
+	//			continue;
+	//		mlog("<ITEM name=\"%s\" model=\"%s\"/> \n", itemDesc->m_pMItemName->Ref().m_szItemName, meshInfo->m_Name.c_str());
+	//	}
+	//	mlog("</WOMANPARTS>\n", meshNode->m_FileName.c_str());
+	//}
+
+	//for (auto& itemInfo = MGetMatchItemDescMgr()->begin(); itemInfo != MGetMatchItemDescMgr()->end(); ++itemInfo)
+	//{
+	//	MMatchItemDesc* itemDesc = itemInfo->second;
+	//	if (itemDesc->m_nType.Ref() != MMatchItemType::MMIT_EQUIPMENT && itemDesc->m_nType.Ref() != MMatchItemType::MMIT_AVATAR)
+	//		continue;
+	//	if (itemDesc->m_nSlot < MMatchItemSlotType::MMIST_HEAD || itemDesc->m_nSlot == MMatchItemSlotType::MMIST_FINGER || itemDesc->m_nSlot == MMatchItemSlotType::MMIST_EXTRA)
+	//		continue;
+	//	if (itemDesc->m_nSlot > MMIST_AVATAR)
+	//		continue;
+	//		
+	//	mlog("item mesh name %s\n", itemDesc->m_pMItemName->Ref().m_szMeshName);
+	//}
+
 	m_bLoginTimeout = false;
 	m_nLoginState = LOGINSTATE_FADEIN;
 	m_dwLoginTimer = timeGetTime();

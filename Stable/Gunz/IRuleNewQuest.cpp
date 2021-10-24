@@ -248,7 +248,7 @@ void IRuleNewQuest::OnUpdate(float fElapsed)
 
 void IRuleNewQuest::SetNewNpcController(MUID& uidController, MUID& uidNpc)
 {
-	ZActorWithFSM* pActor = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetObject(uidNpc));
+	ZActorWithFSM* pActor = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetNPCObject(uidNpc));
 	pActor->SetMyControl(uidController == ZGetMyUID());
 }
 

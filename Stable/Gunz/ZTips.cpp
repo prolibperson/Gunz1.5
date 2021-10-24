@@ -74,6 +74,8 @@ void ZTips::ParseTips(rapidxml::xml_node<>* pElement)
 	{
 		if (_stricmp(it->name(), "MSG") == 0)
 		{
+			if (it->first_node() == nullptr || it->first_node()->value() == nullptr)
+				continue;
 			int nMsgID = -1;
 			if (it->first_attribute("id") != nullptr)
 			{

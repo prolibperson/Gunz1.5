@@ -131,7 +131,7 @@ void MMatchRuleBaseQuest::OnEnterBattle(MUID& uidChar)
 	if (m_NPCManager.GetNPCObjectMap().empty() || m_NPCManager.GetNPCObjectCount() == 0)
 		return;
 
-	for (auto itor = m_NPCManager.GetNPCObjectMap().begin(); itor != m_NPCManager.GetNPCObjectMap().end(); ++itor)
+	for (auto& itor = m_NPCManager.GetNPCObjectMap().begin(); itor != m_NPCManager.GetNPCObjectMap().end(); ++itor)
 	{
 		MMatchNPCObject* npcObj = (*itor).second;
 		if (npcObj == nullptr)
@@ -142,7 +142,6 @@ void MMatchRuleBaseQuest::OnEnterBattle(MUID& uidChar)
 		else
 			controllingPlayer = npcObj->GetController();
 
-		mlog("MUID of npc Controller MUID(%d, %d)", controllingPlayer.High, controllingPlayer.Low);
 		MCommand* pCmd = MMatchServer::GetInstance()->CreateCommand(MC_QUEST_NPC_SPAWN, uidChar);
 		pCmd->AddParameter(new MCmdParamUID(controllingPlayer));
 		pCmd->AddParameter(new MCmdParamUID(npcObj->GetUID()));

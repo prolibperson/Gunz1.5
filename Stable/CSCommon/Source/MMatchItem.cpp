@@ -463,6 +463,32 @@ MMatchItemDesc* MMatchItemDescMgr::GetItemDesc(unsigned long int nID)
 	return NULL;
 }
 
+MMatchItemDesc* MMatchItemDescMgr::GetItemByMeshNameAndSex(const char* meshName,int sex)
+{
+	for (auto& itemDesc = begin(); itemDesc != end(); ++itemDesc)
+	{
+		MMatchItemDesc* desc = itemDesc->second;
+		if (sex != desc->m_nResSex.Ref())
+			continue;
+		if (desc->m_nSlot == MMatchItemSlotType::MMIST_AVATAR)
+		{
+			if (strcmp(desc->m_pAvatarMeshName->Ref().m_szChestMeshName, meshName) == 0 ||
+				strcmp(desc->m_pAvatarMeshName->Ref().m_szFeetMeshName, meshName) == 0 ||
+				strcmp(desc->m_pAvatarMeshName->Ref().m_szHandMeshName, meshName) == 0 ||
+				strcmp(desc->m_pAvatarMeshName->Ref().m_szHeadMeshName, meshName) == 0 ||
+				strcmp(desc->m_pAvatarMeshName->Ref().m_szLegsMeshName, meshName) == 0)
+			{
+				return desc;
+			}
+		}
+		if (strcmp(desc->m_pMItemName->Ref().m_szMeshName, meshName) == 0)
+		{
+			return desc;
+		}
+	}
+	return nullptr;
+}
+
 
 
 bool MMatchItemDescMgr::ParseItem(MXmlElement& element)
