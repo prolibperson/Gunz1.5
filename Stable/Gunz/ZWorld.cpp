@@ -25,6 +25,7 @@ ZWorld::ZWorld() : m_pBsp(NULL), m_pMapDesc(NULL), m_nRefCount(1), m_bCreated(fa
 
 	m_bWaterMap = false;
 	m_fWaterHeight = 0.f;
+	m_szBspName[0] = 0;
 
 }
 

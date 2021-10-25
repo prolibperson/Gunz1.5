@@ -180,7 +180,7 @@ void ZRuleQuestChallenge::MoveToNextSector()
 
 	++m_nCurrSector;	
 	ZGetWorldManager()->SetCurrent(m_nCurrSector);
-
+	m_uidBoss.SetInvalid();
 }
 
 void ZRuleQuestChallenge::MoveToRealSector(int currSector)

@@ -322,7 +322,7 @@ bool ZActorWithFSM::ProcessMotion(float fDelta)
 void ZActorWithFSM::UpdateVelocity(float fDelta)
 {
 	///TODO: fix ismovinganimation?
-	if (IsAir())
+	if (IsAir() && !IsMovingAnimation())
 	{
 		m_pModule_Movable->UpdateGravity(fDelta);
 	}
@@ -759,14 +759,14 @@ void ZActorWithFSM::PostBasicInfo()
 
 	// Dont send info 5 seconds after the npc dies.
 	if(IsDie() && m_pGame->GetTime() - GetDeadTime()>5.f) return;
-	int nMoveTick = 25;///TODO: figure out owhat's making this so CPU intensive???? -__-
+	int nMoveTick = 100;///TODO: figure out owhat's making this so CPU intensive???? -__-
 
 	if ((int)(nNowTime - m_nLastTimePostBasicInfo) >= nMoveTick)
 	{
 		m_nLastTimePostBasicInfo = nNowTime;
 
 		ZACTOR_WITHFSM_BASICINFO pbi;
-		//pbi.fTime = m_pGame->GetTime();//todok del
+		pbi.fTime = m_pGame->GetTime();//todok del
 		pbi.uidNPC = GetUID();
 
 		pbi.posx = GetPosition().x;
