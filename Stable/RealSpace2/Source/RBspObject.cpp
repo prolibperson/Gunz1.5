@@ -346,6 +346,7 @@ void RBspObject::ClearLightmaps()
 	}
 	m_ppLightmapTextures.clear();
 
+
 	if( m_nLightmap )
 	{
 		for(int i=0;i<m_nPolygon;i++)
@@ -362,8 +363,19 @@ void RBspObject::LightMapOnOff(bool bDraw)
 
 	m_bisDrawLightMap = bDraw;
 
-	if(bDraw) {	// 다시 읽는다
-		OpenLightmap();
+	if(bDraw)
+	{	// 다시 읽는다
+		if (m_lightMapNames.size() > 0)
+		{
+			for (int i = 0; i < m_lightMapNames.size(); ++i)
+			{
+				OpenLightmap(m_lightMapNames[i].c_str());
+			}
+		}
+		else
+		{
+			OpenLightmap();
+		}
 	} else {	// 지운다~
 		ClearLightmaps();
 	}
