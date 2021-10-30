@@ -250,7 +250,7 @@ RMapObjectList::~RMapObjectList()
 	m_MapObjectList.clear();
 }
 
-std::list<ROBJECTINFO*>::iterator RMapObjectList::Delete(std::list<ROBJECTINFO*>::iterator mapObjItr)
+std::vector<ROBJECTINFO*>::iterator RMapObjectList::Delete(std::vector<ROBJECTINFO*>::iterator mapObjItr)
 {
 	if (mapObjItr != m_MapObjectList.end())
 	{
@@ -321,6 +321,9 @@ RBspObject::RBspObject()
 	m_nBspVertices = 0;
 	m_nIndices = 0;
 	m_nVertices = 0;
+	//CUstom: multilightmap support
+	m_lightMapIndex = 0;
+	m_isMultiLightMap = false;
 }
 
 void RBspObject::ClearLightmaps()
@@ -335,11 +338,14 @@ void RBspObject::ClearLightmaps()
 
 	for (size_t i = 0; i < m_ppLightmapTextures.size(); ++i)
 	{
-		m_ppLightmapTextures[i]->Release();
-		m_ppLightmapTextures[i] = nullptr;
+		for (size_t j = 0; j < m_ppLightmapTextures[i].size(); ++j)
+		{
+			m_ppLightmapTextures[i][j]->Release();
+			m_ppLightmapTextures[i][j] = nullptr;
+		}
 	}
-
 	m_ppLightmapTextures.clear();
+
 	if( m_nLightmap )
 	{
 		for(int i=0;i<m_nPolygon;i++)
@@ -588,6 +594,8 @@ int g_nChosenNodeCount;
 bool RBspObject::Draw()
 {
 
+	m_lightMapIndex = rand() % m_ppLightmapTextures.size();
+
 	DrawSky();
 
 
@@ -612,6 +620,9 @@ bool RBspObject::Draw()
 
 	RGetDevice()->SetStreamSource(0,m_pVertexBuffer,0,sizeof(BSPVERTEX) );
 	RGetDevice()->SetIndices(m_pIndexBuffer);
+
+	//Custom: set lightmaptex;
+	std::vector<LPDIRECT3DTEXTURE9> lightMapTexture =  m_ppLightmapTextures.at(m_lightMapIndex);
 
 	if(m_bWireframe)
 	{
@@ -716,8 +727,8 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(m_ppLightmapTextures.size() > 0)
-				RGetDevice()->SetTexture(1,m_ppLightmapTextures[nLightmap]);
+			if(lightMapTexture.size() > 0)
+				RGetDevice()->SetTexture(1, lightMapTexture[nLightmap]);
 
 			SetDiffuseMap(nMaterial);
 			if(RIsHardwareTNL())
@@ -740,8 +751,8 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(m_ppLightmapTextures.size() > 0)
-				RGetDevice()->SetTexture(1,m_ppLightmapTextures[nLightmap]);
+			if(lightMapTexture.size() > 0)
+				RGetDevice()->SetTexture(1, lightMapTexture[nLightmap]);
 
 			if((m_pMaterials[nMaterial].dwFlags & RM_FLAG_USEALPHATEST) != 0 ) {
 				RGetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, true);
@@ -794,8 +805,8 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(m_ppLightmapTextures.size() > 0)
-				RGetDevice()->SetTexture(1,m_ppLightmapTextures[nLightmap]);
+			if(lightMapTexture.size() > 0)
+				RGetDevice()->SetTexture(1, lightMapTexture[nLightmap]);
 
 			SetDiffuseMap(nMaterial);
 			if(RIsHardwareTNL())
@@ -912,14 +923,14 @@ bool e_mapobject_sort_float(ROBJECTINFO* _a,ROBJECTINFO* _b) {
 //Custom: Draw sky and flags here, don't do it in zworld and remove from the mapobjectlist like maiet -_-
 void RBspObject::DrawSky()
 {
-	for (const auto& itor : m_SkyList.m_MapObjectList)
-	{
-		rmatrix identity;
-		D3DXMatrixIdentity(&identity);
-		itor->pVisualMesh->SetWorldMatrix(identity);
-		itor->pVisualMesh->Frame();
-		itor->pVisualMesh->Render();
-	}
+	if (m_SkyList.m_MapObjectList.size() == 0)
+		return;
+	ROBJECTINFO* const skyobj = m_SkyList.m_MapObjectList.at(m_lightMapIndex);
+	rmatrix identity;
+	D3DXMatrixIdentity(&identity);
+	skyobj->pVisualMesh->SetWorldMatrix(identity);
+	skyobj->pVisualMesh->Frame();
+	skyobj->pVisualMesh->Render();
 }
 
 void RBspObject::DrawFlags()
@@ -943,7 +954,7 @@ void RBspObject::DrawFlags()
 		pCurr->fDist = Magnitude(t_vec);
 	}
 
-	m_FlagList.m_MapObjectList.sort(e_mapobject_sort_float);
+	std::sort(m_FlagList.m_MapObjectList.begin(), m_FlagList.m_MapObjectList.end(), e_mapobject_sort_float);
 
 	for (const auto& iter : m_FlagList.m_MapObjectList)
 	{
@@ -973,25 +984,26 @@ void RBspObject::DrawObjects()
 	rvector camera_pos = RealSpace2::RCameraPosition;
 	rvector t_vec;
 
-	for(list<ROBJECTINFO*>::iterator i=m_ObjectList.m_MapObjectList.begin();i!=m_ObjectList.m_MapObjectList.end();i++) {
+	for (auto const& worldObj : m_ObjectList.m_MapObjectList)
+	{
 
-		ROBJECTINFO *pInfo = *i;
-		if(!pInfo->pVisualMesh) continue;
+		ROBJECTINFO* pInfo = worldObj;
+		if (!pInfo->pVisualMesh) continue;
 
-		if(pInfo) {
+		if (pInfo) {
 			t_vec = rvector(pInfo->pVisualMesh->GetWorldMat()._41,
-							pInfo->pVisualMesh->GetWorldMat()._42,
-							pInfo->pVisualMesh->GetWorldMat()._43 );
+				pInfo->pVisualMesh->GetWorldMat()._42,
+				pInfo->pVisualMesh->GetWorldMat()._43);
 			t_vec = camera_pos - t_vec;
 			pInfo->fDist = Magnitude(t_vec);
 		}
 	}
 
-	m_ObjectList.m_MapObjectList.sort(e_mapobject_sort_float);
+	std::sort(m_ObjectList.m_MapObjectList.begin(), m_ObjectList.m_MapObjectList.end(), e_mapobject_sort_float);
 
-	for(list<ROBJECTINFO*>::iterator i=m_ObjectList.m_MapObjectList.begin();i!=m_ObjectList.m_MapObjectList.end();i++)
+	for(auto const& worldObj : m_ObjectList.m_MapObjectList)
 	{
-		ROBJECTINFO *pInfo=*i;
+		ROBJECTINFO *pInfo= worldObj;
 		if(!pInfo->pVisualMesh) continue;
 
 		// occlusion test
@@ -1354,8 +1366,18 @@ bool RBspObject::Open(const char *filename, const char* descExtension, ROpenFlag
 	}
 
 	// 라이트맵을 읽는다
-	if(m_bisDrawLightMap)
-		OpenLightmap();
+	if (m_bisDrawLightMap)
+	{
+		if (m_lightMapNames.size() > 0)
+		{
+			for (int i = 0; i < m_lightMapNames.size(); ++i)
+			{
+				OpenLightmap(m_lightMapNames[i].c_str());
+			}
+		}
+		else
+			OpenLightmap();
+	}
 
 	CreateRenderInfo();
 
@@ -1666,9 +1688,10 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 	mlog("RBspObject::Open_ObjectList : size %d \n",m_ObjectList.m_MapObjectList.size());
 
 
-	for(list<ROBJECTINFO*>::iterator it=m_ObjectList.m_MapObjectList.begin();it!=m_ObjectList.m_MapObjectList.end();it++) {
+	for(auto const& it  : m_ObjectList.m_MapObjectList)
+	{
 
-		ROBJECTINFO *pInfo=*it;
+		ROBJECTINFO *pInfo=it;
 
 //		mlog("RBspObject::Open_ObjectList %d : %s \n",__cnt,pInfo->name.c_str());
 
@@ -1752,6 +1775,27 @@ bool RBspObject::Open_DummyList(MXmlElement *pElement)
 	Make_LenzFalreList();
 #endif
 	return true;
+}
+
+bool RBspObject::Open_LightmapList(MXmlElement* pElement)
+{
+	MXmlElement	aMaterialNode, aChild;
+	int nCount = pElement->GetChildNodeCount();
+	bool result = true;
+
+	char szTagName[256], szContents[256];
+	for (int i = 0; i < nCount; i++)
+	{
+		aMaterialNode = pElement->GetChildNode(i);
+		aMaterialNode.GetTagName(szTagName);
+
+		if (_stricmp(szTagName, "LIGHTMAP") == 0)
+		{
+			aMaterialNode.GetAttribute(szContents, "name");
+			m_lightMapNames.push_back(szContents);
+		}
+	}
+	return result;
 }
 
 bool RBspObject::Set_Fog(MXmlElement *pElement)
@@ -1904,6 +1948,10 @@ bool RBspObject::OpenDescription(const char *filename)
 			Set_Fog(&aChild);
 		if(_stricmp(szTagName,"AMBIENTSOUNDLIST")==0)
 			Set_AmbSound(&aChild);
+		if (_stricmp(szTagName, "LIGHTMAPLIST") == 0)
+		{
+			Open_LightmapList(&aChild);
+		}
 	}
 
 	delete[] buffer;
@@ -2109,16 +2157,24 @@ bool RBspObject::OpenNav(const char *filename)
 
 bool SaveMemoryBmp(int x,int y,void *data,void **retmemory,int *nsize);
 
-bool RBspObject::OpenLightmap()
+bool RBspObject::OpenLightmap(const char* lightmapName)
 {
 //	if(m_ppLightmapTextures) return true;	// 이미 로드되어있다
-
-	char lightmapinfofilename[_MAX_PATH];
-	sprintf(lightmapinfofilename,"%s.lm",m_filename.c_str());
-//	int *pLightmapInfo=new int[m_nConvexPolygon];		// lightmap 에 중복이 제거된 인덱스.
-
 	MZFile file;
-	if(!file.Open(lightmapinfofilename,g_pFileSystem)) return false;
+
+	if (lightmapName == nullptr)
+	{
+		char lightmapinfofilename[_MAX_PATH];
+		sprintf(lightmapinfofilename, "%s.lm", m_filename.c_str());
+
+		if (!file.Open(lightmapinfofilename, g_pFileSystem)) return false;
+	}
+	else
+	{
+		string targetFile = m_filename.substr(0,m_filename.find_last_of("/") + 1);
+		targetFile.append(lightmapName);
+		if (!file.Open(targetFile.c_str(), g_pFileSystem)) return false;
+	}
 
 	RHEADER header;
 	file.Read(&header,sizeof(RHEADER));
@@ -2167,6 +2223,8 @@ bool RBspObject::OpenLightmap()
 		return false;
 	}
 
+	std::vector<LPDIRECT3DTEXTURE9> lightMapTextures;
+
 	mlog("BspObject load lightmap nCount = %d\n",m_nLightmap);
 	for (int i = 0; i < m_nLightmap; i++)
 	{
@@ -2203,13 +2261,22 @@ bool RBspObject::OpenLightmap()
 			D3DX_FILTER_TRIANGLE | D3DX_FILTER_MIRROR,
 			0, NULL, NULL, &tex);
 
-		m_ppLightmapTextures.push_back(tex);
+		if (hr != D3D_OK)
+		{
+			return false;
+		}
+		lightMapTextures.push_back(tex);// emplace((int)m_ppLightmapTextures.size(), tex);
 
 		//if (hr != D3D_OK) //mlog("lightmap texture 생성 실패 %s \n", DXGetErrorString(hr));
 		delete[] bmpmemory;
 		//		delete memory;
 	}
 
+	//Custom: Safety check to prevent lightmaptextures from being assigned to if it's nullptr
+	if (lightMapTextures.size() > 0)
+	{
+		m_ppLightmapTextures.emplace(m_ppLightmapTextures.size(), lightMapTextures);
+	}
 	mlog("BspObject load lightmap : file.Read(&m_nLightmap) done\n");
 
 	// 저장될때의 폴리곤 순서를 읽는다

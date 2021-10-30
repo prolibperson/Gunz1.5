@@ -341,9 +341,10 @@ void ZInterfaceBackground::LoadMesh()
 
 		ROBJECTINFO* pInfo = NULL;
 
-		for (it = pMapObject->m_MapObjectList.begin(); it != pMapObject->m_MapObjectList.end(); it++) {
+		for (auto const& it : pMapObject->m_MapObjectList)
+		{
 
-			pInfo = (*it);
+			pInfo = it;
 
 			if (!pInfo->pVisualMesh) continue;
 
@@ -525,9 +526,9 @@ void ZInterfaceBackground::LoadMesh( void)
 			}
 		}
 
-		for (list<ROBJECTINFO*>::iterator& itor =  ((RBspObject*)m_pLogin)->GetSkyBoxList()->m_MapObjectList.begin(); itor != ((RBspObject*)m_pLogin)->GetSkyBoxList()->m_MapObjectList.end(); ++itor)
+		for (auto const& mapObj : m_pLogin->GetSkyBoxList()->m_MapObjectList)
 		{
-			ROBJECTINFO* skyBox = *itor;
+			ROBJECTINFO* skyBox = mapObj;
 
 			if (skyBox)
 			{

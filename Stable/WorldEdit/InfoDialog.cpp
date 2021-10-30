@@ -124,21 +124,21 @@ BOOL CInfoDialog::OnInitDialog()
 	}
 
 	string.Format("%d objects\r\n%d map lights\r\n%d object lights\r\n",
-		pBsp->GetMapObjectList()->size(),pBsp->GetMapLightList()->size(),pBsp->GetObjectLightList()->size());
+		static_cast<int>(pBsp->GetMapObjectList()->m_MapObjectList.size()), static_cast<int>(pBsp->GetMapLightList()->size()), static_cast<int>(pBsp->GetObjectLightList()->size()));
 	info+=string;
 
 	// object 관련 출력
 	{
 		int nCount=0;
 		RMapObjectList *pol=pBsp->GetMapObjectList();
-		string.Format("\r\n%d map objects\r\n",pol->size());
+		string.Format("\r\n%d map objects\r\n", static_cast<int>(pol->m_MapObjectList.size()));
 		info+=string;
 
-		for(RMapObjectList::iterator i=pol->begin();i!=pol->end();i++)
+		for (auto const& mapObj : pol->m_MapObjectList)
 		{
-			ROBJECTINFO *poi=*i;
-			string.Format("   %d %s\r\n",nCount++,poi->name.c_str());
-			info+=string;
+			ROBJECTINFO* poi = mapObj;
+			string.Format("   %d %s\r\n", nCount++, poi->name.c_str());
+			info += string;
 		}
 	}
 

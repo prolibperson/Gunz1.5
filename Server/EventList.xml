@@ -2,15 +2,15 @@
 <XML xmlns="http://tempurl.org/EventTable.xsd" id="EventTable">
 
 <!--
-	이벤트가 등록되는 정보.
+	Information about which events are registered.
 	
-	* Attribute 이름은 최대 127바이트.	*
-	* Attribute 값은 최대 255바이트.	*
+	* Attribute Names up to 127 bytes.	*
+	* Attribute Values up to 255 bytes. *
 	
 	event_type
-		0	: 스테이지 게임을 시작할때.
-		1	: 스테이지 방을 만들어 게임을 시작을 해야 활성화되는 이벤트.
-		2	: 스테이지 게임이 끝나후에.
+		0	: When the stage game starts.
+		1	: An event that is activated only when you create a stage room and start the game.
+		2	: After the stage game is over.
 		100 : Custom check event.
 		
 	game_type

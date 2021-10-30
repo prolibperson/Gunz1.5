@@ -94,9 +94,9 @@ public:
 	RMapObjectList() { };
 	virtual ~RMapObjectList();
 
-	std::list<ROBJECTINFO*> m_MapObjectList;
+	std::vector<ROBJECTINFO*> m_MapObjectList;
 
-	std::list<ROBJECTINFO*>::iterator Delete(std::list<ROBJECTINFO*>::iterator mapObjItr);
+	std::vector<ROBJECTINFO*>::iterator Delete(std::vector<ROBJECTINFO*>::iterator mapObjItr);
 
 };
 
@@ -270,7 +270,8 @@ public:
 	bool OpenDescription(const char *);				// 디스크립션 파일		.xml 파일을 연다.
 	bool OpenRs(const char *);						// 실제 월드 정보파일	.rs 파일을 연다. 
 	bool OpenBsp(const char *);						// bsp 정보 파일		.bsp 파일을 연다. 
-	bool OpenLightmap();							// 라이트맵 정보파일	.lm  파일을 연다.
+	//Custom: MUltilightmaps
+	bool OpenLightmap(const char* lmName = nullptr);							// 라이트맵 정보파일	.lm  파일을 연다.
 //	bool OpenPathNode(const char *);				// 경로 정보파일		.pat 파일을 연다.
 	bool OpenCol(const char *);						// collision 정보 파일	.col 파일을 연다. 
 	bool OpenNav(const char *);						// 네비게이션맵 정보파일 .nav 파일을 연다.
@@ -440,6 +441,9 @@ private:
 //	bool Open_LightList(MZFile *pfile);
 	bool Open_ConvexPolygons(MZFile *pfile);
 	bool Open_OcclusionList(MXmlElement *pElement);
+	//Custom: LightmapList
+	vector<string> m_lightMapNames;
+	bool Open_LightmapList(MXmlElement* pElement);
 public:
 	bool Make_LenzFalreList();
 	///Custom: update to make objects move in game
@@ -494,9 +498,12 @@ protected:
 
 // 실제로 텍스쳐 메모리에 올라가는 라이트맵
 	int							m_nLightmap;
-	std::vector<LPDIRECT3DTEXTURE9> m_ppLightmapTextures;
+	//Custom: rewrote to use a map instead of a ptr of ptrs
+	std::map<int,vector<LPDIRECT3DTEXTURE9>> m_ppLightmapTextures;
+	//Custom: lightmap index/Support for multimap
+	int m_lightMapIndex;
 	vector<RBspLightmapManager*> m_LightmapList;
-
+	bool m_isMultiLightMap;
 // lightmap 텍스처로 생성시 필요한 것..
 	void CalcLightmapUV(RSBspNode *pNode,int *pLightmapInfo,vector<RLIGHTMAPTEXTURE*> *pLightmaps);
 

@@ -856,15 +856,6 @@
 <STR id="ZITEM_NAME_25014">Hunter's Ring</STR>
 <STR id="ZITEM_DESC_25014">A commemoration ring awarded to only the finest hunters. It proves that the holder of the ring is a hunter with outstanding skills.</STR>
 
-
-<!-- Avatar(Man) -->
-<STR id="ZITEM_NAME_29001">Winter Warrior (Men)</STR>
-<STR id="ZITEM_DESC_29001">Avatar of the Winter Warriors, mystical creatures that hunt monsters in the Polar Regions of Northernmost Astra. Their reason for hunting is unknown and kept secret by the Warriors themselves.</STR>
-
-<!-- Avatar(Woman) -->
-<STR id="ZITEM_NAME_29501">Winter Warrior (Women)</STR>
-<STR id="ZITEM_DESC_29501">Avatar of the Winter Warriors, mystical creatures that hunt monsters in the Polar Regions of Northernmost Astra. Their reason for hunting is unknown and kept secret by the Warriors themselves.</STR>
-
 <!-- Equipment_Extra -->
 <STR id="ZITEM_NAME_30001">Medical Kit MK-1</STR>
 <STR id="ZITEM_DESC_30001">This enables you to recover physical strength. 2 units</STR>
@@ -949,8 +940,8 @@
 <STR id="ZITEM_DESC_300031">Precious sword used by the Skeleton soldiers.</STR>
 
 <!-- GM_Item -->
-<STR id="ZITEM_NAME_399997">GM 머신건</STR>
-<STR id="ZITEM_DESC_399997">GM 머신건</STR>
+<STR id="ZITEM_NAME_399997">GM machine gun</STR>
+<STR id="ZITEM_DESC_399997">GM machine gun</STR>
 
 <STR id="ZITEM_NAME_399998">GM Coat (Women)</STR>
 <STR id="ZITEM_DESC_399998">GM exclusive Coat</STR>
@@ -1101,152 +1092,7 @@
 <STR id="ZITEM_NAME_400533">Palmpoa's Helmet (Women)</STR>
 <STR id="ZITEM_DESC_400533">Palmpoa's Helmet taken from Cursed Palmpow.  One might look as cute as Palmpoa when wear it.</STR>
 
-<!-- Event_Ticket -->
-<STR id="ZITEM_NAME_401000">Lucky 0 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401000">Lucky 0 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401001">Lucky 1 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401001">Lucky 1 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401002">Lucky 2 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401002">Lucky 2 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401003">Lucky 3 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401003">Lucky 3 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401004">Lucky 4 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401004">Lucky 4 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401005">Lucky 5 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401005">Lucky 5 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401006">Lucky 6 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401006">Lucky 6 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401007">Lucky 7 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401007">Lucky 7 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401008">Lucky 8 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401008">Lucky 8 ticket to participate in Lucky Number Event.</STR>
-
-<STR id="ZITEM_NAME_401009">Lucky 9 ticket (Event)</STR>
-<STR id="ZITEM_DESC_401009">Lucky 9 ticket to participate in Lucky Number Event.</STR>
-
-<!-- Event_Ticket -->
-<STR id="ZITEM_NAME_402000">(A) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402000">(A) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402001">(B) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402001">(B) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402002">(C) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402002">(C) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402003">(D) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402003">(D) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402004">(E) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402004">(E) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402005">(F) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402005">(F) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402006">(G) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402006">(G) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402007">(H) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402007">(H) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402008">(I) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402008">(I) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402009">(J) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402009">(J) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402010">(K) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402010">(K) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402011">(L) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402011">(L) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402012">(M) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402012">(M) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402013">(N) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402013">(N) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402014">(O) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402014">(O) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402015">(P) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402015">(P) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402016">(Q) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402016">(Q) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402017">(R) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402017">(R) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402018">(S) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402018">(S) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402019">(T) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402019">(T) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402020">(U) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402020">(U) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402021">(V) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402021">(V) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402022">(W) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402022">(W) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402023">(X) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402023">(X) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402024">(Y) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402024">(Y) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_402025">(Z) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_402025">(Z) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<!-- Halloween Event_Ticket -->
-<STR id="ZITEM_NAME_403001">(Have a) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403001">(Have a) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403002">(Happy) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403002">(Happy) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403003">(Halloween) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403003">(Halloween) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403004">(from) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403004">(from) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403005">(Ijji) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403005">(Ijji) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403006">(and) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403006">(and) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403007">(MAIET!) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403007">(MAIET!) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403008">(Pumpkin) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403008">(Pumpkin) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403009">(Ghost) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403009">(Ghost) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403010">(Trick or) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403010">(Trick or) card of Halloween Event!</STR>
-
-<STR id="ZITEM_NAME_403011">(Treat!!) Ticket (Event)</STR>
-<STR id="ZITEM_DESC_403011">(Treat!!) card of Halloween Event!</STR>
-
-
-<!-- 넷마블 이벤트 기념품(바운티 제공하기위한) -->
+<!-- Netmarble event souvenirs (to provide bounties)  -->
 <STR id="ZITEM_NAME_405001">Ring of Darkage</STR>
 <STR id="ZITEM_DESC_405001">An old metal ring. It is worn out and doesn't seem to have much value.</STR>
 
@@ -1268,7 +1114,7 @@
 <STR id="ZITEM_NAME_405007">Keepsake of a Noble Man</STR>
 <STR id="ZITEM_DESC_405007">A platinum necklace with expensive jewels. Its elaborate carving enhances its value even more. </STR>
 
-<!-- 첼린지 퀘스트 보상 지폐 -->
+<!-- Challenge Quest Reward Bills  -->
 <STR id="ZITEM_NAME_405101">50 Bounty</STR>
 <STR id="ZITEM_DESC_405101">50 Bounty</STR>
 
@@ -1285,7 +1131,7 @@
 <STR id="ZITEM_DESC_405105">250 Bounty</STR>
 
 
-<!-- 승점 교환권 -->
+<!-- Victory Point Voucher  -->
 <STR id="ZITEM_NAME_405201">5 medal coupon</STR>
 <STR id="ZITEM_DESC_405201">You can receive 5 medals with this coupon at the medal shop.</STR>
 
@@ -1414,8 +1260,8 @@
 <STR id="ZITEM_NAME_502025">Elite Soldier's Scimitar</STR>
 <STR id="ZITEM_DESC_502025">These leader’s dual swords are quite efficient and will give you an edge on the competition. A famous blacksmith toiled over them for years to create the most outstanding swords you'll ever have the pleasure to hold.</STR>
 
-<STR id="ZITEM_NAME_502026">샤크티스</STR>
-<STR id="ZITEM_DESC_502026">(히든 아이템)샤크티스 해적단의 단장이 사용하던 희대의 명검. 악마가 깃들었다는 소문도 있다. </STR>
+<STR id="ZITEM_NAME_502026">Shaktis </STR>
+<STR id="ZITEM_DESC_502026">(Hidden Item) A rare and famous sword used by the leader of the Shaktis Pirates. There are rumors that this sword is inhabited by a demon.</STR>
 
 <!-- Weapon_Pistol -->
 <STR id="ZITEM_NAME_504001">Adventurer Pistol x2</STR>
@@ -1550,8 +1396,8 @@
 <STR id="ZITEM_NAME_506016">Fatalist</STR>
 <STR id="ZITEM_DESC_506016">The limited-edition shotgun that earned Adam Industry its reputation as the best firearm manutacturer in the world. It delivered a statement: that scientific R&amp;D coupled with meticulous design could best the experience of a skilled craftsman.</STR>
 
-<STR id="ZITEM_NAME_506017">디스트로이어</STR>
-<STR id="ZITEM_DESC_506017">(히든 아이템)애덤 중공업에서 엄청난 연구비를 투입해 개발했으나, 제작비가 지나치게 비싸 양산되지 않은 괴물같은 성능의 샷건. 프로토타입 일부만 암시장에 풀려 있는 상태다.</STR>
+<STR id="ZITEM_NAME_506017">Destroyer</STR>
+<STR id="ZITEM_DESC_506017">((Hidden Item) A shotgun with monstrous performance that was developed with a huge amount of research money at Adam Heavy Industries, but was not mass-produced because the production cost was too high. Only some of the prototypes are on the black market. </STR>
 
 <!-- Weapon_Range rifle -->
 <STR id="ZITEM_NAME_507001">Iris Rifle</STR>
@@ -1631,8 +1477,8 @@
 <STR id="ZITEM_NAME_509012">Elite Soldier's Launcher</STR>
 <STR id="ZITEM_DESC_509012">This leader’s rocket launcher is quite efficient and will give you an edge on the competition. A famous blacksmith toiled over it for years to create the most outstanding rocket launcher you'll ever have the pleasure to use.</STR>
 
-<STR id="ZITEM_NAME_509013">둠 슬링어</STR>
-<STR id="ZITEM_DESC_509013">(히든 아이템)과거 이교도가 사용하던 특이한 형태의 로켓포. 상식적으로 이해되지 않는 엄청난 파괴력을 지니고 있다. 제작법이 실전되어 현재는 존재 자체가 도시전설로 치부되고 있다.</STR>
+<STR id="ZITEM_NAME_509013">Doom Bringer</STR>
+<STR id="ZITEM_DESC_509013">(Hidden Item) A unique type of rocket cannon used by pagans in the past. It has tremendous destructive power, but production was halted, and its existence is now regarded as an urban legend. </STR>
 
 <!-- Addition_Head(Man) -->
 <STR id="ZITEM_NAME_520001">Ares Military Hat</STR>
@@ -4279,6 +4125,9 @@
 <STR id="ZITEM_DESC_524577">(Hidden Item) The battle of the legendary mercenary soldiers, called the Butcher who caused the bloody battle for each battlefield appearing while hiding the identity. For women</STR>
 
 <!-- Avatar(Man) -->
+<STR id="ZITEM_NAME_29001">Winter Warrior (Men)</STR>
+<STR id="ZITEM_DESC_29001">Avatar of the Winter Warriors, mystical creatures that hunt monsters in the Polar Regions of Northernmost Astra. Their reason for hunting is unknown and kept secret by the Warriors themselves.</STR>
+
 <STR id="ZITEM_NAME_530001">Shadow Avatar (Men)</STR>
 <STR id="ZITEM_DESC_530001">This Avatar, shaped by the Shadow of the Dark Age, transforms into body armor when equipped. It once had supernatural powers but now only possesses transformative power.</STR>
 
@@ -4358,6 +4207,9 @@
 <STR id="ZITEM_DESC_530026">A high-tech mechanical suit created to enhance the individual strength of the soldier that wears it. This suit is a transitional model in the Battle Suit series.</STR>
 
 <!-- Avatar(Woman) -->
+<STR id="ZITEM_NAME_29501">Winter Warrior (Women)</STR>
+<STR id="ZITEM_DESC_29501">Avatar of the Winter Warriors, mystical creatures that hunt monsters in the Polar Regions of Northernmost Astra. Their reason for hunting is unknown and kept secret by the Warriors themselves.</STR>
+
 <STR id="ZITEM_NAME_530501">Shadow Avatar (Women)</STR>
 <STR id="ZITEM_DESC_530501">This Avatar, shaped by the Shadow of the Dark Age, transforms into body armor when equipped. It once had supernatural powers but now only possesses transformative power. </STR>
 
@@ -4569,11 +4421,6 @@
 <STR id="ZITEM_NAME_600306">Giston's Eye</STR>
 <STR id="ZITEM_DESC_600306">[Enchant Lv.0] Enchanted on this tiny jewel is the power of Giston. Melee weapon fires up when charged. Any opponent hit by enchant attack will get damaged at every second for a certain amount of time.</STR>
 
-
-<!-- Premium Ticket -->
-<STR id="ZITEM_NAME_700001">Admission Ticket</STR>
-<STR id="ZITEM_DESC_700001">Ticket that allows you admission into a pay channel.</STR>
-
 <!-- Easter Event_Ticket -->
 <STR id="ZITEM_NAME_701001">(Event Item) Easter Egg (Green)</STR>
 <STR id="ZITEM_DESC_701001">(Event Item) Easter Egg (Green)</STR>
@@ -4586,85 +4433,6 @@
 
 <STR id="ZITEM_NAME_701004">(Event Item) Easter Egg (Red)</STR>
 <STR id="ZITEM_DESC_701004">(Event Item) Easter Egg (Red)</STR>
-
-<!-- Event_Ticket -->
-<STR id="ZITEM_NAME_702000">(A) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702000">(A) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702001">(B) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702001">(B) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702002">(C) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702002">(C) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702003">(D) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702003">(D) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702004">(E) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702004">(E) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702005">(F) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702005">(F) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702006">(G) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702006">(G) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702007">(H) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702007">(H) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702008">(I) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702008">(I) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702009">(J) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702009">(J) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702010">(K) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702010">(K) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702011">(L) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702011">(L) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702012">(M) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702012">(M) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702013">(N) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702013">(N) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702014">(O) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702014">(O) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702015">(P) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702015">(P) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702016">(Q) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702016">(Q) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702017">(R) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702017">(R) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702018">(S) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702018">(S) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702019">(T) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702019">(T) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702020">(U) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702020">(U) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702021">(V) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702021">(V) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702022">(W) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702022">(W) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702023">(X) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702023">(X) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702024">(Y) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702024">(Y) Lucky Ticket for the Alphabet ticket event.</STR>
-
-<STR id="ZITEM_NAME_702025">(Z) Lucky Ticket (Event)</STR>
-<STR id="ZITEM_DESC_702025">(Z) Lucky Ticket for the Alphabet ticket event.</STR>
 
 <!-- channel.xml -->
 <STR id="CHANNEL_DEFAULT_NAME">Free Channel</STR>
@@ -4693,53 +4461,6 @@
 <STR id="CHANNEL_DUELTOURNAMENT_NAME_6">Duel Tournament Channel 6</STR>
 <STR id="CHANNEL_DUELTOURNAMENT_NAME_7">Duel Tournament Channel 7</STR>
 <STR id="CHANNEL_DUELTOURNAMENT_NAME_8">Duel Tournament Channel 8</STR>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- gametypecfg.xml -->
 <STR id="GAMETYPECFG_LIMITTIME_1MIN">1 min</STR>
@@ -5547,8 +5268,8 @@
 <STR id="UI_OPTION_80">Action3</STR>
 <STR id="UI_OPTION_81">Select Item 1</STR>
 <STR id="UI_OPTION_82">Select Item 2</STR>
-<STR id="UI_OPTION_83">커뮤니티 아이템1 선택</STR>
-<STR id="UI_OPTION_84">커뮤니티 아이템2 선택</STR>
+<STR id="UI_OPTION_83">Select Community Item 1 </STR>
+<STR id="UI_OPTION_84">Select Community Item 2 </STR>
 
 <STR id="UI_OPTION_91">NumPad 1</STR>
 <STR id="UI_OPTION_92">NumPad 2</STR>
@@ -5619,7 +5340,7 @@
 <STR id="UI_SHOP_20">Purchase item</STR>
 <STR id="UI_SHOP_21">Please enter the quantity to purchase.</STR>
 <STR id="UI_SHOP_22">Quantity</STR>
-<STR id="UI_SHOP_23">중복 구매(&amp;B)</STR>
+<STR id="UI_SHOP_23">Duplicate purchase (&amp;B)</STR>
 <STR id="UI_SHOP_24">Mounted Armor</STR>
 <STR id="UI_SHOP_25">Mounted Weapons</STR>
 <STR id="UI_SHOP_26">Cash Flow:</STR>
@@ -5804,19 +5525,7 @@
 <STR id="ZITEM_NAME_40703">Acceleration Vial v3</STR>
 <STR id="ZITEM_DESC_40703">An ultra-lightweight potion that forcibly accelerates the metabolism. It has been licensed to sell by eliminating side effects. Maximum of 2 vials can be used per game. (consumable item)</STR>
 
-<STR id="ZITEM_NAME_80000">아바타 아이템(남성)</STR>
-<STR id="ZITEM_DESC_80000">아바타 아이템 테스트 아이템입니다. 룩을 변화시켜줍니다.</STR>
-
-<STR id="ZITEM_NAME_80001">아바타 아이템(여성)</STR>
-<STR id="ZITEM_DESC_80001">아바타 아이템 테스트 아이템입니다. 룩을 변화시켜줍니다.</STR>
-
-<STR id="ZITEM_NAME_90000">커뮤니티 아이템</STR>
-<STR id="ZITEM_DESC_90000">커뮤니티 아이템 샘플</STR>
-
-<STR id="ZITEM_NAME_100000">롱 버프 아이템</STR>
-<STR id="ZITEM_DESC_100000">롱 버프 아이템 샘플</STR>
-
-<!-- 캐쉬 소모성 아이템 -->
+<!-- Cash Consumable Items  -->
 <STR id="ZITEM_NAME_800001">Testing cache supplies</STR>
 <STR id="ZITEM_DESC_800001">Testing of consumable items for cash items</STR>
 
@@ -5879,7 +5588,7 @@
 
 <STR id="UI_BLITZ_29">You may use the hotkey to upgrade.</STR>
 
-<!-- 타겟 이름  -->
+<!-- target name (blitzkrieg)  -->
 <STR id="UI_BLITZ_30">Air Defense Radar</STR>
 <STR id="UI_BLITZ_31">Barricades</STR>
 <STR id="UI_BLITZ_32">Treasure Chest</STR>

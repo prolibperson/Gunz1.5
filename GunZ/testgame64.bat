@@ -1,1 +1,1 @@
-Gunz64.exe dummy town 0
+Gunz64.exe dummy deffjay 0

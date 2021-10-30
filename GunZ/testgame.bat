@@ -1,1 +1,1 @@
-Gunz.exe dummy mansion 0
+Gunz.exe dummy deffjay 0
