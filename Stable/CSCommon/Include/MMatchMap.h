@@ -65,6 +65,7 @@ private:
 		int			nMaxPlayers;					// ÃÖ´ë ÀÎ¿ø
 		bool		bOnlyDuelMap;					// µà¾ó¸Ê Àü¿ë
 		bool		bIsCTFMap;
+		vector<string> lightMaps;
 	};
 
 
@@ -89,6 +90,16 @@ public:
 	const char* GetBannerName(const char* szMapName);
 	float GetExpRatio( const int nMapID); 
 	int GetMaxPlayers( const int nMapID);
+
+	std::vector<string> GetLightMaps(int const& mapID)
+	{
+		return m_MapVectors[mapID].lightMaps;
+	}
+
+	int GetLightMapCount(int const& mapID)
+	{
+		return m_MapVectors[mapID].lightMaps.size();
+	}
 
 	int GetMapID(const char* mapName);
 

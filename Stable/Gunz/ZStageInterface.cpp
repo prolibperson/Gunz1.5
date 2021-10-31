@@ -645,6 +645,9 @@ void ZStageInterface::ChangeStageGameSetting( const MSTAGE_SETTING_NODE* pSettin
 	// Set map name
 	SetMapName( pSetting->szMapName);
 
+	//Custom: tod lighting
+	SetMapTOD(pSetting->lightMapIndex);
+
 	// Is team game?
 	ZApplication::GetGameInterface()->m_bTeamPlay = ZGetGameTypeManager()->IsTeamGame( pSetting->nGameType);
 
@@ -1064,6 +1067,31 @@ void ZStageInterface::SetMapName( const char* szMapName)
 			pMapCombo->SetText("Random Map");
 		else
 			pMapCombo->SetText(szMapName);
+	}
+
+	MComboBox* comboBox = (MComboBox*)ZApplication::GetGameInterface()->GetIDLResource()->FindWidget("MapTime");
+	if (comboBox != nullptr)
+	{
+		comboBox->RemoveAll();
+		std::vector<string> lightMaps = MGetMapDescMgr()->GetLightMaps(ZGetGameClient()->GetMatchStageSetting()->GetMapIndex());
+		for (int i = 0; i < lightMaps.size(); ++i)
+		{
+			if (lightMaps[i].length() == 0)
+				continue;
+			comboBox->Add(lightMaps[i].c_str());
+		}
+		comboBox->SetSelIndex(0);
+	}
+}
+
+void ZStageInterface::SetMapTOD(int const& index)
+{
+	MComboBox* comboBox = (MComboBox*)ZApplication::GetGameInterface()->GetIDLResource()->FindWidget("MapTime");
+	if (comboBox != nullptr)
+	{
+		if (index > comboBox->GetCount())
+			return;
+		comboBox->SetSelIndex(index);
 	}
 }
 

@@ -244,6 +244,8 @@ constexpr auto CHANNELNAME_LEN = 64;
 constexpr auto CHANNELRULE_LEN = 64;
 // map
 constexpr auto MAPNAME_LENGTH = 32;
+//Custom: map tod lighting max lightmap count
+constexpr auto MAX_LIGHTMAP = 4;
 // Auth
 constexpr auto NHN_GAMEID = "u_gunz";
 constexpr auto NHN_AUTH_LENGTH = 4096;

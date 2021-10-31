@@ -386,6 +386,17 @@ bool ZGameClient::OnCommand(MCommand* pCommand)
 				OnStageMap(uidStage, szMapName);
 			}
 			break;
+		//Custom: map tod lighting
+		case MC_MATCH_STAGE_MAPTOD:
+			{
+				MUID stageUID;
+				int  lightmapIndex;
+
+				pCommand->GetParameter(&stageUID, 0, MPT_UID);
+				pCommand->GetParameter(&lightmapIndex, 1, MPT_INT);
+
+				OnStageMapLighting(stageUID, lightmapIndex);
+			}break;
 
 		case MC_MATCH_STAGE_RELAY_MAP_INFO_UPDATE:
 			{

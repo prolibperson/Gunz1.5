@@ -622,6 +622,8 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			rmatrix mat;
 			D3DXMatrixRotationZ(&mat, D3DXToRadian(5));
 			cameraDir = cameraDir * mat;
+			Normalize(cameraDir);
+
 
 			RCameraDirection = cameraDir;
 		}break;
@@ -631,8 +633,9 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			rmatrix mat;
 			D3DXMatrixRotationX(&mat, -D3DXToRadian(5));
 			cameraDir = cameraDir * mat;
+			Normalize(cameraDir);
 
-			RCameraDirection = cameraDir;
+			RCameraDirection = D3DXVECTOR3(RCameraDirection.x, RCameraDirection.y,cameraDir.z);
 		}break;
 		case VK_DOWN:
 		{
@@ -641,19 +644,24 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			D3DXMatrixRotationX(&mat, D3DXToRadian(5));
 			cameraDir = cameraDir * mat;
 
-			RCameraDirection = cameraDir;		
+			RCameraDirection = D3DXVECTOR3(RCameraDirection.x, RCameraDirection.y,cameraDir.z);
 		}break;
 		case 'W':
 		{
 
-			rvector cameraPos;
-			rmatrix mat;
-			D3DXMatrixRotationZ(&mat, RCameraDirection.y);
+			rvector right;
+			rvector forward = RCameraDirection;
+			CrossProduct(&right, rvector(0, 0, 1), forward);
+			Normalize(right);
 
-			cameraPos = cameraPos * mat;
-			Normalize(cameraPos);
-	
-			RCameraPosition.y += cameraPos.y;
+			rvector accel = rvector(0, 0, 0);
+			accel += forward;
+
+			rvector cameraMove = 50 * 0.04 * accel;
+
+			rvector targetPos = cameraMove + RCameraPosition;
+
+			RCameraPosition = targetPos;
 			
 		}break;
 		case 'S':
@@ -666,12 +674,11 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			rvector accel = rvector(0, 0, 0);
 			accel -= forward;
 
-			rvector cameraMove = 1000 * 0.04 * accel;
+			rvector cameraMove = 50 * 0.04 * accel;
 
 			rvector targetPos = cameraMove + RCameraPosition;
-			Normalize(targetPos);
 
-			RCameraPosition = RCameraPosition * *targetPos;
+			RCameraPosition = targetPos;
 		}break;
 		case 'A':
 		{

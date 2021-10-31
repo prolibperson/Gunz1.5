@@ -1357,6 +1357,32 @@ void MMatchServer::OnStageMap(const MUID& uidStage, char* pszMapName, const MUID
     RouteToStage(uidStage, pNew);
 }
 
+//Custom: tod map lighting
+void MMatchServer::OnStageMapLighting(MUID const& matchStage, int& lightingIndex, MUID const& sender)
+{
+	MMatchStage* pStage = FindStage(matchStage);
+	if (pStage == NULL) return;
+	if (pStage->GetState() != STAGE_STATE_STANDBY) return;	// 대기상태에서만 바꿀수 있다
+
+	if (pStage->GetMasterUID() != sender)
+	{
+		return;
+	}
+
+	//Safety to prevent issues with crashes if fuckery happens
+	if (lightingIndex > MGetMapDescMgr()->GetLightMapCount(pStage->GetStageSetting()->GetMapIndex()))
+	{
+		lightingIndex = 0;
+	}
+
+	pStage->GetStageSetting()->SetMapLightMapIndex(lightingIndex);
+
+	MCommand* command = new MCommand(m_CommandManager.GetCommandDescByID(MC_MATCH_STAGE_MAPTOD), MUID(0, 0), m_This);
+	command->AddParameter(new MCommandParameterUID(matchStage));
+	command->AddParameter(new MCommandParameterInt(lightingIndex));
+	RouteToStage(matchStage, command);
+}
+
 void MMatchServer::StageRelayMapBattleStart(const MUID& uidPlayer, const MUID& uidStage)
 {// 릴레이맵 선택하고 게임 시작 버튼 누르면 다음을 수행한다
 	MMatchStage* pStage = FindStage(uidStage);

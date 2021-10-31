@@ -32,4 +32,5 @@
   <MAP id="29" MapName="SkillMapV3" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
   <MAP id="30" MapName="SkillMapV4" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
   <MAP id="31" MapName="SuperFlip" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" />
+  <MAP id="32" MapName="deffjay" MapImageName="" BannerName="" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" lightmaps="day : evening : night"/>
 </XML>

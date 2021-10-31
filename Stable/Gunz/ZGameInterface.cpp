@@ -686,6 +686,8 @@ bool ZGameInterface::InitInterfaceListener()
 	SetListenerWidget("ParentClose", ZGetParentCloseListener());
 	SetListenerWidget("ChannelListFrameCaller", ZGetChannelListFrameCallerListener());
 	SetListenerWidget("MapList", ZGetMapListListener());
+	//Custom: map tod lighting
+	SetListenerWidget("MapTime", ZGetMapTimeComboListener());
 	SetListenerWidget("Lobby_StageExit", ZGetLobbyListener());
 	SetListenerWidget("LoginState", ZGetLoginStateButtonListener());
 	SetListenerWidget("GreeterState", ZGetGreeterStateButtonListener());

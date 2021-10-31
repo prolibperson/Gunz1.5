@@ -148,6 +148,8 @@ protected:
 	void OnStageLaunch(const MUID& uidStage, const char* pszMapName);
 	void OnStageFinishGame(const MUID& uidStage, const bool bIsRelayMapUnFinish);
 	void OnStageMap(const MUID& uidStage, char* szMapName, bool bIsRelayMap = false);
+	//Custom: map tod lighting
+	void OnStageMapLighting(MUID const& stageUID, int const& lightmapIndex);
 	void OnStageTeam(const MUID& uidChar, const MUID& uidStage, unsigned int nTeam);
 	void OnStagePlayerState(const MUID& uidChar, const MUID& uidStage, MMatchObjectStageState nStageState);
 	void OnStageMaster(const MUID& uidStage, const MUID& uidChar);

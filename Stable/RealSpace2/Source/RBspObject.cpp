@@ -605,9 +605,6 @@ int g_nChosenNodeCount;
 
 bool RBspObject::Draw()
 {
-
-	m_lightMapIndex = rand() % m_ppLightmapTextures.size();
-
 	DrawSky();
 
 
@@ -2287,7 +2284,7 @@ bool RBspObject::OpenLightmap(const char* lightmapName)
 	//Custom: Safety check to prevent lightmaptextures from being assigned to if it's nullptr
 	if (lightMapTextures.size() > 0)
 	{
-		m_ppLightmapTextures.emplace(m_ppLightmapTextures.size(), lightMapTextures);
+		m_ppLightmapTextures.push_back(lightMapTextures);
 	}
 	mlog("BspObject load lightmap : file.Read(&m_nLightmap) done\n");
 

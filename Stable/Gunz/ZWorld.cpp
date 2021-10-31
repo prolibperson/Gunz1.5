@@ -92,6 +92,9 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 
 #ifndef _MAP_CACHING
 
+	//Custom: tod lighting
+
+
 	if(!m_pBsp->Open(m_szBspName, "xml", ROF_RUNTIME,ZWorldProgressCallBack,pLoading))
 	{
 		MLog("error while loading %s \n",m_szName);
@@ -100,6 +103,9 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 	}
 
 	m_pBsp->OptimizeBoundingBox();
+
+	int lightMapIndex = ZGetGameClient()->GetMatchStageSetting()->GetLightMapIndex();
+	m_pBsp->SetLightMapIndex(lightMapIndex);
 #else
 	if (!ZGetGameClient()->GetMatchStageSetting()->IsQuestDrived() && ZGetGameClient()->GetMatchStageSetting()->GetGameType() != MMATCH_GAMETYPE_QUEST_CHALLENGE)
 	{

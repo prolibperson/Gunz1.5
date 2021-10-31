@@ -270,6 +270,11 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType)
 		C(MC_MATCH_STAGE_MAP, "Stage.Map", "Change Map", MCDT_MACHINE2MACHINE)
 			P(MPT_UID, "uidStage")
 			P(MPT_STR, "MapName")
+
+		//Custom: map tod lighting
+		C(MC_MATCH_STAGE_MAPTOD, "Stage.Map.Lighting.Index", "Change Map Lighting", MCDT_MACHINE2MACHINE)
+			P(MPT_UID, "uidStage")
+			P(MPT_INT, "lightingIndex")
 	
 		C(MC_MATCH_STAGE_RELAY_MAP_ELEMENT_UPDATE, "Stage.RelayMapElement", "RelayMapElement Update", MCDT_MACHINE2MACHINE)
 			P(MPT_UID, "uidStage")

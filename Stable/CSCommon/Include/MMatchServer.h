@@ -372,6 +372,8 @@ protected:
 	void OnStopStageList(const MUID& uidComm);
 	void OnStageRequestStageList(const MUID& uidPlayer, const MUID& uidChannel, const int nStageCursor);
 	void OnStageMap(const MUID& uidStage, char* pszMapName, const MUID& uidPlayer);
+	//Custom: map tod lighting
+	void OnStageMapLighting(MUID const& matchStage, int& lightingIndex, MUID const& sender);
 
 	void OnStageRelayMapElementUpdate(const MUID& uidStage, int nType, int nTurnCount);
 	void OnStageRelayMapListUpdate(const MUID& uidStage, int nRelayMapType, int nRelayMapRepeatCount, void* pRelayMapListBlob);

@@ -1093,6 +1093,16 @@ void ZGameClient::OnStageMap(const MUID& uidStage, char* szMapName, bool bIsRela
 	ZApplication::GetGameInterface()->SerializeStageInterface();
 }
 
+void ZGameClient::OnStageMapLighting(MUID const& stageUID, int const& lightmapIndex)
+{
+	if (stageUID != GetStageUID())
+		return;
+
+	m_MatchStageSetting.SetMapLightMapIndex(lightmapIndex);
+
+	ZApplication::GetGameInterface()->SerializeStageInterface();
+}
+
 void ZGameClient::OnStageTeam(const MUID& uidChar, const MUID& uidStage, unsigned int nTeam)
 {
 	MMatchObjectStageState nStageState = MOSS_NONREADY;

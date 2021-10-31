@@ -1166,6 +1166,15 @@ BEGIN_IMPLEMENT_LISTENER(ZGetMapComboListener, MCMBBOX_CHANGED)
 	PostMapname();
 END_IMPLEMENT_LISTENER()
 
+BEGIN_IMPLEMENT_LISTENER(ZGetMapTimeComboListener,MCMBBOX_CHANGED)
+//TODO:setmaptod,post to server
+ZIDLResource* pResource = ZGetGameInterface()->GetIDLResource();
+MComboBox* pMapCombo = (MComboBox*)pResource->FindWidget("MapTime");
+
+ZApplication::GetStageInterface()->SetMapTOD(pMapCombo->GetSelIndex());
+ZPostStageMapLighting(ZGetGameClient()->GetStageUID(), pMapCombo->GetSelIndex());
+END_IMPLEMENT_LISTENER()
+
 BEGIN_IMPLEMENT_LISTENER(ZGetSelectMapPrevButtonListener, MBTN_CLK_MSG)
 
 	ZIDLResource* pResource = ZGetGameInterface()->GetIDLResource();

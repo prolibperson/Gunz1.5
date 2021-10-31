@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Oct 30 2021 08:53:17) 
-Log time (10/30/21 08:55:19)
+GUNZ 1,0,0,290 launched. build (Oct 31 2021 14:54:26) 
+Log time (10/31/21 15:09:11)
 Windows = 6.2 Build 9200 ,  (16701652KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
@@ -23,24 +23,24 @@ InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
-2(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
+1(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
+2(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.609000 
+-------------------> Sound Engine Create : 0.590000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.561000 
+loading pictures : 1.588000 
 IDLResource Loading Success!!
-IDL resources : 0.109000 
+IDL resources : 0.123000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.197000 
+Screen Effect Manager Create : 0.210000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -64,22 +64,22 @@ SFX/ef_haste ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater 
 SFX/ef_haste ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_haste ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 Effect manager create success.
-8077 upnp port forward initialized.
+7989 upnp port forward initialized.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.368000 
+-------------------> GameInterface Create : 2.635000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.162000 
+-------------------> Character Loading : 0.169000 
 
 
--------------------> WeaponMesh Loading : 0.228000 
+-------------------> WeaponMesh Loading : 0.242000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.021000 
+-------------------> Worlditem Loading : 0.022000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -89,7 +89,7 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.237000 
+-------------------> ETC .. : 21.275000 
 
 game create begin , type = 0
 BspObject open : begin maps/deffjay/deffjay.rs 
@@ -124,7 +124,7 @@ BspObject load lightmap : end
 RBspObject::Open : done
 game world create success.
 Reload all animation end 
-game created ( 08:55:24 )
+game created ( 15:09:59 )
 Create character : Name=Jeff Level=99 
 main : OnCreate() done
 Destroy gunz
@@ -137,7 +137,7 @@ game destroy begin
 Destroy sound engine()
 game destroy match destroy 
 ------------------------ReleaseBuffer
-game destroyed ( 08:55:55 )
+game destroyed ( 15:10:04 )
 game interface destroy finished
 destroy client.
 PeerInfoList Released

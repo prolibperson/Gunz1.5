@@ -43,6 +43,9 @@ void MMatchStageSetting::SetDefault()
 	m_StageSetting.Ref().nRelayMapType = RELAY_MAP_TURN;
 	m_StageSetting.Ref().nRelayMapRepeatCount = RELAY_MAP_3REPEAT;
 
+	//Custom: map tod lighting
+	m_StageSetting.Ref().lightMapIndex = 0;//default;
+
 #ifdef _VOTESETTING
 	m_StageSetting.Ref().bVoteEnabled = true;
 	m_StageSetting.Ref().bObserverEnabled = false;
@@ -72,6 +75,15 @@ void MMatchStageSetting::SetMapName(char* pszName)
 			}
 		}
 	}
+	m_StageSetting.MakeCrc();
+}
+
+void MMatchStageSetting::SetMapLightMapIndex(int const& lightIndex)
+{
+	m_StageSetting.CheckCrc();
+
+	m_StageSetting.Ref().lightMapIndex = lightIndex;
+
 	m_StageSetting.MakeCrc();
 }
 

@@ -90,6 +90,8 @@ struct MSTAGE_SETTING_NODE {
 	RelayMap			MapList[MAX_RELAYMAP_LIST_COUNT];	// 릴레이맵 리스트
 	RELAY_MAP_TYPE		nRelayMapType;				// 릴레이맵 타입
 	RELAY_MAP_REPEAT_COUNT	nRelayMapRepeatCount;	// 릴레이맵 회차
+
+	int					lightMapIndex;
 	
 #ifdef _VOTESETTING
 	bool				bVoteEnabled;				// 투표가능 여부
@@ -174,10 +176,14 @@ public:
 
 	bool						IsRelayMap()				{ return m_StageSetting.Ref().bIsRelayMap; }
 	bool						IsStartRelayMap()			{ return m_StageSetting.Ref().bIsStartRelayMap; }
+	//Custom: map tod lighting
+	int const					GetLightMapIndex()			{ return m_StageSetting.Ref().lightMapIndex; }
 
 	// Set
 	void SetMasterUID(const MUID& uid)				{ m_uidMaster = uid; }
 	void SetMapName(char* pszName);
+	//Custom: map tod lighting
+	void SetMapLightMapIndex(int const& lightIndex);
 	void SetMapIndex(int nMapIndex);
 	void SetRoundMax(int nRound)					{ MEMBER_SET_CHECKCRC(m_StageSetting, nRoundMax, nRound); }
 	void SetLimitTime(int nTime)					{ MEMBER_SET_CHECKCRC(m_StageSetting, nLimitTime, nTime); }

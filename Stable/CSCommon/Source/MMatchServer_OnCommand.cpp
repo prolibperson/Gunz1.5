@@ -500,6 +500,17 @@ bool MMatchServer::OnCommand(MCommand* pCommand)
 				OnStageMap(uidStage, szMapName, pCommand->GetSenderUID());
 			}
 			break;
+		//Custom: map tod lighting
+		case MC_MATCH_STAGE_MAPTOD:
+			{
+				MUID matchStage;
+				int  lightingIndex;
+
+				pCommand->GetParameter(&matchStage, 0, MPT_UID);
+				pCommand->GetParameter(&lightingIndex, 1, MPT_INT);
+
+				OnStageMapLighting(matchStage, lightingIndex, pCommand->GetSenderUID());
+			}break;
 		case MC_MATCH_STAGE_RELAY_MAP_ELEMENT_UPDATE:
 			{
 				MUID uidStage;

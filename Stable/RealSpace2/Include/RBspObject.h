@@ -448,6 +448,8 @@ public:
 	bool Make_LenzFalreList();
 	///Custom: update to make objects move in game
 	void OnUpdate(float fElapsed);
+	//Custom: map tod lighting
+	void SetLightMapIndex(int const& index) { m_lightMapIndex = index; }
 protected:
 	bool Set_Fog(MXmlElement *pElement);
 	bool Set_AmbSound(MXmlElement *pElement);
@@ -499,7 +501,7 @@ protected:
 // 실제로 텍스쳐 메모리에 올라가는 라이트맵
 	int							m_nLightmap;
 	//Custom: rewrote to use a map instead of a ptr of ptrs
-	std::map<int,vector<LPDIRECT3DTEXTURE9>> m_ppLightmapTextures;
+	std::vector<vector<LPDIRECT3DTEXTURE9>> m_ppLightmapTextures;
 	//Custom: lightmap index/Support for multimap
 	int m_lightMapIndex;
 	vector<RBspLightmapManager*> m_LightmapList;

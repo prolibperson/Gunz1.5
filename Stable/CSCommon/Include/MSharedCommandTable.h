@@ -179,6 +179,8 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType);
 #define MC_MATCH_STAGE_RESPONSE_FORCED_ENTRY	1416	///< 스테이지 게임 난입 응답
 #define MC_MATCH_STAGE_RELAY_MAP_ELEMENT_UPDATE	1417	///< 스테이지 릴레이맵 요소(타입, 회차) 업데이트
 #define MC_MATCH_STAGE_RELAY_MAP_INFO_UPDATE	1418	///< 스테이지 릴레이맵 리스트 업데이트
+//Custom: map tod lightmaps
+#define MC_MATCH_STAGE_MAPTOD					1419
 
 #define MC_MATCH_STAGE_MASTER					1421	///< 스테이지 방장 알림
 #define MC_MATCH_STAGE_PLAYER_STATE				1422	///< 스테이지 레디 등의 플레이어 상태 정보

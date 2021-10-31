@@ -290,6 +290,8 @@ public:		// public functions
 	void ChangeStageGameSetting( const MSTAGE_SETTING_NODE* pSetting);
 	void ChangeStageEnableReady( bool bReady);
 	void SetMapName(const char* szMapName);
+	//Custom: map time of day
+	void SetMapTOD(int const& index);
 
 	void OnStageInterfaceSettup( void);							// Change map combobox
 	void OnStageCharListSettup( void);							// Change map combobox

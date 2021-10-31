@@ -314,6 +314,12 @@ inline void ZPostStageMap(const MUID& uidStage, char* szMap)
 	ZPOSTCMD2(MC_MATCH_STAGE_MAP, MCommandParameterUID(uidStage), MCommandParameterString(szMap));
 }
 
+//Custom: Stage TOD Lightmaps
+inline void ZPostStageMapLighting(MUID const& uidStage, int const& lightingIndex)
+{
+	ZPOSTCMD2(MC_MATCH_STAGE_MAPTOD, MCmdParamUID(uidStage), MCmdParamInt(lightingIndex));
+}
+
 inline void ZPostStageRelayMapElementUpdate(const MUID& uidStage, int nType, int nRoundCount)
 {
 	ZPOSTCMD3(MC_MATCH_STAGE_RELAY_MAP_ELEMENT_UPDATE, MCommandParameterUID(uidStage), MCommandParameterInt(nType), MCommandParameterInt(nRoundCount));

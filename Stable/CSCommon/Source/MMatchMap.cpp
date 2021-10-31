@@ -16,11 +16,12 @@
 #define MMAP_MAXPLAYERS		"MaxPlayers"
 #define MMAP_ONLYDUELMAP	"bOnlyDuelMap"
 #define MMAP_ISCTFMAP		"bIsCTFMap"
+//Custom: map tod lighting
+#define MMAP_LIGHTMAPS		"lightmaps"
 
 
 MMapDesc::MMapDesc()
 {
-
 }
 
 
@@ -99,6 +100,16 @@ bool MMapDesc::Initialize(const char* szFileName, MZFileSystem* pFileSystem)
 			aChild.GetAttribute(&m_MapVectors[num].nMaxPlayers, MMAP_MAXPLAYERS);
 			aChild.GetAttribute(&m_MapVectors[num].bOnlyDuelMap, MMAP_ONLYDUELMAP);
 			aChild.GetAttribute(&m_MapVectors[num].bIsCTFMap, MMAP_ISCTFMAP);
+
+			//Custom: map tod lighting
+			char lightMaps[256];
+
+			if (aChild.GetAttribute(lightMaps, MMAP_LIGHTMAPS))
+			{
+				const char tmp1[256]= "", tmp2[256]="", tmp3[256]="", tmp4[256] = "";
+				sscanf(lightMaps, "%s : %s : %s : %s",tmp1,tmp2,tmp3,tmp4);
+				m_MapVectors[num].lightMaps = { tmp1,tmp2,tmp3,tmp4 };
+			}
 
 			num++;
 		}

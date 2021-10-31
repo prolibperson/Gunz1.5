@@ -221,7 +221,8 @@ DECLARE_LISTENER(ZGetShowEquipInfoGroupListener);
 DECLARE_LISTENER(ZGetMapComboListener);
 DECLARE_LISTENER(ZGetSelectMapPrevButtonListener);
 DECLARE_LISTENER(ZGetSelectMapNextButtonListener);
-
+//Custom: Time of Day for map
+DECLARE_LISTENER(ZGetMapTimeComboListener);
 // 선택된 캐릭터 돌리기
 DECLARE_LISTENER(ZGetSelectCameraLeftButtonListener);
 DECLARE_LISTENER(ZGetSelectCameraRightButtonListener);
