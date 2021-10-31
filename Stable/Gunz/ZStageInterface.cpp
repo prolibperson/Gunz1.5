@@ -1011,6 +1011,8 @@ void ZStageInterface::ChangeStageEnableReady( bool bReady)
 			ZApplication::GetGameInterface()->EnableWidget( "Stage_RelayMap_OK_Button", !bReady);
 			ZApplication::GetGameInterface()->EnableWidget( "Stage_RelayMapType", !bReady);
 			ZApplication::GetGameInterface()->EnableWidget( "Stage_RelayMapRepeatCount", !bReady);
+			//Custom: map tod lighting
+			ZApplication::GetGameInterface()->EnableWidget("MapTime", !bReady);
 		}
 		else
 		{
@@ -1022,6 +1024,8 @@ void ZStageInterface::ChangeStageEnableReady( bool bReady)
 			ZApplication::GetGameInterface()->EnableWidget( "Stage_RelayMap_OK_Button", false);
 			ZApplication::GetGameInterface()->EnableWidget( "Stage_RelayMapType", false);
 			ZApplication::GetGameInterface()->EnableWidget( "Stage_RelayMapRepeatCount", false);
+			ZApplication::GetGameInterface()->EnableWidget("MapTime", false);
+
 		}
 	}
 
