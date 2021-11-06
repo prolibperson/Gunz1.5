@@ -74,12 +74,16 @@ struct RCONVEXPOLYGONINFO {
 	DWORD	dwFlags;
 };
 
+//TODO: add a width/height for moving platforms.
 struct ROBJECTINFO {
 	string		name;
 	int			nMeshID;
 	RVisualMesh *pVisualMesh;
 	RLIGHT		*pLight;
 	float		fDist;
+	float       fRadius = 0.f;
+	float       fHeight = 0.f;
+	bool		isCollidable = 0;
 };
 
 struct RBSPPICKINFO {

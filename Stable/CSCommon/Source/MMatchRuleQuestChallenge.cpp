@@ -380,35 +380,36 @@ void MMatchRuleQuestChallenge::RefreshStageGameInfo()
 	RouteStageGameInfo();
 }
 
+//todo: update playercount and player level limit based on scenario
 void MMatchRuleQuestChallenge::MakeStageGameInfo()
 {
-	MSTAGE_SETTING_NODE stageNode;
-	stageNode.bAutoTeamBalancing = false;
-	stageNode.bForcedEntryEnabled = GetStage()->GetStageSetting()->GetForcedEntry();
-	stageNode.bIsRelayMap = false;
-	stageNode.bIsStartRelayMap = false;
-	stageNode.bTeamKillEnabled = false;
-	stageNode.bTeamWinThePoint = false;
-	for (int i = 0; i < MAX_RELAYMAP_LIST_COUNT; ++i)
-	{
-		stageNode.MapList[i].nMapID = -1;
-	}
-	stageNode.nGameType = MMATCH_GAMETYPE_QUEST_CHALLENGE;
-	stageNode.nLimitLevel = 0;
-	stageNode.nLimitTime = 99999;
-	stageNode.nMapIndex = ms_scenarioMgr.GetScenario(m_pStage->GetMapName())->GetMapID();
-	stageNode.nMaxPlayers = ms_scenarioMgr.GetScenario(m_pStage->GetMapName())->GetMaxPlayers();
-	stageNode.nRelayMapListCount = 0;
-	stageNode.nRelayMapRepeatCount = RELAY_MAP_3REPEAT;
-	stageNode.nRelayMapType = RELAY_MAP_TYPE::RELAY_MAP_TURN;
-	strcpy_s(stageNode.szMapName, GetStage()->GetMapName());
-	stageNode.uidStage = GetStage()->GetUID();
-
-	GetStage()->GetStageSetting()->UpdateStageSetting(&stageNode);
+	//MSTAGE_SETTING_NODE stageNode;
+	//stageNode.bAutoTeamBalancing = false;
+	//stageNode.bForcedEntryEnabled = GetStage()->GetStageSetting()->GetForcedEntry();
+	//stageNode.bIsRelayMap = false;
+	//stageNode.bIsStartRelayMap = false;
+	//stageNode.bTeamKillEnabled = false;
+	//stageNode.bTeamWinThePoint = false;
+	//for (int i = 0; i < MAX_RELAYMAP_LIST_COUNT; ++i)
+	//{
+	//	stageNode.MapList[i].nMapID = -1;
+	//}
+	//stageNode.nGameType = MMATCH_GAMETYPE_QUEST_CHALLENGE;
+	//stageNode.nLimitLevel = 0;
+	//stageNode.nLimitTime = 99999;
+	//stageNode.nMapIndex = ms_scenarioMgr.GetScenario(m_pStage->GetMapName())->GetMapID();
+	//stageNode.nMaxPlayers = ms_scenarioMgr.GetScenario(m_pStage->GetMapName())->GetMaxPlayers();
+	//stageNode.nRelayMapListCount = 0;
+	//stageNode.nRelayMapRepeatCount = RELAY_MAP_3REPEAT;
+	//stageNode.nRelayMapType = RELAY_MAP_TYPE::RELAY_MAP_TURN;
+	//strcpy_s(stageNode.szMapName, GetStage()->GetMapName());
+	//stageNode.uidStage = GetStage()->GetUID();
+	//stageNode.lightMapIndex = 0;
+	//GetStage()->GetStageSetting()->UpdateStageSetting(&stageNode);
 }
 
 void MMatchRuleQuestChallenge::RouteStageGameInfo()
 {
-	MCommand* pCmd = MGetMatchServer()->CreateCmdResponseStageSetting(GetStage()->GetUID());
-	MGetMatchServer()->RouteToStage(GetStage()->GetUID(), pCmd);
+	//MCommand* pCmd = MGetMatchServer()->CreateCmdResponseStageSetting(GetStage()->GetUID());
+	//MGetMatchServer()->RouteToStage(GetStage()->GetUID(), pCmd);
 }

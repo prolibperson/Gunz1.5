@@ -1582,9 +1582,6 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 	MXmlElement	aObjectNode,aChild;
 	int nCount = pElement->GetChildNodeCount();
 
-//	RMesh* pBaseMtrlMesh=NULL;//임시
-
-//	bool bcheck = true;
 
 	char szTagName[256],szContents[256];
 	for (i = 0; i < nCount; i++)
@@ -1601,31 +1598,6 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 			char fname[_MAX_PATH];
             GetPurePath(fname,m_descfilename.c_str());
 			strcat(fname,szContents);
-
-			/*
-//			if(bcheck)
-			{
-			//	m_MeshList.SetMtrlAutoLoad(true);
-				pInfo->nMeshID = m_MeshList.Add(fname);
-			//	m_MeshList.SetMtrlAutoLoad(false);
-
-				RMesh *pmesh=m_MeshList.GetFast(pInfo->nMeshID);
-
-				//mtrl 한번등록..
-				if(pmesh) {
-					pBaseMtrlMesh =	pmesh;
-					bcheck = false;
-				}
-			}
-			else {
-				pInfo->nMeshID=m_MeshList.Add(fname);
-
-				RMesh *pmesh=m_MeshList.GetFast(pInfo->nMeshID);
-
-				if(pmesh)
-					pmesh->SetBaseMtrlMesh(pBaseMtrlMesh);
-			}
-			*/
 
 			m_MeshList.SetMtrlAutoLoad(true);
 			m_MeshList.SetMapObject(true);
@@ -1657,7 +1629,27 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 				}
 				else
 				{
-					pInfo->pVisualMesh = 0;
+					//if (strncmp(pName, "obj_moving", 10) == 0)
+					//{
+					//	if (aObjectNode.GetAttribute(szContents, "collideable"))
+					//	{
+					//		if (stricmp(szContents, "true"))
+					//		{
+					//		}
+					//	}
+					//	if (aObjectNode.GetAttribute(szContents, "collradius"))
+					//	{
+					//		pInfo->fRadius = atof(szContents);
+					//	}
+					//	if (aObjectNode.GetAttribute(szContents, "collheight"))
+					//	{
+					//		pInfo->fHeight = atof(szContents);
+					//	}
+
+
+					//}
+					//else
+						pInfo->pVisualMesh = 0;
 				}
 
 				//custom: if object is sky related, store in the skylist to draw later
