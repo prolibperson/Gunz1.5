@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 한국어 resources
+// Korean (Korea) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
-#ifdef _WIN32
 LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
 #pragma code_page(949)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -67,7 +65,9 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\WorldEdit.ico"
+
 IDR_WORLDETYPE          ICON                    "res\\WorldEditDoc.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -76,12 +76,13 @@ IDR_WORLDETYPE          ICON                    "res\\WorldEditDoc.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Toolbar
 //
 
-IDR_MAINFRAME TOOLBAR  16, 15
+IDR_MAINFRAME TOOLBAR 16, 15
 BEGIN
     BUTTON      ID_FILE_NEW
     BUTTON      ID_FILE_OPEN
@@ -102,15 +103,15 @@ END
 // Menu
 //
 
-IDR_MAINFRAME MENU 
+IDR_MAINFRAME MENU
 BEGIN
     POPUP "File(&F)"
     BEGIN
         MENUITEM "Open(&O)...\tCtrl+O",         ID_FILE_OPEN
         MENUITEM "Save(&S)\tCtrl+S",            ID_FILE_SAVE
-        MENUITEM "Save As(&A)...",   ID_FILE_SAVE_AS
+        MENUITEM "Save As(&A)...",              ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
-        MENUITEM "Recent Files",                   ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "Recent Files",                ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
         MENUITEM "Exit(&X)",                    ID_APP_EXIT
     END
@@ -118,20 +119,20 @@ BEGIN
     BEGIN
         MENUITEM "Undo(&U)\tCtrl+Z",            ID_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "Cut(&T)\tCtrl+X",        ID_EDIT_CUT
+        MENUITEM "Cut(&T)\tCtrl+X",             ID_EDIT_CUT
         MENUITEM "Copy(&C)\tCtrl+C",            ID_EDIT_COPY
-        MENUITEM "Paste(&P)\tCtrl+V",        ID_EDIT_PASTE
+        MENUITEM "Paste(&P)\tCtrl+V",           ID_EDIT_PASTE
     END
     POPUP "View(&V)"
     BEGIN
-        MENUITEM "View ToolBar(&T)",               ID_VIEW_TOOLBAR
-        MENUITEM "View StatusBar(&S)",             ID_VIEW_STATUS_BAR
+        MENUITEM "View ToolBar(&T)",            ID_VIEW_TOOLBAR
+        MENUITEM "View StatusBar(&S)",          ID_VIEW_STATUS_BAR
         MENUITEM SEPARATOR
         MENUITEM "800 x 600",                   ID_SCREENSIZE_800
         MENUITEM "1024 x 768",                  140
         MENUITEM "1280 x 960",                  139
         MENUITEM SEPARATOR
-        MENUITEM "View Info (&I) \tCtrl+I",      ID_VIEWINFO
+        MENUITEM "View Info (&I) \tCtrl+I",     ID_VIEWINFO
         MENUITEM "&Bounding Box \tCtrl+B",      ID_BOUNDINGBOX, CHECKED
         MENUITEM "&Wireframe \tCtrl+W",         ID_WIREFRAME, CHECKED
         MENUITEM "Occlu&sion \tCtrl+S",         ID_OCCLUSION, CHECKED
@@ -142,22 +143,20 @@ BEGIN
     POPUP "Edit Mode(&M)"
     BEGIN
         MENUITEM "Edit Object\tF2",             ID_MENUITEM_MODEOBJECT
-        MENUITEM "Edit Path \tF3",			    ID_MENUITEM_MODEPATH
-        MENUITEM "Trigger/Script\tF4",     ID_MENUITEM_MODETRIGGER
+        MENUITEM "Edit Path \tF3",              ID_MENUITEM_MODEPATH
+        MENUITEM "Trigger/Script\tF4",          ID_MENUITEM_MODETRIGGER
         MENUITEM SEPARATOR
-        MENUITEM "Preview\tF9",                ID_MENUITEM32774
+        MENUITEM "Preview\tF9",                 ID_MENUITEM32774
     END
     POPUP "Generate"
     BEGIN
-        MENUITEM "Generate Lightmap",               ID_MENUITEM_GENERATE_LIGHTMAP
-
-        MENUITEM "Generate Path",             ID_MENUITEM_GENERATE_PATHDATA
-
-        MENUITEM "미리보기",                    ID_MENUITEM32776
+        MENUITEM "Generate Lightmap",           ID_MENUITEM_GENERATE_LIGHTMAP
+        MENUITEM "Generate Path",               ID_MENUITEM_GENERATE_PATHDATA
+        MENUITEM "미리보기",                        ID_MENUITEM32776
     END
     POPUP "Help(&H)"
     BEGIN
-        MENUITEM "About WorldEdit(&A)...",       ID_APP_ABOUT
+        MENUITEM "About WorldEdit(&A)...",      ID_APP_ABOUT
     END
 END
 
@@ -167,7 +166,7 @@ END
 // Accelerator
 //
 
-IDR_MAINFRAME ACCELERATORS 
+IDR_MAINFRAME ACCELERATORS
 BEGIN
     "B",            ID_BOUNDINGBOX,         VIRTKEY, CONTROL, NOINVERT
     "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
@@ -198,7 +197,7 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG  0, 0, 235, 55
+IDD_ABOUTBOX DIALOG 0, 0, 235, 55
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About WorldEdit"
 FONT 9, "Open Sans"
@@ -215,13 +214,10 @@ EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Object"
 FONT 10, "System", 0, 0, 0x1
 BEGIN
-    LISTBOX         IDC_LIST1,7,105,176,97,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
-                    WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST1,7,105,176,97,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     CONTROL         "Move",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,17,14,76,8
-    CONTROL         "Place",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,16,28,76,
-                    8
-    CONTROL         "Delete",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,15,43,76,
-                    8
+    CONTROL         "Place",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,16,28,76,8
+    CONTROL         "Delete",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,15,43,76,8
 END
 
 IDD_DIALOG_PATH DIALOGEX 0, 0, 187, 99
@@ -240,46 +236,38 @@ EXSTYLE WS_EX_TOOLWINDOW
 CAPTION "Control"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    CONTROL         "",ID_MINIMAP,"Static",SS_BLACKFRAME | SS_NOTIFY | 
-                    SS_REALSIZEIMAGE,15,46,187,116
     PUSHBUTTON      "Reset Camera",IDC_BUTTON_RESETCAMERA,19,18,83,20
+    LISTBOX         IDC_LIST2,7,53,218,137,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
 END
 
 IDD_DIALOG_GENERATELIGHTMAP DIALOGEX 0, 0, 186, 95
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Generate Lightmap"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,129,7,50,14
     PUSHBUTTON      "Cancel",IDCANCEL,129,24,50,14
-    COMBOBOX        IDC_COMBO1,63,14,56,66,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO1,63,14,56,66,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     EDITTEXT        IDC_EDIT1,63,75,59,12,ES_AUTOHSCROLL,WS_EX_LEFTSCROLLBAR
     LTEXT           "Max Size",IDC_STATIC,19,15,34,11
     LTEXT           "Tolerance",IDC_STATIC,23,74,35,14
-    COMBOBOX        IDC_COMBO2,65,55,56,108,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO2,65,55,56,108,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Super Sample",IDC_STATIC,16,56,45,12
-    COMBOBOX        IDC_COMBO3,62,30,56,66,CBS_DROPDOWN | WS_VSCROLL | 
-                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,62,30,56,66,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Min Size",IDC_STATIC,18,31,34,11
 END
 
 IDD_DIALOG_PROGRESS DIALOGEX 0, 0, 186, 55
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Working ...."
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     PUSHBUTTON      "Cancel",IDCANCEL,67,34,50,14
-    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,7,7,172,
-                    18
+    CONTROL         "",IDC_PROGRESS1,"msctls_progress32",WS_BORDER,7,7,172,18
 END
 
 IDD_DIALOG_GENERATEPATH DIALOGEX 0, 0, 186, 55
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
@@ -292,14 +280,12 @@ BEGIN
 END
 
 IDD_DIALOG_INFO DIALOGEX 0, 0, 355, 189
-STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
-    WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Information"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "OK",IDOK,298,167,50,14
-    EDITTEXT        IDC_EDIT1,7,7,341,154,ES_MULTILINE | ES_AUTOHSCROLL | 
-                    ES_READONLY | WS_VSCROLL | WS_HSCROLL
+    EDITTEXT        IDC_EDIT1,7,7,341,154,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | WS_VSCROLL | WS_HSCROLL
 END
 
 
@@ -347,7 +333,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
@@ -478,21 +464,32 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_DIALOG_CONTROL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDR_MAINFRAME           "WorldEdit\n\nWorldE\n\n\nWorldEdit.Document\nWorldE Document"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "WorldEdit"
     AFX_IDS_IDLEMESSAGE     "준비"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_INDICATOR_EXT        "EXT"
     ID_INDICATOR_CAPS       "CAP"
@@ -502,7 +499,7 @@ BEGIN
     ID_INDICATOR_REC        "REC"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_NEW             "새 문서를 작성합니다\n새 파일"
     ID_FILE_OPEN            "기존 문서를 엽니다\n열기"
@@ -511,13 +508,13 @@ BEGIN
     ID_FILE_SAVE_AS         "현재 열린 문서를 다른 이름으로 저장합니다\n다른 이름으로 저장"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_APP_ABOUT            "프로그램 정보와 버전 정보, 저작권 정보를 표시합니다\n정보"
     ID_APP_EXIT             "응용 프로그램을 종료하기 위해 문서를 저장할 것인지 묻습니다\n종료"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_FILE_MRU_FILE1       "이 문서를 엽니다"
     ID_FILE_MRU_FILE2       "이 문서를 엽니다"
@@ -537,18 +534,18 @@ BEGIN
     ID_FILE_MRU_FILE16      "이 문서를 엽니다"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_NEXT_PANE            "다음 창으로 전환합니다\n다음 창"
     ID_PREV_PANE            "이전 창으로 전환합니다\n이전 창"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_WINDOW_SPLIT         "현재 열린 창을 나눕니다\n나누기"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_EDIT_CLEAR           "선택 부분을 지웁니다\n지우기"
     ID_EDIT_CLEAR_ALL       "모든 것을 지웁니다\n모두 지우기"
@@ -563,13 +560,13 @@ BEGIN
     ID_EDIT_REDO            "이전에 취소한 동작을 다시 수행합니다\n다시 실행"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_VIEW_TOOLBAR         "도구 모음을 보이거나 감춥니다\n도구 모음 전환"
     ID_VIEW_STATUS_BAR      "상태 표시줄을 표시하거나 감춥니다\n상태 표시줄 전환"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCSIZE          "창의 크기를 변경합니다"
     AFX_IDS_SCMOVE          "창의 위치를 변경합니다"
@@ -580,13 +577,13 @@ BEGIN
     AFX_IDS_SCCLOSE         "현재 열린 창을 닫고 문서를 저장할 것인지를 묻습니다"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_SCRESTORE       "창을 원래 크기로 복원합니다"
     AFX_IDS_SCTASKLIST      "작업 목록을 활성화합니다"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     ID_MENUITEM_MODEOBJECT  "맵위에 놓일 오브젝트를 추가/삭제/이동 합니다."
     ID_MENUITEM_MODETRIGGER "트리거"
@@ -594,7 +591,68 @@ BEGIN
     ID_MENUITEM_MODEPATH    "지형의 갈수 있는 곳 / 없는 곳을 정합니다."
 END
 
-#endif    // 한국어 resources
+#endif    // Korean (Korea) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LIGHTEDIT_DLG DIALOGEX 0, 0, 311, 177
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Edit Light"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,200,162,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,261,162,50,14
+    LTEXT           "Light Name",IDC_STATIC,0,7,87,10
+    EDITTEXT        IDC_LIGHTEDIT,0,20,134,13,ES_AUTOHSCROLL | WS_DISABLED
+    LTEXT           "Position",IDC_STATIC,0,33,44,8
+    EDITTEXT        IDC_LIGHTEDIT_POS,0,44,135,14,ES_AUTOHSCROLL
+    LTEXT           "Color",IDC_STATIC,1,59,46,8
+    EDITTEXT        IDC_LIGHTEDIT_COLOR,1,70,134,14,ES_AUTOHSCROLL
+    LTEXT           "Light Intensity",IDC_STATIC,0,85,57,8
+    EDITTEXT        IDC_LIGHTEDIT_INTENSITY,0,95,135,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_LIGHTEDIT_DLG, DIALOG
+    BEGIN
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 176
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_LIGHTEDIT_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

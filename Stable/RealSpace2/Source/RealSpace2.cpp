@@ -1095,7 +1095,7 @@ void RSetFrameLimitPerSeceond(unsigned short nFrameLimit)
 	}
 }
 
-void RDrawCylinder(rvector origin,float fRadius,float fHeight,int nSegment)
+void RDrawCylinder(rvector origin,float fRadius,float fHeight,int nSegment,DWORD color)
 {
 	RGetDevice()->SetTexture(0,NULL);
 	RGetDevice()->SetTexture(1,NULL);
@@ -1108,10 +1108,10 @@ void RDrawCylinder(rvector origin,float fRadius,float fHeight,int nSegment)
 		rvector a=fRadius*rvector(cos(fAngle),sin(fAngle),0)+origin;
 		rvector b=fRadius*rvector(cos(fAngle2),sin(fAngle2),0)+origin;
 
-		RDrawLine(a+rvector(0,0,fHeight),b+rvector(0,0,fHeight),0xffff0000);
-		RDrawLine(a-rvector(0,0,fHeight),b-rvector(0,0,fHeight),0xffff0000);
+		RDrawLine(a+rvector(0,0,fHeight),b+rvector(0,0,fHeight),color);
+		RDrawLine(a - rvector(0, 0, fHeight), b - rvector(0, 0, fHeight), color);
 
-		RDrawLine(a+rvector(0,0,fHeight),a-rvector(0,0,fHeight),0xffff0000);
+		RDrawLine(a + rvector(0, 0, fHeight), a - rvector(0, 0, fHeight), color);
 	}
 }
 

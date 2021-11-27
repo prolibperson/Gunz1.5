@@ -735,8 +735,7 @@ void RMesh::CheckNameToType(RMeshNode* pMeshNode)
 bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 {
 #define MZF_READ(x,y) { if(!mzf->Read((x),(y))) return false; }
-#define MZF_READ_XOR(x,y) { if(!mzf->Read((x),(y))) return false; }
-#define MZF_READ_XOR_SPECIAL(x,y) { if(!mzf->Read((x),(y))) return false; for (int i = 0; i < y; ++i) *(BYTE*)(x + i) ^= 0; }
+#define MZF_READ_XOR(x,y) {if(!mzf->Read((x),(y))) return false;}
 	int i;
 	unsigned short count_mesh = 0;
 	MZF_READ_XOR(&count_mesh, 2);
@@ -1320,30 +1319,10 @@ bool RMesh::ReadElu(char* fname)
 		}
 	}
 
-	//	buffer = new char[mzf.GetLength()+1];
-	//	buffer[mzf.GetLength()] = 0;
-
-	//	mzf.Read(buffer,mzf.GetLength());
-
-	//	if(!XmlDoc.LoadFromMemory(buffer))
-	//		return false;
-
-	//	delete[] buffer;
-
-	//	FILE *fp;
-	//	fp  = fopen(fname, "rb");
-
-	//	if(!fp) return false;
-
 	ex_hd_t t_hd;
 
 	MZF_READ(&t_hd, sizeof(ex_hd_t));
-	/*
-	if(t_hd.ver != EXPORTER_VER) {
-		mlog("%s elu file 버젼이 틀림.\n",fname);
-		return false;
-	}
-*/
+
 	if (t_hd.sig != EXPORTER_SIG) {
 		mlog("%s elu file 파일 식별 실패.\n", fname);
 		return false;
@@ -1358,14 +1337,9 @@ bool RMesh::ReadElu(char* fname)
 		ReadNewElu(&mzf, fname);
 	}
 
-	// 안경(가면) - type 도 추가되어야 함..파츠용 더미..
-	// 가방
 
-	// 더미추가 - 모델은 무기처럼 찾아서 붙이고..
-
-	//--------------------------------------------------
-
-	if (m_isCharacterMesh) {
+	if (m_isCharacterMesh)
+	{
 		rmatrix _pbm;
 
 		// 썬그라스 기본장비 위치..
@@ -1393,26 +1367,17 @@ bool RMesh::ReadElu(char* fname)
 		AddNode("eq_sunglass", "Bip01 Head", _pbm);
 	}
 
-	//<------------------------------------------------
-
-	//	fclose (fp);
 	mzf.Close();
 
 	ConnectMatrix();
 
-	///////////////////////////////////////////
-	//mtrl list load
-
-	//	char Path[256];
-	//	GetPath(fname,Path);
-	//	m_mtrl_list_ex.Restore(RGetDevice(),Path);
-	// map object 라면 마음대로 올리면 안됨...구분필요...
-
-	if (m_is_map_object) {
+	if (m_is_map_object)
+	{
 		ClearVoidMtrl();//연결안된 빈 mtrl 을 지운다...
 	}
 
-	if (m_mtrl_auto_load) {
+	if (m_mtrl_auto_load)
+	{
 		m_mtrl_list_ex.Restore(RGetDevice(), Path);
 	}
 

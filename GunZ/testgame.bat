@@ -1,1 +1,1 @@
-Gunz.exe dummy deffjay 0
+Gunz.exe dummy map 0

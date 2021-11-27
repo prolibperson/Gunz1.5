@@ -119,7 +119,7 @@ rvector RGetTransformCoord(rvector &coord);
 
 // 그리는것과 관련된 펑션..
 void RDrawLine(rvector &v1,rvector &v2,DWORD dwColor);
-void RDrawCylinder(rvector origin,float fRadius,float fHeight,int nSegment);
+void RDrawCylinder(rvector origin,float fRadius,float fHeight,int nSegment, DWORD color = 0xffff0000);
 void RDrawCorn(rvector center,rvector pole,float fRadius,int nSegment);
 void RDrawSphere(rvector origin,float fRadius,int nSegment);
 void RDrawAxis(rvector origin,float fSize);

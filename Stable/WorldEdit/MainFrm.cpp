@@ -105,7 +105,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	m_ControlDialog.Create(IDD_DIALOG_CONTROL,this);
 	PlaceControlDialog();
-	m_ControlDialog.GetDlgItem(ID_MINIMAP)->EnableWindow();
+	//m_ControlDialog.GetDlgItem(ID_MINIMAP)->EnableWindow();
 
 
 	m_ControlDialog.ShowWindow(SW_SHOW);

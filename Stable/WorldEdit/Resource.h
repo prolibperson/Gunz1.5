@@ -24,6 +24,7 @@
 #define ID_VIEWINFO                     147
 #define IDD_DIALOG2                     148
 #define IDD_DIALOG_INFO                 148
+#define IDD_LIGHTEDIT_DLG               150
 #define IDC_LIST1                       1005
 #define IDC_BUTTON1                     1007
 #define IDC_BUTTON2                     1008
@@ -40,6 +41,12 @@
 #define IDC_PROGRESS1                   1019
 #define IDC_EDIT2                       1019
 #define IDC_COMBO2                      1020
+#define IDC_LIST2                       1022
+#define IDC_LIGHTEDIT                   1023
+#define IDC_LIGHTEDIT_POS               1024
+#define IDC_LIGHTEDIT_COLOR             1025
+#define IDC_EDIT_INTENSITY              1026
+#define IDC_LIGHTEDIT_INTENSITY         1026
 #define ID_MENUITEM32771                32771
 #define ID_MENUITEM32772                32772
 #define ID_MENUITEM_MODEOBJECT          32772
@@ -64,9 +71,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        149
+#define _APS_NEXT_RESOURCE_VALUE        152
 #define _APS_NEXT_COMMAND_VALUE         32796
-#define _APS_NEXT_CONTROL_VALUE         1022
+#define _APS_NEXT_CONTROL_VALUE         1027
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

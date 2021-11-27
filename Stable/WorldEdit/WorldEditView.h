@@ -33,7 +33,7 @@ public:
 public:
 
 	void Resize(CSize size);	// 윈도 크기 바꿀때.
-	void OnResetCamera();		// Reset Camera 버튼이 눌렸을때..
+	void OnResetCamera(D3DXVECTOR3 targetpos = D3DXVECTOR3(0,0,0));		// Reset Camera 버튼이 눌렸을때..
 
 // Overrides
 	// ClassWizard generated virtual function overrides

@@ -738,7 +738,7 @@ public:
 		clear();
 	}
 
-	iterator Erase(iterator where) {
+	T Erase(T where) {
 		iterator itor = erase(where);
 
 		if (itor != end()) {

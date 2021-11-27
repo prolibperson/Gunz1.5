@@ -446,6 +446,7 @@ RBspObject::~RBspObject()
 		SAFE_DELETE( *iter );
 		iter = m_StaticSunLigthtList.erase( iter );
 	}
+	m_StaticSunLigthtList.clear();
 
 	for (RLightList::iterator iter = m_StaticMapLightList.begin(); iter != m_StaticMapLightList.end();)
 	{
@@ -453,6 +454,7 @@ RBspObject::~RBspObject()
 		iter = m_StaticMapLightList.erase(iter);
 
 	}
+	m_StaticMapLightList.clear();
 
 	for (RLightList::iterator iter = m_StaticObjectLightList.begin(); iter != m_StaticObjectLightList.end();)
 	{
@@ -460,6 +462,7 @@ RBspObject::~RBspObject()
 		iter = m_StaticObjectLightList.erase(iter);
 
 	}
+	m_StaticObjectLightList.clear();
 
 
 	for( list<AmbSndInfo*>::iterator iter = m_AmbSndInfoList.begin(); iter != m_AmbSndInfoList.end(); )
@@ -468,6 +471,7 @@ RBspObject::~RBspObject()
 		SAFE_DELETE(p);
 		iter = m_AmbSndInfoList.erase(iter);
 	}
+	m_AmbSndInfoList.clear();
 
 	//TODO: determine if this is necesary?
 	//Custom: Clear objs from memory
@@ -629,9 +633,12 @@ bool RBspObject::Draw()
 
 	RGetDevice()->SetStreamSource(0,m_pVertexBuffer,0,sizeof(BSPVERTEX) );
 	RGetDevice()->SetIndices(m_pIndexBuffer);
-
+	std::vector<LPDIRECT3DTEXTURE9> lightMapTexture;
 	//Custom: set lightmaptex;
-	std::vector<LPDIRECT3DTEXTURE9> lightMapTexture =  m_ppLightmapTextures.at(m_lightMapIndex);
+	if (m_bisDrawLightMap)
+	{
+		lightMapTexture = m_ppLightmapTextures.at(m_lightMapIndex);
+	}
 
 	if(m_bWireframe)
 	{
@@ -4183,9 +4190,23 @@ void RBspObject::OnUpdate(float fElapsed)
 	{
 		/*
 		m_MovableObjects->UpdatePosition(///TODO:position);
-		
-		
+
+
 		*/
+	}
+}
+
+//TODO: draw wireframe shape based on intensity/attnstart/end for worldedit
+void RBspObject::DrawLights()
+{
+	for (RLightList::iterator itor = GetMapLightList()->begin(); itor != GetMapLightList()->end(); ++itor)
+	{
+		RLIGHT* mapLight = *itor;
+
+		if (isInViewFrustum(mapLight->Position, RGetViewFrustum()))
+		{
+			RDrawSphere(mapLight->Position, 10, 10);
+		}
 	}
 }
 

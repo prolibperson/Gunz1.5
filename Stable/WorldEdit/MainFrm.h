@@ -39,6 +39,8 @@ public:
 	virtual void AssertValid() const;
 	virtual void Dump(CDumpContext& dc) const;
 #endif
+	CControlDialog		m_ControlDialog;
+
 
 protected:  // control bar embedded members
 	CStatusBar  m_wndStatusBar;
@@ -47,7 +49,6 @@ protected:  // control bar embedded members
 	RECT		m_LastPos;
 	CObjectDialog		m_ObjectDialog;
 	CPathDialog			m_PathDialog;
-	CControlDialog		m_ControlDialog;
 
 	void HideDialogs();
 	void PlaceControlDialog();

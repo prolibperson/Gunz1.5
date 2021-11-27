@@ -10,6 +10,8 @@
 #include "FileInfo.h"
 #include "RMaterialList.h"
 
+#include "MainFrm.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -116,6 +118,14 @@ BOOL CWorldEditDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		SAFE_DELETE(m_pBspObject);
 		AfxMessageBox("파일열기에 실패하였습니다.");
 		return FALSE;
+	}
+
+	CWnd* pMainframe = AfxGetMainWnd();
+
+	for (RLightList::iterator itor = m_pBspObject->GetMapLightList()->begin(); itor != m_pBspObject->GetMapLightList()->end(); ++itor)
+	{
+		string lightData = (*itor)->Name; 
+		((CMainFrame*)pMainframe)->m_ControlDialog.m_lightList.AddString(lightData.c_str());
 	}
 
 	m_bLastPicked=false;

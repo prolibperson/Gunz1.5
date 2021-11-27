@@ -152,6 +152,7 @@
       <WarningLevel>Level3</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalOptions>/MACHINE:AMD64 /NODEFAULTLIB:libc.lib %(AdditionalOptions)</AdditionalOptions>
@@ -159,7 +160,7 @@
       <OutputFile>.\WorldEdit/WorldEdit.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>../sdk/dx9/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreSpecificDefaultLibraries>libci.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libci.lib;comsuppw.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Release/WorldEdit.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
@@ -262,6 +263,7 @@
     <ClCompile Include="GenerateLightmapDialog.cpp" />
     <ClCompile Include="GeneratePathDataDialog.cpp" />
     <ClCompile Include="InfoDialog.cpp" />
+    <ClCompile Include="LightEditDlg.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="ObjectDialog.cpp" />
     <ClCompile Include="PathDialog.cpp" />
@@ -284,6 +286,7 @@
     <ClInclude Include="GenerateLightmapDialog.h" />
     <ClInclude Include="GeneratePathDataDialog.h" />
     <ClInclude Include="InfoDialog.h" />
+    <ClInclude Include="LightEditDlg.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="ObjectDialog.h" />
     <ClInclude Include="PathDialog.h" />

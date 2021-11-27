@@ -123,11 +123,30 @@ struct EnhanceNPC
 };
 
 ///TODO: read <BUILDING/> Tag
+
+struct BarricadeBuilding
+{
+	short distance;
+	float reduceDamageRatio;
+	float recoveryMagazineRatio;
+	float recoveryDelay;
+};
+
+struct RadarBuilding
+{
+	short distance;
+	float recoveryHPAPRatio;
+	float recoveryMagazineRatio;
+	float recoveryDelay;
+};
+
 struct Building
 {
 	float damageReduction;
 	int	  timeCheck;
 	///TODO: fillthe rest of this
+	BarricadeBuilding barricade;
+	RadarBuilding radar;
 };
 
 ///TODO: read <REWARD/> Tag

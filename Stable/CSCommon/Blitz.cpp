@@ -135,6 +135,24 @@ void Blitz::ParseXml_EventTag(rapidxml::xml_node<>* elem)
 			node.damageReduction = strtof(itor->first_attribute("reduceDamageRatioFromPlayer")->value(),nullptr);
 			node.timeCheck = atoi(itor->first_attribute("checkDelay")->value());
 
+			rapidxml::xml_node<>* buildingNode = childNode->first_node("BARRICADE");
+			if (buildingNode != nullptr)
+			{
+				BarricadeBuilding barricade = { 0 };
+				barricade.distance = atoi(buildingNode->first_attribute("dist")->value());
+				barricade.reduceDamageRatio = atof(buildingNode->first_attribute("reduceDamageRatio")->value());
+				barricade.recoveryMagazineRatio = atof(buildingNode->first_attribute("recoveryMagazineRatio")->value());
+				barricade.recoveryDelay = atof(buildingNode->first_attribute("recoveryDelay")->value());
+
+				m_buildingEvents.barricade = barricade;
+			}
+			buildingNode = childNode->first_node("RADAR");
+			if (buildingNode != nullptr)
+			{
+				RadarBuilding radar = { 0 };
+				radar.distance = atoi(buildingNode->first_attribute("dist")->value());
+			}
+
 			m_buildingEvents = node;
 		}
 	}

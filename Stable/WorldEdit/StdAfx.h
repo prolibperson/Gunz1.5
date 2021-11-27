@@ -21,6 +21,8 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 #include "rapidxml.hpp"
 #include "rapidxml_utils.hpp"
+
+#import "msxml6.dll" named_guids
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

@@ -261,7 +261,9 @@ public:
 	// open 을 수행하면 기본 확장자로 다음의 Open...펑션들을 순서대로 부른다.
 	bool Open(const char *, const char* descExtension, ROpenFlag nOpenFlag=ROF_RUNTIME,RFPROGRESSCALLBACK pfnProgressCallback=NULL, void *CallbackParam=NULL);
 	bool IsVisible(rboundingbox &bb);		// occlusion 에 의해 가려져있으면 false 를 리턴.
-	bool Draw() ;
+	bool Draw();
+	//Custom: Draw lights in worldedit
+	void DrawLights();
 	bool Pick(const rvector &pos, const rvector &dir, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) ;
 	bool PickTo(const rvector &pos, const rvector &to, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) ;
 	 bool PickOcTree(rvector &pos, rvector &dir, RBSPPICKINFO *pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE) ;
@@ -406,9 +408,9 @@ public:
 	 RNavigationMesh* GetNavigationMesh()  { return &m_NavigationMesh; }
 
 	string m_filename;
+	string m_descfilename;
 private:
 
-	string m_descfilename;
 	
 	// 에디터및 디버그를 위한 모드 
 	bool m_bWireframe;

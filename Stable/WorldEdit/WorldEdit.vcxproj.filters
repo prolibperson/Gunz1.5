@@ -51,6 +51,9 @@
     <ClCompile Include="WorldEditView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="LightEditDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WorldEdit.rc">
@@ -95,6 +98,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WorldEditView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightEditDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

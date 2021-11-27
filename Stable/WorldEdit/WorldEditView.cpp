@@ -123,6 +123,9 @@ void CWorldEditView::OnDraw(CDC* pDC)
 
 		pDoc->m_pBspObject->DrawObjects();
 
+		pDoc->m_pBspObject->DrawLights();
+
+
 		if(m_EditMode==EDITMODE_PATH)
 		{
 			RBspObject *pBsp=pDoc->m_pBspObject;
@@ -130,6 +133,7 @@ void CWorldEditView::OnDraw(CDC* pDC)
 
 //			pBsp->DrawCollision();
 			pBsp->Draw();
+			//TODO: draw light entities
 
 			RGetDevice()->SetTexture(0,NULL);
 			RGetDevice()->SetRenderState( D3DRS_LIGHTING, FALSE );
@@ -393,7 +397,7 @@ void CWorldEditView::OnLButtonUp(UINT nFlags, CPoint point)
 
 }
 
-void CWorldEditView::OnResetCamera()
+void CWorldEditView::OnResetCamera(D3DXVECTOR3 targetPos)
 {
 	// TODO: Add your control notification handler code here
 
@@ -411,10 +415,19 @@ void CWorldEditView::OnResetCamera()
 
 	size=pbb->vmax-pbb->vmin;
 
-	rvector targetpos=.5f*(pbb->vmax+pbb->vmin);
-	targetpos.z=0;
-	rvector sourcepos=targetpos+rvector(0,100,100);
-	RSetCamera(sourcepos,targetpos,rvector(0,0,1));
+	rvector target;
+
+	if (targetPos != D3DXVECTOR3(0, 0, 0))
+	{
+		target = targetPos;
+	}
+	else
+	{
+		target = 0.5f * (pbb->vmax + pbb->vmin);
+		target.z = 0;
+	}
+	rvector sourcepos=target+rvector(0,100,100);
+	RSetCamera(sourcepos,target,rvector(0,0,1));
 	RSetProjection(1.f/3.f*pi,100,55000);
 
 	Invalidate();
@@ -563,6 +576,7 @@ void CWorldEditView::OnUpdateShowlightmap(CCmdUI *pCmdUI)
 	pCmdUI->SetCheck(m_bShowLightmap);
 }
 
+#include <filesystem>
 void CWorldEditView::OnDropFiles(HDROP hDropInfo)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
@@ -574,19 +588,15 @@ void CWorldEditView::OnDropFiles(HDROP hDropInfo)
 	char szFileName[_MAX_PATH];
 	DragQueryFile(hDropInfo,0,szFileName,sizeof(szFileName));
 
-	int nLen;
-	while( (nLen=strlen(szFileName))>0)
+	std::filesystem::path file(szFileName);
+
+	if (file.extension() == ".rs")
 	{
-		if(strnicmp(szFileName+nLen-3,".rs",3)==0)
-		{
-			AfxGetApp()->OpenDocumentFile(szFileName);
-			return;
-		}
-
-		char *lastdot=strrchr(szFileName,'.');
-		if(!lastdot) return;
-
-		*lastdot=0;
+		AfxGetApp()->OpenDocumentFile(file.generic_u8string().c_str());
+	}
+	else
+	{
+		MessageBox("Drag the file with .rs to the window!", "ERROR");
 	}
 }
 

@@ -26,6 +26,18 @@ public:
 	virtual ~RLightList();
 	bool Open(MXmlElement* pElement);
 	bool Save(MXmlElement* pElement);
+
+	RLIGHT* Find(string lightName)
+	{
+		for (auto& light = begin(); light != end(); ++light)
+		{
+			if ((*light)->Name == lightName)
+			{
+				return (*light);
+			}
+		}
+		return nullptr;
+	}
 };
 
 _NAMESPACE_REALSPACE2_END
