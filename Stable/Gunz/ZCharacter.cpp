@@ -229,6 +229,31 @@ void ChangeEquipAvatarParts(ZObjectVMesh* pVMesh, const unsigned long int* pItem
 	MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(pItemID[MMCIP_AVATAR]);
 	if( pDesc != NULL )
 	{
+		if (pDesc->GetEluName() != nullptr)
+		{
+			RMesh* playerMesh = nullptr;
+			if (_stricmp(pVMesh->GetMesh()->GetName(), "heroman1") == 0)
+			{
+				playerMesh = ZGetMeshMgr()->Get("heroman1");
+			}
+			else
+			{
+				playerMesh = ZGetMeshMgr()->Get("herowoman1");
+			}
+			if (playerMesh->m_parts_mgr->Find(pDesc->m_szElu) == false)//Find(playerItem->m_szElu) == false)
+			{
+				string filePath = pDesc->m_szElu;
+				if (filePath.find("woman") != std::string::npos)
+				{
+					filePath = string("model/woman/") + pDesc->m_szElu;
+				}
+				else
+				{
+					filePath = string("model/man/") + pDesc->m_szElu;
+				}
+				playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
+			}
+		}
 		szMeshName = pDesc->m_pAvatarMeshName->Ref().m_szHeadMeshName;
 		if( strlen(szMeshName) > 0 )	pVMesh->SetParts(eq_parts_head, szMeshName,pDesc->GetEluName());
 		else							ChangeCharHair(pVMesh, nSex, nHairIndex);

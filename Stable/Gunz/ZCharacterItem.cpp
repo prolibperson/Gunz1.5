@@ -120,35 +120,36 @@ bool ZCharacterItem::EquipItem(MMatchCharItemParts parts, int nItemDescID, int n
 
 	if (pDesc == NULL) { _ASSERT(0); return false; }
 
-	//TODO: find way to check if it's contained???
-	if (playerSex != MMS_END)
-	{
-		if (pDesc->GetEluName() != nullptr)
-		{
-			RMesh* playerMesh = nullptr;
-			if (playerSex == MMS_MALE)
-			{
-				playerMesh = ZGetMeshMgr()->Get("heroman1");
-			}
-			else
-			{
-				playerMesh = ZGetMeshMgr()->Get("herowoman1");
-			}
-			if (playerMesh->m_parts_mgr->Find(pDesc->m_szElu) == false)//Find(playerItem->m_szElu) == false)
-			{
-				string filePath = pDesc->m_szElu;
-				if (filePath.find("woman") != std::string::npos)
-				{
-					filePath = string("model/woman/") + pDesc->m_szElu;
-				}
-				else
-				{
-					filePath = string("model/man/") + pDesc->m_szElu;
-				}
-				playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
-			}
-		}
-	}
+	//Custom: no longer needed, everything is handled in zchangecharhair,zchangecharparts,zchangecharpartsavatar
+	////TODO: find way to check if it's contained???
+	//if (playerSex != MMS_END)
+	//{
+	//	if (pDesc->GetEluName() != nullptr)
+	//	{
+	//		RMesh* playerMesh = nullptr;
+	//		if (playerSex == MMS_MALE)
+	//		{
+	//			playerMesh = ZGetMeshMgr()->Get("heroman1");
+	//		}
+	//		else
+	//		{
+	//			playerMesh = ZGetMeshMgr()->Get("herowoman1");
+	//		}
+	//		if (playerMesh->m_parts_mgr->Find(pDesc->m_szElu) == false)//Find(playerItem->m_szElu) == false)
+	//		{
+	//			string filePath = pDesc->m_szElu;
+	//			if (filePath.find("woman") != std::string::npos)
+	//			{
+	//				filePath = string("model/woman/") + pDesc->m_szElu;
+	//			}
+	//			else
+	//			{
+	//				filePath = string("model/man/") + pDesc->m_szElu;
+	//			}
+	//			playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
+	//		}
+	//	}
+	//}
 
 	if (!Confirm(parts, pDesc)) {
 //		_ASSERT(0);

@@ -32,7 +32,7 @@ void ZWorldItem::Initialize( int nID, short nItemID,MTD_WorldItemSubType SubType
 	m_SubType			= SubType;
 	m_Position			= position;
 	m_fAmount			= fAmount;
-	m_Dir 				= dir;
+	m_Dir 				= rvector(0,1,0);
 	m_Up				= rvector(0,0,1);
 }
 
