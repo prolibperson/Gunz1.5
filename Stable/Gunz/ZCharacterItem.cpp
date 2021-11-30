@@ -121,6 +121,7 @@ bool ZCharacterItem::EquipItem(MMatchCharItemParts parts, int nItemDescID, int n
 	if (pDesc == NULL) { _ASSERT(0); return false; }
 
 	//Custom: no longer needed, everything is handled in zchangecharhair,zchangecharparts,zchangecharpartsavatar
+	
 	////TODO: find way to check if it's contained???
 	//if (playerSex != MMS_END)
 	//{
