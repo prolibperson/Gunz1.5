@@ -1193,7 +1193,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 		return nRMainReturn;
 	}
 
-	D3DMULTISAMPLE_TYPE type;
+	D3DMULTISAMPLE_TYPE type = D3DMULTISAMPLE_NONE;
 	switch (Z_VIDEO_ANTIALIAS)
 	{
 	case 0:

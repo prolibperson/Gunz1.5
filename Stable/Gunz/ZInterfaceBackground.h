@@ -9,6 +9,12 @@ using namespace RealSpace2;
 
 #ifdef _CHURCH
 
+#define BLOCK_SIZE			4000.0f
+#define END_BLOCK_OFFSET	3000
+#define CHURCH_BLOCK_COUNT		4
+#define TIME_PER_DISTANCE		20000
+#define END_TIME_PER_DISTANCE	2000
+
 #define LOGIN_SCENE_FIXEDSKY	0			// 하늘에 카메라 고정
 #define LOGIN_SCENE_FALLDOWN	1			// 카메라 내려오면서 로고 보임
 

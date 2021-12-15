@@ -122,27 +122,7 @@ void ZGameAction::OnPeerSkill_LastShot(float fShotTime,ZCharacter *pOwnerCharact
 			return;
 
 
-	// fShotTime ÀÌ ±× Ä³¸¯ÅÍÀÇ ·ÎÄÃ ½Ã°£ÀÌ¹Ç·Î ³» ½Ã°£À¸·Î º¯È¯ÇØÁØ´Ù
 	fShotTime -= pOwnerCharacter->m_fTimeOffset;
-	/*
-	float fCurrentTime = g_pGame->GetTime();
-
-	if( abs(fCurrentTime - fShotTime ) > TIME_ERROR_BETWEEN_RECIEVEDTIME_MYTIME )
-	{
-#ifdef _DEBUG
-		mlog("!!!!°­º£±â ÇÙ »ç¿ë!!!!Ä³¸¯ÅÍ ³×ÀÓ: %s      fShotTime : %f     fCurrentTime : %f \n", 
-			pOwnerCharacter->GetUserName(), fShotTime - pOwnerCharacter->m_fTimeOffset , fCurrentTime);
-#endif
-		return;
-	}
-	ÀÌ ºÎºÐÀº ÇÙ¿¡¼­ shotÀ» ÇÑ ½Ã°£À» Á¶ÀÛÇÏ¿© º¸³»´Â °ÍÀ» °¨ÁöÇÏ¿© ÇÙÀ» ¸·´Â ÄÚµå¿´´Âµ¥ ¹Þ´Â ÂÊ¿¡¼­ ½Ã°£ °Ë»ç¸¦ ÇÏÁö ¸»°í 
-	º¸³»´Â ÂÊ¿¡¼­ °Ë»ç¸¦ ÇØ¼­ shotÀ» ÇÑ ½Ã°£ÀÌ ÇØ´ç Ä³¸¯ÅÍÀÇ lacal time°ú ¸ÂÁö ¾ÊÀ¸¸é ¾Æ¿¹ ÆÐÅ¶À» º¸³»Áö ¾Êµµ·Ï ¹Ù²å´Ù. 
-	µû¶ó¼­ ÇØ´ç ÄÚµå°¡ ÇÊ¿ä ¾ø°Ô µÊ. ÃßÈÄ localtimeÀ» Á¶ÀÛÇÒ °æ¿ì¸¦ ´ëºñÇØ ÁÖ¼®Ã³¸®·Î ³²°ÜµÒ..
-	*/
-
-		// ºñÁ¤»óÀûÀÎ ¹ß»ç¼Óµµ¸¦ ¹«½ÃÇÑ´Ù.
-	//jintriple3 µð¹ö±× ·¹Áö½ºÅÍ ÇÙ ¹æ¾î...ÀÌ°Ç °­º£±â ÇÙ ¹æ¾î Àü¿ë..
-	//bReturnValue = pOwnerCharacter->CheckValidShotTime(pItem->GetDescID(), fShotTime, pItem);
 
 	if (pOwnerCharacter->CheckValidShotTime(pItem->GetDescID(), fShotTime, pItem))
 	{

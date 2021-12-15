@@ -1,5 +1,4 @@
 ﻿#include "stdafx.h"
-
 #include "ZApplication.h"
 #include "ZInterfaceBackground.h"
 #include "RealSpace2.h"
@@ -7,11 +6,10 @@
 #include "MDebug.h"
 #include "ZScreenEffectManager.h"
 #include "ZConfiguration.h"
-#ifdef _CHURCH
-#define DIR_LOGIN	"interface/church"
-#endif
 
 #ifdef _CHURCH
+
+#define DIR_LOGIN	"interface/church"
 ZInterfaceBackground::ZInterfaceBackground()
 {
 	RealSpace2::RSetFileSystem(ZApplication::GetFileSystem());
@@ -136,29 +134,19 @@ void ZInterfaceBackground::Draw()
 
 	SetRenderState();
 
-
-	SetRenderState();
-
 	const rvector CamPos(0, 0, 2200);	
 	const rvector CamDir(0, 1, 1.5f);
 
 	rvector ff = m_EndCamPos - (m_EndCamDir * 100);
 	ff.z += 1;
-#define BLOCK_SIZE			4000.0f		// ÀÏ¹Ý ¼º´ç ºí·°ÀÇ Å©±â
-#define END_BLOCK_OFFSET	3000		// ¸¶Áö¸· ¼º´ç ºí·°ÀÇ ¿ÀÇÁ¼Â
-	//static float fLastOffset = 0;
-	//static float fLastDiff = 0;
 
-	// Ä«¸Þ¶óÀÇ À§Ä¡´Â Ç×»ó YÃà(±íÀÌ ¹æÇâ) 0¿¡ À§Ä¡ÇÑ´Ù.
-#define CHURCH_BLOCK_COUNT		4		// ÀÏ¹Ý ¼º´ç ºí·°ÀÇ °¹¼ö
-#define TIME_PER_DISTANCE		20000	// ÃÊ±â ¼Óµµ
-#define END_TIME_PER_DISTANCE	2000		// ÃÖÁ¾ ¼Óµµ
 
 	unsigned long int nCurrTime = timeGetTime();
 	float fTimePerDistance = TIME_PER_DISTANCE;
 
 
-	if (m_nSceneNumber == LOGIN_SCENE_FIXEDSKY) {	// ¼º´ç ³»ºÎ ¹Ýº¹
+	if (m_nSceneNumber == LOGIN_SCENE_FIXEDSKY)
+	{
 
 		void RSetProjection(float fFov, float fAspect, float fNearZ, float fFarZ);
 
@@ -167,7 +155,6 @@ void ZInterfaceBackground::Draw()
 
 		SetFogState(4000.0f, 8000.0f, 0x008C6636);
 
-		//		float fDiff = (nCurrTime%TIME_PER_DISTANCE)/(float)TIME_PER_DISTANCE;
 		float fDiff = (int(m_elapsedTime * 1000) % TIME_PER_DISTANCE) / (float)TIME_PER_DISTANCE;
 
 		for (int i = CHURCH_BLOCK_COUNT - 1; i >= 0; i--) {
@@ -180,13 +167,9 @@ void ZInterfaceBackground::Draw()
 		}
 
 		UpdatePigeon();
-
-		//fLastOffset = BLOCK_SIZE*(0-fDiff);
-		//fLastDiff = fDiff;
 	}
-	else if (m_nSceneNumber == LOGIN_SCENE_FALLDOWN) {	// ¼º´ç ³¡
-		//static bool m_bScrollToEnd = false;
-
+	else if (m_nSceneNumber == LOGIN_SCENE_FALLDOWN)
+	{	
 		if (m_nPrevSceneNumber == LOGIN_SCENE_FIXEDSKY)
 		{
 			RSetProjection(D3DX_PI * 60 / 180, RGetScreenWidth() / (float)RGetScreenHeight(), 10.0f, 15000.0f);
@@ -205,8 +188,6 @@ void ZInterfaceBackground::Draw()
 
 			float t = fDiff / fLimit;
 
-			// Fog
-			//RGetDevice()->SetRenderState(D3DRS_FOGENABLE, TRUE);
 			SetFogState(4000.0f + 8000.0f * t, 8000.0f + 8000.0f * t, 0x008C6636);
 
 
@@ -248,10 +229,9 @@ void ZInterfaceBackground::Draw()
 					int yEndOffset = 0;
 					if (i == CHURCH_BLOCK_COUNT - 1) yEndOffset = END_BLOCK_OFFSET;
 
-					// EndCamPos±îÁö ¿òÁ÷ÀÌ¸é ¸ØÃá´Ù.
 					float fYPos = BLOCK_SIZE * (i - fDiff) + yEndOffset;
 
-					rvector ep(m_EndCamPos.x, 0, m_EndCamPos.z);	// ¿Å°ÜÁú Ä«¸Þ¶ó À§Ä¡
+					rvector ep(m_EndCamPos.x, 0, m_EndCamPos.z);
 					rvector cp = CamPos + (ep - CamPos) * t;
 
 					rvector cd = CamDir + (m_EndCamDir - CamDir) * t;
@@ -270,9 +250,9 @@ void ZInterfaceBackground::Draw()
 
 			}
 		}
-		else {
+		else
+		{
 			_ASSERT(0);
-			// ¾ÆÁ÷ Ã³¸® ¾ÈÇßÀ½
 		}
 	}
 }
@@ -419,20 +399,24 @@ bool ZInterfaceBackground::CreatePigeon(int nCnt)
 
 		node = new RPigeonVisualMesh;
 
-		if (!node->Create(m_pPigeonMesh)) {
-			//			mlog("VisualMesh Create failure !!!\n");
-			return -1;
+		if (!node->Create(m_pPigeonMesh))
+		{
+			return false;
 		}
 
 		id = m_VMeshMgr.Add(node);
+		if (id == -1)
+		{
+			return false;
+		}
 
 		pVMesh = (RPigeonVisualMesh*)m_VMeshMgr.GetFast(id);
 
-		pVMesh->SetCheckViewFrustum(false);// = false;
+		pVMesh->SetCheckViewFrustum(false);
 
 		SetRandomPigeon(pVMesh);
 	}
-	return 1;
+	return true;
 }
 
 void ZInterfaceBackground::UpdatePigeon()
@@ -442,7 +426,8 @@ void ZInterfaceBackground::UpdatePigeon()
 	RPigeonVisualMesh* pVMesh = NULL;
 	rmatrix m;
 
-	for (int j = 0; j < size; j++) {
+	for (int j = 0; j < size; j++)
+	{
 
 		pVMesh = (RPigeonVisualMesh*)m_VMeshMgr.GetFast(j);
 
@@ -454,7 +439,8 @@ void ZInterfaceBackground::UpdatePigeon()
 
 			pVMesh->Frame();
 
-			if (pVMesh->m_vPos.y < -1200.f) {
+			if (pVMesh->m_vPos.y < -1200.f)
+			{
 				SetRandomPigeon(pVMesh, 18000.f);
 			}
 			pVMesh->Render();

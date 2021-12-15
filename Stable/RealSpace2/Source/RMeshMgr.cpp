@@ -725,24 +725,5 @@ bool RMeshMgr::Find(const char* name)
 		}
 	}
 	return false;
-	/*
-	
-	RMeshNode* pMesh = m_list.Find(name);
-	
-	if (pMesh == nullptr)
-	{
-		if (eluName != nullptr)
-		{
-	
-
-
-			node->CalcBox();
-			return m_id_last - 1;
-		}
-	}
-	else
-		return pMesh;
-	*/
-	return nullptr;
 }
 _NAMESPACE_REALSPACE2_END
