@@ -269,51 +269,66 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 #endif
 
-int RMain(const char *AppName, HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int cmdshow, RMODEPARAMS *pModeParams, WNDPROC winproc, WORD nIconResID )
+int RMain(const char* AppName, HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int cmdshow, RMODEPARAMS* pModeParams, WNDPROC winproc, WORD nIconResID)
 {
-	g_WinProc=winproc ? winproc : DefWindowProc;
+	g_WinProc = winproc ? winproc : DefWindowProc;
 
 	// make a window
-    WNDCLASS    wc;
-    wc.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
-    wc.lpfnWndProc = WndProc;
-    wc.cbClsExtra = 0;
-    wc.cbWndExtra = sizeof(DWORD);
-    wc.hInstance = this_inst;
-	wc.hIcon = LoadIcon( this_inst, MAKEINTRESOURCE(nIconResID));
-    wc.hCursor = 0;//LoadCursor(NULL, IDC_ARROW);
-    wc.hbrBackground = NULL;
-    wc.lpszMenuName = NULL;
-    wc.lpszClassName = "RealSpace2";
-	if(!RegisterClass(&wc)) return FALSE;
+	WNDCLASS    wc;
+	wc.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
+	wc.lpfnWndProc = WndProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = sizeof(DWORD);
+	wc.hInstance = this_inst;
+	wc.hIcon = LoadIcon(this_inst, MAKEINTRESOURCE(nIconResID));
+	wc.hCursor = 0;//LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = NULL;
+	wc.lpszMenuName = NULL;
+	wc.lpszClassName = "RealSpace2";
+	if (!RegisterClass(&wc)) return FALSE;
 
-	DWORD dwStyle = pModeParams->bFullScreen ? WS_POPUP | WS_SYSMENU : WS_POPUP | WS_CAPTION | WS_SYSMENU;
-	g_hWnd = CreateWindow("RealSpace2", AppName, dwStyle, CW_USEDEFAULT, CW_USEDEFAULT,
+	DWORD dwStyle;
+	if (pModeParams->bFullScreen) // Fullscreen
+		dwStyle = WS_VISIBLE | WS_POPUP;
+	else//windowed
+		dwStyle = WS_VISIBLE | WS_OVERLAPPED | WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX;
+
+
+	
+	//Custom: dpi scaling fix
+	const int iDpi = GetDpiForWindow(g_hWnd);
+	const int dpiScaledWidth = MulDiv(pModeParams->nWidth, iDpi, 96);
+	const int dpiScaledHeight = MulDiv(pModeParams->nHeight, iDpi, 96);
+
+	g_hWnd = CreateWindowA("RealSpace2", AppName, dwStyle, CW_USEDEFAULT, CW_USEDEFAULT,
+		dpiScaledWidth, dpiScaledHeight, NULL, NULL, this_inst, NULL);
+
+	/*g_hWnd = CreateWindow("RealSpace2", AppName, dwStyle, CW_USEDEFAULT, CW_USEDEFAULT,
 		pModeParams->nWidth, pModeParams->nHeight, NULL, NULL, this_inst, NULL);
-
-	// initialize realspace2
+		*/
+		// initialize realspace2
 
 	RAdjustWindow(pModeParams);
 
-	while(ShowCursor(FALSE)>0);
-//	ShowCursor(TRUE);	// RAONHAJE Mouse Cursor HardwareDraw
+	while (ShowCursor(FALSE) > 0);
+	//	ShowCursor(TRUE);	// RAONHAJE Mouse Cursor HardwareDraw
 
-//	RFrame_Create();
-//
-//	ShowWindow(g_hWnd,SW_SHOW);
-//	if(!RInitDisplay(g_hWnd,pModeParams))
-//	{
-//		mlog("can't init display\n");
-//		return -1;
-//	}
-//
-//	//RBeginScene();
-//	RGetDevice()->Clear(0 , NULL, D3DCLEAR_TARGET, 0x00000000, 1.0f, 0 );
-////	REndScene();
-//	RFlip();
+	//	RFrame_Create();
+	//
+	//	ShowWindow(g_hWnd,SW_SHOW);
+	//	if(!RInitDisplay(g_hWnd,pModeParams))
+	//	{
+	//		mlog("can't init display\n");
+	//		return -1;
+	//	}
+	//
+	//	//RBeginScene();
+	//	RGetDevice()->Clear(0 , NULL, D3DCLEAR_TARGET, 0x00000000, 1.0f, 0 );
+	////	REndScene();
+	//	RFlip();
 
-	
-//	RGetDevice()->ShowCursor( TRUE );	// RAONHAJE Mouse Cursor HardwareDraw
+
+	//	RGetDevice()->ShowCursor( TRUE );	// RAONHAJE Mouse Cursor HardwareDraw
 
 	return 0;
 }

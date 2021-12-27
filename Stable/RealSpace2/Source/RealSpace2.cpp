@@ -489,23 +489,27 @@ bool RCloseDisplay()
 	return true;
 }
 
+
+//Custom: dpi scaling fix
 void RAdjustWindow(const RMODEPARAMS *pModeParams)
 {
 	if((GetWindowLong( g_hWnd, GWL_STYLE) & WS_CHILD) !=0)
 		return;
 
-	if(pModeParams->bFullScreen)
-	{
-		SetWindowLong( g_hWnd, GWL_STYLE, WS_POPUP | WS_SYSMENU );
-	}
-	else
-		SetWindowLong( g_hWnd, GWL_STYLE, WS_POPUP | WS_CAPTION | WS_SYSMENU );
+	if (pModeParams->bFullScreen) // Fullscreen
+		SetWindowLong(g_hWnd, GWL_STYLE, WS_VISIBLE | WS_POPUP);
+	else//windowed
+		SetWindowLong(g_hWnd, GWL_STYLE, WS_VISIBLE | WS_OVERLAPPED | WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
 
-	RECT rt = { 0,0,pModeParams->nWidth,pModeParams->nHeight };
 	if (!pModeParams->bFullScreen)
 	{
-		AdjustWindowRect(&rt, GetWindowLong(g_hWnd, GWL_STYLE), FALSE);
-		SetWindowPos(g_hWnd, HWND_NOTOPMOST, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_SHOWWINDOW);
+		int iDpi = GetDpiForWindow(g_hWnd);
+		int dpiScaledWidth = MulDiv(pModeParams->nWidth, iDpi, 96);
+		int dpiScaledHeight = MulDiv(pModeParams->nHeight, iDpi, 96);
+		//RECT rt = { 0,0,dpiScaledWidth,dpiScaledHeight };
+
+		//AdjustWindowRect(&rt, GetWindowLong(g_hWnd, GWL_STYLE), FALSE);
+		SetWindowPos(g_hWnd, HWND_NOTOPMOST, 0,0,dpiScaledWidth, dpiScaledHeight, SWP_SHOWWINDOW);
 	}
 }
 

@@ -471,6 +471,10 @@ public:
 	void SetMtrlAutoLoad(bool b);
 	bool GetMtrlAutoLoad();
 
+	//Custom: dynamic model loading
+	void SetModelAutoLoad(bool b);
+	bool const GetIsModelAutoLoad();
+
 	void SetMapObject(bool b);
 	bool GetMapObject();
 
@@ -592,6 +596,9 @@ public:
 	bool			m_mtrl_auto_load;
 	bool			m_is_map_object;
 	bool			m_bEffectSort;
+	//Custom: dynamic model loading
+	bool			m_ismodel_auto_load;
+
 
 
 	RMesh*			m_base_mtrl_mesh;

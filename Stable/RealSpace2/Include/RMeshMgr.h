@@ -22,7 +22,8 @@ public:
 	RMeshMgr();
 	~RMeshMgr();
 
-	int		Add(char* name,char* modelname=NULL,bool namesort=false);
+	//Custom: Dynamic Model Loading. Additional bool parameter to set autoload
+	int		Add(char* name,char* modelname=NULL,bool namesort=false, bool autoLoad = false);
 	int		AddXml(char* name,char* modelname=NULL,bool autoload=true,bool namesort=false);
 	int     AddXml(MXmlElement* pNode,char* Path,char* modelname=NULL,bool namesort=NULL);
 

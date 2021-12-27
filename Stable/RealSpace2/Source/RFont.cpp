@@ -359,7 +359,11 @@ bool RFont::Create(const TCHAR* szFontName, int nHeight, bool bBold/* =false */,
 //	m_nSamplingMultiplier = nSamplingMultiplier;	// 한방향 샘플링 횟수, 2이면 2*2크기를 샘플링한다.
 	HDC hDC = GetDC(g_hWnd);
 	SetMapMode(hDC, MM_TEXT);
-	nHeight = MulDiv(nHeight, GetDeviceCaps(hDC, LOGPIXELSY), 72);
+
+	const int iDpi = GetDpiForWindow(g_hWnd);
+
+
+	nHeight = MulDiv(nHeight, GetDeviceCaps(hDC, LOGPIXELSY), iDpi);
 	
 	m_nHeight = nHeight;
 

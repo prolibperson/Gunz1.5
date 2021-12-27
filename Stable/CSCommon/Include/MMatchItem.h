@@ -440,6 +440,7 @@ MMatchWeaponType GetWeaponType(MMatchRangeItemType nRangeItemType);
 MMatchWeaponType GetWeaponType(MMatchCustomItemType nCustomItemType);
 
 // 인챈트아이템인지 확인
+bool IsArmor(MMatchCharItemParts itemPart);
 bool IsEnchantItem(MMatchItemDesc* pItemDesc);
 
 

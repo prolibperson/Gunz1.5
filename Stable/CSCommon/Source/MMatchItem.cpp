@@ -1724,6 +1724,17 @@ MMatchWeaponType GetWeaponType(MMatchCustomItemType nCustomItemType)
 	return MWT_NONE;
 }
 
+bool IsArmor(MMatchCharItemParts itemPart)
+{
+	if (itemPart == MMCIP_AVATAR || itemPart < MMCIP_FINGERL)
+		return true;
+
+	if (itemPart > MMCIP_LONGBUFF2 && itemPart < MMCIP_DASH)
+		return true;
+
+	return false;
+}
+
 bool IsEnchantItem(MMatchItemDesc* pItemDesc)
 {
 	if (pItemDesc->m_nType.Ref() == MMIT_CUSTOM)

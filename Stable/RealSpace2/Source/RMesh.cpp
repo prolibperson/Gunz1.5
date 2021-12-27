@@ -82,6 +82,8 @@ void RMesh::Init()
 	m_is_use_ani_set = false;
 	m_mtrl_auto_load = true;
 	m_is_map_object = false;
+	//Custom: dynamic model loading
+	m_ismodel_auto_load = false;
 
 	m_bUnUsededCheck = false;
 
@@ -188,6 +190,16 @@ void RMesh::SetMtrlAutoLoad(bool b)
 bool RMesh::GetMtrlAutoLoad() 
 { 
 	return m_mtrl_auto_load; 
+}
+
+void RMesh::SetModelAutoLoad(bool b)
+{
+	m_ismodel_auto_load = b;
+}
+
+bool const RMesh::GetIsModelAutoLoad()
+{
+	return m_ismodel_auto_load;
 }
 
 void RMesh::SetMapObject(bool b) 

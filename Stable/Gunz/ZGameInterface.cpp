@@ -2001,6 +2001,66 @@ void ZGameInterface::OnLobbyCreate(void)
 	if ( pWidget)		pWidget->Enable( bEnable);
 
 	InitLobbyUIByChannelType();
+
+	if (RMesh::m_parts_mesh_loading_skip)
+	{
+		if (m_nState != GUNZ_CHARSELECTION)
+		{
+			std::vector<string> myMeshes(20);
+			ZMyItemList* myItems = ZGetMyInfo()->GetItemList();
+			string filePath = "";
+			if (ZGetMyInfo()->GetSex() == MMS_MALE)
+			{
+				filePath = "model/man/";
+			}
+			else
+			{
+				filePath = "model/woman/";
+			}
+			for (int j = 0; j < MMCIP_END; ++j)
+			{
+				if (myItems->GetEquipedItem((MMatchCharItemParts)(j)) != nullptr)
+				{
+					const unsigned long itemID = myItems->GetEquipedItem((MMatchCharItemParts)j)->GetItemID();
+					MMatchItemDesc* item = MGetMatchItemDescMgr()->GetItemDesc(itemID);
+					if (item != nullptr)
+					{
+						if (IsArmor((MMatchCharItemParts)j))
+						{
+							myMeshes.push_back(filePath + item->GetEluName());
+						}
+					}
+				}
+			}
+
+			RMesh* maleMesh = ZGetMeshMgr()->Get("heroman1");
+			if (maleMesh != nullptr)
+			{
+				for (auto& mesh : maleMesh->m_parts_mgr->m_list)
+				{
+					if (mesh->GetIsModelAutoLoad() == false)
+					{
+						if (std::find(myMeshes.begin(), myMeshes.end(), mesh->GetFileName()) == myMeshes.end())
+							maleMesh->m_parts_mgr->Del(mesh);
+					}
+				}
+			}
+			myMeshes.clear();
+
+			RMesh* femaleMesh = ZGetMeshMgr()->Get("herowoman1");
+			if (femaleMesh != nullptr)
+			{
+				for (auto& mesh : femaleMesh->m_parts_mgr->m_list)
+				{
+					if (mesh->GetIsModelAutoLoad() == false)
+					{
+						if (std::find(myMeshes.begin(), myMeshes.end(), mesh->GetFileName()) == myMeshes.end())
+							femaleMesh->m_parts_mgr->Del(mesh);
+					}
+				}
+			}
+		}
+	}
 }
 
 void ZGameInterface::InitLobbyUIByChannelType()

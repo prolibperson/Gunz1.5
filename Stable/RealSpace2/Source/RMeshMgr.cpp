@@ -37,7 +37,7 @@ RMeshMgr::~RMeshMgr()
 	DelAll();
 }
 
-int RMeshMgr::Add(char* name,char* modelname,bool namesort)
+int RMeshMgr::Add(char* name,char* modelname,bool namesort, bool autoLoad)
 {
 	RMesh* node;
 	node = new RMesh;
@@ -53,6 +53,8 @@ int RMeshMgr::Add(char* name,char* modelname,bool namesort)
 
 	node->SetMtrlAutoLoad( m_mtrl_auto_load );
 	node->SetMapObject(m_is_map_object);
+	node->SetModelAutoLoad(autoLoad);
+
 
 	if (!node->ReadElu(name))
 	{

@@ -119,7 +119,7 @@ bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 				else
 					strcpy(PathFileName, FileName);
 
-				int ret = m_parts_mgr->Add(PathFileName);
+				int ret = m_parts_mgr->Add(PathFileName, nullptr, false, true);
 
 				if (ret == -1) {
 					return false;
