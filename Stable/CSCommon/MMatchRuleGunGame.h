@@ -6,7 +6,7 @@ class MMatchRuleGunGame : public MMatchRule {
 protected:
 	int			   m_nSet;
 	vector<GGSet>  m_MatchSet;
-			void SendNewSet(const MUID& uidPlayer, int KillCount);
+			void SendNewSet(const MUID& uidPlayer, int KillCount,bool isSuicide);
 	virtual void OnBegin();
 	virtual void OnEnd();
 	virtual void OnRoundTimeOut();

@@ -1726,6 +1726,7 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType)
 		P(MPT_UINT, "Weapon1")
 		P(MPT_UINT, "Weapon2")
 		P(MPT_UINT, "Weapon3")
+		P(MPT_BOOL, "suicide")
 
 	//Custom: infection
 	C(MC_MATCH_GUNGAME_SET, "Set.ID", "Set ID", MCDT_MACHINE2MACHINE)

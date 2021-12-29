@@ -7,9 +7,11 @@ public:
 	ZRuleGunGame(ZMatch* pMatch);
 	virtual ~ZRuleGunGame();
 	virtual bool OnCommand(MCommand* pCommand);
+	virtual void AfterCommandProcessed(MCommand* pCmd) override;
+
 
 	int m_nSetID;
-	void SetPlayerWeapons(MUID& uidPlayer, const int WeaponSetArray[]);
+	void SetPlayerWeapons(MUID& uidPlayer, const int WeaponSetArray[], bool isSuicide);
 
 	vector<GGWeaponSet> matchSet;
 	vector<GGWeaponSet> GetMatchSet() { return matchSet; }

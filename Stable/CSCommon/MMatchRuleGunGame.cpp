@@ -57,10 +57,13 @@ void MMatchRuleGunGame::OnGameKill(const MUID& uidAttacker, const MUID& uidVicti
 	if (!pAttacker || !pVictim)
 		return;
 
+	//OnKilling yourself, you go back a level
 	if (pAttacker == pVictim)
-		return;
+	{
+		pAttacker->SetKillCount(pAttacker->GetKillCount() - 1);
+	}
 
-	SendNewSet(pAttacker->GetUID(), pAttacker->GetKillCount());
+	SendNewSet(pAttacker->GetUID(), pAttacker->GetKillCount(), pAttacker == pVictim);
 }
 
 bool MMatchRuleGunGame::CheckKillCount(MMatchObject* pOutObj)
@@ -92,7 +95,7 @@ bool MMatchRuleGunGame::OnCheckRoundFinish()
 	return false;
 }
 
-void MMatchRuleGunGame::SendNewSet(const MUID& uidPlayer,int KillCount)
+void MMatchRuleGunGame::SendNewSet(const MUID& uidPlayer,int KillCount, bool isSuicide)
 {
 	if (KillCount > static_cast<int>(m_MatchSet.size()))
 		return;
@@ -102,6 +105,7 @@ void MMatchRuleGunGame::SendNewSet(const MUID& uidPlayer,int KillCount)
 	pCommand->AddParameter(new MCmdParamUInt(pSet.WeaponSet[0]));
 	pCommand->AddParameter(new MCmdParamUInt(pSet.WeaponSet[1]));
 	pCommand->AddParameter(new MCmdParamUInt(pSet.WeaponSet[2]));
+	pCommand->AddParameter(new MCmdParamBool(isSuicide));
 
 	MGetMatchServer()->RouteToBattle(GetStage()->GetUID(), pCommand);
 }
@@ -114,7 +118,7 @@ bool MMatchRuleGunGame::OnRun()
 void MMatchRuleGunGame::OnEnterBattle(MUID& uidPlayer)
 {
 	MMatchObject* pJoiner = MGetMatchServer()->GetObject(uidPlayer);
-	SendNewSet(pJoiner->GetUID(), 0);
+	SendNewSet(pJoiner->GetUID(), 0,false);
 	for (auto itor = GetStage()->GetObjBegin(); itor != GetStage()->GetObjEnd(); ++itor)
 	{
 		MMatchObject* pObj = (MMatchObject*)(*itor).second;
@@ -123,7 +127,7 @@ void MMatchRuleGunGame::OnEnterBattle(MUID& uidPlayer)
 		if (!pObj->GetEnterBattle())
 			continue;
 		//TODO: make a separate function to send all players weapon info?
-		SendNewSet(pObj->GetUID(), pObj->GetKillCount());
+		SendNewSet(pObj->GetUID(), pObj->GetKillCount(),false);
 	}
 
 	MCommand* pCmd = MGetMatchServer()->CreateCommand(MC_MATCH_GUNGAME_SET, MUID(0, 0));

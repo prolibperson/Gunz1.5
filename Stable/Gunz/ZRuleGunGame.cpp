@@ -39,12 +39,14 @@ bool ZRuleGunGame::OnCommand(MCommand* pCommand)
 		{
 			int WeaponSet[3];
 			MUID uidPlayer;
+			bool isSuicide;
 			pCommand->GetParameter(&uidPlayer,0,MPT_UID);
 			pCommand->GetParameter(&WeaponSet[0], 1,MPT_UINT);
 			pCommand->GetParameter(&WeaponSet[1], 2, MPT_UINT);
 			pCommand->GetParameter(&WeaponSet[2], 3, MPT_UINT);
+			pCommand->GetParameter(&isSuicide, 4, MPT_BOOL);
 
-			SetPlayerWeapons(uidPlayer, WeaponSet);
+			SetPlayerWeapons(uidPlayer, WeaponSet,isSuicide);
 
 			return true;
 		}
@@ -81,13 +83,21 @@ bool ItemsAlreadyEquipped(ZCharacter* player,const int WeaponSetArray[])
 	return false;
 }
 
-void ZRuleGunGame::SetPlayerWeapons(MUID& uidPlayer, const int WeaponSetArray[])
+void ZRuleGunGame::SetPlayerWeapons(MUID& uidPlayer, const int WeaponSetArray[], bool isSuicide)
 {
 	ZCharacter* pChar = (ZCharacter*)ZGetCharacterManager()->Find(uidPlayer);
 	if (pChar == nullptr)
 	{
 		mlog("Error, char is nullptr?\n");
 		return;
+	}
+
+	if (isSuicide)
+	{
+		string message = pChar->GetCharName();
+		message.append("has killed themselves and went back a level!");
+
+		ZChatOutput(message.c_str());
 	}
 
 	//ugly logic yes, but it saves having to use another packet

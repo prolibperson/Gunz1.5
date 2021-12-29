@@ -372,7 +372,7 @@ bool RFont::Create(const TCHAR* szFontName, int nHeight, bool bBold/* =false */,
 	m_bAntiAlias = bAntiAlias;
 
 	m_hFont = CreateFont(-nHeight, 0, 0, 0, bBold==true?FW_BOLD:FW_NORMAL, bItalic==true?TRUE:FALSE, 
-		FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH , szFontName);
+		FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DRAFT_QUALITY, DEFAULT_PITCH , szFontName);
 
 	if(m_hFont==NULL)
 		return false;
