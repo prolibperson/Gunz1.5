@@ -4132,6 +4132,8 @@ void ZCombatInterface::OnRestore()
 //TODO: write logic
 void ZCombatInterface::DrawBlitzScoreBoard(MDrawContext* pDC)
 {
+	//TODO: handle positioning
+	return;
 	std::string bitMapName = "Blitz_ScoreBoard_";
 	if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED)
 		bitMapName.append("Red");
@@ -4140,23 +4142,24 @@ void ZCombatInterface::DrawBlitzScoreBoard(MDrawContext* pDC)
 
 	bitMapName.append(".png");
 
+	ZSCOREBOARDITEMLIST items;
+
 
 	MBitmap* scoreBoard = MBitmapManager::Get(bitMapName.c_str());
 	if (scoreBoard != nullptr)
 	{
 		//TODO: handle repositioning???
-		BitmapRelative(pDC, scoreBoard->GetX(), scoreBoard->GetY(), scoreBoard->GetWidth(), scoreBoard->GetHeight(),scoreBoard);
+		BitmapRelative(pDC, 0,0, scoreBoard->GetWidth(), scoreBoard->GetHeight(), scoreBoard);
+
+		for (auto& const itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
+		{
+			ZCharacter* player = dynamic_cast<ZCharacter*>((*itor).second);
+			if (player != nullptr)
+			{
+				MBitmap* classBitMap = ((ZRuleBlitzKrieg*)ZGetGame()->GetMatch()->GetRule())->GetClassBitmap(player->GetBlitzClass(), player->GetTeamID());
+			}
+		}
 	}
-
-	//TODO: Player Information
-
-
-	///todo: clean way to draw team m8 scores
-	/*for (auto& const itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
-	{
-		ZCharacter* player = dynamic_cast<ZCharacter*>((*itor).second);
-		if(play)
-	}*/
 }
 
 //TODO: get bitmaps to drqaw backwards on the opposite side of the screen.

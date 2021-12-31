@@ -1,9 +1,9 @@
-GUNZ 1,0,0,290 launched. build (Oct 31 2021 14:54:26) 
-Log time (10/31/21 15:09:11)
-Windows = 6.2 Build 9200 ,  (16701652KB) :  Windows 8..
+GUNZ 1,0,0,290 launched. build (Dec 30 2021 16:55:12) 
+Log time (12/31/21 17:45:51)
+Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
-Display Driver Version = 30.0.13025.5005
+Display Driver Version = 30.0.13037.1003
 Load XML from memory : system/locale.xml- SUCCESS
 Country : (BRZ), Language : (BRZ)
 Load Config from file : config.xml- SUCCESS
@@ -23,24 +23,24 @@ InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(4 - 55S517 (4- AMD High Definition Audio Device)): Hardware Mixing Not Supported
-2(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
-3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
+1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
+2(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
+3(4 - 55S517 (AMD High Definition Audio Device)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.590000 
+-------------------> Sound Engine Create : 0.614000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.588000 
+loading pictures : 1.626000 
 IDLResource Loading Success!!
-IDL resources : 0.123000 
+IDL resources : 4.258000 
 start InitInterface option
-Number of Display mode : 101
+Number of Display mode : 102
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.210000 
+Screen Effect Manager Create : 0.236000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -64,22 +64,21 @@ SFX/ef_haste ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater 
 SFX/ef_haste ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_haste ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 Effect manager create success.
-7989 upnp port forward initialized.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.635000 
+-------------------> GameInterface Create : 6.783000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.169000 
+-------------------> Character Loading : 0.176000 
 
 
--------------------> WeaponMesh Loading : 0.242000 
+-------------------> WeaponMesh Loading : 0.272000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.022000 
+-------------------> Worlditem Loading : 0.023000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -89,14 +88,23 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 21.275000 
+-------------------> ETC .. : 0.249000 
 
 game create begin , type = 0
-BspObject open : begin maps/deffjay/deffjay.rs 
+BspObject open : begin maps/maptest/maptest.rs 
+Error while loading maps/maptest/maptest.rs.xml
+error while loading maptest 
+ZGame Failed to create.
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
 RBspObject::Open : Open_MaterialList
 RBspObject::Open : Open_LightList
 BspObject open object list : begin
-RBspObject::Open_ObjectList : size 0 
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
 RBspObject::Open_ObjectList : end
 RBspObject::Open : OpenDescription
 RBspObject::OpenRs : file.Open 
@@ -107,25 +115,18 @@ RBspObject::OpenRs : Open_Nodes end
 RBspObject::Open : OpenRs 
 RBspObject::Open : OpenBsp 
 BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
+BspObject load lightmap nCount = 4
 BspObject load lightmap 0
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
-BspObject load lightmap 0
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
-BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
 BspObject load lightmap : file.Read(&m_nLightmap) done
 BspObject load lightmap : end 
 RBspObject::Open : done
+create game enrvironment.
 game world create success.
 Reload all animation end 
-game created ( 15:09:59 )
-Create character : Name=Jeff Level=99 
+game created ( 17:46:16 )
 main : OnCreate() done
 Destroy gunz
 Destroy sound engine.
@@ -137,7 +138,7 @@ game destroy begin
 Destroy sound engine()
 game destroy match destroy 
 ------------------------ReleaseBuffer
-game destroyed ( 15:10:04 )
+game destroyed ( 17:46:20 )
 game interface destroy finished
 destroy client.
 PeerInfoList Released

@@ -982,12 +982,15 @@ void ZGame::CheckMyCharDeadUnchecked()
 	}
 	else if (ZGetGameTypeManager()->IsNewQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType())) {
 		ZCharacter* pCharacter = dynamic_cast<ZCharacter*>(ZGetCharacterManager()->Find(uidAttacker));
-		if (pCharacter) {
+		if (pCharacter) 
+		{
 			ZPostGameKill(uidAttacker);
 		}
-		else {
+		else
+		{
 			ZActorWithFSM* pActor = dynamic_cast<ZActorWithFSM*>(ZGetObjectManager()->GetObject(uidAttacker));
-			if (pActor) {
+			if (pActor) 
+			{
 				ZPostQuestGameKill();
 			}
 		}
@@ -7275,7 +7278,8 @@ void ZGame::PostSpMotion(ZC_SPMOTION_TYPE mtype)
 
 		ZItem* pSItem = m_pMyCharacter->GetItems()->GetSelectedWeapon();
 
-		if( pSItem && pSItem->GetDesc() ) {
+		if( pSItem && pSItem->GetDesc())
+		{
 			type = pSItem->GetDesc()->m_nWeaponType.Ref();
 		}
 
@@ -7309,10 +7313,14 @@ bool ZGame::CanAttack(ZObject *pAttacker, ZObject *pTarget)
 
 	if (pAttacker == NULL) return true;
 
-	if (GetMatch()->IsTeamPlay()) {
-		if (pAttacker->GetTeamID() == pTarget->GetTeamID()) {
+	if (GetMatch()->IsTeamPlay())
+	{
+		if (pAttacker->GetTeamID() == pTarget->GetTeamID()) 
+		{
 			if (!GetMatch()->GetTeamKillEnabled())
+			{
 				return false;
+			}
 		}
 	}
 
@@ -7340,8 +7348,10 @@ bool ZGame::CanAttack_DebugRegister(ZObject *pAttacker, ZObject *pTarget)
 		if (GetMatch()->GetRoundState() != MMATCH_ROUNDSTATE_PLAY) return false;
 	if (pAttacker == NULL) return true;
 
-	if (GetMatch()->IsTeamPlay()) {
-		if (pAttacker->GetTeamID() == pTarget->GetTeamID()) {
+	if (GetMatch()->IsTeamPlay())
+	{
+		if (pAttacker->GetTeamID() == pTarget->GetTeamID()) 
+		{
 			if (!GetMatch()->GetTeamKillEnabled())
 				return false;
 		}
@@ -7382,16 +7392,16 @@ void ZGame::OnLocalOptainSpecialWorldItem(MCommand* pCommand)
 
 	switch (nWorldItemID)
 	{
-	case WORLDITEM_PORTAL_ID:
-	{
-		MMATCH_GAMETYPE eGameType = ZGetGameClient()->GetMatchStageSetting()->GetGameType();
-		if (!ZGetGameTypeManager()->IsQuestDerived(eGameType)) break;
+		case WORLDITEM_PORTAL_ID:
+		{
+			MMATCH_GAMETYPE eGameType = ZGetGameClient()->GetMatchStageSetting()->GetGameType();
+			if (!ZGetGameTypeManager()->IsQuestDerived(eGameType)) break;
 
-		// 서버에 포탈로 이동한다고 전송
-		char nCurrSectorIndex = ZGetQuest()->GetGameInfo()->GetCurrSectorIndex();
-		ZPostQuestRequestMovetoPortal(nCurrSectorIndex);
-	}
-	break;
+			// 서버에 포탈로 이동한다고 전송
+			char nCurrSectorIndex = ZGetQuest()->GetGameInfo()->GetCurrSectorIndex();
+			ZPostQuestRequestMovetoPortal(nCurrSectorIndex);
+		}
+		break;
 	};
 }
 

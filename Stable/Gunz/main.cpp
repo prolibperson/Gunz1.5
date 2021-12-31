@@ -740,6 +740,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			{
 				bool b = false;
 		}break;
+		case WM_DPICHANGED:
+		{
+			const int iDpi = GetDpiForWindow(g_hWnd);
+			const int dpiScaledWidth = MulDiv(RGetScreenWidth(), iDpi, 96);
+			const int dpiScaledHeight = MulDiv(RGetScreenHeight(), iDpi, 96);
+		}break;
 	}
 
 	if(Mint::GetInstance()->ProcessEvent(hWnd, message, wParam, lParam)==true)

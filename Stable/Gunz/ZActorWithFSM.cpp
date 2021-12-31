@@ -1794,20 +1794,15 @@ void ZActorWithFSM::SpawnSpecialNpc(int nBarricadeCount)
 float ZActorWithFSM::ModifyAttackDamage(float fDamage)
 {
 	///TODO: handle player damage from this
-	//float dist = 0;
-	//ZCharacter* characterObj = dynamic_cast<ZCharacter*>(ZGetCharacterManager()->Find(GetLastAttacker()));
-	//if (characterObj) {
-	//	for (auto itor = ZGetObjectManager()->GetNPCObjectMap()->begin(); itor != ZGetObjectManager()->GetNPCObjectMap()->end(); ++itor) {
-	//		if (itor->second->GetUID() == GetUID())
-	//			continue;
-	//		ZActorWithFSM* fsmActor = dynamic_cast<ZActorWithFSM*>((*itor).second);
-	//		if (_stricmp(fsmActor->GetActorDef()->GetActorType(), "barricade") != 0 ||
-	//			_stricmp(fsmActor->GetActorDef()->GetActorType(), "radar") != 0)
-	//			continue;
+	float dist = MagnitudeSq(ZGetGame()->m_pMyCharacter->GetPosition() - GetPosition());
+	if (_stricmp(GetActorDef()->GetActorType(), "barricade") == 0)
+	{
+		if (dist <= 800)
+		{
+			fDamage *= 0.5;
+		}
+	}
 
-	//		float dist = Magnitude(characterObj->GetPosition() - fsmActor->GetPosition());
-	//	}
-	//}
 	return fDamage;//todo: handle modification of damage
 }
 

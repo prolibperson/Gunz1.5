@@ -362,17 +362,18 @@ bool RFont::Create(const TCHAR* szFontName, int nHeight, bool bBold/* =false */,
 
 	const int iDpi = GetDpiForWindow(g_hWnd);
 
-
-	nHeight = MulDiv(nHeight, GetDeviceCaps(hDC, LOGPIXELSY), iDpi);
+	//multiply font by real dpi and divide by the default of 96
+	float scale = (float)96 / float(iDpi);
+	float AdjustedHeight = (nHeight * scale) + nHeight;
 	
-	m_nHeight = nHeight;
+	m_nHeight = AdjustedHeight;
 
 	m_ColorArg1 = nColorArg1;
 	m_ColorArg2 = nColorArg2;
 	m_bAntiAlias = bAntiAlias;
 
-	m_hFont = CreateFont(-nHeight, 0, 0, 0, bBold==true?FW_BOLD:FW_NORMAL, bItalic==true?TRUE:FALSE, 
-		FALSE, FALSE, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DRAFT_QUALITY, DEFAULT_PITCH , szFontName);
+	m_hFont = CreateFont(-AdjustedHeight, 0, 0, 0, bBold==true?FW_BOLD:FW_NORMAL, bItalic==true?TRUE:FALSE,
+		FALSE, FALSE, DEFAULT_CHARSET, OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH , szFontName);
 
 	if(m_hFont==NULL)
 		return false;

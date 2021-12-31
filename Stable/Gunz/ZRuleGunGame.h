@@ -7,7 +7,6 @@ public:
 	ZRuleGunGame(ZMatch* pMatch);
 	virtual ~ZRuleGunGame();
 	virtual bool OnCommand(MCommand* pCommand);
-	virtual void AfterCommandProcessed(MCommand* pCmd) override;
 
 
 	int m_nSetID;
