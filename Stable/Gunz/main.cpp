@@ -745,6 +745,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			const int iDpi = GetDpiForWindow(g_hWnd);
 			const int dpiScaledWidth = MulDiv(RGetScreenWidth(), iDpi, 96);
 			const int dpiScaledHeight = MulDiv(RGetScreenHeight(), iDpi, 96);
+
+			RAdjustWindow(&g_ModeParams);
+
+			g_pDefFont->Destroy();
+
+			if (g_pDefFont->Create("Default", Z_LOCALE_DEFAULT_FONT, DEFAULT_FONT_HEIGHT, 1.0f) == false)
+			{
+				mlog("Fail to Create defualt font : MFontR2 / main.cpp.. onCreate\n");
+				g_pDefFont->Destroy();
+				SAFE_DELETE(g_pDefFont);
+				g_pDefFont = NULL;
+			}
 		}break;
 	}
 

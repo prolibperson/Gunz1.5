@@ -360,19 +360,29 @@ bool RFont::Create(const TCHAR* szFontName, int nHeight, bool bBold/* =false */,
 	HDC hDC = GetDC(g_hWnd);
 	SetMapMode(hDC, MM_TEXT);
 
-	const int iDpi = GetDpiForWindow(g_hWnd);
 
-	//multiply font by real dpi and divide by the default of 96
-	float scale = (float)96 / float(iDpi);
-	float AdjustedHeight = (nHeight * scale) + nHeight;
-	
-	m_nHeight = AdjustedHeight;
+	const int iDpi = GetDpiForWindow(g_hWnd);
+	//if window is being scaled, calculate the scale from the original Dpi, then multiply and add the original height
+	if (iDpi != 96)
+	{
+		if (iDpi != 96)
+		{
+			float scale = (float)96 / float(iDpi);
+			m_nHeight = (nHeight * scale) + nHeight;
+		}
+	}
+	//otherwise as normal
+	else
+	{
+		nHeight = MulDiv(nHeight, GetDeviceCaps(hDC, LOGPIXELSY), 72);
+		m_nHeight = nHeight;
+	}
 
 	m_ColorArg1 = nColorArg1;
 	m_ColorArg2 = nColorArg2;
 	m_bAntiAlias = bAntiAlias;
 
-	m_hFont = CreateFont(-AdjustedHeight, 0, 0, 0, bBold==true?FW_BOLD:FW_NORMAL, bItalic==true?TRUE:FALSE,
+	m_hFont = CreateFont(-m_nHeight, 0, 0, 0, bBold==true?FW_BOLD:FW_NORMAL, bItalic==true?TRUE:FALSE,
 		FALSE, FALSE, DEFAULT_CHARSET, OUT_DEVICE_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH , szFontName);
 
 	if(m_hFont==NULL)
