@@ -95,28 +95,17 @@ BOOL CWorldEditDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
 	if (!CDocument::OnOpenDocument(lpszPathName))
 		return FALSE;
-	
-	/*
-	char rmpath[256];
-	ReplaceExtension(rmpath,lpszPathName,"rm2");
 
-	m_pMaterialList=new RMaterialList;
-	m_pMaterialList->Open(rmpath);
-
-	// TODO: Add your specialized creation code here
-	m_pBspObject=new RBspObject;
-	m_pBspObject->Open(lpszPathName,m_pMaterialList);
-	m_pBspObject->OpenLightmap();
-	m_pBspObject->CreateVertexBuffer();
-*/
-
-	SAFE_DELETE(m_pBspObject);
+	if (m_pBspObject)
+	{
+		SAFE_DELETE(m_pBspObject);
+	}
 
 	m_pBspObject=new RBspObject;
 	if(!m_pBspObject->Open(lpszPathName, "xml", ROpenFlag::ROF_EDITOR))
 	{
 		SAFE_DELETE(m_pBspObject);
-		AfxMessageBox("파일열기에 실패하였습니다.");
+		AfxMessageBox("Failed to open file.");
 		return FALSE;
 	}
 

@@ -254,7 +254,7 @@ BOOL CWorldEditView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD
 
 	if(ret)
 	{
-		RMODEPARAMS mparams={ 1024,768,false,D3DFMT_R5G6B5 };
+		RMODEPARAMS mparams={ 1024,768,false,D3DFMT_X8R8G8B8 };
 		RSetMultiSampling(D3DMULTISAMPLE_TYPE::D3DMULTISAMPLE_8_SAMPLES);
 		RSetStencilBuffer(true);
 		if(!RInitDisplay(m_hWnd,&mparams))
@@ -280,7 +280,7 @@ BOOL CWorldEditView::OnEraseBkgnd(CDC* pDC)
 
 void CWorldEditView::Resize(CSize size)
 {
-	RMODEPARAMS mparams={ size.cx,size.cy,false,D3DFMT_R5G6B5 };
+	RMODEPARAMS mparams={ size.cx,size.cy,false,D3DFMT_X8R8G8B8 };
 	RBspObject *pbsp=GetDocument()->m_pBspObject;
 	if(pbsp) pbsp->OnInvalidate();
 	RResetDevice(&mparams);
@@ -592,7 +592,8 @@ void CWorldEditView::OnDropFiles(HDROP hDropInfo)
 
 	if (file.extension() == ".rs")
 	{
-		AfxGetApp()->OpenDocumentFile(file.generic_u8string().c_str());
+		m_pDocument->OnOpenDocument(file.generic_u8string().c_str());
+		//AfxGetApp()->OpenDocumentFile(file.generic_u8string().c_str());
 	}
 	else
 	{
@@ -643,7 +644,7 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			rmatrix mat;
 			D3DXMatrixRotationX(&mat, -D3DXToRadian(5));
 			cameraDir = cameraDir * mat;
-			Normalize(cameraDir);
+			//Normalize(cameraDir);
 
 			RCameraDirection = D3DXVECTOR3(RCameraDirection.x, RCameraDirection.y,cameraDir.z);
 		}break;
@@ -667,7 +668,7 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			rvector accel = rvector(0, 0, 0);
 			accel += forward;
 
-			rvector cameraMove = 50 * 0.04 * accel;
+			rvector cameraMove = 1000 * 0.002 * accel;
 
 			rvector targetPos = cameraMove + RCameraPosition;
 
@@ -684,7 +685,7 @@ BOOL CWorldEditView::PreTranslateMessage(MSG* pMsg)
 			rvector accel = rvector(0, 0, 0);
 			accel -= forward;
 
-			rvector cameraMove = 50 * 0.04 * accel;
+			rvector cameraMove = 1000 * 0.002 * accel;
 
 			rvector targetPos = cameraMove + RCameraPosition;
 

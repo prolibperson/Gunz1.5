@@ -609,6 +609,7 @@ int g_nChosenNodeCount;
 
 bool RBspObject::Draw()
 {
+	//draw sky first so it can be occluded by the rest of the world object
 	DrawSky();
 
 
@@ -4184,15 +4185,19 @@ void RBspObject::DrawLight(D3DLIGHT9 *pLight)
 //Custom: OnUpdate to make objects movable
 void RBspObject::OnUpdate(float fElapsed)
 {
-	int movableObjectCount = 0; ///TODO: create movable objects and find a way to populate a vector of movable objects. this is just pseudocode while my mind is thinking about how i'd do this
-	///TODO:
-	for (int i = 0; i < movableObjectCount; ++i)
+	return;
+	//update flags
+	for (auto const& itor : m_FlagList.m_MapObjectList)
 	{
-		/*
-		m_MovableObjects->UpdatePosition(///TODO:position);
+		ROBJECTINFO* flagObj = itor;
 
+		D3DXVECTOR3 pos = flagObj->pVisualMesh->GetPosition();
 
-		*/
+		//if can't see object, skip updating it.
+		if (isInViewFrustum(flagObj->pVisualMesh->GetPosition(), RGetViewFrustum()) == false)
+		{
+			continue;
+		}
 	}
 }
 

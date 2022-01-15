@@ -69,6 +69,7 @@ CMainFrame::~CMainFrame()
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
+	InitLog(MLOGSTYLE_DEBUGSTRING | MLOGSTYLE_FILE);
 	SetTitle("WorldEdit ( build " __DATE__" " __TIME__" )");
 	lpCreateStruct->dwExStyle |= WS_EX_ACCEPTFILES;
 

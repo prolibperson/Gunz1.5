@@ -486,7 +486,7 @@ END
 STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "WorldEdit"
-    AFX_IDS_IDLEMESSAGE     "준비"
+    AFX_IDS_IDLEMESSAGE     "preparation"
 END
 
 STRINGTABLE
@@ -501,11 +501,11 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_FILE_NEW             "새 문서를 작성합니다\n새 파일"
-    ID_FILE_OPEN            "기존 문서를 엽니다\n열기"
-    ID_FILE_CLOSE           "현재 열린 문서를 닫습니다\n닫기"
-    ID_FILE_SAVE            "현재 열린 문서를 저장합니다\n저장"
-    ID_FILE_SAVE_AS         "현재 열린 문서를 다른 이름으로 저장합니다\n다른 이름으로 저장"
+    ID_FILE_NEW             "Creates a new document\nNew file"
+    ID_FILE_OPEN            "Open an existing document\nOpen "
+    ID_FILE_CLOSE           "Close the currently open document\nClose "
+    ID_FILE_SAVE            "Save the currently open document\nSave "
+    ID_FILE_SAVE_AS         "Saves the currently open document as\nSave As "
 END
 
 STRINGTABLE
@@ -516,22 +516,22 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_FILE_MRU_FILE1       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE2       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE3       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE4       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE5       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE6       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE7       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE8       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE9       "이 문서를 엽니다"
-    ID_FILE_MRU_FILE10      "이 문서를 엽니다"
-    ID_FILE_MRU_FILE11      "이 문서를 엽니다"
-    ID_FILE_MRU_FILE12      "이 문서를 엽니다"
-    ID_FILE_MRU_FILE13      "이 문서를 엽니다"
-    ID_FILE_MRU_FILE14      "이 문서를 엽니다"
-    ID_FILE_MRU_FILE15      "이 문서를 엽니다"
-    ID_FILE_MRU_FILE16      "이 문서를 엽니다"
+    ID_FILE_MRU_FILE1       "Open This Document"
+    ID_FILE_MRU_FILE2       "Open This Document"
+    ID_FILE_MRU_FILE3       "Open This Document"
+    ID_FILE_MRU_FILE4       "Open This Document"
+    ID_FILE_MRU_FILE5       "Open This Document"
+    ID_FILE_MRU_FILE6       "Open This Document"
+    ID_FILE_MRU_FILE7       "Open This Document"
+    ID_FILE_MRU_FILE8       "Open This Document"
+    ID_FILE_MRU_FILE9       "Open This Document"
+    ID_FILE_MRU_FILE10      "Open This Document"
+    ID_FILE_MRU_FILE11      "Open This Document"
+    ID_FILE_MRU_FILE12      "Open This Document"
+    ID_FILE_MRU_FILE13      "Open This Document"
+    ID_FILE_MRU_FILE14      "Open This Document"
+    ID_FILE_MRU_FILE15      "Open This Document"
+    ID_FILE_MRU_FILE16      "Open This Document"
 END
 
 STRINGTABLE
@@ -585,10 +585,10 @@ END
 
 STRINGTABLE
 BEGIN
-    ID_MENUITEM_MODEOBJECT  "맵위에 놓일 오브젝트를 추가/삭제/이동 합니다."
-    ID_MENUITEM_MODETRIGGER "트리거"
+    ID_MENUITEM_MODEOBJECT  "Add/delete/move objects to be placed on the map. "
+    ID_MENUITEM_MODETRIGGER "trigger "
     ID_MENUITEM32777        "-_-"
-    ID_MENUITEM_MODEPATH    "지형의 갈수 있는 곳 / 없는 곳을 정합니다."
+    ID_MENUITEM_MODEPATH    "Decide where you can go / where you can't go on the terrain. "
 END
 
 #endif    // Korean (Korea) resources
