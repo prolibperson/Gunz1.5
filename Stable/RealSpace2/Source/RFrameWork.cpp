@@ -13,6 +13,9 @@
 static DWORD g_last_mouse_move_time = 0;
 static bool g_tool_tip = false;
 
+static double lastUpdateTime;
+static double lastRenderTime;
+
 bool IsToolTipEnable() {
 	return g_tool_tip;
 }
@@ -333,21 +336,81 @@ int RMain(const char* AppName, HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR c
 	return 0;
 }
 
+
+
+using namespace std::chrono;
+
+
+void RFrame_UpdateRender(double& lastUpdateTime, double& lastRenderTime)
+{
+	///TODO: add new variable (g_nUpdateLimitvalue) note : the updatetime must be equal to or higher than the frametime, otherwise bugs can occur
+
+	__BP(5006,"RMain::Run");
+
+	double thisTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+
+	if (g_nUpdateLimitValue != 0)
+	{
+		const double maxUpdatePeriod = 1000.0 / static_cast<double>(g_nUpdateLimitValue);
+
+		double  deltaTime = duration<double>(thisTime - lastUpdateTime).count();
+
+		if (deltaTime >= maxUpdatePeriod)
+		{
+			RFrame_Update();
+			lastUpdateTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+		}
+	}
+	else
+	{
+		RFrame_Update();
+	}
+
+	thisTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+	const double maxRenderPeriod = 1000.0 / static_cast<double>(g_nFrameLimitValue);
+	double deltaTime = duration<double>(thisTime - lastRenderTime).count();
+
+	if (deltaTime >= maxRenderPeriod)
+	{
+		g_fFPS = deltaTime;
+		lastRenderTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+
+		RFrame_Render();
+
+		__BP(5007, "RMain::RFlip");
+
+
+
+		if (!RFlip())
+		{
+			RIsReadyToRender();
+		}
+		__EP(5007);
+
+	}
+
+	__EP(5006);
+}
+
 void RFrame_UpdateRender()
 {
-	__BP(5006,"RMain::Run");
+	__BP(5006, "RMain::Run");
 
 
 	RFrame_Update();
+
+
+
 	RFrame_Render();
 
-	__BP(5007,"RMain::RFlip");
-	
+	__BP(5007, "RMain::RFlip");
+
 	if (!RFlip())
 	{
 		RIsReadyToRender();
 	}
 	__EP(5007);
+
 
 	__EP(5006);
 }
@@ -357,9 +420,6 @@ void RFrame_UpdateInput()
 	if (g_pFunctions[RF_UPDATEINPUT])
 		g_pFunctions[RF_UPDATEINPUT](NULL);
 }
-
-
-using namespace std::chrono;
 
 int RRun()
 {
@@ -371,8 +431,8 @@ int RRun()
 			return -1;
 		}
 	}
-
-	double lastTime = duration<double,std::ratio<1,1000>>(high_resolution_clock::now().time_since_epoch()).count();
+	lastUpdateTime = duration<double,std::ratio<1,1000>>(high_resolution_clock::now().time_since_epoch()).count();
+	lastRenderTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
 
 	RFrame_Init();
 
@@ -404,24 +464,7 @@ int RRun()
         }
 		else
 		{
-			if (g_nFrameLimitValue != 0)
-			{
-				const double maxPeriod = 1000.0 / static_cast<double>(g_nFrameLimitValue);
-				double currTime = duration<double,std::ratio<1,1000>>(high_resolution_clock::now().time_since_epoch()).count();
-
-				double  deltaTime = duration<double>(currTime - lastTime).count();
-				if (deltaTime >= maxPeriod)
-				{
-					g_fFPS = deltaTime;
-					RFrame_UpdateRender();		
-					lastTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
-
-				}
-			}
-			else
-			{
-				RFrame_UpdateRender();
-			}
+			RFrame_UpdateRender(lastUpdateTime, lastRenderTime);
 		}
 
 		if(!g_bActive)

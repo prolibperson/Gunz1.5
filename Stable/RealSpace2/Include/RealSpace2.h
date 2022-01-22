@@ -49,6 +49,7 @@ RParticleSystem *RGetParticleSystem();
 extern int g_nFrameCount,g_nLastFrameCount;
 extern double g_fFPS;
 extern int g_nFrameLimitValue;
+extern int g_nUpdateLimitValue;
 extern HWND	g_hWnd;
 extern MZFileSystem *g_pFileSystem;
 extern DWORD g_dwLastTime;
@@ -139,6 +140,7 @@ LPDIRECT3DSURFACE9 RCreateImageSurface(const char *filename);
 void RSetGammaRamp(unsigned short nGammaValue = 255);
 // 1초당 프레임 제한 설정
 void RSetFrameLimitPerSeceond(unsigned short nFrameLimit = 0);
+void RSetUpdateLimitPerSecond(unsigned short nUpdateLimit = 0);
 // wbuffer enable
 void RSetWBuffer(bool bEnable);
 

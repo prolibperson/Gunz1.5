@@ -48,6 +48,7 @@ int	g_nVidioMemory = 0;
 int g_nFrameCount=0,g_nLastFrameCount=0;
 double g_fFPS=0;
 int g_nFrameLimitValue=0;
+int g_nUpdateLimitValue = 0;
 DWORD g_dwLastTime=timeGetTime();
 DWORD g_dwLastFPSTime=timeGetTime();
 
@@ -663,7 +664,7 @@ RRESULT RIsReadyToRender()
 			displayMode.RefreshRate = 0;
 			displayMode.ScanLineOrdering = D3DSCANLINEORDERING_PROGRESSIVE;
 			hr = g_pd3dDevice->ResetEx(&g_d3dpp, RIsFullScreen() != 0 ? &displayMode : nullptr);
-			return R_NOTREADY;
+			return R_RESTORED;
 		}
 
 		if (hr == D3DERR_DEVICEHUNG)
@@ -681,7 +682,7 @@ RRESULT RIsReadyToRender()
 			hr = g_pd3dDevice->ResetEx(&g_d3dpp, RIsFullScreen() != 0 ? &displayMode : nullptr);
 			RBaseTexture_Restore();
 			RFrame_Restore();
-			return R_NOTREADY;
+			return R_RESTORED;
 		}
 		return R_OK;
 	}
@@ -1096,6 +1097,19 @@ void RSetFrameLimitPerSeceond(unsigned short nFrameLimit)
 	case 3:	{	g_nFrameLimitValue = 250;	}	break;
 	case 4: {   g_nFrameLimitValue = 333;   }   break;
 	default:{	g_nFrameLimitValue = 0;		}	break;
+	}
+}
+
+void RSetUpdateLimitPerSecond(unsigned short nUpdateLimit)
+{
+	switch (nUpdateLimit)
+	{
+	case 0: {g_nUpdateLimitValue = 60; }break;
+	case 1: {	g_nUpdateLimitValue = 120;	}	break;
+	case 2: {	g_nUpdateLimitValue = 250;	}	break;
+	case 3: {	g_nUpdateLimitValue = 333;	}	break;
+	case 4: {   g_nUpdateLimitValue = 500;   }   break;
+	default: {	g_nUpdateLimitValue = 250;		}	break;
 	}
 }
 

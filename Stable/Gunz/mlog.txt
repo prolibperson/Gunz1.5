@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Dec 30 2021 16:55:12) 
-Log time (12/31/21 17:45:51)
+GUNZ 1,0,0,290 launched. build (Jan 22 2022 10:21:50) 
+Log time (01/22/22 10:22:24)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
@@ -28,19 +28,19 @@ ZApplication::OnCreate : begin
 3(4 - 55S517 (AMD High Definition Audio Device)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.614000 
+-------------------> Sound Engine Create : 0.542000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.626000 
+loading pictures : 1.584000 
 IDLResource Loading Success!!
-IDL resources : 4.258000 
+IDL resources : 0.133000 
 start InitInterface option
 Number of Display mode : 102
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.236000 
+Screen Effect Manager Create : 0.216000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -67,18 +67,18 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 6.783000 
+-------------------> GameInterface Create : 2.404000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.176000 
+-------------------> Character Loading : 0.169000 
 
 
--------------------> WeaponMesh Loading : 0.272000 
+-------------------> WeaponMesh Loading : 0.259000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.023000 
+-------------------> Worlditem Loading : 0.024000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -88,7 +88,7 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.249000 
+-------------------> ETC .. : 0.234000 
 
 game create begin , type = 0
 BspObject open : begin maps/maptest/maptest.rs 
@@ -126,42 +126,5 @@ RBspObject::Open : done
 create game enrvironment.
 game world create success.
 Reload all animation end 
-game created ( 17:46:16 )
+game created ( 10:22:44 )
 main : OnCreate() done
-Destroy gunz
-Destroy sound engine.
-Destroy sound engine. success
-Destroy console.
-Destroy interface begin 
-game interface destory begin.
-game destroy begin
-Destroy sound engine()
-game destroy match destroy 
-------------------------ReleaseBuffer
-game destroyed ( 17:46:20 )
-game interface destroy finished
-destroy client.
-PeerInfoList Released
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-clear IDL resource end.
-Final interface end.
-Destroy game interface done.
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-Destroy mesh manager.
-Destroy weapon mesh manager.
-Clear SkillManager.
-Clear QuestItemDescMgr.
-Clear MatchItemDescMgr.
-Clear ChattingFilter.
-Clear ChannelRuleMgr.
-destroy game application done.
-interface finalize.
-game input destroy.
-game gonfiguration destroy.
-Bitmap manager destroy Animation bitmap.
-destroy gunz finish.
-Rframe_destory::closeDisplay
