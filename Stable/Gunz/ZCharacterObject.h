@@ -157,7 +157,7 @@ class ZCharacterObject : public ZObject
 private:
 	float			m_fTremblePower;	///< Be shot when the shivery degree
 public:
-	ZCharacterObject(IGame* pGame);
+	ZCharacterObject();
 	virtual ~ZCharacterObject();
 
 public:

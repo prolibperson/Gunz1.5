@@ -9,12 +9,8 @@
 class ZActorBase : public ZCharacterObject
 {
 	MDeclareRTTI;
-
-protected:
-	IGame* m_pGame;
-
 public:
-	ZActorBase(IGame* pGame);
+	ZActorBase();
 	virtual ~ZActorBase() {}
 
 	virtual void SetMyControl(bool bMyControl) = 0;

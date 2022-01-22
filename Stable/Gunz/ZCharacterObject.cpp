@@ -16,7 +16,7 @@ MImplementRTTI(ZCharacterObject, ZObject);
 
 sCharacterLight	g_CharLightList[NUM_LIGHT_TYPE];
 
-ZCharacterObject::ZCharacterObject(IGame* pGame) : ZObject(pGame)
+ZCharacterObject::ZCharacterObject() : ZObject()
 {
 	m_pshadow = NULL;
 	m_bDynamicLight = false;

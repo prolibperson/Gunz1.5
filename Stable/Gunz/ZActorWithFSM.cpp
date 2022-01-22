@@ -18,8 +18,8 @@
 MImplementRTTI(ZActorWithFSM, ZActorBase);
 
 static float currTime = 0.f;
-ZActorWithFSM::ZActorWithFSM(IGame* pGame, ZActorActionManager* pActionMgr)
-: ZActorBase(pGame)
+ZActorWithFSM::ZActorWithFSM(ZActorActionManager* pActionMgr)
+: ZActorBase()
 , m_pActionMgr(pActionMgr)
 , m_pActorDef(NULL)
 , m_pFsm(NULL)
@@ -419,7 +419,7 @@ void ZActorWithFSM::UpdatePosition(float fDelta)
 			vPos.z += 50.f;
 
 			RBSPPICKINFO pInfo;
-			if (m_pGame->PickWorld(vPos, vDir, &pInfo))
+			if (ZGetGame()->PickWorld(vPos, vDir, &pInfo))
 			{
 				vPos = pInfo.PickPos;
 
@@ -560,7 +560,7 @@ void ZActorWithFSM::ProcessShotInAction(float fDelta)
 			{
 				ZCharacterObject* pObj = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(m_uidTarget));
 
-				pMeleeShot->ProcessShot(ZGetGame(), m_UID, fCurrTime);
+				pMeleeShot->ProcessShot(m_UID, fCurrTime);
 				SetProcessedShot(pMeleeShot);
 			}
 		}
@@ -758,7 +758,7 @@ void ZActorWithFSM::PostBasicInfo()
 	if (GetInitialized() == false) return;
 
 	// Dont send info 5 seconds after the npc dies.
-	if(IsDie() && m_pGame->GetTime() - GetDeadTime()>5.f) return;
+	if(IsDie() && ZGetGame()->GetTime() - GetDeadTime()>5.f) return;
 	int nMoveTick = 100;///TODO: figure out owhat's making this so CPU intensive???? -__-
 
 	if ((int)(nNowTime - m_nLastTimePostBasicInfo) >= nMoveTick)
@@ -766,7 +766,7 @@ void ZActorWithFSM::PostBasicInfo()
 		m_nLastTimePostBasicInfo = nNowTime;
 
 		ZACTOR_WITHFSM_BASICINFO pbi;
-		pbi.fTime = m_pGame->GetTime();//todok del
+		pbi.fTime = ZGetGame()->GetTime();//todok del
 		pbi.uidNPC = GetUID();
 
 		pbi.posx = GetPosition().x;
@@ -799,7 +799,7 @@ void ZActorWithFSM::PostBasicInfo()
 		pitem->info.direction = GetDirection();
 		pitem->info.velocity = GetVelocity();
 
-		pitem->fSendTime = pitem->fReceivedTime = m_pGame->GetTime();
+		pitem->fSendTime = pitem->fReceivedTime = ZGetGame()->GetTime();
 		m_BasicHistory.push_back(pitem);
 
 		while(m_BasicHistory.size()>ACTOR_HISTROY_COUNT)
@@ -1040,7 +1040,7 @@ void ZActorWithFSM::Cond_GetTargetPos( rvector& out )
 {
 	out = rvector(0,0,0);
 
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 	if (m_uidTarget.IsInvalid()) return;
 
 	ZCharacterObject* pChar = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(m_uidTarget));
@@ -1088,7 +1088,7 @@ bool ZActorWithFSM::CanSee(ZObject* pTarget)
 
 bool ZActorWithFSM::Cond_CanSeeTarget()
 {
-	if (!m_pGame) { _ASSERT(0); return false; }
+	if (!ZGetGame()) { _ASSERT(0); return false; }
 	if (m_uidTarget.IsInvalid()) return false;
 
 	ZObject* pChar = ZGetObjectManager()->GetObject(m_uidTarget);
@@ -1099,7 +1099,7 @@ bool ZActorWithFSM::Cond_CanSeeTarget()
 
 bool ZActorWithFSM::Cond_CantSeeTarget()
 {
-	if (!m_pGame) { _ASSERT(0); return false; }
+	if (!ZGetGame()) { _ASSERT(0); return false; }
 	if (m_uidTarget.IsInvalid()) return false;
 	ZObject* pChar = ZGetObjectManager()->GetObject(m_uidTarget);
 	if (!CanSee(pChar))
@@ -1125,7 +1125,7 @@ bool ZActorWithFSM::Cond_Pick(float fAngleDegree, float fDist)
 
 	const DWORD dwPickPassFlag=RM_FLAG_ADDITIVE | RM_FLAG_HIDE;
 
-	if (m_pGame->Pick(this,pos, dir, &pickinfo, dwPickPassFlag)) 
+	if (ZGetGame()->Pick(this,pos, dir, &pickinfo, dwPickPassFlag)) 
 	{
 		rvector pickpos;
 
@@ -1152,7 +1152,7 @@ bool ZActorWithFSM::Cond_Pick(float fAngleDegree, float fDist)
 
 void ZActorWithFSM::Func_FindTarget()
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	MUID uidTarget	= MUID(0,0);
 	float fDist		= FLT_MAX;
@@ -1185,7 +1185,7 @@ void ZActorWithFSM::Func_SetTargetLastAttacker()
 
 void ZActorWithFSM::Func_RotateToTarget(float fFrameDelta)
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	if (m_uidTarget.IsInvalid()) return;
 
@@ -1201,7 +1201,7 @@ void ZActorWithFSM::Func_RotateToTarget(float fFrameDelta)
 
 void ZActorWithFSM::Func_FaceToTarget()
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	if (m_uidTarget.IsInvalid()) return;
 
@@ -1226,7 +1226,7 @@ void ZActorWithFSM::Func_ReduceGroggy(float f)
 
 void ZActorWithFSM::Func_BuildWaypointsToTarget()
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	if (m_uidTarget.IsInvalid()) return;
 	m_listWaypoint.clear();
@@ -1235,7 +1235,7 @@ void ZActorWithFSM::Func_BuildWaypointsToTarget()
 	if (!pTarget) return;
 
 	// Make path
-	ZNavigationMesh navMesh = m_pGame->GetNavigationMesh();
+	ZNavigationMesh navMesh = ZGetNavigationMesh();
 	if ( navMesh.IsNull())
 		return;
 
@@ -1355,7 +1355,7 @@ void ZActorWithFSM::Func_OnEnterBlastedThrust()
 
 	Normalize(m_vAddBlastVel);
 
-	m_fAddBlastVelTime = m_pGame->GetTime();
+	m_fAddBlastVelTime = ZGetGame()->GetTime();
 
 	m_bSuffering = true;
 	//SetFlag(AF_LAND, false); //todok land 플래그 만들어지면 처리하자*/
@@ -1411,7 +1411,7 @@ void ZActorWithFSM::Func_OnUpdateBlastedThrust(float fFrameDelta)
 /*
 #define BLAST_DAGGER_MAX_TIME 0.8f
 
-	float fTime = max((1.f - (m_pGame->GetTime() - m_fAddBlastVelTime) / BLAST_DAGGER_MAX_TIME),0.0f);
+	float fTime = max((1.f - (ZGetGame()->GetTime() - m_fAddBlastVelTime) / BLAST_DAGGER_MAX_TIME),0.0f);
 
 	if( fTime < 0.4f )
 		fTime = 0.f;
@@ -1434,7 +1434,7 @@ void ZActorWithFSM::Func_ExitSuffering()
 
 void ZActorWithFSM::Func_OnEnterDie()
 {
-	SetDeadTime(m_pGame->GetTime());
+	SetDeadTime(ZGetGame()->GetTime());
 	if (m_summonCount > 0)
 		m_summonCount--;
 }
@@ -1489,7 +1489,7 @@ bool ZActorWithFSM::Cond_SummonLess(int Count)
 
 void ZActorWithFSM::Func_FindTargetInHeight(int height)
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	MUID uidTarget = MUID(0, 0);
 	float fDist = FLT_MAX;
@@ -1519,7 +1519,7 @@ void ZActorWithFSM::Func_FindTargetInHeight(int height)
 
 void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist, float fDelta)
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	if (m_uidTarget.IsInvalid()) return;
 
@@ -1527,7 +1527,7 @@ void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist, float fDelta)
 	if (!pTarget) return;
 	// Make path
 
-	ZNavigationMesh navMesh = m_pGame->GetNavigationMesh();
+	ZNavigationMesh navMesh = ZGetNavigationMesh();
 	if (navMesh.IsNull())
 		return;
 
@@ -1620,7 +1620,7 @@ void ZActorWithFSM::Func_FindTargetInDist(int nArg1)
 
 void ZActorWithFSM::Func_FaceToLatestAttacker()
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 //	if (m_uidTarget.IsInvalid()) return;
 
@@ -1639,7 +1639,7 @@ void ZActorWithFSM::Func_FaceToLatestAttacker()
 #include "../Blitz.h"
 void ZActorWithFSM::Func_RunWayPointsAlongRoute(float fDelta)
 {
-	ZNavigationMesh navMesh = ZGetGame()->GetNavigationMesh();
+	ZNavigationMesh navMesh = ZGetNavigationMesh();
 	if (navMesh.IsNull())
 		return;
 

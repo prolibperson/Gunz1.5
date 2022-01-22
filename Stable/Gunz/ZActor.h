@@ -10,16 +10,14 @@
 #include "ZStateMachine.h"
 #include "ZAI_Base.h"
 #include "MBaseQuest.h"
-#include "IBrain.h"
 #include "ZActorAnimation.h"
 #include "ZTask.h"
 #include "ZTaskManager.h"
 #include "ZModule_HPAP.h"
 #include "MMatchTransDataType.h"
 #include "ZNPCInfoFromServer.h"
-#include "IGame.h"
 #include "ZActorBase.h"
-
+#include "ZBrain.h"
 #include <list>
 #include <string>
 using namespace std;
@@ -71,7 +69,7 @@ protected:
 	MMatchItemDesc			m_ItemDesc;			// npc의 무기(혹은 아이템 디스크립션)
 	MQuestNPCInfo*			m_pNPCInfo;
 	ZActorAnimation			m_Animation;		// Animation부분을 관장
-	IBrain*					m_pBrain;			// AI 부분을 관장
+	ZBrain*					m_pBrain;			// AI 부분을 관장
 	ZTaskManager			m_TaskManager;
 	float					m_timeDieAnimationDone;
 	float					m_fSpeed;			// 속도는 인스턴스 개개마다 다 다르다.
@@ -79,7 +77,7 @@ protected:
 	bool					m_bReserveStandUp;	// 쓰러지고 나서 일어나는데 지연 시간을 가짐
 	DWORD					m_dwStandUp;		// 쓰러지고 나서 일어나는데까지 걸리는 시간
 private:
-	void InitFromNPCType(MQUEST_NPC nNPCType, float fTC, int nQL, IBrain* pBrain);
+	void InitFromNPCType(MQUEST_NPC nNPCType, float fTC, int nQL, ZBrain* pBrain);
 	void InitMesh(char* szMeshName, MQUEST_NPC nNPCType);
 	void OnTaskFinished(ZTASK_ID nLastID);
 	static void OnTaskFinishedCallback(ZActor* pActor, ZTASK_ID nLastID);
@@ -132,9 +130,9 @@ protected:
 	void PostBossHpAp();
 
 public:
-	ZActor(IGame* pGame);
+	ZActor();
 	virtual ~ZActor();
-	static ZActor* CreateActor(MQUEST_NPC nNPCType, float fTC, int nQL, bool bForceCollRadius35, ZActor* pExternalAllocBody, IBrain* pExternalAllocBrain);
+	static ZActor* CreateActor(MQUEST_NPC nNPCType, float fTC, int nQL, bool bForceCollRadius35);
 	virtual void InputBasicInfo(ZBasicInfo* pni, BYTE anistate);
 	virtual void InputBossHpAp(float fHp, float fAp);
 	void Input(AI_INPUT_SET nInput);
@@ -178,7 +176,7 @@ public:
 
 	bool isThinkAble();
 
-	IBrain* GetBrain()					{ return m_pBrain; }
+	ZBrain* GetBrain()					{ return m_pBrain; }
 	MQuestNPCInfo* GetNPCInfo()			{ return m_pNPCInfo; }
 	ZTaskManager* GetTaskManager()		{ return &m_TaskManager; }
 

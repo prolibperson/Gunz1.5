@@ -880,12 +880,6 @@
     <ClInclude Include="ZRuleQuestChallenge.h">
       <Filter>Game\Rule</Filter>
     </ClInclude>
-    <ClInclude Include="IBrain.h">
-      <Filter>Character\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="IGame.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="ZWeaponNewQuest.h">
       <Filter>ZWeapon</Filter>
     </ClInclude>

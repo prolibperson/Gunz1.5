@@ -90,7 +90,7 @@ private:
 	bool m_bIsBoss;
 	bool m_bIsStationary;
 public:
-	ZActorWithFSM(IGame* pGame, ZActorActionManager* pActionMgr);
+	ZActorWithFSM(ZActorActionManager* pActionMgr);
 	~ZActorWithFSM();
 
 	MActorDef* GetActorDef() { return m_pActorDef; }

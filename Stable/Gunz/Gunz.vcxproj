@@ -210,8 +210,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="IBrain.h" />
-    <ClInclude Include="IGame.h" />
     <ClInclude Include="ZActionDef.h" />
     <ClInclude Include="ZActorAction.h" />
     <ClInclude Include="ZActorActionManager.h" />

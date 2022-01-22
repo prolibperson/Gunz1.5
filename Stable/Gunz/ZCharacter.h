@@ -530,7 +530,7 @@ public:
 	
 //	ZHPInfoHistory		m_HPHistory;		///< 투표를 위해 몇초간의 데이터를 가지고있는다
 
-	ZCharacter(IGame* pGame);
+	ZCharacter();
 	virtual ~ZCharacter();
 
 	virtual bool Create(MTD_CharInfo* pCharInfo/*, MTD_CharBuffInfo* pCharBuffInfo*/);//버프정보임시주석 

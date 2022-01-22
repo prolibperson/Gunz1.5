@@ -10,7 +10,7 @@
 #include "../CSCommon/MCompanionDef.h"
 
 
-ZCompanion::ZCompanion(IGame* pGame) : ZActorBase(pGame)
+ZCompanion::ZCompanion() : ZActorBase()
 ,m_RealPositionBefore(rvector(0,0,0))
 {
 
@@ -205,7 +205,7 @@ void ZCompanion::OnDamaged(ZObject* pAttacker, rvector srcPos, ZDAMAGETYPE damag
 
 void ZCompanion::FindTarget()
 {
-	if (!m_pGame) { _ASSERT(0); return; }
+	if (!ZGetGame()) { _ASSERT(0); return; }
 
 	MUID uidTarget = MUID(0, 0);
 	float fDist = FLT_MAX;
@@ -281,7 +281,7 @@ void ZCompanion::UpdatePosition(float fDelta)
 			vPos.z += 50.f;
 
 			RBSPPICKINFO pInfo;
-			if (m_pGame->PickWorld(vPos, vDir, &pInfo))
+			if (ZGetGame()->PickWorld(vPos, vDir, &pInfo))
 			{
 				vPos = pInfo.PickPos;
 

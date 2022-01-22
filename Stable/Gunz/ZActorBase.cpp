@@ -3,9 +3,7 @@
 
 MImplementRTTI(ZActorBase, ZCharacterObject);
 
-ZActorBase::ZActorBase( IGame* pGame )
-: ZCharacterObject(pGame)
-, m_pGame(pGame)
+ZActorBase::ZActorBase() : ZCharacterObject()
 {
 
 }

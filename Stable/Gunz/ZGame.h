@@ -2,7 +2,6 @@
 #define _ZGAME_H
 
 //#pragma once
-#include "IGame.h"
 #include "ZPrerequisites.h"
 
 #include "MMatchClient.h"
@@ -20,6 +19,7 @@
 #include "ZCharacterManager.h"
 #include "ZObjectManager.h"
 #include "ZWorld.h"
+#include "ZNavigationMesh.h"
 
 _USING_NAMESPACE_REALSPACE2
 
@@ -43,6 +43,19 @@ class ZMapDesc;
 class ZReplayLoader;
 
 void CheckMsgAboutChat(char * msg);
+
+struct ZPICKINFO {
+
+	// 캐릭터가 결과인 경우
+	//	ZCharacter *pCharacter;
+	ZObject* pObject;
+	RPickInfo	info;
+
+	// 맵이 결과인경우.
+	bool bBspPicked;
+	int nBspPicked_DebugRegister;
+	RBSPPICKINFO bpi;
+};
 
 // Game Loop 시작하기 전의 초기화및 싱크완료 검사에 쓰임
 enum ZGAME_READYSTATE {
@@ -89,22 +102,20 @@ struct ReplayInfo_UseSpendItem
 #define PEERMOVE_TICK			100		// 0.1초 마다 이동메세지를 보낸다 (초당 10회)
 #define PEERMOVE_AGENT_TICK		100		// Agent를 통하면 초당 10번 메시지를 보낸다.
 
-
-#include "IGame.h"
-
-class ZGame : public IGame { 
+class ZGame
+{
 protected:
 	enum ZGAME_LASTTIME
 	{
-		ZLASTTIME_HPINFO		= 0,
+		ZLASTTIME_HPINFO = 0,
 		ZLASTTIME_BASICINFO,
 		ZLASTTIME_PEERPINGINFO,
 		ZLASTTIME_SYNC_REPORT,
 		ZLASTTIME_MAX
 	};
 
-//	ZWorld				*m_pWorld;
-	ZGameAction			*m_pGameAction;
+	//	ZWorld				*m_pWorld;
+	ZGameAction* m_pGameAction;
 	MDataChecker		m_DataChecker;
 	ZGameTimer			m_GameTimer;
 	MProtectValue<float> m_fTime;
@@ -112,32 +123,31 @@ protected:
 	DWORD				m_nLastTime[ZLASTTIME_MAX];
 	MProtectValue<DWORD>			m_lastHackCheck;
 
-    bool				m_bIsCreate;	
-	
+	bool				m_bIsCreate;
+
 	ZGAME_READYSTATE	m_nReadyState;
 
 	set<const ZCharacter*>	m_setCharacterExceptFromNpcTarget;		// NPC가 타겟으로 삼지 않아야 하는 캐릭터
 
 	void OnPreDraw();
 	bool OnRuleCommand(MCommand* pCommand);
-	virtual bool InRanged( ZObject* pAttacker, ZObject* pVictim);
-	virtual bool InRanged( ZObject* pAttacker, ZObject* pVictim, int &nDebugRegister/*디버그 레지스터 해킹 방지를 위한 변수*/);
+	bool InRanged(ZObject* pAttacker, ZObject* pVictim, int& nDebugRegister/*디버그 레지스터 해킹 방지를 위한 변수*/);
 
 public://todok 단위테스트를 위해서는 최종적으로는 private으로 바꿔야 한다.
 
 	// 핵 제작을 방해하기 위해 멤버변수의 위치를 빌드때마다 뒤섞기 위한 주석매크로(runtime/ShuffleCode.bat 실행)
 	// m_pMyCharacter가 중요하다. ZGame 포인터를 통해 내 캐릭터를 찾아 무적핵을 제작한다.
-	/* [[SHUFFLE_LINE]] ZGame */	ZMyCharacter*		m_pMyCharacter;
+	/* [[SHUFFLE_LINE]] ZGame */	ZMyCharacter* m_pMyCharacter;
 
-	/* [[SHUFFLE_LINE]] ZGame */	ZEffectManager*		m_pEffectManager;
+	/* [[SHUFFLE_LINE]] ZGame */	ZEffectManager* m_pEffectManager;
 
 	/* [[SHUFFLE_LINE]] ZGame */	ZHelpScreen	m_HelpScreen;
 	/* [[SHUFFLE_LINE]] ZGame */	ZCharacterManager	m_CharacterManager;
 
 	/* [[SHUFFLE_LINE]] ZGame */	bool m_bShowWireframe;
-	/* [[SHUFFLE_LINE]] ZGame */	RParticles			*m_pParticles;
+	/* [[SHUFFLE_LINE]] ZGame */	RParticles* m_pParticles;
 	/* [[SHUFFLE_LINE]] ZGame */	RVisualMeshMgr		m_VisualMeshMgr;
-	
+
 	/* [[SHUFFLE_LINE]] ZGame */	ZWeaponMgr			m_WeaponManager;
 
 	/* [[SHUFFLE_LINE]] ZGame */	ZObjectManager		m_ObjectManager;
@@ -145,22 +155,22 @@ public://todok 단위테스트를 위해서는 최종적으로는 private으로 바꿔야 한다.
 
 
 public:
-	virtual MUID GetMyUid();
-	virtual ZMyCharacter* GetMyCharacter() { return m_pMyCharacter; }
+	MUID GetMyUid();
+	ZMyCharacter* GetMyCharacter() { return m_pMyCharacter; }
 
-	virtual ZCharacterManagerBase* GetCharacterMgr() { return &m_CharacterManager; }
-	
+	ZCharacterManagerBase* GetCharacterMgr() { return &m_CharacterManager; }
+
 public:
 
 	ZGame();
-	virtual ~ZGame();
+	~ZGame();
 
-	bool Create(MZFileSystem *pfs, ZLoadingProgress *pLoading = nullptr);
+	bool Create(MZFileSystem* pfs, ZLoadingProgress* pLoading = nullptr);
 
 	bool IsCreated() { return m_bIsCreate; }
 
 	void Draw();
-	void Draw(MDrawContextR2 &dc);
+	void Draw(MDrawContextR2& dc);
 	void Update(float fElapsed);
 	void Destroy();
 
@@ -170,14 +180,14 @@ public:
 
 	void ParseReservedWord(char* pszDest, const char* pszSrc);
 
-	void ShowReplayInfo( bool bShow);
+	void ShowReplayInfo(bool bShow);
 
-	void OnExplosionGrenade(MUID uidOwner,rvector pos,float fDamage,float fRange,float fMinDamage,float fKnockBack,MMatchTeam nTeamID);
-	void OnExplosionMagic(ZWeaponMagic *pWeapon, MUID uidOwner,rvector pos,float fMinDamage,float fKnockBack,MMatchTeam nTeamID,bool bSkipNpc);
-	void OnExplosionMagicThrow(ZWeaponMagic *pWeapon, MUID uidOwner,rvector pos,float fMinDamage,float fKnockBack,MMatchTeam nTeamID,bool bSkipNpc, rvector from, rvector to);
-	void OnExplosionMagicNonSplash(ZWeaponMagic *pWeapon, MUID uidOwner, MUID uidTarget, rvector pos, float fKnockBack);
-	void OnReloadComplete(ZCharacterObject *pCharacter);
-	
+	void OnExplosionGrenade(MUID uidOwner, rvector pos, float fDamage, float fRange, float fMinDamage, float fKnockBack, MMatchTeam nTeamID);
+	void OnExplosionMagic(ZWeaponMagic* pWeapon, MUID uidOwner, rvector pos, float fMinDamage, float fKnockBack, MMatchTeam nTeamID, bool bSkipNpc);
+	void OnExplosionMagicThrow(ZWeaponMagic* pWeapon, MUID uidOwner, rvector pos, float fMinDamage, float fKnockBack, MMatchTeam nTeamID, bool bSkipNpc, rvector from, rvector to);
+	void OnExplosionMagicNonSplash(ZWeaponMagic* pWeapon, MUID uidOwner, MUID uidTarget, rvector pos, float fKnockBack);
+	void OnReloadComplete(ZCharacterObject* pCharacter);
+
 	void OnPeerShotSp(MUID& uid, float fShotTime, rvector& pos, rvector& dir, int type, MMatchCharItemParts sel_type);
 
 	void OnChangeWeapon(MUID& uid, MMatchCharItemParts parts);
@@ -190,8 +200,8 @@ public:
 	void CheckMyCharDeadUnchecked();
 
 	void CheckStylishAction(ZCharacter* pCharacter);
-	void CheckCombo( ZCharacter *pOwnerCharacter , ZObject *pHitObject ,bool bPlaySound);
-	void UpdateCombo(bool bShot = false );
+	void CheckCombo(ZCharacter* pOwnerCharacter, ZObject* pHitObject, bool bPlaySound);
+	void UpdateCombo(bool bShot = false);
 	//void AssignCommander(const MUID& uidRedCommander, const MUID& uidBlueCommander);
 	//void SetGameRuleInfo(const MUID& uidRedCommander, const MUID& uidBlueCommander);
 
@@ -202,11 +212,14 @@ public:
 	void PostPeerPingInfo();
 	void PostSyncReport();
 	void PostMyBuffInfo();
-	
+
 	int  SelectSlashEffectMotion(ZCharacter* pCharacter);
 	//jintriple3 디버그 레지스터 해킹 방지~!!!
-	virtual bool IsWallBlocked(ZObject* pObj1,ZObject* pObj2, bool bCoherentToPeer=false);
-	virtual bool IsWallBlocked(ZObject* pObj1,ZObject* pObj2, int & nDebugRegister/*단순 비교용*/, bool bCoherentToPeer=false);
+	bool IsWallBlocked(ZObject* pObj1, ZObject* pObj2, bool bCoherentToPeer = false);
+	bool IsWallBlocked(ZObject* pObj1, ZObject* pObj2, int& nDebugRegister/*단순 비교용*/, bool bCoherentToPeer = false);
+
+	bool InRanged(ZObject* pAttacker, ZObject* pVictim);
+
 
 	void InitRound();
 	void AddEffectRoundState(MMATCH_ROUNDSTATE nRoundState, int nArg);
@@ -242,58 +255,58 @@ public:
 	void ReleaseObserver();
 
 	// 외부에서 참조할만한 것들
-	ZMatch* GetMatch()				{ return &m_Match; }
-	ZMapDesc* GetMapDesc()			{ return GetWorld() ? GetWorld()->GetDesc() : NULL; }
-	ZWorld* GetWorld()				{ return ZGetWorldManager()->GetCurrent(); }
+	ZMatch* GetMatch() { return &m_Match; }
+	ZMapDesc* GetMapDesc() { return GetWorld() ? GetWorld()->GetDesc() : NULL; }
+	ZWorld* GetWorld() { return ZGetWorldManager()->GetCurrent(); }
 
-	ZGameTimer* GetGameTimer()		{ return &m_GameTimer; }
-	unsigned long GetTickTime()		{ return m_GameTimer.GetGlobalTick(); }
-	virtual float GetTime()			{ /*mlog("현재시간: %f \n", m_fTime.GetData());*/ return m_fTime.Ref(); }
+	ZGameTimer* GetGameTimer() { return &m_GameTimer; }
+	unsigned long GetTickTime() { return m_GameTimer.GetGlobalTick(); }
+	float GetTime() { /*mlog("현재시간: %f \n", m_fTime.GetData());*/ return m_fTime.Ref(); }
 
 	int GetPing(MUID& uid);
 
-	MDataChecker* GetDataChecker()	{ return &m_DataChecker; }
+	MDataChecker* GetDataChecker() { return &m_DataChecker; }
 
 	bool CharacterOverlapCollision(ZObject* pFloorObject, float WorldFloorHeight, float ObjectFloorHeight);
 
-	virtual bool Pick(ZObject *pOwnerObject,rvector &origin,rvector &dir,ZPICKINFO *pickinfo,DWORD dwPassFlag=RM_FLAG_ADDITIVE | RM_FLAG_HIDE,bool bMyChar=false);
-	bool PickTo(ZObject *pOwnerObject,rvector &origin,rvector &to,ZPICKINFO *pickinfo,DWORD dwPassFlag=RM_FLAG_ADDITIVE | RM_FLAG_HIDE,bool bMyChar=false);
-	bool PickHistory(ZObject *pOwnerObject,float fTime,const rvector &origin, const rvector &to,ZPICKINFO *pickinfo,DWORD dwPassFlag,bool bMyChar=false);
+	bool Pick(ZObject* pOwnerObject, rvector& origin, rvector& dir, ZPICKINFO* pickinfo, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_HIDE, bool bMyChar = false);
+	bool PickTo(ZObject* pOwnerObject, rvector& origin, rvector& to, ZPICKINFO* pickinfo, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_HIDE, bool bMyChar = false);
+	bool PickHistory(ZObject* pOwnerObject, float fTime, const rvector& origin, const rvector& to, ZPICKINFO* pickinfo, DWORD dwPassFlag, bool bMyChar = false);
 	bool ObjectColTest(ZObject* pOwner, rvector& origin, rvector& to, float fRadius, ZObject** poutTarget);
 
-	virtual bool PickWorld( const rvector &pos, const rvector &dir,RBSPPICKINFO *pOut,DWORD dwPassFlag=RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE);
-	virtual bool CheckWall(rvector &origin, rvector &targetpos, float fRadius, float fHeight=0.f, RCOLLISIONMETHOD method=RCW_CYLINDER, int nDepth=0, rplane *pimpactplane=NULL);
-	virtual rvector GetFloor(rvector pos, rplane *pimpactplane=NULL, MUID uID=MUID(0,0) );
+	bool PickWorld(const rvector& pos, const rvector& dir, RBSPPICKINFO* pOut, DWORD dwPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_USEOPACITY | RM_FLAG_HIDE);
+	bool CheckWall(rvector& origin, rvector& targetpos, float fRadius, float fHeight = 0.f, RCOLLISIONMETHOD method = RCW_CYLINDER, int nDepth = 0, rplane* pimpactplane = NULL);
+	rvector GetFloor(rvector pos, rplane* pimpactplane = NULL, MUID uID = MUID(0, 0));
 	// 어떤 오브젝트가 diff만큼 이동하려 할때 다른 캐릭터와의 충돌을 고려해 diff를 수정해주는 함수
-	virtual void AdjustMoveDiff(ZObject* pObject, rvector& diff);
+	void AdjustMoveDiff(ZObject* pObject, rvector& diff);
 
-	virtual ZNavigationMesh GetNavigationMesh();	// 단순 포인터 래퍼이므로 그냥 return by value
+	ZNavigationMesh GetNavigationMesh();	// 단순 포인터 래퍼이므로 그냥 return by value
 
 	char* GetSndNameFromBsp(const char* szSrcSndName, RMATERIAL* pMaterial);
 
 	bool CheckGameReady();
-	ZGAME_READYSTATE GetReadyState()			{ return m_nReadyState; }
-	void SetReadyState(ZGAME_READYSTATE nState)	{ m_nReadyState = nState; }
+	ZGAME_READYSTATE GetReadyState() { return m_nReadyState; }
+	void SetReadyState(ZGAME_READYSTATE nState) { m_nReadyState = nState; }
 
-	bool GetSpawnRequested()			{ return m_bSpawnRequested; }
-	void SetSpawnRequested(bool bVal)	{ m_bSpawnRequested = bVal; }
+	bool GetSpawnRequested() { return m_bSpawnRequested; }
+	void SetSpawnRequested(bool bVal) { m_bSpawnRequested = bVal; }
 
-	bool GetUserNameColor(MUID uid,MCOLOR& color,char* sp_name);
+	bool GetUserNameColor(MUID uid, MCOLOR& color, char* sp_name);
 	//jintriple3 디버그 레지스터 해킹 방지를 위해 CanAttack()함수를 이름만 바꿔서 사용.
-	virtual bool CanAttack(ZObject *pAttacker, ZObject *pTarget);
-	virtual bool CanAttack_DebugRegister(ZObject *pAttacker, ZObject *pTarget);
+	bool CanAttack(ZObject* pAttacker, ZObject* pTarget);
+	bool CanAttack_DebugRegister(ZObject* pAttacker, ZObject* pTarget);
 
-	bool CanISeeAttacker( ZCharacter* pAtk, const rvector& vRequestPos );
+	bool CanISeeAttacker(ZCharacter* pAtk, const rvector& vRequestPos);
 
 	// npc AI가 타겟으로 삼지않아야 하는 캐릭터 목록 관련함수
 	void ExceptCharacterFromNpcTargetting(const ZCharacter* pChar) { m_setCharacterExceptFromNpcTarget.insert(pChar); }
 	void ClearListExceptionFromNpcTargetting() { m_setCharacterExceptFromNpcTarget.clear(); }
-	virtual bool IsExceptedFromNpcTargetting(const ZCharacter* pChar) { return m_setCharacterExceptFromNpcTarget.find(pChar) != m_setCharacterExceptFromNpcTarget.end(); }
+	bool IsExceptedFromNpcTargetting(const ZCharacter* pChar) { return m_setCharacterExceptFromNpcTarget.find(pChar) != m_setCharacterExceptFromNpcTarget.end(); }
 
 protected:
 	char m_szReplayFileName[_MAX_PATH];	// 리플레이 저장 완료 메시지 출력을 위해
-	ZFile *m_pReplayFile;
-//	FILE *m_pRecordingFile;
+	ZFile* m_pReplayFile;
+	//	FILE *m_pRecordingFile;
 	MProtectValue<bool> m_bReplaying;
 	bool m_bShowReplayInfo;
 
@@ -318,14 +331,14 @@ protected:
 	ReplayInfo_UseSpendItem m_Replay_UseItem[16];	// 16명 이상 사용시 무시(확률적음) map등을 사용할 필요성....
 
 	void CheckKillSound(ZCharacter* pAttacker);
-	
+
 	void OnReserveObserver();
 	void DrawDebugInfo();
 
 	void OnStageEnterBattle(MCmdEnterBattleParam nParam, MTD_PeerListNode* pPeerNode);
 	void OnStageLeaveBattle(const MUID& uidChar, const bool bIsRelayMap);//, const MUID& uidStage);
 	void OnPeerList(const MUID& uidStage, void* pBlob, int nCount);
-	void OnAddPeer(const MUID& uidChar, DWORD dwIP, const int nPort =	
+	void OnAddPeer(const MUID& uidChar, DWORD dwIP, const int nPort =
 		MATCHCLIENT_DEFAULT_UDP_PORT, MTD_PeerListNode* pNode = NULL);
 	void OnGameRoundState(const MUID& uidStage, int nRound, int nRoundState, int nArg);
 
@@ -335,37 +348,37 @@ protected:
 	// 사라진듯.
 //	void OnPeerShot_Item(ZCharacter* pOwnerCharacter,float fShotTime, rvector& pos, rvector& dir,int type);
 
-	void OnPeerDead(const MUID& uidAttacker, const unsigned long int nAttackerArg, 
-					const MUID& uidVictim, const unsigned long int nVictimArg);
+	void OnPeerDead(const MUID& uidAttacker, const unsigned long int nAttackerArg,
+		const MUID& uidVictim, const unsigned long int nVictimArg);
 	void OnReceiveTeamBonus(const MUID& uidChar, const unsigned long int nExpArg);
 	void OnPeerDie(MUID& uidVictim, MUID& uidAttacker);
 	void OnPeerDieMessage(ZCharacter* pVictim, ZCharacter* pAttacker);
-	void OnChangeParts(MUID& uid,int partstype,int PartsID);
+	void OnChangeParts(MUID& uid, int partstype, int PartsID);
 	//void OnAssignCommander(const MUID& uidRedCommander, const MUID& uidBlueCommander);
-	void OnAttack(MUID& uid,int type,rvector& pos);
-	void OnDamage(MUID& tuid,int damage);
+	void OnAttack(MUID& uid, int type, rvector& pos);
+	void OnDamage(MUID& tuid, int damage);
 	void OnPeerReload(MUID& uid);
-	void OnPeerSpMotion(MUID& uid,int nMotionType);
+	void OnPeerSpMotion(MUID& uid, int nMotionType);
 	void OnPeerChangeCharacter(MUID& uid);
 	void OnPeerSpawn(MUID& uid, rvector& pos, rvector& dir);
 
 	void OnSetObserver(MUID& uid);
-	
 
-//	void OnPeerAdd();
-	void OnPeerBasicInfo(MCommand *pCommand,bool bAddHistory=true,bool bUpdate=true);
-	void OnPeerUpdateCharacter(MCommand *pCommand);
-	void OnPeerHPInfo(MCommand *pCommand);
-	void OnPeerHPAPInfo(MCommand *pCommand);
-	void OnPeerDuelTournamentHPAPInfo(MCommand *pCommand);
-	void OnPeerPing(MCommand *pCommand);
-	void OnPeerPong(MCommand *pCommand);
-	void OnPeerOpened(MCommand *pCommand);
+
+	//	void OnPeerAdd();
+	void OnPeerBasicInfo(MCommand* pCommand, bool bAddHistory = true, bool bUpdate = true);
+	void OnPeerUpdateCharacter(MCommand* pCommand);
+	void OnPeerHPInfo(MCommand* pCommand);
+	void OnPeerHPAPInfo(MCommand* pCommand);
+	void OnPeerDuelTournamentHPAPInfo(MCommand* pCommand);
+	void OnPeerPing(MCommand* pCommand);
+	void OnPeerPong(MCommand* pCommand);
+	void OnPeerOpened(MCommand* pCommand);
 	void OnPeerDash(MCommand* pCommand);
 	void OnPeerBuffInfo(const MUID& uidSender, void* pBlobBuffInfo);
 
-		
-	bool FilterDelayedCommand(MCommand *pCommand);
+
+	bool FilterDelayedCommand(MCommand* pCommand);
 	void ProcessDelayedCommand();
 
 	// 투표는 봉인
@@ -379,7 +392,7 @@ public:
 
 	void AutoAiming();
 
-	void OnPeerShot( const MUID& uid, float fShotTime, const rvector& pos, const rvector& to, const MMatchCharItemParts sel_type);
+	void OnPeerShot(const MUID& uid, float fShotTime, const rvector& pos, const rvector& to, const MMatchCharItemParts sel_type);
 
 	void PostSpMotion(ZC_SPMOTION_TYPE type);
 
@@ -387,16 +400,16 @@ public:
 	void OnPeerShot_Melee(const MUID& uidOwner, float fShotTime);
 	void OnPeerShot_Range(const MMatchCharItemParts sel_type, const MUID& uidOwner, float fShotTime, const rvector& pos, const rvector& to);
 	//jintriple3 디버그 레지스터 핵 방어를 위해 OnPeerShot_Range를 쪼갬...
-	void OnPeerShot_Range_Damaged(ZObject* pOwner, float fShotTime, const rvector& pos, const rvector& to, ZPICKINFO pickinfo, DWORD dwPickPassFlag, rvector& v1, rvector& v2, ZItem *pItem, rvector& BulletMarkNormal, bool& bBulletMark, ZTargetType& nTargetType);
-	void OnPeerShot_Shotgun(ZItem *pItem, ZCharacter* pOwnerCharacter, float fShotTime, const rvector& pos, const rvector& to);
-	void OnPeerShotgun_Damaged(ZObject* pOwner, float fShotTime, const rvector& pos, rvector &dir, ZPICKINFO pickinfo, DWORD dwPickPassFlag, rvector& v1, rvector& v2, ZItem *pItem, rvector& BulletMarkNormal, bool& bBulletMark, ZTargetType& nTargetType, bool& bHitEnemy);
+	void OnPeerShot_Range_Damaged(ZObject* pOwner, float fShotTime, const rvector& pos, const rvector& to, ZPICKINFO pickinfo, DWORD dwPickPassFlag, rvector& v1, rvector& v2, ZItem* pItem, rvector& BulletMarkNormal, bool& bBulletMark, ZTargetType& nTargetType);
+	void OnPeerShot_Shotgun(ZItem* pItem, ZCharacter* pOwnerCharacter, float fShotTime, const rvector& pos, const rvector& to);
+	void OnPeerShotgun_Damaged(ZObject* pOwner, float fShotTime, const rvector& pos, rvector& dir, ZPICKINFO pickinfo, DWORD dwPickPassFlag, rvector& v1, rvector& v2, ZItem* pItem, rvector& BulletMarkNormal, bool& bBulletMark, ZTargetType& nTargetType, bool& bHitEnemy);
 
-    void ReserveSuicide( void);
-	bool IsReservedSuicide( void)		{ return m_bSuicide; }
-	void CancelSuicide( void)			{ m_bSuicide = false; }
-	ZObserverCommandList* GetReplayCommandList()  { return &m_ReplayCommandList;} 
+	void ReserveSuicide(void);
+	bool IsReservedSuicide(void) { return m_bSuicide; }
+	void CancelSuicide(void) { m_bSuicide = false; }
+	ZObserverCommandList* GetReplayCommandList() { return &m_ReplayCommandList; }
 
-	void MakeResourceCRC32( const DWORD dwKey, DWORD& out_crc32, DWORD& out_xor );
+	void MakeResourceCRC32(const DWORD dwKey, DWORD& out_crc32, DWORD& out_xor);
 
 	void OnResponseUseSpendableBuffItem(MUID& uidItem, int nResult);
 	//버프정보임시주석 
@@ -407,7 +420,7 @@ public:
 	void OnUseDynamite(int nItemID, ZCharacter* pCharObj, rvector& pos);
 	void OnUseStunGrenade(int nItemID, ZCharacter* pCharObj, rvector& pos);
 
-	void CheckZoneTrap(MUID uidOwner,rvector pos,MMatchItemDesc* pItemDesc, MMatchTeam nTeamID);
+	void CheckZoneTrap(MUID uidOwner, rvector pos, MMatchItemDesc* pItemDesc, MMatchTeam nTeamID);
 	void OnExplosionDynamite(MUID uidOwner, rvector pos, float fDamage, float fRange, float fKnockBack, MMatchTeam nTeamID);
 	void OnExplosionStunGrenade(MUID uidOwner, rvector pos, float fDamage, float fRange, float fKnockBack, MMatchTeam nTeamID);
 	void CheckZoneItemKit(MUID uidOwner, rvector pos, float fDamage, MMatchTeam nTeamID);
@@ -416,9 +429,9 @@ public:
 	bool IsRecording() { return m_bRecording; }
 
 
-	virtual int GetCharacterBasicInfoTick();	// 오브젝트의 기본정보를 피어에게 보낼 시간간격 확인
+	int GetCharacterBasicInfoTick();	// 오브젝트의 기본정보를 피어에게 보낼 시간간격 확인
 
-	virtual bool IsEnabledToWarpNpcWhenStucked();
+	bool IsEnabledToWarpNpcWhenStucked();
 };
 
 

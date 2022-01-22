@@ -272,11 +272,9 @@ void ZActorAnimation::Set(ZA_ANIM_STATE nAnim, bool bReset)
 {
 	if ((!bReset) && (GetCurrState() == nAnim)) return;
 
-	IBrain* pBrain = m_pBody->GetBrain();
-
-	if (pBrain)
+	if (m_pBody->GetBrain())
 	{
-		pBrain->OnBody_AnimExit(m_nCurrState);
+		m_pBody->GetBrain()->OnBody_AnimExit(m_nCurrState);
 	}
 
 	if (m_pBody->m_pVMesh)
@@ -291,7 +289,7 @@ void ZActorAnimation::Set(ZA_ANIM_STATE nAnim, bool bReset)
 		_ASSERT(0);
 	}
 
-	if (pBrain) pBrain->OnBody_AnimEnter(m_nCurrState);
+	if (m_pBody->GetBrain()) m_pBody->GetBrain()->OnBody_AnimEnter(m_nCurrState);
 }
 
 bool ZActorAnimation::Input(ZA_ANIM_INPUT nInput)

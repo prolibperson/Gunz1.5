@@ -196,7 +196,7 @@ public:
 	void SetThrust(bool b) { m_thrust = b; }
 	void SetUpperCut(bool b) { m_uppercut = b;
 	}
-	void ProcessShot(IGame* pGame, const MUID& uidOwner, float fShotTime) const;
+	void ProcessShot(const MUID& uidOwner, float fShotTime) const;
 };
 
 class ZActorActionRangeShot : public ZActorActionShotCommon

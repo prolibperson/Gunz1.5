@@ -21,8 +21,8 @@
 MImplementRTTI(ZActor, ZActorBase);
 
 ///////////////////////////////////////////////////////////////////////
-ZActor::ZActor(IGame* pGame) 
-: ZActorBase(pGame)
+ZActor::ZActor() 
+: ZActorBase()
 , m_nFlags(0)
 , m_pNPCInfo(NULL)
 , m_pModule_Skills(NULL), m_fSpeed(0.0f), m_pBrain(NULL)
@@ -188,10 +188,10 @@ void ZActor::OnDraw()
 #define TRAN_AFTER		0.5f	// 이 시간 이후부터
 #define VANISH_TIME		1.f		// 이 시간동안 투명해진다
 
-		if(m_timeDieAnimationDone==-1) m_timeDieAnimationDone = m_pGame->GetTime();
+		if(m_timeDieAnimationDone==-1) m_timeDieAnimationDone = ZGetGame()->GetTime();
 
 //		float fOpacity = max(0.f,min(1.0f,(	VANISH_TIME-(m_pGame->GetTime()-GetDeadTime() - TRAN_AFTER))/VANISH_TIME));
-		float fOpacity = max(0.f,min(1.0f,(	VANISH_TIME-(m_pGame->GetTime()-m_timeDieAnimationDone - TRAN_AFTER))/VANISH_TIME));
+		float fOpacity = max(0.f,min(1.0f,(	VANISH_TIME-(ZGetGame()->GetTime()-m_timeDieAnimationDone - TRAN_AFTER))/VANISH_TIME));
 
 		m_pVMesh->SetVisibility(fOpacity);
 	}
@@ -318,7 +318,7 @@ void SetClientNPCInfoFromServerNPCInfo( MQuestNPCInfo* pClientNPCInfo, const MTD
 	pClientNPCInfo->fSpeed			= pServerNPCInfo->m_fDefaultSpeed;
 }
 
-void ZActor::InitFromNPCType(MQUEST_NPC nNPCType, float fTC, int nQL, IBrain* pBrain)
+void ZActor::InitFromNPCType(MQUEST_NPC nNPCType, float fTC, int nQL, ZBrain* pBrain)
 {
 	m_pNPCInfo = GetQuestNPCInfo(nNPCType);
 	_ASSERT(m_pNPCInfo);
@@ -445,7 +445,7 @@ void ZActor::UpdateHeight(float fDelta)
 			vPos.z += 50.f;
 
 			RBSPPICKINFO pInfo;
-			if (m_pGame->PickWorld(vPos, vDir, &pInfo))
+			if (ZGetGame()->PickWorld(vPos, vDir, &pInfo))
 			{
 				vPos = pInfo.PickPos;
 
@@ -610,7 +610,7 @@ void ZActor::OnBlastDagger(rvector &dir,rvector& pos)
 
 	Normalize(m_vAddBlastVel);
 
-	m_fAddBlastVelTime = m_pGame->GetTime();
+	m_fAddBlastVelTime = ZGetGame()->GetTime();
 
 	m_fDelayTime = 3.0f;
 
@@ -629,26 +629,13 @@ void ZActor::ProcessAI(float fDelta)
 
 }
 
-
-
-
-
-ZActor* ZActor::CreateActor(MQUEST_NPC nNPCType, float fTC, int nQL, bool bForceCollRadius35, ZActor* pExternalAllocBody, IBrain* pExternalAllocBrain)
+ZActor* ZActor::CreateActor(MQUEST_NPC nNPCType, float fTC, int nQL, bool bForceCollRadius35)
 {
-	ZActor* pNewActor=NULL;
-
-	if (pExternalAllocBody)
-		pNewActor = pExternalAllocBody;
-	else
-		pNewActor = new ZActor(ZGetGame());
+	ZActor* pNewActor = new ZActor();
 
 	if (pNewActor)
 	{
-		IBrain* pBrain=NULL;
-		if (pExternalAllocBrain)
-			pBrain = pExternalAllocBrain;
-		else
-			pBrain = new ZBrain(ZGetGame());	// 외부에서 brain을 제공하지 않으면 기본 brain 생성 (기존 퀘스트용)
+		ZBrain* pBrain = new ZBrain();
 
 		pNewActor->InitFromNPCType(nNPCType, fTC, nQL, pBrain);
 		pNewActor->InitProperty();
@@ -675,15 +662,15 @@ void ZActor::PostBasicInfo()
 	if (GetInitialized() == false) return;
 
 	// 죽고나서 5초가 지나면 basicinfo를 보내지 않는다.
-	if(IsDie() && m_pGame->GetTime() - GetDeadTime()>5.f) return;
-	int nMoveTick = m_pGame->GetCharacterBasicInfoTick();
+	if(IsDie() && ZGetGame()->GetTime() - GetDeadTime()>5.f) return;
+	int nMoveTick = ZGetGame()->GetCharacterBasicInfoTick();
 
 	if ((int)(nNowTime - m_nLastTime[ACTOR_LASTTIME_BASICINFO]) >= nMoveTick)
 	{
 		m_nLastTime[ACTOR_LASTTIME_BASICINFO] = nNowTime;
 
 		ZACTOR_BASICINFO pbi;
-		pbi.fTime = m_pGame->GetTime();
+		pbi.fTime = ZGetGame()->GetTime();
 		pbi.uidNPC = GetUID();
 
 		pbi.posx = GetPosition().x;
@@ -716,7 +703,7 @@ void ZActor::PostBasicInfo()
 		pitem->info.direction = GetDirection();
 		pitem->info.velocity = GetVelocity();
 
-		pitem->fSendTime = pitem->fReceivedTime = m_pGame->GetTime();
+		pitem->fSendTime = pitem->fReceivedTime = ZGetGame()->GetTime();
 		m_BasicHistory.push_back(pitem);
 
 		while(m_BasicHistory.size()>ACTOR_HISTROY_COUNT)
@@ -737,8 +724,8 @@ void ZActor::PostBossHpAp()
 		if (GetInitialized() == false) return;
 		
 		// 죽고나서 5초가 지나면 basicinfo를 보내지 않는다.
-		if(IsDie() && m_pGame->GetTime() - GetDeadTime()>5.f) return;
-		int nMoveTick = m_pGame->GetCharacterBasicInfoTick();
+		if(IsDie() && ZGetGame()->GetTime() - GetDeadTime()>5.f) return;
+		int nMoveTick = ZGetGame()->GetCharacterBasicInfoTick();
 
 		if ((int)(nNowTime - m_nLastTime[ACTOR_LASTTIME_HPINFO]) >= nMoveTick)
 		{
@@ -758,7 +745,7 @@ void ZActor::InputBasicInfo(ZBasicInfo* pni, BYTE anistate)
 		SetVelocity(pni->velocity);
 		SetDirection(pni->direction);
 		m_Animation.ForceAniState(anistate);
-		m_fLastBasicInfo = m_pGame->GetTime();
+		m_fLastBasicInfo = ZGetGame()->GetTime();
 	}
 }
 
@@ -837,7 +824,7 @@ void ZActor::ProcessMovement(float fDelta)
 
 #define BLAST_DAGGER_MAX_TIME 0.8f
 
-		float fTime = max((1.f - (m_pGame->GetTime() - m_fAddBlastVelTime) / BLAST_DAGGER_MAX_TIME),0.0f);
+		float fTime = max((1.f - (ZGetGame()->GetTime() - m_fAddBlastVelTime) / BLAST_DAGGER_MAX_TIME),0.0f);
 
 		if( fTime < 0.4f )
 			fTime = 0.f;
@@ -939,7 +926,7 @@ void ZActor::Attack_Range(rvector& dir)
 	// ' HACK Fix this function.
 	rvector pos,to;
 	pos = GetPosition()+rvector(0,0,100);
-	ZPostNPCRangeShot(GetUID(),m_pGame->GetTime(),pos,pos+10000.f*dir,MMCIP_PRIMARY);
+	ZPostNPCRangeShot(GetUID(),ZGetGame()->GetTime(),pos,pos+10000.f*dir,MMCIP_PRIMARY);
 }
 
 void ZActor::Skill(int nSkill)
@@ -995,7 +982,7 @@ void ZActor::OnDamaged(ZObject* pAttacker, rvector srcPos, ZDAMAGETYPE damageTyp
 		bool bMyKill = false;
 		if (pAttacker)
 		{
-			bMyKill = (pAttacker == m_pGame->GetMyCharacter());
+			bMyKill = (pAttacker == ZGetGame()->GetMyCharacter());
 		}
 
 		rvector pos_sound = GetPosition();
@@ -1093,7 +1080,7 @@ void ZActor::CheckDead(float fDelta)
 	{
 		// 살아있으면 HP로 죽었는지 체크
 		if(m_pModule_HPAP->GetHP()<=0) {
-			SetDeadTime(m_pGame->GetTime());
+			SetDeadTime(ZGetGame()->GetTime());
 			m_Animation.Input(ZA_EVENT_DEATH);
 			SetFlag(AF_DEAD, true);
 
@@ -1107,7 +1094,7 @@ void ZActor::CheckDead(float fDelta)
 	{
 		if (!CheckFlag(AF_REQUESTED_DEAD))
 		{
-			if (m_pGame->GetTime()-GetDeadTime() > m_pNPCInfo->fDyingTime)
+			if (ZGetGame()->GetTime()-GetDeadTime() > m_pNPCInfo->fDyingTime)
 			{
 				// 나중에 나락까지 감안하게 되면 ZGame::CheckMyCharDead와 합쳐서 모듈로 빼야한다.
 				MUID uidAttacker = GetLastAttacker();
@@ -1115,7 +1102,7 @@ void ZActor::CheckDead(float fDelta)
 				{
 					// 죽인 사람이 누군지 모르면 그냥 조종자 자신이 죽인 사람
 					//_ASSERT(0);
-					uidAttacker = m_pGame->GetMyUid();
+					uidAttacker = ZGetMyUID();
 				}
 
 				// 여기서 죽었다고 보내보자
@@ -1185,7 +1172,7 @@ void ZActor::OnDie()
 
 void ZActor::OnPeerDie(MUID& uidKiller)
 {
-	bool bMyKill = (m_pGame->GetMyUid() == uidKiller);
+	bool bMyKill = (ZGetMyUID() == uidKiller);
 
 	rvector pos_sound = GetPosition();
 	pos_sound.z += m_Collision.GetHeight() - 10.0f;
@@ -1229,7 +1216,7 @@ bool ZActor::CanAttackRange(ZObject* pTarget)
 
 	const DWORD dwPickPassFlag=RM_FLAG_ADDITIVE | RM_FLAG_HIDE | RM_FLAG_PASSROCKET | RM_FLAG_PASSBULLET;
 
-	if (m_pGame->Pick(this, pos, dir, &pickinfo, dwPickPassFlag))
+	if (ZGetGame()->Pick(this, pos, dir, &pickinfo, dwPickPassFlag))
 	{
 		if (pickinfo.pObject)
 		{

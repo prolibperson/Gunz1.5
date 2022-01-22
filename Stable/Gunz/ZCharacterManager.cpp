@@ -60,8 +60,8 @@ ZCharacter* ZCharacterManager::Add(MUID uid, rvector pos, bool bMyCharacter)
 	if (pCharacter != NULL) return pCharacter;
 
 	//pCharacter = new ZNetCharacter;
-	if (bMyCharacter) pCharacter = new ZMyCharacter(ZGetGame());
-	else pCharacter = new ZNetCharacter(ZGetGame());
+	if (bMyCharacter) pCharacter = new ZMyCharacter();
+	else pCharacter = new ZNetCharacter();
 
 	pCharacter->SetUID(uid);
 	//pCharacter->m_Position= pos;

@@ -5,11 +5,11 @@ class ZActor;
 class ZNavigationMesh;
 
 #include "ZActorAnimation.h"
+#include "ZTaskID.h"
 #include "ZTask.h"
 #include "ZTaskManager.h"
 #include "ZBehavior.h"
 #include "ZTimer.h"
-#include "IBrain.h"
 
 #define		DIST_FORCEDIN		300000.0f
 #define		DIST_IN				1600000.0f
@@ -18,10 +18,9 @@ class ZNavigationMesh;
 
 
 ///< Actor의 AI주체
-class ZBrain : public IBrain
+class ZBrain
 {
 private:
-	IGame*				m_pGame;
 
 	// Timer
 	ZUpdateTimer		m_PathFindingTimer;
@@ -66,19 +65,19 @@ protected:
 
 public:
 	// 몸체에서의 이벤트 발생 인터페이스
-	virtual void OnBody_AnimEnter( ZA_ANIM_STATE nAnimState);
-	virtual void OnBody_AnimExit( ZA_ANIM_STATE nAnimState);
-	virtual void OnBody_OnTaskFinished( ZTASK_ID nLastID);
-	virtual void OnBody_CollisionWall();
+	void OnBody_AnimEnter( ZA_ANIM_STATE nAnimState);
+	void OnBody_AnimExit( ZA_ANIM_STATE nAnimState);
+	void OnBody_OnTaskFinished( ZTASK_ID nLastID);
+	void OnBody_CollisionWall();
 
 
 public:
-	ZBrain(IGame* pGame);
-	virtual ~ZBrain();
+	ZBrain();
+	~ZBrain();
 
-	virtual void Init( ZActor* pBody);
-	virtual void Think( float fDelta);
-	virtual void OnDamaged();
+	void Init( ZActor* pBody);
+	void Think( float fDelta);
+	void OnDamaged();
 
 	ZActor* GetBody()					{ return m_pBody; }
 	ZObject* GetTarget();

@@ -12,10 +12,8 @@
 
 
 
-ZBrain::ZBrain(IGame* pGame) : m_pGame(pGame), m_pBody(NULL), m_uidTarget( MUID( 0, 0))
+ZBrain::ZBrain() :  m_pBody(NULL), m_uidTarget( MUID( 0, 0))
 {
-	_ASSERT(m_pGame);
-
 	ResetStuckInState();
 	ResetStuckInStateForWarp();
 }
@@ -135,7 +133,7 @@ bool ZBrain::FindTarget()
 	MUID uidTarget	= MUID(0,0);
 	float fDist		= FLT_MAX;
 
-	for ( ZCharacterManagerBase::iterator itor=m_pGame->GetCharacterMgr()->begin(); itor!=m_pGame->GetCharacterMgr()->end(); ++itor)
+	for ( ZCharacterManagerBase::iterator itor=ZGetGame()->GetCharacterMgr()->begin(); itor!=ZGetGame()->GetCharacterMgr()->end(); ++itor)
 	{
 		// 죽은 놈은 관심없다.
 		ZCharacter* pCharacter = (ZCharacter*) (*itor).second;
@@ -143,7 +141,7 @@ bool ZBrain::FindTarget()
 			continue;
 
 		// 제외 목록에 들어간 캐릭터는 건너뜀
-		if ( m_pGame->IsExceptedFromNpcTargetting( pCharacter))
+		if ( ZGetGame()->IsExceptedFromNpcTargetting( pCharacter))
 			continue;
 
 		// 거리를 구한다.
@@ -187,7 +185,7 @@ void ZBrain::ProcessAttack( float fDelta)
 		return;
 
 	// Use default attack
-	if ( bDefaultAttackEnabled && m_pBody->CanAttackMelee( GetTarget()) && !m_pGame->IsWallBlocked(m_pBody, GetTarget(), true))
+	if ( bDefaultAttackEnabled && m_pBody->CanAttackMelee( GetTarget()) && !ZGetGame()->IsWallBlocked(m_pBody, GetTarget(), true))
 	{	// (실제 근접타격 판정할때 벽체크하는 함수) CheckWall로 타겟과 나 사이에 장애물이 없는지 확인- 안그러면 기둥 뒤에서 계속 헛방친다
 
 		float fNextCoolTime = m_pBody->MakeDefaultAttackCoolTime();
@@ -275,7 +273,7 @@ bool ZBrain::GetUseableSkill( int *pnSkill, MUID *puidTarget, rvector *pTargetPo
 					continue;
 
 				// 적이면 넘어간다
-				if ( m_pGame->CanAttack(m_pBody,pObject))
+				if ( ZGetGame()->CanAttack(m_pBody,pObject))
 					continue;
 
 				// 자기 자신이면 넘어간다
@@ -336,7 +334,7 @@ bool ZBrain::GetUseableSkill( int *pnSkill, MUID *puidTarget, rvector *pTargetPo
 			Normalize( dir);
 
 			const DWORD dwPickPassFlag = RM_FLAG_ADDITIVE | RM_FLAG_HIDE | RM_FLAG_PASSROCKET | RM_FLAG_PASSBULLET;
-			if ( m_pGame->Pick( m_pBody, pos, dir, &pickinfo, dwPickPassFlag))
+			if ( ZGetGame()->Pick( m_pBody, pos, dir, &pickinfo, dwPickPassFlag))
 			{
 				if ( pickinfo.pObject)
 				{
@@ -371,7 +369,7 @@ void ZBrain::ProcessBuildPath( float fDelta)
 		return;
 
 	// 맵에 낀 경우 워프시키도록 설정되어 있는가?
-	if (m_pGame->IsEnabledToWarpNpcWhenStucked())
+	if (ZGetGame()->IsEnabledToWarpNpcWhenStucked())
 	{
 		if (EscapeFromStuckIn(m_WayPointList))
 			return;
@@ -433,7 +431,7 @@ void ZBrain::ProcessBuildPath( float fDelta)
 
 
 	// Make path
-	ZNavigationMesh navMesh = m_pGame->GetNavigationMesh();
+	ZNavigationMesh navMesh = ZGetNavigationMesh();
 	if ( navMesh.IsNull())
 		return;
 
@@ -517,7 +515,7 @@ bool ZBrain::EscapeFromStuckIn(list<rvector>& wayPointList)
 		if (MagnitudeSq(diff) < 100)
 		{
 			OutputDebugString("NPC NEED WARP....\n");
-			ZNavigationMesh navMesh = m_pGame->GetNavigationMesh();
+			ZNavigationMesh navMesh = ZGetNavigationMesh();
 			if (!navMesh.IsNull()) {
 				// 근방의 랜덤지점을 정한다
 

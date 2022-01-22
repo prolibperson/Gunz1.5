@@ -331,7 +331,7 @@ bool ZQuest::OnNPCSpawn(MCommand* pCommand)
 	}
 
 	float fTC = m_GameInfo.GetNPC_TC();
-	ZActorBase* pNewActor = ZActor::CreateActor(NPCType, fTC, m_GameInfo.GetQuestLevel(), false, NULL, NULL);
+	ZActorBase* pNewActor = ZActor::CreateActor(NPCType, fTC, m_GameInfo.GetQuestLevel(), false);
 	if (pNewActor)
 	{
 		pNewActor->SetUID(uidNPC);

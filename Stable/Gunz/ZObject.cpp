@@ -9,7 +9,7 @@
 
 MImplementRTTI(ZObject, ZModuleContainer);
 
-ZObject::ZObject(IGame* pGame) : m_Direction(1,0,0), m_bInitialized(false), m_UID(MUID(0,0)),
+ZObject::ZObject() : m_Direction(1,0,0), m_bInitialized(false), m_UID(MUID(0,0)),
 					 m_fSpawnTime(0.0f), m_fDeadTime(0.0f), m_pVMesh(NULL), m_bVisible(false),
 					 m_bIsNPC(false)
 //					 ,m_Velocity(m_Module_Movable.m_Velocity)
@@ -17,7 +17,7 @@ ZObject::ZObject(IGame* pGame) : m_Direction(1,0,0), m_bInitialized(false), m_UI
 	//mmemory proxy
 	m_Position.Set_MakeCrc(rvector(0,0,0));
 
-	m_pModule_Movable = new ZModule_Movable(pGame);
+	m_pModule_Movable = new ZModule_Movable();
 	AddModule(m_pModule_Movable,true);
 }
 

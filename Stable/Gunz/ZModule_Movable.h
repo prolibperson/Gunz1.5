@@ -8,7 +8,6 @@ class IGame;
 
 class ZModule_Movable : public ZModule {
 private:
-	IGame* m_pGame;
 
 	// 실린더의 반지름과 높이
 //	float	m_fRadius;
@@ -55,7 +54,7 @@ protected:
 public:
 
 	DECLARE_ID(ZMID_MOVABLE)
-	ZModule_Movable(IGame* pGame);
+	ZModule_Movable();
 
 	virtual bool Update(float fElapsed);
 	virtual void InitStatus();

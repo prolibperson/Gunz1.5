@@ -434,14 +434,14 @@ bool ZReplayLoader::LoadCharInfo(ZFile* file)
 		ZCharacter* pChar = NULL;
 		if (bHero)
 		{
-			ZGetGame()->m_pMyCharacter = new ZMyCharacter(ZGetGame());
+			ZGetGame()->m_pMyCharacter = new ZMyCharacter();
 			ZGetGame()->CreateMyCharacter(&info/*, NULL*/);			///< TodoH(상) - 리플레이 관련..
 			pChar = ZGetGame()->m_pMyCharacter;
 			pChar->Load(file, m_nVersion);
 		}
 		else
 		{
-			pChar = new ZNetCharacter(ZGetGame());
+			pChar = new ZNetCharacter();
 			pChar->Load(file, m_nVersion);
 			pChar->Create(&info/*, NULL*/);							///< TodoH(상) - 리플레이 관련..
 		}
@@ -562,7 +562,7 @@ bool ZReplayLoader::LoadNPCInfo(ZFile* file)
 		if (Read != 1)
 			break;
 
-		pActor = new ZActorWithFSM(ZGetGame(), pRule->GetActorActionMgr());
+		pActor = new ZActorWithFSM(pRule->GetActorActionMgr());
 		pActor->Load(file, info);
 		pActor->InitWithActorDef(pRule->GetActorDefMgr()->GetDef(info.actorName), pRule->GetFSMMgr());							///< TodoH(상) - 리플레이 관련..
 		pActor->SetHero(false);

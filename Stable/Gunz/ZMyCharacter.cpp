@@ -55,7 +55,7 @@ desc : ¹«±â »ç¿ë Å° Ä¿½ºÅÍ¸¶ÀÌÁî °ü·Ã
 
 MImplementRTTI(ZMyCharacter, ZCharacter);
 
-ZMyCharacter::ZMyCharacter(IGame* pGame) : ZCharacter(pGame)
+ZMyCharacter::ZMyCharacter() : ZCharacter()
 {
 #ifndef _PUBLISH	// ¾Æ·¡ Ãâ·Â¹®ÀÌ Àý´ë ½Ç¼­ºñ½º¿¡ ³ª°¡Áö ¾Êµµ·Ï ÁÖÀÇ
 	//mlog("ZMyCharacter : %x\n", (DWORD)&m_shotTimeInfo);

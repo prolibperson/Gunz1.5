@@ -14,7 +14,7 @@ protected:
 	virtual void OnDraw();
 	virtual void OnUpdate(float fDelta);
 public:
-	ZNetCharacter(IGame* pGame);
+	ZNetCharacter();
 	virtual ~ZNetCharacter();
 
 	//virtual void  Update(float fDelta);

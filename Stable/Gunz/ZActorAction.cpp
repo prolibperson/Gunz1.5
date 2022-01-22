@@ -28,7 +28,7 @@ ZActorAction::~ZActorAction()
 		delete m_vecEffect[i];
 }
 
-void ZActorActionMeleeShot::ProcessShot( IGame* pGame, const MUID& uidOwner, float fShotTime ) const
+void ZActorActionMeleeShot::ProcessShot(const MUID& uidOwner, float fShotTime ) const
 {
 	// 디버그 레지스터 핵 방어 구문을 모두 제거했습니다 필요하면 추가
 
@@ -107,12 +107,12 @@ void ZActorActionMeleeShot::ProcessShot( IGame* pGame, const MUID& uidOwner, flo
 			continue;
 
 		// 타겟이 해당 공격 범위 안에서 일정 영역 높이에 있는지 확인한다.
-		if (!pGame->InRanged(pAttacker, pVictim))
+		if (!ZGetGame()->InRanged(pAttacker, pVictim))
 			continue;
 
 		// 공격자와 타겟 사이에 벽이 막고 있으면 다음 타겟으로 넘어간다.
 		int nDebugRegister = 0;
-		if (pGame->IsWallBlocked( pAttacker, pVictim, nDebugRegister, true))
+		if (ZGetGame()->IsWallBlocked( pAttacker, pVictim, nDebugRegister, true))
 			continue;
 
 		if (GetThrust())

@@ -427,7 +427,7 @@ void ZChangeCharWeaponMesh(ZObjectVMesh* pVMesh, unsigned long int nWeaponID)
 ///////////////////////////////////////////////////////////////////////////////////////
 MImplementRTTI(ZCharacter, ZCharacterObject);
 
-ZCharacter::ZCharacter(IGame* pGame) : ZCharacterObject(pGame), m_DirectionLower(1,0,0),m_DirectionUpper(1,0,0),m_TargetDir(1,0,0)
+ZCharacter::ZCharacter() : ZCharacterObject(), m_DirectionLower(1,0,0),m_DirectionUpper(1,0,0),m_TargetDir(1,0,0)
 { 
 	m_fPreMaxHP = 0.f;
 	m_fPreMaxAP = 0.f;
@@ -3511,6 +3511,8 @@ bool ZCharacter::Create(MTD_CharInfo* pCharInfo/*, MTD_CharBuffInfo* pCharBuffIn
 	m_fAttack1Ratio.Set_CheckCrc(1.f);
 
 	ZGetEmblemInterface()->AddClanInfo(GetClanID());
+
+	//Custom: blitzkrieg modules???
 
 	return true;
 }

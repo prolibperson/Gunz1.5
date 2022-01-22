@@ -80,6 +80,9 @@ int						ZGetSVNRevision(void);
 #define ZGetWorldManager()		ZApplication::GetInstance()->GetWorldManager()
 #define ZGetWorld()				(ZGetWorldManager()->GetCurrent())
 
+//Custom: getnavigationmesh
+#define ZGetNavigationMesh() (ZApplication::GetGameInterface()->GetGame()->GetNavigationMesh())
+
 inline ZEmblemInterface*	ZGetEmblemInterface() { return ZApplication::GetInstance()->GetEmblemInterface(); }
 inline ZOptionInterface*	ZGetOptionInterface(void) { return ZApplication::GetInstance()->GetOptionInterface(); }
 

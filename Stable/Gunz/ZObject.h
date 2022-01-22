@@ -122,7 +122,7 @@ protected:
 	virtual void OnDie() {} // Á×À»¶§
 
 public:
-	ZObject(IGame* pGame);
+	ZObject();
 	virtual ~ZObject();
 
 	__forceinline const rvector& GetPosition() const

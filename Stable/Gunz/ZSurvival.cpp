@@ -365,7 +365,7 @@ bool ZSurvival::OnNPCSpawn(MCommand* pCommand)
 		bForceCollRadius35 = true;
 	//////////////////////////////////////////////////////////////////////////////////////////
 
-	ZActor* pNewActor = ZActor::CreateActor(NPCType, fTC, m_GameInfo.GetQuestLevel(), bForceCollRadius35, NULL, NULL);
+	ZActor* pNewActor = ZActor::CreateActor(NPCType, fTC, m_GameInfo.GetQuestLevel(), bForceCollRadius35);
 	if (pNewActor)
 	{
 		bool bMyControl = (uidChar == ZGetGameClient()->GetPlayerUID());

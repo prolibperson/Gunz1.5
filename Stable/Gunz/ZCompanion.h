@@ -25,7 +25,7 @@ private:
 	DWORD		m_lastTargetSearch;
 	MCompanionDef* m_companionDef;
 public:
-	ZCompanion(IGame* pGame);
+	ZCompanion();
 	virtual ~ZCompanion();
 	ZCharacter* companionOwner;
 	RMesh*		m_pMesh;

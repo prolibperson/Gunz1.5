@@ -294,7 +294,7 @@ ZActorWithFSM* IRuleNewQuest::SpawnActor(const char* szActorDefName, MUID& uid, 
 		}
 	}
 
-	ZActorWithFSM* pNewActor = new ZActorWithFSM(ZGetGame(), m_pActorActionMgr);
+	ZActorWithFSM* pNewActor = new ZActorWithFSM(m_pActorActionMgr);
 	pNewActor->InitWithActorDef(pActorDef, m_pFsmManager);
 	pNewActor->SetUID(uid);
 	pNewActor->SetPosition(pos);
@@ -334,7 +334,7 @@ ZActorWithFSM* IRuleNewQuest::SpawnActorSummon(const char* szActorName, MUID& ui
 		}
 	}
 
-	ZActorWithFSM* pNewActor = new ZActorWithFSM(ZGetGame(), m_pActorActionMgr);
+	ZActorWithFSM* pNewActor = new ZActorWithFSM(m_pActorActionMgr);
 	pNewActor->InitWithActorDef(pActorDef, m_pFsmManager);
 	pNewActor->SetUID(uid);
 	pos = rvector(vec.x, vec.y, vec.z);
@@ -375,7 +375,7 @@ ZActorWithFSM* IRuleNewQuest::SpawnLateJoinNpc(const char* szActorDefName, MUID&
 		}
 	}
 
-	ZActorWithFSM* pNewActor = new ZActorWithFSM(ZGetGame(), m_pActorActionMgr);
+	ZActorWithFSM* pNewActor = new ZActorWithFSM(m_pActorActionMgr);
 	pNewActor->InitWithActorDef(pActorDef, m_pFsmManager);
 	pNewActor->SetUID(uid);
 	pNewActor->SetMyControl(false);

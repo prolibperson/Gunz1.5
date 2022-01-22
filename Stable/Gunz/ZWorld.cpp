@@ -93,7 +93,14 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 #ifndef _MAP_CACHING
 
 
-
+	if (ZGetGameClient()->GetMatchStageSetting()->IsQuestDrived() || ZGetGameClient()->GetMatchStageSetting()->GetGameType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+	{
+		m_pBsp->SetLightMapIndex(0);
+	}
+	else
+	{
+		m_pBsp->SetLightMapIndex(ZGetGameClient()->GetMatchStageSetting()->GetLightMapIndex());
+	}
 
 	if(!m_pBsp->Open(m_szBspName, "xml", ROF_RUNTIME,ZWorldProgressCallBack,pLoading))
 	{
@@ -104,14 +111,7 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 
 	m_pBsp->OptimizeBoundingBox();
 	//Custom: tod lighting
-	if (ZGetGameClient()->GetMatchStageSetting()->IsQuestDrived() || ZGetGameClient()->GetMatchStageSetting()->GetGameType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
-	{
-		m_pBsp->SetLightMapIndex(0);
-	}
-	else
-	{
-		m_pBsp->SetLightMapIndex(ZGetGameClient()->GetMatchStageSetting()->GetLightMapIndex());
-	}
+
 #else
 	if (!ZGetGameClient()->GetMatchStageSetting()->IsQuestDrived() && ZGetGameClient()->GetMatchStageSetting()->GetGameType() != MMATCH_GAMETYPE_QUEST_CHALLENGE)
 	{

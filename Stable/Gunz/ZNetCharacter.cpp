@@ -7,7 +7,7 @@
 
 MImplementRTTI(ZNetCharacter, ZCharacter);
 
-ZNetCharacter::ZNetCharacter(IGame* pGame) : ZCharacter(pGame)
+ZNetCharacter::ZNetCharacter() : ZCharacter()
 {
 
 }

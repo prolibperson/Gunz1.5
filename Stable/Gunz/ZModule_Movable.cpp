@@ -2,16 +2,12 @@
 
 #include "ZModule_Movable.h"
 #include "ZObjectManager.h"
-#include "IGame.h"
 #include "ZGameConst.h"
 
 // 나 이외의 캐릭터는 위치를 양자화해서 보내므로 오차가 있어서 m_fRadius 를 실제보다 2정도 줄였다
 
-ZModule_Movable::ZModule_Movable(IGame* pGame) 
-			: m_pGame(pGame), m_Velocity(0,0,0), m_bForceCollRadius35(false) /*, m_fMaxSpeed(1000.f)*/ 
+ZModule_Movable::ZModule_Movable() :  m_Velocity(0,0,0), m_bForceCollRadius35(false) /*, m_fMaxSpeed(1000.f)*/ 
 {
-	_ASSERT(pGame);
-
 	// 원래 초기값 배정을 안했던 변수는 그냥 쓰레기값 상태로 crc를 생성
 	m_fDistToFloor.Set_MakeCrc(0);
 	m_FloorPlane.MakeCrc();
@@ -58,7 +54,7 @@ bool ZModule_Movable::Update(float fElapsed)
 	if(!pThisObj->GetInitialized()) return true;
 	if(!pThisObj->IsVisible()) return true;
 
-	float fCurrTime = m_pGame->GetTime();
+	float fCurrTime = ZGetGame()->GetTime();
 
 	// 감속 가속의 종료 시간 체크
 	if(m_bRestrict.Ref() && fCurrTime-m_fRestrictTime.Ref() > m_fRestrictDuration.Ref()) {
@@ -91,7 +87,7 @@ bool ZModule_Movable::Move(rvector &diff)
 	ZObject *pThisObj = MStaticCast(ZObject,m_pContainer);
 	float fThisObjRadius = pThisObj->GetCollRadius();
 
-	m_pGame->AdjustMoveDiff(pThisObj, diff);
+	ZGetGame()->AdjustMoveDiff(pThisObj, diff);
 
 	rvector origin,targetpos;
 	rplane impactplane;
@@ -115,9 +111,9 @@ bool ZModule_Movable::Move(rvector &diff)
 	if (pThisObj->GetPosition().z > DIE_CRITICAL_LINE)
 	{
 		if (m_bForceCollRadius35)
-			m_bAdjusted.Set_CheckCrc( m_pGame->CheckWall(origin,targetpos,35,60,RCW_CYLINDER,0,&impactplane));
+			m_bAdjusted.Set_CheckCrc( ZGetGame()->CheckWall(origin,targetpos,35,60,RCW_CYLINDER,0,&impactplane));
 		else
-			m_bAdjusted.Set_CheckCrc( m_pGame->CheckWall(origin,targetpos,fThisObjRadius,60,RCW_CYLINDER,0,&impactplane));
+			m_bAdjusted.Set_CheckCrc( ZGetGame()->CheckWall(origin,targetpos,fThisObjRadius,60,RCW_CYLINDER,0,&impactplane));
 
 		//kimyhwan - 이 CheckWall은 bsp 충돌 부분에 결함이 있는 것 같다. "radius=35 height=60" 이 근처의 값이 아니면 잘못된 충돌판정이 난다(값이 커도 작아도 마찬가지)
 		// 평소엔 판정이 잘 되지만 35, 60이 아니면 밟고올라설 수 있는 배경 물체 위에 올라가질 못하는 현상이 발생한다.
@@ -135,7 +131,7 @@ bool ZModule_Movable::Move(rvector &diff)
 	pThisObj->SetPosition(targetpos-rvector(0,0,fCollUpHeight));
 
 	if(m_bAdjusted.Ref())
-		m_fLastAdjustedTime.Set_CheckCrc(m_pGame->GetTime());
+		m_fLastAdjustedTime.Set_CheckCrc(ZGetGame()->GetTime());
 
 	return m_bAdjusted.Ref();
 }
@@ -160,7 +156,7 @@ void ZModule_Movable::UpdatePosition(float fDelta)
 		Move(diff);
 
 	m_FloorPlane.CheckCrc();
-	rvector floor=m_pGame->GetFloor(pThisObj->GetPosition(), &m_FloorPlane.Ref(), pThisObj->GetUID());
+	rvector floor=ZGetGame()->GetFloor(pThisObj->GetPosition(), &m_FloorPlane.Ref(), pThisObj->GetUID());
 	m_FloorPlane.MakeCrc();
 	m_fDistToFloor.Set_CheckCrc(pThisObj->GetPosition().z-floor.z);
 
@@ -189,7 +185,7 @@ void ZModule_Movable::SetMoveSpeedRestrictRatio(float fRatio, float fDuration)
 	if(m_bRestrict.Ref() && fRatio>m_fRestrictRatio.Ref()) return;
 
 	m_bRestrict.Set_CheckCrc(true);
-	m_fRestrictTime.Set_CheckCrc( m_pGame->GetTime());
+	m_fRestrictTime.Set_CheckCrc( ZGetGame()->GetTime());
 	m_fRestrictDuration.Set_CheckCrc(fDuration);
 	m_fRestrictRatio.Set_CheckCrc(fRatio); 
 }
@@ -199,7 +195,7 @@ void ZModule_Movable::SetMoveSpeedHasteRatio(float fRatio, float fDuration, int 
 	// 더 큰 가속이 있으면 무시한다
 	if(m_bHaste.Ref() && fRatio<m_fHasteRatio.Ref()) return;
 
-	float fCurrTime = m_pGame->GetTime();
+	float fCurrTime = ZGetGame()->GetTime();
 
 	m_bHaste.Set_CheckCrc(true);
 	m_fHasteTime.Set_CheckCrc(fCurrTime);
@@ -228,7 +224,7 @@ bool ZModule_Movable::GetHasteBuffInfo(MTD_BuffInfo& out)
 	if (!m_bHaste.Ref()) return false;
 	out.nItemId = m_nHasteItemId;
 
-	float fElapsed = m_pGame->GetTime() - m_fHasteTime.Ref();
+	float fElapsed = ZGetGame()->GetTime() - m_fHasteTime.Ref();
 	out.nRemainedTime = unsigned short(m_fHasteDuration.Ref() - fElapsed);
 	return true;
 }

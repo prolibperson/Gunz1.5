@@ -172,7 +172,7 @@ public:
 
 	void WallJump2();
 
-	ZMyCharacter(IGame* pGame);
+	ZMyCharacter();
 	~ZMyCharacter();
 
 	void InitSpawn();//솔로에서는 라운드에 해당..
