@@ -572,6 +572,16 @@ void ZOptionInterface::InitInterfaceOption(void)
 			RSetFrameLimitPerSeceond(Z_ETC_FRAMELIMIT_PERSECOND);
 		}
 
+		pComboBox = (MComboBox*)pResource->FindWidget("UpdateLimit_PerSecond");
+		if (pComboBox) {
+			if (Z_ETC_UPDATELIMIT_PERSECOND >= pComboBox->GetCount())
+			{
+				Z_ETC_UPDATELIMIT_PERSECOND = 0;
+			}
+			pComboBox->SetSelIndex(Z_ETC_UPDATELIMIT_PERSECOND);
+			RSetUpdateLimitPerSecond(Z_ETC_UPDATELIMIT_PERSECOND);
+		}
+
 		pComboBox = (MComboBox*)pResource->FindWidget("AntiAlias");
 		if (pComboBox != nullptr)
 		{
@@ -1130,6 +1140,19 @@ bool ZOptionInterface::SaveInterfaceOption(void)
 		{
 			Z_ETC_FRAMELIMIT_PERSECOND = pComboBox->GetSelIndex();
 			RSetFrameLimitPerSeceond(Z_ETC_FRAMELIMIT_PERSECOND);
+		}
+
+		pComboBox = (MComboBox*)pResource->FindWidget("UpdateLimit_PerSecond");
+		if (pComboBox)
+		{
+			Z_ETC_UPDATELIMIT_PERSECOND = pComboBox->GetSelIndex();
+
+			if (Z_ETC_FRAMELIMIT_PERSECOND > Z_ETC_UPDATELIMIT_PERSECOND)
+			{
+				ZChatOutput(MCOLOR(ZCOLOR_CHAT_SYSTEM), "FrameLimit must be lower than or equal to update limit");
+				return false;
+			}
+			RSetFrameLimitPerSeceond(Z_ETC_UPDATELIMIT_PERSECOND);
 		}
 
 
@@ -1942,6 +1965,8 @@ BEGIN_IMPLEMENT_LISTENER(ZGetSaveOptionButtonListener, MBTN_CLK_MSG)
 	}
 	else
 	{
+		if (ZGetOptionInterface()->SaveInterfaceOption() == false)
+			return false;
 		bool bLanguageChanged = false;
 		MComboBox* pLanguageComboBox = (MComboBox*)pResource->FindWidget("LanguageSelectComboBox");
 		//MComboBox* pFontComboBox = (MComboBox*)pResource->FindWidget("FontSelectComboBox");
@@ -1951,7 +1976,6 @@ BEGIN_IMPLEMENT_LISTENER(ZGetSaveOptionButtonListener, MBTN_CLK_MSG)
 				bLanguageChanged = true;
 		}
 
-		ZGetOptionInterface()->SaveInterfaceOption();
 		ZIDLResource* pResource = ZApplication::GetGameInterface()->GetIDLResource();
 		MWidget* pWidget = pResource->FindWidget("Option");
 		if(pWidget!=NULL) pWidget->Show(false);

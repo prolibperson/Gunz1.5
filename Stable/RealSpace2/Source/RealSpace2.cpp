@@ -1091,12 +1091,11 @@ void RSetFrameLimitPerSeceond(unsigned short nFrameLimit)
 { // 1초당 프레임 제한 (제한 종류: 무제한, 60fps, 120fps, 240fps)
 	switch( nFrameLimit )
 	{
-	case 0:	{	g_nFrameLimitValue = 0;		}	break;
-	case 1:	{	g_nFrameLimitValue = 60;	}	break;
-	case 2:	{	g_nFrameLimitValue = 120;	}	break;
-	case 3:	{	g_nFrameLimitValue = 250;	}	break;
-	case 4: {   g_nFrameLimitValue = 333;   }   break;
-	default:{	g_nFrameLimitValue = 0;		}	break;
+	case 0:	{	g_nFrameLimitValue = 60;		}	break;
+	case 1:	{	g_nFrameLimitValue = 120;	}	break;
+	case 2:	{	g_nFrameLimitValue = 250;	}	break;
+	case 3:	{	g_nFrameLimitValue = 333;	}	break;
+	default:{	g_nFrameLimitValue = 60;		}	break;
 	}
 }
 

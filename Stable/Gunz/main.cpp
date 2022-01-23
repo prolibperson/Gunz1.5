@@ -1226,7 +1226,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	RSetStencilBuffer(Z_VIDEO_STENCILBUFFER);
 	RSetMultiSampling(type);
-	RSetUpdateLimitPerSecond(250);
+	RSetUpdateLimitPerSecond(Z_ETC_UPDATELIMIT_PERSECOND);
 	bool resetDevice = false;
 
 	if( 0 != RInitD3D(&g_ModeParams) )

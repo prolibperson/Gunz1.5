@@ -140,6 +140,8 @@ struct ZCONFIG_ETC{
 										// 오직 클랜채팅, 채팅 명령어만 허용함.
 	char		szLanguage[32];			// 현재 선택된 언어
 	int			nFrameLimit_perSecond;
+	//Custom: input rate
+	int			nUpdateLimit_perSecond;
 	bool		bTrailOption;			//Trail Option
 	bool		bFpsOverlay;
 	bool		bDisableSW;	
@@ -499,6 +501,8 @@ ZLanguageSetting_forNHNUSA* ZGetLanguageSetting_forNHNUSA();
 #define Z_ETC_REJECT_INVITE		(ZGetConfiguration()->GetEtc()->bRejectInvite)
 #define Z_ETC_CROSSHAIR			(ZGetConfiguration()->GetEtc()->nCrossHair)
 #define Z_ETC_FRAMELIMIT_PERSECOND	(ZGetConfiguration()->GetEtc()->nFrameLimit_perSecond)
+//Custom: Input Rate
+#define Z_ETC_UPDATELIMIT_PERSECOND (ZGetConfiguration()->GetEtc()->nUpdateLimit_perSecond)
 #define Z_ETC_TRAIL_OPTION		(ZGetConfiguration()->GetEtc()->bTrailOption) //Trail Option
 #define Z_ETC_OVERLAY_OPTION	(ZGetConfiguration()->GetEtc()->bFpsOverlay)//fps overlay
 //Custom: dynamic model loading game option

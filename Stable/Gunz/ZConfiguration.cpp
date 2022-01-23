@@ -489,6 +489,8 @@ bool ZConfiguration::LoadConfig(const char* szFileName)
 				strcpy_s(m_Etc.szLanguage, 32, itor->first_node(ZTOK_ETC_LANGUAGE)->value());
 			else
 				strcpy_s(m_Etc.szLanguage, 32, "USA");
+
+			m_Etc.nUpdateLimit_perSecond = atoi(itor->first_node("INPUTFPS")->value());
 		}
 		if (_stricmp(itor->name(), ZTOK_CUSTOM) == 0)
 		{
@@ -812,6 +814,9 @@ bool ZConfiguration::SaveToFile(const char *szFileName, const char* szHeader)
 		childNode = doc.allocate_node(rapidxml::node_element, ZTOK_ETC_FRAMELIMIT_PERSECOND, doc.allocate_string(to_string(m_Etc.nFrameLimit_perSecond).c_str()));
 		parentNode->insert_node(0, childNode);
 
+		childNode = doc.allocate_node(rapidxml::node_element, "INPUTFPS", doc.allocate_string(to_string(m_Etc.nUpdateLimit_perSecond).c_str()));
+		parentNode->insert_node(0, childNode);
+
 	}
 	///CUSTOM
 	{
@@ -916,6 +921,7 @@ void ZConfiguration::Init()
 	m_Etc.nNetworkPort2 = 7800;
 	m_Etc.nCrossHair = 0;
 	m_Etc.nFrameLimit_perSecond = 0;
+	m_Etc.nUpdateLimit_perSecond = 0;
 	m_Etc.bInGameNoChat = false;
 	m_Etc.bTrailOption = true; //Trail Option
 	m_Etc.bFpsOverlay = true;

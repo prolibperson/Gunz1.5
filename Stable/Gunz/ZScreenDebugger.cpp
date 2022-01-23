@@ -38,27 +38,25 @@ extern MFontR2*		g_pDefFont;
 void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 {
 
-	if (m_nShowDebugInfo != 0) {
+	if (m_nShowDebugInfo != 0)
+	{
 		int sy=100;
 		pDC->SetColor(MCOLOR(0xFFffffff));
 		char buffer[512];
 
-		//int nSendTraffic, nRecvTraffic;
-		//ZGetGameClient()->GetUDPTraffic(&nSendTraffic, &nRecvTraffic);
-
-		//float fScore = 100-(fMs-(1000.f/60.f))*2;
-		//int zcr_cnt = ZGetObjectManager()->GetRenderedCount();
-		//int zco_cnt = ZGetObjectManager()->GetDrawCount();
 		double fMs = 1000.0/g_fFPS;
 		sprintf_s(buffer, "FPS: %.0f", fMs);
-		int x;
-	//	pDC->BeginFont();
-	//	pDC->Text(0,sy,buffer);
-	//	pDC->EndFont();
-		x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
+
+		int x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
 		pDC->Text(x, 10, buffer);
 
-		pDC->SetColor(MCOLOR(0xFFffffff));
+		double inputRate = g_nUpdateLimitValue;
+		sprintf_s(buffer, "InputRate: %0.f", inputRate);
+
+		x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
+		pDC->Text(x, 30, buffer);
+
+
 		sprintf_s(buffer, "Damage Dealt : %d", ZGetCombatInterface()->GetDamageDealt());
 		x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
 		pDC->Text(x, 50, buffer);
