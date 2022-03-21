@@ -751,6 +751,7 @@ bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 		MZF_READ_XOR(Name, count_name);
 		MZF_READ_XOR(&count_name_Parent, 2);
 		RMeshNode* pMeshNode = new RMeshNode;
+		pMeshNode->m_isMeshLoaded = false;
 		D3DXMatrixIdentity(&pMeshNode->m_mat_base);
 		pMeshNode->m_id = m_data_num;
 		memset(pMeshNode->m_Parent, 0, sizeof(pMeshNode->m_Parent));
@@ -800,26 +801,6 @@ bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 			MZF_READ(pMeshNode->m_face_list, sizeof(RFaceInfo) * pMeshNode->m_face_num);
 			MZF_READ(pMeshNode->m_face_normal_list, sizeof(RFaceNormalInfo) * pMeshNode->m_face_num);
 		}
-		/*
-	if(pMeshNode->m_face_num) {
-	pMeshNode->m_face_list = new RFaceInfo[pMeshNode->m_face_num];
-	pMeshNode->m_face_normal_list = new RFaceNormalInfo[pMeshNode->m_face_num];
-
-	memset(pMeshNode->m_face_list, 0, pMeshNode->m_face_num * sizeof(RFaceInfo));
-
-	int p = 0;
-	for (p = 0; p < pMeshNode->m_face_num; p++)
-	{
-	MZF_READ_XOR(&pMeshNode->m_face_list[p],sizeof(RFaceInfo));
-	}
-	int e = 0;
-	for (e = 0; e < pMeshNode->m_face_num; e++)
-	{
-	MZF_READ_XOR(&pMeshNode->m_face_normal_list[e],sizeof(RFaceNormalInfo));
-	}
-	//MZF_READ_XOR(pMeshNode->m_face_list,sizeof(RFaceInfo)*pMeshNode->m_face_num);
-	//MZF_READ_XOR(pMeshNode->m_face_normal_list,sizeof(RFaceNormalInfo)*pMeshNode->m_face_num);
-	}*/
 
 		MZF_READ_XOR(&pMeshNode->m_point_color_num, 4);
 
@@ -863,6 +844,9 @@ bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 
 		m_data.push_back(pMeshNode);
 		m_data_num++;
+
+		pMeshNode->m_isMeshLoaded = true;
+
 
 		if (MAX_MESH_NODE_TABLE != (int)m_data.capacity())
 		{
@@ -1261,6 +1245,8 @@ bool RMesh::ReadOldElu(MZFile* mzf, ex_hd_t* m_phd_t)
 		m_data.push_back(pMeshNode);
 		m_data_num++;
 
+		pMeshNode->m_isMeshLoaded = true;
+
 		if (MAX_MESH_NODE_TABLE != (int)m_data.capacity())
 		{
 			mlog("m_data number is not quite right..! (%d)\n", (int)m_data.capacity());
@@ -1272,8 +1258,10 @@ bool RMesh::ReadOldElu(MZFile* mzf, ex_hd_t* m_phd_t)
 #undef MZF_READ
 }
 
-bool RMesh::ReadElu(char* fname)
+bool RMesh::ReadElu(char* fname, bool isMultiThread)
 {
+	if (fname == nullptr)
+		return false;
 #define MZF_READ(x,y) { if(!mzf.Read((x),(y))) return false; }
 	__BP(2009, "RMesh::ReadElu");
 
@@ -1402,6 +1390,7 @@ bool RMesh::ReadElu(char* fname)
 
 	MakeAllNodeVertexBuffer();
 
+
 	//	mlog("elu file ( %s ) load... \n",fname);
 
 	__EP(2009);
@@ -1444,11 +1433,14 @@ bool RMesh::AddNode(char* name, char* pname, rmatrix& base_mat)
 
 	D3DXMatrixInverse(&pMeshNode->m_mat_ref_inv, 0, &pMeshNode->m_mat_ref);
 
+
 	m_list.push_back(pMeshNode);
 	m_data.push_back(pMeshNode);
 	m_data_num++;
 
 	CheckNameToType(pMeshNode);
+
+	pMeshNode->m_isMeshLoaded = true;
 
 	//	CalcLocalMatrix(pMeshNode);//뺀다..부모 연결 등이지만 이후에 호출.. local matrix 등을 계산..
 

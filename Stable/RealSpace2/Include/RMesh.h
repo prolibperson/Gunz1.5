@@ -341,7 +341,7 @@ public:
 
 	bool ReadXmlElement(MXmlElement* pNode,char* Path);
 
-	bool ReadElu(char* fname);
+	bool ReadElu(char* fname,bool isMultiThread = false);
 	bool ReadNewElu(MZFile* mzf, char* fname);
 	bool ReadOldElu(MZFile* mzf, ex_hd_t* fname);
 	bool SaveElu(char* fname);

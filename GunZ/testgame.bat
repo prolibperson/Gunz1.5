@@ -1,1 +1,1 @@
-Gunz.exe dummy map 0
+Gunz.exe dummy town 0

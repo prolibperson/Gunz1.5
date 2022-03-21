@@ -1152,7 +1152,7 @@ bool ZOptionInterface::SaveInterfaceOption(void)
 				ZChatOutput(MCOLOR(ZCOLOR_CHAT_SYSTEM), "FrameLimit must be lower than or equal to update limit");
 				return false;
 			}
-			RSetFrameLimitPerSeceond(Z_ETC_UPDATELIMIT_PERSECOND);
+			RSetUpdateLimitPerSecond(Z_ETC_UPDATELIMIT_PERSECOND);
 		}
 
 

@@ -36,6 +36,8 @@ ZWorld::~ZWorld()
 
 void ZWorld::Update(float fDelta)
 {
+	UpdateMapObjects(fDelta);
+
 	if(m_bWaterMap)
 		m_waters.Update();
 
@@ -43,6 +45,7 @@ void ZWorld::Update(float fDelta)
 
 	////TODO: create movable objects with animations so things like elevators and platforms can be made to move in the future
 	((RBspObject*)m_pBsp)->OnUpdate(fDelta);
+
 }
 
 void ZWorld::Draw()
@@ -53,6 +56,7 @@ void ZWorld::Draw()
  //		m_pSkyBox->Render();
 	//}
 
+
 	// farz clipping 을 위해 farz plane 을 다시 계산해준다
 	if(m_bFog) {
 		ComputeZPlane(RGetViewFrustum()+5,m_fFogFar,-1);
@@ -62,6 +66,9 @@ void ZWorld::Draw()
 
 
 	RealSpace2::g_poly_render_cnt = 0;
+
+	//render after world but before flags
+	RenderMapObjects();
 
 	__BP(16,"ZGame::Draw::flags");
 
@@ -291,7 +298,11 @@ bool ZWorld::Create(ZLoadingProgress *pLoading )
 		m_bFog = true;
 	}
 
+	LoadWorldObjects();
+
 	m_bCreated = true;
+
+
 
 	mlog( "game world create success.\n" );
 
@@ -314,6 +325,8 @@ void ZWorld::Destroy()
 	m_flags.OnInvalidate();
 	m_waters.Clear();
 	m_waters.OnInvalidate();
+
+	mapObjects.clear();
 //	SAFE_DELETE(m_pSkyBox);
 
 }
@@ -332,6 +345,147 @@ void ZWorld::OnRestore()
 	m_flags.OnRestore();
 }
 
+void ZWorld::LoadWorldObjects()
+{
+	char szMapPath[64] = "";
+	ZGetCurrMapPath(szMapPath);
+
+	char szBuf[256];
+
+	sprintf(szBuf, "%s%s/objects.xml", szMapPath, ZGetGameClient()->GetMatchStageSetting()->GetMapName());
+
+	MXmlDocument	Data;
+	Data.Create();
+
+	MZFile mzf;
+
+	if (!mzf.Open(szBuf, g_pFileSystem))
+	{
+		return;
+	}
+
+	char* buffer;
+	buffer = new char[mzf.GetLength() + 1];
+	mzf.Read(buffer, mzf.GetLength());
+	buffer[mzf.GetLength()] = 0;
+
+	if (!Data.LoadFromMemory(buffer))
+	{
+		delete[] buffer;
+		mlog("Error opening objects file\n");
+		return;
+	}
+
+	delete[] buffer;
+	mzf.Close();
+
+	MXmlElement rootElement = Data.GetDocumentElement();
+	int childCount = rootElement.GetChildNodeCount();
+
+	for (int i = 0; i < childCount; ++i)
+	{
+		MXmlElement child = rootElement.GetChildNode(i);
+		char TagName[256];
+		child.GetTagName(TagName);
+		if (TagName[0] == '#')
+		{
+			continue;
+		}
+
+		if (strcmp(TagName, "OBJECT") == 0)
+		{
+			ZWorldObject worldObject;
+			child.GetAttribute(&worldObject.name, "name");
+			child.GetAttribute(&worldObject.model, "model");
+			child.GetAttribute(&worldObject.collradius, "collradius", 0);
+			child.GetAttribute(&worldObject.collwidth, "collwidth", 0);
+			child.GetAttribute(&worldObject.collheight, "collheight", 0);
+			child.GetAttribute(&worldObject.movable, "moving", false);
+			child.GetAttribute(&worldObject.collidable, "collidable", false);
+			child.GetAttribute(&worldObject.reverseanimation, "reverseanimation", false);
+			child.GetAttribute(&worldObject.sound, "sound", "");
+			child.GetAttribute(&worldObject.usepath, "usepath", false);
+
+			int objectChildCount = child.GetChildNodeCount();
+			for (int j = 0; j < objectChildCount; ++j)
+			{
+				MXmlElement subChild = child.GetChildNode(j);
+				subChild.GetTagName(TagName);
+				if (strcmp(TagName, "POSITION") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					rvector pos(0, 0, 0);
+					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.position.x,&worldObject.position.y,&worldObject.position.z);
+				}
+				if (strcmp(TagName, "DIRECTION") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					rvector pos(0, 1, 0);
+					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.direction.x, &worldObject.direction.y, &worldObject.direction.z);
+				}
+				if (strcmp(TagName, "SPEED") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					worldObject.speed = std::stof(contents);
+				}
+				if (strcmp(TagName, "ANIMATION") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					worldObject.animation = contents;
+				}
+				if (strcmp(TagName, "SCALE") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.scale.x, &worldObject.scale.y, &worldObject.scale.z);
+				}
+				if (strcmp(TagName, "MINHEIGHT") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					worldObject.minheight = std::stoi(contents);
+				}
+				if (strcmp(TagName, "MAXHEIGHT") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					worldObject.maxheight = std::stoi(contents);
+				}
+				if (strcmp(TagName, "COLLISION") == 0)
+				{
+					std::string contents;
+					subChild.GetContents(&contents);
+					worldObject.collisiontype = static_cast<COLLTYPE>(std::stoi(contents));
+				}
+				if (strcmp(TagName, "ENDPOSITION") == 0)
+				{
+					std::string contents;
+					rvector endpos(-1, -1, -1);
+					subChild.GetContents(&contents);
+					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.endposition.x, &worldObject.endposition.y, &worldObject.endposition.z);
+				}
+			}
+			std::unique_ptr<ZMapObject> mapObject = std::make_unique<ZMapObject>();
+			mapObject->InitMesh(worldObject);
+			mapObjects.push_back(std::move(mapObject));
+		}
+	}
+}
+
+bool ZWorld::PickWorldObject(rvector& pos, rvector& dir)
+{
+	for (auto const& worldObject : mapObjects)
+	{
+		if (worldObject->Pick(pos, dir, nullptr))
+			return true;
+	}
+	return false;
+}
+
 void ZWorld::SetFog(bool bFog)
 {
 	if(bFog) {
@@ -339,5 +493,23 @@ void ZWorld::SetFog(bool bFog)
 	}
 	else {
 		RSetFog( FALSE );
+	}
+}
+
+
+
+void ZWorld::RenderMapObjects()
+{
+	for (auto const& mapObjs : mapObjects)
+	{
+		mapObjs->Draw();//(0);
+	}
+}
+
+void ZWorld::UpdateMapObjects(float delta)
+{
+	for (auto const& mapObjs : mapObjects)
+	{
+		mapObjs->Update(delta);
 	}
 }

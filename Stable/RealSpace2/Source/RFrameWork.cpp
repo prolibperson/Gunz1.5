@@ -345,10 +345,11 @@ void RFrame_UpdateRender(double& lastUpdateTime, double& lastRenderTime)
 {
 	///TODO: add new variable (g_nUpdateLimitvalue) note : the updatetime must be equal to or higher than the frametime, otherwise bugs can occur
 
-	double thisTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
 
 	if (g_nUpdateLimitValue != 0)
 	{
+		double thisTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+
 		const double maxUpdatePeriod = 1000.0 / static_cast<double>(g_nUpdateLimitValue);
 		double  deltaTime = duration<double>(thisTime - lastUpdateTime).count();
 
@@ -366,7 +367,7 @@ void RFrame_UpdateRender(double& lastUpdateTime, double& lastRenderTime)
 	if (g_nFrameLimitValue != 0)
 	{
 
-		thisTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+		double thisTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
 		const double maxRenderPeriod = 1000.0 / static_cast<double>(g_nFrameLimitValue);
 		double deltaTime = duration<double>(thisTime - lastRenderTime).count();
 

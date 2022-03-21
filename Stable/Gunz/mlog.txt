@@ -1,9 +1,9 @@
-GUNZ 1,0,0,290 launched. build (Jan 22 2022 10:21:50) 
-Log time (01/22/22 10:22:24)
+GUNZ 1,0,0,290 launched. build (Mar 12 2022 01:05:48) 
+Log time (03/12/22 01:29:21)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
-Display Device = Radeon RX 570 Series ( vendor=1002 device=67df subsys=341b1462 revision=ef )
-Display Driver Version = 30.0.13037.1003
+Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
+Display Driver Version = 30.0.14023.3004
 Load XML from memory : system/locale.xml- SUCCESS
 Country : (BRZ), Language : (BRZ)
 Load Config from file : config.xml- SUCCESS
@@ -16,31 +16,30 @@ InitializeNotify ok.
 WFog Enabled Device.
 device created.
 Video memory 2047.500000 
-shader initialize successful : 1
 main : RGetLenzFlare()->Initialize() 
 Alpha GunZ - Ver 0
 InitialLoading success.
 interface Initialize success
 ZApplication::OnCreate : begin
 0(Primary Sound Driver): Hardware Mixing Not Supported
-1(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
+1(1 - 55S517 (2- AMD High Definition Audio Device)): Hardware Mixing Not Supported
 2(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
-3(4 - 55S517 (AMD High Definition Audio Device)): Hardware Mixing Not Supported
+3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.542000 
+-------------------> Sound Engine Create : 0.604000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.584000 
+loading pictures : 1.792000 
 IDLResource Loading Success!!
-IDL resources : 0.133000 
+IDL resources : 0.155000 
 start InitInterface option
-Number of Display mode : 102
+Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.216000 
+Screen Effect Manager Create : 0.218000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -67,18 +66,18 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.404000 
+-------------------> GameInterface Create : 3.047000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.169000 
+-------------------> Character Loading : 0.204000 
 
 
--------------------> WeaponMesh Loading : 0.259000 
+-------------------> WeaponMesh Loading : 0.300000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.024000 
+-------------------> Worlditem Loading : 0.019000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -88,13 +87,61 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.234000 
+-------------------> ETC .. : 0.242000 
 
-game create begin , type = 0
-BspObject open : begin maps/maptest/maptest.rs 
-Error while loading maps/maptest/maptest.rs.xml
-error while loading maptest 
-ZGame Failed to create.
+
+LoginID: jetman82
+BspObject open : begin interface/church/church_b.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 1
+BspObject load lightmap 0
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+BspObject open : begin interface/church/church_a.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 38 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 1
+BspObject load lightmap 0
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
+main : OnCreate() done
+Server Connected
+Login Successful. 
+Responsed Account Charlist
+Selected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
+0,Jetman82,Jetman82,This is a test send
+Shop Gamble item count : 2
+shop gitem : 1000003, Green Box
+shop gitem : 1000004, Gold Box
+StageCreated
 game create begin , type = 0
 BspObject open : begin maps/Mansion/Mansion.rs 
 RBspObject::Open : Open_MaterialList
@@ -124,7 +171,9 @@ BspObject load lightmap : file.Read(&m_nLightmap) done
 BspObject load lightmap : end 
 RBspObject::Open : done
 create game enrvironment.
-game world create success.
+in zip : model/npc/goblin/goblinG_ranged_attacked2.elu.ani file not found!! 
+ game world create success.
 Reload all animation end 
-game created ( 10:22:44 )
-main : OnCreate() done
+---------------------------------setBuffer
+game created ( 01:29:38 )
+Create character : Name=Jetman82 Level=18 

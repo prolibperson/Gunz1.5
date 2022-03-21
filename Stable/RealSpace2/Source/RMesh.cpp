@@ -420,6 +420,40 @@ void RMesh::GetPartsNode(RMeshPartsType type,vector<RMeshNode*>& nodetable)
 	if(!m_parts_mgr)
 		return;
 
+
+	//for (auto& pair : m_parts_mgr->asyncTasks)
+	//{
+	//	if (pair.second.valid() && pair.second._Is_ready())
+	//	{
+	//		if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+	//		{
+
+	//			if (pair.first->m_FileName == m_FileName)
+	//				continue;
+	//			pair.second.get();
+
+	//			pair.first->CalcBox();
+
+	//			m_parts_mgr->m_node_table.push_back(pair.first);
+	//			pair.first->m_id = m_parts_mgr->m_id_last;
+
+	//			if (m_parts_mgr->m_id_last > MAX_NODE_TABLE)
+	//				mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
+
+	//			m_parts_mgr->m_list.push_back(pair.first);
+
+	//			//	std::remove(m_pMesh->m_parts_mgr->asyncTasks.begin(), m_pMesh->m_parts_mgr->asyncTasks.end(), pair);
+
+
+	//			break;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		continue;
+	//	}
+	//}
+
 	m_parts_mgr->GetPartsNode(type,nodetable);
 }
 

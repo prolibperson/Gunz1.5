@@ -102,6 +102,9 @@ BOOL CWorldEditDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 
 	m_pBspObject=new RBspObject;
+	std::string temp = lpszPathName;
+	size_t search = temp.find_last_of('/');
+	FolderPath = temp.substr(0, search + 1);
 	if(!m_pBspObject->Open(lpszPathName, "xml", ROpenFlag::ROF_EDITOR))
 	{
 		SAFE_DELETE(m_pBspObject);

@@ -3981,9 +3981,11 @@ void ZCombatInterface::GameCheckPickCharacter()
 
 	bool bPick = false;
 
+
 	if(ZGetGame()->Pick(pMyChar,pos,dir,&pickinfo,RM_FLAG_ADDITIVE | RM_FLAG_HIDE,true)) {
 		
-		if(pickinfo.pObject)	{
+		if(pickinfo.pObject)
+		{
 			if (pickinfo.info.parts == eq_parts_head) bPick=true;
 			bPick = true;
 		}
@@ -4026,6 +4028,7 @@ void ZCombatInterface::GameCheckPickCharacter()
 			bPick = true;
 
 		float fVisibility = bPick ? 0.4f : 1.0f;
+
 		pMyChar->m_pVMesh->SetVisibility(fVisibility);
 	}
 
@@ -4046,6 +4049,7 @@ void ZCombatInterface::GameCheckPickCharacter()
 		}else
 			SetPickTarget(false);
 	}
+
 }
 
 void ZCombatInterface::OnGadget(MMatchWeaponType nWeaponType)

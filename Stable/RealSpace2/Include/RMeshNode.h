@@ -179,6 +179,8 @@ public:
 	
 	bool			m_bConnectPhysique;
 
+	bool			m_isMeshLoaded;
+
 #ifndef _BLEND_ANIMATION
 	RAnimationNode*	m_pAnimationNode;
 #else

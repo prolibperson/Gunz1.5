@@ -903,6 +903,10 @@ void ZGame::Update(float fElapsed)
 //	m_fTime->SetWarpingAdd(GetTickCount());
 
 	m_WeaponManager.Update();
+
+//	GetWorld()->UpdateMapObjects(fElapsed);
+
+
 }
 
 
@@ -1103,6 +1107,7 @@ void ZGame::Draw()
 
 	__BP(21,"ZGame::Draw::DrawWorld");
 	GetWorld()->Draw();
+
 
 	//TODO: rewrite this
 	//((RBspObject*)GetWorld()->GetBsp())->DrawFlags();
@@ -5353,6 +5358,40 @@ rvector ZGame::GetFloor(rvector pos, rplane *pimpactplane, MUID myUID)
 			}
 		}
 	}
+
+
+	if (myUID == ZGetMyUID())
+	{
+		//Custom: map object collision
+		for (auto const& mapObj : GetWorld()->GetMapObjects())
+		{
+
+			if (mapObj->IsCollidable() == false)
+			{
+				continue;
+			}
+
+			rvector diff = mapObj->GetPosition() - pos;
+			diff.z = 0;
+
+
+			// 나중에 radius상수값으로 된것 Object의 멤버변수로 고치자
+			float objDistance = 0;
+			if (mapObj->GetCollisionType() == CT_CYLINDER)
+				objDistance = mapObj->GetCollRadius();
+			else
+				objDistance = mapObj->GetCollWidth();
+
+			if (Magnitude(diff) < objDistance)
+			{
+				rvector newfloor = mapObj->GetPosition() + rvector(mapObj->GetCollRadius(), mapObj->GetCollWidth(), mapObj->GetCollHeight());
+				if (pos.z >= mapObj->GetPosition().z)
+				{
+					floor = newfloor;
+				}
+			}
+		}
+	}
 #endif
 
 	return floor;
@@ -7890,6 +7929,77 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 					rvector newdiff=newthispos-pObject->GetPosition();
 					diff.x=newdiff.x;
 					diff.y=newdiff.y;
+				}
+			}
+		}
+	}
+
+	//custom: map object collision
+	for (auto const& mapObjects : GetWorld()->GetMapObjects())
+	{
+		if (mapObjects == nullptr || mapObjects->IsCollidable() == false)
+			continue;
+
+		//don't check for collision if I'm not gonna pick with the object
+		//if (mapObjects->Pick((rvector)pObject->GetPosition(), (rvector)pObject->GetDirection(), nullptr) == false)
+		//	continue;
+
+		rvector pos = mapObjects->GetPosition();
+		rvector dir = pObject->GetPosition() + diff - pos;
+		dir.z = 0;
+		float fDist = Magnitude(dir);
+
+		float objDistance = 0;
+		if (mapObjects->GetCollisionType() == CT_CYLINDER)
+			objDistance = mapObjects->GetCollRadius();
+		else
+			objDistance = mapObjects->GetCollWidth();
+
+		float fCOLLISION_DIST = objDistance + pObject->GetCollRadius();
+
+		if (mapObjects->GetCollisionType() == CT_CYLINDER)
+		{
+			if (fDist < fCOLLISION_DIST && pObject->GetPosition().z <= mapObjects->GetPosition().z + mapObjects->GetCollHeight())
+			{
+				if (fDist < 1.f)
+				{
+					pos.x += 1.f;
+					dir = pObject->GetPosition() - pos;
+				}
+
+				if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
+				{
+					Normalize(dir);
+					rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
+
+					rvector newdiff = newthispos - pObject->GetPosition();
+					diff.x = newdiff.x;
+					diff.y = newdiff.y;
+				}
+			}
+		}
+		else
+		{
+			if (fDist < fCOLLISION_DIST)
+			{
+				fDist = (mapObjects->GetPosition().z + mapObjects->GetCollHeight()) - pObject->GetPosition().z;
+				float heightColl = mapObjects->GetCollHeight() + pObject->GetCollHeight();
+
+				if (pObject->GetVisualMesh()->GetHeadPosition().z <= mapObjects->GetPosition().z)
+				{
+					if (fDist <= heightColl)
+					{
+						diff.z -= fDist;
+					}
+				}
+
+				if (pObject->GetPosition().z >= mapObjects->GetPosition().z && pObject->GetVelocity().z < 5.f)
+				{
+					fDist = (pObject->GetPosition().z) - (mapObjects->GetPosition().z + mapObjects->GetCollHeight());
+					if (fDist <= mapObjects->GetCollHeight())
+					{
+						diff.z -= fDist;
+					}
 				}
 			}
 		}

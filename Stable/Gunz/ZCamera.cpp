@@ -44,6 +44,11 @@ rvector ZCamera::GetCurrentDir()
 						cosf(m_fCurrentAngleX));
 }
 
+bool ZCamera::CheckMovingObjectCollision(float& fRealDist, rvector& pos, rvector& dir)
+{
+	return false;
+}
+
 
 void ZCamera::Update(float fElapsed)
 {
@@ -383,6 +388,7 @@ void ZCamera::Init()
 	AdjustDist();
 }
 
+//TODO: check for collision with moving object
 bool ZCamera::CheckCollisionWall(float &fRealDist, rvector& pos, rvector& dir)
 {
 	RBSPPICKINFO bpi;

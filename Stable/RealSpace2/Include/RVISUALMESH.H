@@ -257,7 +257,7 @@ public:
 	// Animation
 
 	bool SetAnimation(RAnimation* pAniSet,bool b=false);
-	bool SetAnimation(char* ani_name,bool b=false);
+	bool SetAnimation(const char* ani_name,bool b=false);
 	bool SetAnimation(RAniMode animode,RAnimation* pAniSet,bool b=false);
 	bool SetAnimation(RAniMode animode,const char* ani_name,bool b=false);
 

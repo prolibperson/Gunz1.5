@@ -909,6 +909,9 @@
     <ClInclude Include="ZEmoji.h">
       <Filter>Interface\Base</Filter>
     </ClInclude>
+    <ClInclude Include="ZMapObject.h">
+      <Filter>Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZBandiCapturer.cpp">
@@ -1645,6 +1648,9 @@
     </ClCompile>
     <ClCompile Include="ZEmoji.cpp">
       <Filter>Interface\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ZMapObject.cpp">
+      <Filter>Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

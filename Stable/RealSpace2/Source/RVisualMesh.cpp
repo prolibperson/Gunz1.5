@@ -796,7 +796,45 @@ void RVisualMesh::Render(ROcclusionList* pOCCL)
 
 void RVisualMesh::Render(bool low,bool render_buffer) {
 
-	if(m_pMesh) {
+	if (m_pMesh == nullptr)
+		return;
+
+
+	if(m_pMesh)
+	{
+
+		if (m_pMesh->m_parts_mgr)
+		{
+			for (auto pair = m_pMesh->m_parts_mgr->asyncTasks.begin(); pair != m_pMesh->m_parts_mgr->asyncTasks.end();)
+			{
+				if (pair->second.valid() && pair->second._Is_ready())
+				{
+					if (pair->second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+					{
+						pair->second.get();
+
+						RMesh* pMesh = new RMesh;
+						memcpy(pMesh, pair->first, sizeof(RMesh));
+
+						pMesh->CalcBox();
+
+						m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
+						pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last;
+
+						//if (m_pMesh->m_parts_mgr->m_id_last > MAX_NODE_TABLE)
+						//	mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
+
+						m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
+
+						m_pMesh->m_parts_mgr->asyncTasks.erase(pair);
+
+
+					}
+				}
+				else
+					++pair;
+			}
+		}
 
 		rboundingbox bbox;
 
@@ -2012,7 +2050,7 @@ bool RVisualMesh::SetAnimation(RAnimation* pAniSet,bool b)
 	return SetAnimation(ani_mode_lower,pAniSet,b);
 }
 
-bool RVisualMesh::SetAnimation(char* ani_name,bool b)
+bool RVisualMesh::SetAnimation(const char* ani_name,bool b)
 {
 	return SetAnimation(ani_mode_lower,ani_name,b);
 }
@@ -2857,6 +2895,9 @@ void RVisualMesh::SetClothMeshNodeRender(bool b)
 bool RVisualMesh::ChangeChestCloth(float fAccel,int Numiter  )
 {
 	RMeshNode* pMeshNode = GetParts( eq_parts_chest );
+
+	if (m_pMesh == nullptr)
+		return false;
 
 	// mesh node를 검색하면서 컬러값을 가진 노드를 걸러낸다
 

@@ -7,6 +7,7 @@
 
 #include "RMesh.h"
 #include <vector>
+#include <future>
 
 _NAMESPACE_REALSPACE2_BEGIN
 
@@ -21,6 +22,8 @@ public:
 
 	RMeshMgr();
 	~RMeshMgr();
+
+	std::vector<std::pair<RMesh*,std::future<bool>>> asyncTasks;
 
 	//Custom: Dynamic Model Loading. Additional bool parameter to set autoload
 	int		Add(char* name,char* modelname=NULL,bool namesort=false, bool autoLoad = false);

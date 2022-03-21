@@ -378,7 +378,7 @@ bool RInitDisplay(HWND hWnd, const RMODEPARAMS *params)
 //	mlog("multithread.\n");
 
 	// 이 플래그는 device 를 여러 쓰레드에서 쓸때 사용한다. 퍼포먼스 저하가 있다.
-	//BehaviorFlags|=D3DCREATE_MULTITHREADED;
+	BehaviorFlags|=D3DCREATE_MULTITHREADED;
 #endif
 
 

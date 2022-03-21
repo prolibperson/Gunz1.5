@@ -1610,7 +1610,7 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 			m_MeshList.SetMtrlAutoLoad(true);
 			m_MeshList.SetMapObject(true);
 
-			pInfo->nMeshID = m_MeshList.Add(fname);
+			pInfo->nMeshID = m_MeshList.Add(fname,nullptr,false,true);
 			RMesh *pmesh=m_MeshList.GetFast(pInfo->nMeshID);
 
 			if(pmesh)

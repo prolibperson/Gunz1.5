@@ -27,6 +27,7 @@ public:
 	bool m_bLastPicked;
 	RBSPPICKINFO m_LastPicked;
 
+	std::string FolderPath;
 // Operations
 public:
 	bool ReOpen();

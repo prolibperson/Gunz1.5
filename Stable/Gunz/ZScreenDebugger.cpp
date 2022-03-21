@@ -45,7 +45,7 @@ void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 		char buffer[512];
 
 		double fMs = 1000.0/g_fFPS;
-		sprintf_s(buffer, "FPS: %.0f", fMs);
+		sprintf_s(buffer, "FPS: %.2f", fMs);
 
 		int x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
 		pDC->Text(x, 10, buffer);

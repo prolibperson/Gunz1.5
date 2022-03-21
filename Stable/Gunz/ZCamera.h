@@ -92,6 +92,8 @@ private:
 	void CalcMaxPayneCameraZ(float &fRealDist, float& fAddedZ, float fAngleX);
 	rvector GetCurrentDir();		// 카메라가 바라보는 방향을 얻어낸다
 
+	bool CheckMovingObjectCollision(float& fRealDist, rvector& pos, rvector& dir);
+
 public:
 	float m_fCurrentDist;
 	bool m_bCollision[4];

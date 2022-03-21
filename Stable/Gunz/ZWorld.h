@@ -4,6 +4,7 @@
 #include "ZWater.h"
 #include "ZMapDesc.h"
 #include "ZClothEmblem.h"
+#include "ZMapObject.h"
 
 // 앞으로 월드를 이루고 있는 것은 여기다 넣도록 합시다. (특히 그리는 것 관련된 것들)
 // 게임 구동 관련은 ZGame에서 하고, 월드를 이루고 있는 것들이나, 그리는 것 관련 등은 여기서 했으면 좋겠습니다.
@@ -15,6 +16,7 @@ class ZWorldManager;
 class ZMapDesc;
 class ZSkyBox;
 class ZLoadingProgress;
+
 
 class ZWorld
 {
@@ -46,6 +48,8 @@ private:
 	bool	m_bCreated;
 
 	ZWorld();		// 클래스를 직접 생성하지 말것. ZWorldManager를 통해서 관리한다.
+
+
 public:
 	~ZWorld();
 
@@ -57,6 +61,8 @@ public:
 	void OnInvalidate();
 	void OnRestore();
 
+	void LoadWorldObjects();
+
 	RBspObject* const GetBsp() { return m_pBsp; }
 	ZMapDesc	*GetDesc() { return m_pMapDesc; }
 	ZEmblemList	*GetFlags() { return &m_flags; }
@@ -66,6 +72,19 @@ public:
 	bool IsWaterMap() { return m_bWaterMap; }
 	float GetWaterHeight() { return m_fWaterHeight; }
 	bool IsFogVisible()		{ return m_bFog; }
+
+	bool PickWorldObject(rvector& pos, rvector& dir);
+
+	//custom: map objects
+	std::vector<std::unique_ptr<ZMapObject>> mapObjects;
+
+	std::vector<std::unique_ptr<ZMapObject>> const& GetMapObjects()
+	{
+		return mapObjects;
+	}
+
+	void RenderMapObjects();
+	void UpdateMapObjects(float delta);
 };
 
 #endif

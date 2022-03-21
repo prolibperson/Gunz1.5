@@ -282,6 +282,9 @@ void ChangeEquipParts(ZObjectVMesh* pVMesh, const unsigned long int* pItemID)
 {
 	pVMesh->ClearParts();
 
+	if (pVMesh->GetMesh() == nullptr)
+		return;
+
 	struct _ZPARTSPAIR
 	{
 		_RMeshPartsType			meshparts;
@@ -298,7 +301,8 @@ void ChangeEquipParts(ZObjectVMesh* pVMesh, const unsigned long int* pItemID)
 	};
 
 	//Custom: Dynamic resource loading
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; i++)
+	{
 		if (pItemID[PartsPair[i].itemparts] != 0)
 		{
 			MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(pItemID[PartsPair[i].itemparts]);
@@ -1250,13 +1254,13 @@ void ZCharacter::UpdateHeight(float fDelta)
 		//	if(!m_bLand )
 		if(m_pModule_Movable->isLanding())
 		{
-			if(GetPosition().z + 100.f < m_pModule_Movable->GetFallHeight())
+			if (GetPosition().z + 100.f < m_pModule_Movable->GetFallHeight())
 			{
-//				m_fFallHeight = m_Position.z;
-				float fSpeed=fabs(GetVelocity().z);
-				if(fSpeed>DAMAGE_VELOCITY)
+				//				m_fFallHeight = m_Position.z;
+				float fSpeed = fabs(GetVelocity().z);
+				if (fSpeed > DAMAGE_VELOCITY)
 				{
-					float fDamage = MAX_FALL_DAMAGE * ( fSpeed-DAMAGE_VELOCITY) / (MAX_FALL_SPEED-DAMAGE_VELOCITY) ;
+					float fDamage = MAX_FALL_DAMAGE * (fSpeed - DAMAGE_VELOCITY) / (MAX_FALL_SPEED - DAMAGE_VELOCITY);
 #ifdef	ENABLE_FALLING_DAMAGE
 					//				DamagedFalling(fDamage);
 #endif
@@ -1267,47 +1271,58 @@ void ZCharacter::UpdateHeight(float fDelta)
 
 				// 점프 착지시 먼지..
 				rvector vPos = GetPosition();
-				rvector vDir = rvector(0.f,0.f,-1.f);
+				rvector vDir = rvector(0.f, 0.f, -1.f);
 				vPos.z += 50.f;
 
 				RBSPPICKINFO pInfo;
-
-				if(r_map->Pick(vPos,vDir,&pInfo)) {
-/*
-					if( g_pGame->m_waters.CheckSpearing( vPos+rvector(0.f,0.f,200.f), pInfo.PickPos, 250, 0.3 ) )	{
-								
-
+				bool isWorldObjectPicked = ZGetGame()->GetWorld()->PickWorldObject(vPos, vDir);
+				if (isWorldObjectPicked)
+				{
+					for (auto const& worldObject : ZGetGame()->GetWorld()->GetMapObjects())
+					{
+						if (worldObject->Pick(vPos, vDir, nullptr))
+						{
+							std::string sound;
+							sound = "man_jump_";
+							sound.append(worldObject->GetSound());
+							ZGetSoundEngine()->PlaySound(sound.c_str(), vPos, IsObserverTarget());
+						}
 					}
-					else {
-*/						
-					vPos = pInfo.PickPos;
-
-					vDir.x = pInfo.pInfo->plane.a;
-					vDir.y = pInfo.pInfo->plane.b;
-					vDir.z = pInfo.pInfo->plane.c;
-
-					ZGetEffectManager()->AddLandingEffect(vPos,vDir);//내부에서 옵션에 따라~
-
-					///////////////////////////////////////////////////////////
-					// 착지 sound .. 착지 시점을 정확하게 하려면 ..
-
-					AniFrameInfo* pInfo = m_pVMesh->GetFrameInfo(ani_mode_lower);
-					RAniSoundInfo* pSInfo = &pInfo->m_SoundInfo;// &m_pVMesh->m_SoundInfo[0];
-
-					if(pSInfo->Name[0]) {
-						pSInfo->isPlay = true;
-						UpdateSound();
-//							ZApplication::GetSoundEngine()->PlaySound(pSInfo->Name,vPos.x,vPos.y,vPos.z);
-					}
-					else {//벽점프후 사운드등은 등록되어 있지 않다..
-						strcpy(pSInfo->Name,"man_jump");
-						pSInfo->isPlay = true;
-						UpdateSound();
-					}
-
-//						}
 				}
 
+				else
+				{
+					if (r_map->Pick(vPos, vDir, &pInfo))
+					{
+						vPos = pInfo.PickPos;
+
+						vDir.x = pInfo.pInfo->plane.a;
+						vDir.y = pInfo.pInfo->plane.b;
+						vDir.z = pInfo.pInfo->plane.c;
+
+						ZGetEffectManager()->AddLandingEffect(vPos, vDir);//내부에서 옵션에 따라~
+
+						///////////////////////////////////////////////////////////
+						// 착지 sound .. 착지 시점을 정확하게 하려면 ..
+
+						AniFrameInfo* pInfo = m_pVMesh->GetFrameInfo(ani_mode_lower);
+						RAniSoundInfo* pSInfo = &pInfo->m_SoundInfo;// &m_pVMesh->m_SoundInfo[0];
+
+						if (pSInfo->Name[0]) {
+							pSInfo->isPlay = true;
+							UpdateSound();
+							//							ZApplication::GetSoundEngine()->PlaySound(pSInfo->Name,vPos.x,vPos.y,vPos.z);
+						}
+						else {//벽점프후 사운드등은 등록되어 있지 않다..
+							strcpy(pSInfo->Name, "man_jump");
+							pSInfo->isPlay = true;
+							UpdateSound();
+						}
+
+						//						}
+					}
+
+				}
 			}
 		}
 	}
@@ -2639,11 +2654,13 @@ void ZCharacter::UpdateSound()
 		RBSPPICKINFO bpi;
 		if(ZGetGame()->GetWorld()->GetBsp()->Pick(GetPosition()+rvector(0,0,100),rvector(0,0,-1),&bpi))
 		{
-			pMaterial = ZGetGame()->GetWorld()->GetBsp()->GetMaterial(bpi.pNode, bpi.nIndex);
+			//if you're on top of a world object, dont use the sound beneath it!
+			if (ZGetGame()->GetWorld()->PickWorldObject((rvector)GetPosition(), rvector(0, 0, -1)) == false)
+			{
+				pMaterial = ZGetGame()->GetWorld()->GetBsp()->GetMaterial(bpi.pNode, bpi.nIndex);
+			}
 		}
-
-
-		//	발자국 소리 하드코드 !    
+				//	발자국 소리 하드코드 !    
 
 		AniFrameInfo* pInfo = m_pVMesh->GetFrameInfo(ani_mode_lower);
 
@@ -2680,7 +2697,8 @@ void ZCharacter::UpdateSound()
 		}
 
 		//	지금 왼발인지 오른발인지 판단하고 발이 바뀌면 소리를 낸다
-		if(m_nWhichFootSound!=nCurrFoot && pMaterial) {	
+		if(m_nWhichFootSound!=nCurrFoot && pMaterial)
+		{	
 			if(m_nWhichFootSound==0)
 			{	
 				// 왼발
@@ -2703,6 +2721,33 @@ void ZCharacter::UpdateSound()
 #endif
 			}
 			m_nWhichFootSound=nCurrFoot;
+		}
+
+		if (m_nWhichFootSound != nCurrFoot)
+		{
+			for (auto const& worldObj : ZGetGame()->GetWorld()->GetMapObjects())
+			{
+				if (worldObj->Pick((D3DXVECTOR3)GetPosition(), (D3DXVECTOR3)GetDirection(), nullptr))
+				{
+					rvector pos;
+					std::string sound;
+					if (m_nWhichFootSound == 0)
+					{
+						sound = "man_fs_l_";
+						sound.append(worldObj->GetSound());
+						pos = m_pVMesh->GetLFootPosition();
+					}
+					else
+					{
+						sound = "man_fs_r_";
+						sound.append(worldObj->GetSound());
+						pos = m_pVMesh->GetRFootPosition();
+					}
+
+					ZApplication::GetSoundEngine()->PlaySound(sound.c_str(), pos, IsObserverTarget());
+				}
+			}
+			m_nWhichFootSound = nCurrFoot;
 		}
          
 		RAniSoundInfo* pSInfo;

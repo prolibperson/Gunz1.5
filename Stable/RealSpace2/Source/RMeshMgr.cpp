@@ -10,6 +10,7 @@
 #include "MZFileSystem.h"
 
 #include "MDebug.h"
+#include <future>
 
 _USING_NAMESPACE_REALSPACE2
 
@@ -37,49 +38,128 @@ RMeshMgr::~RMeshMgr()
 	DelAll();
 }
 
-int RMeshMgr::Add(char* name,char* modelname,bool namesort, bool autoLoad)
+int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 {
 	RMesh* node;
 	node = new RMesh;
 
-	if(node==NULL)
+	if (node == NULL)
 	{
-		mlog("RMeshMgr::Add begin modelname = %s  ",modelname);
+		mlog("RMeshMgr::Add begin modelname = %s  ", modelname);
 		return -1;
 	}
 
-	if(namesort)
+	if (namesort)
 		node->m_bEffectSort = namesort;
 
-	node->SetMtrlAutoLoad( m_mtrl_auto_load );
+	node->SetMtrlAutoLoad(m_mtrl_auto_load);
 	node->SetMapObject(m_is_map_object);
 	node->SetModelAutoLoad(autoLoad);
+	if (modelname)
+		node->SetName(modelname);
 
+	bool isCharModel = false;
+
+
+	if (RMesh::m_parts_mesh_loading_skip == 1)
+	{
+		string filename = name;
+		if (filename.find("model/lo") != std::string::npos || filename.find("model/man/") != std::string::npos ||
+			filename.find("model/woman/") != std::string::npos)
+			isCharModel = true;
+		if (autoLoad == true)
+		{
+			if (!node->ReadElu(name))
+			{
+				delete node;
+				return -1;
+			}
+
+
+			node->CalcBox();
+
+			m_node_table.push_back(node);
+			node->m_id = m_id_last;
+
+			if (m_id_last > MAX_NODE_TABLE)
+				mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
+
+			m_list.push_back(node);
+			m_id_last++;
+
+			return m_id_last - 1;
+		}
+		else
+		{
+			if (isCharModel == false)
+			{
+				if (!node->ReadElu(name))
+				{
+					delete node;
+					return -1;
+				}
+
+
+				node->CalcBox();
+
+				m_node_table.push_back(node);
+				node->m_id = m_id_last;
+
+				if (m_id_last > MAX_NODE_TABLE)
+					mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
+
+				m_list.push_back(node);
+				m_id_last++;
+
+				return m_id_last - 1;
+			}
+			else
+			{
+				if (asyncTasks.size() == 0)
+				{
+
+					asyncTasks.push_back(make_pair(std::move(node), std::move(std::async(std::launch::async, &RMesh::ReadElu, node, const_cast<char*>(filename.c_str()), true))));
+
+					m_id_last++;
+
+					return m_id_last - 1;
+				}
+				else
+				{
+					for (auto const& pair : asyncTasks)
+					{
+						if (pair.first->m_FileName == name)
+							continue;
+
+						asyncTasks.push_back(make_pair(std::move(node), std::async(std::launch::async, &RMesh::ReadElu, node, const_cast<char*>(filename.c_str()), true)));
+
+						m_id_last++;
+
+						return m_id_last - 1;
+					}
+				}
+
+			}
+		}
+	}
 
 	if (!node->ReadElu(name))
 	{
-		//mlog("elu %s file loading failure !!!\n",name);
 		delete node;
 		return -1;
 	}
 
-	if(modelname)
-		node->SetName(modelname);
-
-//	mlog("node name %s, modelname %s\n", node->GetName(), node->GetFileName());
 
 	node->CalcBox();
 
 	m_node_table.push_back(node);
 	node->m_id = m_id_last;
 
-	if(m_id_last > MAX_NODE_TABLE)
+	if (m_id_last > MAX_NODE_TABLE)
 		mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
 
 	m_list.push_back(node);
 	m_id_last++;
-
-	return m_id_last-1;
 }
 
 //#define	LOAD_TEST
@@ -246,6 +326,7 @@ int	RMeshMgr::LoadXmlList(const char* name,RFPROGRESSCALLBACK pfnProgressCallbac
 					else
 					{
 						RMesh* pMesh = GetFast(id);
+						if(pMesh != nullptr)
 						pMesh->m_LitVertexModel = true;
 					}
 				}
@@ -497,6 +578,7 @@ void RMeshMgr::Render(int id)
 
 	r_mesh_node node;
 
+
 	for(node = m_list.begin(); node != m_list.end();)
 	{
 
@@ -512,6 +594,7 @@ void RMeshMgr::Render(int id)
 void RMeshMgr::RenderFast(int id,D3DXMATRIX* unit_mat)
 {
 	if(m_list.empty()) return;
+
 
 	if(id == -1) return;
 	_ASSERT(m_node_table[id]);
@@ -534,6 +617,7 @@ RMesh* RMeshMgr::Get(const char* name)
 	if(m_list.empty()) return NULL;
 
 	r_mesh_node node;
+
 
 	for(node = m_list.begin(); node != m_list.end(); ++node)
 	{
@@ -674,9 +758,11 @@ void RMeshMgr::GetPartsNode(RMeshPartsType parts,vector<RMeshNode*>& nodetable)
 	RMesh* pMesh = NULL;
 	RMeshNode* pMeshNode = NULL;
 
+
 	for(node = m_list.begin(); node != m_list.end(); ++node)
 	{
 		pMesh = (*node);
+
 		pMesh->GetMeshData(parts,nodetable);
 	}
 }
@@ -688,21 +774,6 @@ RMeshNode* RMeshMgr::GetPartsNode(char* name, const char* eluName)
 	RMesh* pMesh = NULL;
 	RMeshNode* pMeshNode = NULL;
 
-	//if (eluName != nullptr)
-	//{
-	//	bool result = Find(eluName);
-	//	if (result == false)
-	//	{
-	//		mlog("%s", eluName);
-	//		std::string modelPath = "model/man/";
-	//		modelPath.append(eluName);
-
-	//		RMesh* node;
-	//		node = new RMesh;
-
-	//		Add((char*)modelPath.c_str());
-	//	}
-	//}
 
 	for(node = m_list.begin(); node != m_list.end(); ++node)
 	{

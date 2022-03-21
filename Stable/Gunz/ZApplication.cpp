@@ -498,6 +498,12 @@ bool ZApplication::OnCreate(ZLoadingProgress *pLoadingProgress)
 	if(m_NPCMeshMgr.LoadXmlList("model/npc.xml") == -1)
 		return false;
 
+	if (ZGetNpcMeshMgr()->LoadXmlList("model/npc2.xml") == -1)
+	{
+		mlog("Error while Load NPC Models.\n");
+		return false;
+	}
+
 	///if (m_NPCMeshMgr.LoadXmlList("model/npc3.xml") == -1)
 	//	return false;
 #endif

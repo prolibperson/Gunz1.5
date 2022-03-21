@@ -1275,7 +1275,7 @@ void ChatCmd_AdminMoveTo(const char* line, const int argc, char **const argv)
 	if (!ZGetMyInfo()->IsAdminGrade())
 		return;
 
-	ZGetGame()->m_pMyCharacter->SetPosition(rvector(atof(argv[1]), atof(argv[2]), atof(argv[3])));
+	ZGetGame()->m_pMyCharacter->SetPosition(rvector(2890.7146, -3076.026123, -729.207581));
 }
 
 void ChatCmd_EmotionTaunt(const char* line,const int argc, char **const argv)
