@@ -557,13 +557,18 @@ void ZMyCharacter::ProcessInput(float fDelta)
 				Normalize(PickedNormal);
 				float fAbsorb=DotProduct(PickedNormal,GetVelocity());
 				rvector newVelocity = GetVelocity();
-				newVelocity-=fAbsorb*PickedNormal;
+				
+				//custom: worldobjects, prevent queued jump issues
+				if (ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction) == nullptr)
+				{
+					newVelocity -= fAbsorb * PickedNormal;
 
-				newVelocity*=1.1f; // °¡¼Ó¹Þ´Â´Ù.
+					newVelocity *= 1.1f; // °¡¼Ó¹Þ´Â´Ù.
 
-				newVelocity+=PickedNormal*JUMP2_WALL_VELOCITY;
-				newVelocity.z=JUMP2_VELOCITY;
-				SetVelocity(newVelocity);
+					newVelocity += PickedNormal * JUMP2_WALL_VELOCITY;
+					newVelocity.z = JUMP2_VELOCITY;
+					SetVelocity(newVelocity);
+				}
 
 				MEMBER_SET_CHECKCRC(m_timeInfo, m_fJump2Time, ZGetGame()->GetTime());
 
@@ -645,9 +650,9 @@ void ZMyCharacter::ProcessInput(float fDelta)
 			{
 				zStatus.m_bJumpQueued=false;
 
-				rvector right;
-				rvector forward=m_Direction;
-				CrossProduct(&right,rvector(0,0,1),forward);
+				//rvector right;
+				//rvector forward=m_Direction;
+				//CrossProduct(&right,rvector(0,0,1),forward);
 
 				rvector vel=rvector(GetVelocity().x,GetVelocity().y,0);
 				float fVel=Magnitude(vel);
@@ -2340,8 +2345,28 @@ void ZMyCharacter::OnUpdate(float fDelta)
 		{
 			PROTECT_DEBUG_REGISTER(bForDebugRegister)
 			{
-				m_pModule_Movable->UpdateGravity(GetGravityConst()*fAccmulatedDelta);
-				uStatus.m_bLand=false;
+				/*Custom: worldobjects : if a player is currently picking an object and the heightdiff is less than collision, set landing to true
+				so walking when the object is going down won't cause acceleration issues*/
+				ZWorldObject* obje = ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction);
+				if (obje == nullptr)
+				{
+					m_pModule_Movable->UpdateGravity(GetGravityConst() * fAccmulatedDelta);
+					uStatus.m_bLand = false;
+				}
+				else
+				{
+					m_pModule_Movable->UpdateGravity(GetGravityConst() * fAccmulatedDelta);
+
+					float heightdiff = m_Position.Ref().z - (obje->GetPosition().z + obje->GetCollHeight());
+					if (heightdiff >= obje->GetCollHeight())
+					{
+						uStatus.m_bLand = false;
+					}
+					else
+					{
+						uStatus.m_bLand = true;
+					}
+				}
 			}
 		}
 

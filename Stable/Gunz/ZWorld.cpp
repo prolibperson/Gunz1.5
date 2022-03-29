@@ -394,7 +394,7 @@ void ZWorld::LoadWorldObjects()
 
 		if (strcmp(TagName, "OBJECT") == 0)
 		{
-			ZWorldObject worldObject;
+			WorldObject worldObject;
 			child.GetAttribute(&worldObject.name, "name");
 			child.GetAttribute(&worldObject.model, "model");
 			child.GetAttribute(&worldObject.collradius, "collradius", 0);
@@ -469,21 +469,35 @@ void ZWorld::LoadWorldObjects()
 					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.endposition.x, &worldObject.endposition.y, &worldObject.endposition.z);
 				}
 			}
-			std::unique_ptr<ZMapObject> mapObject = std::make_unique<ZMapObject>();
-			mapObject->InitMesh(worldObject);
-			mapObjects.push_back(std::move(mapObject));
+			std::unique_ptr<ZWorldObject> object = std::make_unique<ZWorldObject>();
+			object->InitMesh(worldObject);
+			mapObjects.push_back(std::move(object));
 		}
 	}
 }
 
-bool ZWorld::PickWorldObject(rvector& pos, rvector& dir)
+
+
+ZWorldObject* ZWorld::PickWorldObject(rvector& pos, rvector& dir)
 {
 	for (auto const& worldObject : mapObjects)
 	{
 		if (worldObject->Pick(pos, dir, nullptr))
-			return true;
+			return worldObject.get();
 	}
-	return false;
+	return nullptr;
+}
+
+rvector ZWorld::GetFloor(rvector& origin, float fRadius, float fHeight, rplane* pimpactplane)
+{
+	ZWorldObject* worldObject = PickWorldObject(origin, rvector(0, 1, 0));
+	if (worldObject != nullptr && worldObject->IsCollidable())
+	{
+		rvector floor = worldObject->GetPosition() + rvector(worldObject->GetCollRadius(), worldObject->GetCollWidth(), worldObject->GetCollHeight());
+		return floor;
+	}
+
+	return GetBsp()->GetFloor(origin, fRadius, fHeight, pimpactplane);
 }
 
 void ZWorld::SetFog(bool bFog)

@@ -1275,19 +1275,15 @@ void ZCharacter::UpdateHeight(float fDelta)
 				vPos.z += 50.f;
 
 				RBSPPICKINFO pInfo;
-				bool isWorldObjectPicked = ZGetGame()->GetWorld()->PickWorldObject(vPos, vDir);
-				if (isWorldObjectPicked)
+				ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(vPos, vDir);
+				if (worldObject)
 				{
-					for (auto const& worldObject : ZGetGame()->GetWorld()->GetMapObjects())
-					{
-						if (worldObject->Pick(vPos, vDir, nullptr))
-						{
-							std::string sound;
-							sound = "man_jump_";
-							sound.append(worldObject->GetSound());
-							ZGetSoundEngine()->PlaySound(sound.c_str(), vPos, IsObserverTarget());
-						}
-					}
+					std::string sound;
+					sound = "man_jump_";
+					sound.append(worldObject->GetSound());
+					ZGetSoundEngine()->PlaySound(sound.c_str());
+					ZGetEffectManager()->AddLandingEffect(vPos, vDir,500);//내부에서 옵션에 따라~
+
 				}
 
 				else
@@ -2725,7 +2721,7 @@ void ZCharacter::UpdateSound()
 
 		if (m_nWhichFootSound != nCurrFoot)
 		{
-			for (auto const& worldObj : ZGetGame()->GetWorld()->GetMapObjects())
+			for (auto const& worldObj : ZGetGame()->GetWorld()->GetWorldObjects())
 			{
 				if (worldObj->Pick((D3DXVECTOR3)GetPosition(), (D3DXVECTOR3)GetDirection(), nullptr))
 				{

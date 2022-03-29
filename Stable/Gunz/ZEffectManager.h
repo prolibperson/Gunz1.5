@@ -354,7 +354,7 @@ public:
 	void AddReBirthEffect(const rvector& Target);
 	void AddTimeRewardEffect(const rvector& Target,ZObject* pObj);
 
-	void AddLandingEffect(rvector& Target, rvector& TargetNormal);
+	void AddLandingEffect(rvector& Target, rvector& TargetNormal, int const lifetime = 3000);
 	void AddGrenadeEffect(rvector& Target, rvector& TargetNormal);
 	void AddRocketEffect(rvector& Target, rvector& TargetNormal);
 	void AddRocketSmokeEffect(rvector& Target);

@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "ZMapObject.h"
+#include "ZWorldObject.h"
 
 MapObjectCollision::MapObjectCollision()
 {
 	//TODO: make use of collisiontype
-	CollisionType = CT_SQUARE;
+	CollisionType = CT_CYLINDER;
 	Height = 0;
 	Width = 0;
 	Radius = 0;
@@ -17,7 +17,7 @@ MapObjectCollision::~MapObjectCollision()
 }
 
 //todo: fetch information from a xml for the map
-ZMapObject::ZMapObject() noexcept
+ZWorldObject::ZWorldObject() noexcept
 {
 	lastUpdateTime = 0;
 	IsReversing = false;
@@ -29,13 +29,13 @@ ZMapObject::ZMapObject() noexcept
 	moveSpeed = 0;
 }
 
-ZMapObject::~ZMapObject() noexcept
+ZWorldObject::~ZWorldObject() noexcept
 {
 	
 }
 
 //todo: init mesh differently, currently using npc mesh manager...
-void ZMapObject::InitMesh(ZWorldObject const& worldObj)
+void ZWorldObject::InitMesh(WorldObject const& worldObj)
 {
 	RMesh* pMesh;
 
@@ -97,7 +97,7 @@ void ZMapObject::InitMesh(ZWorldObject const& worldObj)
 }
 
 //TODO: determine best way to update the npcs position and framing
-void ZMapObject::Update(float time)
+void ZWorldObject::Update(float time)
 {
 	double thisTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
 
@@ -119,17 +119,17 @@ void ZMapObject::Update(float time)
 			VisualMesh->SetWorldMatrix(mat);
 
 			lastUpdateTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
-
 		}
 	}
 }
 
-void ZMapObject::Draw()
+void ZWorldObject::Draw()
 {
-	RGetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
-
 	if (VisualMesh == nullptr || VisualMesh->GetMesh()->m_isMeshLoaded == false)
 		return;
+
+	if (RGetMultiSampling() > D3DMULTISAMPLE_NONE)
+		RGetDevice()->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, TRUE);
 
 	//need to update the frame at every draw call
 	VisualMesh->Frame();
@@ -149,12 +149,14 @@ void ZMapObject::Draw()
 	//		ZGetGame()->m_pMyCharacter->SetPosition(rvector(pos.x, pos.y + fCOLLISION_DIST, ZGetGame()->m_pMyCharacter->GetPosition().z));
 	//	}
 	//}
+	if (RGetMultiSampling() > D3DMULTISAMPLE_NONE)
+		RGetDevice()->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, FALSE);
+
 }
 
 //todo: handle stuf a bit better i guess?
-void ZMapObject::Move(double const& moveDiff)
+void ZWorldObject::Move(double const& moveDiff)
 {
-
 	if (CurrPosition.z >= MaxHeight)
 	{
 		ReverseAnimation = true;
@@ -175,7 +177,7 @@ void ZMapObject::Move(double const& moveDiff)
 
 }
 
-void ZMapObject::Move(rvector& diff)
+void ZWorldObject::Move(rvector& diff)
 {
 	rvector origin, targetpos;
 	rplane impactplane;
@@ -189,13 +191,14 @@ void ZMapObject::Move(rvector& diff)
 }
 
 //TODO: fill this in
-bool ZMapObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
+bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 {
 	if (IsCollidable() == false)
 	{
 		return false;
 	}
 	rvector diff = GetPosition() - pos;
+	diff.z = 0;
 
 	// 나중에 radius상수값으로 된것 Object의 멤버변수로 고치자
 	float objDistance = 0;
@@ -203,7 +206,7 @@ bool ZMapObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 		objDistance = GetCollRadius();
 	else
 		objDistance = GetCollWidth();
-	if (Magnitude(diff) < objDistance && pos.z > GetPosition().z)
+	if (Magnitude(diff) < objDistance && pos.z >= CurrPosition.z)
 	{
 		return true;
 	}
@@ -211,7 +214,7 @@ bool ZMapObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 }
 
 //TODO: if object has reached the end of its path, need to reverse and go back to the start point
-void ZMapObject::BuildNavigationPath()
+void ZWorldObject::BuildNavigationPath()
 {
 	if (EndPosition == rvector(-1, -1, -1))
 		return;
@@ -229,7 +232,7 @@ void ZMapObject::BuildNavigationPath()
 		m_listWaypoint.push_back(*it);
 }
 
-void ZMapObject::RunWayPoints()
+void ZWorldObject::RunWayPoints()
 {
 	//TODO: reverse position
 	if (m_listWaypoint.size() == 0)

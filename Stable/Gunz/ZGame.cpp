@@ -5321,13 +5321,13 @@ void ZGame::OnPeerDash(MCommand* pCommand)
 
 rvector ZGame::GetFloor(rvector pos, rplane *pimpactplane, MUID myUID)
 {
-	rvector floor=ZGetGame()->GetWorld()->GetBsp()->GetFloor(pos+rvector(0,0,120),CHARACTER_RADIUS-1.1f,58.f,pimpactplane);
-
+	rvector floor = ZGetGame()->GetWorld()->GetFloor(pos + rvector(0, 0, 120), CHARACTER_RADIUS - 1.1f, 58.f, pimpactplane);
 #ifdef ENABLE_CHARACTER_COLLISION
-	ZObjectManager::iterator itor = m_ObjectManager.begin();
-	for ( ;itor != m_ObjectManager.end(); ++itor)
+	for (auto const& itor : m_ObjectManager)
 	{
-		ZObject* pObject = (*itor).second;
+		ZObject* pObject = itor.second;
+		if (pObject == nullptr || pObject == m_pMyCharacter)
+			continue;
 		if (pObject->IsCollideable())
 //		if(!pCharacter->IsDie() && !pCharacter->m_bBlastDrop)
 		{
@@ -5359,39 +5359,6 @@ rvector ZGame::GetFloor(rvector pos, rplane *pimpactplane, MUID myUID)
 		}
 	}
 
-
-	if (myUID == ZGetMyUID())
-	{
-		//Custom: map object collision
-		for (auto const& mapObj : GetWorld()->GetMapObjects())
-		{
-
-			if (mapObj->IsCollidable() == false)
-			{
-				continue;
-			}
-
-			rvector diff = mapObj->GetPosition() - pos;
-			diff.z = 0;
-
-
-			// 나중에 radius상수값으로 된것 Object의 멤버변수로 고치자
-			float objDistance = 0;
-			if (mapObj->GetCollisionType() == CT_CYLINDER)
-				objDistance = mapObj->GetCollRadius();
-			else
-				objDistance = mapObj->GetCollWidth();
-
-			if (Magnitude(diff) < objDistance)
-			{
-				rvector newfloor = mapObj->GetPosition() + rvector(mapObj->GetCollRadius(), mapObj->GetCollWidth(), mapObj->GetCollHeight());
-				if (pos.z >= mapObj->GetPosition().z)
-				{
-					floor = newfloor;
-				}
-			}
-		}
-	}
 #endif
 
 	return floor;
@@ -7935,31 +7902,25 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 	}
 
 	//custom: map object collision
-	for (auto const& mapObjects : GetWorld()->GetMapObjects())
+	ZWorldObject* worldObject = GetWorld()->PickWorldObject((rvector)pObject->GetPosition(), (rvector)pObject->GetDirection());
+	if (worldObject != nullptr)
 	{
-		if (mapObjects == nullptr || mapObjects->IsCollidable() == false)
-			continue;
-
-		//don't check for collision if I'm not gonna pick with the object
-		//if (mapObjects->Pick((rvector)pObject->GetPosition(), (rvector)pObject->GetDirection(), nullptr) == false)
-		//	continue;
-
-		rvector pos = mapObjects->GetPosition();
+		rvector pos = worldObject->GetPosition();
 		rvector dir = pObject->GetPosition() + diff - pos;
 		dir.z = 0;
 		float fDist = Magnitude(dir);
 
 		float objDistance = 0;
-		if (mapObjects->GetCollisionType() == CT_CYLINDER)
-			objDistance = mapObjects->GetCollRadius();
+		if (worldObject->GetCollisionType() == CT_CYLINDER)
+			objDistance = worldObject->GetCollRadius();
 		else
-			objDistance = mapObjects->GetCollWidth();
+			objDistance = worldObject->GetCollWidth();
 
 		float fCOLLISION_DIST = objDistance + pObject->GetCollRadius();
 
-		if (mapObjects->GetCollisionType() == CT_CYLINDER)
+		if (worldObject->GetCollisionType() == CT_CYLINDER)
 		{
-			if (fDist < fCOLLISION_DIST && pObject->GetPosition().z <= mapObjects->GetPosition().z + mapObjects->GetCollHeight())
+			if (fDist < fCOLLISION_DIST && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
 			{
 				if (fDist < 1.f)
 				{
@@ -7982,25 +7943,33 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 		{
 			if (fDist < fCOLLISION_DIST)
 			{
-				fDist = (mapObjects->GetPosition().z + mapObjects->GetCollHeight()) - pObject->GetPosition().z;
-				float heightColl = mapObjects->GetCollHeight() + pObject->GetCollHeight();
+				fDist = (worldObject->GetPosition().z + worldObject->GetCollHeight()) - pObject->GetPosition().z;
+				float heightColl = worldObject->GetCollHeight() + pObject->GetCollHeight();
 
-				if (pObject->GetVisualMesh()->GetHeadPosition().z <= mapObjects->GetPosition().z)
+				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z)
 				{
 					if (fDist <= heightColl)
 					{
+						//if (pObject->GetUID() == ZGetMyUID())
+						//{
+						//	rvector floor = GetWorld()->GetBsp()->GetFloor((rvector)pObject->m_pVMesh->GetFootPosition(), pObject->GetCollRadius(), pObject->GetCollHeight());
+						//	if (pObject->m_pVMesh->GetFootPosition().z - floor.z < pObject->GetCollHeight())
+						//	{
+						//		m_pMyCharacter->Die();
+						//	}
+						//}
 						diff.z -= fDist;
 					}
 				}
 
-				if (pObject->GetPosition().z >= mapObjects->GetPosition().z && pObject->GetVelocity().z < 5.f)
-				{
-					fDist = (pObject->GetPosition().z) - (mapObjects->GetPosition().z + mapObjects->GetCollHeight());
-					if (fDist <= mapObjects->GetCollHeight())
-					{
-						diff.z -= fDist;
-					}
-				}
+				//if (pObject->GetPosition().z >= worldObject->GetPosition().z)
+				//{
+				//	fDist = (pObject->GetPosition().z) - (worldObject->GetPosition().z + worldObject->GetCollHeight());
+				//	if (fDist <= worldObject->GetCollHeight())
+				//	{
+				//		diff.z -= fDist;
+				//	}
+				//}
 			}
 		}
 	}

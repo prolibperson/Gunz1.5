@@ -13,7 +13,7 @@ enum COLLTYPE
 	CT_END
 };
 
-struct ZWorldObject
+struct WorldObject
 {
 	std::string name;
 	std::string model;
@@ -64,7 +64,7 @@ public:
 };
 
 
-class ZMapObject
+class ZWorldObject
 {
 private:
 	std::string Name;
@@ -93,8 +93,8 @@ private:
 	int MinHeight;
 public:
 
-	ZMapObject() noexcept;
-	~ZMapObject() noexcept;
+	ZWorldObject() noexcept;
+	~ZWorldObject() noexcept;
 
 	float const& GetCollRadius()
 	{
@@ -179,7 +179,7 @@ public:
 		return Direction;
 	}
 
-	void InitMesh(ZWorldObject const& worldObject);
+	void InitMesh(WorldObject const& worldObject);
 
 	void Update(float time);
 

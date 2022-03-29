@@ -235,7 +235,7 @@
     <ClInclude Include="ZGameInput.h" />
     <ClInclude Include="ZInput.h" />
     <ClInclude Include="ZMapCache.h" />
-    <ClInclude Include="ZMapObject.h" />
+    <ClInclude Include="ZWorldObject.h" />
     <ClInclude Include="ZMiniMap.h" />
     <ClInclude Include="ZNavigationMesh.h" />
     <ClInclude Include="ZObjectVMesh.h" />
@@ -504,7 +504,7 @@
     <ClCompile Include="ZGameInput_Debug.cpp" />
     <ClCompile Include="ZInput.cpp" />
     <ClCompile Include="ZMapCache.cpp" />
-    <ClCompile Include="ZMapObject.cpp" />
+    <ClCompile Include="ZWorldObject.cpp" />
     <ClCompile Include="ZMiniMap.cpp" />
     <ClCompile Include="ZObjectVMesh.cpp" />
     <ClCompile Include="ZObserver.cpp" />

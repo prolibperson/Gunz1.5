@@ -1253,7 +1253,7 @@ void ZEffectManager::AddSkillDashEffect(rvector& Target,rvector& TargetNormal,ZO
 	Add(pNew);
 }
 
-void ZEffectManager::AddLandingEffect(rvector& Target, rvector& TargetNormal)
+void ZEffectManager::AddLandingEffect(rvector& Target, rvector& TargetNormal,int const lifetime)
 {
 	// 옵션에 따라? 중급 이상만?
 	if(g_nEffectLevel > Z_VIDEO_EFFECT_NORMAL)//하급 이펙트라면 안 그린다..
@@ -1268,7 +1268,7 @@ void ZEffectManager::AddLandingEffect(rvector& Target, rvector& TargetNormal)
 	Target.z += 5.f;
 
 	pNew = new ZEffectLandingSmoke(m_pEBSLanding, Target, 
-		TargetNormal, LANDING_SMOKE_MIN_SCALE, LANDING_SMOKE_MAX_SCALE, LANDING_SMOKE_LIFE_TIME);
+		TargetNormal, LANDING_SMOKE_MIN_SCALE, LANDING_SMOKE_MAX_SCALE, lifetime);
 
 	Add(pNew);
 
