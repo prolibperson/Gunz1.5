@@ -5,6 +5,7 @@
 #include "ZMapDesc.h"
 #include "ZClothEmblem.h"
 #include "ZWorldObject.h"
+#include "ZWorldObject_Movable.h"
 
 // 앞으로 월드를 이루고 있는 것은 여기다 넣도록 합시다. (특히 그리는 것 관련된 것들)
 // 게임 구동 관련은 ZGame에서 하고, 월드를 이루고 있는 것들이나, 그리는 것 관련 등은 여기서 했으면 좋겠습니다.

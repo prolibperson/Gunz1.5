@@ -112,6 +112,9 @@
     <Filter Include="LUA">
       <UniqueIdentifier>{c334191c-1f3e-45fc-8f56-808ccfc25a7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="WorldObjects">
+      <UniqueIdentifier>{e6a75737-768e-4a31-9c40-c279044e631d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZActionDef.h">
@@ -910,7 +913,10 @@
       <Filter>Interface\Base</Filter>
     </ClInclude>
     <ClInclude Include="ZWorldObject.h">
-      <Filter>Character</Filter>
+      <Filter>WorldObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ZWorldObject_Movable.h">
+      <Filter>WorldObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1650,7 +1656,10 @@
       <Filter>Interface\Base</Filter>
     </ClCompile>
     <ClCompile Include="ZWorldObject.cpp">
-      <Filter>Character</Filter>
+      <Filter>WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ZWorldObject_Movable.cpp">
+      <Filter>WorldObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

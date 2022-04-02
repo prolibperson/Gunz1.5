@@ -99,27 +99,27 @@ void ZWorldObject::InitMesh(WorldObject const& worldObj)
 //TODO: determine best way to update the npcs position and framing
 void ZWorldObject::Update(float time)
 {
-	double thisTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+	//double thisTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
 
 	//hard limit movement updates to 30fps
 	if (Movable == true)
 	{
-		if (thisTime - lastUpdateTime >= 33.33)
-		{
+		//if (thisTime - lastUpdateTime >= 33.33)
+		//{
 			if (UsingNavMesh == true)
 			{
 				RunWayPoints();
 			}
 			else
 			{
-				Move(thisTime - lastUpdateTime);
+				Move(time);
 			}
 
 			rmatrix mat = GetWorldMatrix();
 			VisualMesh->SetWorldMatrix(mat);
 
-			lastUpdateTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
-		}
+		//	lastUpdateTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
+	//	}
 	}
 }
 
@@ -155,24 +155,34 @@ void ZWorldObject::Draw()
 }
 
 //todo: handle stuf a bit better i guess?
+D3DXVECTOR3 lerp(const D3DXVECTOR3& start, const D3DXVECTOR3& end, float percent) {
+	return start + (percent * (end - start));// a + (b - a) * t;
+}
 void ZWorldObject::Move(double const& moveDiff)
 {
 	if (CurrPosition.z >= MaxHeight)
 	{
 		ReverseAnimation = true;
 	}
-	else if (CurrPosition.z <= MinHeight)
+	else if(CurrPosition.z <= MinHeight)
 	{
 		ReverseAnimation = false;
 	}
+//	auto targetPos = ReverseAnimation ? StartPosition : EndPosition;
 
+	//if (GetPosition() == targetPos)
+	//	ReverseAnimation = !ReverseAnimation;
+	//TODO: handle moveDiff differently????
+
+	//CurrPosition = lerp(CurrPosition, ReverseAnimation ? StartPosition : EndPosition, 0.05 * moveDiff);
 	if (ReverseAnimation == false)
 	{
-		CurrPosition.z += roundf((moveSpeed / moveDiff));
+		//CurrPosition = lerp(CurrPosition, EndPosition, moveDiff);
+		CurrPosition.z += roundf((moveSpeed * moveDiff));
 	}
 	else
 	{
-		CurrPosition.z -= (roundf(moveSpeed / moveDiff));
+		CurrPosition.z -= (roundf(moveSpeed * moveDiff));
 	}
 
 }

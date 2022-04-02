@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Mar 12 2022 01:05:48) 
-Log time (03/12/22 01:29:21)
+GUNZ 1,0,0,290 launched. build (Apr  2 2022 14:17:32) 
+Log time (04/02/22 14:20:25)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -27,19 +27,19 @@ ZApplication::OnCreate : begin
 3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.604000 
+-------------------> Sound Engine Create : 0.555000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.792000 
+loading pictures : 1.684000 
 IDLResource Loading Success!!
-IDL resources : 0.155000 
+IDL resources : 0.113000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.218000 
+Screen Effect Manager Create : 0.210000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -66,14 +66,14 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 3.047000 
+-------------------> GameInterface Create : 2.375000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.204000 
+-------------------> Character Loading : 0.158000 
 
 
--------------------> WeaponMesh Loading : 0.300000 
+-------------------> WeaponMesh Loading : 0.278000 
 
 Load weapon.xml success. 
 
@@ -87,7 +87,7 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.242000 
+-------------------> ETC .. : 0.238000 
 
 
 LoginID: jetman82
@@ -133,47 +133,33 @@ BspObject load lightmap : end
 RBspObject::Open : done
 ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
 main : OnCreate() done
-Server Connected
-Login Successful. 
-Responsed Account Charlist
-Selected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
-0,Jetman82,Jetman82,This is a test send
-Shop Gamble item count : 2
-shop gitem : 1000003, Green Box
-shop gitem : 1000004, Gold Box
-StageCreated
-game create begin , type = 0
-BspObject open : begin maps/Mansion/Mansion.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 4
-BspObject load lightmap 0
-BspObject load lightmap 1
-BspObject load lightmap 2
-BspObject load lightmap 3
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-create game enrvironment.
-in zip : model/npc/goblin/goblinG_ranged_attacked2.elu.ani file not found!! 
- game world create success.
-Reload all animation end 
----------------------------------setBuffer
-game created ( 01:29:38 )
-Create character : Name=Jetman82 Level=18 
+Destroy gunz
+Destroy sound engine.
+Destroy sound engine. success
+Destroy console.
+Destroy interface begin 
+destroy client.
+PeerInfoList Released
+clear looks end.
+Widget map clear end.
+desctroy cursor system end.
+clear IDL resource end.
+Final interface end.
+Destroy game interface done.
+clear looks end.
+Widget map clear end.
+desctroy cursor system end.
+Destroy mesh manager.
+Destroy weapon mesh manager.
+Clear SkillManager.
+Clear QuestItemDescMgr.
+Clear MatchItemDescMgr.
+Clear ChattingFilter.
+Clear ChannelRuleMgr.
+destroy game application done.
+interface finalize.
+game input destroy.
+game gonfiguration destroy.
+Bitmap manager destroy Animation bitmap.
+destroy gunz finish.
+Rframe_destory::closeDisplay

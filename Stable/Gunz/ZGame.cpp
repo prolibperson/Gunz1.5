@@ -7944,20 +7944,21 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 			if (fDist < fCOLLISION_DIST)
 			{
 				fDist = (worldObject->GetPosition().z + worldObject->GetCollHeight()) - pObject->GetPosition().z;
-				float heightColl = worldObject->GetCollHeight() + pObject->GetCollHeight();
+				float heightColl = worldObject->GetCollHeight();
 
 				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z)
 				{
 					if (fDist <= heightColl)
 					{
-						//if (pObject->GetUID() == ZGetMyUID())
-						//{
-						//	rvector floor = GetWorld()->GetBsp()->GetFloor((rvector)pObject->m_pVMesh->GetFootPosition(), pObject->GetCollRadius(), pObject->GetCollHeight());
-						//	if (pObject->m_pVMesh->GetFootPosition().z - floor.z < pObject->GetCollHeight())
-						//	{
-						//		m_pMyCharacter->Die();
-						//	}
-						//}
+		//				m_pMyCharacter->Die();
+						if (pObject->GetUID() == ZGetMyUID())
+						{
+							rvector floor = GetWorld()->GetBsp()->GetFloor(pObject->GetPosition() + rvector(0, 0, 120), CHARACTER_RADIUS - 1.1f, 58.f);
+							if (fDist < floor.z)
+							{
+								m_pMyCharacter->Die();
+							}
+						}
 						diff.z -= fDist;
 					}
 				}

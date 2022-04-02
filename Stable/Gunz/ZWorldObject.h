@@ -91,10 +91,11 @@ private:
 
 	int MaxHeight;
 	int MinHeight;
+	float MoveProgress;
 public:
 
 	ZWorldObject() noexcept;
-	~ZWorldObject() noexcept;
+	virtual ~ZWorldObject() noexcept;
 
 	float const& GetCollRadius()
 	{

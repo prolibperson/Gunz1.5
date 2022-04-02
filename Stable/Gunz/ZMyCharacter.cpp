@@ -559,7 +559,7 @@ void ZMyCharacter::ProcessInput(float fDelta)
 				rvector newVelocity = GetVelocity();
 				
 				//custom: worldobjects, prevent queued jump issues
-				if (ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction) == nullptr)
+				//if (ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction) == nullptr)
 				{
 					newVelocity -= fAbsorb * PickedNormal;
 
@@ -2357,15 +2357,13 @@ void ZMyCharacter::OnUpdate(float fDelta)
 				{
 					m_pModule_Movable->UpdateGravity(GetGravityConst() * fAccmulatedDelta);
 
-					float heightdiff = m_Position.Ref().z - (obje->GetPosition().z + obje->GetCollHeight());
-					if (heightdiff >= obje->GetCollHeight())
+					//float heightdiff = m_Position.Ref().z - (obje->GetPosition().z + obje->GetCollHeight());
+					if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
 					{
-						uStatus.m_bLand = false;
-					}
-					else
-					{
+						SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
 						uStatus.m_bLand = true;
 					}
+
 				}
 			}
 		}
