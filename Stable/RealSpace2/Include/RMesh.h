@@ -6,8 +6,9 @@
 
 #include "RMeshNode.h"
 #include "RAnimationMgr.h"
-#include "mempool.h"
+#include "MemPool.h"
 #include "MZFileSystem.h"
+#include <MXml.h>
 
 _NAMESPACE_REALSPACE2_BEGIN
 

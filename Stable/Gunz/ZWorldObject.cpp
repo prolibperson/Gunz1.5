@@ -155,29 +155,39 @@ void ZWorldObject::Draw()
 }
 
 //todo: handle stuf a bit better i guess?
-D3DXVECTOR3 lerp(const D3DXVECTOR3& start, const D3DXVECTOR3& end, float percent) {
-	return start + (percent * (end - start));// a + (b - a) * t;
+D3DXVECTOR3 lerp(const D3DXVECTOR3& start, const D3DXVECTOR3& end, float percent)
+{
+	rvector target = end - start;
+
+	return target;
+//	return start + (percent * (end - start));// a + (b - a) * t;
 }
 void ZWorldObject::Move(double const& moveDiff)
 {
+	//rvector targetpos;
+	//float dist = Magnitude(EndPosition - CurrPosition);
+	//if (dist > 1)
+	//	targetpos = EndPosition;
+	//else
+	//	targetpos = StartPosition;
+
+	//if (targetpos == StartPosition)
+	//	ReverseAnimation = true;
+	//else
+	//	ReverseAnimation = false;
+
+	//if (ReverseAnimation == false)
+	//	CurrPosition += lerp(CurrPosition, targetpos, roundf(moveSpeed * moveDiff));
+	//else
+	//	CurrPosition -= lerp(CurrPosition, targetpos, roundf(moveSpeed * moveDiff));
+
 	if (CurrPosition.z >= MaxHeight)
-	{
 		ReverseAnimation = true;
-	}
-	else if(CurrPosition.z <= MinHeight)
-	{
+	else if (CurrPosition.z <= MinHeight)
 		ReverseAnimation = false;
-	}
-//	auto targetPos = ReverseAnimation ? StartPosition : EndPosition;
 
-	//if (GetPosition() == targetPos)
-	//	ReverseAnimation = !ReverseAnimation;
-	//TODO: handle moveDiff differently????
-
-	//CurrPosition = lerp(CurrPosition, ReverseAnimation ? StartPosition : EndPosition, 0.05 * moveDiff);
 	if (ReverseAnimation == false)
 	{
-		//CurrPosition = lerp(CurrPosition, EndPosition, moveDiff);
 		CurrPosition.z += roundf((moveSpeed * moveDiff));
 	}
 	else

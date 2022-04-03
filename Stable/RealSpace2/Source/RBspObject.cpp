@@ -638,7 +638,8 @@ bool RBspObject::Draw()
 	//Custom: set lightmaptex;
 	if (m_bisDrawLightMap)
 	{
-		lightMapTexture = m_ppLightmapTextures.at(m_lightMapIndex);
+		if (m_ppLightmapTextures.size() > 0)
+			lightMapTexture = m_ppLightmapTextures.at(m_lightMapIndex);
 	}
 
 	if(m_bWireframe)

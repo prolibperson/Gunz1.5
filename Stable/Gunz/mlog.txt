@@ -1,5 +1,5 @@
 GUNZ 1,0,0,290 launched. build (Apr  2 2022 14:17:32) 
-Log time (04/02/22 14:20:25)
+Log time (04/02/22 15:59:35)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -27,14 +27,14 @@ ZApplication::OnCreate : begin
 3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.555000 
+-------------------> Sound Engine Create : 0.554000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.684000 
+loading pictures : 1.667000 
 IDLResource Loading Success!!
-IDL resources : 0.113000 
+IDL resources : 0.117000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
@@ -66,18 +66,18 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.375000 
+-------------------> GameInterface Create : 2.389000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.158000 
+-------------------> Character Loading : 0.162000 
 
 
 -------------------> WeaponMesh Loading : 0.278000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.019000 
+-------------------> Worlditem Loading : 0.020000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -87,7 +87,7 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.238000 
+-------------------> ETC .. : 0.236000 
 
 
 LoginID: jetman82

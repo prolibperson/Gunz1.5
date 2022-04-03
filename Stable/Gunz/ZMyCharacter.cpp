@@ -2361,7 +2361,6 @@ void ZMyCharacter::OnUpdate(float fDelta)
 					if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
 					{
 						SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
-						uStatus.m_bLand = true;
 					}
 
 				}
