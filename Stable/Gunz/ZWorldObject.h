@@ -77,6 +77,7 @@ private:
 	rvector CurrPosition;
 	rvector Direction;
 	rvector EndPosition;
+	rvector TargetPosition;
 
 	std::list<rvector> m_listWaypoint;
 

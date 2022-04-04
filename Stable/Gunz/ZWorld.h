@@ -62,7 +62,7 @@ public:
 	void OnInvalidate();
 	void OnRestore();
 
-	void LoadWorldObjects();
+
 
 	RBspObject* const GetBsp() { return m_pBsp; }
 	ZMapDesc	*GetDesc() { return m_pMapDesc; }
@@ -73,6 +73,8 @@ public:
 	bool IsWaterMap() { return m_bWaterMap; }
 	float GetWaterHeight() { return m_fWaterHeight; }
 	bool IsFogVisible()		{ return m_bFog; }
+
+	void LoadWorldObjects();
 
 	ZWorldObject* PickWorldObject(rvector& pos, rvector& dir);
 

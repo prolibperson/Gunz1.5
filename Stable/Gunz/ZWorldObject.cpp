@@ -86,6 +86,7 @@ void ZWorldObject::InitMesh(WorldObject const& worldObj)
 	Sound = worldObj.sound;
 	UsingNavMesh = worldObj.usepath;
 	EndPosition = rvector(worldObj.endposition);
+	TargetPosition = Movable == true ? EndPosition : StartPosition;
 
 
 	//init world matrix once so object is positioned correctly
@@ -154,47 +155,25 @@ void ZWorldObject::Draw()
 
 }
 
-//todo: handle stuf a bit better i guess?
-D3DXVECTOR3 lerp(const D3DXVECTOR3& start, const D3DXVECTOR3& end, float percent)
-{
-	rvector target = end - start;
-
-	return target;
-//	return start + (percent * (end - start));// a + (b - a) * t;
-}
 void ZWorldObject::Move(double const& moveDiff)
 {
-	//rvector targetpos;
-	//float dist = Magnitude(EndPosition - CurrPosition);
-	//if (dist > 1)
-	//	targetpos = EndPosition;
-	//else
-	//	targetpos = StartPosition;
-
-	//if (targetpos == StartPosition)
-	//	ReverseAnimation = true;
-	//else
-	//	ReverseAnimation = false;
-
-	//if (ReverseAnimation == false)
-	//	CurrPosition += lerp(CurrPosition, targetpos, roundf(moveSpeed * moveDiff));
-	//else
-	//	CurrPosition -= lerp(CurrPosition, targetpos, roundf(moveSpeed * moveDiff));
-
-	if (CurrPosition.z >= MaxHeight)
-		ReverseAnimation = true;
-	else if (CurrPosition.z <= MinHeight)
-		ReverseAnimation = false;
-
-	if (ReverseAnimation == false)
+	float dist = Magnitude(TargetPosition - CurrPosition);
+	if (dist <= 1.f)
 	{
-		CurrPosition.z += roundf((moveSpeed * moveDiff));
-	}
-	else
-	{
-		CurrPosition.z -= (roundf(moveSpeed * moveDiff));
+		if (TargetPosition == StartPosition)
+		{
+			TargetPosition = EndPosition;
+		}
+		else
+		{
+			TargetPosition = StartPosition;
+		}
 	}
 
+	rvector diff = TargetPosition - CurrPosition;
+	Normalize(diff);
+
+	CurrPosition += diff * (moveSpeed * moveDiff);
 }
 
 void ZWorldObject::Move(rvector& diff)
