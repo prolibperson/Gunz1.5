@@ -5,6 +5,12 @@
 #include "ZNavigationMesh.h"
 
 
+enum OBJTYPE
+{
+	OT_STATIC,
+	OT_MOVABLE,
+	OT_NAVIGATION,
+};
 
 enum COLLTYPE
 {
@@ -27,13 +33,10 @@ struct WorldObject
 	float collradius;
 	float collheight;
 	float collwidth;
-	int minheight;
-	int maxheight;
 	COLLTYPE collisiontype;
+	OBJTYPE objecttype;
 	bool collidable;
-	bool movable;
 	bool reverseanimation;
-	bool usepath;
 };
 
 
@@ -66,7 +69,7 @@ public:
 
 class ZWorldObject
 {
-private:
+protected:
 	std::string Name;
 	std::string Model;
 	std::string Sound;
@@ -74,25 +77,11 @@ private:
 	MapObjectCollision m_Collision;
 
 	rvector StartPosition;
-	rvector CurrPosition;
 	rvector Direction;
-	rvector EndPosition;
-	rvector TargetPosition;
+	rvector CurrPosition;
 
-	std::list<rvector> m_listWaypoint;
 
 	RVisualMesh* VisualMesh;
-
-	double lastUpdateTime;
-	double moveSpeed;
-	bool Movable;
-	bool ReverseAnimation;
-	bool IsReversing;
-	bool UsingNavMesh;
-
-	int MaxHeight;
-	int MinHeight;
-	float MoveProgress;
 public:
 
 	ZWorldObject() noexcept;
@@ -163,8 +152,6 @@ public:
 		return Sound;
 	}
 
-
-
 	RVisualMesh* const GetVisualMesh() { return VisualMesh; }
 
 	rmatrix GetWorldMatrix() {
@@ -181,20 +168,11 @@ public:
 		return Direction;
 	}
 
-	void InitMesh(WorldObject const& worldObject);
+	virtual void InitWithMesh(WorldObject const& worldObject);
 
-	void Update(float time);
+	virtual void Update(float time);
 
 	void Draw();
 
-	void Move(double const& moveDiff);
-	void Move(rvector& diff);
-
 	bool Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut);
-
-	void BuildNavigationPath();
-
-	void RunWayPoints();
-
-	bool const IsReversingAnimation() { return ReverseAnimation; }
 };

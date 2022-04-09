@@ -400,11 +400,14 @@ void ZWorld::LoadWorldObjects()
 			child.GetAttribute(&worldObject.collradius, "collradius", 0);
 			child.GetAttribute(&worldObject.collwidth, "collwidth", 0);
 			child.GetAttribute(&worldObject.collheight, "collheight", 0);
-			child.GetAttribute(&worldObject.movable, "moving", false);
 			child.GetAttribute(&worldObject.collidable, "collidable", false);
 			child.GetAttribute(&worldObject.reverseanimation, "reverseanimation", false);
 			child.GetAttribute(&worldObject.sound, "sound", "");
-			child.GetAttribute(&worldObject.usepath, "usepath", false);
+
+			bool movable = false;
+			bool usepath = false;
+			child.GetAttribute(&movable, "moving", false);
+			child.GetAttribute(&usepath, "usepath", false);
 
 			int objectChildCount = child.GetChildNodeCount();
 			for (int j = 0; j < objectChildCount; ++j)
@@ -443,18 +446,6 @@ void ZWorld::LoadWorldObjects()
 					subChild.GetContents(&contents);
 					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.scale.x, &worldObject.scale.y, &worldObject.scale.z);
 				}
-				if (strcmp(TagName, "MINHEIGHT") == 0)
-				{
-					std::string contents;
-					subChild.GetContents(&contents);
-					worldObject.minheight = std::stoi(contents);
-				}
-				if (strcmp(TagName, "MAXHEIGHT") == 0)
-				{
-					std::string contents;
-					subChild.GetContents(&contents);
-					worldObject.maxheight = std::stoi(contents);
-				}
 				if (strcmp(TagName, "COLLISION") == 0)
 				{
 					std::string contents;
@@ -469,8 +460,15 @@ void ZWorld::LoadWorldObjects()
 					sscanf(contents.c_str(), "%f,%f,%f", &worldObject.endposition.x, &worldObject.endposition.y, &worldObject.endposition.z);
 				}
 			}
-			std::unique_ptr<ZWorldObject> object = std::make_unique<ZWorldObject>();
-			object->InitMesh(worldObject);
+			std::unique_ptr<ZWorldObject> object;
+			if (usepath == true)
+				object = std::make_unique<ZWorldObject_Navigation>();
+			else if (movable == true)
+				object = std::make_unique<ZWorldObject_Movable>();
+			else
+				object = std::make_unique<ZWorldObject>();
+
+			object->InitWithMesh(worldObject);
 			mapObjects.push_back(std::move(object));
 		}
 	}

@@ -918,6 +918,9 @@
     <ClInclude Include="ZWorldObject_Movable.h">
       <Filter>WorldObjects</Filter>
     </ClInclude>
+    <ClInclude Include="ZWorldObject_Navigation.h">
+      <Filter>WorldObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZBandiCapturer.cpp">
@@ -1659,6 +1662,9 @@
       <Filter>WorldObjects</Filter>
     </ClCompile>
     <ClCompile Include="ZWorldObject_Movable.cpp">
+      <Filter>WorldObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ZWorldObject_Navigation.cpp">
       <Filter>WorldObjects</Filter>
     </ClCompile>
   </ItemGroup>

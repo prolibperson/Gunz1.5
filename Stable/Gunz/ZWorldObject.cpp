@@ -19,23 +19,16 @@ MapObjectCollision::~MapObjectCollision()
 //todo: fetch information from a xml for the map
 ZWorldObject::ZWorldObject() noexcept
 {
-	lastUpdateTime = 0;
-	IsReversing = false;
-	MaxHeight = 0;
-	MinHeight = 0;
-	Movable = false;
-	ReverseAnimation = false;
 	VisualMesh = nullptr;
-	moveSpeed = 0;
 }
 
 ZWorldObject::~ZWorldObject() noexcept
 {
-	
+//	ZGetNpcMeshMgr()->DelAll();
 }
 
 //todo: init mesh differently, currently using npc mesh manager...
-void ZWorldObject::InitMesh(WorldObject const& worldObj)
+void ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 {
 	RMesh* pMesh;
 
@@ -67,61 +60,25 @@ void ZWorldObject::InitMesh(WorldObject const& worldObj)
 	VisualMesh->SetVisibility(1.f);
 	VisualMesh->GetMesh()->SetTextureRenderOnOff(true);
 	VisualMesh->SetCheckViewFrustum(false);
-	//temporary scale
 	VisualMesh->SetScale((D3DXVECTOR3)(worldObj.scale));
 
-	StartPosition = worldObj.position;
-	CurrPosition = StartPosition;
-	Direction = worldObj.direction;
 	SetCollidable(worldObj.collidable);
 	SetCollRadius(worldObj.collradius);
 	SetCollWidth(worldObj.collwidth);
 	SetCollHeight(worldObj.collheight);
 	SetCollisionType(worldObj.collisiontype);
-	Movable = worldObj.movable;
-	moveSpeed = worldObj.speed;
-	MaxHeight = worldObj.maxheight;
-	MinHeight = worldObj.minheight;
-	ReverseAnimation = worldObj.reverseanimation;
+	StartPosition = worldObj.position;
+	CurrPosition = StartPosition;
+	Direction = worldObj.direction;
 	Sound = worldObj.sound;
-	UsingNavMesh = worldObj.usepath;
-	EndPosition = rvector(worldObj.endposition);
-	TargetPosition = Movable == true ? EndPosition : StartPosition;
 
-
-	//init world matrix once so object is positioned correctly
-	if (Movable == false)
-	{
-		rmatrix mat = GetWorldMatrix();
-		VisualMesh->SetWorldMatrix(mat);
-	}
+	rmatrix mat = GetWorldMatrix();
+	VisualMesh->SetWorldMatrix(mat);
 }
 
-//TODO: determine best way to update the npcs position and framing
-void ZWorldObject::Update(float time)
+void ZWorldObject::Update(float elapsed)
 {
-	//double thisTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
 
-	//hard limit movement updates to 30fps
-	if (Movable == true)
-	{
-		//if (thisTime - lastUpdateTime >= 33.33)
-		//{
-			if (UsingNavMesh == true)
-			{
-				RunWayPoints();
-			}
-			else
-			{
-				Move(time);
-			}
-
-			rmatrix mat = GetWorldMatrix();
-			VisualMesh->SetWorldMatrix(mat);
-
-		//	lastUpdateTime = std::chrono::duration<double, std::ratio<1, 1000>>(std::chrono::high_resolution_clock::now().time_since_epoch()).count();
-	//	}
-	}
 }
 
 void ZWorldObject::Draw()
@@ -155,39 +112,7 @@ void ZWorldObject::Draw()
 
 }
 
-void ZWorldObject::Move(double const& moveDiff)
-{
-	float dist = Magnitude(TargetPosition - CurrPosition);
-	if (dist <= 1.f)
-	{
-		if (TargetPosition == StartPosition)
-		{
-			TargetPosition = EndPosition;
-		}
-		else
-		{
-			TargetPosition = StartPosition;
-		}
-	}
 
-	rvector diff = TargetPosition - CurrPosition;
-	Normalize(diff);
-
-	CurrPosition += diff * (moveSpeed * moveDiff);
-}
-
-void ZWorldObject::Move(rvector& diff)
-{
-	rvector origin, targetpos;
-	rplane impactplane;
-	float fCollUpHeight = max(120.f, 0.666667f * GetCollHeight() * 0.5f); // 0.666667f == 120.f/180.f
-
-	origin = GetPosition() + rvector(0, 0, fCollUpHeight);
-	targetpos = origin + diff;
-
-	diff = targetpos - origin;
-	CurrPosition = targetpos - rvector(0, 0, fCollUpHeight);// (targetpos - rvector(0, 0, fCollUpHeight));
-}
 
 //TODO: fill this in
 bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
@@ -210,54 +135,4 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 		return true;
 	}
 	return false;
-}
-
-//TODO: if object has reached the end of its path, need to reverse and go back to the start point
-void ZWorldObject::BuildNavigationPath()
-{
-	if (EndPosition == rvector(-1, -1, -1))
-		return;
-
-	ZNavigationMesh navMesh = ZGetNavigationMesh();
-	if (navMesh.IsNull())
-		return;
-
-	// Make navigation path
-	float dist = Magnitude(GetPosition() - EndPosition);
-	if (!navMesh.BuildNavigationPath(GetPosition(), EndPosition))
-		return;
-
-	for (list<rvector>::iterator it = navMesh.GetWaypointList().begin(); it != navMesh.GetWaypointList().end(); ++it)
-		m_listWaypoint.push_back(*it);
-}
-
-void ZWorldObject::RunWayPoints()
-{
-	//TODO: reverse position
-	if (m_listWaypoint.size() == 0)
-	{
-		BuildNavigationPath();
-		//return;
-	}
-
-	rvector nextWaypoint = *m_listWaypoint.begin();
-	rvector myPos = GetPosition();
-
-	nextWaypoint.z = 0;
-	myPos.z = 0;
-
-	float diffSq = MagnitudeSq(nextWaypoint - myPos);
-	if (diffSq <= 20.f * 20.f)
-	{
-		m_listWaypoint.pop_front();
-		return;
-	}
-
-	rvector vWaypointDir = nextWaypoint - myPos;
-	Normalize(vWaypointDir);
-
-	// 다음 웨이포인트를 향해 방향 전환
-	Direction = vWaypointDir;
-
-	Move(vWaypointDir);
 }

@@ -479,6 +479,7 @@
     <ClInclude Include="SecurityTest.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ZWorldObject_Movable.h" />
+    <ClInclude Include="ZWorldObject_Navigation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZActorAction.cpp" />
@@ -735,6 +736,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ZWorldObject_Movable.cpp" />
+    <ClCompile Include="ZWorldObject_Navigation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="runtime\shader\skin.vsh" />

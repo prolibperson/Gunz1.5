@@ -7954,7 +7954,7 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 						if (pObject->GetUID() == ZGetMyUID())
 						{
 							rvector floor = GetWorld()->GetBsp()->GetFloor(pObject->GetPosition() + rvector(0, 0, 120), CHARACTER_RADIUS - 1.1f, 58.f);
-							if (fDist < floor.z)
+							if (pObject->GetPosition().z + pObject->GetCollHeight() < floor.z)
 							{
 								m_pMyCharacter->Die();
 							}
