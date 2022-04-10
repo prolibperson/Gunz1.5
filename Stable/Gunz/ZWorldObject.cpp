@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ZWorldObject.h"
+#include "ZMap.h"
 
 MapObjectCollision::MapObjectCollision()
 {
@@ -25,27 +26,37 @@ ZWorldObject::ZWorldObject() noexcept
 ZWorldObject::~ZWorldObject() noexcept
 {
 //	ZGetNpcMeshMgr()->DelAll();
+	//ZGetMeshMgr()->Del((char*)Name.c_str());
 }
 
 //todo: init mesh differently, currently using npc mesh manager...
-void ZWorldObject::InitWithMesh(WorldObject const& worldObj)
+bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 {
-	RMesh* pMesh;
-
 	Name = worldObj.name;
 	Model = worldObj.model;
 
-	pMesh = ZGetNpcMeshMgr()->Get(worldObj.model.c_str());
-	if (!pMesh)
+	char szMapPath[64] = "";
+	ZGetCurrMapPath(szMapPath);
+
+	char szBuf[256];
+
+	sprintf(szBuf, "%s%s/", szMapPath, ZGetGameClient()->GetMatchStageSetting()->GetMapName());
+	std::string meshpath = szBuf;
+	meshpath.append(Model);
+
+	RMesh* pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
+
+	if (pMesh == nullptr)
 	{
-		_ASSERT(0);
-		return;
+		ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)worldObj.name.c_str(), false, true);
 	}
-	if (pMesh->m_isMeshLoaded == false)
-	{
-			ZGetNpcMeshMgr()->Load(worldObj.model.c_str());
-			ZGetNpcMeshMgr()->ReloadAllAnimation();
-	}
+
+
+	pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
+	if (pMesh == nullptr)
+		return false;
+
+	pMesh->ReloadAnimation();
 
 	int nVMID = ZGetGame()->m_VisualMeshMgr.Add(pMesh);
 	if (nVMID == -1) mlog("InitNpcMesh() - 캐릭터 생성 실패\n");
@@ -74,6 +85,8 @@ void ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 	rmatrix mat = GetWorldMatrix();
 	VisualMesh->SetWorldMatrix(mat);
+
+	return true;
 }
 
 void ZWorldObject::Update(float elapsed)

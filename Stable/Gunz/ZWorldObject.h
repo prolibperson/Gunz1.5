@@ -168,7 +168,7 @@ public:
 		return Direction;
 	}
 
-	virtual void InitWithMesh(WorldObject const& worldObject);
+	virtual bool InitWithMesh(WorldObject const& worldObject);
 
 	virtual void Update(float time);
 

@@ -38,12 +38,11 @@ void ZWorldObject_Movable::Move(double const& moveDiff)
 	CurrPosition += diff * (moveSpeed * moveDiff);
 }
 
-void ZWorldObject_Movable::InitWithMesh(WorldObject const& worldObj)
+bool ZWorldObject_Movable::InitWithMesh(WorldObject const& worldObj)
 {
-
-	ZWorldObject::InitWithMesh(worldObj);
-
 	moveSpeed = worldObj.speed;
 	EndPosition = rvector(worldObj.endposition);
 	TargetPosition = worldObj.endposition;
+
+	return ZWorldObject::InitWithMesh(worldObj);
 }

@@ -16,7 +16,7 @@ protected:
 	virtual void Update(float elapsedtime);
 	virtual void Move(double const& moveDiff);
 
-	virtual void InitWithMesh(WorldObject const& worldObject);
+	virtual bool InitWithMesh(WorldObject const& worldObject);
 
 	rvector TargetPosition;
 	rvector EndPosition;

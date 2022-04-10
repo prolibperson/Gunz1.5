@@ -7920,9 +7920,9 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 
 		if (worldObject->GetCollisionType() == CT_CYLINDER)
 		{
-			if (fDist < fCOLLISION_DIST && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
+			if (fDist < fCOLLISION_DIST && fabs(pos.z - pObject->GetPosition().z) < worldObject->GetCollHeight())
 			{
-				if (fDist < 1.f)
+				if (fDist <= 1.f)
 				{
 					pos.x += 1.f;
 					dir = pObject->GetPosition() - pos;
@@ -7941,37 +7941,23 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 		}
 		else
 		{
-			if (fDist < fCOLLISION_DIST)
-			{
-				fDist = (worldObject->GetPosition().z + worldObject->GetCollHeight()) - pObject->GetPosition().z;
-				float heightColl = worldObject->GetCollHeight();
+			//if (fDist < fCOLLISION_DIST && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
+			//{
+			//	if (pObject->GetUID() == ZGetMyUID())
+			//	{
+			//		m_pMyCharacter->Die();
+			//	}
 
-				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z)
-				{
-					if (fDist <= heightColl)
-					{
-		//				m_pMyCharacter->Die();
-						if (pObject->GetUID() == ZGetMyUID())
-						{
-							rvector floor = GetWorld()->GetBsp()->GetFloor(pObject->GetPosition() + rvector(0, 0, 120), CHARACTER_RADIUS - 1.1f, 58.f);
-							if (pObject->GetPosition().z + pObject->GetCollHeight() < floor.z)
-							{
-								m_pMyCharacter->Die();
-							}
-						}
-						diff.z -= fDist;
-					}
-				}
 
-				//if (pObject->GetPosition().z >= worldObject->GetPosition().z)
-				//{
-				//	fDist = (pObject->GetPosition().z) - (worldObject->GetPosition().z + worldObject->GetCollHeight());
-				//	if (fDist <= worldObject->GetCollHeight())
-				//	{
-				//		diff.z -= fDist;
-				//	}
-				//}
-			}
+			//	//if (pObject->GetPosition().z >= worldObject->GetPosition().z)
+			//	//{
+			//	//	fDist = (pObject->GetPosition().z) - (worldObject->GetPosition().z + worldObject->GetCollHeight());
+			//	//	if (fDist <= worldObject->GetCollHeight())
+			//	//	{
+			//	//		diff.z -= fDist;
+			//	//	}
+			//	//}
+			//}
 		}
 	}
 }

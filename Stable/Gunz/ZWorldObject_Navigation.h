@@ -20,5 +20,5 @@ private:
 	std::list<rvector> m_listWaypoint;
 
 protected:
-	virtual void InitWithMesh(WorldObject const& worldObj) override;
+	virtual bool InitWithMesh(WorldObject const& worldObj) override;
 };

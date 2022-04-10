@@ -9,9 +9,9 @@ ZWorldObject_Navigation::~ZWorldObject_Navigation()
 {
 }
 
-void ZWorldObject_Navigation::InitWithMesh(WorldObject const& worldObj)
+bool ZWorldObject_Navigation::InitWithMesh(WorldObject const& worldObj)
 {
-	ZWorldObject_Movable::InitWithMesh(worldObj);
+	return ZWorldObject_Movable::InitWithMesh(worldObj);
 }
 
 void ZWorldObject_Navigation::Update(float elapsedtime)

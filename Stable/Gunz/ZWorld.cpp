@@ -468,8 +468,10 @@ void ZWorld::LoadWorldObjects()
 			else
 				object = std::make_unique<ZWorldObject>();
 
-			object->InitWithMesh(worldObject);
-			mapObjects.push_back(std::move(object));
+			if (object->InitWithMesh(worldObject))
+			{
+				mapObjects.push_back(std::move(object));
+			}
 		}
 	}
 }
