@@ -802,39 +802,35 @@ void RVisualMesh::Render(bool low,bool render_buffer) {
 
 	if(m_pMesh)
 	{
+		//if (m_pMesh->m_parts_mgr)
+		//{
+		//	for (auto pair = m_pMesh->m_parts_mgr->asyncTasks.begin(); pair != m_pMesh->m_parts_mgr->asyncTasks.end();)
+		//	{
+		//		if (pair->second.valid() == false)
+		//		{
+		//			m_pMesh->m_parts_mgr->asyncTasks.erase(pair);
+		//		}
+		//		if (pair->second.valid() && pair->second._Is_ready())
+		//		{
+		//			if (pair->second.get())
+		//			{
+		//				RMesh* pMesh = new RMesh;
+		//				memcpy(pMesh, pair->first, sizeof(RMesh));
 
-		if (m_pMesh->m_parts_mgr)
-		{
-			for (auto pair = m_pMesh->m_parts_mgr->asyncTasks.begin(); pair != m_pMesh->m_parts_mgr->asyncTasks.end();)
-			{
-				if (pair->second.valid() && pair->second._Is_ready())
-				{
-					if (pair->second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
-					{
-						pair->second.get();
+		//				pMesh->CalcBox();
 
-						RMesh* pMesh = new RMesh;
-						memcpy(pMesh, pair->first, sizeof(RMesh));
+		//				m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
+		//				pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last;
 
-						pMesh->CalcBox();
+		//				m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
 
-						m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
-						pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last;
+		//				m_pMesh->m_parts_mgr->m_id_last++;
 
-						//if (m_pMesh->m_parts_mgr->m_id_last > MAX_NODE_TABLE)
-						//	mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
-
-						m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
-
-						m_pMesh->m_parts_mgr->asyncTasks.erase(pair);
-
-
-					}
-				}
-				else
-					++pair;
-			}
-		}
+		//				m_pMesh->m_parts_mgr->asyncTasks.erase(pair);
+		//			}
+		//		}
+		//	}
+		//}
 
 		rboundingbox bbox;
 
