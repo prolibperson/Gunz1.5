@@ -79,6 +79,7 @@ protected:
 	rvector StartPosition;
 	rvector Direction;
 	rvector CurrPosition;
+	rvector LastMoveDiff;
 
 
 	RVisualMesh* VisualMesh;
@@ -166,6 +167,10 @@ public:
 
 	rvector const& GetDirection() {
 		return Direction;
+	}
+
+	rvector const& GetLastMoveDiff() {
+		return LastMoveDiff;
 	}
 
 	virtual bool InitWithMesh(WorldObject const& worldObject);

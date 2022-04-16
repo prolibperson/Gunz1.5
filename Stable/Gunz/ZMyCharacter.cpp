@@ -2322,6 +2322,24 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 	zStatus.m_bMoving = Magnitude(rvector(GetVelocity().x,GetVelocity().y,0))>.1f;
 
+	/*Custom: worldobjects : if a player is currently picking an object and the heightdiff is less than collision, set landing to true
+	so walking when the object is going down won't cause acceleration issues*/
+	ZWorldObject* obje = ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction);
+	if (obje != nullptr)
+	{
+		if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
+		{
+			if (zStatus.m_bMoving)
+			{
+				SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
+			}
+			else
+			{
+				SetPosition(rvector(m_Position.Ref().x + obje->GetLastMoveDiff().x, m_Position.Ref().y + obje->GetLastMoveDiff().y, obje->GetPosition().z + obje->GetCollHeight()));
+			}
+		}
+	}
+
 //	UpdatePosition(fDelta);
 
 	// ÇÁ·¹ÀÓ¼ö°¡ ³Ê¹« ¸¹ÀÌ ³ª¿Â´Ù¸é delta °¡ ³Ê¹« ÀÛ¾Æ¼­ ¿òÁ÷ÀÌÁö ¾ÊÀ¸¹Ç·Î ¸ð¾Æ¼­ ÇÑ¹ø¿¡ ¿òÁ÷ÀÎ´Ù
@@ -2345,25 +2363,9 @@ void ZMyCharacter::OnUpdate(float fDelta)
 		{
 			PROTECT_DEBUG_REGISTER(bForDebugRegister)
 			{
-				/*Custom: worldobjects : if a player is currently picking an object and the heightdiff is less than collision, set landing to true
-				so walking when the object is going down won't cause acceleration issues*/
-				ZWorldObject* obje = ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction);
-				if (obje == nullptr)
-				{
-					m_pModule_Movable->UpdateGravity(GetGravityConst() * fAccmulatedDelta);
-					uStatus.m_bLand = false;
-				}
-				else
-				{
-					m_pModule_Movable->UpdateGravity(GetGravityConst() * fAccmulatedDelta);
 
-					//float heightdiff = m_Position.Ref().z - (obje->GetPosition().z + obje->GetCollHeight());
-					if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
-					{
-						SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
-					}
-
-				}
+				m_pModule_Movable->UpdateGravity(GetGravityConst() * fAccmulatedDelta);
+				uStatus.m_bLand = false;
 			}
 		}
 

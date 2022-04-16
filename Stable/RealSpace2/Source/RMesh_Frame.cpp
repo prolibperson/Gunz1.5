@@ -592,6 +592,8 @@ void RMesh::RenderFrame()
 	
 	for (auto const& meshNode : m_list)
 	{
+		if (meshNode == nullptr || meshNode->m_isMeshLoaded == false)
+			continue;
 		UpdateNodeAniMatrix(meshNode);
 	}
 

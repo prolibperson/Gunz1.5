@@ -35,7 +35,9 @@ void ZWorldObject_Movable::Move(double const& moveDiff)
 	rvector diff = TargetPosition - CurrPosition;
 	Normalize(diff);
 
-	CurrPosition += diff * (moveSpeed * moveDiff);
+	LastMoveDiff = diff * (moveSpeed * moveDiff);
+
+	CurrPosition += LastMoveDiff;
 }
 
 bool ZWorldObject_Movable::InitWithMesh(WorldObject const& worldObj)

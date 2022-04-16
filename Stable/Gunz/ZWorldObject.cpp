@@ -21,6 +21,7 @@ MapObjectCollision::~MapObjectCollision()
 ZWorldObject::ZWorldObject() noexcept
 {
 	VisualMesh = nullptr;
+	LastMoveDiff = rvector(0, 0, 0);
 }
 
 ZWorldObject::~ZWorldObject() noexcept
@@ -143,7 +144,9 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 		objDistance = GetCollRadius();
 	else
 		objDistance = GetCollWidth();
-	if (Magnitude(diff) < objDistance && pos.z >= CurrPosition.z)
+
+	//todo: improve some more but fixes the teleportation bug
+	if (Magnitude(diff) < objDistance && fabs(CurrPosition.z - pos.z) < (GetCollHeight() + CHARACTER_HEIGHT))
 	{
 		return true;
 	}

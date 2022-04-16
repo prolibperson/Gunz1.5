@@ -69,7 +69,7 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 			isCharModel = true;
 		if (autoLoad == true)
 		{
-			if (!node->ReadElu(name))
+			if (!node->ReadElu(name,false))
 			{
 				delete node;
 				return -1;
@@ -93,7 +93,7 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 		{
 			if (isCharModel == false)
 			{
-				if (!node->ReadElu(name))
+				if (!node->ReadElu(name,false))
 				{
 					delete node;
 					return -1;
@@ -115,30 +115,20 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 			}
 			else
 			{
-				if (asyncTasks.size() == 0)
+				if (Find(name))
 				{
-
-					asyncTasks.push_back(make_pair(std::move(node), std::move(std::async(std::launch::async, &RMesh::ReadElu, node, const_cast<char*>(filename.c_str()), true))));
-
-					m_id_last++;
-
-					return m_id_last - 1;
+					return -1;
 				}
-				else
+				for (auto const& task : asyncTasks)
 				{
-					for (auto const& pair : asyncTasks)
-					{
-						if (pair.first->m_FileName == name)
-							continue;
-
-						asyncTasks.push_back(make_pair(std::move(node), std::async(std::launch::async, &RMesh::ReadElu, node, const_cast<char*>(filename.c_str()), true)));
-
-						m_id_last++;
-
-						return m_id_last - 1;
-					}
+					if (task.first == name)
+						return -1;
 				}
+				asyncTasks.push_back(std::make_pair(std::string(name), std::async(std::launch::async, &RMesh::ReadEluPtr, node, const_cast<char*>(filename.c_str()))));
 
+				m_id_last++;
+
+				return m_id_last - 1;
 			}
 		}
 	}

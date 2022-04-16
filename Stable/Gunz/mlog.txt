@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Apr  2 2022 14:17:32) 
-Log time (04/02/22 15:59:35)
+GUNZ 1,0,0,290 launched. build (Apr 10 2022 15:15:22) 
+Log time (04/10/22 15:36:21)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -27,19 +27,19 @@ ZApplication::OnCreate : begin
 3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.554000 
+-------------------> Sound Engine Create : 0.556000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.667000 
+loading pictures : 1.662000 
 IDLResource Loading Success!!
-IDL resources : 0.117000 
+IDL resources : 0.116000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.210000 
+Screen Effect Manager Create : 0.213000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -66,18 +66,18 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.389000 
+-------------------> GameInterface Create : 2.355000 
 
 Load character.xml success,
 
--------------------> Character Loading : 0.162000 
+-------------------> Character Loading : 0.160000 
 
 
--------------------> WeaponMesh Loading : 0.278000 
+-------------------> WeaponMesh Loading : 0.289000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.020000 
+-------------------> Worlditem Loading : 0.019000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -87,7 +87,7 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.236000 
+-------------------> ETC .. : 0.233000 
 
 
 LoginID: jetman82
@@ -133,33 +133,14 @@ BspObject load lightmap : end
 RBspObject::Open : done
 ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
 main : OnCreate() done
-Destroy gunz
-Destroy sound engine.
-Destroy sound engine. success
-Destroy console.
-Destroy interface begin 
-destroy client.
-PeerInfoList Released
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-clear IDL resource end.
-Final interface end.
-Destroy game interface done.
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-Destroy mesh manager.
-Destroy weapon mesh manager.
-Clear SkillManager.
-Clear QuestItemDescMgr.
-Clear MatchItemDescMgr.
-Clear ChattingFilter.
-Clear ChannelRuleMgr.
-destroy game application done.
-interface finalize.
-game input destroy.
-game gonfiguration destroy.
-Bitmap manager destroy Animation bitmap.
-destroy gunz finish.
-Rframe_destory::closeDisplay
+Server Connected
+Login Successful. 
+Responsed Account Charlist
+Selected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
+Shop Gamble item count : 2
+shop gitem : 1000003, Green Box
+shop gitem : 1000004, Gold Box
+0,Jetman82,Jetman82,This is a test send
+Shop Gamble item count : 2
+shop gitem : 1000003, Green Box
+shop gitem : 1000004, Gold Box

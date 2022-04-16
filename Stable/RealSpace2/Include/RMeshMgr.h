@@ -23,7 +23,7 @@ public:
 	RMeshMgr();
 	~RMeshMgr();
 
-	std::vector<std::pair<RMesh*,std::future<bool>>> asyncTasks;
+	std::vector<std::pair<std::string,std::future<RMesh*>>> asyncTasks;
 
 	//Custom: Dynamic Model Loading. Additional bool parameter to set autoload
 	int		Add(char* name,char* modelname=NULL,bool namesort=false, bool autoLoad = false);

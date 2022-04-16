@@ -119,10 +119,10 @@ RRESULT OnCreate(void *pParam)
 	g_App.PreCheckArguments();
 
 	//Custom: skip loading dynamic models if config is set to true
-	//if (Z_VIDEO_DYNAMIC_MODELS == true)
-	//{
-	//	RMesh::SetPartsMeshLoadingSkip(1);
-	//}
+	if (Z_VIDEO_DYNAMIC_MODELS == true)
+	{
+		RMesh::SetPartsMeshLoadingSkip(1);
+	}
 	string strFileLenzFlare("System/LenzFlare.xml");
 	RCreateLenzFlare(strFileLenzFlare.c_str());
 	RGetLenzFlare()->Initialize();

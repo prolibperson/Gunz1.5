@@ -732,6 +732,148 @@ void RMesh::CheckNameToType(RMeshNode* pMeshNode)
 #undef NCMPNAME
 }
 
+RMesh* RMesh::ReadEluPtr(std::string const& fname)
+{
+	if (fname.empty())
+		return nullptr;
+#define MZF_READ(x,y) { if(!mzf.Read((x),(y))) return false; }
+	__BP(2009, "RMesh::ReadElu");
+
+	char Path[256];
+	char Name[256];
+
+	Path[0] = NULL;
+	Name[0] = NULL;
+
+	// 이펙트 모델이라면 자동으로 옵션켠다.
+
+	GetPath(fname.c_str(), Path);
+
+	size_t len = strlen(Path);
+
+	if (strncmp(&fname[len], "ef_", 3) == 0) {
+		m_bEffectSort = true;
+		m_LitVertexModel = true;
+	}
+	else {//이펙트가 아니라면 텍스쳐 해상도 옵션의 영향을 받음.
+		m_mtrl_list_ex.SetObjectTexture(true);
+	}
+
+	SetFileName((char*)fname.c_str());
+
+	m_data_num = 0;
+
+	//	char *buffer;
+	MZFile mzf;
+
+	if (g_pFileSystem) {
+		if (!mzf.Open(fname.c_str(), g_pFileSystem)) {
+			if (!mzf.Open(fname.c_str())) {
+				mlog("----------> in zip ( %s ) file not found!! \n ", fname);
+				return nullptr;
+			}
+		}
+	}
+	else {
+		if (!mzf.Open(fname.c_str())) {
+			mlog("----------> %s file not found!! \n ", fname);
+			return nullptr;
+		}
+	}
+
+	ex_hd_t t_hd;
+
+	MZF_READ(&t_hd, sizeof(ex_hd_t));
+
+	if (t_hd.sig != EXPORTER_SIG) {
+		mlog("%s elu file 파일 식별 실패.\n", fname);
+		return false;
+	}
+
+	if (t_hd.mesh_num != -1 && t_hd.mtrl_num != -1) {
+		if (!ReadOldElu(&mzf, &t_hd))
+			return false;
+	}
+	else
+	{
+		ReadNewElu(&mzf, (char*)fname.c_str());
+	}
+
+
+	if (m_isCharacterMesh)
+	{
+		rmatrix _pbm;
+
+		// 썬그라스 기본장비 위치..
+
+		_pbm._11 = 0.f;
+		_pbm._12 = 1.f;
+		_pbm._13 = 0.f;
+		_pbm._14 = 0.f;
+
+		_pbm._21 = 0.1504f;
+		_pbm._22 = -0.f;
+		_pbm._23 = 0.9886f;
+		_pbm._24 = 0.f;
+
+		_pbm._31 = 0.9886f;
+		_pbm._32 = 0.f;
+		_pbm._33 = -0.1504f;
+		_pbm._34 = 0.f;
+
+		_pbm._41 = 9.0528f;
+		_pbm._42 = 0.f;
+		_pbm._43 = 9.8982f;
+		_pbm._44 = 1.f;
+
+		AddNode("eq_sunglass", "Bip01 Head", _pbm);
+	}
+
+	mzf.Close();
+
+	ConnectMatrix();
+
+	if (m_is_map_object)
+	{
+		ClearVoidMtrl();//연결안된 빈 mtrl 을 지운다...
+	}
+
+	if (m_mtrl_auto_load)
+	{
+		m_mtrl_list_ex.Restore(RGetDevice(), Path);
+	}
+
+	ConnectMtrl();// Mtrl 연결..
+
+	if (m_bEffectSort)
+	{
+		std::sort(m_list.begin(), m_list.end(), e_sort_str);
+
+		int cnt = 0;
+
+		for (auto const& meshNode : m_list)
+		{
+			m_data[cnt] = meshNode;
+			meshNode->m_id = cnt;
+
+			cnt++;
+		}
+	}
+
+	CheckNodeAlphaMtrl();// 각노드 alpha mtrl 인가 체크..
+
+	MakeAllNodeVertexBuffer();
+
+
+	//	mlog("elu file ( %s ) load... \n",fname);
+
+	__EP(2009);
+
+	m_isMeshLoaded = true;
+
+	return this;
+}
+
 bool RMesh::ReadNewElu(MZFile* mzf, char* fname)
 {
 #define MZF_READ(x,y) { if(!mzf->Read((x),(y))) return false; }

@@ -480,24 +480,31 @@ void ZWorld::LoadWorldObjects()
 
 ZWorldObject* ZWorld::PickWorldObject(rvector& pos, rvector& dir)
 {
+	rvector realfloor = GetBsp()->GetFloor(pos, CHARACTER_RADIUS, CHARACTER_HEIGHT, nullptr);// , fHeight, pimpactplane);
+
 	for (auto const& worldObject : mapObjects)
 	{
 		if (worldObject->Pick(pos, dir, nullptr))
+		{
+			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetCollHeight())
+				continue;
 			return worldObject.get();
+		}
 	}
 	return nullptr;
 }
-
 rvector ZWorld::GetFloor(rvector& origin, float fRadius, float fHeight, rplane* pimpactplane)
 {
+	rvector realfloor = GetBsp()->GetFloor(origin, fRadius, fHeight, pimpactplane);
 	ZWorldObject* worldObject = PickWorldObject(origin, rvector(0, 1, 0));
 	if (worldObject != nullptr && worldObject->IsCollidable())
 	{
 		rvector floor = worldObject->GetPosition() + rvector(worldObject->GetCollRadius(), worldObject->GetCollWidth(), worldObject->GetCollHeight());
-		return floor;
+		if (realfloor.z < worldObject->GetPosition().z)
+			return floor;
 	}
 
-	return GetBsp()->GetFloor(origin, fRadius, fHeight, pimpactplane);
+	return realfloor;
 }
 
 void ZWorld::SetFog(bool bFog)

@@ -164,6 +164,10 @@ void RMesh::RenderSub(D3DXMATRIX* world_mat,bool NoPartsChange,bool bRenderBuffe
 
 	for (auto const& meshObj : m_list)
 	{
+		if (meshObj == nullptr)
+			continue;
+		if (meshObj->m_isMeshLoaded == false)
+			continue;
 		meshObj->CheckAlign(world_mat);
 
 		CalcNodeMatrixBBox(meshObj);
