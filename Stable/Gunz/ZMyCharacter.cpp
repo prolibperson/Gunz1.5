@@ -2329,14 +2329,16 @@ void ZMyCharacter::OnUpdate(float fDelta)
 	{
 		if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
 		{
-			if (zStatus.m_bMoving)
+			rvector diff = m_Position.Ref();
+
+			if (!zStatus.m_bMoving)
 			{
-				SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
+				rvector diff = rvector(obje->GetLastMoveDiff().x, obje->GetLastMoveDiff().y, 0);
+				Move(diff);
 			}
-			else
-			{
-				SetPosition(rvector(m_Position.Ref().x + obje->GetLastMoveDiff().x, m_Position.Ref().y + obje->GetLastMoveDiff().y, obje->GetPosition().z + obje->GetCollHeight()));
-			}
+
+			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
+			//m_Position.Ref().z = obje->GetPosition().z + obje->GetCollHeight();
 		}
 	}
 

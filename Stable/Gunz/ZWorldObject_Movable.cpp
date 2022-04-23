@@ -42,9 +42,13 @@ void ZWorldObject_Movable::Move(double const& moveDiff)
 
 bool ZWorldObject_Movable::InitWithMesh(WorldObject const& worldObj)
 {
+	if (ZWorldObject::InitWithMesh(worldObj) == false)
+		return false;
+
+
 	moveSpeed = worldObj.speed;
 	EndPosition = rvector(worldObj.endposition);
 	TargetPosition = worldObj.endposition;
 
-	return ZWorldObject::InitWithMesh(worldObj);
+	return true;
 }

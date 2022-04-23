@@ -69,6 +69,9 @@ public:
 
 class ZWorldObject
 {
+private:
+	int MeshID;
+
 protected:
 	std::string Name;
 	std::string Model;
@@ -81,8 +84,9 @@ protected:
 	rvector CurrPosition;
 	rvector LastMoveDiff;
 
-
+	RMesh* Mesh;
 	RVisualMesh* VisualMesh;
+	rboundingbox bbox;
 public:
 
 	ZWorldObject() noexcept;
@@ -171,6 +175,16 @@ public:
 
 	rvector const& GetLastMoveDiff() {
 		return LastMoveDiff;
+	}
+
+	__forceinline rboundingbox GetBounds()
+	{
+		rvector min, max;
+		for (int i = 0; i < 3; ++i)
+		{
+			min[i] = VisualMesh->GetBoundMax()[i] * VisualMesh->GetScale()[i];
+			max[i] = VisualMesh->GetBoundMin()[i] * VisualMesh->GetScale()[i];
+		}
 	}
 
 	virtual bool InitWithMesh(WorldObject const& worldObject);

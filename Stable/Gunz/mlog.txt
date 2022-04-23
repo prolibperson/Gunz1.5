@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Apr 10 2022 15:15:22) 
-Log time (04/10/22 15:36:21)
+GUNZ 1,0,0,290 launched. build (Apr 17 2022 14:43:28) 
+Log time (04/17/22 21:03:30)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -27,120 +27,15 @@ ZApplication::OnCreate : begin
 3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.556000 
+-------------------> Sound Engine Create : 0.542000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.662000 
+loading pictures : 1.716000 
 IDLResource Loading Success!!
-IDL resources : 0.116000 
+IDL resources : 0.127000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.213000 
-Screen effect manager create success.
-SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_hp ampulla.elu mesh Plane51 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_hp ampulla.elu mesh Plane52 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_hp ampulla.elu mesh Plane53 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_hp ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_hp ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane51 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane52 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane53 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_ap ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane51 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane52 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane53 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane54 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane56 node 2 face 0 point -> physique 3 Greater than
-SFX/ef_haste ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
-Effect manager create success.
-Client create success.
-game interface create success.
-
--------------------> GameInterface Create : 2.355000 
-
-Load character.xml success,
-
--------------------> Character Loading : 0.160000 
-
-
--------------------> WeaponMesh Loading : 0.289000 
-
-Load weapon.xml success. 
-
--------------------> Worlditem Loading : 0.019000 
-
-Load zitem info success.
-Load zBuff info success.
-Init world item manager success.
-Init map Descriptor success.
-Init channel rule manager success.
-Init abuse manager success.
-Init chatting filter. success
-
--------------------> ETC .. : 0.233000 
-
-
-LoginID: jetman82
-BspObject open : begin interface/church/church_b.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 8 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
-BspObject load lightmap 0
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-BspObject open : begin interface/church/church_a.rs 
-RBspObject::Open : Open_MaterialList
-RBspObject::Open : Open_LightList
-BspObject open object list : begin
-RBspObject::Open_ObjectList : size 38 
-RBspObject::Open_ObjectList : end
-RBspObject::Open : OpenDescription
-RBspObject::OpenRs : file.Open 
-RBspObject::OpenRs : file.Read(&header) 
-RBspObject::OpenRs : file.Read(&nMaterial) 
-RBspObject::OpenRs : Open_Nodes begin 
-RBspObject::OpenRs : Open_Nodes end 
-RBspObject::Open : OpenRs 
-RBspObject::Open : OpenBsp 
-BspObject load lightmap : file.Read(&header)
-BspObject load lightmap nCount = 1
-BspObject load lightmap 0
-BspObject load lightmap : file.Read(&m_nLightmap) done
-BspObject load lightmap : end 
-RBspObject::Open : done
-ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
-main : OnCreate() done
-Server Connected
-Login Successful. 
-Responsed Account Charlist
-Selected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
-Shop Gamble item count : 2
-shop gitem : 1000003, Green Box
-shop gitem : 1000004, Gold Box
-0,Jetman82,Jetman82,This is a test send
-Shop Gamble item count : 2
-shop gitem : 1000003, Green Box
-shop gitem : 1000004, Gold Box

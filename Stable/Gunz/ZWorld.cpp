@@ -461,6 +461,8 @@ void ZWorld::LoadWorldObjects()
 				}
 			}
 			std::unique_ptr<ZWorldObject> object;
+			if (usepath == true || movable == true)
+				worldObject.objecttype = OBJTYPE::OT_MOVABLE;
 			if (usepath == true)
 				object = std::make_unique<ZWorldObject_Navigation>();
 			else if (movable == true)

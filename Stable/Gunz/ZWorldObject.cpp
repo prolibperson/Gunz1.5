@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ZWorldObject.h"
 #include "ZMap.h"
+#include "../RealSpace2/Source/RBspObject.cpp"
+#include "../MaxPlugIns/RSBatchExporter/Dib.cpp"
 
 MapObjectCollision::MapObjectCollision()
 {
@@ -22,10 +24,12 @@ ZWorldObject::ZWorldObject() noexcept
 {
 	VisualMesh = nullptr;
 	LastMoveDiff = rvector(0, 0, 0);
+	MeshID = -1;
 }
 
 ZWorldObject::~ZWorldObject() noexcept
 {
+	ZGetMeshMgr()->Del(MeshID);
 //	ZGetNpcMeshMgr()->DelAll();
 	//ZGetMeshMgr()->Del((char*)Name.c_str());
 }
@@ -49,6 +53,8 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 	if (pMesh == nullptr)
 	{
+		//todo: addxml
+		//ZGetMeshMgr()->AddXml((char*)meshpath.c_str(), (char*)Model.c_str());
 		ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)worldObj.name.c_str(), false, true);
 	}
 
@@ -59,13 +65,20 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 	pMesh->ReloadAnimation();
 
-	int nVMID = ZGetGame()->m_VisualMeshMgr.Add(pMesh);
-	if (nVMID == -1) mlog("InitNpcMesh() - 캐릭터 생성 실패\n");
+	MeshID = ZGetGame()->m_VisualMeshMgr.Add(pMesh);
+	if (MeshID == -1)
+	{
+		mlog("Failed to load worldobject mesh %s\n", Model.c_str());
+	}
 
-	VisualMesh = ZGetGame()->m_VisualMeshMgr.GetFast(nVMID);
+	VisualMesh = ZGetGame()->m_VisualMeshMgr.GetFast(MeshID);
 
 	if (worldObj.animation.empty() == false)
 	{
+		std::string meshpath = szBuf;
+		meshpath.append(worldObj.animation.c_str());
+		RAnimation* pAni = VisualMesh->GetMesh()->m_ani_mgr.AddGameLoad((char*)worldObj.animation.c_str(), (char*)meshpath.c_str(), -1, 0);
+		pAni->SetAnimationLoopType(AnimationLoopType::RAniLoopType_Loop);
 		VisualMesh->SetAnimation(worldObj.animation.c_str());
 	}
 
@@ -92,7 +105,7 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 void ZWorldObject::Update(float elapsed)
 {
-
+	VisualMesh->GetMesh()->RenderBox(&GetWorldMatrix());
 }
 
 void ZWorldObject::Draw()
@@ -106,6 +119,8 @@ void ZWorldObject::Draw()
 	//need to update the frame at every draw call
 	VisualMesh->Frame();
 	VisualMesh->Render();
+
+	RDrawCylinder(CurrPosition, GetCollisionType() == COLLTYPE::CT_CYLINDER ? GetCollRadius() : GetCollWidth(), GetCollHeight(), 8);
 
 	//if (m_Collision.IsCollidable() && Movable == false)
 	//{
@@ -148,7 +163,10 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 	//todo: improve some more but fixes the teleportation bug
 	if (Magnitude(diff) < objDistance && fabs(CurrPosition.z - pos.z) < (GetCollHeight() + CHARACTER_HEIGHT))
 	{
-		return true;
+		if (pos.z + CHARACTER_HEIGHT >= CurrPosition.z + GetCollHeight())
+			return true;
+
+		return false;
 	}
 	return false;
 }

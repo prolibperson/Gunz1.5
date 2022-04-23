@@ -7901,10 +7901,11 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 		}
 	}
 
-	//custom: map object collision
-	ZWorldObject* worldObject = GetWorld()->PickWorldObject((rvector)pObject->GetPosition(), (rvector)pObject->GetDirection());
-	if (worldObject != nullptr)
+	for (auto const& worldObject : GetWorld()->GetWorldObjects())
 	{
+		if (worldObject->IsCollidable() == false)
+			continue;
+
 		rvector pos = worldObject->GetPosition();
 		rvector dir = pObject->GetPosition() + diff - pos;
 		dir.z = 0;
@@ -7941,23 +7942,37 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 		}
 		else
 		{
-			//if (fDist < fCOLLISION_DIST && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
-			//{
-			//	if (pObject->GetUID() == ZGetMyUID())
-			//	{
-			//		m_pMyCharacter->Die();
-			//	}
+			if (fDist < fCOLLISION_DIST)// && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
+			{
+				//if (pObject->GetUID() == ZGetMyUID())
+				//{
+				//	m_pMyCharacter->Die();
+				//}
 
+				//float heightdiff = fabs(pObject->GetPosition().z - pos.z);
 
-			//	//if (pObject->GetPosition().z >= worldObject->GetPosition().z)
-			//	//{
-			//	//	fDist = (pObject->GetPosition().z) - (worldObject->GetPosition().z + worldObject->GetCollHeight());
-			//	//	if (fDist <= worldObject->GetCollHeight())
-			//	//	{
-			//	//		diff.z -= fDist;
-			//	//	}
-			//	//}
-			//}
+				//if (heightdiff < worldObject->GetCollHeight())
+				//{
+				//	if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
+				//	{
+				//		Normalize(dir);
+				//		rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
+
+				//		rvector newdiff = newthispos - pObject->GetPosition();
+				//		diff.x = newdiff.x;
+				//		diff.y = newdiff.y;
+				//	}
+				//}
+
+				if (pObject->GetVisualMesh()->GetHeadPosition().z < worldObject->GetPosition().z)
+				{
+					float dist = worldObject->GetPosition().z - pObject->GetVisualMesh()->GetHeadPosition().z;
+					if (dist < worldObject->GetCollHeight())
+					{
+						diff.z -= dist;
+					}
+				}
+			}
 		}
 	}
 }
