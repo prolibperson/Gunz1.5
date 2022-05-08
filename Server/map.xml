@@ -21,7 +21,7 @@
   <MAP id="18" MapName="Jail" MapImageName="map_Prison.bmp" BannerName="banner_Prison.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="True" bIsCTFMap="False" />
   <MAP id="19" MapName="Shower Room" MapImageName="map_Prison II.bmp" BannerName="banner_Prison II.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="True" bIsCTFMap="False" />
   <MAP id="20" MapName="High_Haven" MapImageName="map_High_Haven.bmp" BannerName="banner_High_Haven.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" />
-  <MAP id="21" MapName="Citadel" MapImageName="map_Citadel.bmp" BannerName="banner_Citadel.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" />
+  <MAP id="21" MapName="Citadel" MapImageName="map_Citadel.bmp" BannerName="banner_Citadel.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" lightmaps="day : night"/>
   <MAP id="22" MapName="RelayMap" MapImageName="map_RelayMap.bmp" BannerName="banner_RelayMap.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="False" />
   <MAP id="23" MapName="Halloween Town" MapImageName="map_Halloween Town.bmp" BannerName="banner_Halloween Town.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" />
   <MAP id="24" MapName="WeaponShop" MapImageName="map_WeaponShop.bmp" BannerName="banner_WeaponShop.tga" ExpRatio="1" MaxPlayers="16" bOnlyDuelMap="False" bIsCTFMap="True" />

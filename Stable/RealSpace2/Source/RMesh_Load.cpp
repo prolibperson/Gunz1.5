@@ -102,15 +102,16 @@ bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 				Node.GetAttribute(FileName, "filename");
 				bool autoLoad = false;
 				//Custom: Dynamic Resource Loading. If you want to disable the feature, comment out node.getattribute(&autoLoad);todo: write config option
-				Node.GetAttribute(&autoLoad, "autoload");
+				Node.GetAttribute(&autoLoad, "autoload",true);
 
-				//Customn: Skip autoload when m_parts_mesh_loading_skip is enabled via Z_VIDEO_DYNAMIC_MODELS
-				if (autoLoad == false && RMesh::m_parts_mesh_loading_skip == 1)
-					continue;
 
 				if (!m_parts_mgr) {
 					m_parts_mgr = new RMeshMgr;
 				}
+
+				////Customn: Skip autoload when m_parts_mesh_loading_skip is enabled via Z_VIDEO_DYNAMIC_MODELS
+				//if (autoLoad == false && RMesh::m_parts_mesh_loading_skip == 1)
+				//	continue;
 
 				if (Path[0]) {
 					strcpy(PathFileName, Path);

@@ -24,14 +24,15 @@ ZWorldObject::ZWorldObject() noexcept
 {
 	VisualMesh = nullptr;
 	LastMoveDiff = rvector(0, 0, 0);
-	MeshID = -1;
 }
 
 ZWorldObject::~ZWorldObject() noexcept
 {
-	ZGetMeshMgr()->Del(MeshID);
-//	ZGetNpcMeshMgr()->DelAll();
-	//ZGetMeshMgr()->Del((char*)Name.c_str());
+	delete VisualMesh;
+	VisualMesh = nullptr;
+
+	//remove model from memory, will be loaded again next time it's needed
+	ZGetMeshMgr()->Del((char*)Model.c_str());
 }
 
 //todo: init mesh differently, currently using npc mesh manager...
@@ -53,8 +54,6 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 	if (pMesh == nullptr)
 	{
-		//todo: addxml
-		//ZGetMeshMgr()->AddXml((char*)meshpath.c_str(), (char*)Model.c_str());
 		ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)worldObj.name.c_str(), false, true);
 	}
 
@@ -65,13 +64,8 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 	pMesh->ReloadAnimation();
 
-	MeshID = ZGetGame()->m_VisualMeshMgr.Add(pMesh);
-	if (MeshID == -1)
-	{
-		mlog("Failed to load worldobject mesh %s\n", Model.c_str());
-	}
-
-	VisualMesh = ZGetGame()->m_VisualMeshMgr.GetFast(MeshID);
+	VisualMesh = new RVisualMesh;
+	VisualMesh->Create(pMesh);
 
 	if (worldObj.animation.empty() == false)
 	{
@@ -105,7 +99,7 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 void ZWorldObject::Update(float elapsed)
 {
-	VisualMesh->GetMesh()->RenderBox(&GetWorldMatrix());
+	//VisualMesh->GetMesh()->RenderBox(&GetWorldMatrix());
 }
 
 void ZWorldObject::Draw()

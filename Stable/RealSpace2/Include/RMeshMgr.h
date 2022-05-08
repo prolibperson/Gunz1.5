@@ -35,6 +35,8 @@ public:
 	void	Del(int id);
 	void	Del(RMesh* pMesh);
 
+	void    Del(char* name);
+
 	int		LoadList(char* name);
 	int		SaveList(char* name);
 

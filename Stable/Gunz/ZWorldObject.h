@@ -70,8 +70,6 @@ public:
 class ZWorldObject
 {
 private:
-	int MeshID;
-
 protected:
 	std::string Name;
 	std::string Model;

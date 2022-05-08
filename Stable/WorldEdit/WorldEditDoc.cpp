@@ -102,6 +102,7 @@ BOOL CWorldEditDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 
 	m_pBspObject=new RBspObject;
+	m_pBspObject->SetLightMapIndex(0);
 	std::string temp = lpszPathName;
 	size_t search = temp.find_last_of('/');
 	FolderPath = temp.substr(0, search + 1);

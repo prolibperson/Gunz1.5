@@ -1388,7 +1388,7 @@ void ZGameInterface::OnLoginCreate(void)
 	///TODO: uncomment these
 	// WPE hacking protect
 //#ifndef _DEBUG
-	HMODULE hMod = GetModuleHandle( "ws2_32.dll"); 
+	HMODULE hMod = GetModuleHandle( "ws2_32.dll");   
 	FARPROC RetVal = GetProcAddress( hMod, "recv"); 
 	if ( (BYTE)RetVal == 0xE9)
 	{
@@ -2002,7 +2002,7 @@ void ZGameInterface::OnLobbyCreate(void)
 
 	InitLobbyUIByChannelType();
 
-	if (RMesh::m_parts_mesh_loading_skip)
+	/*if (RMesh::m_parts_mesh_loading_skip)
 	{
 		if (m_nState != GUNZ_CHARSELECTION)
 		{
@@ -2060,7 +2060,7 @@ void ZGameInterface::OnLobbyCreate(void)
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void ZGameInterface::InitLobbyUIByChannelType()

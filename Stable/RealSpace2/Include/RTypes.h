@@ -69,6 +69,7 @@ struct RMODEPARAMS {
 
 #define rvector2 D3DXVECTOR2
 
+
 struct rboundingbox
 {
 	union {
@@ -83,6 +84,32 @@ struct rboundingbox
 
 	rboundingbox() {};
 	~rboundingbox() {};
+
+	rboundingbox(const rvector& min, const rvector& max)
+	{
+		vmin = min;
+		vmax = max;
+	}
+
+	rvector GetCenter() const { return (vmax + vmin) * 0.5f; }
+	rvector GetSize() const { return vmax - vmin; }
+	rvector GetExtents() const { return (vmax - vmin) * 0.5f; }
+
+	rboundingbox Transform(const rmatrix& transform) const
+	{
+		rvector center_new; 
+		
+		D3DXVec3TransformCoord(&center_new, &GetCenter(), &transform);// transform* GetCenter();
+		const rvector extent_old = GetExtents();
+		const rvector extend_new = rvector
+		(
+			abs(transform._11) * extent_old.x + abs(transform._21) * extent_old.y + abs(transform._31) * extent_old.z,
+			abs(transform._12) * extent_old.x + abs(transform._22) * extent_old.y + abs(transform._32) * extent_old.z,
+			abs(transform._13) * extent_old.x + abs(transform._23) * extent_old.y + abs(transform._33) * extent_old.z
+		);
+
+		return rboundingbox(center_new - extend_new, center_new + extend_new);
+	}
 
 	rvector Point(int i) const { return rvector( (i&1)?vmin.x:vmax.x, (i&2)?vmin.y:vmax.y, (i&4)?vmin.z:vmax.z );  }
 	
@@ -225,5 +252,6 @@ enum ROpenFlag
 };
 
 _NAMESPACE_REALSPACE2_END
+
 
 #endif

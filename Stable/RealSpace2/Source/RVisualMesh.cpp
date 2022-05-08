@@ -794,40 +794,47 @@ void RVisualMesh::Render(ROcclusionList* pOCCL)
 	m_pTOCCL = NULL;
 }
 
-void RVisualMesh::Render(bool low,bool render_buffer) {
+void RVisualMesh::Render(bool low, bool render_buffer) {
 
 	if (m_pMesh == nullptr)
 		return;
 
+	//for (auto const& meshes : m_pMesh->m_list)
+	//{
+	//	if (meshes->m_isMeshLoaded == false)
+	//		continue;
+	//}
+
 
 	if(m_pMesh)
 	{
-		if (m_pMesh->m_parts_mgr)
-		{
-			for (auto& pair : m_pMesh->m_parts_mgr->asyncTasks)
-			{
-				if (pair.second.valid())
-				{
-					if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
-					{
+		//if (m_pMesh->m_parts_mgr)
+		//{
+		//	for (auto& pair : m_pMesh->m_parts_mgr->asyncTasks)
+		//	{
+		//		if (pair.second.valid())
+		//		{
+		//			if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+		//			{
 
-						RMesh* pMesh = std::move(pair.second.get());
+		//				RMesh* pMesh = std::move(pair.second.get());
 
-						pMesh->CalcBox();
+		//				pMesh->CalcBox();
 
-						m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
-						pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last++;
+		//				m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
+		//				pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last++;
 
-						m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
+		//				m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
 
-						pair.first.clear();
+		//				pair.first.clear();
 
-						//std::remove(m_pMesh->m_parts_mgr->asyncTasks.begin(), m_pMesh->m_parts_mgr->asyncTasks.end(), pair);
-						return;
-					}
-				}
-			}
-		}
+		//				std::swap(pair, m_pMesh->m_parts_mgr->asyncTasks.back());
+		//				m_pMesh->m_parts_mgr->asyncTasks.pop_back();
+
+		//			}
+		//		}
+		//	}
+		//}
 
 		rboundingbox bbox;
 

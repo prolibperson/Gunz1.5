@@ -507,7 +507,7 @@ protected:
 // 실제로 텍스쳐 메모리에 올라가는 라이트맵
 	int							m_nLightmap;
 	//Custom: rewrote to use a map instead of a ptr of ptrs
-	std::vector<vector<LPDIRECT3DTEXTURE9>> m_ppLightmapTextures;
+	std::vector<LPDIRECT3DTEXTURE9> m_ppLightmapTextures;
 	//Custom: lightmap index/Support for multimap
 	int m_lightMapIndex;
 	vector<RBspLightmapManager*> m_LightmapList;

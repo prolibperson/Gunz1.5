@@ -338,11 +338,8 @@ void RBspObject::ClearLightmaps()
 
 	for (size_t i = 0; i < m_ppLightmapTextures.size(); ++i)
 	{
-		for (size_t j = 0; j < m_ppLightmapTextures[i].size(); ++j)
-		{
-			m_ppLightmapTextures[i][j]->Release();
-			m_ppLightmapTextures[i][j] = nullptr;
-		}
+			m_ppLightmapTextures[i]->Release();
+			m_ppLightmapTextures[i] = nullptr;
 	}
 	m_ppLightmapTextures.clear();
 
@@ -369,7 +366,7 @@ void RBspObject::LightMapOnOff(bool bDraw)
 		{
 			for (int i = 0; i < m_lightMapNames.size(); ++i)
 			{
-				OpenLightmap(m_lightMapNames[i].c_str());
+				OpenLightmap(m_lightMapNames[m_lightMapIndex].c_str());
 			}
 		}
 		else
@@ -634,13 +631,6 @@ bool RBspObject::Draw()
 
 	RGetDevice()->SetStreamSource(0,m_pVertexBuffer,0,sizeof(BSPVERTEX) );
 	RGetDevice()->SetIndices(m_pIndexBuffer);
-	std::vector<LPDIRECT3DTEXTURE9> lightMapTexture;
-	//Custom: set lightmaptex;
-	if (m_bisDrawLightMap)
-	{
-		if (m_ppLightmapTextures.size() > 0)
-			lightMapTexture = m_ppLightmapTextures.at(m_lightMapIndex);
-	}
 
 	if(m_bWireframe)
 	{
@@ -745,8 +735,8 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(lightMapTexture.size() > 0)
-				RGetDevice()->SetTexture(1, lightMapTexture[nLightmap]);
+			if(m_bisDrawLightMap)
+				RGetDevice()->SetTexture(1, m_ppLightmapTextures[nLightmap]);
 
 			SetDiffuseMap(nMaterial);
 			if(RIsHardwareTNL())
@@ -769,8 +759,8 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(lightMapTexture.size() > 0)
-				RGetDevice()->SetTexture(1, lightMapTexture[nLightmap]);
+			if(m_bisDrawLightMap)
+				RGetDevice()->SetTexture(1, m_ppLightmapTextures[nLightmap]);
 
 			if((m_pMaterials[nMaterial].dwFlags & RM_FLAG_USEALPHATEST) != 0 ) {
 				RGetDevice()->SetRenderState(D3DRS_ZWRITEENABLE, true);
@@ -823,8 +813,8 @@ bool RBspObject::Draw()
 			else
 				RGetDevice()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE );
 
-			if(lightMapTexture.size() > 0)
-				RGetDevice()->SetTexture(1, lightMapTexture[nLightmap]);
+			if(m_bisDrawLightMap)
+				RGetDevice()->SetTexture(1, m_ppLightmapTextures[nLightmap]);
 
 			SetDiffuseMap(nMaterial);
 			if(RIsHardwareTNL())
@@ -1388,10 +1378,10 @@ bool RBspObject::Open(const char *filename, const char* descExtension, ROpenFlag
 	{
 		if (m_lightMapNames.size() > 0)
 		{
-			for (int i = 0; i < m_lightMapNames.size(); ++i)
-			{
-				OpenLightmap(m_lightMapNames[i].c_str());
-			}
+		//	for (int i = 0; i < m_lightMapNames.size(); ++i)
+			//{
+				OpenLightmap(m_lightMapNames[m_lightMapIndex].c_str());
+			//}
 		}
 		else
 			OpenLightmap();
@@ -1611,7 +1601,7 @@ bool RBspObject::Open_ObjectList(MXmlElement *pElement)
 			m_MeshList.SetMtrlAutoLoad(true);
 			m_MeshList.SetMapObject(true);
 
-			pInfo->nMeshID = m_MeshList.Add(fname,nullptr,false,true);
+			pInfo->nMeshID = m_MeshList.Add(fname);
 			RMesh *pmesh=m_MeshList.GetFast(pInfo->nMeshID);
 
 			if(pmesh)
@@ -2275,7 +2265,8 @@ bool RBspObject::OpenLightmap(const char* lightmapName)
 		{
 			return false;
 		}
-		lightMapTextures.push_back(tex);// emplace((int)m_ppLightmapTextures.size(), tex);
+		m_ppLightmapTextures.push_back(tex);
+		//lightMapTextures.push_back(tex);// emplace((int)m_ppLightmapTextures.size(), tex);
 
 		//if (hr != D3D_OK) //mlog("lightmap texture 생성 실패 %s \n", DXGetErrorString(hr));
 		delete[] bmpmemory;
@@ -2283,10 +2274,6 @@ bool RBspObject::OpenLightmap(const char* lightmapName)
 	}
 
 	//Custom: Safety check to prevent lightmaptextures from being assigned to if it's nullptr
-	if (lightMapTextures.size() > 0)
-	{
-		m_ppLightmapTextures.push_back(lightMapTextures);
-	}
 	mlog("BspObject load lightmap : file.Read(&m_nLightmap) done\n");
 
 	// 저장될때의 폴리곤 순서를 읽는다

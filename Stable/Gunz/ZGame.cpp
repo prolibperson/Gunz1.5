@@ -7949,20 +7949,20 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 				//	m_pMyCharacter->Die();
 				//}
 
-				//float heightdiff = fabs(pObject->GetPosition().z - pos.z);
+				float heightdiff = fabs(pObject->GetPosition().z - pos.z);
 
-				//if (heightdiff < worldObject->GetCollHeight())
-				//{
-				//	if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
-				//	{
-				//		Normalize(dir);
-				//		rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
+				if (heightdiff < worldObject->GetCollHeight() && pObject->GetPosition().z < pos.z)
+				{
+					if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
+					{
+						Normalize(dir);
+						rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
 
-				//		rvector newdiff = newthispos - pObject->GetPosition();
-				//		diff.x = newdiff.x;
-				//		diff.y = newdiff.y;
-				//	}
-				//}
+						rvector newdiff = newthispos - pObject->GetPosition();
+						diff.x = newdiff.x;
+						diff.y = newdiff.y;
+					}
+				}
 
 				if (pObject->GetVisualMesh()->GetHeadPosition().z < worldObject->GetPosition().z)
 				{
