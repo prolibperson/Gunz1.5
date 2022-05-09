@@ -19,6 +19,15 @@ void ZWorldObject_Movable::Update(float elapsed)
 
 void ZWorldObject_Movable::Move(double const& moveDiff)
 {
+	if (CurrPosition > EndPosition)
+	{
+		TargetPosition = StartPosition;
+	}
+	else if (CurrPosition < StartPosition)
+	{
+		TargetPosition = EndPosition;
+	}
+
 	float dist = Magnitude(TargetPosition - CurrPosition);
 	if (dist <= 1.f)
 	{
