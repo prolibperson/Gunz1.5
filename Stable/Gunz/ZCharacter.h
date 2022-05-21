@@ -610,7 +610,7 @@ public:
 	//max itemname check fix
 	std::deque<std::pair<unsigned long, RMesh*>> m_char_wep_mgr;
 
-	inline void	SetInvincibleTime(int nDuration);
+	void	SetInvincibleTime(int nDuration);
 	inline bool	isInvincible();
 
 	bool IsMan();

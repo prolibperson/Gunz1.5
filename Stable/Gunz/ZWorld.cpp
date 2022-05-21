@@ -495,6 +495,19 @@ ZWorldObject* ZWorld::PickWorldObject(rvector& pos, rvector& dir)
 	}
 	return nullptr;
 }
+
+ZWorldObject* ZWorld::CheckWallHang(rvector const& pos, rvector const& dir, bool const& initial)
+{
+	for (auto const& worldObject : mapObjects)
+	{
+		if (worldObject->OnCheckWallHang(pos, dir,initial) == true)
+		{
+			return worldObject.get();
+		}
+	}
+	return nullptr;
+}
+
 rvector ZWorld::GetFloor(rvector& origin, float fRadius, float fHeight, rplane* pimpactplane)
 {
 	rvector realfloor = GetBsp()->GetFloor(origin, fRadius, fHeight, pimpactplane);

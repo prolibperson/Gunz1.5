@@ -2721,27 +2721,25 @@ void ZCharacter::UpdateSound()
 
 		if (m_nWhichFootSound != nCurrFoot)
 		{
-			for (auto const& worldObj : ZGetGame()->GetWorld()->GetWorldObjects())
+			ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject((rvector)GetPosition(), rvector(GetDirection()));
+			if (worldObject != nullptr)
 			{
-				if (worldObj->Pick((D3DXVECTOR3)GetPosition(), (D3DXVECTOR3)GetDirection(), nullptr))
+				rvector pos;
+				std::string sound;
+				if (m_nWhichFootSound == 0)
 				{
-					rvector pos;
-					std::string sound;
-					if (m_nWhichFootSound == 0)
-					{
-						sound = "man_fs_l_";
-						sound.append(worldObj->GetSound());
-						pos = m_pVMesh->GetLFootPosition();
-					}
-					else
-					{
-						sound = "man_fs_r_";
-						sound.append(worldObj->GetSound());
-						pos = m_pVMesh->GetRFootPosition();
-					}
-
-					ZApplication::GetSoundEngine()->PlaySound(sound.c_str(), pos, IsObserverTarget());
+					sound = "man_fs_l_";
+					sound.append(worldObject->GetSound());
+					pos = m_pVMesh->GetLFootPosition();
 				}
+				else
+				{
+					sound = "man_fs_r_";
+					sound.append(worldObject->GetSound());
+					pos = m_pVMesh->GetRFootPosition();
+				}
+
+				ZApplication::GetSoundEngine()->PlaySound(sound.c_str(), pos, IsObserverTarget());
 			}
 			m_nWhichFootSound = nCurrFoot;
 		}

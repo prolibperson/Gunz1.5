@@ -1016,8 +1016,6 @@ void RMesh::ClearAnimation()
 
 bool RMesh::Pick(int mx,int my,RPickInfo* pInfo,rmatrix* world_mat)
 {
-	LPDIRECT3DDEVICE9 dev = RGetDevice();
-
 	int sw = RGetScreenWidth();
 	int sh = RGetScreenHeight();
 

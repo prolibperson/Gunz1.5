@@ -1,8 +1,6 @@
 #include "stdafx.h"
 #include "ZWorldObject.h"
 #include "ZMap.h"
-#include "../RealSpace2/Source/RBspObject.cpp"
-#include "../MaxPlugIns/RSBatchExporter/Dib.cpp"
 
 MapObjectCollision::MapObjectCollision()
 {
@@ -81,11 +79,14 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 	VisualMesh->SetCheckViewFrustum(false);
 	VisualMesh->SetScale((D3DXVECTOR3)(worldObj.scale));
 
-	SetCollidable(worldObj.collidable);
-	SetCollRadius(worldObj.collradius);
-	SetCollWidth(worldObj.collwidth);
-	SetCollHeight(worldObj.collheight);
-	SetCollisionType(worldObj.collisiontype);
+	//collision
+	{
+		SetCollidable(worldObj.collidable);
+		SetCollRadius(worldObj.collradius);
+		SetCollWidth(worldObj.collwidth);
+		SetCollHeight(worldObj.collheight);
+		SetCollisionType(worldObj.collisiontype);
+	}
 	StartPosition = worldObj.position;
 	CurrPosition = StartPosition;
 	Direction = worldObj.direction;
@@ -94,12 +95,34 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 	rmatrix mat = GetWorldMatrix();
 	VisualMesh->SetWorldMatrix(mat);
 
+
 	return true;
 }
 
 void ZWorldObject::Update(float elapsed)
 {
-	//VisualMesh->GetMesh()->RenderBox(&GetWorldMatrix());
+	if (IsCollidable() && VisualMesh != nullptr)
+	{
+		//update bbox, i think is worth to use only when change the model scale after first initialization
+		//VisualMesh->CalcBox();
+
+		rvector vmin, vmax;
+		VisualMesh->GetBBox(vmin, vmax);
+		rboundingbox bbox(vmin, vmax);
+
+		for (int i = 0; i < 3; ++i)
+		{
+			bbox.vmin[i] *= VisualMesh->GetScale()[i];
+			bbox.vmax[i] *= VisualMesh->GetScale()[i];
+		}
+
+		rboundingbox transformed = bbox.Transform(GetWorldMatrix());
+
+		m_Collision.SetHeight(abs(transformed.GetSize().z));
+		m_Collision.SetRadius(abs(max(transformed.GetExtents().x, transformed.GetExtents().y)));
+		m_Collision.SetWidth(m_Collision.GetRadius());
+	}
+
 }
 
 void ZWorldObject::Draw()
@@ -114,7 +137,46 @@ void ZWorldObject::Draw()
 	VisualMesh->Frame();
 	VisualMesh->Render();
 
-	RDrawCylinder(CurrPosition, GetCollisionType() == COLLTYPE::CT_CYLINDER ? GetCollRadius() : GetCollWidth(), GetCollHeight(), 8);
+	rvector vmin, vmax;
+	VisualMesh->GetBBox(vmin, vmax);
+	rboundingbox bbox(vmin, vmax);
+
+	for (int i = 0; i < 3; ++i)
+	{
+		bbox.vmin[i] *= VisualMesh->GetScale()[i];
+		bbox.vmax[i] *= VisualMesh->GetScale()[i];
+	}
+
+	rboundingbox transformed = bbox.Transform(GetWorldMatrix());
+
+
+	_RS2::RGetDevice()->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
+	_RS2::RGetDevice()->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_CONSTANT);
+	_RS2::RGetDevice()->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1);
+	_RS2::RGetDevice()->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_CONSTANT);
+	_RS2::RGetDevice()->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE);
+	_RS2::RGetDevice()->SetTextureStageState(1, D3DTSS_ALPHAOP, D3DTOP_DISABLE);
+
+	_RS2::RGetDevice()->SetTextureStageState(0, D3DTSS_CONSTANT, 0xFFFF0000);
+
+	int i, j;
+
+	int ind[8][3] = { {0,0,0},{1,0,0},{1,1,0},{0,1,0}, {0,0,1},{1,0,1},{1,1,1},{0,1,1} };
+	int lines[12][2] = { {0,1},{1,5},{5,4},{4,0},{5,6},{1,2},{0,3},{4,7},{7,6},{6,2},{2,3},{3,7} };
+
+	for (i = 0; i < 12; i++)
+	{
+		rvector a, b;
+		for (j = 0; j < 3; j++)
+		{
+			a[j] = ind[lines[i][0]][j] ? transformed.vmax[j] : transformed.vmin[j];
+			b[j] = ind[lines[i][1]][j] ? transformed.vmax[j] : transformed.vmin[j];
+		}
+
+		_RS2::RDrawLine(a, b, 0xFFFF0000);
+	}
+
+//	RDrawCylinder(CurrPosition, GetCollisionType() == COLLTYPE::CT_CYLINDER ? GetCollRadius() : GetCollWidth(), GetCollHeight(), 8);
 
 	//if (m_Collision.IsCollidable() && Movable == false)
 	//{
@@ -161,6 +223,45 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 			return true;
 
 		return false;
+	}
+	return false;
+}
+
+bool ZWorldObject::OnCheckWallHang(rvector const& pos, rvector const& dir, bool const& initial)
+{
+	//todo: tweak this better
+	if (IsCollidable() == false)
+	{
+		return false;
+	}
+
+	rvector diff;
+	if (initial == false)
+	{
+		diff = GetPosition() - LastMoveDiff - pos;
+	}
+	else
+	{
+		diff = GetPosition() - pos;
+	}
+	diff.z = 0;
+
+	float objDistance = 0;
+	if (GetCollisionType() == CT_CYLINDER)
+		objDistance = GetCollRadius();
+	else
+		objDistance = GetCollWidth();
+
+	//get the difference in height
+	float heightdiff = fabs(GetPosition().z - pos.z);
+
+	float diff1 = Magnitude(diff) - (CHARACTER_RADIUS + objDistance);
+
+	//if player is close enough to the object, but not too high, return true to hang.
+	float collheight = GetCollHeight(); // coll height is a value of 110 for this object
+	if (diff1 <= objDistance && heightdiff <= collheight)
+	{
+		return true;
 	}
 	return false;
 }

@@ -7964,7 +7964,7 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 					}
 				}
 
-				if (pObject->GetVisualMesh()->GetHeadPosition().z < worldObject->GetPosition().z)
+				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z)
 				{
 					float dist = worldObject->GetPosition().z - pObject->GetVisualMesh()->GetHeadPosition().z;
 					if (dist < worldObject->GetCollHeight())

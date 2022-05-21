@@ -12,9 +12,14 @@ ZWorldObject_Movable::~ZWorldObject_Movable()
 
 void ZWorldObject_Movable::Update(float elapsed)
 {
+
+
 	Move(elapsed);
 	rmatrix mat = GetWorldMatrix();
 	VisualMesh->SetWorldMatrix(mat);
+
+	ZWorldObject::Update(elapsed);
+
 }
 
 void ZWorldObject_Movable::Move(double const& moveDiff)

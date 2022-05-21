@@ -192,4 +192,5 @@ public:
 	void Draw();
 
 	bool Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut);
+	bool OnCheckWallHang(rvector const& pos, rvector const& dir, bool const& initial = false);
 };

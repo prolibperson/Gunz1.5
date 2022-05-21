@@ -404,21 +404,36 @@ void ZMyCharacter::ProcessInput(float fDelta)
 					{
 						pickorigin=GetPosition();	// ¹ßµðµô°÷ÀÌ ÀÖ´ÂÁö Çã¸®ºÎ±Ù ¸Ó¸®ºÎ±Ù.. µÎ±ºµ¥ °Ë»çÇÑ´Ù..
 
-						RBSPPICKINFO bpi1,bpi2;
-						bool bPicked1=ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin+rvector(0,0,100),dir,&bpi1);
-						bool bPicked2=ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin+rvector(0,0,180),dir,&bpi2);
-						if(bPicked1 && bPicked2)
+						//todo: world object walljump
+						//ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(pickorigin + rvector(0, 0, 100), dir);
+						//if (worldObject != nullptr)
+						//{
+						//	rvector backdir = -dir;
+						//	float dist = Magnitude(pickorigin + rvector(0, 0, 100) - worldObject->GetPosition());
+						//	if (dist <= 120)
+						//	{
+						//		bWallJump = true;
+						//		nWallJumpDir = 1;
+						//	}
+						//}
+						//else
 						{
-							rvector backdir=-dir;
-							float fDist1=Magnitude(pickorigin+rvector(0,0,100)-bpi1.PickPos);
-							float fDist2=Magnitude(pickorigin+rvector(0,0,180)-bpi2.PickPos);
-
-							// °Å¸®¿Í °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù
-							if(fDist1<120 && (D3DXPlaneDotNormal(&bpi1.pInfo->plane,&backdir)>cos(10.f/180.f*pi)) && 
-								fDist2<120 && (D3DXPlaneDotNormal(&bpi2.pInfo->plane,&backdir)>cos(10.f/180.f*pi)))
+							RBSPPICKINFO bpi1, bpi2;
+							bool bPicked1 = ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin + rvector(0, 0, 100), dir, &bpi1);
+							bool bPicked2 = ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin + rvector(0, 0, 180), dir, &bpi2);
+							if (bPicked1 && bPicked2)
 							{
-								bWallJump=true;
-								nWallJumpDir=1;
+								rvector backdir = -dir;
+								float fDist1 = Magnitude(pickorigin + rvector(0, 0, 100) - bpi1.PickPos);
+								float fDist2 = Magnitude(pickorigin + rvector(0, 0, 180) - bpi2.PickPos);
+
+								// °Å¸®¿Í °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù
+								if (fDist1 < 120 && (D3DXPlaneDotNormal(&bpi1.pInfo->plane, &backdir) > cos(10.f / 180.f * pi)) &&
+									fDist2 < 120 && (D3DXPlaneDotNormal(&bpi2.pInfo->plane, &backdir) > cos(10.f / 180.f * pi)))
+								{
+									bWallJump = true;
+									nWallJumpDir = 1;
+								}
 							}
 						}
 					}
@@ -1333,24 +1348,38 @@ void ZMyCharacter::OnGadget_Hanging()
 			dir=front;
 			pickorigin=GetPosition()+rvector(0,0,210); // Âï¾îº¼ À§Ä¡
 
-			RBSPPICKINFO bpi;
-			bool bPicked=ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin,dir,&bpi);
-
-			if(bPicked && Magnitude(pickorigin-bpi.PickPos)<100.f) 
+			ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckWallHang(pickorigin, dir);
+			if (worldObject != nullptr)
 			{
-				zStatus.m_bHangSuccess=true;
-				rplane plane=bpi.pInfo->plane;
-				ZGetEffectManager()->AddLightFragment(bpi.PickPos,rvector(plane.a,plane.b,plane.c));
+				//float mag = Magnitude(pickorigin - worldObject->GetPosition());
+				//if (mag < worldObject->GetCollHeight())
+				//{
+					zStatus.m_bHangSuccess = true;
+				//}
+				//else
+				//	zStatus.m_bHangSuccess = false;
+			}
+			else
+			{
+				RBSPPICKINFO bpi;
+				bool bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin, dir, &bpi);
+
+				if (bPicked && Magnitude(pickorigin - bpi.PickPos) < 100.f)
+				{
+					zStatus.m_bHangSuccess = true;
+					rplane plane = bpi.pInfo->plane;
+					ZGetEffectManager()->AddLightFragment(bpi.PickPos, rvector(plane.a, plane.b, plane.c));
 
 #ifdef _BIRDSOUND
 
 #else
-				ZGetSoundEngine()->PlaySoundHangOnWall(GetItems()->GetSelectedWeapon()->GetDesc(), bpi.PickPos);
+					ZGetSoundEngine()->PlaySoundHangOnWall(GetItems()->GetSelectedWeapon()->GetDesc(), bpi.PickPos);
 #endif
-				SetLastThrower(MUID(0,0), 0.0f);
+					SetLastThrower(MUID(0, 0), 0.0f);
+				}
+				else
+					zStatus.m_bHangSuccess = false;
 			}
-			else
-				zStatus.m_bHangSuccess=false;
 		}//if
 	}//else
 }
@@ -2305,6 +2334,8 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 	if((zStatus.m_bWallHang && zStatus.m_bHangSuccess) || zStatus.m_bShot) 
 		SetVelocity(0,0,0);
+
+
 	
 	UpdateVelocity(fDelta);
 
@@ -2321,6 +2352,8 @@ void ZMyCharacter::OnUpdate(float fDelta)
 	//	mlog("uid:%d state: %d ani: %s \n ",m_UID.Low,m_State,m_szCurrentAnimation);
 
 	zStatus.m_bMoving = Magnitude(rvector(GetVelocity().x,GetVelocity().y,0))>.1f;
+
+
 
 	/*Custom: worldobjects : if a player is currently picking an object and the heightdiff is less than collision, set landing to true
 	so walking when the object is going down won't cause acceleration issues*/
@@ -2339,6 +2372,14 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
 			//m_Position.Ref().z = obje->GetPosition().z + obje->GetCollHeight();
+		}
+	}
+	else
+	{
+		obje = ZGetGame()->GetWorld()->CheckWallHang(m_Position.Ref(), m_Direction,false);
+		if (obje != nullptr && zStatus.m_bHangSuccess == true)
+		{
+			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
 		}
 	}
 
