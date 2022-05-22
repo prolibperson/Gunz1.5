@@ -508,6 +508,22 @@ ZWorldObject* ZWorld::CheckWallHang(rvector const& pos, rvector const& dir, bool
 	return nullptr;
 }
 
+ZWorldObject* ZWorld::CheckStandingOnObject(rvector& pos)
+{
+	rvector realfloor = GetBsp()->GetFloor(pos, CHARACTER_RADIUS, CHARACTER_HEIGHT, nullptr);// , fHeight, pimpactplane);
+
+	for (auto const& worldObject : mapObjects)
+	{
+		if (worldObject->IsStandingOn(pos))
+		{
+			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetCollHeight())
+				continue;
+			return worldObject.get();
+		}
+	}
+	return nullptr;
+}
+
 rvector ZWorld::GetFloor(rvector& origin, float fRadius, float fHeight, rplane* pimpactplane)
 {
 	rvector realfloor = GetBsp()->GetFloor(origin, fRadius, fHeight, pimpactplane);

@@ -1348,16 +1348,14 @@ void ZMyCharacter::OnGadget_Hanging()
 			dir=front;
 			pickorigin=GetPosition()+rvector(0,0,210); // Âï¾îº¼ À§Ä¡
 
-			ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckWallHang(pickorigin, dir);
+			//Custom: worldobjects. check if player can hang. if they can move them to the proper position and set a hang success
+			ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckWallHang(pickorigin, dir,true);
 			if (worldObject != nullptr)
 			{
-				//float mag = Magnitude(pickorigin - worldObject->GetPosition());
-				//if (mag < worldObject->GetCollHeight())
-				//{
-					zStatus.m_bHangSuccess = true;
-				//}
-				//else
-				//	zStatus.m_bHangSuccess = false;
+				zStatus.m_bHangSuccess = true;
+				SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, GetPosition().z + worldObject->GetLastMoveDiff().z));
+
+				ZGetSoundEngine()->PlaySoundHangOnWall(GetItems()->GetSelectedWeapon()->GetDesc(),(rvector)GetPosition() + worldObject->GetLastMoveDiff());
 			}
 			else
 			{
@@ -2332,9 +2330,10 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 	UpdateLimit();
 
-	if((zStatus.m_bWallHang && zStatus.m_bHangSuccess) || zStatus.m_bShot) 
-		SetVelocity(0,0,0);
-
+	if ((zStatus.m_bWallHang && zStatus.m_bHangSuccess) || zStatus.m_bShot)
+	{
+		SetVelocity(0, 0, 0);
+	}
 
 	
 	UpdateVelocity(fDelta);
@@ -2357,7 +2356,7 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 	/*Custom: worldobjects : if a player is currently picking an object and the heightdiff is less than collision, set landing to true
 	so walking when the object is going down won't cause acceleration issues*/
-	ZWorldObject* obje = ZGetGame()->GetWorld()->PickWorldObject(m_Position.Ref(), m_Direction);
+	ZWorldObject* obje = ZGetGame()->GetWorld()->CheckStandingOnObject(m_Position.Ref());
 	if (obje != nullptr)
 	{
 		if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
@@ -2374,12 +2373,16 @@ void ZMyCharacter::OnUpdate(float fDelta)
 			//m_Position.Ref().z = obje->GetPosition().z + obje->GetCollHeight();
 		}
 	}
+	//Custom: Worldobjects : if player isn't standing on top of the object, attempt to hang. redo later so players can jump from one objec tto another and hang
 	else
 	{
-		obje = ZGetGame()->GetWorld()->CheckWallHang(m_Position.Ref(), m_Direction,false);
-		if (obje != nullptr && zStatus.m_bHangSuccess == true)
+		obje = ZGetGame()->GetWorld()->CheckWallHang(m_Position.Ref() + rvector(0,0,210), m_Direction);
+		if (obje != nullptr && (zStatus.m_bHangSuccess == true && zStatus.m_bWallHang == true))
 		{
-			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
+			rvector diff = rvector(obje->GetLastMoveDiff().x, obje->GetLastMoveDiff().y,0);
+			Move(diff);
+
+			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, m_Position.Ref().z + obje->GetLastMoveDiff().z));
 		}
 	}
 

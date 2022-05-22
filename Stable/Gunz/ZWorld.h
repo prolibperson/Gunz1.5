@@ -79,6 +79,7 @@ public:
 
 	ZWorldObject* PickWorldObject(rvector& pos, rvector& dir);
 	ZWorldObject* CheckWallHang(rvector const& pos, rvector const& dir, bool const& initial = true);
+	ZWorldObject* CheckStandingOnObject(rvector& pos);
 
 	rvector GetFloor(rvector& origin, float fRadius, float fHeight, rplane* pimpactplane = NULL);
 

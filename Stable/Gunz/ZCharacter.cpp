@@ -1275,7 +1275,7 @@ void ZCharacter::UpdateHeight(float fDelta)
 				vPos.z += 50.f;
 
 				RBSPPICKINFO pInfo;
-				ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(vPos, vDir);
+				ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckStandingOnObject(vPos);
 				if (worldObject)
 				{
 					std::string sound;
@@ -2651,7 +2651,7 @@ void ZCharacter::UpdateSound()
 		if(ZGetGame()->GetWorld()->GetBsp()->Pick(GetPosition()+rvector(0,0,100),rvector(0,0,-1),&bpi))
 		{
 			//if you're on top of a world object, dont use the sound beneath it!
-			if (ZGetGame()->GetWorld()->PickWorldObject((rvector)GetPosition(), rvector(0, 0, -1)) == false)
+			if (ZGetGame()->GetWorld()->CheckStandingOnObject(m_Position.Ref()) == false)
 			{
 				pMaterial = ZGetGame()->GetWorld()->GetBsp()->GetMaterial(bpi.pNode, bpi.nIndex);
 			}
@@ -2721,7 +2721,7 @@ void ZCharacter::UpdateSound()
 
 		if (m_nWhichFootSound != nCurrFoot)
 		{
-			ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject((rvector)GetPosition(), rvector(GetDirection()));
+			ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckStandingOnObject(m_Position.Ref());
 			if (worldObject != nullptr)
 			{
 				rvector pos;

@@ -229,21 +229,17 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 
 bool ZWorldObject::OnCheckWallHang(rvector const& pos, rvector const& dir, bool const& initial)
 {
+
+	if (IsStandingOn(pos) == true)
+		return false;
+
 	//todo: tweak this better
 	if (IsCollidable() == false)
 	{
 		return false;
 	}
 
-	rvector diff;
-	if (initial == false)
-	{
-		diff = GetPosition() - LastMoveDiff - pos;
-	}
-	else
-	{
-		diff = GetPosition() - pos;
-	}
+	rvector diff = GetPosition() - pos;
 	diff.z = 0;
 
 	float objDistance = 0;
@@ -252,16 +248,40 @@ bool ZWorldObject::OnCheckWallHang(rvector const& pos, rvector const& dir, bool 
 	else
 		objDistance = GetCollWidth();
 
-	//get the difference in height
-	float heightdiff = fabs(GetPosition().z - pos.z);
-
-	float diff1 = Magnitude(diff) - (CHARACTER_RADIUS + objDistance);
+	float heightdiff = fabs(pos.z - CurrPosition.z);
 
 	//if player is close enough to the object, but not too high, return true to hang.
-	float collheight = GetCollHeight(); // coll height is a value of 110 for this object
-	if (diff1 <= objDistance && heightdiff <= collheight)
+	if (Magnitude(diff) < objDistance + 100) //add 100 for sword stab
 	{
+		if(heightdiff <= GetCollHeight())
 		return true;
+	}
+	return false;
+}
+
+bool ZWorldObject::IsStandingOn(rvector const& pos)
+{
+	if (IsCollidable() == false)
+	{
+		return false;
+	}
+	rvector diff = GetPosition() - pos;
+	diff.z = 0;
+
+	// 나중에 radius상수값으로 된것 Object의 멤버변수로 고치자
+	float objDistance = 0;
+	if (GetCollisionType() == CT_CYLINDER)
+		objDistance = GetCollRadius();
+	else
+		objDistance = GetCollWidth();
+
+	//todo: improve some more but fixes the teleportation bug
+	if (Magnitude(diff) < objDistance && fabs(CurrPosition.z - pos.z) < (GetCollHeight() + CHARACTER_HEIGHT))
+	{
+		if (pos.z + CHARACTER_HEIGHT >= CurrPosition.z + GetCollHeight())
+			return true;
+
+		return false;
 	}
 	return false;
 }
