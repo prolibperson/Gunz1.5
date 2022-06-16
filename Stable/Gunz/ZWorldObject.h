@@ -82,7 +82,6 @@ protected:
 	rvector CurrPosition;
 	rvector LastMoveDiff;
 
-	RMesh* Mesh;
 	RVisualMesh* VisualMesh;
 	rboundingbox bbox;
 public:

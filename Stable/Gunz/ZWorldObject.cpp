@@ -87,6 +87,7 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 		SetCollHeight(worldObj.collheight);
 		SetCollisionType(worldObj.collisiontype);
 	}
+
 	StartPosition = worldObj.position;
 	CurrPosition = StartPosition;
 	Direction = worldObj.direction;
@@ -101,28 +102,6 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 void ZWorldObject::Update(float elapsed)
 {
-	if (IsCollidable() && VisualMesh != nullptr)
-	{
-		//update bbox, i think is worth to use only when change the model scale after first initialization
-		//VisualMesh->CalcBox();
-
-		rvector vmin, vmax;
-		VisualMesh->GetBBox(vmin, vmax);
-		rboundingbox bbox(vmin, vmax);
-
-		for (int i = 0; i < 3; ++i)
-		{
-			bbox.vmin[i] *= VisualMesh->GetScale()[i];
-			bbox.vmax[i] *= VisualMesh->GetScale()[i];
-		}
-
-		rboundingbox transformed = bbox.Transform(GetWorldMatrix());
-
-		m_Collision.SetHeight(abs(transformed.GetSize().z));
-		m_Collision.SetRadius(abs(max(transformed.GetExtents().x, transformed.GetExtents().y)));
-		m_Collision.SetWidth(m_Collision.GetRadius());
-	}
-
 }
 
 void ZWorldObject::Draw()
@@ -176,27 +155,11 @@ void ZWorldObject::Draw()
 		_RS2::RDrawLine(a, b, 0xFFFF0000);
 	}
 
-//	RDrawCylinder(CurrPosition, GetCollisionType() == COLLTYPE::CT_CYLINDER ? GetCollRadius() : GetCollWidth(), GetCollHeight(), 8);
-
-	//if (m_Collision.IsCollidable() && Movable == false)
-	//{
-	//	rvector pos = GetPosition();
-	//	rvector dir = ZGetGame()->m_pMyCharacter->GetPosition() - pos;
-	//	dir.z = 0;
-	//	float fDist = Magnitude(dir);
-
-	//	float fCOLLISION_DIST = GetCollRadius() + ZGetGame()->m_pMyCharacter->GetCollRadius();
-
-	//	if (fDist < fCOLLISION_DIST && fabs(pos.z - ZGetGame()->m_pMyCharacter->GetPosition().z) < GetCollHeight())
-	//	{
-	//		ZGetGame()->m_pMyCharacter->SetPosition(rvector(pos.x, pos.y + fCOLLISION_DIST, ZGetGame()->m_pMyCharacter->GetPosition().z));
-	//	}
-	//}
 	if (RGetMultiSampling() > D3DMULTISAMPLE_NONE)
+	{
 		RGetDevice()->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, FALSE);
-
+	}
 }
-
 
 
 //TODO: fill this in
@@ -275,6 +238,7 @@ bool ZWorldObject::IsStandingOn(rvector const& pos)
 	else
 		objDistance = GetCollWidth();
 
+	
 	//todo: improve some more but fixes the teleportation bug
 	if (Magnitude(diff) < objDistance && fabs(CurrPosition.z - pos.z) < (GetCollHeight() + CHARACTER_HEIGHT))
 	{
