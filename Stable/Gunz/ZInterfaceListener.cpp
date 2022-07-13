@@ -2317,13 +2317,14 @@ BEGIN_IMPLEMENT_LISTENER(ZGetChannelList, MBTN_CLK_MSG)
 
 	MCHANNEL_TYPE nChannelType = MCHANNEL_TYPE_PRESET;
 	// 0 = 일반 , 1 = 사설 , 2 = 클랜 채널 리스트 , 3 = 듀얼 토너먼트 채널 리스트를 요청한다
-	switch(nIndexInGroup) {
-	case 0 : nChannelType = MCHANNEL_TYPE_PRESET; break;
-	case 1 : nChannelType = MCHANNEL_TYPE_USER; break;
-	case 2 : nChannelType = MCHANNEL_TYPE_CLAN; break;
-	case 3 : nChannelType = MCHANNEL_TYPE_DUELTOURNAMENT; break;
-
-	default : _ASSERT(FALSE);
+	switch(nIndexInGroup)
+	{
+		case 0 : nChannelType = MCHANNEL_TYPE_PRESET; break;
+		case 1 : nChannelType = MCHANNEL_TYPE_USER; break;
+		case 2 : nChannelType = MCHANNEL_TYPE_CLAN; break;
+		case 3 : nChannelType = MCHANNEL_TYPE_DUELTOURNAMENT; break;
+	//	case 4 : nChannelType = MCHANNEL_TYPE_LADDER; break;
+		default : _ASSERT(FALSE);
 	}
 
 	ZGetGameInterface()->InitChannelFrame(nChannelType);

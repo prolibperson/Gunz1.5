@@ -173,6 +173,7 @@
     <ClInclude Include="Include\IMatchRuleNewQuest.h" />
     <ClInclude Include="Include\IndexPage.h" />
     <ClInclude Include="Include\MActorDef.h" />
+    <ClInclude Include="include\MAsyncDBJob_GetAchievements.h" />
     <ClInclude Include="Include\MCommand.h" />
     <ClInclude Include="Include\MCommandBuilder.h" />
     <ClInclude Include="Include\MCommandManager.h" />
@@ -370,6 +371,7 @@
     <ClCompile Include="MMatchRuleSpyMode.cpp" />
     <ClCompile Include="SkillMap.cpp" />
     <ClCompile Include="Source\MActorDef.cpp" />
+    <ClCompile Include="source\MAsyncDBJob_GetAchievements.cpp" />
     <ClCompile Include="Source\MCommand.cpp" />
     <ClCompile Include="Source\MCommandBuilder.cpp" />
     <ClCompile Include="Source\MCommandManager.cpp" />

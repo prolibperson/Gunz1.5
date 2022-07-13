@@ -501,12 +501,12 @@ TCHAR g_szDB_GET_REWARD_CHAR_BR[] = _T("{CALL spRewardCharBattleTimeReward (%d, 
 
 TCHAR g_szDB_ON_BAN_PLAYER[] = _T("{CALL spOnBanPlayer (%d,%d,'%s')}");
 
-TCHAR g_szDB_UPDATE_SKILLMAP_BESTTIME[] = _T("{CALL spInsertSkillMapTime (%d,%d,%d)}");
+TCHAR g_szDB_UPDATE_SKILLMAP_BESTTIME[] = _T("{CALL spInsertSkillMapTime ('%d','%d','%d')}");
 
-TCHAR g_szDB_GET_SKILLMAP_BESTTIME[] = _T("{CALL spGetSkillMapBestTime (%d,%d)}");
+TCHAR g_szDB_GET_SKILLMAP_BESTTIME[] = _T("{CALL spGetSkillMapBestTime ('%d','%d')}");
 
 
-TCHAR g_szDB_GET_ACHIEVEMENT_BYCID[] = _T("{CALL spGetAchievementByCID (%d, %d, %d)}");
+TCHAR g_szDB_GET_ACHIEVEMENT_BYCID[] = _T("{CALL spGetAchievementsByCID ('%d')}");
 
 //Custom: UserMail
 TCHAR g_szDB_GET_USERMAIL[] = _T("{CALL spGetUserMail ('%d')}");
@@ -4514,7 +4514,7 @@ bool MMatchDBMgr::GetSkillMapBestTime(int CID, const int& mapID, unsigned int* o
 	return true;
 }
 
-bool MMatchDBMgr::FindAchievements(int CID, achievementNode& outValue)
+bool MMatchDBMgr::FindAchievements(int CID, achievementNode* outValue)
 {
 	///TODO: get this correct
 	_STATUS_DB_START;
@@ -4523,7 +4523,7 @@ bool MMatchDBMgr::FindAchievements(int CID, achievementNode& outValue)
 
 
 	CString strSQL;
-	strSQL.Format(g_szDB_GET_ACHIEVEMENT_BYCID, CID, outValue.type,outValue.id);
+	strSQL.Format(g_szDB_GET_ACHIEVEMENT_BYCID, CID, outValue->type,outValue->id);
 
 	CODBCRecordset rs(&m_DB);
 
@@ -4549,9 +4549,51 @@ bool MMatchDBMgr::FindAchievements(int CID, achievementNode& outValue)
 	return true;
 }
 
-bool MMatchDBMgr::GetCharacterAchievements(int CID, MMatchCharInfo* pOutCharInfo)
+bool MMatchDBMgr::GetCharacterAchievements(int CID, std::vector<MTD_Achievement>& outachievements)
 {
-	return false;
+	_STATUS_DB_START;
+
+	if (!CheckOpen()) return false;
+
+
+	CString strSQL;
+	strSQL.Format(g_szDB_GET_ACHIEVEMENT_BYCID, CID);
+
+	CODBCRecordset rs(&m_DB);
+
+	bool bException = false;
+	try
+	{
+		rs.Open(strSQL, CRecordset::forwardOnly, CRecordset::readOnly);
+	}
+	catch (CDBException* e)
+	{
+		bException = true;
+
+		ExceptionHandler(strSQL, e);
+		return false;
+	}
+
+	if ((rs.IsOpen() == FALSE) || (rs.GetRecordCount() <= 0) || (rs.IsBOF() == TRUE))
+	{
+		return false;
+	}
+
+	for (; !rs.IsEOF(); rs.MoveNext())
+	{
+		DWORD achievementID = (DWORD)rs.Field("AchievementID").AsInt();
+		DWORD achievementType = (DWORD)rs.Field("AchievementType").AsInt();
+
+		MTD_Achievement achievement;
+
+		achievement.achievementid = achievementID;
+		achievement.achievementtype = achievementType;
+
+		outachievements.push_back(achievement);
+	}
+
+	_STATUS_DB_END(11);
+	return true;
 }
 
 //Custom: UserMail

@@ -391,8 +391,8 @@ public:
 	bool OnBanPlayer(int AID, MMatchHackID hackID, const char* banReason);
 	bool UpdateSkillMapBestTIme(const unsigned int player, const int& mapID, const unsigned int bestTime);
 	bool GetSkillMapBestTime(int CID, const int& mapName, unsigned int* outValue);
-	bool FindAchievements(int cid, achievementNode& outValue);
-	bool GetCharacterAchievements(int CID, MMatchCharInfo* pOutCharInfo);
+	bool FindAchievements(int cid, achievementNode* outValue);
+	bool GetCharacterAchievements(int CID, std::vector<MTD_Achievement>& outachievements);
 
 	//Custom: UserMail
 	bool GetUserMail(int const& CID, std::vector<MTD_UserMail>& userMail);

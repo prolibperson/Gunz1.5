@@ -901,6 +901,7 @@ protected:
 	void OnAsyncResponse_GetBR_Description(MAsyncJob *pJobResult);	
 	void OnAsyncResponse_GetCharBRInfo(MAsyncJob *pJobResult);
 	void OnAsyncResponse_UpdateCharBRInfo(MAsyncJob *pJobResult);
+	void OnAsyncResponse_GetAchievements(MAsyncJob* pJobResult);
 	void OnAsyncResponse_RewardCharBR(MAsyncJob *pJobResult);
 
 	
@@ -915,6 +916,8 @@ public:
 private:
 //Custom: UserMail
 	void OnResponseUserMail(MUID const& sender);
+//Custom: Achievements
+	void OnResponseAchievements(MUID const& sender);
 
 };
 

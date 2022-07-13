@@ -1827,9 +1827,7 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType)
 		P(MPT_UID,"player")
 		P(MPT_UINT,"bestTime")
 
-	//achievements
-	C(MC_MATCH_ACHIEVEMENT_COMPLETED,"","",MCDT_MACHINE2MACHINE)
-		P(MPT_BLOB,"achvBlob")
+
 
 	//Custom: ADmin slap
 	C(MC_ADMIN_REQUEST_SLAP, "", "", MCDT_MACHINE2MACHINE)
@@ -1844,6 +1842,13 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType)
 	C(MC_MATCH_RESPONSE_CREATE_ACCOUNT, "Response.CreateAccount", "Response Result", MCDT_MACHINE2MACHINE);
 		P(MPT_STR, "Message");
 		P(MPT_BOOL, "response");
+
+	//achievements
+	C(MC_MATCH_ACHIEVEMENT_COMPLETED, "", "", MCDT_MACHINE2MACHINE)
+			P(MPT_BLOB, "achvBlob")
+	C(MC_MATCH_REQUEST_ACHIEVEMENTS,"Request.Achievements", "",MCDT_MACHINE2MACHINE);
+	C(MC_MATCH_RESPONSE_ACHIEVEMENTS, "Response.Achievements", "", MCDT_MACHINE2MACHINE)
+			P(MPT_BLOB,"achvBlob");
 
 	//Custom: UserMail
 	C(MC_MATCH_REQUEST_USERMAIL,"Request.UserMail","Sends a request to get all mail after character selection",MCDT_MACHINE2MACHINE);

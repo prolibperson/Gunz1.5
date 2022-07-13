@@ -1362,23 +1362,21 @@ void MMatchStage::OnGameKill(const MUID& uidAttacker, const MUID& uidVictim)
 	if (player->GetUID() == uidVictim)
 		return;
 
-	/*achievementNode node;
+	achievementNode* node = nullptr;
 	if (MGetAchievements()->checkRequirements(player,GetStageSetting()->GetGameType(), player->GetKillCount() + 1,node))
 	{
 		MCommand* command = MGetMatchServer()->CreateCommand(MC_MATCH_ACHIEVEMENT_COMPLETED, MUID(0, 0));
 		void* achievementBlob = MMakeBlobArray(sizeof(MTD_Achievement), 1);
 		MTD_Achievement achievement;
-		strcpy_s(achievement.title, node.title);
-		strcpy_s(achievement.desc, node.desc);
+		achievement.achievementid = node->id;
+		achievement.achievementtype = node->type;
 		*(MTD_Achievement*)MGetBlobArrayElement(achievementBlob, 0) = achievement;
 
 		command->AddParameter(new MCmdParamBlob(achievementBlob, MGetBlobArraySize(achievementBlob)));
 
 		MEraseBlobArray(achievementBlob);
 		MGetMatchServer()->RouteToListener(player, command);
-
-
-	}*/
+	}
 }
 
 

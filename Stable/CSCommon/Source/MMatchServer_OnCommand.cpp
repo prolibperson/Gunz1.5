@@ -1955,6 +1955,14 @@ bool MMatchServer::OnCommand(MCommand* pCommand)
 			CreateAccount(pCommand->GetSenderUID(), szUserID, szPassword, szEmail);
 		}
 		break;
+		//Custom: Achievements
+		case MC_MATCH_REQUEST_ACHIEVEMENTS:
+		{
+			if (pCommand->GetSenderUID().IsInvalid())
+				break;
+
+			OnResponseAchievements(pCommand->GetSenderUID());
+		}
 		//Custom: UserMail
 		case MC_MATCH_REQUEST_USERMAIL:
 		{

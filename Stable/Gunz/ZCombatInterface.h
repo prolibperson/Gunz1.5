@@ -120,6 +120,9 @@ protected:
 	MLabel*				m_pTargetLabel;
 	MBitmap*			m_ppIcons[ZCI_END];		/// 칭찬 아이콘들
 	MBitmapR2*			m_pResultBgImg;
+
+	//Custom: bitmap for gun ammo count
+	MBitmapR2*			m_AmmoCount;
 	
 	bool				m_bMenuVisible;
 	bool				m_bSniferMode;

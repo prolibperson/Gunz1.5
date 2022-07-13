@@ -39,6 +39,7 @@
 #include "../SkillMap.h"
 #include "ZMapCache.h"
 #include "ZEmoji.h"
+#include "../Achievements.h"
 
 #ifdef _QEUST_ITEM_DEBUG
 #include "MQuestItem.h"
@@ -661,6 +662,9 @@ bool ZApplication::OnCreate(ZLoadingProgress *pLoadingProgress)
 	if (!ZGetEmojis()->ParseXml("system/emoji.xml", GetFileSystem()))
 		mlog("Error reading emoji.xml\n");
 
+	if (!MGetAchievements()->readXml("system/achievements.xml", GetFileSystem()))
+		mlog("Error reading achievements.xml\n");
+
 
 
 	mlog("Init chatting filter. success\n");
@@ -766,6 +770,7 @@ void ZApplication::OnDestroy()
 	MGetSkillMap()->Clear();
 	MGetDemolition()->Destroy();
 	ZGetEmojis()->Destroy();
+	MGetAchievements()->Destroy();
 #ifdef _MAP_CACHING
 	ZGetMapCache()->Clear();
 	mlog("Clear mapcache.\n");

@@ -225,6 +225,12 @@ bool ZCombatInterface::OnCreate()
 	m_ppIcons[3]=MBitmapManager::Get("medal_F.tga");
 	m_ppIcons[4]=MBitmapManager::Get("medal_H.tga");
 
+	m_AmmoCount = new MBitmapR2;
+	if (!m_AmmoCount->Create("AmmoBar", RGetDevice(), "Interface/default/loading/loading.bmp"))
+	{
+		mlog("Error creating ammo bar\n");
+	}
+
 	m_CrossHair.Create();
 	m_CrossHair.ChangeFromOption();
 
@@ -542,6 +548,12 @@ void ZCombatInterface::OnDestroy()
 	//	m_Radar->OnDestroy();
 	//	SAFE_DELETE(m_Radar);
 	//}
+
+	if (m_AmmoCount != nullptr)
+	{
+		delete m_AmmoCount;
+		m_AmmoCount = nullptr;
+	}
 	ZScoreBoardItem::Release();
 }
 
@@ -963,15 +975,18 @@ void ZCombatInterface::DrawMyWeaponPont(MDrawContext* pDC)
 	char buffer[256];
 
 	// 무기 이름
-	TextRelative(pDC,660.f/800.f,510.f/600.f,m_szItemName);
+	TextRelative(pDC,660.f/800.f,480.f/600.f,m_szItemName);
 
 	// 탄알수
 	MMatchCharItemParts nParts = pCharacter->GetItems()->GetSelectedWeaponParts();
 	if (nParts != MMCIP_MELEE && nParts < MMCIP_END) 
 	{
 		// melee일때는 탄알수 표시를 하지 않는다.
-		sprintf(buffer,"%d / %d", m_nBulletCurrMagazine, m_nBulletSpare);
-		TextRelative(pDC, 720.f/800.f, 585.f/600.f, buffer);
+		float width = static_cast<float>(pCharacter->GetItems()->GetSelectedWeapon()->GetBulletCurrMagazine()) /
+			static_cast<float>(pCharacter->GetItems()->GetSelectedWeapon()->GetDesc()->m_nMaxBullet.Ref());
+		BitmapRelative(pDC, 660.f / 800.f, 515.f / 600.f, width * 800.f, 16,m_AmmoCount->GetSourceBitmap());
+		sprintf(buffer, "%d / %d", m_nBulletCurrMagazine, m_nBulletSpare);
+		TextRelative(pDC, 720.f/800.f, 495.f/600.f, buffer);
 	}
 }
 

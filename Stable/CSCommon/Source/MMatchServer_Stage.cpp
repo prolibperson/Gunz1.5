@@ -131,6 +131,7 @@ bool MMatchServer::StageJoin(const MUID& uidPlayer, const MUID& uidStage)
 	MMatchChannel* pChannel = FindChannel(pObj->GetChannelUID());
 	if (pChannel == NULL) return false;
 	if (pChannel->GetChannelType() == MCHANNEL_TYPE_DUELTOURNAMENT) return false;
+//	if (pChannel->GetChannelType() == MCHANNEL_TYPE_LADDER) return false;
 
 	MMatchStage* pStage = FindStage(uidStage);
 	if (pStage == NULL) return false;
@@ -3366,10 +3367,10 @@ void MMatchServer::RequestUpdateSkillMapBestTime(const MUID& player, const int& 
 	if (!IsEnabledObject(playerObj))
 		return;
 
-	//if (!MGetSkillMap()->FindMap(mapID)) {
-	//	mlog("Error finding mapName");
-	//	return;
-	//}
+	if (!MGetSkillMap()->FindMap(mapID)) {
+		mlog("Error finding mapName");
+		return;
+	}
 
 	GetDBMgr()->UpdateSkillMapBestTIme(playerObj->GetCharInfo()->m_nCID, MGetMapDescMgr()->GetMapID(mapID), bestTime);
 }
@@ -3384,7 +3385,7 @@ void MMatchServer::ResponseSkillMapBestTime(const MUID& player, const char* mapN
 	if (stage == nullptr)
 		return;
 
-	if (!MGetSkillMap()->FindMap(mapName))
+	if (!MGetSkillMap()->FindMap(stage->GetStageSetting()->GetMapIndex()))
 		return;
 
 	unsigned int outBestTime = 0;

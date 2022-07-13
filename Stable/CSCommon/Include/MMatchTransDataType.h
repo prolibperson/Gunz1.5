@@ -22,9 +22,10 @@ struct MTD_SpyItems {
 	char desc[8];
 };
 
-struct MTD_Achievement {
-	char title[32];
-	char desc[128];
+struct MTD_Achievement
+{
+	int achievementid;
+	int achievementtype;
 };
 
 //custom: antilead

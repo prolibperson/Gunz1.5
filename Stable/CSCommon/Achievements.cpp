@@ -20,11 +20,15 @@ Achievements* Achievements::GetInstance()
 
 void Achievements::Destroy()
 {
+	for (int i = 0; i < achievements.size(); ++i)
+	{
+		delete achievements.at(i);
+	}
 	achievements.clear();
 }
 
 
-bool Achievements::readXml(const char* fileName)
+bool Achievements::readXml(const char* fileName, MZFileSystem* fileSystem)
 {
 	MXmlDocument	xmlIniData;
 	xmlIniData.Create();
@@ -32,11 +36,22 @@ bool Achievements::readXml(const char* fileName)
 	char* buffer;
 	MZFile mzf;
 
-
-	if (!mzf.Open(fileName))
+	if (fileSystem)
 	{
-		xmlIniData.Destroy();
-		return false;
+		if (!mzf.Open(fileName, fileSystem))
+		{
+			if (!mzf.Open(fileName))
+			{
+				return false;
+			}
+		}
+	}
+	else
+	{
+		if (!mzf.Open(fileName))
+		{
+			return false;
+		}
 	}
 
 	buffer = new char[mzf.GetLength() + 1];
@@ -63,18 +78,20 @@ bool Achievements::readXml(const char* fileName)
 		chrElement.GetTagName(szTagName);
 		if (_stricmp(szTagName, "ACHIEVEMENT") == 0)
 		{
-			achievementNode node = {};
+			achievementNode* node = new achievementNode;
 			if (!parseXml_Achievement(chrElement, node))
 			{
 				mlog("Error reading achievement xml\n");
+				delete node;
 				return false;
 			}
+			achievements.push_back(std::move(node));
 		}
 	}
 	return true;
 }
 
-bool Achievements::parseXml_Achievement(MXmlElement& elem, achievementNode& node)
+bool Achievements::parseXml_Achievement(MXmlElement& elem, achievementNode* node)
 {
 	int id, type, requirement;
 	string title, desc;
@@ -84,26 +101,26 @@ bool Achievements::parseXml_Achievement(MXmlElement& elem, achievementNode& node
 	elem.GetAttribute(&desc, "desc", "");
 	elem.GetAttribute(&requirement, "requirement", 0);
 
-	node.id = id;
-	node.type = type;
-	strcpy_s(node.title, title.c_str());
-	strcpy_s(node.desc, desc.c_str());
-	node.requirement = requirement;
+	node->id = id;
+	node->type = type;
+	strcpy_s(node->title, title.c_str());
+	strcpy_s(node->desc, desc.c_str());
+	node->requirement = requirement;
 
 	return true;
 }
 
 
-bool Achievements::checkRequirements(MMatchObject* targetPlayer, MMATCH_GAMETYPE type, int currVal, achievementNode& outValue)
+bool Achievements::checkRequirements(MMatchObject* targetPlayer, MMATCH_GAMETYPE type, int currVal, achievementNode* outValue)
 {
 
-	vector<achievementNode> nodes = Find(type);
+	vector<achievementNode*> nodes = Find(type);
 	if (nodes.size() == 0)
 		return false;
 
 	for (auto itor : nodes)
 	{
-		if (itor.requirement == currVal)
+		if (itor->requirement == currVal)
 		{
 			outValue = itor;
 			break;
@@ -116,14 +133,25 @@ bool Achievements::checkRequirements(MMatchObject* targetPlayer, MMATCH_GAMETYPE
 	return true;
 }
 
-vector<achievementNode> Achievements::Find(MMATCH_GAMETYPE achievementType)
+//todo: make unique_ptrs??
+vector<achievementNode*> Achievements::Find(MMATCH_GAMETYPE achievementType)
 {
-	vector<achievementNode> nodes;
+	vector<achievementNode*> nodes;
 	for (auto& itor  = achievements.begin(); itor != achievements.end(); ++itor)
 	{
-		achievementNode node = *itor;
-		if (node.type == achievementType)
+		achievementNode* node = *itor;
+		if (node->type == achievementType)
 			nodes.push_back(node);
 	}
 	return nodes;
+}
+
+achievementNode* Achievements::GetAchievement(int const& id)
+{
+	for (auto itor : achievements)
+	{
+		if (itor->id == id)
+			return itor;
+	}
+	return nullptr;
 }

@@ -240,6 +240,9 @@ bool ZGameInterface::OnCommand(MCommand* pCommand)
 
 				//Mail
 				ZPostRequestUserMail();
+
+				//Achievements
+				ZPostRequestAchievements();
 			}
 		}
 		break;

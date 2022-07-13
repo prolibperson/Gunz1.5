@@ -1576,6 +1576,28 @@ bool ZGameClient::OnCommand(MCommand* pCommand)
 		}
 		break;//end
 
+		//Custom: Achievements
+		case MC_MATCH_RESPONSE_ACHIEVEMENTS:
+		{
+			std::vector<MTD_Achievement> achievements;
+
+
+			//Mail Blob
+			MCommandParameter* pParam = pCommand->GetParameter(0);
+			if (pParam->GetType() != MPT_BLOB)
+				break;
+
+			void* userMailBlob = pParam->GetPointer();
+			int mailCount = MGetBlobArrayCount(userMailBlob);
+			for (int i = 0; i < mailCount; ++i)
+			{
+				MTD_Achievement mail = *(MTD_Achievement*)MGetBlobArrayElement(userMailBlob, i);
+				achievements.push_back(mail);
+			}
+
+			ZGetMyInfo()->SetAchievements(achievements);
+		}break;
+
 		//Custom: UserMail
 		case MC_MATCH_RESPONSE_USERMAIL:
 		{

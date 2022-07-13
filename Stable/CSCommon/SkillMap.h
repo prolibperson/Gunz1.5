@@ -29,11 +29,11 @@ public:
 		return {};
 	}
 
-	bool FindMap(const char* mapName)
+	bool FindMap(int const& mapID)
 	{
 		for (auto& mapInfo : skillMapInfo)
 		{
-			if (_stricmp(mapInfo.mapName, mapName) == 0)
+			if (mapInfo.id == mapID)
 				return true;
 		}
 		return false;

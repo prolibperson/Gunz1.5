@@ -699,6 +699,9 @@
     <ClInclude Include="Include\AntiSql.h">
       <Filter>MatchServer\DB\Filter</Filter>
     </ClInclude>
+    <ClInclude Include="include\MAsyncDBJob_GetAchievements.h">
+      <Filter>AsyncProxy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MCommand.cpp">
@@ -1239,5 +1242,8 @@
       <Filter>CustomXMLS</Filter>
     </ClCompile>
     <ClCompile Include="..\sdk\md5\md5.cpp" />
+    <ClCompile Include="source\MAsyncDBJob_GetAchievements.cpp">
+      <Filter>AsyncProxy</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

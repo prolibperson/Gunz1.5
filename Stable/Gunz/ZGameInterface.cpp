@@ -79,6 +79,7 @@
 #include "ZShop.h"
 #include "ZGambleItemDefine.h"
 #include "ZCombatInterface.h"
+#include "../Achievements.h"
 
 #ifdef LOCALE_NHNUSA
 #include "ZNHN_USA.h"
@@ -858,7 +859,7 @@ bool ZGameInterface::InitInterfaceListener()
 
 	SetListenerWidget("AllEquipmentList", ZGetShopPurchaseItemListBoxListener());
 	SetListenerWidget("MyAllEquipmentList", ZGetShopSellItemListBoxListener());
-	SetListenerWidget("CashEquipmentList", ZGetCashShopItemListBoxListener());
+	//SetListenerWidget("CashEquipmentList", ZGetCashShopItemListBoxListener());
 
 	SetListenerWidget("Shop_AllEquipmentFilter", ZGetShopListFilterListener());
 	SetListenerWidget("Equip_AllEquipmentFilter", ZGetEquipListFilterListener());
@@ -958,17 +959,30 @@ bool ZGameInterface::InitInterfaceListener()
 	SetListenerWidget("ReplayClose",				ZGetReplayExitButtonListener());
 	SetListenerWidget("Replay_FileList",			ZGetReplayFileListBoxListener());
 
-	////Custom:
-	//SetListenerWidget("Gladiator_Blue", ZGetBlitzBlueGladiatorListener());
-	//SetListenerWidget("Gladiator_Red", ZGetBlitzRedGladiatorListener());
-	//SetListenerWidget("Hunter_Blue", ZGetBlitzBlueGladiatorListener());
-	//SetListenerWidget("Hunter_Red", ZGetBlitzRedGladiatorListener());
-	//SetListenerWidget("Terrorist_Blue", ZGetBlitzBlueTerroristListener());
-	//SetListenerWidget("Terrorist_Red", ZGetBlitzRedTerroristListener());
+	////Custom: Blitzkrieg
+	SetListenerWidget("Hunter_Blue", ZGetBlitzBlueGladiatorListener());
+	SetListenerWidget("Hunter_Red", ZGetBlitzRedGladiatorListener());
+	//SetListenerWidget("Slaughter_Blue", ZGetBlitzBlueSlaughterListener());
+	//SetListenerWidget("Slaughter_Red", ZGetBlitzRedSlaughterListener());
+	//SetListenerWidget("Trickster_Blue", ZGetBlitzBlueTricksterListener());
+	//SetListenerWidget("Trickster_Red", ZGetBlitzRedTricksterListener());
+	SetListenerWidget("Gladiator_Blue", ZGetBlitzBlueGladiatorListener());
+	SetListenerWidget("Gladiator_Red", ZGetBlitzRedGladiatorListener());
+	//SetListenerWidget("Duelist_Blue", ZGetBlitzBlueDuelistListener());
+	//SetListenerWidget("Duelist_Red", ZGetBlitzRedDuelistListener());
+	//SetListenerWidget("Incinerator_Blue", ZGetBlitzBlueIncineratorListener());
+	//SetListenerWidget("Incinerator_Red", ZGetBlitzRedIncineratorListener());
+	//SetListenerWidget("CombatOfficer_Blue", ZGetBlitzBlueOfficerListener());
+	//SetListenerWidget("CombatOfficer_Red", ZGetBlitzRedOfficerListener());
+	//SetListenerWidget("Assassin_Blue", ZGetBlitzBlueAssassinListener());
+	//SetListenerWidget("Assassin_Red", ZGetBlitzRedAssassinListener());
+	SetListenerWidget("Terrorist_Blue", ZGetBlitzBlueTerroristListener());
+	SetListenerWidget("Terrorist_Red", ZGetBlitzRedTerroristListener());
+
 
 	////Achievements
-	//SetListenerWidget("AchievementCaller", ZGetAchievementCallerButtonListener());
-	//SetListenerWidget("AchievementClose", ZGetAchievementExitButtonListener());
+	SetListenerWidget("AchievementCaller", ZGetAchievementCallerButtonListener());
+	SetListenerWidget("AchievementClose", ZGetAchievementExitButtonListener());
 
 	//Music
 	SetListenerWidget("CustomMusicList", ZGetCustomMusicListListener());
@@ -6219,8 +6233,11 @@ void ZGameInterface::ShowAchievementDialog(bool bShow)
 
 			for (auto const& itor : ZGetMyInfo()->GetAchievements())
 			{
-				mlog("%s, %s", itor.title, itor.desc);
-				pListBox->Add(new AchievementListBoxItem(itor.title, itor.desc));
+				mlog("%d, %d", itor.achievementid, itor.achievementtype);
+				achievementNode* achievement = MGetAchievements()->GetAchievement(itor.achievementid);
+				if (achievement == nullptr)
+					continue;
+				pListBox->Add(new AchievementListBoxItem(achievement->title, achievement->desc));
 			}
 
 			pListBox->Sort();		// Sorting

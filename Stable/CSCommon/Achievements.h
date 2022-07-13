@@ -1,6 +1,6 @@
 #pragma once
-
 #include "MBaseGameType.h"
+#include "MMatchTransDataType.h"
 
 struct achievementNode
 {
@@ -20,13 +20,14 @@ public:
 
 	void Destroy();
 
-	bool readXml(const char* xmlName);
-	bool checkRequirements(MMatchObject* targetPlayer, MMATCH_GAMETYPE type, int currVal, achievementNode& outValue);
-	std::vector<achievementNode> Find(MMATCH_GAMETYPE achievementType);
+	bool readXml(const char* xmlName, MZFileSystem* fileSystem = nullptr);
+	bool checkRequirements(MMatchObject* targetPlayer, MMATCH_GAMETYPE type, int currVal, achievementNode* outValue);
+	std::vector<achievementNode*> Find(MMATCH_GAMETYPE achievementType);
 private:
-	bool parseXml_Achievement(MXmlElement& elem, achievementNode& node);
-	std::vector<achievementNode> achievements;
+	bool parseXml_Achievement(MXmlElement& elem, achievementNode* node);
+	std::vector<achievementNode*> achievements;
+public:
 
-
+	achievementNode* GetAchievement(int const& id);
 
 }; inline Achievements* MGetAchievements() { return Achievements::GetInstance(); }

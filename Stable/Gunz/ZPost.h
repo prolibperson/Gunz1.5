@@ -1303,4 +1303,10 @@ inline void ZPostRequestUserMail()
 {
 	ZPOSTCMD0(MC_MATCH_REQUEST_USERMAIL);
 }
+
+//Custom: get achievements on login
+inline void ZPostRequestAchievements()
+{
+	ZPOSTCMD0(MC_MATCH_REQUEST_ACHIEVEMENTS);
+}
 #endif

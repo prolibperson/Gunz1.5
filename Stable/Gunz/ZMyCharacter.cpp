@@ -405,18 +405,18 @@ void ZMyCharacter::ProcessInput(float fDelta)
 						pickorigin=GetPosition();	// ¹ßµðµô°÷ÀÌ ÀÖ´ÂÁö Çã¸®ºÎ±Ù ¸Ó¸®ºÎ±Ù.. µÎ±ºµ¥ °Ë»çÇÑ´Ù..
 
 						//todo: world object walljump
-						//ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(pickorigin + rvector(0, 0, 100), dir);
-						//if (worldObject != nullptr)
-						//{
-						//	rvector backdir = -dir;
-						//	float dist = Magnitude(pickorigin + rvector(0, 0, 100) - worldObject->GetPosition());
-						//	if (dist <= 120)
-						//	{
-						//		bWallJump = true;
-						//		nWallJumpDir = 1;
-						//	}
-						//}
-						//else
+						ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(pickorigin + rvector(0, 0, 100), dir);
+						if (worldObject != nullptr)
+						{
+							rvector backdir = -dir;
+							float dist = Magnitude(pickorigin + rvector(0, 0, 100) - worldObject->GetPosition());
+							if (dist <= 120)
+							{
+								bWallJump = true;
+								nWallJumpDir = 1;
+							}
+						}
+						else
 						{
 							RBSPPICKINFO bpi1, bpi2;
 							bool bPicked1 = ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin + rvector(0, 0, 100), dir, &bpi1);
@@ -448,54 +448,85 @@ void ZMyCharacter::ProcessInput(float fDelta)
 					{
 						dir = (i==0) ? -right : right;
 
-						RBSPPICKINFO bpi;
-						bool bPicked=ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin,dir,&bpi);
-						if(bPicked)
+						//ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(pickorigin, dir);
+						//if (worldObject != nullptr)
+						//{
+						//	rvector backdir = -dir;
+						//	float fDist = Magnitude(pickorigin - worldObject->GetPosition());
+						//	rvector normal = rvector(bpi.pInfo->plane.a, bpi.pInfo->plane.b, bpi.pInfo->plane.c);
+						//	float fDot = DotProduct(normal, backdir);
+
+						//	rvector wallright, jumpdir;
+						//	CrossProduct(&wallright, rvector(0, 0, 1), normal);
+						//	jumpdir = (i == 0) ? -wallright : wallright;
+
+						//	float fRatio = GetMoveSpeedRatio();
+
+						//	// °Å¸®¿Í ¼Óµµ°¡ ¸Â°í, °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù.
+						//	if (fDist<100.f && DotProduct(GetVelocity(), jumpdir)>RUN_SPEED * fRatio * .8f &&
+						//		fDot > cos(55.f / 180.f * pi) && fDot < cos(25.f / 180.f * pi) && DotProduct(jumpdir, dir) < 0)
+						//	{
+						//		// ´ë·« º®¹â°í 3¹ÌÅÍÂë ´Þ·Á°£ µÚ¿¡µµ °°Àº Æò¸éÀ» ¹âÀ»¼ö ÀÖ¾î¾ß ÇÑ´Ù.
+						//		rvector neworigin = pickorigin + 300.f * jumpdir;
+
+						//		RBSPPICKINFO bpi;
+						//		bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(neworigin, dir, &bpi);
+						//		if (bPicked && fabsf(Magnitude(bpi.PickPos - neworigin) - fDist) < 10)
+						//		{
+						//			rvector targetpos = pickorigin + 300.f * jumpdir;
+						//			bool bAdjusted = ZGetGame()->GetWorld()->GetBsp()->CheckWall(pickorigin, targetpos, CHARACTER_RADIUS - 5, 60);
+						//			if (!bAdjusted)
+						//			{
+						//				bWallJump = true;
+						//				nWallJumpDir = (i == 0) ? 0 : 2; // ( ¿ÞÂÊ : ¿À¸¥ÂÊ )
+
+						//				SetTargetDir(jumpdir);
+						//				float speed = Magnitude(GetVelocity());
+						//				SetVelocity(jumpdir * speed);
+						//			}
+						//		}
+						//	}
+						//}
+
+					//	else
 						{
-							rvector backdir=-dir;
-							float fDist=Magnitude(pickorigin-bpi.PickPos);
-							rvector normal=rvector(bpi.pInfo->plane.a,bpi.pInfo->plane.b,bpi.pInfo->plane.c);
-							float fDot=DotProduct(normal,backdir);
-
-							/*
-							rvector wallupdir,jumpdir;
-							CrossProduct(&wallupdir,dir,normal);
-							Normalize(wallupdir);
-							CrossProduct(&jumpdir,wallupdir,normal);
-							*/
-							rvector wallright,jumpdir;
-							CrossProduct(&wallright,rvector(0,0,1),normal);
-							jumpdir = (i==0) ? -wallright : wallright;
-
-							float fRatio = GetMoveSpeedRatio();
-
-							// °Å¸®¿Í ¼Óµµ°¡ ¸Â°í, °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù.
-							if(fDist<100.f && DotProduct(GetVelocity(),jumpdir)>RUN_SPEED * fRatio *.8f &&
-								fDot>cos(55.f/180.f*pi) && fDot<cos(25.f/180.f*pi) && DotProduct(jumpdir,dir)<0)
+							RBSPPICKINFO bpi;
+							bool bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin, dir, &bpi);
+							if (bPicked)
 							{
-								// ´ë·« º®¹â°í 3¹ÌÅÍÂë ´Þ·Á°£ µÚ¿¡µµ °°Àº Æò¸éÀ» ¹âÀ»¼ö ÀÖ¾î¾ß ÇÑ´Ù.
-								rvector neworigin=pickorigin+300.f*jumpdir;
+								rvector backdir = -dir;
+								float fDist = Magnitude(pickorigin - bpi.PickPos);
+								rvector normal = rvector(bpi.pInfo->plane.a, bpi.pInfo->plane.b, bpi.pInfo->plane.c);
+								float fDot = DotProduct(normal, backdir);
 
-								RBSPPICKINFO bpi;
-								bPicked=ZGetGame()->GetWorld()->GetBsp()->Pick(neworigin,dir,&bpi);
-								if(bPicked && fabsf(Magnitude(bpi.PickPos-neworigin)-fDist)<10)
+								rvector wallright, jumpdir;
+								CrossProduct(&wallright, rvector(0, 0, 1), normal);
+								jumpdir = (i == 0) ? -wallright : wallright;
+
+								float fRatio = GetMoveSpeedRatio();
+
+								// °Å¸®¿Í ¼Óµµ°¡ ¸Â°í, °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù.
+								if (fDist<100.f && DotProduct(GetVelocity(), jumpdir)>RUN_SPEED * fRatio * .8f &&
+									fDot > cos(55.f / 180.f * pi) && fDot < cos(25.f / 180.f * pi) && DotProduct(jumpdir, dir) < 0)
 								{
+									// ´ë·« º®¹â°í 3¹ÌÅÍÂë ´Þ·Á°£ µÚ¿¡µµ °°Àº Æò¸éÀ» ¹âÀ»¼ö ÀÖ¾î¾ß ÇÑ´Ù.
+									rvector neworigin = pickorigin + 300.f * jumpdir;
 
-									// ´ë·« 3¹ÌÅÍÂë±îÁö´Â °É¸®´Â°Ô ¾ø¾î¾ß ÇÑ´Ù.
-
-									// origin ¿¡¼­ diff ¸¸Å­ ¿òÁ÷ÀÏ¶§, º®À» °Ë»çÇØ¼­ ¿òÁ÷ÀÏ¼ö ÀÖ´Â ¸¸Å­¸¸ diff ¸¦ Á¶ÀýÇÑ´Ù.
-									//bool CheckWall(rvector &origin,rvector &diff,rvector &velocity,rvector &adjustednormal,float fMargin);
-									
-									rvector targetpos=pickorigin+300.f*jumpdir;
-									bool bAdjusted=ZGetGame()->GetWorld()->GetBsp()->CheckWall(pickorigin,targetpos,CHARACTER_RADIUS-5,60);
-									if(!bAdjusted)
+									RBSPPICKINFO bpi;
+									bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(neworigin, dir, &bpi);
+									if (bPicked && fabsf(Magnitude(bpi.PickPos - neworigin) - fDist) < 10)
 									{
-										bWallJump=true;
-										nWallJumpDir= (i==0) ? 0 : 2 ; // ( ¿ÞÂÊ : ¿À¸¥ÂÊ )
+										rvector targetpos = pickorigin + 300.f * jumpdir;
+										bool bAdjusted = ZGetGame()->GetWorld()->GetBsp()->CheckWall(pickorigin, targetpos, CHARACTER_RADIUS - 5, 60);
+										if (!bAdjusted)
+										{
+											bWallJump = true;
+											nWallJumpDir = (i == 0) ? 0 : 2; // ( ¿ÞÂÊ : ¿À¸¥ÂÊ )
 
-										SetTargetDir(jumpdir);
-										float speed=Magnitude(GetVelocity());
-										SetVelocity(jumpdir*speed);
+											SetTargetDir(jumpdir);
+											float speed = Magnitude(GetVelocity());
+											SetVelocity(jumpdir * speed);
+										}
 									}
 								}
 							}

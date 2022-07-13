@@ -53,6 +53,7 @@
 #include "MAsyncDBJob_InsertCharBRInfo.h"
 #include "MAsyncDBJob_UpdateCharBRInfo.h"
 #include "MAsyncDBJob_RewardCharBR.h"
+#include "MAsyncDBJob_GetAchievements.h"
 
 #include "MMatchBuff.h"
 #include "GunGame.h"
@@ -3905,6 +3906,37 @@ void MMatchServer::OnAsyncResponse_UpdateCharBRInfo(MAsyncJob *pJobResult)
 	}
 }
 
+void MMatchServer::OnAsyncResponse_GetAchievements(MAsyncJob* pJobResult)
+{
+	MAsyncDBJob_GetAchievements* pJob = (MAsyncDBJob_GetAchievements*)pJobResult;
+
+	if (pJob->GetResult() != MASYNC_RESULT_SUCCEED)
+	{
+		mlog("Failed to get achievements for CID %d",pJob->m_nCID);
+		return;
+	}
+
+	MMatchObject* player = MGetMatchServer()->GetObjectA(pJob->GetOwnerUID());
+	if (player == nullptr)
+		return;
+
+	MCommand* pCommand = MGetMatchServer()->CreateCommand(MC_MATCH_RESPONSE_ACHIEVEMENTS, player->GetUID());
+
+
+	void* mailBlob = MMakeBlobArray(sizeof(MTD_Achievement), pJob->achievements.size());
+	int mailCount = MGetBlobArrayCount(mailBlob);
+
+	for (int i = 0; i < mailCount; ++i)
+	{
+		*(MTD_Achievement*)MGetBlobArrayElement(mailBlob, i) = pJob->achievements.at(i);
+
+	}
+	pCommand->AddParameter(new MCmdParamBlob(mailBlob, MGetBlobArraySize(mailBlob)));
+
+	MGetMatchServer()->RouteToListener(player, pCommand);
+	MEraseBlobArray(mailBlob);
+}
+
 void MMatchServer::OnAsyncResponse_RewardCharBR(MAsyncJob *pJobResult)
 {
 	MAsyncDBJob_RewardCharBR* pJob = (MAsyncDBJob_RewardCharBR*)pJobResult;
@@ -4136,4 +4168,17 @@ void MMatchServer::OnResponseUserMail(MUID const& sender)
 
 	MGetMatchServer()->RouteToListener(senderObj, pNew);
 	MEraseBlobArray(mailBlob);
+}
+
+void MMatchServer::OnResponseAchievements(MUID const& sender)
+{
+	MMatchObject* senderObj = GetObject(sender);
+	if (senderObj == nullptr || senderObj->GetCharInfo() == nullptr)
+	{
+		return;
+	}
+
+	MAsyncDBJob_GetAchievements* pJob = new MAsyncDBJob_GetAchievements(sender);
+	pJob->Input(senderObj->GetCharInfo()->m_nCID);
+	senderObj->m_DBJobQ.DBJobQ.push_back(pJob);
 }

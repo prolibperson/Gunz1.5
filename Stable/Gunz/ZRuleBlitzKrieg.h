@@ -103,4 +103,6 @@ public:
 	}
 
 	MBitmap* GetClassBitmap(const int& classID, const MMatchTeam& teamID);
+
+	std::string GetClassNameByType(int const& id);
 };

@@ -247,6 +247,10 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType);
 #define MC_MATCH_LADDER_PREPARE					1578	///< 래더 시작준비
 #define MC_MATCH_LADDER_LAUNCH					1579	///< 래더 런치 (S -> C)
 
+//custom: ladder
+//#define MC_MATCH_CUSTOM_LADDER_REQUEST			1580
+//#define MC_MATCH_CUSTOM_LADDER_RESPONSE			1581
+
 // 의사소통 관련
 #define MC_MATCH_USER_WHISPER					1601	///< 귓속말
 #define MC_MATCH_USER_WHERE						1602	///< 위치확인
@@ -716,12 +720,14 @@ void MAddSharedCommandTable(MCommandManager* pCommandManager, int nSharedType);
 
 //Achievements
 #define MC_MATCH_ACHIEVEMENT_COMPLETED		50051
+#define MC_MATCH_REQUEST_ACHIEVEMENTS		50052
+#define MC_MATCH_RESPONSE_ACHIEVEMENTS		50053
 
 //Custom: Create account
-#define MC_MATCH_REQUEST_CREATE_ACCOUNT		50052
-#define MC_MATCH_RESPONSE_CREATE_ACCOUNT	50053
+#define MC_MATCH_REQUEST_CREATE_ACCOUNT		50054
+#define MC_MATCH_RESPONSE_CREATE_ACCOUNT	50055
 
 //Custom: USer Mail
-#define MC_MATCH_REQUEST_USERMAIL			50054
-#define MC_MATCH_RESPONSE_USERMAIL			50055
+#define MC_MATCH_REQUEST_USERMAIL			50056
+#define MC_MATCH_RESPONSE_USERMAIL			50057
 #endif

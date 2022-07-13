@@ -237,6 +237,10 @@ void MMatchServer::ProcessAsyncJob()
 				OnAsyncResponse_RewardCharBR(pJob);
 			}
 			break;
+		case MASYNCDBJOB_GETACHIEVEMENTS:
+			{
+				OnAsyncResponse_GetAchievements(pJob);
+			};
 
 		default :
 			{

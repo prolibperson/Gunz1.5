@@ -407,7 +407,7 @@ void ZRuleBlitzKrieg::DrawHelpScreen(MDrawContext* pDC, bool draw)
 		MTextArea* pTextArea = (MTextArea*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzHelp_TextArea");
 		if (pTextArea)
 		{
-			if (m_updateTips + 12000 < GetElapsedTime())
+			if (m_updateTips + 12000 <= GetElapsedTime())
 			{
 				pTextArea->Clear();
 				pTextArea->SetText(ZGetGameInterface()->GetTips()->GetTips(ZTIPS_CATEGORY_BLITZKRIEG, 1));
@@ -423,27 +423,44 @@ void ZRuleBlitzKrieg::DrawClassSelect(MDrawContext* pDC, bool draw)
 	MPicture* pPicture = (MPicture*)ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzClassSelect");
 	if (pPicture)
 	{
+		MMatchTeam teamid = ZGetGame()->m_pMyCharacter->GetTeamID();
 		pPicture->Show(draw);
 		if (pPicture->IsVisible())
 		{
 			string background = "BlitzKriegClassSelect_Frame_";
-			background.append(ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED ? "Red.png" : "Blue.png");
+			background.append(teamid == MMT_RED ? "Red.png" : "Blue.png");
 			pPicture->SetBitmap(MBitmapManager::Get(background.c_str()));
 
 			background = "Blitz_ClassSelectTime";
-			background.append(ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED ? "Red" : "Blue");
+			background.append(teamid == MMT_RED ? "Red" : "Blue");
 			ZBmNumLabel* numLabel = dynamic_cast<ZBmNumLabel*>(ZGetGameInterface()->GetIDLResource()->FindWidget(background.c_str()));
 			if (numLabel != nullptr)
 			{
 				numLabel->Show(draw);
 				numLabel->SetText(to_string(static_cast<int>((m_roundStartTime / 1000) % 60)).c_str());
 			}
+			// -56, 52
+
+			MPOINT lastPos{ 0, 52 };
+			for (int i = 1; i < MOC_END; ++i)
+			{
+				string className = GetClassNameByType(i);
+				className.append(teamid == MMT_RED ? "_Red" : "_Blue");
+				MButton* classBtn = dynamic_cast<MButton*>(ZGetGameInterface()->GetIDLResource()->FindWidget(className.c_str()));
+				if (classBtn)
+				{
+					classBtn->SetBounds(lastPos.x * RGetScreenWidth() / 800.f, lastPos.y * RGetScreenHeight() / 600.f, 90, 90);
+					classBtn->Show(true);
+					lastPos.x = lastPos.x + 56;
+				}
+				className.replace(teamid == MMT_RED ? className.find("_Red") : className.find("_Blue"), teamid == MMT_RED ? 5 : 6, teamid == MMT_RED ? "_Blue" : "_Red");
+				classBtn = dynamic_cast<MButton*>(ZGetGameInterface()->GetIDLResource()->FindWidget(className.c_str()));
+				if (classBtn)
+				{
+					classBtn->Show(false);
+				}
+			}
 		}
-/*		MBmButton* bmNum = (MBmButton*)ZGetGameInterface()->GetIDLResource()->FindWidget("Terrorist_Red");
-		if (bmNum)
-		{
-			bmNum->Show(false);
-		}*/
 	}
 }
 
@@ -813,6 +830,33 @@ void ZRuleBlitzKrieg::UpdateClassSelectDesc(const MMatchObjectClass& classID)
 		}
 	}
 	return;
+}
+
+std::string ZRuleBlitzKrieg::GetClassNameByType(int const& id)
+{
+	switch (id)
+	{
+		case MOC_HUNTER:
+			return "Hunter";
+		case MOC_SLAUGHTER:
+			return "Slaughter";
+		case MOC_TRICKSTER: 
+			return "Trickster";
+		case MOC_GLADIATOR:
+			return "Gladiator";
+		case MOC_DUELIST:
+			return "Duelist";
+		case MOC_INCINERATOR:
+			return "Incinerator";
+		case MOC_COMBATOFFICER:
+			return "CombatOfficer";
+		case MOC_ASSASSIN:
+			return "Assassin";
+		case MOC_TERRORIST:
+			return "Terrorist";
+		default:
+			return "";
+	}
 }
 
 void ZRuleBlitzKrieg::UpdateUpgradeUI(int const& upgradeIndex, int const& upgradeLevel)
