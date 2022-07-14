@@ -157,10 +157,11 @@ void ZRuleBlitzKrieg::OnSetRoundState(MMATCH_ROUNDSTATE roundState)
 		{
 			m_roundStartTime = 30000;
 			///temporary, remove after the interface is done
-			ZPostRequestBlitzClass(MOC_HUNTER);
+			//ZPostRequestBlitzClass(MOC_HUNTER);
 		}break;
 		case MMATCH_ROUNDSTATE_PLAY:
 		{
+			m_currRoundElapsedTime = 0;
 			m_drawHPTopInfo = true;
 			DrawHPTop(m_drawHPTopInfo);
 
@@ -386,7 +387,24 @@ void ZRuleBlitzKrieg::DrawMap(MDrawContext* pDC, bool draw)
 			if (pPicture)
 				pPicture->SetBitmap(MBitmapManager::Get("Blitz_HonorItem.png"));
 		}
-		///TODO: radar bitmaps
+
+		///TODO: don't show if radar is dead?
+		pPicture = static_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzkriegBarricade_MyTeam_Radar"));
+		if (pPicture != nullptr)
+		{
+			MMatchTeam teamid = ZGetGame()->m_pMyCharacter->GetTeamID();
+			pPicture->SetBitmap(teamid == MMT_RED ? MBitmapManager::Get("Blitz_Radar_Red.png") : MBitmapManager::Get("Blitz_Radar_Blue.png"));
+			pPicture->Show(true);
+
+		}
+
+		pPicture = static_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzkriegBarricade_Enemy_Radar"));
+		if (pPicture != nullptr)
+		{
+			MMatchTeam teamid = ZGetGame()->m_pMyCharacter->GetTeamID();
+			pPicture->SetBitmap(teamid == MMT_RED ? MBitmapManager::Get("Blitz_Radar_Blue.png") : MBitmapManager::Get("Blitz_Radar_Red.png"));
+			pPicture->Show(true);
+		}
 	}
 }
 
@@ -437,11 +455,18 @@ void ZRuleBlitzKrieg::DrawClassSelect(MDrawContext* pDC, bool draw)
 			if (numLabel != nullptr)
 			{
 				numLabel->Show(draw);
-				numLabel->SetText(to_string(static_cast<int>((m_roundStartTime / 1000) % 60)).c_str());
+				if (m_roundStartTime != 0)
+				{
+					numLabel->SetText(to_string(static_cast<int>((m_roundStartTime / 1000) % 60)).c_str());
+				}
+				else
+				{
+					numLabel->SetText("0");
+				}
 			}
 			// -56, 52
 
-			MPOINT lastPos{ 0, 52 };
+			MPOINT lastPos{ 5, 56 };
 			for (int i = 1; i < MOC_END; ++i)
 			{
 				string className = GetClassNameByType(i);

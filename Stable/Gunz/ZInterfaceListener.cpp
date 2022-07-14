@@ -2615,58 +2615,7 @@ END_IMPLEMENT_LISTENER();
 
 //Custom : Blitzkrieg
 ///TODO: handle interfacelisteners for selecting class
-BEGIN_IMPLEMENT_LISTENER(ZGetBlitzBlueGladiatorListener, MBTN_CLK_MSG)
-{
-	if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED)
-		return false;
-
-	if (ZGetGame()->m_pMyCharacter->GetBlitzClass() == MOC_GLADIATOR)
-		return false;
-
-	for (auto itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
-	{
-		ZCharacter* player = (ZCharacter*)(*itor).second;
-		if (player == ZGetGame()->m_pMyCharacter)
-			continue;
-
-		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID()) {
-			//if they somehow enable the button, return false, if they get past this, th eserver will catch them???? TODO: determine best way of doing this
-			if (player->GetBlitzClass() == MOC_GLADIATOR)
-				return false;
-
-			ZPostRequestBlitzClass(MOC_GLADIATOR);
-		}
-	}
-}
-END_IMPLEMENT_LISTENER();
-
-//Custom : Blitzkrieg
-///TODO: handle interfacelisteners for selecting class
-BEGIN_IMPLEMENT_LISTENER(ZGetBlitzRedGladiatorListener, MBTN_CLK_MSG)
-{
-	if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_BLUE)
-		return false;
-
-	if (ZGetGame()->m_pMyCharacter->GetBlitzClass() == MOC_GLADIATOR)
-		return false;
-
-	for (auto itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
-	{
-		ZCharacter* player = (ZCharacter*)(*itor).second;
-		if (player == ZGetGame()->m_pMyCharacter)
-			continue;
-
-		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID()) {
-			//if they somehow enable the button, return false, if they get past this, th eserver will catch them???? TODO: determine best way of doing this
-			if (player->GetBlitzClass() == MOC_GLADIATOR)
-				return false;
-
-			ZPostRequestBlitzClass(MOC_GLADIATOR);
-		}
-	}
-}
-END_IMPLEMENT_LISTENER();
-
+/// 
 BEGIN_IMPLEMENT_LISTENER(ZGetBlitzBlueHunterListener, MBTN_CLK_MSG)
 {
 	if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED)
@@ -2678,9 +2627,9 @@ BEGIN_IMPLEMENT_LISTENER(ZGetBlitzBlueHunterListener, MBTN_CLK_MSG)
 	for (auto itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
 	{
 		ZCharacter* player = (ZCharacter*)(*itor).second;
-		if (player == ZGetGame()->m_pMyCharacter)
-			continue;
-		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID()) {
+
+		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID())
+		{
 			//if they somehow enable the button, return false, if they get past this, th eserver will catch them???? TODO: determine best way of doing this
 			if (player->GetBlitzClass() == MOC_HUNTER)
 				return false;
@@ -2710,8 +2659,6 @@ BEGIN_IMPLEMENT_LISTENER(ZGetBlitzRedHunterListener, MBTN_CLK_MSG)
 	{
 		ZCharacter* player = (ZCharacter*)(*itor).second;
 
-		if (player == ZGetGame()->m_pMyCharacter)
-			continue;
 		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID()) {
 			//if they somehow enable the button, return false, if they get past this, th eserver will catch them???? TODO: determine best way of doing this
 			if (player->GetBlitzClass() == MOC_HUNTER)
@@ -2722,6 +2669,57 @@ BEGIN_IMPLEMENT_LISTENER(ZGetBlitzRedHunterListener, MBTN_CLK_MSG)
 	}
 }
 END_IMPLEMENT_LISTENER();
+
+//Custom : Blitzkrieg
+///TODO: handle interfacelisteners for selecting class
+BEGIN_IMPLEMENT_LISTENER(ZGetBlitzBlueGladiatorListener, MBTN_CLK_MSG)
+{
+	if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_RED)
+		return false;
+
+	if (ZGetGame()->m_pMyCharacter->GetBlitzClass() == MOC_GLADIATOR)
+		return false;
+
+	for (auto itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
+	{
+		ZCharacter* player = (ZCharacter*)(*itor).second;
+
+		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID()) {
+			//if they somehow enable the button, return false, if they get past this, th eserver will catch them???? TODO: determine best way of doing this
+			if (player->GetBlitzClass() == MOC_GLADIATOR)
+				return false;
+
+			ZPostRequestBlitzClass(MOC_GLADIATOR);
+		}
+	}
+}
+END_IMPLEMENT_LISTENER();
+
+
+BEGIN_IMPLEMENT_LISTENER(ZGetBlitzRedGladiatorListener, MBTN_CLK_MSG)
+{
+	if (ZGetGame()->m_pMyCharacter->GetTeamID() == MMT_BLUE)
+		return false;
+
+	if (ZGetGame()->m_pMyCharacter->GetBlitzClass() == MOC_GLADIATOR)
+		return false;
+
+	for (auto itor = ZGetCharacterManager()->begin(); itor != ZGetCharacterManager()->end(); ++itor)
+	{
+		ZCharacter* player = (ZCharacter*)(*itor).second;
+
+		if (player->GetTeamID() == ZGetGame()->m_pMyCharacter->GetTeamID()) {
+			//if they somehow enable the button, return false, if they get past this, th eserver will catch them???? TODO: determine best way of doing this
+			if (player->GetBlitzClass() == MOC_GLADIATOR)
+				return false;
+
+			ZPostRequestBlitzClass(MOC_GLADIATOR);
+		}
+	}
+}
+END_IMPLEMENT_LISTENER();
+
+
 
 BEGIN_IMPLEMENT_LISTENER(ZGetBlitzBlueTerroristListener, MBTN_CLK_MSG)
 {

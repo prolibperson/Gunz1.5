@@ -960,8 +960,8 @@ bool ZGameInterface::InitInterfaceListener()
 	SetListenerWidget("Replay_FileList",			ZGetReplayFileListBoxListener());
 
 	////Custom: Blitzkrieg
-	SetListenerWidget("Hunter_Blue", ZGetBlitzBlueGladiatorListener());
-	SetListenerWidget("Hunter_Red", ZGetBlitzRedGladiatorListener());
+	SetListenerWidget("Hunter_Blue", ZGetBlitzBlueHunterListener());
+	SetListenerWidget("Hunter_Red", ZGetBlitzRedHunterListener());
 	//SetListenerWidget("Slaughter_Blue", ZGetBlitzBlueSlaughterListener());
 	//SetListenerWidget("Slaughter_Red", ZGetBlitzRedSlaughterListener());
 	//SetListenerWidget("Trickster_Blue", ZGetBlitzBlueTricksterListener());
