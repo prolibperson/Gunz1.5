@@ -1356,9 +1356,13 @@ void ZScreenEffectManager::DrawCombo()
 	int nFrame,nLastDigit=0;
 	for(int i=0;i<COMBOEFFECTS_COUNT;i++)
 	{
-		if(m_pComboEffects[i]) {
+		if(m_pComboEffects[i])
+		{
 
 			nLastDigit=i;
+
+			if (m_pComboEffects[i]->GetVMesh()->GetFrameInfo(ani_mode_lower) == nullptr)
+				continue;
 
 			//			nFrame = m_pComboEffects[i]->GetVMesh()->m_nFrame[0];
 			nFrame = m_pComboEffects[i]->GetVMesh()->GetFrameInfo(ani_mode_lower)->m_nFrame;

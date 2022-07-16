@@ -10,6 +10,7 @@
 #include "ZCharacter.h"
 #include "MDrawContext.h"
 #include "Mint.h"
+#include "ZConfiguration.h"
 enum HONOR_SOUND {
 	HS_LESSGAIN,
 	HS_REGULARGAIN,
@@ -152,6 +153,7 @@ void ZRuleBlitzKrieg::OnSetRoundState(MMATCH_ROUNDSTATE roundState)
 			ZGetCombatInterface()->SetShowBlitzHelp(false);
 			ZGetCombatInterface()->SetShowBlitzMap(false);
 			ZGetCombatInterface()->SetShowUpgradeList(false);
+			ZGetCombatInterface()->ShowCrossHair(false);
 		}break;
 		case MMATCH_ROUNDSTATE_COUNTDOWN:
 		{
@@ -164,6 +166,11 @@ void ZRuleBlitzKrieg::OnSetRoundState(MMATCH_ROUNDSTATE roundState)
 			m_currRoundElapsedTime = 0;
 			m_drawHPTopInfo = true;
 			DrawHPTop(m_drawHPTopInfo);
+
+			if (ZGetGame()->m_pMyCharacter->GetItems()->GetSelectedWeapon()->GetItemType() != MMatchItemType::MMIT_MELEE)
+			{
+				ZGetCombatInterface()->ShowCrossHair(true);
+			}
 
 			ZGetCombatInterface()->SetShowBlitzMap(true);
 			ZGetCombatInterface()->SetShowUpgradeList(true);
@@ -491,14 +498,117 @@ void ZRuleBlitzKrieg::DrawClassSelect(MDrawContext* pDC, bool draw)
 
 void ZRuleBlitzKrieg::DrawUpgradeList(MDrawContext* pDC, bool draw)
 {
-	if (!ZGetCombatInterface()->GetShowUpgradeList())
+	MLabel* label = dynamic_cast<MLabel*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_KeyLabel"));
+	if (label != nullptr)
 	{
-		MPicture* abilityMainFrame = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close"));
+		label->SetTextColor(MCOLOR(0, 255, 0));
+		std::string keylabel = std::string("[") + ZGetConfiguration()->GetKeyboard()->ActionKeys[ZACTION_UPGRADELIST].szName + std::string("]");
+		label->SetText(keylabel.c_str());
+		label->Show(true);
+	}
+	//todo: determine how to draw these???
+	if (ZGetCombatInterface()->GetShowUpgradeList() == false)
+	{
+		MFrame* abilityMainFrame = dynamic_cast<MFrame*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzkriegAbilityList_Close"));
+		abilityMainFrame->SetVisible(true);
 		abilityMainFrame->Show(true);
+
+		MPicture* abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Open"));
+		if (abilitypic != nullptr)
+		{
+			abilitypic->Show(false);
+		}
+		//closed window abilitylist
+		{
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close_DPS_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_DPS_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close_Delay_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Delay_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close_HPAP_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_HPAP_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close_Enchant_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Enchant_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close_Magazine_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Magazine_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Close_Revive_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Revive_Icon_Level1.png"));
+			}
+		}
 	}
 	else
 	{
+		MFrame* abilityMainFrame = dynamic_cast<MFrame*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzkriegAbilityList"));
+		if (abilityMainFrame != nullptr)
+		{
+			abilityMainFrame->Show(true);
+		}
 
+		MPicture* abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Open"));
+		if (abilitypic != nullptr)
+		{
+			abilitypic->Show(true);
+		}
+
+		//ability buttons, icons, and descriptions
+		{
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_DPS_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_DPS_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Delay_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Delay_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_HPAP_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_HPAP_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Enchant_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Enchant_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Magazine_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Magazine_Icon_Level1.png"));
+			}
+
+			abilitypic = dynamic_cast<MPicture*>(ZGetGameInterface()->GetIDLResource()->FindWidget("BlitzAbilityList_Revive_Icon"));
+			if (abilitypic != nullptr)
+			{
+				abilitypic->SetBitmap(MBitmapManager::Get("Blitz_Ability_Revive_Icon_Level1.png"));
+			}
+		}
 	}
 
 }
