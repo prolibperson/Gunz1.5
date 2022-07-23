@@ -20,6 +20,10 @@ void ZPostUserOption()
 	if (Z_ETC_REJECT_INVITE)
 		nOptionFlags |= MBITFLAG_USEROPTION_REJECT_INVITE;
 
+	//todo: add options for general and private chat
+	//if (Z_ETC_REJECT_PCHAT)
+	//	nOptionFlags |= MBITFLAG_USEROPTION_REJECT_PCHAT;
+
 	ZPOSTCMD1(MC_MATCH_USER_OPTION, MCmdParamUInt(nOptionFlags));
 }
 

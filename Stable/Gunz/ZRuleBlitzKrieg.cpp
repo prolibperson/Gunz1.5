@@ -473,7 +473,7 @@ void ZRuleBlitzKrieg::DrawClassSelect(MDrawContext* pDC, bool draw)
 			}
 			// -56, 52
 
-			MPOINT lastPos{ 5, 56 };
+			MPOINT lastPos{ 10, 56 };
 			for (int i = 1; i < MOC_END; ++i)
 			{
 				string className = GetClassNameByType(i);
@@ -481,6 +481,11 @@ void ZRuleBlitzKrieg::DrawClassSelect(MDrawContext* pDC, bool draw)
 				MButton* classBtn = dynamic_cast<MButton*>(ZGetGameInterface()->GetIDLResource()->FindWidget(className.c_str()));
 				if (classBtn)
 				{
+					//todo: get button highlight working better
+					if (ZGetGame()->m_pMyCharacter->GetBlitzClass() == (MMatchObjectClass)i)
+					{
+						classBtn->SetType(MButtonType::MBT_PUSH);
+					}
 					classBtn->SetBounds(lastPos.x * RGetScreenWidth() / 800.f, lastPos.y * RGetScreenHeight() / 600.f, 90, 90);
 					classBtn->Show(true);
 					lastPos.x = lastPos.x + 56;

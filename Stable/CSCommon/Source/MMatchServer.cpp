@@ -2457,7 +2457,7 @@ void MMatchServer::OnChatRoomInvite(const MUID& uidComm, const char* pszTargetNa
 		return;
 	}
 
-	if (pTargetObj->CheckUserOption(MBITFLAG_USEROPTION_REJECT_INVITE) == true) {
+	if (pTargetObj->CheckUserOption(MBITFLAG_USEROPTION_REJECT_PCHAT) == true) {
 		NotifyMessage(pPlayer->GetUID(), MATCHNOTIFY_USER_INVITE_REJECTED);
 		NotifyMessage(pTargetObj->GetUID(), MATCHNOTIFY_USER_INVITE_IGNORED);
 		return;

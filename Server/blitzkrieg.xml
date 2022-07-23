@@ -88,8 +88,7 @@
 			LoseMedalBonusMVP="0.45"
 			/>
 	
-	<!-- 탈주 페널티 -->
-	<!-- [first] 초범일때 다른방 입장 불가 시간, [second] 재범일때 다른방 입장 불가 시간, [afterThird] 상습범일때 다른방 입장 불가 시간 -->
+	<!-- Leave match penalty (ununused) -->
 	<PENALTY first="120" second="300" afterThird="600" />
 
 	<!-- 병과 테이블 -->
@@ -106,9 +105,8 @@
 		<TERRORIST enhanceDamageRatioAtBuilding="1.0" />
 	</CLASS_TABLE>
 	
-	<!-- 병과 교본 테이블 -->
-	<!-- 각 병과의 id는 교본 아이템의 id -->
-	<CLASS_BOOK gladiator="900000" duelist="900001" incinerator="900002" combatofficer="900003" assassin="900004" terrorist="900005" />
+	<!-- players must own these itemids to use the specific class (unused)-->
+	<!--<CLASS_BOOK gladiator="900000" duelist="900001" incinerator="900002" combatofficer="900003" assassin="900004" terrorist="900005" />-->
 	
 	<!-- 업그레이드 -->
 	<!-- 업그레이드는 4단계까지 가능하다. 따라서 각 속성당 4개의 수치가 필요한데, 각 수치를 같은 문자열에 넣되 ':'로 구분한다. -->

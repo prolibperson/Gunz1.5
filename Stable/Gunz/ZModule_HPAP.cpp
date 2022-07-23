@@ -55,7 +55,10 @@ void ZModule_HPAP::OnDamage(MUID uidAttacker,float fDamage, float fRatio)
 
 	// NPC의 난이도 조절계수때문에 넣음
 	ZObject* pAttacker = ZGetObjectManager()->GetObject(uidAttacker);
-	if ((pAttacker) && (!IsPlayerObject(pAttacker)))
+
+	if (pAttacker == nullptr)
+		return;
+	if (!IsPlayerObject(pAttacker))
 	{
 		ZActorBase* pActor = (ZActorBase*)pAttacker;
 		//fDamage = (int)(fDamage * (pActor->GetTC()));

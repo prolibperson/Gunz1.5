@@ -1626,18 +1626,43 @@ bool ZWeaponDynamite::Update(float fElapsedTime)
 			{
 				if (zpi.pObject)
 				{
-					pickpos = zpi.info.vOut;
-					if (zpi.pObject->GetPosition().z + 30.f <= pickpos.z && pickpos.z <= zpi.pObject->GetPosition().z + 160.f)
+					if (zpi.pObject->IsNPC())
 					{
-						normal = pickpos - zpi.pObject->GetPosition();
-						normal.z = 0;
+						if (ZGetGameTypeManager()->IsNewQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType()))
+						{
+							ZActorWithFSM* pActor = (ZActorWithFSM*)zpi.pObject;
+							if (pActor && pActor->GetActorDef()->GetGrenadeCollision() == true)
+							{
+								pickpos = zpi.info.vOut;
+								if (zpi.pObject->GetPosition().z + 30.f <= pickpos.z && pickpos.z <= zpi.pObject->GetPosition().z + 160.f)
+								{
+									normal = pickpos - zpi.pObject->GetPosition();
+									normal.z = 0;
+								}
+								else
+								{
+									normal = pickpos - (zpi.pObject->GetPosition() + rvector(0, 0, 90));
+								}
+
+								Normalize(normal);
+							}
+						}
 					}
 					else
 					{
-						normal = pickpos - (zpi.pObject->GetPosition() + rvector(0, 0, 90));
-					}
+						pickpos = zpi.info.vOut;
+						if (zpi.pObject->GetPosition().z + 30.f <= pickpos.z && pickpos.z <= zpi.pObject->GetPosition().z + 160.f)
+						{
+							normal = pickpos - zpi.pObject->GetPosition();
+							normal.z = 0;
+						}
+						else
+						{
+							normal = pickpos - (zpi.pObject->GetPosition() + rvector(0, 0, 90));
+						}
 
-					Normalize(normal);
+						Normalize(normal);
+					}
 				}
 			}
 		}
@@ -1858,15 +1883,38 @@ bool ZWeaponTrap::Update(float fElapsedTime)
 			}
 			else if (zpi.pObject)
 			{
-				pickpos = zpi.info.vOut;
-				if (zpi.pObject->GetPosition().z + 30.f <= pickpos.z && pickpos.z <= zpi.pObject->GetPosition().z + 160.f)
+				if (zpi.pObject->IsNPC())
 				{
-					normal = pickpos - zpi.pObject->GetPosition();
-					normal.z = 0;
+					if (ZGetGameTypeManager()->IsNewQuestDerived(ZGetGameClient()->GetMatchStageSetting()->GetGameType()))
+					{
+						ZActorWithFSM* actor = (ZActorWithFSM*)zpi.pObject;
+						if (actor && actor->GetActorDef()->GetGrenadeCollision() == true)
+						{
+							pickpos = zpi.info.vOut;
+							if (zpi.pObject->GetPosition().z + 30.f <= pickpos.z && pickpos.z <= zpi.pObject->GetPosition().z + 160.f)
+							{
+								normal = pickpos - zpi.pObject->GetPosition();
+								normal.z = 0;
+							}
+							else
+								normal = pickpos - (zpi.pObject->GetPosition() + rvector(0, 0, 90));
+							Normalize(normal);
+						}
+					}
 				}
 				else
-					normal = pickpos - (zpi.pObject->GetPosition() + rvector(0, 0, 90));
-				Normalize(normal);
+				{
+					pickpos = zpi.info.vOut;
+					if (zpi.pObject->GetPosition().z + 30.f <= pickpos.z && pickpos.z <= zpi.pObject->GetPosition().z + 160.f)
+					{
+						normal = pickpos - zpi.pObject->GetPosition();
+						normal.z = 0;
+					}
+					else
+						normal = pickpos - (zpi.pObject->GetPosition() + rvector(0, 0, 90));
+					Normalize(normal);
+				}
+
 			}
 		}
 

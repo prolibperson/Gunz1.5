@@ -134,11 +134,11 @@ void ZActorWithFSM::OnUpdate( float fDelta )
 
 	if (IsMyControl())
 	{
-		if (timeGetTime() - m_nLastUpdate >= 10)
-		{
+		//if (timeGetTime() - m_nLastUpdate >= 10)
+		//{
 			m_nLastUpdate = timeGetTime();
 			UpdateFsm(fDelta);
-		}
+//		}
 		PostBasicInfo();
 
 		if (!IsStationary())
@@ -637,8 +637,6 @@ void ZActorWithFSM::ProcessShotInAction(float fDelta)
 				else
 					vDir = GetDirection() + pGrenadeShot->GetDirMod();
 
-
-
 				rmatrix mat;
 				if (pGrenadeShot->GetYAxis() != 0)
 				{
@@ -657,9 +655,6 @@ void ZActorWithFSM::ProcessShotInAction(float fDelta)
 
 				Normalize(vDir);
 
-	
-
-
 				rvector vPos;
 				_RMeshPartsPosInfoType posPartsType = pGrenadeShot->GetPosPartsType();
 				if (posPartsType == eq_parts_pos_info_end)
@@ -667,7 +662,7 @@ void ZActorWithFSM::ProcessShotInAction(float fDelta)
 				else
 					vPos = m_pVMesh->GetBipTypePosition(posPartsType) + pGrenadeShot->GetPosMod();
 
-				pGrenadeShot->ProcessShot(vPos, rvector(vDir.x * pGrenadeShot->GetForce(),vDir.y * pGrenadeShot->GetForce(),vDir.z * pGrenadeShot->GetForce()),this);
+				pGrenadeShot->ProcessShot(vPos, vDir * pGrenadeShot->GetForce(),this);
 				SetProcessedShot(pGrenadeShot);
 			}
 		}

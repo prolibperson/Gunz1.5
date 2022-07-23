@@ -15,4 +15,6 @@
 
 #define ZMID_QUESTSTATUS		31				///< 플레이어의 퀘스트 관련 상태값
 
+#define ZMID_HUNTER				40
+
 #endif

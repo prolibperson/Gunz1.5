@@ -118,7 +118,8 @@ enum MMatchClanDeleteState
 // 옵션 관련
 enum MBITFLAG_USEROPTION {
 	MBITFLAG_USEROPTION_REJECT_WHISPER	= 1,
-	MBITFLAG_USEROPTION_REJECT_INVITE	= 1<<1
+	MBITFLAG_USEROPTION_REJECT_INVITE	= 1<<1,
+	MBITFLAG_USEROPTION_REJECT_PCHAT = 1 << 2
 };
 
 // 퀘스트 관련 ///////////////////////////////////////////////////////////////////////////////

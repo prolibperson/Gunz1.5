@@ -7826,7 +7826,7 @@ void ZGame::OnExplosionDynamite(MUID uidOwner, rvector pos, float fDamage, float
 		{
 			ZGetSoundEngine()->PlaySound("fx_bullethit_mt_met");
 		}
-		ZCharacterObject* pOwnerCharacter = (ZCharacterObject*) ZGetGame()->m_CharacterManager.Find( uidOwner );
+		ZCharacterObject* pOwnerCharacter = (ZCharacterObject*) ZGetGame()->m_ObjectManager.GetObjectA( uidOwner );
 		if(pOwnerCharacter && !pOwnerCharacter->IsNPC()) 
 		{
 			CheckCombo((ZCharacter*)pOwnerCharacter, pTarget,!bPushSkip);
