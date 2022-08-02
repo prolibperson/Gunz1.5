@@ -4570,6 +4570,9 @@ void ZGame::OnPeerShotgun_Damaged(ZObject* pOwner, float fShotTime, const rvecto
 	if (pObject->IsNPC() || ZGetGameClient()->GetMatchStageSetting()->isModEnabled(SM_LEAD))
 	{
 		pObject->OnDamaged(pOwner, pOwner->GetPosition(), dt, pDesc->m_nWeaponType.Ref(), fActualDamage, fRatio);
+
+		if (GetMatch()->GetMatchType() == MMATCH_GAMETYPE_QUEST_CHALLENGE)
+			ZGetEffectManager()->AddWithScale("ef_damage07.elu", pickinfo.info.vOut, dir, pickinfo.pObject->GetUID(), 0.2, 0);
 	}
 	else
 	{

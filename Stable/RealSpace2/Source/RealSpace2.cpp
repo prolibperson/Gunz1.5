@@ -1295,15 +1295,17 @@ void RSetFog( bool bFog, float fNear /* = 0 */, float fFar/* =0 */, DWORD dwColo
 		g_dwFogColor = dwColor;
 		g_pd3dDevice->SetRenderState(D3DRS_FOGCOLOR, dwColor);
 		/***** old code = g_pd3dDevice->SetRenderState(D3DRS_FOGTABLEMODE,D3DFOG_LINEAR);*/
-		g_pd3dDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
-		g_pd3dDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD *)(&g_fFogNear));
-		g_pd3dDevice->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&g_fFogFar));
-		/*below this = added code*/
 		D3DCAPS9 d3dcaps;
 		RGetDevice()->GetDeviceCaps(&d3dcaps);
 
 		if (d3dcaps.RasterCaps & D3DPRASTERCAPS_FOGRANGE)
+
 			g_pd3dDevice->SetRenderState(D3DRS_RANGEFOGENABLE, TRUE);
+		g_pd3dDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+		g_pd3dDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD *)(&g_fFogNear));
+		g_pd3dDevice->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&g_fFogFar));
+		/*below this = added code*/
+
 	}
 }
 

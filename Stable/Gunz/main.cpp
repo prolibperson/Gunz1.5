@@ -364,6 +364,11 @@ RRESULT OnRender(void *pParam)
 
 	g_App.OnDraw();
 
+	if (ZIsActionKeyPressed(ZACTION_SCREENSHOT)) {
+		if (g_App.GetGameInterface())
+			g_App.GetGameInterface()->GetBandiCapturer()->CaptureImage();// ->SaveScreenShot();
+	}
+
 
 #ifdef _SMOOTHLOOP
 	Sleep(10);

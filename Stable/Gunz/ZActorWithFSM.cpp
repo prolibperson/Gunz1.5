@@ -322,9 +322,15 @@ bool ZActorWithFSM::ProcessMotion(float fDelta)
 void ZActorWithFSM::UpdateVelocity(float fDelta)
 {
 	///TODO: fix ismovinganimation?
-	if (IsAir() && !IsMovingAnimation())
+	if (IsAir())
 	{
-		m_pModule_Movable->UpdateGravity(fDelta);
+		std::string actionname = "";
+		if (m_pCurrAction != nullptr)
+		{
+			actionname = m_pCurrAction->GetName();
+		}
+		if (actionname.find("dash") != std::string::npos || !IsMovingAnimation())
+			m_pModule_Movable->UpdateGravity(fDelta);
 	}
 	//if ( CheckFlag(AF_MOVING) && CheckFlag(AF_LAND) &&
 	//	((GetCurrAni() == ZA_ANIM_WALK) || (GetCurrAni() == ZA_ANIM_RUN)))
@@ -1518,6 +1524,7 @@ void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist, float fDelta)
 
 	if (m_uidTarget.IsInvalid()) return;
 
+
 	ZCharacter* pTarget = (ZCharacter*)ZGetCharacterManager()->Find(m_uidTarget);
 	if (!pTarget) return;
 	// Make path
@@ -1527,23 +1534,42 @@ void ZActorWithFSM::Func_RunAlongTargetOrbital(int dist, float fDelta)
 		return;
 
 	// Make navigation path
-	rmatrix mat;
 	rvector tarpos = pTarget->GetPosition();
 	tarpos.z = 0;
-	if (tarpos.x < 0)
-		D3DXMatrixRotationZ(&mat, -dist);
-	else
-		D3DXMatrixRotationZ(&mat, dist);
-	tarpos = tarpos * mat;
-	tarpos.z = 0;
+	tarpos.x += dist;
+	tarpos.y += dist;
+	rvector myPos = GetPosition();
+	myPos.z = 0;
 
-	if (navMesh.BuildNavigationPath(GetPosition(), tarpos))
+	if (m_listWaypoint.empty())
 	{
+		if (navMesh.BuildNavigationPath(GetPosition(), tarpos))
+		{
+			for (list<rvector>::iterator it = navMesh.GetWaypointList().begin(); it != navMesh.GetWaypointList().end(); ++it)
+				m_listWaypoint.push_back(*it);
+		}
+	}
+	if (!m_listWaypoint.empty())
+	{
+		rvector nextWaypoint = *m_listWaypoint.begin();
+		nextWaypoint.z = 0;
 
-		m_listWaypoint.clear();
-		for (list<rvector>::iterator it = navMesh.GetWaypointList().begin(); it != navMesh.GetWaypointList().end(); ++it)
-			m_listWaypoint.push_back(*it);
-		Func_RunWaypoints(fDelta);
+		float diffSq = MagnitudeSq(nextWaypoint - myPos);
+		if (diffSq <= 400.f)
+		{
+			m_listWaypoint.pop_front();
+			if (m_listWaypoint.empty() == false)
+			{
+				Func_RunAlongTargetOrbital(dist, fDelta);
+			}
+			return;
+		}
+
+
+/*		rvector vWaypointDir = nextWaypoint - myPos;
+		Normalize(vWaypointDir);
+		*///RotateToDirection(vWaypointDir, fDelta);
+		SetMoving(true);
 	}
 }
 
@@ -1557,16 +1583,21 @@ void ZActorWithFSM::Func_SpeedAccel(int speedAccel)
 	SetSpeedAccel(speedAccel);
 }
 
-void ZActorWithFSM::Func_TurnOrbitalDirection()
+void ZActorWithFSM::Func_TurnOrbitalDirection(float fDelta)
 {
 	//TODO:
 	ZCharacterObject* pObj = dynamic_cast<ZCharacterObject*>(ZGetObjectManager()->GetObject(m_uidTarget));
 	if (!pObj)
 		return;
 	//????
-	rvector dir = pObj->GetPosition() - GetPosition();
-	Normalize(dir);
+	if (m_listWaypoint.empty())
+		return;
+
+	rvector waypos = *m_listWaypoint.begin();
+	rvector dir = waypos - GetPosition();
+	Normalize(dir * fDelta);
 	SetDirection(dir);
+	//RotateToDirection(dir, fDelta);
 }
 
 //blitzkrieg

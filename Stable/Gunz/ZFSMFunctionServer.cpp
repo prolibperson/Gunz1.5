@@ -124,7 +124,7 @@ bool ZFSMFunctionServer::ExecuteFunction(float fFrameDelta, int funcId, int nArg
 			}
 		case FSMFUNC_TURN_ORBITAL_DIR:
 			{
-				Func_TurnOrbitalDirection();
+				Func_TurnOrbitalDirection(fFrameDelta);
 				break;
 			}
 		case FSMFUNC_RUNWAYPOINTSALONGROUTE:

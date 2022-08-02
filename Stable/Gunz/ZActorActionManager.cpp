@@ -431,12 +431,12 @@ ZActorAction* ZActorActionManager::GetAction( const char* szName )
 
 int ZActorActionManager::GetIndexOfAction(IActorAction* pAction)
 {
-	int idx=0;
 	for (ItorAction it=m_mapAction.begin(); it!=m_mapAction.end(); ++it)
 	{
 		if (it->second == pAction)
-			return idx;
-		++idx;
+		{
+			return std::distance(m_mapAction.begin(), it);// m_mapAction.po
+		}
 	}
 	return -1;
 }

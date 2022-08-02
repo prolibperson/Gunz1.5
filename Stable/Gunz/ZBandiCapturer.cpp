@@ -80,6 +80,7 @@ bool ZBandiCapturer::Start(HRESULT& hr)
 		GetFolder(folderName);
 		m_bandiCaptureLibrary.MakePathnameByDate(folderName, _T(""),"avi",m_pathName, MAX_PATH);
 
+
 		// 캡처를 시작합니다.
 		hr = m_bandiCaptureLibrary.Start(m_pathName, m_hHandle, BCAP_MODE_D3D9_SCALE, (LONG_PTR)m_pDevice);
 		if (FAILED(hr))
@@ -169,7 +170,7 @@ void ZBandiCapturer::ToggleStart()
 BCAP_CONFIG ZBandiCapturer::GetConfig()
 {
 	//BCAP_CONFIG cfg;
-	g_nConfig.VideoCodec = FOURCC_MJPG;
+	g_nConfig.VideoCodec = FOURCC_H264;
 	g_nConfig.VideoFPS = 60;
 	return g_nConfig;
 
@@ -224,22 +225,22 @@ int ZBandiCapturer::get_file_length(char *fn)
 
 void GetFolderScreenShot(TCHAR* pPath)
 {
+	//TODO: add a check for if zgetmyinfo is null or if char hasn't been selected
 	char foldername[_MAX_PATH] = "c:\\";
 
 	if (GetMyDocumentsPath(pPath))
 	{
 		strcpy(foldername, pPath);
-		strcat(foldername, GUNZ_FOLDER);
+		strcat(foldername, "\\Gunz");
 		char szCharName[MATCHOBJECT_NAME_LENGTH];
 		ValidateFilename(szCharName, ZGetMyInfo()->GetCharName(), '_');
 		CreatePath(foldername);
-		strcat(foldername, "/Screenshots");
+		strcat(foldername, "\\Screenshots");
 		CreatePath(foldername);
 		strcat(foldername, "");
 	}
 	strcpy(pPath, foldername);
 }
-
 
 bool ZBandiCapturer::CaptureImage()
 {
@@ -252,9 +253,9 @@ bool ZBandiCapturer::CaptureImage()
 
 	TCHAR	folderName[MAX_PATH];
 	GetFolderScreenShot(folderName);
-	m_bandiCaptureLibrary.MakePathnameByDate(folderName, _T(""), _T("jpg"), m_pathName, MAX_PATH*2);
+	m_bandiCaptureLibrary.MakePathnameByDate(folderName, _T(""), "jpg", m_pathName, MAX_PATH);
 
-	if (FAILED(m_bandiCaptureLibrary.CaptureImage(m_pathName, BCAP_IMAGE_JPG, 80, BCAP_MODE_D3D9_SCALE, FALSE, (LONG_PTR)m_pDevice)))
+	if (FAILED(m_bandiCaptureLibrary.CaptureImage(m_pathName, BCAP_IMAGE_JPG, 90, BCAP_MODE_D3D9_SCALE, FALSE, (LONG_PTR)m_pDevice)))
 		return false;
 
 	return true;

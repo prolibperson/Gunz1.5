@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Jul  5 2022 17:24:52) 
-Log time (07/06/22 19:28:05)
+GUNZ 1,0,0,290 launched. build (Jul 23 2022 16:41:06) 
+Log time (07/29/22 10:03:06)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -27,19 +27,19 @@ ZApplication::OnCreate : begin
 3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.609000 
+-------------------> Sound Engine Create : 0.545000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.866000 
+loading pictures : 1.701000 
 IDLResource Loading Success!!
-IDL resources : 0.121000 
+IDL resources : 0.119000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.240000 
+Screen Effect Manager Create : 0.215000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -66,7 +66,7 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.940000 
+-------------------> GameInterface Create : 2.572000 
 
 model/man/man-parts_shunter.elu mesh eq_chest_shunter node 34 face 0 point -> physique 3 Greater than
 model/man/man-parts_dryad.elu mesh eq_chest_dryad node 680 face 0 point -> physique 3 Greater than
@@ -78,14 +78,14 @@ model/woman/woman-parts_bloodsuit.elu mesh eq_chest_bloodsuit node 129 face 0 po
 model/woman/woman-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 1 point -> physique 3 Greater than
 Load character.xml success,
 
--------------------> Character Loading : 5.482000 
+-------------------> Character Loading : 2.003000 
 
 
--------------------> WeaponMesh Loading : 0.316000 
+-------------------> WeaponMesh Loading : 0.286000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.022000 
+-------------------> Worlditem Loading : 0.019000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -93,3 +93,133 @@ Init world item manager success.
 Init map Descriptor success.
 Init channel rule manager success.
 Init abuse manager success.
+Init chatting filter. success
+
+-------------------> ETC .. : 0.259000 
+
+
+LoginID: jetman82
+BspObject open : begin interface/church/church_b.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 1
+BspObject load lightmap 0
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+BspObject open : begin interface/church/church_a.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 38 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 1
+BspObject load lightmap 0
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
+main : OnCreate() done
+Server Connected
+Login Successful. 
+Responsed Account Charlist
+Selected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
+Shop Gamble item count : 2
+shop gitem : 1000003, Green Box
+shop gitem : 1000004, Gold Box
+0,Jetman82,Jetman82,This is a test send
+0,Jetman82,Jetman82,This is a test send
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+game world create success.
+Reload all animation end 
+---------------------------------setBuffer
+game created ( 10:03:25 )
+Create character : Name=Jetman82 Level=22 
+Crash ( 10:03:30 )
+Build Apr  2 2022 20:07:36
+
+dwTotalMemKB = 16701668 KB
+dwAvailMemKB = 6321880 KB
+dwVirtualMemKB = 2097024 KB
+
+[Exception]
+Address	:	7537f192
+ExpCode	:	c0000002
+Flags	:	00000001
+#Param	:	00000000
+other	:	00000000
+
+[Context]
+GS : 0000002b  FS : 00000053  ES : 0000002b  DS : 0000002b
+EDI: 7714cdb0  ESI: 0124a958  EBX: 7713a850  EDX: 348e3c20
+ECX: 00000000  EAX: 008ff208  EBP: 008ff264  EIP: 7537f192
+CS : 00000023  Flg: 00000246  ESP: 008ff208  SS : 0000002b
+
+[Stack]
+c0000002 00000001 00000000 7537f192 00000000 008ff2c0 7713a850 0113a850 
+008ff280 77134ab6 0366c340 00000000 52390d03 7714cdb0 0124a958 77134b55 
+fffffffe 008ff25c 00000012 00000000 00000000 368a8a8d 00000708 008ff5e4 
+76e299f1 c0000002 00000001 00000000 00000000 00a02616 348e3c20 008ff290 
+008ff2c0 00000000 00f7bb48 11c0aa70 00000020 061c00ad 32ff8290 345f0064 
+056fd7a0 056fd7a0 0d960d34 00000020 2ef2c960 348e3c20 00000000 00000000 
+00000c80 00000708 32ff8290 345f0064 00000028 009a07d0 32ff8280 009a0000 
+00000000 02c20000 345f0050 00000000 00000000 00ab2c2b 00000002 00000028 
+009a01cc 00000000 00000005 009a0000 008ff428 00000020 00000000 02c20000 
+009a0bd4 009a0bd0 008ff348 77344cee 00000000 00000000 00000020 00000020 
+008ff360 7738ec17 345ff5b0 02c20000 7713a850 0124a958 008ff374 12063240 
+050451c8 00000064 00000000 32ff8290 0000061c 00000000 061c00ac 345f0050 
+00000001 345ff5b0 32ff8280 02c20000 008ff3d0 008ff3b8 77347c56 00000000 
+00000000 00000000 7714cdb0 12139da8 008ff3cc 00e803fd 02c20000 00000000 
+345ff5b0 008ff3dc 00e71fc9 345ff5b0 00000000 008ff3e8 00e48a2e 345ff5b0 
+008ff408 009e8a38 345ff5b0 00000020 0eee2d2d 008ffcd8 00e908f0 ffffffff 
+

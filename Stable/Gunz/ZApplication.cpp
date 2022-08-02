@@ -833,10 +833,10 @@ void ZApplication::OnUpdate()
 	// 아무곳에서나 찍기 위해서..
 
 //	if(Mint::GetInstance()) {
-		if(ZIsActionKeyPressed(ZACTION_SCREENSHOT)) {
-			if(m_pGameInterface)
-				m_pGameInterface->SaveScreenShot();
-		}
+		//if(ZIsActionKeyPressed(ZACTION_SCREENSHOT)) {
+		//	if(m_pGameInterface)
+		//		m_pGameInterface->SaveScreenShot();
+		//}
 //	}
 
 	// 실행중 메모리 조작으로 item 속성값을 변경하는 해킹대응

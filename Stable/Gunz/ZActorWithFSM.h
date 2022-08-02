@@ -185,7 +185,7 @@ public:
 	virtual void Func_RunAlongTargetOrbital(int dist,float fDelta);
 	virtual void Func_ClearWayPoints();
 	virtual void Func_SpeedAccel(int speedAccel);
-	virtual void Func_TurnOrbitalDirection();
+	virtual void Func_TurnOrbitalDirection(float fDelta);
 	virtual void Func_FindTargetInDist(int dist);
 	virtual void Func_FaceToLatestAttacker();
 	virtual void Func_RunWayPointsAlongRoute(float fDelta);

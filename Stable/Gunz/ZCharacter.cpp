@@ -4442,9 +4442,10 @@ void ZCharacter::InitRound()
 
 ZOBJECTHITTEST ZCharacter::HitTest( const rvector& origin, const rvector& to, float fTime, rvector *pOutPos )
 {
+	//todo: read on gethistory a bit more. looks like it has interpolation to make movement look smoother??
 	// 적절한 시점의 위치를 얻어낼수없으면 실패..
 	rvector footpos,headpos,characterdir;
-	if(ZObject::GetHistory(&footpos,&characterdir,fTime))
+	if(GetHistory(&footpos,&characterdir,fTime))
 	{
 		// 발위치 높이 보정 +5
 		footpos.z+= 5.f;			

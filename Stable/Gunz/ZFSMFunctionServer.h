@@ -78,7 +78,7 @@ protected:
 	virtual void Func_RunAlongTargetOrbital(int dist,float fDelta) { _ASSERT(0); }
 	virtual void Func_ClearWayPoints() { _ASSERT(0); }
 	virtual void Func_SpeedAccel(int speedAcce) { _ASSERT(0); }
-	virtual void Func_TurnOrbitalDirection() { _ASSERT(0); }
+	virtual void Func_TurnOrbitalDirection(float fDelta) { _ASSERT(0); }
 	virtual void Func_RunWayPointsAlongRoute(float fDelta) {_ASSERT(0); }
 	virtual void Func_FindTargetInDist(int dist) { _ASSERT(0); }
 	virtual void Func_FaceToLatestAttacker() { _ASSERT(0); }
