@@ -1163,7 +1163,9 @@ void MTextArea::AdjustHeightByContent()
 	SetSize(rcTextArea.w, newHeight);
 }
 
-int MTextArea::GetTextPosition(const char* text)
+MRECT MTextArea::GetTextPosition(const char* text, int const& line)
 {
-	return 0;
+	return MRECT(0, 0, 0, 0);
+	m_CurrentLine = GetIterator(line);// ()->
+
 }

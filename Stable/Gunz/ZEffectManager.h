@@ -298,6 +298,8 @@ protected:
 
 	RMesh* m_pBlitzEffect[BE_END];
 
+	RMesh* m_pPalmPow;
+
 	RMeshMgr* m_pEffectMeshMgr;
 
 	ZEffectBulletMarkList		m_BulletMarkList;
@@ -427,6 +429,8 @@ public:
 	void AddBerserkerIcon(ZObject* pObj);
 	void AddFlagEffect(ZObject* pObj);
 	void AddBlitzBuff(ZCharacter* pChar, BLITZHONOREFFECT effect);
+
+	void AddPalmPow(ZObject* pObj);
 
 	void AddChatIcon(ZObject* pObj);
 	void AddLostConIcon(ZObject* pObj);

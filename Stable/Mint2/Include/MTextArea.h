@@ -190,7 +190,7 @@ public:
 	void AdjustHeightByContent();
 
 	//Custom: GetTextPosition for emojis
-	int GetTextPosition(const char* text);
+	MRECT GetTextPosition(const char* text,int const& line);
 };
 
 #define MTEXTAREA_ENTER_VALUE		"entered"

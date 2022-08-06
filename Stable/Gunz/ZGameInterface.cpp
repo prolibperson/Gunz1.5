@@ -484,6 +484,9 @@ ZGameInterface::~ZGameInterface()
 	SAFE_DELETE(m_pLoginPanel);
 
 	SAFE_DELETE(m_pShopEquipInterface);
+
+	SAFE_DELETE(m_Capture);
+
 }
 
 
@@ -642,6 +645,9 @@ bool ZGameInterface::InitInterface(const char* szSkinName, ZLoadingProgress *pLo
 	// Player Menu
 	m_pPlayerMenu = new ZPlayerMenu("PlayerMenu", this, this, MPMT_VERTICAL);
 	((MPopupMenu*)m_pPlayerMenu)->Show(false);
+
+	m_Capture = new ZBandiCapturer;
+	m_Capture->Init(g_hWnd, (LPDIRECT3DDEVICE9)RGetDevice());
 
 	return true;
 }
@@ -1319,8 +1325,7 @@ bool ZGameInterface::OnGameCreate(void)
 #endif
 
 	//// �좯�����o A��AA...2008.10.02
-	m_Capture = new ZBandiCapturer;
-	m_Capture->Init(g_hWnd, (LPDIRECT3DDEVICE9)RGetDevice());
+
 
 	return true;
 }
@@ -1369,7 +1374,6 @@ void ZGameInterface::OnGameDestroy(void)
 	m_bLeaveStageReserved = false;
 
 	// �좯�����o A��AA...2008.10.02
-	SAFE_DELETE(m_Capture);
 
 	mlog("game interface destroy finished\n");
 }

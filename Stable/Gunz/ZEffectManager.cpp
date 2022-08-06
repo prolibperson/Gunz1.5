@@ -459,6 +459,9 @@ bool ZEffectManager::Create(void)
 	m_pBlitzEffect[5] = m_pEffectMeshMgr->Get("ef_Blitz_CombatOfficerBuff");
 	m_pBlitzEffect[6] = m_pEffectMeshMgr->Get("ef_Blitz_HonorItem");
 
+	//CUstom: palmpowtest
+	m_pPalmPow = m_pEffectMeshMgr->Get("ef_palpow_baby");
+
 	m__skip_cnt = 0;
 	m__cnt = 0;
 	m__rendered = 0;
@@ -2876,6 +2879,7 @@ void ZEffectManager::AddBlitzBuff(ZCharacter* pChar, BLITZHONOREFFECT effect)
 	Add(pNew);
 }
 
+
 class ZEffectIconLoop : public ZEffectIcon { // 멤버를 추가하면 에러
 private:
 public:
@@ -2913,7 +2917,7 @@ public:
 		virtual bool Draw(unsigned long int nTime)
 		{
 			MMatchObjCache* pCache = ZGetGameClient()->FindObjCache(m_uid);
-			if (pCache && pCache->GetUGrade() != MMUG_STAR)
+			if (pCache == nullptr)
 				return false;
 
 			return ZEffectIconLoop::Draw(nTime);
@@ -3090,6 +3094,15 @@ void ZEffectManager::AddStarEffect( ZObject *pObj )
 	Add(pNew);
 */
 }
+
+void ZEffectManager::AddPalmPow(ZObject* pObj)
+{
+	ZEffect* pNew = new ZEffectIconLoopStar(m_pPalmPow, pObj);
+	((ZEffectIconLoopStar*)pNew)->SetAlignType(1);
+	((ZEffectIconLoopStar*)pNew)->m_type = eq_parts_pos_info_LUpperArm;// _RMeshPartsPosInfoType(i);
+	Add(pNew);
+}
+
 
 void ZEffectManager::Add(const char* szName,const rvector& pos, const rvector& dir,const MUID& uidOwner,int nLifeTime)
 {

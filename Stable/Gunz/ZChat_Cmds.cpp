@@ -1647,6 +1647,7 @@ void ChatCmd_Framed(const char* line, const int argc, char **const argv)
 			sprintf(szMsg, "^1Wireframe mode deactivated!");
 			ZChatOutput(szMsg);
 		}
+		ZGetGame()->GetWorld()->GetBsp()->SetWireframeMode(ZGetGame()->m_bShowWireframe);
 	}
 	else
 	{

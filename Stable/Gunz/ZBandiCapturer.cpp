@@ -172,6 +172,7 @@ BCAP_CONFIG ZBandiCapturer::GetConfig()
 	//BCAP_CONFIG cfg;
 	g_nConfig.VideoCodec = FOURCC_H264;
 	g_nConfig.VideoFPS = 60;
+	g_nConfig.VideoQuality = 80;
 	return g_nConfig;
 
 }
@@ -232,8 +233,6 @@ void GetFolderScreenShot(TCHAR* pPath)
 	{
 		strcpy(foldername, pPath);
 		strcat(foldername, "\\Gunz");
-		char szCharName[MATCHOBJECT_NAME_LENGTH];
-		ValidateFilename(szCharName, ZGetMyInfo()->GetCharName(), '_');
 		CreatePath(foldername);
 		strcat(foldername, "\\Screenshots");
 		CreatePath(foldername);
@@ -253,9 +252,22 @@ bool ZBandiCapturer::CaptureImage()
 
 	TCHAR	folderName[MAX_PATH];
 	GetFolderScreenShot(folderName);
-	m_bandiCaptureLibrary.MakePathnameByDate(folderName, _T(""), "jpg", m_pathName, MAX_PATH);
 
-	if (FAILED(m_bandiCaptureLibrary.CaptureImage(m_pathName, BCAP_IMAGE_JPG, 90, BCAP_MODE_D3D9_SCALE, FALSE, (LONG_PTR)m_pDevice)))
+	char szCharName[MATCHOBJECT_NAME_LENGTH] = "null";
+	if (ZGetMyInfo() != nullptr && ZGetMyInfo()->GetCharName() != nullptr)
+	{
+		ValidateFilename(szCharName, ZGetMyInfo()->GetCharName(), '_');
+
+	}
+	SYSTEMTIME t;
+	GetLocalTime(&t);
+	char fileName[MAX_PATH];
+	sprintf(fileName, "%s_%4d%02d%02d_%02d%02d%02d",
+		szCharName, t.wYear, t.wMonth, t.wDay, t.wHour, t.wMinute, t.wSecond);
+
+	m_bandiCaptureLibrary.MakePathnameByDate(folderName, fileName, "jpg", m_pathName, MAX_PATH);
+
+	if (FAILED(m_bandiCaptureLibrary.CaptureImage(m_pathName, BCAP_IMAGE_JPG, 80, BCAP_MODE_D3D9_SCALE, FALSE, (LONG_PTR)m_pDevice)))
 		return false;
 
 	return true;
