@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Aug  5 2022 21:31:02) 
-Log time (08/05/22 21:46:38)
+GUNZ 1,0,0,290 launched. build (Aug  7 2022 20:02:18) 
+Log time (08/09/22 19:51:25)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -27,19 +27,19 @@ ZApplication::OnCreate : begin
 3(Speakers (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.540000 
+-------------------> Sound Engine Create : 0.519000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.656000 
+loading pictures : 1.650000 
 IDLResource Loading Success!!
-IDL resources : 0.131000 
+IDL resources : 0.132000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.210000 
+Screen Effect Manager Create : 0.209000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -66,7 +66,7 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.485000 
+-------------------> GameInterface Create : 2.470000 
 
 model/man/man-parts_shunter.elu mesh eq_chest_shunter node 34 face 0 point -> physique 3 Greater than
 model/man/man-parts_dryad.elu mesh eq_chest_dryad node 680 face 0 point -> physique 3 Greater than
@@ -78,14 +78,14 @@ model/woman/woman-parts_bloodsuit.elu mesh eq_chest_bloodsuit node 129 face 0 po
 model/woman/woman-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 1 point -> physique 3 Greater than
 Load character.xml success,
 
--------------------> Character Loading : 1.912000 
+-------------------> Character Loading : 1.943000 
 
 
--------------------> WeaponMesh Loading : 0.280000 
+-------------------> WeaponMesh Loading : 0.287000 
 
 Load weapon.xml success. 
 
--------------------> Worlditem Loading : 0.020000 
+-------------------> Worlditem Loading : 0.019000 
 
 Load zitem info success.
 Load zBuff info success.
@@ -95,7 +95,7 @@ Init channel rule manager success.
 Init abuse manager success.
 Init chatting filter. success
 
--------------------> ETC .. : 0.232000 
+-------------------> ETC .. : 0.235000 
 
 
 LoginID: jetman82
@@ -141,33 +141,80 @@ BspObject load lightmap : end
 RBspObject::Open : done
 ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
 main : OnCreate() done
-Destroy gunz
-Destroy sound engine.
-Destroy sound engine. success
-Destroy console.
-Destroy interface begin 
-destroy client.
-PeerInfoList Released
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-clear IDL resource end.
-Final interface end.
-Destroy game interface done.
-clear looks end.
-Widget map clear end.
-desctroy cursor system end.
-Destroy mesh manager.
-Destroy weapon mesh manager.
-Clear SkillManager.
-Clear QuestItemDescMgr.
-Clear MatchItemDescMgr.
-Clear ChattingFilter.
-Clear ChannelRuleMgr.
-destroy game application done.
-interface finalize.
-game input destroy.
-game gonfiguration destroy.
-Bitmap manager destroy Animation bitmap.
-destroy gunz finish.
-Rframe_destory::closeDisplay
+Server Connected
+Login Successful. 
+Responsed Account Charlist
+Selected character name : Jetman82 (4A 65 74 6D 61 6E 38 32 )  (len = 8)
+Shop Gamble item count : 2
+shop gitem : 1000003, Green Box
+shop gitem : 1000004, Gold Box
+0,Jetman82,Jetman82,This is a test send
+0,Jetman82,Jetman82,This is a test send
+StageCreated
+game create begin , type = 0
+BspObject open : begin maps/Mansion/Mansion.rs 
+RBspObject::Open : Open_MaterialList
+RBspObject::Open : Open_LightList
+BspObject open object list : begin
+RBspObject::Open_ObjectList : size 8 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : pInfo->pVisualMesh == NULL 
+RBspObject::Open_ObjectList : end
+RBspObject::Open : OpenDescription
+RBspObject::OpenRs : file.Open 
+RBspObject::OpenRs : file.Read(&header) 
+RBspObject::OpenRs : file.Read(&nMaterial) 
+RBspObject::OpenRs : Open_Nodes begin 
+RBspObject::OpenRs : Open_Nodes end 
+RBspObject::Open : OpenRs 
+RBspObject::Open : OpenBsp 
+BspObject load lightmap : file.Read(&header)
+BspObject load lightmap nCount = 4
+BspObject load lightmap 0
+BspObject load lightmap 1
+BspObject load lightmap 2
+BspObject load lightmap 3
+BspObject load lightmap : file.Read(&m_nLightmap) done
+BspObject load lightmap : end 
+RBspObject::Open : done
+create game enrvironment.
+Crash ( 19:52:03 )
+Build Apr  2 2022 20:07:36
+
+dwTotalMemKB = 16701668 KB
+dwAvailMemKB = 8801216 KB
+dwVirtualMemKB = 2097024 KB
+
+[Exception]
+Address	:	7580f192
+ExpCode	:	e06d7363
+Flags	:	00000001
+#Param	:	00000003
+other	:	00000000
+
+[Context]
+GS : 0000002b  FS : 00000053  ES : 0000002b  DS : 0000002b
+EDI: 00678eb0  ESI: 00000000  EBX: 19930520  EDX: 00000000
+ECX: 00000003  EAX: 024fd800  EBP: 024fd858  EIP: 7580f192
+CS : 00000023  Flg: 00000216  ESP: 024fd800  SS : 0000002b
+
+[Stack]
+e06d7363 00000001 00000000 7580f192 00000003 19930520 024fd898 00678eb0 
+00000000 00000000 3f1c1e42 00000000 00000000 3f1c1e42 00000003 00000f08 
+00000000 00000000 000001e1 02308000 024fd868 b21331a6 024fd888 00590859 
+e06d7363 00000001 00000003 024fd87c 00445f74 00000001 024fd898 19930520 
+024fd898 00678eb0 024fd89c 0044607e 024fd898 00678eb0 00694cc8 024fd8b0 
+00445f97 ffffffff 318e3a58 024fdbfc 024fdb9c 00430e3e ffffffff d2a81f9b 
+33205070 31810920 024fd9a0 024fdbbc 02000002 008eb1b8 4600b9ff 024fdb5c 
+4600b9ff ffffffff 31c11e50 31c11e50 b6d6c55d 318e3a58 4600b9ff 318e3d88 
+00000000 318e3a58 024fdbfc 31810920 02620000 00003c70 057f3318 00000014 
+00000000 3356d0a8 00000146 ffff4749 024fda68 778f9151 02620258 778f9050 
+8366b56a 3356d0a8 02620000 00000000 00000000 00000000 00000000 024fd988 
+02000002 00001000 4600b9ff 00000000 0a000208 00000000 49000148 000000bf 
+00001540 00000000 00000000 00001000 024fd970 00000000 000003ee ffff49f1 
+ffffff40 fffffffe 024fd9f8 005b303b 00001824 02620000 000002a8 02623a88 
+00000000 000000bf 000007ff 00000002 3356d0a8 04fd8090 0000077f 00000001 
+00000000 0262432c 00000001 057f3318 00000000 005a92f9 00000002 3356e5f0 
+

@@ -134,6 +134,21 @@ public:
 		m_Collision.SetCollisionType(type);
 	}
 
+	float GetWidth()
+	{
+		return fabsf(bbox.vmax.y - bbox.vmin.y);
+	}
+
+	float GetLength()
+	{
+		return fabsf(bbox.vmax.x - bbox.vmin.x);
+	}
+
+	float GetHeight()
+	{
+		return fabsf(bbox.vmax.z - bbox.vmin.z);
+	}
+
 	COLLTYPE const GetCollisionType()
 	{
 		return m_Collision.GetCollisionType();
@@ -176,12 +191,7 @@ public:
 
 	__forceinline rboundingbox GetBounds()
 	{
-		rvector min, max;
-		for (int i = 0; i < 3; ++i)
-		{
-			min[i] = VisualMesh->GetBoundMax()[i] * VisualMesh->GetScale()[i];
-			max[i] = VisualMesh->GetBoundMin()[i] * VisualMesh->GetScale()[i];
-		}
+		return bbox;
 	}
 
 	virtual bool InitWithMesh(WorldObject const& worldObject);
@@ -193,5 +203,8 @@ public:
 	bool Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut);
 	bool OnCheckWallHang(rvector const& pos, rvector const& dir, bool const& initial = false);
 	
-	bool IsStandingOn(rvector const& pos);
+	bool IsStandingOn(ZObject* const Object);
+	bool IntersectsXY(const rvector& a, const rboundingbox& b);
+	bool IntersectsXY(const rboundingbox& a, const rboundingbox& b);
+	bool IntersectsZ(rvector const& a, rboundingbox const& b);
 };

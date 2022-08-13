@@ -326,7 +326,7 @@ void ZWorld::Destroy()
 	m_waters.Clear();
 	m_waters.OnInvalidate();
 
-	mapObjects.clear();
+	//mapObjects.clear();
 //	SAFE_DELETE(m_pSkyBox);
 
 }
@@ -508,15 +508,15 @@ ZWorldObject* ZWorld::CheckWallHang(rvector const& pos, rvector const& dir, bool
 	return nullptr;
 }
 
-ZWorldObject* ZWorld::CheckStandingOnObject(rvector& pos)
+ZWorldObject* ZWorld::CheckStandingOnObject(ZObject* const Object)
 {
-	rvector realfloor = GetBsp()->GetFloor(pos, CHARACTER_RADIUS, CHARACTER_HEIGHT, nullptr);// , fHeight, pimpactplane);
+	rvector realfloor = GetBsp()->GetFloor(const_cast<rvector&>(Object->GetPosition()), CHARACTER_RADIUS, CHARACTER_HEIGHT, nullptr);// , fHeight, pimpactplane);
 
 	for (auto const& worldObject : mapObjects)
 	{
-		if (worldObject->IsStandingOn(pos))
+		if (worldObject->IsStandingOn(Object))
 		{
-			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetCollHeight())
+			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetHeight())
 				continue;
 			return worldObject.get();
 		}
@@ -527,11 +527,11 @@ ZWorldObject* ZWorld::CheckStandingOnObject(rvector& pos)
 rvector ZWorld::GetFloor(rvector& origin, float fRadius, float fHeight, rplane* pimpactplane)
 {
 	rvector realfloor = GetBsp()->GetFloor(origin, fRadius, fHeight, pimpactplane);
-	ZWorldObject* worldObject = PickWorldObject(origin, rvector(0, 1, 0));
+	ZWorldObject* worldObject = CheckStandingOnObject(ZGetGame()->m_pMyCharacter);// origin, rvector(0, 1, 0));
 	if (worldObject != nullptr && worldObject->IsCollidable())
 	{
-		rvector floor = worldObject->GetPosition() + rvector(worldObject->GetCollRadius(), worldObject->GetCollWidth(), worldObject->GetCollHeight());
-		if (realfloor.z < worldObject->GetPosition().z)
+		rvector floor = worldObject->GetPosition() + rvector(worldObject->GetLength(), worldObject->GetWidth(), worldObject->GetHeight());
+		if (realfloor.z < floor.z)
 			return floor;
 	}
 

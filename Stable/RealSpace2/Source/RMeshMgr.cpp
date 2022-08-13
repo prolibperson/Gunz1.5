@@ -506,13 +506,16 @@ void RMeshMgr::Del(char* Name)
 {
 	if (m_list.empty()) return;
 
-	for (auto& node : m_list)
+	for (r_mesh_node node = m_list.begin(); node != m_list.end();)
 	{
-		if (node->CmpName(Name) == true)
+		if ((*node)->CmpName(Name) == true)
 		{
-			delete node;
-			node = nullptr;
+			(*node)->ClearMtrl();
+			delete* node;
+			node = m_list.erase(node);
 		}
+		else
+			++node;
 	}
 }
 

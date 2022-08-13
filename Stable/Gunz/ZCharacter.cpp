@@ -1275,14 +1275,28 @@ void ZCharacter::UpdateHeight(float fDelta)
 				vPos.z += 50.f;
 
 				RBSPPICKINFO pInfo;
-				ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckStandingOnObject(vPos);
+				ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckStandingOnObject(this);
 				if (worldObject)
 				{
 					std::string sound;
 					sound = "man_jump_";
 					sound.append(worldObject->GetSound());
-					ZGetSoundEngine()->PlaySound(sound.c_str());
-					ZGetEffectManager()->AddLandingEffect(vPos, vDir,500);//내부에서 옵션에 따라~
+					//ZGetSoundEngine()->PlaySound(sound.c_str());
+					ZGetEffectManager()->AddLandingEffect(vPos, vDir, 500);
+					AniFrameInfo* pInfo = m_pVMesh->GetFrameInfo(ani_mode_lower);
+					RAniSoundInfo* pSInfo = &pInfo->m_SoundInfo;
+
+					if (pSInfo->Name[0]) 
+					{
+						pSInfo->isPlay = true;
+						UpdateSound();
+					}
+					else
+					{//벽점프후 사운드등은 등록되어 있지 않다..
+						strcpy(pSInfo->Name, sound.c_str());
+						pSInfo->isPlay = true;
+						UpdateSound();
+					}
 
 				}
 
@@ -2651,7 +2665,7 @@ void ZCharacter::UpdateSound()
 		if(ZGetGame()->GetWorld()->GetBsp()->Pick(GetPosition()+rvector(0,0,100),rvector(0,0,-1),&bpi))
 		{
 			//if you're on top of a world object, dont use the sound beneath it!
-			if (ZGetGame()->GetWorld()->CheckStandingOnObject(m_Position.Ref()) == false)
+			if (ZGetGame()->GetWorld()->CheckStandingOnObject(this) == false)
 			{
 				pMaterial = ZGetGame()->GetWorld()->GetBsp()->GetMaterial(bpi.pNode, bpi.nIndex);
 			}
@@ -2721,7 +2735,7 @@ void ZCharacter::UpdateSound()
 
 		if (m_nWhichFootSound != nCurrFoot)
 		{
-			ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckStandingOnObject(m_Position.Ref());
+			ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckStandingOnObject(this);
 			if (worldObject != nullptr)
 			{
 				rvector pos;

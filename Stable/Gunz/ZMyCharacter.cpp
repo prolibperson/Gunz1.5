@@ -2387,7 +2387,7 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 	/*Custom: worldobjects : if a player is currently picking an object and the heightdiff is less than collision, set landing to true
 	so walking when the object is going down won't cause acceleration issues*/
-	ZWorldObject* obje = ZGetGame()->GetWorld()->CheckStandingOnObject(m_Position.Ref());
+	ZWorldObject* obje = ZGetGame()->GetWorld()->CheckStandingOnObject(this);
 	if (obje != nullptr)
 	{
 		if (uStatus.m_bJumpUp == false && uStatus.m_bJumpDown == false)
@@ -2396,12 +2396,11 @@ void ZMyCharacter::OnUpdate(float fDelta)
 
 			if (!zStatus.m_bMoving)
 			{
-				rvector diff = rvector(obje->GetLastMoveDiff().x, obje->GetLastMoveDiff().y, 0);
+				rvector diff = rvector(obje->GetLastMoveDiff().x, obje->GetLastMoveDiff().y, obje->GetLastMoveDiff().z);
 				Move(diff);
 			}
 
-			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetCollHeight()));
-			//m_Position.Ref().z = obje->GetPosition().z + obje->GetCollHeight();
+			SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, obje->GetPosition().z + obje->GetHeight()));
 		}
 	}
 	//Custom: Worldobjects : if player isn't standing on top of the object, attempt to hang. redo later so players can jump from one objec tto another and hang

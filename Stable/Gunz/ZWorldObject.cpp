@@ -28,9 +28,10 @@ ZWorldObject::~ZWorldObject() noexcept
 {
 	delete VisualMesh;
 	VisualMesh = nullptr;
+	LastMoveDiff = rvector(0, 0, 0);
 
 	//remove model from memory, will be loaded again next time it's needed
-	ZGetMeshMgr()->Del((char*)Model.c_str());
+	ZGetMeshMgr()->Del((char*)Name.c_str());
 }
 
 //todo: init mesh differently, currently using npc mesh manager...
@@ -52,11 +53,11 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 
 	if (pMesh == nullptr)
 	{
-		ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)worldObj.name.c_str(), false, true);
+		ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)Name.c_str(), false, true);
 	}
 
 
-	pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
+	pMesh = ZGetMeshMgr()->Get((char*)Name.c_str());
 	if (pMesh == nullptr)
 		return false;
 
@@ -65,14 +66,7 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 	VisualMesh = new RVisualMesh;
 	VisualMesh->Create(pMesh);
 
-	if (worldObj.animation.empty() == false)
-	{
-		std::string meshpath = szBuf;
-		meshpath.append(worldObj.animation.c_str());
-		RAnimation* pAni = VisualMesh->GetMesh()->m_ani_mgr.AddGameLoad((char*)worldObj.animation.c_str(), (char*)meshpath.c_str(), -1, 0);
-		pAni->SetAnimationLoopType(AnimationLoopType::RAniLoopType_Loop);
-		VisualMesh->SetAnimation(worldObj.animation.c_str());
-	}
+
 
 	VisualMesh->SetVisibility(1.f);
 	VisualMesh->GetMesh()->SetTextureRenderOnOff(true);
@@ -96,12 +90,63 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 	rmatrix mat = GetWorldMatrix();
 	VisualMesh->SetWorldMatrix(mat);
 
+	if (worldObj.animation.empty() == false)
+	{
+		VisualMesh->SetAnimation(worldObj.animation.c_str());
+	}
+
 
 	return true;
 }
 
+bool ZWorldObject::IntersectsZ(rvector const& a, rboundingbox const& b)
+{
+
+	return
+		a.z >= b.vmin.z &&
+		a.z <= b.vmax.z;
+}
+
 void ZWorldObject::Update(float elapsed)
 {
+	//todo: write check for if object is movable. need to add variable and decide where to call this later
+	//for (auto const& itor : ZGetGame()->m_CharacterManager)
+	//{
+	//	ZCharacterObject* player = itor.second;
+
+	//	if (IntersectsXY(player->GetPosition(), bbox))
+	//	{
+	//		if (fabs((CurrPosition.z + GetHeight()) - player->GetPosition().z) < CHARACTER_HEIGHT)
+	//		{
+	//			continue;
+	//		}
+	//		rvector pos = GetPosition();
+	//		rvector newthispos = pos + ((ZModule_Movable*)player->GetModule(ZMID_MOVABLE))->GetLastMove() * (CHARACTER_RADIUS + 1.f);
+	//		newthispos.z = 0;
+
+	//		rvector diff = newthispos - CurrPosition;
+
+	//		CurrPosition.x += diff.x + CHARACTER_RADIUS * elapsed;
+	//		CurrPosition.y += diff.y + CHARACTER_RADIUS * elapsed;
+	//	}
+	//}
+
+	//rmatrix mat = GetWorldMatrix();
+	//VisualMesh->SetWorldMatrix(mat);
+
+	rvector vmin, vmax;
+	VisualMesh->GetBBox(vmin, vmax);
+	bbox = rboundingbox(vmin, vmax);
+
+	for (int i = 0; i < 3; ++i)
+	{
+		bbox.vmin[i] *= VisualMesh->GetScale()[i];
+		bbox.vmax[i] *= VisualMesh->GetScale()[i];
+	}
+
+	rboundingbox transformed = bbox.Transform(GetWorldMatrix());
+
+	bbox = transformed;
 }
 
 void ZWorldObject::Draw()
@@ -116,17 +161,7 @@ void ZWorldObject::Draw()
 	VisualMesh->Frame();
 	VisualMesh->Render();
 
-	rvector vmin, vmax;
-	VisualMesh->GetBBox(vmin, vmax);
-	rboundingbox bbox(vmin, vmax);
 
-	for (int i = 0; i < 3; ++i)
-	{
-		bbox.vmin[i] *= VisualMesh->GetScale()[i];
-		bbox.vmax[i] *= VisualMesh->GetScale()[i];
-	}
-
-	rboundingbox transformed = bbox.Transform(GetWorldMatrix());
 
 
 	_RS2::RGetDevice()->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1);
@@ -148,8 +183,8 @@ void ZWorldObject::Draw()
 		rvector a, b;
 		for (j = 0; j < 3; j++)
 		{
-			a[j] = ind[lines[i][0]][j] ? transformed.vmax[j] : transformed.vmin[j];
-			b[j] = ind[lines[i][1]][j] ? transformed.vmax[j] : transformed.vmin[j];
+			a[j] = ind[lines[i][0]][j] ? bbox.vmax[j] : bbox.vmin[j];
+			b[j] = ind[lines[i][1]][j] ? bbox.vmax[j] : bbox.vmin[j];
 		}
 
 		_RS2::RDrawLine(a, b, 0xFFFF0000);
@@ -192,60 +227,51 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 
 bool ZWorldObject::OnCheckWallHang(rvector const& pos, rvector const& dir, bool const& initial)
 {
-
-	if (IsStandingOn(pos) == true)
-		return false;
-
-	//todo: tweak this better
+	//todo: rewrite this, intersectsZ works but need to check the difference between the pos and min/max values of boundingbox
+	//todo: handle direction???
 	if (IsCollidable() == false)
 	{
 		return false;
 	}
 
-	rvector diff = GetPosition() - pos;
-	diff.z = 0;
-
-	float objDistance = 0;
-	if (GetCollisionType() == CT_CYLINDER)
-		objDistance = GetCollRadius();
-	else
-		objDistance = GetCollWidth();
-
-	float heightdiff = fabs(pos.z - CurrPosition.z);
-
-	//if player is close enough to the object, but not too high, return true to hang.
-	if (Magnitude(diff) < objDistance + 100) //add 100 for sword stab
+	float diff = fabs(pos.x - GetLength());
+	float diffy = fabs(pos.y - GetWidth());
+	if (diff < 100 && diffy < 100 && IntersectsZ(pos,bbox))
 	{
-		if(heightdiff <= GetCollHeight())
 		return true;
 	}
+
 	return false;
 }
 
-bool ZWorldObject::IsStandingOn(rvector const& pos)
+
+bool ZWorldObject::IntersectsXY(const rvector& a, const rboundingbox& b)
+{
+	return
+		a.x >= b.vmin.x &&
+		a.x <= b.vmax.x&&
+		a.y >= b.vmin.y &&
+		a.y <= b.vmax.y;
+}
+
+bool ZWorldObject::IntersectsXY(const rboundingbox& a, const rboundingbox& b)
+{
+	return a.vmin.x >= b.vmin.x && a.vmax.x <= b.vmax.x
+		&& a.vmin.y >= b.vmin.y && a.vmax.y <= b.vmax.y;
+}
+
+bool ZWorldObject::IsStandingOn(ZObject* const Object)
 {
 	if (IsCollidable() == false)
 	{
 		return false;
 	}
-	rvector diff = GetPosition() - pos;
-	diff.z = 0;
 
-	// 나중에 radius상수값으로 된것 Object의 멤버변수로 고치자
-	float objDistance = 0;
-	if (GetCollisionType() == CT_CYLINDER)
-		objDistance = GetCollRadius();
-	else
-		objDistance = GetCollWidth();
 
-	
-	//todo: improve some more but fixes the teleportation bug
-	if (Magnitude(diff) < objDistance && fabs(CurrPosition.z - pos.z) < (GetCollHeight() + CHARACTER_HEIGHT))
+	if (IntersectsXY(Object->GetPosition(), bbox) && fabs((CurrPosition.z + GetHeight()) - Object->GetPosition().z) < CHARACTER_HEIGHT)
 	{
-		if (pos.z + CHARACTER_HEIGHT >= CurrPosition.z + GetCollHeight())
-			return true;
-
-		return false;
+		return true;
 	}
+
 	return false;
 }

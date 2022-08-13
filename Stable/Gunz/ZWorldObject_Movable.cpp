@@ -3,7 +3,7 @@
 
 ZWorldObject_Movable::ZWorldObject_Movable()
 {
-
+	moveSpeed = 0;
 }
 
 ZWorldObject_Movable::~ZWorldObject_Movable()
@@ -12,8 +12,6 @@ ZWorldObject_Movable::~ZWorldObject_Movable()
 
 void ZWorldObject_Movable::Update(float elapsed)
 {
-
-
 	Move(elapsed);
 	rmatrix mat = GetWorldMatrix();
 	VisualMesh->SetWorldMatrix(mat);

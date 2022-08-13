@@ -108,7 +108,7 @@ struct rboundingbox
 			abs(transform._13) * extent_old.x + abs(transform._23) * extent_old.y + abs(transform._33) * extent_old.z
 		);
 
-		return rboundingbox(center_new - extend_new, center_new + extend_new);
+		return rboundingbox(center_new + extend_new, center_new - extend_new);
 	}
 
 

@@ -60,6 +60,19 @@ void ZScreenDebugger::DrawDebugInfo(MDrawContext *pDC)
 		sprintf_s(buffer, "Damage Dealt : %d", ZGetCombatInterface()->GetDamageDealt());
 		x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
 		pDC->Text(x, 50, buffer);
+
+		rvector dir = ZGetGame()->m_pMyCharacter->GetDirection();
+
+		sprintf_s(buffer, "Direction : %0.f %0.f %0.f", dir.x, dir.y, dir.z);
+
+		x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
+		pDC->Text(x, 70, buffer);
+
+		rvector pos = ZGetGame()->m_pMyCharacter->GetPosition();
+		sprintf_s(buffer, "Position : %0.f %0.f %0.f", pos.x, pos.y, pos.z);
+		x = pDC->GetClipRect().w - pDC->GetFont()->GetWidth(buffer) - 10;
+
+		pDC->Text(x, 90, buffer);
 	}
 
 

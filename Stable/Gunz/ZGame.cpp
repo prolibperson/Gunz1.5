@@ -7904,80 +7904,121 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 		}
 	}
 
+	//todo: adjust for AABB collision
+
 	for (auto const& worldObject : GetWorld()->GetWorldObjects())
 	{
 		if (worldObject->IsCollidable() == false)
 			continue;
 
-		rvector pos = worldObject->GetPosition();
-		rvector dir = pObject->GetPosition() + diff - pos;
-		dir.z = 0;
-		float fDist = Magnitude(dir);
-
-		float objDistance = 0;
-		if (worldObject->GetCollisionType() == CT_CYLINDER)
-			objDistance = worldObject->GetCollRadius();
-		else
-			objDistance = worldObject->GetCollWidth();
-
-		float fCOLLISION_DIST = objDistance + pObject->GetCollRadius();
-
-		if (worldObject->GetCollisionType() == CT_CYLINDER)
+		if (worldObject->IsStandingOn(pObject) == false)
 		{
-			if (fDist < fCOLLISION_DIST && fabs(pos.z - pObject->GetPosition().z) < worldObject->GetCollHeight())
+			rboundingbox objectbounds = worldObject->GetBounds();
+			if (worldObject->IntersectsXY(pObject->GetPosition() + rvector(CHARACTER_RADIUS, CHARACTER_RADIUS, 0), objectbounds)
+				&& worldObject->IntersectsZ(pObject->GetPosition() + rvector(0,0,CHARACTER_HEIGHT), objectbounds))
 			{
-				if (fDist <= 1.f)
-				{
-					pos.x += 1.f;
-					dir = pObject->GetPosition() - pos;
-				}
+				//todo: make player stop moving properly
+				//rvector lastmove = ((ZModule_Movable*)pObject->GetModule(ZMID_MOVABLE))->GetLastMove();
+				//rvector dir = worldObject->GetPosition() - pObject->GetPosition();
+				//dir.z = 0;
+				//Normalize(dir);
+				//diff.x += lastmove.x * dir.x + lastmove.x;
+				//diff.y += lastmove.y * dir.y + lastmove.y;
 
-				if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
-				{
-					Normalize(dir);
-					rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
-
-					rvector newdiff = newthispos - pObject->GetPosition();
-					diff.x = newdiff.x;
-					diff.y = newdiff.y;
-				}
-			}
-		}
-		else
-		{
-			if (fDist < fCOLLISION_DIST)// && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
-			{
-				//if (pObject->GetUID() == ZGetMyUID())
-				//{
-				//	m_pMyCharacter->Die();
-				//}
-
-				float heightdiff = fabs(pObject->GetPosition().z - pos.z);
-
-				if (heightdiff < worldObject->GetCollHeight() && pObject->GetPosition().z < pos.z)
-				{
-					if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
-					{
-						Normalize(dir);
-						rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
-
-						rvector newdiff = newthispos - pObject->GetPosition();
-						diff.x = newdiff.x;
-						diff.y = newdiff.y;
-					}
-				}
-
-				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z)
+				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z + worldObject->GetHeight())
 				{
 					float dist = worldObject->GetPosition().z - pObject->GetVisualMesh()->GetHeadPosition().z;
 					if (dist < worldObject->GetCollHeight())
 					{
 						diff.z -= dist;
 					}
+
+					//rvector floor = GetWorld()->GetFloor(const_cast<rvector&>(pObject->GetPosition()), CHARACTER_RADIUS, CHARACTER_HEIGHT, nullptr);
+					//dist = worldObject->GetPosition().z - worldObject->GetHeight() - floor.z;
+					//if (dist < CHARACTER_HEIGHT && pObject == ZGetGame()->m_pMyCharacter)
+					//{
+					//	ZGetGame()->m_pMyCharacter->Die();
+					//}
 				}
 			}
+
+
 		}
 	}
+	//for (auto const& worldObject : GetWorld()->GetWorldObjects())
+	//{
+	//	if (worldObject->IsCollidable() == false)
+	//		continue;
+
+	//	rvector pos = worldObject->GetPosition();
+	//	rvector dir = pObject->GetPosition() + diff - pos;
+	//	dir.z = 0;
+	//	float fDist = Magnitude(dir);
+
+	//	float objDistance = 0;
+	//	if (worldObject->GetCollisionType() == CT_CYLINDER)
+	//		objDistance = worldObject->GetCollRadius();
+	//	else
+	//		objDistance = worldObject->GetCollWidth();
+
+	//	float fCOLLISION_DIST = objDistance + pObject->GetCollRadius();
+
+	//	if (worldObject->GetCollisionType() == CT_CYLINDER)
+	//	{
+	//		if (fDist < fCOLLISION_DIST && fabs(pos.z - pObject->GetPosition().z) < worldObject->GetCollHeight())
+	//		{
+	//			if (fDist <= 1.f)
+	//			{
+	//				pos.x += 1.f;
+	//				dir = pObject->GetPosition() - pos;
+	//			}
+
+	//			if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
+	//			{
+	//				Normalize(dir);
+	//				rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
+
+	//				rvector newdiff = newthispos - pObject->GetPosition();
+	//				diff.x = newdiff.x;
+	//				diff.y = newdiff.y;
+	//			}
+	//		}
+	//	}
+	//	else
+	//	{
+	//		if (fDist < fCOLLISION_DIST)// && pObject->GetPosition().z <= worldObject->GetPosition().z + worldObject->GetCollHeight())
+	//		{
+	//			//if (pObject->GetUID() == ZGetMyUID())
+	//			//{
+	//			//	m_pMyCharacter->Die();
+	//			//}
+
+	//			float heightdiff = fabs(pObject->GetPosition().z - pos.z);
+
+	//			if (heightdiff < worldObject->GetCollHeight() && pObject->GetPosition().z < pos.z)
+	//			{
+	//				if (DotProduct(dir, diff) < 0)	// 더 가까워지는 방향이면
+	//				{
+	//					Normalize(dir);
+	//					rvector newthispos = pos + dir * (fCOLLISION_DIST + 1.f);
+
+	//					rvector newdiff = newthispos - pObject->GetPosition();
+	//					diff.x = newdiff.x;
+	//					diff.y = newdiff.y;
+	//				}
+	//			}
+
+	//			if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z)
+	//			{
+	//				float dist = worldObject->GetPosition().z - pObject->GetVisualMesh()->GetHeadPosition().z;
+	//				if (dist < worldObject->GetCollHeight())
+	//				{
+	//					diff.z -= dist;
+	//				}
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 int ZGame::GetCharacterBasicInfoTick()
