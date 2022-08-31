@@ -448,47 +448,49 @@ void ZMyCharacter::ProcessInput(float fDelta)
 					{
 						dir = (i==0) ? -right : right;
 
-						//ZWorldObject* worldObject = ZGetGame()->GetWorld()->PickWorldObject(pickorigin, dir);
-						//if (worldObject != nullptr)
-						//{
-						//	rvector backdir = -dir;
-						//	float fDist = Magnitude(pickorigin - worldObject->GetPosition());
-						//	rvector normal = rvector(bpi.pInfo->plane.a, bpi.pInfo->plane.b, bpi.pInfo->plane.c);
-						//	float fDot = DotProduct(normal, backdir);
+						rvector wallrunpickpos;
 
-						//	rvector wallright, jumpdir;
-						//	CrossProduct(&wallright, rvector(0, 0, 1), normal);
-						//	jumpdir = (i == 0) ? -wallright : wallright;
+						ZWorldObject* worldObject = ZGetGame()->GetWorld()->CheckWallRun(pickorigin, dir,wallrunpickpos);
+						if (worldObject != nullptr)
+						{
+							rvector backdir = -dir;
+							float fDist = Magnitude(pickorigin - worldObject->GetPosition());
+							rvector normal = wallrunpickpos;
+							float fDot = DotProduct(normal, backdir);
 
-						//	float fRatio = GetMoveSpeedRatio();
+							rvector wallright, jumpdir;
+							CrossProduct(&wallright, rvector(0, 0, 1), normal);
+							jumpdir = (i == 0) ? -wallright : wallright;
 
-						//	// °Å¸®¿Í ¼Óµµ°¡ ¸Â°í, °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù.
-						//	if (fDist<100.f && DotProduct(GetVelocity(), jumpdir)>RUN_SPEED * fRatio * .8f &&
-						//		fDot > cos(55.f / 180.f * pi) && fDot < cos(25.f / 180.f * pi) && DotProduct(jumpdir, dir) < 0)
-						//	{
-						//		// ´ë·« º®¹â°í 3¹ÌÅÍÂë ´Þ·Á°£ µÚ¿¡µµ °°Àº Æò¸éÀ» ¹âÀ»¼ö ÀÖ¾î¾ß ÇÑ´Ù.
-						//		rvector neworigin = pickorigin + 300.f * jumpdir;
+							float fRatio = GetMoveSpeedRatio();
 
-						//		RBSPPICKINFO bpi;
-						//		bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(neworigin, dir, &bpi);
-						//		if (bPicked && fabsf(Magnitude(bpi.PickPos - neworigin) - fDist) < 10)
-						//		{
-						//			rvector targetpos = pickorigin + 300.f * jumpdir;
-						//			bool bAdjusted = ZGetGame()->GetWorld()->GetBsp()->CheckWall(pickorigin, targetpos, CHARACTER_RADIUS - 5, 60);
-						//			if (!bAdjusted)
-						//			{
-						//				bWallJump = true;
-						//				nWallJumpDir = (i == 0) ? 0 : 2; // ( ¿ÞÂÊ : ¿À¸¥ÂÊ )
+							// °Å¸®¿Í ¼Óµµ°¡ ¸Â°í, °¢µµ°¡ ¸Â¾Æ¾ß ÇÑ´Ù.
+							if (fDist<100.f && DotProduct(GetVelocity(), jumpdir)>RUN_SPEED * fRatio * .8f &&
+								fDot > cos(55.f / 180.f * pi) && fDot < cos(25.f / 180.f * pi) && DotProduct(jumpdir, dir) < 0)
+							{
+								// ´ë·« º®¹â°í 3¹ÌÅÍÂë ´Þ·Á°£ µÚ¿¡µµ °°Àº Æò¸éÀ» ¹âÀ»¼ö ÀÖ¾î¾ß ÇÑ´Ù.
+								rvector neworigin = pickorigin + 300.f * jumpdir;
 
-						//				SetTargetDir(jumpdir);
-						//				float speed = Magnitude(GetVelocity());
-						//				SetVelocity(jumpdir * speed);
-						//			}
-						//		}
-						//	}
-						//}
+								RBSPPICKINFO bpi;
+								//bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(neworigin, dir, &bpi);
+								if (fabsf(Magnitude(worldObject->GetPosition() - neworigin) - fDist) < 10)
+								{
+									rvector targetpos = pickorigin + 300.f * jumpdir;
+									//bool bAdjusted = ZGetGame()->GetWorld()->GetBsp()->CheckWall(pickorigin, targetpos, CHARACTER_RADIUS - 5, 60);
+								//	if (!bAdjusted)
+									{
+										bWallJump = true;
+										nWallJumpDir = (i == 0) ? 0 : 2; // ( ¿ÞÂÊ : ¿À¸¥ÂÊ )
 
-					//	else
+										SetTargetDir(jumpdir);
+										float speed = Magnitude(GetVelocity());
+										SetVelocity(jumpdir * speed);
+									}
+								}
+							}
+						}
+
+						else
 						{
 							RBSPPICKINFO bpi;
 							bool bPicked = ZGetGame()->GetWorld()->GetBsp()->Pick(pickorigin, dir, &bpi);
@@ -1372,7 +1374,7 @@ void ZMyCharacter::OnGadget_Hanging()
 	} else {
 		if(ZGetGame()->GetTime()-m_timeInfo.Ref().m_fHangTime>.4f && !zStatus.m_bHangSuccess) {
 			// º®¿¡ ¸Å´Þ¸±¼ö ÀÖ´ÂÁö °Ë»ç.
-			rvector pickorigin,pickto,dir;
+			rvector pickorigin,dir;
 			rvector front=m_Direction;
 			front.z=0;
 			Normalize(front);
@@ -1386,6 +1388,10 @@ void ZMyCharacter::OnGadget_Hanging()
 				zStatus.m_bHangSuccess = true;
 				SetPosition(rvector(m_Position.Ref().x, m_Position.Ref().y, GetPosition().z + worldObject->GetLastMoveDiff().z));
 
+				/*rvector dir = m_Position.Ref();
+				Normalize(dir);*/
+
+			//	ZGetEffectManager()->AddLightFragment(m_Position.Ref() + rvector(100,0,210),dir);
 				ZGetSoundEngine()->PlaySoundHangOnWall(GetItems()->GetSelectedWeapon()->GetDesc(),(rvector)GetPosition() + worldObject->GetLastMoveDiff());
 			}
 			else

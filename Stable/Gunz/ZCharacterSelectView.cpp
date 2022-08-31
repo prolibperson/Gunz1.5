@@ -73,6 +73,11 @@ void ZCharacterSelectView::SetLastChar(char* szName)
 	if (fp)
 	{
 		fputs(szName, fp);
+
+		//for (int i = 0; i < 5; ++i)
+		//{
+		//	fputs((char*)to_string(m_CharInfo[m_nSelectedCharacter].m_CharInfo.nEquipedItemDesc[i]).c_str(), fp);
+		//}
 		fclose(fp);
 	}
 
@@ -215,6 +220,9 @@ void ZCharacterSelectView::DrawCharacterLight(rvector& vCharPos)
 
 }
 
+static DWORD meshupdatetime = 0;
+bool MeshesFinishedLoading = false;
+
 void ZCharacterSelectView::Draw()
 {
 	if ( m_nState == ZCSVS_SELECT) 
@@ -224,6 +232,21 @@ void ZCharacterSelectView::Draw()
 	}
 
 	if (m_pVisualMesh == NULL) return;
+
+	meshupdatetime += 1000;
+
+	//todo: create a callback instead of this lazy check
+	if (meshupdatetime >= 200000 && MeshesFinishedLoading == false)
+	{
+	//	m_pVisualMesh->ClearParts();
+		MeshesFinishedLoading = true;
+		ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[m_nSelCharIndex].m_CharInfo.nSex),
+			m_CharInfo[m_nSelCharIndex].m_CharInfo.nHair, m_CharInfo[m_nSelCharIndex].m_CharInfo.nFace,
+			m_CharInfo[m_nSelCharIndex].m_CharInfo.nEquipedItemDesc);
+		return;
+		//MeshesFinishedLoading = false;
+	}
+
 
 	if( !Enable_Cloth && m_pVisualMesh->isChestClothMesh() )
 	{
@@ -274,6 +297,11 @@ void ZCharacterSelectView::Draw()
 		rmatrix m = RGetRotZ(m_fCRot);
 		Dir = Dir * m;
 	}
+
+	//todo: create a callback instead of this lazy check!!!
+	//ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[m_nSelCharIndex].m_CharInfo.nSex),
+	//	m_CharInfo[m_nSelCharIndex].m_CharInfo.nHair, m_CharInfo[m_nSelCharIndex].m_CharInfo.nFace,
+	//	m_CharInfo[m_nSelCharIndex].m_CharInfo.nEquipedItemDesc);
 
 	DWORD dw;
 	RGetDevice()->GetRenderState(D3DRS_FOGENABLE,&dw);
@@ -424,13 +452,45 @@ void ZCharacterSelectView::SelectChar(int nSelectIndex)
 	m_pVisualMesh->InitOwnVMesh();
 	m_pVisualMesh->Create(m_pMesh);
 
+	bool setcharpartsimmediate = true;
+
 	if (m_pVisualMesh != NULL)
 	{
 		if (strlen(m_CharInfo[nSelectIndex].m_AccountCharInfo.szName) > 0)
 		{
-			ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[nSelectIndex].m_CharInfo.nSex), 
-				m_CharInfo[nSelectIndex].m_CharInfo.nHair, m_CharInfo[nSelectIndex].m_CharInfo.nFace, 
-				m_CharInfo[nSelectIndex].m_CharInfo.nEquipedItemDesc);
+			for (int i = 0; i < 5; ++i)
+			{
+				unsigned long itemid = m_CharInfo[nSelectIndex].m_CharInfo.nEquipedItemDesc[i];
+
+				MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(itemid);
+
+				if (pDesc != nullptr && pDesc->GetEluName() != nullptr)
+				{
+					if (m_pMesh->m_parts_mgr->Find(pDesc->m_szElu) == false)
+					{
+						string filePath = pDesc->m_szElu;
+						if (filePath.find("woman") != std::string::npos)
+						{
+							filePath = string("model/woman/") + pDesc->m_szElu;
+						}
+						else
+						{
+							filePath = string("model/man/") + pDesc->m_szElu;
+						}
+						m_pMesh->m_parts_mgr->Add((char*)filePath.c_str());
+						MeshesFinishedLoading = false;
+						meshupdatetime = 0;
+						setcharpartsimmediate = false;
+					}
+				}
+
+			}
+			if (setcharpartsimmediate == true)
+			{
+				ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[nSelectIndex].m_CharInfo.nSex),
+					m_CharInfo[nSelectIndex].m_CharInfo.nHair, m_CharInfo[nSelectIndex].m_CharInfo.nFace,
+					m_CharInfo[nSelectIndex].m_CharInfo.nEquipedItemDesc);
+			}
 
 			// ¹«±â
 			if( m_pVisualMesh ) {

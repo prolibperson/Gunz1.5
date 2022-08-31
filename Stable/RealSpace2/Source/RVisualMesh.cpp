@@ -808,33 +808,34 @@ void RVisualMesh::Render(bool low, bool render_buffer) {
 
 	if(m_pMesh)
 	{
-		//if (m_pMesh->m_parts_mgr)
-		//{
-		//	for (auto& pair : m_pMesh->m_parts_mgr->asyncTasks)
-		//	{
-		//		if (pair.second.valid())
-		//		{
-		//			if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
-		//			{
+		if (m_pMesh->m_parts_mgr)
+		{
+			for (auto& pair : m_pMesh->m_parts_mgr->asyncTasks)
+			{
+				if (pair.second.valid())
+				{
+					if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+					{
 
-		//				RMesh* pMesh = std::move(pair.second.get());
+						RMesh* pMesh = std::move(pair.second.get());
 
-		//				pMesh->CalcBox();
+						pMesh->CalcBox();
 
-		//				m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
-		//				pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last++;
+						m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
+						pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last++;
 
-		//				m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
+						m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
 
-		//				pair.first.clear();
+						pair.first.clear();
 
-		//				std::swap(pair, m_pMesh->m_parts_mgr->asyncTasks.back());
-		//				m_pMesh->m_parts_mgr->asyncTasks.pop_back();
+						std::swap(pair, m_pMesh->m_parts_mgr->asyncTasks.back());
+						m_pMesh->m_parts_mgr->asyncTasks.pop_back();
 
-		//			}
-		//		}
-		//	}
-		//}
+						return;
+					}
+				}
+			}
+		}
 
 		rboundingbox bbox;
 
@@ -1907,7 +1908,7 @@ void RVisualMesh::SetParts(RMeshPartsType parts,char* name, const char* eluName)
 
 	if(m_pTMesh==NULL) return;
 
-	if(!m_pMesh) return;
+	if(!m_pMesh || m_pMesh->m_isMeshLoaded == false) return;
 
 	RMeshNode* pNode = m_pMesh->GetPartsNode(name,eluName);
 

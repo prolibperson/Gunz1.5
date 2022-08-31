@@ -202,7 +202,7 @@ public:
 
 	bool Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut);
 	bool OnCheckWallHang(rvector const& pos, rvector const& dir, bool const& initial = false);
-	
+	bool CheckWallRun(rvector const& pos, rvector const& dir, rvector& out);
 	bool IsStandingOn(ZObject* const Object);
 	bool IntersectsXY(const rvector& a, const rboundingbox& b);
 	bool IntersectsXY(const rboundingbox& a, const rboundingbox& b);

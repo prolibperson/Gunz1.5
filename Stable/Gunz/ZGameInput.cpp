@@ -283,12 +283,12 @@ bool ZGameInput::OnEvent(MEvent* pEvent)
 				//	ZGetGameInterface()->GetBandiCapturer()->CaptureImage();
 			}
 			return true;
-			case ZACTION_MOVING_PICTURE:
-				{	// µ¿¿µ»ó Ä¸ÃÄ...2008.10.02
-					if (ZGetGameInterface()->GetBandiCapturer() != NULL)
-						ZGetGameInterface()->GetBandiCapturer()->ToggleStart();
-				}
-				return true;
+			//case ZACTION_MOVING_PICTURE:
+			//	{	// µ¿¿µ»ó Ä¸ÃÄ...2008.10.02
+			//		if (ZGetGameInterface()->GetBandiCapturer() != NULL)
+			//			ZGetGameInterface()->GetBandiCapturer()->ToggleStart();
+			//	}
+			//	return true;
 			case ZACTION_TOGGLE_CHAT:
 				{
 					if(ZGetCombatInterface()->IsShowUI())

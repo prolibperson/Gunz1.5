@@ -863,13 +863,15 @@ bool ZGameInterface::InitInterfaceListener()
 	SetListenerWidget("CashRecharge", ZGetShopCachRechargeButtonListener());
 	SetListenerWidget("ShopSearchFrameCaller", ZGetShopSearchCallerButtonListener());
 
+	SetListenerWidget("Shop_to_Inventory", ZGetShopEquipmentCallerButtonListener());
+
+
 	SetListenerWidget("AllEquipmentList", ZGetShopPurchaseItemListBoxListener());
 	SetListenerWidget("MyAllEquipmentList", ZGetShopSellItemListBoxListener());
 	//SetListenerWidget("CashEquipmentList", ZGetCashShopItemListBoxListener());
 
 	SetListenerWidget("Shop_AllEquipmentFilter", ZGetShopListFilterListener());
 	SetListenerWidget("Equip_AllEquipmentFilter", ZGetEquipListFilterListener());
-	SetListenerWidget("Shop_to_Equipment", ZGetShopEquipmentCallerButtonListener() );
 
 	SetListenerWidget("Shop_ArmorEquipmentTab",  ZShopItemEquipmentTabOpen());
 	SetListenerWidget("Shop_WeaponEquipmentTab",  ZShopWeaponEquipmentTabOpen());	
@@ -5400,22 +5402,22 @@ void ZGameInterface::ShowShopDialog(bool bShow)
 
 		//pPicture = (MPicture*)ZApplication::GetGameInterface()->GetIDLResource()->FindWidget("Shop_ItemIcon");
 		//pPicture->SetBitmap( NULL);
-		MButton* pButton = (MButton*)pResource->FindWidget("Shop_to_Equipment");
+		MButton* pButton = (MButton*)pResource->FindWidget("Shop_to_Inventory");
 		MLabel* pLabel = (MLabel*)pResource->FindWidget("Shop_Message");
-		if ( pButton && pLabel)
+		if (pButton && pLabel)
 		{
-		char buf[256];
-		if ( ZApplication::GetGameInterface()->GetState() == GUNZ_STAGE)
+			char buf[256];
+			if (ZApplication::GetGameInterface()->GetState() == GUNZ_STAGE)
 			{
-		pButton->Show( true);
-		sprintf( buf, "%s > %s > %s", ZGetGameClient()->GetServerName(), ZMsg( MSG_WORD_STAGE), ZMsg( MSG_WORD_SHOP));
-		pLabel->SetText( buf);
+				pButton->Show(true);
+				sprintf(buf, "%s > %s > %s", ZGetGameClient()->GetServerName(), ZMsg(MSG_WORD_STAGE), ZMsg(MSG_WORD_SHOP));
+				pLabel->SetText(buf);
 			}
 			else
 			{
-				pButton->Show( true);
-				sprintf( buf, "%s > %s > %s", ZGetGameClient()->GetServerName(), ZMsg( MSG_WORD_LOBBY), ZMsg( MSG_WORD_SHOP));
-				pLabel->SetText( buf);
+				pButton->Show(true);
+				sprintf(buf, "%s > %s > %s", ZGetGameClient()->GetServerName(), ZMsg(MSG_WORD_LOBBY), ZMsg(MSG_WORD_SHOP));
+				pLabel->SetText(buf);
 			}
 		}
 

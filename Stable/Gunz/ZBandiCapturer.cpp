@@ -156,6 +156,13 @@ void ZBandiCapturer::OnDrawCapture(MDrawContext* pDC)
 
 void ZBandiCapturer::ToggleStart()
 {
+	static unsigned long int st_nLastTime = 0;
+	unsigned long int nNowTime = timeGetTime();
+#define SCREENSHOT_DELAY		2000
+
+	if ((nNowTime - st_nLastTime) < SCREENSHOT_DELAY)	return;
+	st_nLastTime = nNowTime;
+
 	if (IsCapturing() == false)
 	{
 		HRESULT hr;

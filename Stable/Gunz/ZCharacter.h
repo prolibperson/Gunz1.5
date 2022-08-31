@@ -375,6 +375,7 @@ private:
 	int  m_Honor;
 	MMatchObjectClass  m_blitzClass;
 	unsigned int	m_skillMapBestTime;
+	bool MeshesFinishedLoading;
 public:
 	std::vector<std::vector<int>> m_blitzUpgradeLevel;
 protected:

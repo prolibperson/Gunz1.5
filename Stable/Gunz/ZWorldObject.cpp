@@ -120,8 +120,8 @@ void ZWorldObject::Update(float elapsed)
 	//		{
 	//			continue;
 	//		}
-	//		rvector pos = GetPosition();
-	//		rvector newthispos = pos + ((ZModule_Movable*)player->GetModule(ZMID_MOVABLE))->GetLastMove() * (CHARACTER_RADIUS + 1.f);
+
+	//		rvector newthispos = CurrPosition + ((ZModule_Movable*)player->GetModule(ZMID_MOVABLE))->GetLastMove() * (CHARACTER_RADIUS + 1.f);
 	//		newthispos.z = 0;
 
 	//		rvector diff = newthispos - CurrPosition;
@@ -131,8 +131,8 @@ void ZWorldObject::Update(float elapsed)
 	//	}
 	//}
 
-	//rmatrix mat = GetWorldMatrix();
-	//VisualMesh->SetWorldMatrix(mat);
+	rmatrix mat = GetWorldMatrix();
+	VisualMesh->SetWorldMatrix(mat);
 
 	rvector vmin, vmax;
 	VisualMesh->GetBBox(vmin, vmax);
@@ -204,6 +204,13 @@ bool ZWorldObject::Pick(rvector& pos, rvector& dir, RBSPPICKINFO* pOut)
 	{
 		return false;
 	}
+
+	if (IntersectsXY(pos, bbox) && fabs(CurrPosition.z - pos.z) < fabs((CurrPosition.z + GetHeight()) - pos.z) < 100)
+	{
+		return true;
+	}
+
+	return false;
 	rvector diff = GetPosition() - pos;
 	diff.z = 0;
 
@@ -234,9 +241,32 @@ bool ZWorldObject::OnCheckWallHang(rvector const& pos, rvector const& dir, bool 
 		return false;
 	}
 
-	float diff = fabs(pos.x - GetLength());
-	float diffy = fabs(pos.y - GetWidth());
-	if (diff < 100 && diffy < 100 && IntersectsZ(pos,bbox))
+	rvector dirdiff = pos - CurrPosition;
+	Normalize(dirdiff);
+
+	rboundingbox playerbox;
+	playerbox.vmin = pos + rvector(100, 100, 0);
+	playerbox.vmax = pos - rvector(100, 100, 0);
+	if (IntersectsXY(playerbox,bbox) && IntersectsZ(pos,bbox))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+bool ZWorldObject::CheckWallRun(rvector const& pos, rvector const& dir, rvector& out)
+{
+	if (IsCollidable() == false)
+	{
+		return false;
+	}
+
+	rboundingbox playerbox;
+	playerbox.vmin = pos + rvector(CHARACTER_RADIUS, CHARACTER_RADIUS, 0);
+	playerbox.vmax = pos - rvector(CHARACTER_RADIUS, CHARACTER_RADIUS, 0);
+
+	if (IntersectsXY(playerbox, bbox))
 	{
 		return true;
 	}

@@ -332,8 +332,11 @@ void ChangeEquipParts(ZObjectVMesh* pVMesh, const unsigned long int* pItemID)
 						}
 						playerMesh->m_parts_mgr->Add((char*)filePath.c_str());// ("man")->AddNode(playerItem->m_szElu);//Add((char*)filePath.c_str());
 					}
+					else
+					{
+						pVMesh->SetParts(PartsPair[i].meshparts, pDesc->m_pMItemName->Ref().m_szMeshName, pDesc->GetEluName());
+					}
 				}
-				pVMesh->SetParts(PartsPair[i].meshparts, pDesc->m_pMItemName->Ref().m_szMeshName, pDesc->GetEluName());
 			}
 		}
 		else {
@@ -569,6 +572,7 @@ ZCharacter::ZCharacter() : ZCharacterObject(), m_DirectionLower(1,0,0),m_Directi
 	m_uidLastTarget = MUID(0, 0);
 
 	m_blitzClass = MOC_NONE;
+	MeshesFinishedLoading = false;
 }
 
 //void ZCharacter::RegisterModules()
@@ -1080,6 +1084,13 @@ void ZCharacter::OnDraw()
 
 	__BP(39,"ZCharacter::Draw");
 
+	//if(MeshesFinishedLoading == true)
+	//{
+	//	InitMeshParts();
+	//	MeshesFinishedLoading = false;
+	//}
+	//ZChangeCharParts(this->GetVisualMesh(),m_Property.nSex,m_Property.nHair,m_Property.nFace,GetEquippedItem)
+
 	if( m_pVMesh && !Enable_Cloth )	m_pVMesh->DestroyCloth();
 	//////////////
 	// 광원 세팅
@@ -1580,6 +1591,7 @@ void ZCharacter::UpdateSpeed()
 	m_pVMesh->SetSpeed(speed,speed);
 }
 
+static DWORD meshupdatetime = 0;
 void ZCharacter::OnUpdate(float fDelta)
 {
 	if (m_bInitialized==false) return;
@@ -1587,6 +1599,21 @@ void ZCharacter::OnUpdate(float fDelta)
 
 	//버프정보임시주석 UpdateBuff();	// 버프 효과 적용해줄 것 적용해주기! (도트 위주)
 	UpdateSpeed();	// 아이템에 따른 에니메이션 속도 조절..
+
+	meshupdatetime += fDelta * 1000;
+
+	//todo: create a callback instead of this lazy check
+	if (meshupdatetime >= 20000 && MeshesFinishedLoading == false)
+	{
+		MeshesFinishedLoading = true;
+		unsigned long meshparts[MMCIP_END];
+		for (int i = 0; i < MMCIP_END; ++i)
+		{
+			meshparts[i] = this->GetItems()->GetItem(static_cast<MMatchCharItemParts>(i))->GetDescID();
+		}
+		ZChangeCharParts(m_pVMesh, GetProperty()->nSex, GetProperty()->nHair, GetProperty()->nFace, meshparts);
+		MeshesFinishedLoading = false;
+	}
 
 	if(m_pVMesh) {
 		m_pVMesh->SetVisibility(1.f);//투명 버그 때문...
@@ -3581,6 +3608,9 @@ void ZCharacter::Destroy()
 	DestroyShadow();
 }
 
+/// <summary>
+/// todo: execute callbacks to make mesh render properly for character select views.
+/// </summary>
 void ZCharacter::InitMeshParts()
 {
 	RMeshPartsType mesh_parts_type;
@@ -3632,9 +3662,15 @@ void ZCharacter::InitMeshParts()
 								filePath = string("model/man/") + itemDesc->m_szElu;
 							}
 							playerMesh->m_parts_mgr->Add((char*)filePath.c_str());
+							MeshesFinishedLoading = false;
+							meshupdatetime = 0;
+						}
+						else
+						{
+							m_pVMesh->SetParts(mesh_parts_type, itemDesc->m_pMItemName->Ref().m_szMeshName, itemDesc->m_szElu);
 						}
 					}
-					m_pVMesh->SetParts(mesh_parts_type, itemDesc->m_pMItemName->Ref().m_szMeshName, itemDesc->m_szElu);
+					//m_pVMesh->SetParts(mesh_parts_type, itemDesc->m_pMItemName->Ref().m_szMeshName, itemDesc->m_szElu);
 				}
 				else {
 					m_pVMesh->SetBaseParts(mesh_parts_type);

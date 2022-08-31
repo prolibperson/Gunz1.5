@@ -119,7 +119,7 @@ RRESULT OnCreate(void *pParam)
 	g_App.PreCheckArguments();
 
 	//Custom: skip loading dynamic models if config is set to true
-	if (Z_VIDEO_DYNAMIC_MODELS == true)
+	//if (Z_VIDEO_DYNAMIC_MODELS == true)
 	{
 		RMesh::SetPartsMeshLoadingSkip(1);
 	}
@@ -353,10 +353,10 @@ RRESULT OnUpdateInput(void* param)
 	return R_OK;
 }
 
-RRESULT OnRender(void *pParam)
+RRESULT OnRender(void* pParam)
 {
 	__BP(101, "main::OnRender");
-	if( !RIsActive() && RIsFullScreen())
+	if (!RIsActive() && RIsFullScreen())
 	{
 		__EP(101);
 		return R_NOTREADY;
@@ -368,6 +368,15 @@ RRESULT OnRender(void *pParam)
 		if (g_App.GetGameInterface())
 			g_App.GetGameInterface()->GetBandiCapturer()->CaptureImage();// ->SaveScreenShot();
 	}
+
+	if (ZIsActionKeyPressed(ZACTION_MOVING_PICTURE))
+	{	// µ¿¿µ»ó Ä¸ÃÄ...2008.10.02
+		if (g_App.GetGameInterface())
+			g_App.GetGameInterface()->GetBandiCapturer()->ToggleStart();
+	}
+
+	if (ZGetGameInterface()->GetBandiCapturer() != NULL)
+		ZGetGameInterface()->GetBandiCapturer()->DrawCapture(g_pDC);
 
 
 #ifdef _SMOOTHLOOP

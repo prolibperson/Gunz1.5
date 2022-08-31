@@ -1628,7 +1628,29 @@ void ChatCmd_QUESTTEST_WeakNPCs(const char* line, const int argc, char **const a
 
 void ChatCmd_Framed(const char* line, const int argc, char **const argv)
 {
+	//ZGetGame()->m_pMyCharacter->m_Items.EquipItem(MMCIP_AVATAR, ZGetGame()->m_pMyCharacter->GetProperty()->nSex == MMS_MALE ? 530002 : 530502);
+	//ZGetGame()->m_pMyCharacter->m_Items.EquipItem(MMCIP_MELEE, 1);
+
+	//if (ZGetGame()->m_pMyCharacter->m_Items.GetSelectedWeaponType() != MMCIP_MELEE)
+	//	ZGetGame()->m_pMyCharacter->ChangeWeapon(MMCIP_MELEE);
+
+	//for (int i = MMCIP_PRIMARY; i <= MMCIP_CUSTOM2; ++i)
+	//{
+	//	ZGetGame()->m_pMyCharacter->m_Items.EquipItem((MMatchCharItemParts)i, 0);
+	//}
+
+	//unsigned long nItemID[MMCIP_END];
+	//for (int i = 0; i < MMCIP_END; ++i)
+	//{
+	//	nItemID[i] = ZGetGame()->m_pMyCharacter->m_Items.GetItem((MMatchCharItemParts)i)->GetDescID();
+	//}
+
+	//ZChangeCharParts(ZGetGame()->m_pMyCharacter->GetVisualMesh(), 
+	//	ZGetGame()->m_pMyCharacter->GetProperty()->nSex,
+	//	ZGetGame()->m_pMyCharacter->GetProperty()->nHair, ZGetGame()->m_pMyCharacter->GetProperty()->nFace, nItemID);
+
 	return;
+
 	char szMsg[256];
 
 	GunzState state = ZApplication::GetGameInterface()->GetState();

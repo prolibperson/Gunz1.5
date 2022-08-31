@@ -110,8 +110,8 @@ bool RMesh::ReadXmlElement(MXmlElement* PNode, char* Path)
 				}
 
 				////Customn: Skip autoload when m_parts_mesh_loading_skip is enabled via Z_VIDEO_DYNAMIC_MODELS
-				//if (autoLoad == false && RMesh::m_parts_mesh_loading_skip == 1)
-				//	continue;
+				if (autoLoad == false && RMesh::m_parts_mesh_loading_skip == 1)
+					continue;
 
 				if (Path[0]) {
 					strcpy(PathFileName, Path);

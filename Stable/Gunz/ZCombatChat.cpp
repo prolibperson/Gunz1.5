@@ -300,7 +300,9 @@ void ZCombatChat::OutputChatMsg(MCOLOR color, const char* szMsg)
 	if (m_pChattingOutput == NULL) return;
 
 	if (m_pChattingOutput->GetLineCount() == 0)
-		for (int i = 0; i < (MAX_CHAT_OUTPUT_LINE-1); i++) m_pChattingOutput->AddText("");
+	{
+		for (int i = 0; i < (MAX_CHAT_OUTPUT_LINE - 1); i++) m_pChattingOutput->AddText("");
+	}
 	m_pChattingOutput->AddText(szMsg, color);
 
 	ProcessChatMsg();
@@ -320,7 +322,7 @@ void ZCombatChat::ProcessChatMsg()
 	}
 }
 
-
+#include "ZEmoji.h"
 void ZCombatChat::OnDraw(MDrawContext* pDC)
 {
 	if (m_pInputEdit)
@@ -331,6 +333,15 @@ void ZCombatChat::OnDraw(MDrawContext* pDC)
 			pDC->FillRectangle(m_pInputEdit->GetScreenRect());
 		}
 	}
+
+	//TODO: filter each line and look for emoji text. if text found, attempt to use GetPositionOfAlignment(MPOINT* p, MRECT& r, const char* szText, MAlignmentMode am, bool bAndInclude)
+	//to overlap the text with an emoji
+	//for (int i = 0; i < m_pChattingOutput->GetLineCount(); ++i)
+	//{
+	//	std::string contents = m_pChattingOutput->GetTextLine(i);
+
+	//	MRECT texPos = m_pChattingOutput->GetTextPosition(contents.c_str(), i);
+	//}
 }
 
 void ZCombatChat::SetFont( MFont* pFont)

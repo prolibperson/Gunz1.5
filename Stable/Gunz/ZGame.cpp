@@ -7918,12 +7918,12 @@ void ZGame::AdjustMoveDiff(ZObject* pObject, rvector& diff)
 				&& worldObject->IntersectsZ(pObject->GetPosition() + rvector(0,0,CHARACTER_HEIGHT), objectbounds))
 			{
 				//todo: make player stop moving properly
-				//rvector lastmove = ((ZModule_Movable*)pObject->GetModule(ZMID_MOVABLE))->GetLastMove();
-				//rvector dir = worldObject->GetPosition() - pObject->GetPosition();
-				//dir.z = 0;
-				//Normalize(dir);
-				//diff.x += lastmove.x * dir.x + lastmove.x;
-				//diff.y += lastmove.y * dir.y + lastmove.y;
+				rvector lastmove = ((ZModule_Movable*)pObject->GetModule(ZMID_MOVABLE))->GetLastMove();
+				rvector dir = worldObject->GetPosition() - pObject->GetPosition();
+				dir.z = 0;
+				Normalize(dir);
+				diff.x += lastmove.x * dir.x + lastmove.x;
+				diff.y += lastmove.y * dir.y + lastmove.y;
 
 				if (pObject->GetVisualMesh()->GetHeadPosition().z <= worldObject->GetPosition().z + worldObject->GetHeight())
 				{

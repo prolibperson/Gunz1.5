@@ -482,6 +482,7 @@ void ZShopEquipItem_Match::UpdateCharacterView(ZCharacterView* pCharacterView)
 				filePath = string("model/man/") + m_pItemDesc->m_szElu;
 			}
 			playerMesh->m_parts_mgr->Add((char*)filePath.c_str());
+			return;
 		}
 	}
 

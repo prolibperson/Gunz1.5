@@ -61,77 +61,77 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 	bool isCharModel = false;
 
 
-	//if (RMesh::m_parts_mesh_loading_skip == 1)
-	//{
-	//	string filename = name;
-	//	if (filename.find("model/lo") != std::string::npos || filename.find("model/man/") != std::string::npos ||
-	//		filename.find("model/woman/") != std::string::npos)
-	//		isCharModel = true;
-	//	if (autoLoad == true)
-	//	{
-	//		if (!node->ReadElu(name,false))
-	//		{
-	//			delete node;
-	//			return -1;
-	//		}
+	if (RMesh::m_parts_mesh_loading_skip == 1)
+	{
+		string filename = name;
+		if (filename.find("model/lo") != std::string::npos || filename.find("model/man/") != std::string::npos ||
+			filename.find("model/woman/") != std::string::npos)
+			isCharModel = true;
+		if (autoLoad == true)
+		{
+			if (!node->ReadElu(name,false))
+			{
+				delete node;
+				return -1;
+			}
 
 
-	//		node->CalcBox();
+			node->CalcBox();
 
-	//		m_node_table.push_back(node);
-	//		node->m_id = m_id_last;
+			m_node_table.push_back(node);
+			node->m_id = m_id_last;
 
-	//		if (m_id_last > MAX_NODE_TABLE)
-	//			mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
+			if (m_id_last > MAX_NODE_TABLE)
+				mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
 
-	//		m_list.push_back(node);
-	//		m_id_last++;
+			m_list.push_back(node);
+			m_id_last++;
 
-	//		return m_id_last - 1;
-	//	}
-	//	else
-	//	{
-	//		if (isCharModel == false)
-	//		{
-	//			if (!node->ReadElu(name,false))
-	//			{
-	//				delete node;
-	//				return -1;
-	//			}
+			return m_id_last - 1;
+		}
+		else
+		{
+			if (isCharModel == false)
+			{
+				if (!node->ReadElu(name,false))
+				{
+					delete node;
+					return -1;
+				}
 
 
-	//			node->CalcBox();
+				node->CalcBox();
 
-	//			m_node_table.push_back(node);
-	//			node->m_id = m_id_last;
+				m_node_table.push_back(node);
+				node->m_id = m_id_last;
 
-	//			if (m_id_last > MAX_NODE_TABLE)
-	//				mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
+				if (m_id_last > MAX_NODE_TABLE)
+					mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
 
-	//			m_list.push_back(node);
-	//			m_id_last++;
+				m_list.push_back(node);
+				m_id_last++;
 
-	//			return m_id_last - 1;
-	//		}
-	//		else
-	//		{
-	//			if (Find(name))
-	//			{
-	//				return -1;
-	//			}
-	//			for (auto const& task : asyncTasks)
-	//			{
-	//				if (task.first == name)
-	//					return -1;
-	//			}
-	//			asyncTasks.push_back(std::make_pair(std::string(name), std::async(std::launch::async, &RMesh::ReadEluPtr, node, const_cast<char*>(filename.c_str()))));
+				return m_id_last - 1;
+			}
+			else
+			{
+				if (Find(name))
+				{
+					return -1;
+				}
+				for (auto const& task : asyncTasks)
+				{
+					if (task.first == name)
+						return -1;
+				}
+				asyncTasks.push_back(std::make_pair(std::string(name), std::async(std::launch::async, &RMesh::ReadEluPtr, node, const_cast<char*>(filename.c_str()))));
 
-	//			m_id_last++;
+				m_id_last++;
 
-	//			return m_id_last - 1;
-	//		}
-	//	}
-	//}
+				return m_id_last - 1;
+			}
+		}
+	}
 
 	if (!node->ReadElu(name)) {
 		mlog("elu %s file loading failure !!!\n", name);

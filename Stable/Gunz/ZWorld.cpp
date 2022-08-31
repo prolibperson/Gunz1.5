@@ -488,7 +488,7 @@ ZWorldObject* ZWorld::PickWorldObject(rvector& pos, rvector& dir)
 	{
 		if (worldObject->Pick(pos, dir, nullptr))
 		{
-			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetCollHeight())
+			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetHeight())
 				continue;
 			return worldObject.get();
 		}
@@ -518,6 +518,19 @@ ZWorldObject* ZWorld::CheckStandingOnObject(ZObject* const Object)
 		{
 			if (realfloor.z >= worldObject->GetPosition().z + worldObject->GetHeight())
 				continue;
+			return worldObject.get();
+		}
+	}
+	return nullptr;
+}
+
+ZWorldObject* ZWorld::CheckWallRun(rvector const& pos, rvector const& dir, rvector& out)
+{
+
+	for (auto const& worldObject : mapObjects)
+	{
+		if (worldObject->CheckWallRun(pos, dir, out))
+		{
 			return worldObject.get();
 		}
 	}
