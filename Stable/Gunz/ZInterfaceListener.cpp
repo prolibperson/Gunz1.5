@@ -1115,8 +1115,13 @@ BEGIN_IMPLEMENT_LISTENER(ZGetShopCachRechargeButtonListener, MBTN_CLK_MSG)
 	ZGetGameInterface()->ShowErrorMessage( MERR_NOT_SUPPORT );
 END_IMPLEMENT_LISTENER()
 
-BEGIN_IMPLEMENT_LISTENER(ZGetShopSearchCallerButtonListener, MBTN_CLK_MSG)
-	ZGetGameInterface()->ShowErrorMessage( MERR_NOT_SUPPORT );
+BEGIN_IMPLEMENT_LISTENER(ZGetShopSearchCallerButtonListener, MEDIT_ENTER_VALUE)
+	if (MWidget::IsMsg(szMessage, MEDIT_ENTER_VALUE) == true)
+	{
+		MEdit* shopsearch = (MEdit*)ZGetGameInterface()->GetIDLResource()->FindWidget("ShopSearchFrameCaller");
+		if(strlen(shopsearch->GetText()) > 0)
+		ZGetGameInterface()->OnShopSearch(shopsearch->GetText());
+	}
 END_IMPLEMENT_LISTENER()
 
 

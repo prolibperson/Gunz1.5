@@ -175,6 +175,8 @@ void CObjectDialog::Initilize()
 			}
 			std::unique_ptr<ZWorldObject> mapObject = std::make_unique<ZWorldObject>();
 			mapObject->InitWithMesh(worldObject);
+			m_ObjectList.AddString(worldObject.name.c_str());
+
 			mapObjects.push_back(std::move(mapObject));
 		}
 	}
@@ -213,60 +215,61 @@ bool ZWorldObject::InitWithMesh(WorldObject const& worldObj)
 	Name = worldObj.name;
 	Model = worldObj.model;
 
-	char szMapPath[64] = "";
-	ZGetCurrMapPath(szMapPath);
-
-	std::string folderpath = ((CWorldEditDoc*)((CMainFrame*)AfxGetMainWnd())->GetActiveView()->GetDocument())->FolderPath;
-
-	char szBuf[256];
-
-	sprintf(szBuf, "%s%s/", szMapPath, ZGetGameClient()->GetMatchStageSetting()->GetMapName());
-	std::string meshpath = szBuf;
-	meshpath.append(Model);
-
-	RMesh* pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
-
-	if (pMesh == nullptr)
-	{
-		ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)worldObj.name.c_str(), false, true);
-	}
-
-
-	pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
-	if (pMesh == nullptr)
-		return false;
-
-	pMesh->ReloadAnimation();
-
-	int nVMID = m_VisualMeshMgr.Add(pMesh);
-	if (nVMID == -1) mlog("InitNpcMesh() - 캐릭터 생성 실패\n");
-
-	VisualMesh = ZGetGame()->m_VisualMeshMgr.GetFast(nVMID);
-
-	if (worldObj.animation.empty() == false)
-	{
-		VisualMesh->SetAnimation(worldObj.animation.c_str());
-	}
-
-	VisualMesh->SetVisibility(1.f);
-	VisualMesh->GetMesh()->SetTextureRenderOnOff(true);
-	VisualMesh->SetCheckViewFrustum(false);
-	VisualMesh->SetScale((D3DXVECTOR3)(worldObj.scale));
-
-	SetCollidable(worldObj.collidable);
-	SetCollRadius(worldObj.collradius);
-	SetCollWidth(worldObj.collwidth);
-	SetCollHeight(worldObj.collheight);
-	SetCollisionType(worldObj.collisiontype);
-	StartPosition = worldObj.position;
-	CurrPosition = StartPosition;
-	Direction = worldObj.direction;
-	Sound = worldObj.sound;
-
-	rmatrix mat = GetWorldMatrix();
-	VisualMesh->SetWorldMatrix(mat);
-
 	return true;
+	//char szMapPath[64] = "";
+	//ZGetCurrMapPath(szMapPath);
+
+	//std::string folderpath = ((CWorldEditDoc*)((CMainFrame*)AfxGetMainWnd())->GetActiveView()->GetDocument())->FolderPath;
+
+	//char szBuf[256];
+
+	//sprintf(szBuf, "%s%s/", szMapPath, ZGetGameClient()->GetMatchStageSetting()->GetMapName());
+	//std::string meshpath = szBuf;
+	//meshpath.append(Model);
+
+	//RMesh* pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
+
+	//if (pMesh == nullptr)
+	//{
+	//	ZGetMeshMgr()->Add((char*)meshpath.c_str(), (char*)worldObj.name.c_str(), false, true);
+	//}
+
+
+	//pMesh = ZGetMeshMgr()->Get((char*)worldObj.name.c_str());
+	//if (pMesh == nullptr)
+	//	return false;
+
+	//pMesh->ReloadAnimation();
+
+	//int nVMID = m_VisualMeshMgr.Add(pMesh);
+	//if (nVMID == -1) mlog("InitNpcMesh() - 캐릭터 생성 실패\n");
+
+	//VisualMesh = ZGetGame()->m_VisualMeshMgr.GetFast(nVMID);
+
+	//if (worldObj.animation.empty() == false)
+	//{
+	//	VisualMesh->SetAnimation(worldObj.animation.c_str());
+	//}
+
+	//VisualMesh->SetVisibility(1.f);
+	//VisualMesh->GetMesh()->SetTextureRenderOnOff(true);
+	//VisualMesh->SetCheckViewFrustum(false);
+	//VisualMesh->SetScale((D3DXVECTOR3)(worldObj.scale));
+
+	//SetCollidable(worldObj.collidable);
+	//SetCollRadius(worldObj.collradius);
+	//SetCollWidth(worldObj.collwidth);
+	//SetCollHeight(worldObj.collheight);
+	//SetCollisionType(worldObj.collisiontype);
+	//StartPosition = worldObj.position;
+	//CurrPosition = StartPosition;
+	//Direction = worldObj.direction;
+	//Sound = worldObj.sound;
+
+	//rmatrix mat = GetWorldMatrix();
+	//VisualMesh->SetWorldMatrix(mat);
+
+	//return true;
 }
 
 void ZWorldObject::Update(float elapsed)

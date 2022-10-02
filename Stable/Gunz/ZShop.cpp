@@ -108,7 +108,7 @@ bool ZShop::CheckTypeWithListFilter(int type, bool bEnchantItem)
 	return false;
 }
 
-void ZShop::Serialize()
+void ZShop::Serialize(const char* searchtext)
 {
 	ZIDLResource* pResource = ZApplication::GetGameInterface()->GetIDLResource();
 	MMultiColListBox* pListBox = (MMultiColListBox*)pResource->FindWidget("AllEquipmentList");
@@ -140,10 +140,18 @@ void ZShop::Serialize()
 
 		if (MMatchItemDesc* pDesc = MGetMatchItemDescMgr()->GetItemDesc(m_vShopItem[i]->nItemID))
 		{
-			if (CheckTypeWithListFilter(pDesc->m_nSlot, pDesc->IsEnchantItem()) == false) continue;
+			if (searchtext == nullptr)
+				if (CheckTypeWithListFilter(pDesc->m_nSlot, pDesc->IsEnchantItem()) == false) continue;
 			if (pDesc->m_nResSex.Ref() != -1 && pDesc->m_nResSex.Ref() != int(ZGetMyInfo()->GetSex())) continue;
 
 			ZShopEquipItem_Match* pMItem = new ZShopEquipItem_Match(pDesc);
+			if (searchtext != nullptr)
+			{
+				std::string searchitem = searchtext;
+
+				if (searchitem.find_first_of(pMItem->GetDesc()->m_pMItemName->Ref().m_szItemName) == std::string::npos)
+					continue;
+			}
 			ZShopEquipItemHandle_PurchaseMatch* pHandle = 
 				new ZShopEquipItemHandle_PurchaseMatch(pMItem);
 			pWrappedItem = pMItem;

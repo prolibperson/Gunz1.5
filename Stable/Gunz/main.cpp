@@ -119,7 +119,7 @@ RRESULT OnCreate(void *pParam)
 	g_App.PreCheckArguments();
 
 	//Custom: skip loading dynamic models if config is set to true
-	//if (Z_VIDEO_DYNAMIC_MODELS == true)
+	if (Z_VIDEO_DYNAMIC_MODELS == true)
 	{
 		RMesh::SetPartsMeshLoadingSkip(1);
 	}
@@ -772,6 +772,52 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 				g_pDefFont = NULL;
 			}
 		}break;
+		case WM_SYSCOMMAND:
+		{
+			//if (wParam == SC_MAXIMIZE)
+			//{
+			//	const int iDpi = GetDpiForWindow(g_hWnd);
+			//	int dpiScaledWidth = MulDiv(RGetScreenWidth(), iDpi, 96);
+			//	int dpiScaledHeight = MulDiv(RGetScreenHeight(), iDpi, 96);
+
+			//	if (RIsMaximized())
+			//	{
+			//		RSetMaximized(false);
+			//	}
+			//	else
+			//	{
+			//		RSetMaximized(true);
+			//		RECT WorkAreaRect;
+			//		SystemParametersInfo(SPI_GETWORKAREA, NULL, &WorkAreaRect, NULL);
+
+			//		dpiScaledWidth = WorkAreaRect.right - WorkAreaRect.left;
+			//		dpiScaledHeight = WorkAreaRect.bottom - WorkAreaRect.top;
+			//	}
+
+			//	g_ModeParams.nWidth = dpiScaledWidth;
+			//	g_ModeParams.nHeight = dpiScaledHeight;
+
+			//	//RAdjustWindow(&g_ModeParams);
+
+
+			//	RResetDevice(&g_ModeParams);
+
+
+			//	g_pDefFont->Destroy();
+
+			//	if (g_pDefFont->Create("Default", Z_LOCALE_DEFAULT_FONT, DEFAULT_FONT_HEIGHT, 1.0f) == false)
+			//	{
+			//		mlog("Fail to Create defualt font : MFontR2 / main.cpp.. onCreate\n");
+			//		g_pDefFont->Destroy();
+			//		SAFE_DELETE(g_pDefFont);
+			//		g_pDefFont = NULL;
+			//	}
+
+
+
+			//}
+		}
+		break;
 	}
 
 	if(Mint::GetInstance()->ProcessEvent(hWnd, message, wParam, lParam)==true)

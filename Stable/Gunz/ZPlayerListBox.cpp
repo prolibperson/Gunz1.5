@@ -82,8 +82,8 @@ void ZPlayerListBoxLook::OnDraw(MListBox* pListBox, MDrawContext* pDC)
 	((ZPlayerListBox*)pListBox)->UpdateList(((ZPlayerListBox*)pListBox)->GetPlayerListMode());
 
 //	float fA = ((ZPlayerListBox*)pListBox)->OnReSize();
-	int newW = RGetScreenWidth();
-	float fA = GetF(newW);
+	//int newW = RGetScreenWidth();
+	float fA = (float)RGetScreenHeight() / 600.f;
 
 	m_SelectedPlaneColor = MCOLOR(180,220,180);
 
@@ -307,8 +307,8 @@ void ZPlayerListBox::SetupButton(const char *szOn, const char *szOff)
 
 void ZPlayerListBox::InitUI(PLAYERLISTMODE nMode)
 {
-	int newW = RGetScreenWidth();
-	float fA = GetF(newW);
+	//int newW = RGetScreenWidth();
+	float fA = (float)RGetScreenHeight() / 600.f;
 
 	m_nMode = nMode;
 	_ASSERT(nMode>=0 && nMode<PLAYERLISTMODE_END);
@@ -430,8 +430,8 @@ void ZPlayerListBox::OnSize(int w,int h)
 {
 	if(m_Fields.GetCount()==0) return;
 
-	int newW = RGetScreenWidth();
-	float fA = GetF(newW);
+	//int newW = RGetScreenWidth();
+	float fA = (float)RGetScreenHeight() / 600.f;
 
 	m_nItemHeight = PLAYERLIST_ITEM_HEIGHT * fA;
 

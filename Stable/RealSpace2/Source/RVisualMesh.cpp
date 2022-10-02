@@ -808,34 +808,10 @@ void RVisualMesh::Render(bool low, bool render_buffer) {
 
 	if(m_pMesh)
 	{
-		if (m_pMesh->m_parts_mgr)
-		{
-			for (auto& pair : m_pMesh->m_parts_mgr->asyncTasks)
-			{
-				if (pair.second.valid())
-				{
-					if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
-					{
+		//if (m_pMesh->m_parts_mgr)
+		//{
 
-						RMesh* pMesh = std::move(pair.second.get());
-
-						pMesh->CalcBox();
-
-						m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
-						pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last++;
-
-						m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
-
-						pair.first.clear();
-
-						std::swap(pair, m_pMesh->m_parts_mgr->asyncTasks.back());
-						m_pMesh->m_parts_mgr->asyncTasks.pop_back();
-
-						return;
-					}
-				}
-			}
-		}
+		//}
 
 		rboundingbox bbox;
 
@@ -992,6 +968,35 @@ void RVisualMesh::Render(bool low, bool render_buffer) {
 //		draw_box(&m_WorldMat,m_vBMax,m_vBMin,0xffff0000);
 //		draw_box(&m_WorldMat,rvector(5,10,5),rvector(-5,0,-5),0xffffffff);
 //		RMeshNode* pMeshNode = m_pMesh->GetMeshData("eq_chest_a001");
+	}
+
+	if (m_pMesh->m_parts_mgr)
+	{
+		for (auto& pair : m_pMesh->m_parts_mgr->asyncTasks)
+		{
+			if (pair.second.valid())
+			{
+				if (pair.second.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
+				{
+
+					RMesh* pMesh = std::move(pair.second.get());
+
+					pMesh->CalcBox();
+
+					m_pMesh->m_parts_mgr->m_node_table.push_back(pMesh);
+					pMesh->m_id = m_pMesh->m_parts_mgr->m_id_last;
+
+					m_pMesh->m_parts_mgr->m_list.push_back(pMesh);
+
+					pair.first.clear();
+
+					std::swap(pair, m_pMesh->m_parts_mgr->asyncTasks.back());
+					m_pMesh->m_parts_mgr->asyncTasks.pop_back();
+
+					return;
+				}
+			}
+		}
 	}
 }
 

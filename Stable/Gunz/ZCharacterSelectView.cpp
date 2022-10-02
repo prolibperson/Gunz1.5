@@ -225,6 +225,9 @@ bool MeshesFinishedLoading = false;
 
 void ZCharacterSelectView::Draw()
 {
+
+	meshupdatetime += 1000;
+
 	if ( m_nState == ZCSVS_SELECT) 
 	{
 		if ( (m_nSelCharIndex < 0) || (m_nSelCharIndex > MAX_CHAR_COUNT)) return;
@@ -233,103 +236,85 @@ void ZCharacterSelectView::Draw()
 
 	if (m_pVisualMesh == NULL) return;
 
-	meshupdatetime += 1000;
-
-	//todo: create a callback instead of this lazy check
-	if (meshupdatetime >= 200000 && MeshesFinishedLoading == false)
-	{
-	//	m_pVisualMesh->ClearParts();
-		MeshesFinishedLoading = true;
-		ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[m_nSelCharIndex].m_CharInfo.nSex),
-			m_CharInfo[m_nSelCharIndex].m_CharInfo.nHair, m_CharInfo[m_nSelCharIndex].m_CharInfo.nFace,
-			m_CharInfo[m_nSelCharIndex].m_CharInfo.nEquipedItemDesc);
-		return;
-		//MeshesFinishedLoading = false;
-	}
-
-
 	if( !Enable_Cloth && m_pVisualMesh->isChestClothMesh() )
 	{
 		m_pVisualMesh->DestroyCloth();
 	}
-	else if( m_pVisualMesh->isChestClothMesh() )
+
+
+	if (m_pVisualMesh->isChestClothMesh())
 	{
-		srand( timeGetTime());
- 		int rint = rand() % 10;
+		srand(timeGetTime());
+		int rint = rand() % 10;
 		force.x += rint - 7;
-		force.x = min(max( force.x, 5 ), maxForce * 0.3 );
-		srand( timeGetTime());
-		rint = rand() % (int)(maxForce*0.3);
-		force.y += rint - 4;	
-		force.y = min(max( force.y, 0 ), maxForce );
+		force.x = min(max(force.x, 5), maxForce * 0.3);
+		srand(timeGetTime());
+		rint = rand() % (int)(maxForce * 0.3);
+		force.y += rint - 4;
+		force.y = min(max(force.y, 0), maxForce);
 		force.z = -70;
 
 		m_pVisualMesh->SetClothForce(force);
 	}
 
+
 	rmatrix World;
-	rvector Pos, Dir, Up(0,0,1);
+	rvector Pos, Dir, Up(0, 0, 1);
 	Pos = m_pBackground->GetCharPos();
 	Dir = m_pBackground->GetCharDir();
 
 	static MButton* s_button_l;
 	static MButton* s_button_r;
 
-	if(s_button_l==NULL) {
+	if (s_button_l == NULL) {
 		s_button_l = (MButton*)ZGetGameInterface()->GetIDLResource()->FindWidget("Charviewer_Rotate_L---");
 	}
 
-	if(s_button_r==NULL) {
+	if (s_button_r == NULL) {
 		s_button_r = (MButton*)ZGetGameInterface()->GetIDLResource()->FindWidget("Charviewer_Rotate_R---");
 	}
 
-	if( s_button_l && s_button_l->IsButtonDown() ) {
+	if (s_button_l && s_button_l->IsButtonDown()) {
 		m_fCRot += 1.f;
 	}
 
-	if( s_button_r && s_button_r->IsButtonDown() ) {
+	if (s_button_r && s_button_r->IsButtonDown()) {
 		m_fCRot -= 1.f;
 	}
 
 
-	if( m_nState == ZCSVS_CREATE ) {
-	
+	if (m_nState == ZCSVS_CREATE) {
+
 		rmatrix m = RGetRotZ(m_fCRot);
 		Dir = Dir * m;
 	}
-
-	//todo: create a callback instead of this lazy check!!!
-	//ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[m_nSelCharIndex].m_CharInfo.nSex),
-	//	m_CharInfo[m_nSelCharIndex].m_CharInfo.nHair, m_CharInfo[m_nSelCharIndex].m_CharInfo.nFace,
-	//	m_CharInfo[m_nSelCharIndex].m_CharInfo.nEquipedItemDesc);
-
 	DWORD dw;
-	RGetDevice()->GetRenderState(D3DRS_FOGENABLE,&dw);
-	RGetDevice()->SetRenderState(D3DRS_FOGENABLE,FALSE);
+	RGetDevice()->GetRenderState(D3DRS_FOGENABLE, &dw);
+	RGetDevice()->SetRenderState(D3DRS_FOGENABLE, FALSE);
 
-	if(m_pVisualMesh!=NULL)
+	if (m_pVisualMesh != NULL)
 	{
 		MakeWorldMatrix(&World, Pos, Dir, Up);
 
-/*
-		if(m_pBackground->GetChurchEnd())
-		{
-			m_pBackground->GetChurchEnd()->SetObjectLight(Pos);
-		}
-*/
+		/*
+				if(m_pBackground->GetChurchEnd())
+				{
+					m_pBackground->GetChurchEnd()->SetObjectLight(Pos);
+				}
+		*/
 
 		DrawCharacterLight(Pos);
 
-		bool bGame = ZGetGame() ? true:false;
+		bool bGame = ZGetGame() ? true : false;
 
-		m_pVisualMesh->SetClothValue(bGame,0.f); // cloth
+		m_pVisualMesh->SetClothValue(bGame, 0.f); // cloth
 		m_pVisualMesh->SetWorldMatrix(World);
 		m_pVisualMesh->Frame();
 		m_pVisualMesh->Render(true);
 
 		AniFrameInfo* pInfo = m_pVisualMesh->GetFrameInfo(ani_mode_lower);
 
-		if( pInfo->m_pAniSet )
+		if (pInfo->m_pAniSet)
 		{
 			if ((!strcmp(pInfo->m_pAniSet->GetName(), "login_intro")) &&
 				(m_pVisualMesh->isOncePlayDone()))
@@ -344,13 +329,22 @@ void ZCharacterSelectView::Draw()
 
 			m_bReserveSelectChar = false;
 		}
-
-//		m_pVisualMesh->UpdateCloth();
-//		m_pVisualMesh->RenderCloth();
-
 	}
-    
-	RGetDevice()->SetRenderState(D3DRS_FOGENABLE,dw);
+
+	RGetDevice()->SetRenderState(D3DRS_FOGENABLE, dw);
+
+	//todo: create a callback instead of this lazy check
+	if (meshupdatetime >= 1200000 && MeshesFinishedLoading == false)
+	{
+		//	m_pVisualMesh->ClearParts();
+		MeshesFinishedLoading = true;
+		ZChangeCharParts(m_pVisualMesh, MMatchSex(m_CharInfo[m_nSelCharIndex].m_CharInfo.nSex),
+			m_CharInfo[m_nSelCharIndex].m_CharInfo.nHair, m_CharInfo[m_nSelCharIndex].m_CharInfo.nFace,
+			m_CharInfo[m_nSelCharIndex].m_CharInfo.nEquipedItemDesc);
+		//	return;
+			//meshupdatetime = 0;
+			//MeshesFinishedLoading = false;
+	}
 }
 
 

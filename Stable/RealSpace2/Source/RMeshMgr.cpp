@@ -69,25 +69,7 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 			isCharModel = true;
 		if (autoLoad == true)
 		{
-			if (!node->ReadElu(name,false))
-			{
-				delete node;
-				return -1;
-			}
-
-
-			node->CalcBox();
-
-			m_node_table.push_back(node);
-			node->m_id = m_id_last;
-
-			if (m_id_last > MAX_NODE_TABLE)
-				mlog("MeshNode 예약 사이즈를 늘리는것이 좋겠음...\n");
-
-			m_list.push_back(node);
-			m_id_last++;
-
-			return m_id_last - 1;
+			goto autorun;
 		}
 		else
 		{
@@ -124,7 +106,7 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 					if (task.first == name)
 						return -1;
 				}
-				asyncTasks.push_back(std::make_pair(std::string(name), std::async(std::launch::async, &RMesh::ReadEluPtr, node, const_cast<char*>(filename.c_str()))));
+				asyncTasks.push_back(std::make_pair(std::string(name), std::async(std::launch::async, &RMesh::ReadEluPtr, node, filename)));
 
 				m_id_last++;
 
@@ -133,6 +115,7 @@ int RMeshMgr::Add(char* name, char* modelname, bool namesort, bool autoLoad)
 		}
 	}
 
+autorun:
 	if (!node->ReadElu(name)) {
 		mlog("elu %s file loading failure !!!\n", name);
 		return -1;
@@ -770,7 +753,6 @@ void RMeshMgr::GetPartsNode(RMeshPartsType parts,vector<RMeshNode*>& nodetable)
 	r_mesh_node node;
 	RMesh* pMesh = NULL;
 	RMeshNode* pMeshNode = NULL;
-
 
 	for(node = m_list.begin(); node != m_list.end(); ++node)
 	{

@@ -24,7 +24,7 @@ public:
 	void Destroy();
 	void ClearShop();
 	void ClearGamble();
-	void Serialize();
+	void Serialize(const char* itemsearch = nullptr);
 
 	bool CheckTypeWithListFilter(int type, bool bEnchantItem);
 

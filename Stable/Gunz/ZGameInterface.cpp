@@ -7144,3 +7144,7 @@ void ZGameInterface::UpdateDuelTournamantMyCharInfoPreviousUI()
 	}
 }
 
+void ZGameInterface::OnShopSearch(const char* text)
+{
+	ZGetShop()->Serialize(text);
+}

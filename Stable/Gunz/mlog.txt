@@ -1,5 +1,5 @@
-GUNZ 1,0,0,290 launched. build (Aug 25 2022 18:53:02) 
-Log time (08/27/22 10:32:00)
+GUNZ 1,0,0,290 launched. build (Sep  2 2022 07:28:21) 
+Log time (09/02/22 07:28:50)
 Windows = 6.2 Build 9200 ,  (16701668KB) :  Windows 8..
 CPU ID = AMD Ryzen 5 3500X 6-Core Processor              ( family = 0 , model = 586 , stepping = 28928 )
 Display Device = AMD Radeon RX 6600 ( vendor=1002 device=73ff subsys=50221462 revision=c7 )
@@ -28,19 +28,19 @@ ZApplication::OnCreate : begin
 3(Realtek Digital Output (Realtek(R) Audio)): Hardware Mixing Not Supported
 [[[getMaxChannel32]]]]
 
--------------------> Sound Engine Create : 0.545000 
+-------------------> Sound Engine Create : 0.558000 
 
 sound engine create.
 Load XML from memory : system/USA/tips.xml(0x0009)start log bipmap
 end of load bitmaps2
-loading pictures : 1.703000 
+loading pictures : 1.763000 
 IDLResource Loading Success!!
-IDL resources : 0.111000 
+IDL resources : 0.116000 
 start InitInterface option
 Number of Display mode : 101
 end of InitInterface option ok
 Init maps : no Current ChannelRule 
-Screen Effect Manager Create : 0.214000 
+Screen Effect Manager Create : 0.216000 
 Screen effect manager create success.
 SFX/ef_hp ampulla.elu mesh Plane57 node 2 face 0 point -> physique 3 Greater than
 SFX/ef_hp ampulla.elu mesh Plane50 node 2 face 0 point -> physique 3 Greater than
@@ -67,14 +67,22 @@ Effect manager create success.
 Client create success.
 game interface create success.
 
--------------------> GameInterface Create : 2.270000 
+-------------------> GameInterface Create : 2.340000 
 
+model/man/man-parts_shunter.elu mesh eq_chest_shunter node 34 face 0 point -> physique 3 Greater than
+model/man/man-parts_dryad.elu mesh eq_chest_dryad node 680 face 0 point -> physique 3 Greater than
+model/man/man-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 2 point -> physique 3 Greater than
+model/man/man-parts_mummy.elu mesh eq_chest_mummy node 18 face 0 point -> physique 3 Greater than
+model/woman/woman-parts_blackdragon.elu mesh eq_legs_blackdragon node 301 face 1 point -> physique 3 Greater than
+model/woman/woman-parts_eskimo.elu mesh eq_chest_eskimo node 80 face 1 point -> physique 3 Greater than
+model/woman/woman-parts_bloodsuit.elu mesh eq_chest_bloodsuit node 129 face 0 point -> physique 3 Greater than
+model/woman/woman-parts_gveteran.elu mesh eq_chest_gveteran node 6 face 1 point -> physique 3 Greater than
 Load character.xml success,
 
--------------------> Character Loading : 0.162000 
+-------------------> Character Loading : 1.908000 
 
 
--------------------> WeaponMesh Loading : 0.291000 
+-------------------> WeaponMesh Loading : 0.298000 
 
 Load weapon.xml success. 
 
@@ -134,6 +142,3 @@ BspObject load lightmap : end
 RBspObject::Open : done
 ZInterfaceBackground::LoadMesh pMapDesc->LoadSmokeDesc 
 main : OnCreate() done
-Server Connected
-Login Successful. 
-Responsed Account Charlist

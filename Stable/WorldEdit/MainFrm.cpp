@@ -99,8 +99,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	DockControlBar(&m_wndToolBar);
 
 
-	m_ObjectDialog.Create(IDD_DIALOG_OBJECTSELECT,this);
-	m_ObjectDialog.Initilize();
+	
 
 	m_PathDialog.Create(IDD_DIALOG_PATH,this);
 

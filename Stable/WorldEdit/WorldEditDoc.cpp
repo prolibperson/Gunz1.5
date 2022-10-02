@@ -121,6 +121,9 @@ BOOL CWorldEditDoc::OnOpenDocument(LPCTSTR lpszPathName)
 		((CMainFrame*)pMainframe)->m_ControlDialog.m_lightList.AddString(lightData.c_str());
 	}
 
+	((CMainFrame*)pMainframe)->m_ObjectDialog.Create(IDD_DIALOG_OBJECTSELECT, ((CMainFrame*)pMainframe));
+	((CMainFrame*)pMainframe)->m_ObjectDialog.Initilize();
+
 	m_bLastPicked=false;
 	return TRUE;
 }

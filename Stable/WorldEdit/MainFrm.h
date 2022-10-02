@@ -47,7 +47,9 @@ protected:  // control bar embedded members
 	CToolBar    m_wndToolBar;
 	
 	RECT		m_LastPos;
+public:
 	CObjectDialog		m_ObjectDialog;
+protected:
 	CPathDialog			m_PathDialog;
 
 	void HideDialogs();

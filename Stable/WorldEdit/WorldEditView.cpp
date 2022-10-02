@@ -123,7 +123,8 @@ void CWorldEditView::OnDraw(CDC* pDC)
 
 		pDoc->m_pBspObject->DrawObjects();
 
-		pDoc->m_pBspObject->DrawLights();
+		//todo: draw lights via  toggle
+		//pDoc->m_pBspObject->DrawLights();
 
 
 		if(m_EditMode==EDITMODE_PATH)

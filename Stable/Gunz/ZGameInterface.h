@@ -474,6 +474,8 @@ public:
 	void UpdateDuelTournamantMyCharInfoUI();
 	void UpdateDuelTournamantMyCharInfoPreviousUI();
 
+	void OnShopSearch(const char* text);
+
 // ∏±∑π¿Ã∏ 
 	bool GetIsGameFinishLeaveBattle()			{ return m_bGameFinishLeaveBattle; }
 

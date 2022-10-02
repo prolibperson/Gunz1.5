@@ -7,11 +7,13 @@
 // ObjectDialog.h : header file
 //
 
+#include "StdAfx.h"
+#include "RBspObject.h"
 #include "RVisualMeshMgr.h"
 
 enum OBJTYPE
 {
-	OT_STATIC,
+	OT_STATIONARY,
 	OT_MOVABLE,
 	OT_NAVIGATION,
 };

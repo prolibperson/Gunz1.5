@@ -38,6 +38,9 @@ void    RSetStencilBuffer(bool b);
 int		RGetMultiSampling();
 void    RSetMultiSampling(D3DMULTISAMPLE_TYPE value);
 
+void RSetMaximized(bool const& b);
+bool RIsMaximized();
+
 int RGetAdapterModeCount( D3DFORMAT Format,UINT Adapter = D3DADAPTER_DEFAULT );
 bool REnumAdapterMode( UINT Adapter, D3DFORMAT Format ,UINT Mode, D3DDISPLAYMODE* pMode );
 
@@ -54,6 +57,7 @@ extern HWND	g_hWnd;
 extern MZFileSystem *g_pFileSystem;
 extern DWORD g_dwLastTime;
 extern bool g_isDirect3D9ExEnabled;
+extern bool g_isMaximized;
 // 초기화 & 종료
 bool RInitDisplay(HWND hWnd,const RMODEPARAMS *params);
 bool RCloseDisplay();
