@@ -16,7 +16,8 @@ FOV Option,
 UI Changes, 
 FPS Counter updates every .25 seconds (hopefully), 
 Can read from unpacked MRSES (gets enabled and disabled in config.h),
-UpTimeFaker to fix an uptime related issue
+UpTimeFaker to fix an uptime related issue,
+No Locator
 
 I probably forgot some stuff I did T-T
 
