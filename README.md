@@ -3,18 +3,18 @@ This source is made by Jetman, but the state it got released in isnt the greates
 So, since I'm very nice, here is a better "Jetman Source".
 
 Features:
-Achievement system commented out (its unfinished and causes a deathmatch matchserver crash... zz) 
-Quest Fixes from Jetman
-Ammo Bar works properly
-Medkits fixed
-Sword Reload Fix (checks for nullptr unlike my old fix, credits to Lotus)
-Compiles with C++17
-FPS Limiter improvements
-Duel Tournament should be functional (make sure to set DB up properly)
-Damage Counter counts both HP and AP damage
-FOV Option
-UI Changes
-FPS Counter updates every .25 seconds (hopefully)
+Achievement system commented out (its unfinished and causes a deathmatch matchserver crash... zz), 
+Quest Fixes from Jetman, 
+Ammo Bar works properly, 
+Medkits fixed, 
+Sword Reload Fix (checks for nullptr unlike my old fix, credits to Lotus), 
+Compiles with C++17, 
+FPS Limiter improvements, 
+Duel Tournament should be functional (make sure to set DB up properly), 
+Damage Counter counts both HP and AP damage, 
+FOV Option, 
+UI Changes, 
+FPS Counter updates every .25 seconds (hopefully), 
 Can read from unpacked MRSES (gets enabled and disabled in config.h)
 
 I probably forgot some stuff I did T-T
