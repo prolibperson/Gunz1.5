@@ -1,6 +1,0 @@
-BEGIN TRAN --------
-
-	DELETE CharacterItem
-	WHERE ItemID BETWEEN 402000 AND 402025
-	
-COMMIT TRAN --------

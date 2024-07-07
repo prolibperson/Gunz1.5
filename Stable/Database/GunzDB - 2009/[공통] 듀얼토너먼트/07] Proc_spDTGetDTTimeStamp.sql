@@ -1,8 +1,0 @@
-ALTER PROCEDURE dbo.spDTGetDTTimeStamp
-AS BEGIN
-	SET NOCOUNT ON;
-	
-	SELECT TOP 1 TimeStamp 
-	FROM DTTimeStamp(NOLOCK) 
-	ORDER BY TimeStamp DESC;
-END
