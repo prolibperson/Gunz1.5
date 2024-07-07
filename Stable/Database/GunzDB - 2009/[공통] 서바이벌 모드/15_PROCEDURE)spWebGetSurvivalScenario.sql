@@ -1,0 +1,11 @@
+USE GunzDB
+GO
+
+ALTER PROCEDURE dbo.spWebGetSurvivalScenario
+AS BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT	SID, SName
+	FROM	SurvivalScenarioID WITH (NOLOCK)	
+END
+GO

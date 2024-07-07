@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+
+	<NPCModel></NPCModel>
+	<AddBaseModel name="b_zealot_blue" filename="gz_hzealot_hunter.elu"> </AddBaseModel>
+	<MakeAnimationMap ></MakeAnimationMap>
+
+	<AddAnimation name="idle"		filename="H_Zealot_idle.elu.ani" 	 	gm="1"	motion_type="0" motion_loop_type="loop" > </AddAnimation>
+	<AddAnimation name="run"		filename="H_Zealot_run_20up.elu.ani"		gm="1" 	motion_type="0" motion_loop_type="loop" > </AddAnimation>
+	
+	<AddAnimation name="suffer1"		filename="H_Zealot_suffer1.elu.ani" 	gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="suffer2"		filename="H_Zealot_suffer2.elu.ani" 	gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="suffer3"		filename="H_Zealot_suffer3.elu.ani" 	gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="suffer3recover"		filename="H_Zealot_suffer3_r.elu.ani" 	gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	
+	<AddAnimation name="charge"	filename="H_Zealot_charge_20up.elu.ani" gm="1" motion_type="0" motion_loop_type="loop" > 	</AddAnimation>
+	<AddAnimation name="attack"	filename="H_Zealot_attack.elu.ani" gm="1" motion_type="0" motion_loop_type="lastframe" > 	</AddAnimation>
+	<AddAnimation name="attack2"	filename="H_Zealot_attack2.elu.ani" gm="1" motion_type="0" motion_loop_type="lastframe" > 	</AddAnimation>
+	
+	<AddAnimation name="lightningstun"		filename="H_Zealot_lightning.elu.ani"  gm="1"	motion_type="0" motion_loop_type="loop" > </AddAnimation>
+	<AddAnimation name="blast_soar"		filename="H_Zealot_blast.elu.ani" 	 gm="1"	motion_type="0" motion_loop_type="lastframe" > 	</AddAnimation>
+	<AddAnimation name="blast_fall"		filename="H_Zealot_blast_fall.elu.ani" 	gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="blast_down"		filename="H_Zealot_blast_drop.elu.ani" 	gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="standup"		filename="H_Zealot_blast_stand.elu.ani" 	 gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="blast_thrust"	filename="H_Zealot_blast_dagger.elu.ani" 	 gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="blast_thrustdown" filename="H_Zealot_blast_drop_dagger.elu.ani" 	 gm="1"	motion_type="0" motion_loop_type="lastframe" > </AddAnimation>
+	<AddAnimation name="die"		filename="H_Zealot_die.elu.ani"		gm="1"	motion_type="0" motion_loop_type="lastframe" 	> 	</AddAnimation>
+
+
+</xml>

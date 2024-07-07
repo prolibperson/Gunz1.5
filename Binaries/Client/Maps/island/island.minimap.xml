@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_island.bmp</PICTURE>
+	<LEFTTOP>
+		<X>320</X>
+		<Y>320</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-6620</X>
+		<Y>-6040</Y>
+	</RIGHTBOTTOM>
+	<!-- <X>6620</X>
+		<Y>7200</Y>
+		-->
+</XML>

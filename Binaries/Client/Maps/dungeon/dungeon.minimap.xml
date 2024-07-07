@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_dungeon.bmp</PICTURE>
+	<LEFTTOP>
+		<X>7810</X>
+		<Y>9380</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-8390</X>
+		<Y>-6820</Y>
+	</RIGHTBOTTOM>
+</XML>

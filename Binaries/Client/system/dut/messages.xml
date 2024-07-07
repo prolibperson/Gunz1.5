@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML>
+
+<!-- ?�라?�언???�러메시지 관??-->
+<MSG id="500">kennisgeving</MSG>
+<MSG id="501">Log in op de Netmarble GUNZ homepage en selecteer de server in de server lijst om de GUNZ bedienen.</MSG>
+
+<!-- ?�라?�언???�터?�이??관??-->
+<MSG id="1000">U kunt raporteren na 1 minuut.</MSG>
+<MSG id="1001">Details van het chatten gemeld.</MSG>
+<MSG id="1002">U heeft niet de autoriteit om te chatten.</MSG>
+<MSG id="1003">Voer $1 teken in of meer.</MSG>
+<MSG id="1004">Onjuiste Command Syntax.</MSG>
+<MSG id="1005">Onjuiste Command Syntax.</MSG>
+<MSG id="1006">Kan alleen in de lobby worden uitgevoerd.</MSG>
+<MSG id="1007">Kan alleen in de wachtkamer worden uitgevoerd.</MSG>
+<MSG id="1008">Kan alleen in spel worden uitgevoerd.</MSG>
+<MSG id="1009">Het is geannuleerd.</MSG>
+<MSG id="1010">Kan de command niet gebruiken.</MSG>
+<MSG id="1011">De screenshot is opgeslagen in "My Documents$1".</MSG>
+<MSG id="1012">De screenshot kon niet worden opgeslagen.</MSG>
+<MSG id="1013">Opnemen is begonnen.</MSG>
+<MSG id="1014">Opname is opgeslagen in "My Documents$1".</MSG>
+<MSG id="1015">De opname kon niet worden opgeslagen.</MSG>
+<MSG id="1016">Stemmen voor het kicken van '%s' is begonnen. </MSG>
+<MSG id="1017">Als u wilt deelnemen aan de stemming , druk op ' Y' als u akkoord ; 'N' als je niet akkoord gaat.</MSG>
+<MSG id="1018">Selecteer de speler die eruit moet </MSG>
+<MSG id="1019">[ESC] Annuleer</MSG>
+<MSG id="1020">Vote is geaccepteerd.</MSG>
+<MSG id="1021">Vote is geweigerd.</MSG>
+<MSG id="1022">Vote optie is niet beschikbaar.</MSG>
+<MSG id="1023">Stem op '$1' is begonnen.</MSG>
+<!-- 추?�부?11. 15. -->
+<MSG id="1024">Zoeken naar de andere team $1</MSG>
+
+<MSG id="1025"></MSG>
+
+<MSG id="1105">$1 Probeert een clan te maken '$3'Clan with $2. Ga je akkoord?</MSG>
+<MSG id="1106">$1 Heeft geweigerd om deel te nemen aan de creatie.</MSG>
+<MSG id="1107">De clan is gecreërd.</MSG>
+<MSG id="1108">De clan is gesloten. De clan zal volledig gesloten zijn om 7:00 AM CST.</MSG>
+<MSG id="1109">Alleen de Clan Meester kan het uitvoeren.</MSG>
+<MSG id="1110">Alleen de Clan Meester en Clan Administrator kan het uitvoeren.</MSG>
+<MSG id="1111">Je zit al bij een clan.</MSG>
+<MSG id="1112">Je hebt de clan niet gejoined.</MSG>
+<MSG id="1113">'$1' Wil je de clan joinen?</MSG>
+<MSG id="1114">De speler is geweigerd.</MSG>
+<MSG id="1115">Je hebt de clan gejoined.</MSG>
+<MSG id="1116">Je bent uit de clan gegaan.</MSG>
+<MSG id="1117">De clan meester kan niet verlaten.</MSG>
+<MSG id="1118">Je kunt je karakter niet verwijderen zolang je nog in een clan zit.</MSG>
+<MSG id="1119">Autoriteit veranderd.</MSG>
+<MSG id="1120">De geselecteerde speler is verwijderd van de clan.</MSG>
+<MSG id="1121">Je moet $1 spelers selecteren om een clan te maken.</MSG>
+<MSG id="1122">Weet je zeker dat je de clan wilt sluiten?</MSG>
+<MSG id="1123">Weet je zeker dat je de clan wilt verlaten?</MSG>
+<MSG id="1124">Clan naam is anders.</MSG>
+<MSG id="1125">Clan speler '$1' Is online.</MSG>
+
+<MSG id="1200">Kan niet worden verwijderd, omdat het is uitgerust met contant apparatuur.</MSG>
+<MSG id="1201">De karakter is verwijdered.</MSG>
+
+<MSG id="1202">Je bent terug in eerdere resolutie binnen in $ 1 seconde(s).</MSG>
+
+<!-- 로비 UI -->
+<MSG id="1301">Clan Master : $1, $2 is online.</MSG>
+<MSG id="1302">%d wachten. </MSG>
+<MSG id="1303">Je hebt de clan niet gejoined.</MSG>
+<!-- 추???�부?11.13 -->
+<MSG id="1304">Gebruik de vrije channel als je wilt spelen met elke niveau.</MSG>
+<MSG id="1305">Je moet vechten met alle spelers, ongeacht de channel in de competitiewedstrijd.</MSG>
+<MSG id="1306">$1 is uitgenodigd naar de chat kamer.</MSG>	
+<MSG id="1307">$1 has invited you the Chat kamer '$2'.</MSG>
+<MSG id="1308">'$2' Heeft de chat kamer gejoined '$1'.</MSG>
+<MSG id="1309">'$2' Heeft de chat kamer verlaten '$1'.</MSG>
+<MSG id="1310">Zal worden omgezet naar de Chat kamer '$1'.</MSG>
+<!--
+<MSG id="1311">'$1' Nodigt je uit naar chat kamer '$2'.</MSG>
+-->
+<MSG id="1312">Chat kamer($1) $2 : $3</MSG>
+<!--
+<MSG id="1313">Fluisteren ($1) : $2</MSG>
+-->
+<!-- �추???�부?11.15 -->
+<MSG id="1313">Verzoek hiertoe aan om de Chat kamer te openen ...</MSG>
+<MSG id="1314">Verzoek word gedaan om de chat room te joinen ...</MSG>
+<MSG id="1315">De chatroom verlaten.</MSG>
+<MSG id="1316">De chatroom selecteren</MSG>
+<MSG id="1317">Je hebt de channel gejoined '$1'.</MSG>
+
+
+<MSG id="1400">Wachten op toestemming</MSG>
+<MSG id="1401">Wacht totdat de speler accepteert.</MSG>
+<MSG id="1402">$1 Nodigt je uit voor een spel. Accepteer je?</MSG>
+<MSG id="1403">$1 heeft geweigerd.</MSG>
+<MSG id="1404">$1 has geannuleerd.</MSG>
+<MSG id="1405">Het is geannuleerd.</MSG>
+<MSG id="1406">Selecteer de juiste aantal spelers.</MSG>
+
+<MSG id="1420">$1 Nodigt je uit voor een clanwar, accepteer je?</MSG>
+
+<!-- ?붴랜??-->	
+<MSG id="1510">'$1' Clan versloeg '$2' Clan En is gevuld met energie na $3 overwinningen op een rij.</MSG>
+<MSG id="1511">'$1' Clan versloeg '$2' Clan Heeft $3 overwinningen op een rij.</MSG>
+<MSG id="1512">'$1' Clan versloeg '$2' Clan om op te nemen heeft $3 overwinningen op rij zonder hapering.</MSG>
+<MSG id="1513">'$1' Clan versloeg '$2' Clan heeft succsesvol $3 overwinningen op een rij.</MSG>
+<MSG id="1514">'$1' Clan versloeg '$2' Clan te markeren heeft $3 overwinningen op een rij.</MSG>
+<MSG id="1515">'$1' Clan versloeg '$2' Clan blokkeert hun weg naar een derde opeenvolgende zege.</MSG>
+
+<!-- 듀얼 -->
+<MSG id="1520">'$1' Heeft $4 Duel Matches op een rij gewonnen in $3 kamer van '$2' channel.</MSG>
+<MSG id="1521">'$2' Stopt '$1' Na het winnen van $3 Duel Matches.</MSG>
+
+<!-- 로딩 메시지 -->
+<MSG id="1600">'Dash'</MSG>
+<MSG id="1601">Je kunt veel sneller bewegen dan normaal.</MSG>
+<MSG id="1602">Het kan ook in de lucht</MSG>
+<MSG id="1603">'Perfecte verdediging'</MSG>
+<MSG id="1604">Tijdens verdediging, kunt u alle kogels en zwaarden volledig blokkeren.</MSG>
+<MSG id="1605">Onmogelijk om het onderste deel te verdedigen.</MSG>
+<MSG id="1606">'Special Attack'</MSG>
+<MSG id="1607">In het geval van een long sword , het raakt de tegenhanger op te schorten in de lucht. Bij</MSG>
+<MSG id="1608">een dolk het duwt de tegenpartij hem / haar op te schorten met de duwkracht. </MSG>
+<MSG id="1609">'Hoe moet je vallen'</MSG>
+<MSG id="1610">Een succesvolle val down op de grond vermindert de extra schade die je</MSG>
+<MSG id="1611">Je kan niet bewegen op de grond.</MSG>
+<MSG id="1612">'Tumbling'</MSG>
+<MSG id="1613">Je kan een aanval vermijden door tumbling.</MSG>
+<MSG id="1614">YJe kunt ook schieten tijdens tumbling.</MSG>
+<MSG id="1615">'Suspending'</MSG>
+<MSG id="1616">Klik op de rechterknop van de muis wanneer je in de lucht zweeft en gewapend met een wapen voor</MSG>
+<MSG id="1617">close combat kun je jezelf op te schorten van de muur met behulp van het wapen voor close combat.</MSG>
+<MSG id="1618">'Wall jump'</MSG>
+<MSG id="1619">Druk op de Jump knop wanneer je dichtbij de muur bent</MSG>
+<MSG id="1620">Om een andere sprong te maken.</MSG>
+<MSG id="1621">'Run the wall'</MSG>
+<MSG id="1622">Druk op de jump knop wanneer je diognaal naast de muur </MSG>
+<MSG id="1623">vooruit in beweging bent, Dan rent de karakter automatisch tegen de muur.</MSG>
+<MSG id="1624">Klimmen op de muur</MSG>
+<MSG id="1625">Je kunt de muur beklimmen.</MSG>
+<MSG id="1626">Tenzij je dichtbij de muur bent, dan werkt deze functie niet.</MSG>
+
+<!-- 캐릭???�보 ?�시 -->
+<MSG id="1700">[Character Information]=============</MSG>
+<MSG id="1701">Naam</MSG>
+<MSG id="1702">Clan</MSG>
+<MSG id="1703">Level</MSG>
+<MSG id="1704">Winning Percentage</MSG>
+<MSG id="1705">Win</MSG>
+<MSG id="1706">Lose</MSG>
+<MSG id="1707">Connection Time</MSG>
+<MSG id="1708">dag</MSG>
+<MSG id="1709">uur</MSG>
+<MSG id="1710">min</MSG>
+<MSG id="1711">sec</MSG>
+<!-- 추???�부?-->
+<MSG id="1712">EXP</MSG>
+<MSG id="1713">Bounty</MSG>
+<MSG id="1714">HP</MSG>
+<MSG id="1715">AP</MSG>
+<MSG id="1716">WT</MSG>
+<MSG id="1717">Lv.</MSG>
+
+<!-- �게임 ?�메시지 -->
+<MSG id="2000">$1 heeft deelgenomen aan het spel.</MSG>
+<MSG id="2001">$1 Heeft het spel verlaten.</MSG>
+<MSG id="2002">$1 is level up.</MSG>
+<MSG id="2003">$1 is leveled down.</MSG>
+<MSG id="2004">Clan War $1 ( $2 vs. $3 )</MSG>
+<!-- 추???�부?-->
+<MSG id="2005">Gevallen in de hel.</MSG>
+<MSG id="2006">Je bent vermoord door je explosieven.</MSG>
+<MSG id="2007">Je hebt jezelf verslagen.</MSG>
+<MSG id="2008">$1 heeft zelfmoord gepleegd.</MSG>	
+<MSG id="2009">Je hebt $1 verslagen.</MSG>
+<MSG id="2010">$1 heeft jou verslagen.</MSG>
+<MSG id="2011">$1 heeft $2 verslagen.</MSG>
+<MSG id="2012">Om te spelen, druk de Fire knop!</MSG>
+<MSG id="2013">wacht nog $1 second(s)!</MSG>
+<MSG id="2014">Je verlaat de spel $1 second(s).</MSG>
+<!-- �추?�부?11. 15. -->
+<MSG id="2015">Fluister ($1) : $2</MSG>
+<MSG id="2016">Het item is in gebracht.</MSG>
+<MSG id="2017">Het item kan niet in worden gebracht.</MSG>
+<MSG id="2018">U heeft de aankoop gedaan.</MSG>
+<MSG id="2019">U kunt een aankooporder niet maken.</MSG>
+<MSG id="2020">Het is verkocht.</MSG>
+<MSG id="2021">Er is geen karakter om te selecteren. Maak eerst een karakter.</MSG>
+<MSG id="2022">Je kunt het niet verkopen.</MSG>
+<MSG id="2023">Je kunt naar de volgende ronde na $1 second(s).</MSG>
+<MSG id="2024">Quest team heeft een $1.</MSG>
+<MSG id="2025">Heeft $2 $1(s).</MSG>
+<MSG id="2026">De portaal is open.</MSG>
+<MSG id="2027">automatisch team balance</MSG>
+<MSG id="2028">Het heeft geen scenario.</MSG>
+
+<!-- �추?�부?11. 15. -->
+<MSG id="3000">Administrator: $1</MSG>
+
+
+<!-- �메뉴 -->
+<MSG id="8000">None</MSG>
+
+<MSG id="8001">Voeg een vriend toe</MSG>
+<MSG id="8002">Verwijder vriend</MSG>
+<MSG id="8003">Bekijk locatie</MSG>
+<MSG id="8004">Catch up met</MSG>
+<MSG id="8005">Fluister</MSG>
+<MSG id="8006">Kick</MSG>
+<MSG id="8007">Werv</MSG>
+
+<MSG id="8008">Maak Clan meester</MSG>
+<MSG id="8009">Maak clan administrator</MSG>
+<MSG id="8010">Maak clan member</MSG>
+<MSG id="8011">Kicken van de clan</MSG>
+<MSG id="8012">Uit de clan gaan</MSG>
+
+<MSG id="8013">Sturen naar de Centrale Bank</MSG>
+
+<MSG id="8014">OK</MSG>
+<MSG id="8015">Annuleer</MSG>
+<MSG id="8016">JA</MSG>
+<MSG id="8017">Nee</MSG>
+<MSG id="8018">Bericht</MSG>	
+
+			
+<!-- ?�어 -->
+<MSG id="9000"></MSG>
+<MSG id="9001">Clan Meester</MSG>
+<MSG id="9002">Clan Administrator</MSG>
+<MSG id="9003">Clan Member</MSG>
+
+<MSG id="9004">Administrator</MSG>
+<MSG id="9005">Developer</MSG>
+<MSG id="9006">Commands</MSG>
+<MSG id="9007">Help</MSG>
+<MSG id="9008">Gebruik</MSG>
+
+<MSG id="9100">Male</MSG>
+<MSG id="9101">Female</MSG>
+<MSG id="9102">Male</MSG>
+<MSG id="9103">Female</MSG>
+
+<MSG id="9200">Lobby</MSG>
+<MSG id="9201">Stage</MSG>
+<MSG id="9202">Winkel</MSG>
+<MSG id="9203">uitrusting</MSG>
+<MSG id="9204">Geld</MSG>
+
+<MSG id="9302">Voor Mannen</MSG>
+<MSG id="9349">Voor vrouwen</MSG>
+<MSG id="9303">Req. Level</MSG>
+<MSG id="9304">Gewicht</MSG>
+<MSG id="9305">Attributes:Fire</MSG>
+<MSG id="9306">Attributes:Ice</MSG>
+<MSG id="9307">Attributes:Poison</MSG>
+<MSG id="9308">Attributes:Lightning</MSG>
+<MSG id="9309">Durutie</MSG>
+<MSG id="9310">Clip</MSG>
+<MSG id="9311">Schade</MSG>
+<MSG id="9312">Vertraging</MSG>
+<MSG id="9313">Max Wgt.</MSG>
+<MSG id="9314">Snelheid</MSG>					<!-- Speed of movement -->
+<MSG id="9315">Jump [X]</MSG>				<!-- Jump not allowed -->
+<MSG id="9316">Dash [X]</MSG>				<!-- Dash not allowed -->
+<MSG id="9317">Wall climbing [X]</MSG>		<!-- Wall climbing not allowed -->
+<MSG id="9318">Schade</MSG>
+<MSG id="9319">Quest</MSG>
+<MSG id="9320">Item</MSG>
+<MSG id="9321">Offer</MSG>
+<MSG id="9322">Spelers</MSG>
+<MSG id="9323">Blauw</MSG>
+<MSG id="9324">Rood</MSG>
+<MSG id="9325">hoeveelheid</MSG>
+<MSG id="9326">Zoeken naar team</MSG>
+<MSG id="9327">Num of items</MSG>
+<MSG id="9328">Num of NPC</MSG>
+<MSG id="9329">Progressie</MSG>
+<MSG id="9330">Resterende tijd</MSG>
+<MSG id="9331">V</MSG>
+<MSG id="9363">Doelstelling Kills</MSG>
+<MSG id="9364">Ronde</MSG>
+
+<MSG id="9332">Rate</MSG>
+<MSG id="9333">Graad</MSG>
+<MSG id="9334">Regulair</MSG>
+<MSG id="9335">Legendarisch</MSG>
+<MSG id="9336">Boss</MSG>
+<MSG id="9337">Elite</MSG>
+<MSG id="9338">Veteran</MSG>
+<MSG id="9339">Heel sterk</MSG>
+<MSG id="9340">Sterk</MSG>
+<MSG id="9341">Normaal</MSG>
+<MSG id="9342">Slap</MSG>
+<MSG id="9343">Heel slap</MSG>
+
+<MSG id="9344">Oneindig</MSG>
+<MSG id="9345">Niet beschikbaar</MSG>
+<MSG id="9346">Level gap</MSG>
+<MSG id="9347">Toegestaan</MSG>
+<MSG id="9348">Verboden</MSG>
+
+<!-- 2006년 5월 3일 추가 -->
+<MSG id="9365">Type</MSG>
+<MSG id="9366">Exp</MSG>
+<MSG id="9367">Doden</MSG>
+<MSG id="9368">Dood</MSG>
+<MSG id="9369">Ping</MSG>
+
+<MSG id="9370">&lt; Hoofd &gt;</MSG>
+<MSG id="9371">&lt; Torso &gt;</MSG>
+<MSG id="9372">&lt; Hand &gt;</MSG>
+<MSG id="9373">&lt; Benen &gt;</MSG>
+<MSG id="9374">&lt; Voeten &gt;</MSG>
+<MSG id="9375">&lt; Linker vinger &gt;</MSG>
+<MSG id="9376">&lt; Rechter vinger &gt;</MSG>
+<MSG id="9377">&lt; Melee &gt;</MSG>
+<MSG id="9378">&lt; Primary Weapon &gt;</MSG>
+<MSG id="9379">&lt; Secondary Weapon &gt;</MSG>
+<MSG id="9380">&lt; Item 1 &gt;</MSG>
+<MSG id="9381">&lt; Item 2 &gt;</MSG>
+
+<MSG id="9382">Debug Server</MSG>
+<MSG id="9383">Match Server</MSG>
+<MSG id="9384">Clan Server</MSG>
+<MSG id="9385">Quest Server</MSG>
+<MSG id="9386">Event Server</MSG>
+
+<MSG id="100100">Zoeken nar team $1</MSG>
+<MSG id="100200">De stem op '$1' is begonnen.</MSG>
+
+<MSG id="100300">De woord '$1' kan je niet gebruiken.</MSG>
+
+
+<!-- 매치 ?�??-->
+<MSG id="9350">Deathmatch</MSG>
+<MSG id="9351">Team Deathmatch</MSG>
+<MSG id="9352">Gladiator</MSG>
+<MSG id="9353">Team Gladiator</MSG>
+<MSG id="9354">Assassination</MSG>
+<MSG id="9355">Training</MSG>
+<MSG id="9356">Classic</MSG>
+<MSG id="9357">Team Classic</MSG>
+<MSG id="9358">Survival</MSG>
+<MSG id="9359">Quest</MSG>
+<MSG id="9360">Deathmatch +Berserker</MSG>
+<MSG id="9361">Team Deathmatch +Extream</MSG>
+<MSG id="9362">The Duel match</MSG>
+<MSG id="10000">Challenge Quest</MSG>
+<MSG id="10001">Infected</MSG>
+<MSG id="10002">GunGame</MSG>
+<MSG id="10003">Capture The Flag</MSG>
+<MSG id="10004">SkillMap</MSG>
+<MSG id="10005">SpyMode</MSG>
+
+<!-- 추? -->
+<MSG id="9400">resterend.</MSG>
+<MSG id="9401">Jij joint '$1'.</MSG>
+<MSG id="9402">'$1' Heeft stage'$2' gejoined.</MSG>
+
+<MSG id="9500">Aan</MSG>
+<MSG id="9501">Uit</MSG>
+
+<MSG id="9601">Een hack-poging is gedetecteerd.</MSG>
+<MSG id="9602">Gelieve Gunz te Herstarten om de taal te wijzigen.</MSG>
+
+<!--
+<MSG id=""></MSG>
+-->
+
+<!-- �경고 -->
+<MSG id="20000">Een hack-poging is gedetecteerd. In overeenstemming met de afspraak dat de leden hebben ingestemd, de GUNZ Operation Team blijft toezicht en het verzamelen van informatie over de gebruikers die hacken . Houd in gedachten dat alle verantwoordelijkheid als gevolg van het plegen van een illegale daad in civiele of strafrechtelijke zaak valt op de schouders van de gebruiker die dergelijke illegale daad begaat.</MSG>
+<MSG id="20001">De periode van gebruik is verstreken.</MSG>
+<MSG id="20002">U kunt een uitrusting aan of uit doen door de icoon naar een sleuf te slepen, u kunt een bounty apparaat (of item) niet naar de Centrale Bank overzetten.</MSG>
+<MSG id="20003">WAARSCHUWING : GunZ ondersteunt niet de $1. Je mag niet in staat zijn om bepaalde fonts bekijken of doorgaan met gameplay.Wilt u nog verder wilt gaan ?</MSG>
+<MSG id="20004">GunZ vereist DirectX 9.0c om goed te werken . Wilt u DirectX 9.0c nu installeren?</MSG>
+<MSG id="20005">Forum.daemonsring.com</MSG>
+<MSG id="20006">Enter 'YES' Als je de karakter wilt verwijderen.</MSG>
+</XML>

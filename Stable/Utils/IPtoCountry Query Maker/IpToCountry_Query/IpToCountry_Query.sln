@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IpToCountry_Query", "IpToCountry_Query.vcproj", "{D76BD8DF-CC56-4F9F-95ED-11D215E2E740}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D76BD8DF-CC56-4F9F-95ED-11D215E2E740}.Debug.ActiveCfg = Debug|Win32
+		{D76BD8DF-CC56-4F9F-95ED-11D215E2E740}.Debug.Build.0 = Debug|Win32
+		{D76BD8DF-CC56-4F9F-95ED-11D215E2E740}.Release.ActiveCfg = Release|Win32
+		{D76BD8DF-CC56-4F9F-95ED-11D215E2E740}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

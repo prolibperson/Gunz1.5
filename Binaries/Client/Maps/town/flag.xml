@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<FLAG NAME="obj_flag_b 03.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="1000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_b 02.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="500"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_b 01.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="1000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_a 04.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="500"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_a 03.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="1000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_a 02.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="1000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_a 01.elu" DIRECTION="90" POWER="5.0">
+		<WINDTYPE TYPE="1" DELAY="1500"/>
+	</FLAG>
+</XML>

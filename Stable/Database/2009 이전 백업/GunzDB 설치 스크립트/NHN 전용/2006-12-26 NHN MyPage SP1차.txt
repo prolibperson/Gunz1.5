@@ -1,0 +1,563 @@
+-- 유저가 보유한 캐릭터 목록
+IF OBJECT_ID('spNHNGetCharList') IS NOT NULL DROP PROC spNHNGetCharList
+GO
+
+CREATE PROC spNHNGetCharList
+ @UserID varchar(20)
+AS 
+BEGIN
+ SET NOCOUNT ON
+
+ DECLARE @AID INT
+
+ SELECT @AID = AID FROM Account(NOLOCK) WHERE UserID = @UserID
+ IF @AID IS NULL BEGIN
+  RETURN
+ END
+ 
+ SELECT c.CID, c.Name, c.Level, c.Sex, c.RegDate, c.XP, c.BP, c.LastTime
+  , c.PlayTime, c.KillCount, c.DeathCount 
+ FROM Character c(NOLOCK)
+ WHERE c.AID = @AID AND c.DeleteFlag = 0
+ ORDER BY c.CID
+END
+GO
+
+-----------------------------------------------------------------
+
+IF OBJECT_ID('spNHNGetUserCashItemCount') IS NOT NULL DROP PROC spNHNGetUserCashItemCount
+GO
+
+-- 유저가 보유한 특정 아이템 개수
+CREATE PROC spNHNGetUserCashItemCount
+ @UserID varchar(20)
+, @CSID int
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ DECLARE @AID int
+ DECLARE @ItemID int
+ DECLARE @Today datetime
+
+ SELECT @AID = AID FROM Account(NOLOCK) WHERE UserID = @UserID
+ SELECT @ItemID = ItemID FROM CashShop(NOLOCK) WHERE CSID = @CSID
+
+ IF (@AID IS NULL) OR (@ItemID IS NULL) BEGIN
+  SELECT (-1) AS 'Count'
+  RETURN
+ END
+
+ SET @Today  = GETDATE()
+
+ SELECT SUM(t.Count) AS 'Count'
+ FROM
+ (
+  SELECT COUNT(ItemID) as 'Count'
+  FROM ItemPurchaseLogByCash(NOLOCK)
+  WHERE AID = @AID AND ItemID = @ItemID 
+   AND ((RentHourPeriod >= DATEDIFF(hh, Date, @Today)) OR RentHourPeriod IS NULL)
+  UNION ALL
+  SELECT COUNT(CSID) as 'Count'
+  FROM CashItemPresentLog(NOLOCK)
+  WHERE ReceiverAID = @AID AND CSID IS NOT NULL AND CSID = @CSID 
+   AND ((RentHourPeriod >= DATEDIFF(hh, Date, @Today)) OR RentHourPeriod IS NULL)
+ ) AS t
+END
+GO
+
+-----------------------------------------------------------------
+
+IF OBJECT_ID('spNHNGetUserCashSetItemCount') IS NOT NULL DROP PROC spNHNGetUserCashSetItemCount
+GO
+
+-- 유저가 보유한 특정 세트 아이템 개수
+CREATE PROC spNHNGetUserCashSetItemCount
+ @UserID varchar(20)
+, @CSSID int
+AS 
+BEGIN
+ SET NOCOUNT ON
+
+ DECLARE @AID int
+ DECLARE @Today datetime
+
+ SELECT @AID = AID FROM Account(NOLOCK) WHERE UserID = @UserID
+ IF @AID IS NULL BEGIN
+  SELECT (-1) AS 'Count'
+  RETURN
+ END
+
+ SET @Today = GETDATE()
+
+ SELECT SUM(t.Count) AS 'Count'
+ FROM
+ (
+  SELECT COUNT(CSSID) as 'Count'
+  FROM SetItemPurchaseLogByCash(NOLOCK)
+  WHERE AID = @AID AND CSSID = @CSSID 
+   AND (RentHourPeriod >= DATEDIFF(hh, Date, @Today) OR RentHourPeriod IS NULL)
+  UNION ALL
+  SELECT COUNT(CSSID) as 'Count'
+  FROM CashItemPresentLog(NOLOCK)
+  WHERE ReceiverAID = @AID AND CSSID IS NOT NULL AND CSSID = @CSSID 
+   AND (RentHourPeriod >= DATEDIFF(hh, Date, @Today) OR RentHourPeriod IS NULL)
+ ) AS t
+END
+GO
+
+----------------------------------------------------------------
+
+IF OBJECT_ID('spNHNGetMyItems') IS NOT NULL DROP PROC spNHNGetMyItems  
+GO
+
+CREATE PROC spNHNGetMyItems    
+ @UserID varchar(20)    
+, @Page int    
+, @PageSize int    
+, @Category int    
+, @PageCount int OUTPUT  
+AS    
+BEGIN    
+-- Category 1 : Buy, 2 : Receivce, 3 : All    
+-- 비교를 할때는 거꾸로 비교를 한다.    
+    
+ SET NOCOUNT ON    
+    
+ DECLARE @AID int    
+ DECLARE @Today datetime    
+ DECLARE @MyItemList table(id int identity, ItemID int, Date datetime, RentHourPeriod int, ExpiredDate datetime    
+  , Cash int, Name varchar(256), Slot int, BuyType int, Sender varchar(20))    
+    
+ SELECT @AID = AID FROM Account(NOLOCK) WHERE UserID = @UserID    
+ IF @AID IS NULL     
+  RETURN     
+    
+ SET @Today = GETDATE()    
+    
+ INSERT INTO @MyItemList(ItemID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender)    
+ SELECT t1.ItemID, t1.Date, t1.RentHourPeriod, DATEADD(hh, t1.RentHourPeriod, t1.Date) AS 'ExpiredDate'    
+  , t1.Cash, i.Name, i.Slot,     
+  CASE t1.BuyType     
+   WHEN 2 THEN 1     
+   WHEN 1 THEN 2    
+  END AS 'BuyType'    
+  , t1.Sender    
+ FROM    
+ (    
+  SELECT ItemID, Date, RentHourPeriod,  Cash, 2 AS 'BuyType', NULL AS 'Sender'    
+  FROM ItemPurchaseLogByCash(NOLOCK)     
+  WHERE AID =  @AID AND (RentHourPeriod IS NULL OR RentHourPeriod >= DATEDIFF(hh, Date, @Today))    
+  UNION ALL    
+  SELECT cs.ItemID, sipl.Date, sipl.RentHourPeriod, sipl.Cash, 2 AS 'BuyType', NULL AS 'Sender'    
+  FROM SetItemPurchaseLogByCash sipl(NOLOCK), CashSetItem csi(NOLOCK), CashShop cs(NOLOCK)    
+  WHERE sipl.AID = @AID AND (sipl.RentHourPeriod IS NULL OR sipl.RentHourPeriod >= DATEDIFF(hh, sipl.Date, @Today))     
+   AND csi.CSSID = sipl.CSSID AND cs.CSID = csi.CSID    
+  UNION ALL    
+  SELECT cs.ItemID, cipl.Date, cipl.RentHourPeriod, cipl.Cash, 1 AS 'BuyType', cipl.SenderUserID AS 'Sender'    
+  FROM CashItemPresentLog cipl(NOLOCK), CashShop cs(NOLOCK)    
+  WHERE cipl.ReceiverAID = @AID AND cipl.CSID IS NOT NULL     
+   AND (cipl.RentHourPeriod IS NULL OR cipl.RentHourPeriod >= DATEDIFF(hh, cipl.Date, @Today))    
+   AND cs.CSID = cipl.CSID    
+  UNION ALL    
+  SELECT cs.ItemID, cipl.Date, cipl.RentHourPeriod, cipl.Cash, 1 AS 'BuyType', cipl.SenderUserID AS 'Sender'    
+  FROM CashItemPresentLog cipl(NOLOCK), CashSetItem csi(NOLOCK)    
+   , CashShop cs(NOLOCK)    
+  WHERE cipl.ReceiverAID = @AID AND cipl.CSSID IS NOT NULL    
+   AND (cipl.RentHourPeriod IS NULL OR cipl.RentHourPeriod >= DATEDIFF(hh, cipl.DATE, @Today))    
+   AND csi.CSSID = cipl.CSSID AND cs.CSID = csi.CSID    
+ ) AS t1, Item i(NOLOCK)    
+ WHERE t1.BuyType <> @Category AND i.ItemID = t1.ItemID    
+ ORDER BY t1.Date DESC, t1.ItemID    
+  
+  
+ DECLARE @MyItemListCount int    
+ DECLARE @ShowPageSize int  
+ DECLARE @Reminder int  
+ DECLARE @FilterRowCount int  
+ DECLARE @ShowPage table(id int identity, ItemID int, Date datetime, RentHourPeriod int, ExpiredDate datetime    
+  , Cash int, Name varchar(256), Slot int, BuyType int, Sender varchar(20))    
+ DECLARE @ShowPageTmp table(id int identity, ItemID int, Date datetime, RentHourPeriod int, ExpiredDate datetime    
+  , Cash int, Name varchar(256), Slot int, BuyType int, Sender varchar(20))    
+  
+  
+ SET @FilterRowCount = @PageSize * @Page  
+ SET @MyItemListCount = SCOPE_IDENTITY()  
+ SET @PageCount = @MyItemListCount / @PageSize  
+ SET @Reminder = @MyItemListCount % @PageSize  
+  
+ IF 0 <> @Reminder   
+  SET @PageCount = @PageCount + 1  
+  
+ IF @MyItemListCount >= @FilterRowCount   
+  SET @ShowPageSize = @PageSize  
+ ELSE   
+ SET @ShowPageSize = @Reminder  
+  
+  
+ SET ROWCOUNT @FilterRowCount  
+  
+ INSERT INTO @ShowPageTmp(ItemID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender)  
+ SELECT ItemID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender  
+ FROM @MyItemList  
+ ORDER BY id   
+  
+ SET ROWCOUNT @ShowPageSize  
+
+ INSERT INTO @ShowPage(ItemID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender)   
+ SELECT ItemID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender  
+ FROM @ShowPageTmp
+ ORDER BY id   DESC
+
+ SELECT ItemID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender  
+ FROM @ShowPage
+ ORDER BY id   DESC
+ 
+END    
+GO
+
+----------------------------------------------------------------------
+IF OBJECT_ID('spNHNGetHistory') IS NOT NULL DROP PROC spNHNGetHistory  
+GO
+
+CREATE PROC spNHNGetHistory  
+ @UserID varchar(20)  
+, @Page int  
+, @PageSize int  
+, @Category int  
+, @PageCount int OUTPUT  
+AS  
+BEGIN  
+-- Category 1 : Buy, 2 : Receivce, 3 : Send, 0  : All  
+-- 비교를 할때는 꺼꾸로 비교를 한다.  
+  
+ SET NOCOUNT ON  
+  
+ DECLARE @AID int  
+ DECLARE @Today datetime  
+ DECLARE @MyItemList table(id int identity, ItemID int, CSSID int, Date datetime, RentHourPeriod int, ExpiredDate datetime  
+  , Cash int, Name varchar(256), Slot int, BuyType int, Sender varchar(20), Receiver varchar(20))  
+  
+ SELECT @AID = AID FROM Account(NOLOCK) WHERE UserID = @UserID  
+ IF @AID IS NULL   
+  RETURN   
+  
+ SET @Today = GETDATE()  
+  
+ INSERT INTO @MyItemList(ItemID, CSSID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender)  
+ SELECT t1.ItemID, t1.CSSID, t1.Date, t1.RentHourPeriod, DATEADD(hh, t1.RentHourPeriod, t1.Date) AS 'ExpiredDate'  
+  , t1.Cash  
+  , CASE WHEN t1.ItemID IS NOT NULL THEN i.Name   
+     WHEN t1.CSSID IS NOT NULL THEN css.Name  
+    END AS 'Name'  
+   , i.Slot, t1.BuyType, t1.Sender  
+ FROM  
+ ((  
+  SELECT ItemID, NULL AS 'CSSID', Date, RentHourPeriod,  Cash, @Category AS 'BuyType', NULL AS 'Sender', NULL AS 'Receiver'  
+  FROM ItemPurchaseLogByCash(NOLOCK)   
+  WHERE (@Category = 1 OR @Category = 0) AND AID =  @AID   
+  UNION ALL  
+  SELECT NULL AS 'ItemID', sipl.CSSID, sipl.Date, sipl.RentHourPeriod, sipl.Cash, @Category AS 'BuyType', NULL AS 'Sender', NULL AS 'Receiver'  
+  FROM SetItemPurchaseLogByCash sipl(NOLOCK)  
+  WHERE (@Category = 1 OR @Category = 0) AND sipl.AID = @AID   
+  UNION ALL  
+  SELECT cs.ItemID, NULL AS 'CSSID', cipl.Date, cipl.RentHourPeriod, cipl.Cash, @Category AS 'BuyType', cipl.SenderUserID AS 'Sender', cipl.ReceiverAID AS 'Receiver'  
+  FROM CashItemPresentLog cipl(NOLOCK), CashShop cs(NOLOCK)  
+  WHERE   
+   ((@AID = CASE @Category WHEN 2 THEN cipl.ReceiverAID ELSE NULL END)   
+    OR (@UserID = CASE @Category WHEN 3 THEN cipl.SenderUserID ELSE NULL END))  
+   AND cipl.CSID IS NOT NULL AND cs.CSID = cipl.CSID   
+  UNION ALL  
+  SELECT NULL AS 'ItemID', cipl.CSSID, cipl.Date, cipl.RentHourPeriod, cipl.Cash, @Category AS 'BuyType', cipl.SenderUserID AS 'Sender', cipl.ReceiverAID AS 'Receiver'  
+  FROM CashItemPresentLog cipl(NOLOCK)  
+  WHERE  
+   ((@AID = CASE @Category WHEN 2 THEN cipl.ReceiverAID ELSE NULL END)   
+    OR (@UserID = CASE @Category WHEN 3 THEN cipl.SenderUserID ELSE NULL END))  
+   AND cipl.CSSID IS NOT NULL  
+ ) AS t1 LEFT OUTER JOIN Item i(NOLOCK) ON i.ItemID = t1.ItemID) LEFT OUTER JOIN CashSetShop css(NOLOCK) ON css.CSSID = t1.CSSID  
+ ORDER BY t1.Date DESC, t1.ItemID  
+  
+ DECLARE @MyItemListCount int  
+ DECLARE @FilterRowCount int  
+ DECLARE @Reminder int   
+ DECLARE @ShowPageSize int  
+ DECLARE @ShowPageTmp table(id int identity, ItemID int, CSSID int, Date datetime, RentHourPeriod int, ExpiredDate datetime  
+  , Cash int, Name varchar(256), Slot int, BuyType int, Sender varchar(20), Receiver varchar(20))  
+ DECLARE @ShowPage table(id int identity, ItemID int, CSSID int, Date datetime, RentHourPeriod int, ExpiredDate datetime  
+  , Cash int, Name varchar(256), Slot int, BuyType int, Sender varchar(20), Receiver varchar(20))  
+  
+ SET @MyItemListCount = SCOPE_IDENTITY()  
+ SET @FilterRowCount = @PageSize * @Page  
+ SET @PageCount = @MyItemListCount / @PageSize  
+ SET @Reminder = @MyItemListCount % @PageSize  
+  
+ IF 0 <> @Reminder   
+  SET @PageCount = @PageCount + 1  
+  
+ IF @MyItemListCount >= @FilterRowCount   
+  SET @ShowPageSize = @PageSize  
+ ELSE   
+ SET @ShowPageSize = @Reminder  
+  
+  
+ SET ROWCOUNT @FilterRowCount  
+  
+ INSERT INTO @ShowPageTmp(ItemID, CSSID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender)  
+ SELECT ItemID, CSSID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender  
+ FROM @MyItemList  
+ ORDER BY id 
+  
+ SET ROWCOUNT @ShowPageSize  
+  
+ INSERT INTO @ShowPage(ItemID, CSSID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender)  
+ SELECT ItemID, CSSID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender  
+ FROM @ShowPageTmp  
+ ORDER BY id DESC  
+
+ SELECT ItemID, CSSID, Date, RentHourPeriod, ExpiredDate, Cash, Name, Slot, BuyType, Sender  
+ FROM @ShowPage
+ ORDER BY id DESC   
+END  
+GO
+
+--------------------------------------------------------------------
+
+IF OBJECT_ID('spNHNGetCashItemList') IS NOT NULL DROP PROC spNHNGetCashItemList
+GO
+
+CREATE PROC spNHNGetCashItemList  
+ @ItemType int  
+, @Page int  
+, @PageSize int  
+, @SortType int  
+, @Sex int  
+, @Slot int   
+, @PageCount int OUTPUT  
+AS  
+BEGIN  
+ SET NOCOUNT ON  
+  
+ DECLARE @SortTypeSql varchar(100)  
+ DECLARE @ItemTypeSql varchar(100)  
+ DECLARE @SexSql varchar(100)  
+ DECLARE @Order varchar(100)  
+ DECLARE @SlotSql varchar(100)  
+  
+ IF 0 = @SortType   
+  SET @SortTypeSql = 'ORDER BY cs.RegDate DESC'  
+ ELSE IF 1 = @SortType   
+  SET @SortTypeSql = 'ORDER BY i.ResLevel DESC'  
+ ELSE IF 2 = @SortType   
+  SET @SortTypeSql = 'ORDER BY i.ResLevel'  
+ ELSE IF 3 = @SortType   
+  SET @SortTypeSql = 'ORDER BY cs.CashPrice DESC'  
+ ELSE IF 4 = @SortType   
+  SET @SortTypeSql = 'ORDER BY cs.CashPrice'  
+ ELSE   
+  SET @SortTypeSql = ''  
+  
+  
+ IF 1 = @ItemType  
+  SET @ItemTypeSql = ' AND i.Slot = 1'  
+ ELSE IF 2 = @ItemType  
+  SET @ItemTypeSql = ' AND i.Slot = 2 '  
+ ELSE IF 3 = @ItemType  
+  SET @ItemTypeSql = ' AND i.Slot BETWEEN 4 AND 8 '  
+ ELSE IF 4 = @ItemType  
+  SET @ItemTypeSql = ' AND (i.Slot = 3 OR i.Slot = 9) '  
+ ELSE IF 0 = @ItemType  
+  SET @ItemTypeSql = ''  
+ ELSE  
+  SET @ItemTypeSql = ''  
+  
+  
+ IF 1 = @Sex   
+  SET @SexSql = ' AND i.ResSex = 1 '  
+ ELSE IF 2 = @Sex  
+  SET @SexSql = ' AND i.ResSex = 2 '  
+ ELSE IF 0 = @Sex  
+  SET @SexSql = ''  
+ ELSE  
+  SET @SexSql = ''  
+  
+  
+ IF 0 <> @Slot  
+  SET @SlotSql = ' AND i.Slot = ' + CAST(@Slot AS varchar(8)) + ' '  
+ ELSE IF 0 = @slot  
+  SET @SlotSql = ''  
+ ELSE   
+  SET @SlotSql = ''  
+  
+ DECLARE @Sql nvarchar(4000)  
+  
+ SET @Sql = N'  
+ DECLARE @ItemCount int  
+ DECLARE @FilterRowCount int  
+ DECLARE @Reminder int  
+ DECLARE @ShowPageSize int  
+ DECLARE @CashItemList table(id int IDENTITY, CSID int, Name varchar(256), Slot tinyint, Cash int  
+  , WebImgName varchar(64), ResSex tinyint, ResLevel int, Weight int, Description varchar(1000)  
+  , RegDate datetime, IsNewItem tinyint, RentType tinyint)  
+ DECLARE @ShowPageTmp table(id int IDENTITY, CSID int, Name varchar(256), Slot tinyint, Cash int  
+  , WebImgName varchar(64), ResSex tinyint, ResLevel int, Weight int, Description varchar(1000)  
+  , RegDate datetime, IsNewItem tinyint, RentType tinyint)  
+ DECLARE @ShowPage table(id int IDENTITY, CSID int, Name varchar(256), Slot tinyint, Cash int  
+  , WebImgName varchar(64), ResSex tinyint, ResLevel int, Weight int, Description varchar(1000)  
+  , RegDate datetime, IsNewItem tinyint, RentType tinyint)  
+  
+ INSERT INTO @CashItemList(CSID, Name, Slot, Cash, WebImgName, ResSex, ResLevel, Weight, Description  
+  , RegDate, IsNewItem, RentType)  
+ SELECT cs.CSID, i.Name, i.Slot, cs.CashPrice AS ''Cash'', cs.WebImgName  
+  , i.ResSex, i.ResLevel, i.Weight, i.Description, cs.RegDate, cs.NewItemOrder AS ''IsNewItem''  
+ , cs.RentType  
+ FROM CashShop cs(NOLOCK), Item i(NOLOCK)  
+ WHERE i.ItemId = cs.ItemID AND cs.Opened = 1  
+  ' + @ItemTypeSql + @SexSql + @SlotSql  + @SortTypeSql + '  
+  
+ SET @ItemCount = SCOPE_IDENTITY()  
+ SET @FilterRowCount = @PageSize * @Page  
+ SET @PageCount = @ItemCount / @PageSize  
+ SET @Reminder = @ItemCount % @PageSize  
+  
+ IF 0 <> @Reminder   
+  SET @PageCount = @PageCount + 1  
+  
+ IF @ItemCount >= @FilterRowCount  
+  SET @ShowPageSize = @PageSize  
+ ELSE  
+  SET @ShowPageSize = @Reminder  
+  
+ SET ROWCOUNT @FilterRowCount  
+  
+ INSERT INTO @ShowPageTmp(CSID, Name, Slot, Cash, WebImgName, ResSex, ResLevel, Weight, Description  
+  , RegDate, IsNewItem, RentType)  
+ SELECT CSID, Name, Slot, Cash, WebImgName, ResSex, ResLevel, Weight, Description  
+  , RegDate, IsNewItem, RentType  
+ FROM @CashItemList  
+ ORDER BY id 
+  
+ SET ROWCOUNT @ShowPageSize  
+  
+ INSERT INTO @ShowPage(CSID, Name, Slot, Cash, WebImgName, ResSex, ResLevel, Weight, Description  
+  , RegDate, IsNewItem, RentType)  
+ SELECT CSID, Name, Slot, Cash, WebImgName, ResSex, ResLevel, Weight, Description  
+  , RegDate, IsNewItem, RentType  
+ FROM @ShowPageTmp
+ ORDER BY id DESC  
+
+ SELECT CSID, Name, Slot, Cash, WebImgName, ResSex, ResLevel, Weight, Description  
+  , RegDate, IsNewItem, RentType  
+ FROM @ShowPage
+ ORDER BY id DESC  
+'  
+  
+ exec sp_executesql @Sql, N'@Page int, @PageSize int, @PageCount int OUTPUT'  
+  , @Page, @PageSize, @PageCount OUTPUT  
+END  
+GO
+
+--------------------------------------------------------------------
+
+IF OBJECT_ID('spNHNGetCashSetItemList') IS NOT NULL DROP PROC spNHNGetCashSetItemList
+GO
+
+CREATE PROC spNHNGetCashSetItemList  
+@Page int  
+, @PageSize int  
+, @SortType int  
+, @Sex int  
+, @PageCount int OUTPUT  
+AS  
+BEGIN  
+ SET NOCOUNT ON  
+  
+ DECLARE @SortTypeSql varchar(100)  
+ DECLARE @SexSql varchar(100)  
+  
+ IF 0 = @SortType   
+  SET @SortTypeSql = 'ORDER BY RegDate DESC'  
+ ELSE IF 1 = @SortType   
+  SET @SortTypeSql = 'ORDER BY ResLevel DESC'  
+ ELSE IF 2 = @SortType   
+  SET @SortTypeSql = 'ORDER BY ResLevel'  
+ ELSE IF 3 = @SortType   
+  SET @SortTypeSql = 'ORDER BY CashPrice DESC'  
+ ELSE IF 4 = @SortType   
+  SET @SortTypeSql = 'ORDER BY CashPrice'  
+ ELSE   
+  SET @SortTypeSql = ''  
+  
+ IF 1 = @Sex   
+  SET @SexSql = ' AND ResSex = 1 '  
+ ELSE IF 2 = @Sex  
+  SET @SexSql = ' AND ResSex = 2 '  
+ ELSE IF 0 = @Sex  
+  SET @SexSql = ''  
+ ELSE  
+  SET @SexSql = ''  
+  
+ DECLARE @Sql nvarchar(4000)  
+  
+ SET @Sql = '  
+ DECLARE @SetItemCount int  
+ DECLARE @FilterRowCount int  
+ DECLARE @Reminder int  
+ DECLARE @ShowPageSize int  
+ DECLARE @CashSetItemList table(id int IDENTITY, CSSID int, Name varchar(256)  
+  , Cash int, WebImgName varchar(64), ResSex tinyint, ResLevel int, Weight int  
+  , Description varchar(1000), RegDate datetime, IsNewItem tinyint, RentType tinyint)  
+ DECLARE @ShowPageTmp table(id int IDENTITY, CSSID int, Name varchar(256)  
+  , Cash int, WebImgName varchar(64), ResSex tinyint, ResLevel int, Weight int  
+  , Description varchar(1000), RegDate datetime, IsNewItem tinyint, RentType tinyint)  
+ DECLARE @ShowPage table(id int IDENTITY, CSSID int, Name varchar(256)  
+  , Cash int, WebImgName varchar(64), ResSex tinyint, ResLevel int, Weight int  
+  , Description varchar(1000), RegDate datetime, IsNewItem tinyint, RentType tinyint)  
+  
+ INSERT INTO @CashSetItemList(CSSID, Name, Cash, WebImgName, ResSex, ResLevel, Weight  
+  , Description, RegDate, IsNewItem, RentType)  
+ SELECT CSSID, Name, CashPrice AS ''Cash'', WebImgName, ResSex, ResLevel  
+  , Weight, Description, RegDate, NewItemOrder AS ''IsNewItem'', RentType   
+ FROM CashSetShop   
+ WHERE Opened = 1 ' + @SexSql + @SortTypeSql+ '  
+  
+ SET @SetItemCount = SCOPE_IDENTITY()  
+ SET @FilterRowCount = @PageSize * @Page  
+ SET @PageCount = @SetItemCount / @PageSize  
+ SET @Reminder = @SetItemCount % @PageSize  
+  
+ IF 0 <> @Reminder   
+  SET @PageCount = @PageCount + 1  
+  
+ IF @SetItemCount >= @FilterRowCount  
+  SET @ShowPageSize = @PageSize  
+ ELSE  
+  SET @ShowPageSize = @Reminder  
+  
+ SET ROWCOUNT @FilterRowCount  
+  
+ INSERT INTO @ShowPageTmp(CSSID, Name, Cash, WebImgName, ResSex, ResLevel, Weight  
+  , Description, RegDate, IsNewItem, RentType)  
+ SELECT CSSID, Name, Cash, WebImgName, ResSex, ResLevel, Weight  
+  , Description, RegDate, IsNewItem, RentType  
+ FROM @CashSetitemList  
+ ORDER BY id   
+  
+ SET ROWCOUNT @ShowPageSize  
+  
+ INSERT INTO @ShowPage(CSSID, Name, Cash, WebImgName, ResSex, ResLevel, Weight  
+  , Description, RegDate, IsNewItem, RentType)  
+ SELECT CSSID, Name, Cash, WebImgName, ResSex, ResLevel, Weight  
+  , Description, RegDate, IsNewItem, RentType  
+ FROM @ShowPageTmp
+ ORDER BY id DESC  
+
+ SELECT CSSID, Name, Cash, WebImgName, ResSex, ResLevel, Weight  
+  , Description, RegDate, IsNewItem, RentType  
+ FROM @ShowPage
+ ORDER BY id DESC  
+'  
+ exec sp_executesql @Sql, N'@Page int, @PageSize int, @PageCount int OUTPUT'  
+  ,@Page, @PageSize,  @PageCount OUTPUT  
+END  
+
+GO

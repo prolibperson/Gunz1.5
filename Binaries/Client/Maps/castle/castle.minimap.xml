@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_castle.bmp</PICTURE>
+	<LEFTTOP>
+		<X>6480</X>
+		<Y>6480</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-6480</X>
+		<Y>-6480</Y>
+	</RIGHTBOTTOM>
+</XML>

@@ -1,0 +1,89 @@
+CREATE TABLE ConnLog(
+ id int IDENTITY
+, AID int NOT NULL
+, Time smalldatetime
+, IPPart1 tinyint NOT NULL
+, IPPart2 tinyint NOT NULL
+, IPPart3 tinyint NOT NULL
+, IPPart4 tinyint NOT NULL
+, CountryCode3 char(3) )
+GO
+
+CREATE NONCLUSTERED INDEX IX_ConnLog_AID
+ON ConnLog( AID )
+
+CREATE NONCLUSTERED INDEX IX_ConnLog_Time
+ON ConnLog( Time )
+GO
+
+-------------------------------------------------------
+
+create table ServerLogStorage(
+ id int identity primary key clustered
+, ServerID smallint not null
+, PlayerCount int not null
+, GameCount int not null
+, BlockCount int not null
+, NonBlockCount int not null
+, Time smalldatetime not null)
+go
+
+create nonclustered index IX_ServerLogStorage_ServerID
+on ServerLogStorage(ServerID)
+
+create nonclustered index IX_ServerLogStorage_Time
+on ServerLogStorage(Time)
+go
+
+-------------------------------------------------------
+
+-- create on log db.
+CREATE TABLE LocatorLog(
+ LocatorID int
+, CountryCode3 varchar(3)
+, Count int
+, RegDate smalldatetime )
+
+CREATE NONCLUSTERED INDEX IX_LocatorLog_CountryCode3
+ON LocatorLog( CountryCode3 )
+
+CREATE NONCLUSTERED INDEX IX_LocatorLog_RegDate
+ON LocatorLog( RegDate )
+GO
+
+-------------------------------------------------------
+
+USE LogDB
+GO
+
+IF OBJECT_ID('HackingBlockLog') IS NOT NULL 
+ DROP TABLE HackingBlockLog
+GO
+
+CREATE TABLE HackingBlockLog(
+ id int IDENTITY PRIMARY KEY CLUSTERED
+, AID int NOT NULL
+, CID int
+, HackingType tinyint NOT NULL
+, IPPart1 tinyint NOT NULL
+, IPPart2 tinyint NOT NULL
+, IPPart3 tinyint NOT NULL
+, IPPart4 tinyint NOT NULL
+, RegDate datetime NOT NULL
+, ServerID tinyint NOT NULL
+, ChannelName varchar(64)
+, Comment varchar(128) )
+GO
+
+CREATE NONCLUSTERED INDEX IX_HackingBlockLog_AID
+ON HackingBlockLog(AID)
+
+CREATE NONCLUSTERED INDEX IX_HackingBlockLog_HackingType
+ON HackingBlockLog(HackingType)
+
+CREATE NONCLUSTERED INDEX IX_HackingBlockLog_IP
+ON HackingBlockLog(IPPart1, IPPart2, IPPart3, IPPart4)
+
+CREATE NONCLUSTERED INDEX IX_HackingBlockLog_RegDateDesc
+ON HackingBlockLog( RegDate DESC )
+GO

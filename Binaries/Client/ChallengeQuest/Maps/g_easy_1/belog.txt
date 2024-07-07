@@ -1,0 +1,93 @@
+Starting BSP Export...
+object hide_1 : hide_1: 384 ver / 398 face 
+object hnav_0 : hnav_0: 148 ver / 104 face 
+NaviMesh: 148 ver / 208 face 
+object pass_pillar : pass_pillar: 32 ver / 24 face 
+object pass_pillar007 : pass_pillar007: 32 ver / 24 face 
+object pass_pillar008 : pass_pillar008: 32 ver / 24 face 
+object pass_pillar009 : pass_pillar009: 32 ver / 24 face 
+object pass_ceiling006 : pass_ceiling006: 60 ver / 48 face 
+object pass_obj4 : pass_obj4: 0 ver / 0 face 
+object pass_obj2 : pass_obj2: 0 ver / 0 face 
+object pass_obj3 : pass_obj3: 0 ver / 0 face 
+object pass_shelf003 : pass_shelf003: 8 ver / 4 face 
+object pass_pillar006 : pass_pillar006: 8 ver / 4 face 
+object pass_ceiling005 : pass_ceiling005: 60 ver / 48 face 
+object pass_obj7 : pass_obj7: 0 ver / 0 face 
+object pass_obj6 : pass_obj6: 0 ver / 0 face 
+object pass_obj5 : pass_obj5: 0 ver / 0 face 
+object pass_shelf002 : pass_shelf002: 8 ver / 4 face 
+object pass_pillar005 : pass_pillar005: 8 ver / 4 face 
+object pass_ceiling004 : pass_ceiling004: 60 ver / 48 face 
+object pass_obj10 : pass_obj10: 0 ver / 0 face 
+object pass_obj9 : pass_obj9: 0 ver / 0 face 
+object pass_obj8 : pass_obj8: 0 ver / 0 face 
+object pass_shelf001 : pass_shelf001: 8 ver / 4 face 
+object pass_pillar004 : pass_pillar004: 8 ver / 4 face 
+object pass_ceiling : pass_ceiling: 60 ver / 48 face 
+object pass_obj11 : pass_obj11: 0 ver / 0 face 
+object pass_obj12 : pass_obj12: 0 ver / 0 face 
+object pass_obj13 : pass_obj13: 0 ver / 0 face 
+object pass_shelf : pass_shelf: 8 ver / 4 face 
+object pass_pillar : pass_pillar: 8 ver / 4 face 
+object pass_obj1 : pass_obj1: 0 ver / 0 face 
+object pass_pillar010 : pass_pillar010: 32 ver / 24 face 
+object pass_pillar011 : pass_pillar011: 32 ver / 24 face 
+object pass_pillar012 : pass_pillar012: 32 ver / 24 face 
+object pass_pillar013 : pass_pillar013: 32 ver / 24 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_window : pass_window: 68 ver / 57 face 
+object pass_wall : pass_wall: 56 ver / 26 face 
+object pass_pillar : pass_pillar: 152 ver / 67 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_window : pass_window: 204 ver / 159 face 
+object pass_wall : pass_wall: 192 ver / 84 face 
+object pass_pillar : pass_pillar: 386 ver / 160 face 
+object pass_window001 : pass_window001: 68 ver / 57 face 
+object pass_pillar014 : pass_pillar014: 152 ver / 67 face 
+object pass_floowh001 : pass_floowh001: 4 ver / 1 face 
+object pass_wall001 : pass_wall001: 56 ver / 26 face 
+object pass_ceiling007 : pass_ceiling007: 4 ver / 1 face 
+object pass_window002 : pass_window002: 68 ver / 57 face 
+object pass_pillar015 : pass_pillar015: 152 ver / 67 face 
+object pass_floowh002 : pass_floowh002: 4 ver / 1 face 
+object pass_wall002 : pass_wall002: 56 ver / 26 face 
+object pass_ceiling008 : pass_ceiling008: 4 ver / 1 face 
+object pass_window003 : pass_window003: 68 ver / 57 face 
+object pass_pillar016 : pass_pillar016: 152 ver / 67 face 
+object pass_floowh003 : pass_floowh003: 4 ver / 1 face 
+object pass_wall003 : pass_wall003: 56 ver / 26 face 
+object pass_ceiling009 : pass_ceiling009: 4 ver / 1 face 
+object Object02 : Object02: 0 ver / 0 face 
+object pass_pillar : pass_pillar: 0 ver / 0 face 
+object pass_placard : pass_placard: 80 ver / 60 face 
+object pass_stuff : pass_stuff: 16 ver / 9 face 
+object pass_wall : pass_wall: 8 ver / 4 face 
+object pass_pillar : pass_pillar: 56 ver / 34 face 
+RSBsp Info : 1784 faces
+Scene Dimension ( 4217.6 4217.6 2451.3 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 1 objects
+construct object subtree hide_1 ( 398 source polygon ) : total 115 faces splitted 68 leaf nodes 259 nodes 1015 polygons
+0 faces eliminated. (solid)
+398 source polygons remain
+optimized 228 polygons remain
+Generating Convex polygons...
+Optimize Polygon 1784 -> 1638 
+Constructing Collision BspTree. ( 228 source polygons )
+Collision Bsp Info : total 457 faces splitted 46 leaf nodes 469 nodes 1370 polygons
+Constructing OcTree. ( 1638 source polygons )
+Octree Info : total 1109 faces splitted 24 leaf nodes 47 nodes 2747 polygons
+Constructing BspTree. ( 1638 source polygons )
+RSBsp Info : total 7991 faces splitted 3622 leaf nodes 7243 nodes 9629 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+C:\Users\ehswns\Desktop\New Slash\testmap\게릴라_쉬움\13\G_Easy_1.RS file saved
+C:\Users\ehswns\Desktop\New Slash\testmap\게릴라_쉬움\13\G_Easy_1.RS.bsp file saved
+C:\Users\ehswns\Desktop\New Slash\testmap\게릴라_쉬움\13\G_Easy_1.RS.col file saved
+Exporting takes 0 minutes and     13 seconds.
+Done.

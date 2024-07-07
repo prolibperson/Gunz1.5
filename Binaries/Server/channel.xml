@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML id="channel">
+	<DEFAULTCHANNELNAME name="STR:CHANNEL_DEFAULT_NAME"/>
+	<DEFAULTRULENAME name="elite"/>
+
+	<CHANNEL name="GunZ" maxplayers="500" rule="elite"/>
+	<CHANNEL name="GunZ Event Channel" maxplayers="500" rule="event" levelmin="1" levelmax="99"/>
+	
+	<CHANNEL name="STR:CHANNEL_DUELTOURNAMENT_NAME_1" maxplayers="250" rule="dueltournament" IsDuelTournament="true"/>
+</XML>

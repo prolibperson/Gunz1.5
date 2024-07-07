@@ -1,0 +1,1537 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML ID="Blitzkrieg">
+	<Schema xmlns="MaietData" xmlns:dt="MaietDataTypes" />
+	
+	<FRAME item="Blitzkrieg">
+		<FRAMELOOK>NullFrameLook</FRAMELOOK>
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>-1</W>
+			<H>-1</H>
+		</BOUNDS>
+		<VISIBLE>false</VISIBLE>
+		<RESIZABLE>false</RESIZABLE>
+		<MOVABLE>false</MOVABLE>
+	</FRAME>
+	
+	<!-- PICTURE : 초보 유저 전격전 설명창 -->
+	<PICTURE item="BlitzDescForNewbie" parent="Blitzkrieg">
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>800</W>
+			<H>600</H>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<ZBMNUMLABEL item="BlitzDescForNewbieTimeBlue" parent="BlitzDescForNewbie">
+		<BOUNDS>
+			<X>186</X>
+			<Y>517</Y>
+			<W>100</W>
+			<H>30</H>
+		</BOUNDS>
+		<BITMAP>Blitz_TimeNum_Blue.png</BITMAP>
+		<FONTSIZE>
+			<W>64</W>
+			<H>64</H>
+		</FONTSIZE>
+	</ZBMNUMLABEL>
+	
+	<ZBMNUMLABEL item="BlitzDescForNewbieTimeRed" parent="BlitzDescForNewbie">
+		<BOUNDS>
+			<X>186</X>
+			<Y>517</Y>
+			<W>100</W>
+			<H>30</H>
+		</BOUNDS>
+		<BITMAP>Blitz_TimeNum_Red.png</BITMAP>
+		<FONTSIZE>
+			<W>64</W>
+			<H>64</H>
+		</FONTSIZE>
+	</ZBMNUMLABEL>
+	
+	
+	<!-- PICTURE : 병과 선택 -->
+	<PICTURE item="BlitzClassSelect" parent="Blitzkrieg">
+		<BOUNDS>
+			<X>144</X>
+			<Y>101</Y>
+			<W>519</W>
+			<H>382</H>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<ZBMNUMLABEL item="Blitz_ClassSelectTimeBlue" parent="BlitzClassSelect">
+		<BOUNDS>
+			<X>0</X>
+			<Y>23</Y>
+			<W>53</W>
+			<H>14</H>
+		</BOUNDS>
+		<BITMAP>Blitz_TimeNum_Blue.png</BITMAP>
+		<FONTSIZE>
+			<W>64</W>
+			<H>64</H>
+		</FONTSIZE>
+	</ZBMNUMLABEL>
+	
+	<ZBMNUMLABEL item="Blitz_ClassSelectTimeRed" parent="BlitzClassSelect">
+		<BOUNDS>
+			<X>0</X>
+			<Y>23</Y>
+			<W>53</W>
+			<H>14</H>
+		</BOUNDS>
+		<BITMAP>Blitz_TimeNum_Red.png</BITMAP>
+		<FONTSIZE>
+			<W>64</W>
+			<H>64</H>
+		</FONTSIZE>
+	</ZBMNUMLABEL>
+	
+<!--  병과별 버튼 -->
+	<!-- Picture :   헌터  -->
+	<BMBUTTON item="Hunter_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Hunter_blue.png</BITMAP>
+		<BITMAP type="over">Hunter_over.png</BITMAP>
+		<BITMAP type="down">Hunter_down.png</BITMAP>
+		<BITMAP type="disable">Hunter_disable.png</BITMAP>
+		<FOCUSABLE>true</FOCUSABLE>
+		<TEXT></TEXT>
+	</BMBUTTON>
+	
+	<!-- Picture :  슬러터  -->
+	<BMBUTTON item="Slaughter_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Slaughter_blue.png</BITMAP>
+		<BITMAP type="over">Slaughter_over.png</BITMAP>
+		<BITMAP type="down">Slaughter_down.png</BITMAP>
+		<BITMAP type="disable">Slaughter_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+	<!-- Picture : 트릭스터  -->
+	<BMBUTTON item="Trickster_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Trickster_blue.png</BITMAP>
+		<BITMAP type="over">Trickster_over.png</BITMAP>
+		<BITMAP type="down">Trickster_down.png</BITMAP>
+		<BITMAP type="disable">Trickster_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+	<!-- Picture : 글래디에이터 -->
+	<BMBUTTON item="Gladiator_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Gladiator_blue.png</BITMAP>
+		<BITMAP type="over">Gladiator_over.png</BITMAP>
+		<BITMAP type="down">Gladiator_down.png</BITMAP>
+		<BITMAP type="disable">Gladiator_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+		<!-- Picture : 듀얼리스트  -->
+	<BMBUTTON item="Duelist_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Duelist_blue.png</BITMAP>
+		<BITMAP type="over">Duelist_over.png</BITMAP>
+		<BITMAP type="down">Duelist_down.png</BITMAP>
+		<BITMAP type="disable">Duelist_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+		<!-- Picture : 인시너레이터  -->
+	<BMBUTTON item="Incinerator_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Incinerator_blue.png</BITMAP>
+		<BITMAP type="over">Incinerator_over.png</BITMAP>
+		<BITMAP type="down">Incinerator_down.png</BITMAP>
+		<BITMAP type="disable">Incinerator_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+		<!-- Picture : 컴뱃 오피서  -->
+	<BMBUTTON item="CombatOfficer_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">CombatOfficer_blue.png</BITMAP>
+		<BITMAP type="over">CombatOfficer_over.png</BITMAP>
+		<BITMAP type="down">CombatOfficer_down.png</BITMAP>
+		<BITMAP type="disable">CombatOfficer_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+		<!-- Picture :   어쌔신  -->
+	<BMBUTTON item="Assassin_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Assassin_blue.png</BITMAP>
+		<BITMAP type="over">Assassin_over.png</BITMAP>
+		<BITMAP type="down">Assassin_down.png</BITMAP>
+		<BITMAP type="disable">Assassin_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+		<!-- Picture : 테러리스트  -->
+	<BMBUTTON item="Terrorist_Blue" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Terrorist_blue.png</BITMAP>
+		<BITMAP type="over">Terrorist_over.png</BITMAP>
+		<BITMAP type="down">Terrorist_down.png</BITMAP>
+		<BITMAP type="disable">Terrorist_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+	<!--Red-->
+	<!-- Picture :   헌터  -->
+	<BMBUTTON item="Hunter_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Hunter_Red.png</BITMAP>
+		<BITMAP type="over">Hunter_over.png</BITMAP>
+		<BITMAP type="down">Hunter_down.png</BITMAP>
+		<BITMAP type="disable">Hunter_disable.png</BITMAP>
+		<FOCUSABLE>true</FOCUSABLE>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+	<!-- Picture :  슬러터  -->
+	<BMBUTTON item="Slaughter_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Slaughter_Red.png</BITMAP>
+		<BITMAP type="over">Slaughter_over.png</BITMAP>
+		<BITMAP type="down">Slaughter_down.png</BITMAP>
+		<BITMAP type="disable">Slaughter_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+	<!-- Picture : 트릭스터  -->
+	<BMBUTTON item="Trickster_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Trickster_Red.png</BITMAP>
+		<BITMAP type="over">Trickster_over.png</BITMAP>
+		<BITMAP type="down">Trickster_down.png</BITMAP>
+		<BITMAP type="disable">Trickster_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+	<!-- Picture : 글래디에이터 -->
+	<BMBUTTON item="Gladiator_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Gladiator_Red.png</BITMAP>
+		<BITMAP type="over">Gladiator_over.png</BITMAP>
+		<BITMAP type="down">Gladiator_down.png</BITMAP>
+		<BITMAP type="disable">Gladiator_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+
+		<!-- Picture : 듀얼리스트  -->
+	<BMBUTTON item="Duelist_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Duelist_Red.png</BITMAP>
+		<BITMAP type="over">Duelist_over.png</BITMAP>
+		<BITMAP type="down">Duelist_down.png</BITMAP>
+		<BITMAP type="disable">Duelist_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+	
+		<!-- Picture : 인시너레이터  -->
+	<BMBUTTON item="Incinerator_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Incinerator_Red.png</BITMAP>
+		<BITMAP type="over">Incinerator_over.png</BITMAP>
+		<BITMAP type="down">Incinerator_down.png</BITMAP>
+		<BITMAP type="disable">Incinerator_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+	
+		<!-- Picture : 컴뱃 오피서  -->
+	<BMBUTTON item="CombatOfficer_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">CombatOfficer_Red.png</BITMAP>
+		<BITMAP type="over">CombatOfficer_over.png</BITMAP>
+		<BITMAP type="down">CombatOfficer_down.png</BITMAP>
+		<BITMAP type="disable">CombatOfficer_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+	
+		<!-- Picture :   어쌔신  -->
+	<BMBUTTON item="Assassin_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Assassin_Red.png</BITMAP>
+		<BITMAP type="over">Assassin_over.png</BITMAP>
+		<BITMAP type="down">Assassin_down.png</BITMAP>
+		<BITMAP type="disable">Assassin_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+	
+		<!-- Picture : 테러리스트  -->
+	<BMBUTTON item="Terrorist_Red" parent="BlitzClassSelect">
+	<BUTTONLOOK>NormalBmButtonLook</BUTTONLOOK>
+		<STRETCH/>
+		<BITMAP type="up">Terrorist_Red.png</BITMAP>
+		<BITMAP type="over">Terrorist_over.png</BITMAP>
+		<BITMAP type="down">Terrorist_down.png</BITMAP>
+		<BITMAP type="disable">Terrorist_disable.png</BITMAP>
+		<TEXT></TEXT>
+	</BMBUTTON>
+	
+	<!-- 선택한 병과 포커스  -->	
+	<PICTURE item="SelClass_Focus_Blue" parent="BlitzClassSelect">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Focus_Blue.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="SelClass_Focus_Red" parent="BlitzClassSelect">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Focus_Red.png</BITMAP>
+	</PICTURE>
+	
+	<!--   선택한 병과 이름 -->
+	<LABEL item="SelClassNameLabel" parent="BlitzClassSelect">
+		<FONT>FONTa10_O2Wht</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>58</X>
+			<Y>132</Y>
+			<W>117</W>
+			<H>19</H>
+		</BOUNDS>
+	</LABEL>
+	
+	<!--  선택한 병과 간단한 설명  -->
+	<LABEL item="ClassSimpleDescription" parent="BlitzClassSelect">
+		<FONT>FONTa8</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>58</X>
+			<Y>152</Y>
+			<W>468</W>
+			<H>19</H>
+		</BOUNDS>
+	</LABEL>
+	
+	<!-- 선택한 병과 자세한 설명 TextArea  -->
+	<TEXTAREA item="ClassDetailDescription" parent="BlitzClassSelect">
+	<FONT>FONTa8</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>255</G>
+			<B>255</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>58</X>
+			<Y>183</Y>
+			<W>390</W>
+			<H>66</H>
+		</BOUNDS>
+		<VISIBLE>true</VISIBLE>
+		<EDITABLE>false</EDITABLE>
+	</TEXTAREA>
+	
+	
+	<!-- 플레이어별 선택 병과 정보 -->
+	<PICTURE item="SelClassPlyer1" parent="BlitzClassSelect">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<LABEL item="SelPlyerNameTagLabel1" parent="BlitzClassSelect">
+		<!--><FONT>FONTa7</FONT><-->
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+		</BOUNDS>
+	</LABEL>
+	
+	<PICTURE item="SelClassPlyer2" parent="BlitzClassSelect">
+		<BOUNDS>
+			<X>243</X>
+			<Y>350</Y>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<LABEL item="SelPlyerNameTagLabel2" parent="BlitzClassSelect">
+		<!--><FONT>FONTa7</FONT><-->
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+		</BOUNDS>
+	</LABEL>
+	
+		<PICTURE item="SelClassPlyer3" parent="BlitzClassSelect">
+		<BOUNDS>
+			<X>363</X>
+			<Y>350</Y>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<LABEL item="SelPlyerNameTagLabel3" parent="BlitzClassSelect">
+		<!--><FONT>FONTa7</FONT><-->
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+		</BOUNDS>
+	</LABEL>
+	
+		<PICTURE item="SelClassPlyer4" parent="BlitzClassSelect">
+		<BOUNDS>
+			<X>483</X>
+			<Y>350</Y>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH></STRETCH>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<LABEL item="SelPlyerNameTagLabel4" parent="BlitzClassSelect">
+		<!--><FONT>FONTa7</FONT><-->
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+		</BOUNDS>
+	</LABEL>
+	
+
+	<!-- 상단 UI -->
+	<!-- 규격 보려고 임시로 그려줌 -->
+	<PICTURE item="BlitrzKriegTopInfo" parent="Blitzkrieg">
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>800</W>
+			<H>70</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Top_UI.png</BITMAP>
+		<VISIBLE>false</VISIBLE>
+	</PICTURE>
+	
+	<LABEL item="BlitrzTopInfoNamePlayer" parent="BlitrzKriegTopInfo">
+		<FONT>FONTa9</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>8</X>
+			<Y>10</Y>
+			<W>95</W>
+			<H>18</H>
+		</BOUNDS>
+		<TEXTALIGN> <HALIGN>center</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<LABEL item="BlitrzTopInfoHonorPlayer" parent="BlitrzKriegTopInfo">
+		<FONT>FONTa9</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>163</X>
+			<Y>31</Y>
+			<W>234</W>
+			<H>18</H>
+		</BOUNDS>
+	</LABEL>
+	
+	<!-- 플레이어의 병과-->
+	<PICTURE item="BlitzSelClassPlayer" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<X>5</X>
+			<Y>19</Y>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+	</PICTURE>
+	
+	<!-- 플레이어의 HP게이지-->
+	<PICTURE item="BlitzHPBarPlayerFrame" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_hp_Frame.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="BlitzHPBarPlayer" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_hp.png</BITMAP>
+	</PICTURE>
+	
+	<!-- 플레이어의 AP게이지-->
+	<PICTURE item="BlitzAPBarPlayerFrame" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_ap_Frame.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="BlitzAPBarPlayer" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_ap.png</BITMAP>
+	</PICTURE>
+	
+	<!--타겟정보-->
+	<LABEL item="BlitrzTopInfoNameTarget" parent="BlitrzKriegTopInfo">
+		<FONT>FONTa9</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>695</X>
+			<Y>10</Y>
+			<W>95</W>
+			<H>18</H>
+		</BOUNDS>
+		<TEXTALIGN> <HALIGN>center</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+
+	<!--타겟의 병과-->
+	<PICTURE item="BlitzSelClassTarget" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<X>753</X>
+			<Y>19</Y>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+	</PICTURE>
+	
+	<!-- 타겟의 HP게이지-->
+	<PICTURE item="BlitzHPBarTargetFrame" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_hp_Frame.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="BlitzHPBarTarget" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_hp.png</BITMAP>
+	</PICTURE>
+	
+	<!-- 타겟의 AP게이지-->
+	<PICTURE item="BlitzAPBarTargetFrame" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_ap_Frame.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="BlitzAPBarTarget" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Player_ap.png</BITMAP>
+	</PICTURE>
+
+	<!--블루팀 로고-->
+	<PICTURE item="BlitzBlueTeamLogo" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>BlueTeam_Logo.png</BITMAP>
+	</PICTURE>
+	
+	<!-- 블루팀의 HP게이지-->
+	<PICTURE item="BlitzBlueHPBarFrame" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<W>160</W>
+			<H>25</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Blue_HP_Frame.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="BlitzBlueHPBar" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<W>160</W>
+			<H>25</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Blue_HP.png</BITMAP>
+	</PICTURE>
+	
+	<!--레드팀 로고-->
+	<PICTURE item="BlitzRedTeamLogo" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<W>40</W>
+			<H>40</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>RedTeam_Logo.png</BITMAP>
+	</PICTURE>
+	
+	<!-- 레드팀의 HP게이지-->
+	<PICTURE item="BlitzRedHPBarFrame" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<W>160</W>
+			<H>25</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Red_HP_Frame.png</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="BlitzRedHPBar" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<W>160</W>
+			<H>25</H>
+		</BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Red_HP.png</BITMAP>
+	</PICTURE>
+	
+	<!-- 바리케이드 수 :  -->
+	<LABEL item="BlitzBarricadeCount_First" parent="BlitrzKriegTopInfo">	<!-- 바리게이트 수 :  -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>185</X> <Y>48</Y> <W>200</W> <H>12</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>center</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+		<TEXT></TEXT>
+	</LABEL>
+	
+	<LABEL item="BlitzBarricadeCount_Second" parent="BlitrzKriegTopInfo">	<!-- 바리게이트 수 :  -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>415</X> <Y>48</Y> <W>200</W> <H>12</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>center</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+		<TEXT></TEXT>
+	</LABEL>
+	
+	<!-- 팀 킬수  -->
+	<LABEL item="BlitzTeamKillCount_MyTeam" parent="BlitrzKriegTopInfo">	<!-- 팀 킬수 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>329</X> <Y>53</Y> <W>50</W> <H>12</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>center</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+		<TEXT></TEXT>
+	</LABEL>
+	
+	<LABEL item="BlitzTeamKillCount_Enemy" parent="BlitrzKriegTopInfo">	<!-- 팀 킬수 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>421</X> <Y>53</Y> <W>50</W> <H>12</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>center</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+		<TEXT></TEXT>
+	</LABEL>
+	
+	<ZBMNUMLABEL item="Blitz_ElapsedTime" parent="BlitrzKriegTopInfo">
+		<BOUNDS>
+			<X>363</X>
+			<Y>32</Y>
+			<W>69</W>
+			<H>19</H>
+		</BOUNDS>
+		<BITMAP>Blitz_TimeNum_Blue.png</BITMAP>
+		<FONTSIZE>
+			<W>64</W>
+			<H>64</H>
+		</FONTSIZE>
+	</ZBMNUMLABEL>
+	
+	<!-- PICTURE : 이벤트 메시지 -->
+	<PICTURE item="BlitzEvent" parent="Blitzkrieg">
+		<BOUNDS> <X>200</X> <Y>110</Y> <W>360</W> <H>50</H> </BOUNDS>
+		<VISIBLE>false</VISIBLE>
+	</PICTURE>
+	
+	<PICTURE item="BlitzEventMsg1" parent="BlitzEvent">
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>360</W> <H>50</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>true</VISIBLE>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	<PICTURE item="BlitzEventMsg2" parent="BlitzEvent">
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>360</W> <H>50</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>true</VISIBLE>
+		<BITMAP></BITMAP>
+	</PICTURE>
+	
+	<!-- 특권 목록 -->
+	<FRAME item="BlitzkriegAbilityList">
+		<FRAMELOOK>NullFrameLook</FRAMELOOK>
+		<BOUNDS> <X>0</X> <Y>64</Y> <W>258</W> <H>496</H> </BOUNDS>
+		<VISIBLE>false</VISIBLE>
+	</FRAME>
+	
+	<!-- 특권 목록 닫기 -->
+	<FRAME item="BlitzkriegAbilityList_Close" parent="BlitzkriegAbilityList">
+		<FRAMELOOK>NullFrameLook</FRAMELOOK>
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>258</W> <H>496</H> </BOUNDS>
+		<VISIBLE>false</VISIBLE>
+	</FRAME>
+	
+	<PICTURE item="BlitzAbilityList_Close" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>258</W> <H>19</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>true</VISIBLE>
+		<BITMAP>Blitz_AbilityList_Close.png</BITMAP>
+	</PICTURE>
+	
+	<!-- 특권 목록 닫기 : DPS -->
+	<PICTURE item="BlitzAbilityList_Close_DPS_Icon" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>5</X> <Y>40</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Close_DPS_KeyLabel" parent="BlitzkriegAbilityList_Close">	<!-- 단축키 출력:신형 무기 지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>41</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Close_DPS_Level" parent="BlitzkriegAbilityList_Close">			<!-- 현재 레벨 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>28</X> <Y>62</Y> <W>12</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<!-- 특권 목록 닫기 : Delay -->
+	<PICTURE item="BlitzAbilityList_Close_Delay_Icon" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>5</X> <Y>80</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Close_Delay_KeyLabel" parent="BlitzkriegAbilityList_Close">	<!-- 단축키 출력:신형 탄환 지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>81</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Close_Delay_Level" parent="BlitzkriegAbilityList_Close">			<!-- 현재 레벨 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>28</X> <Y>102</Y> <W>12</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<!-- 특권 목록 닫기 : HPAP -->
+	<PICTURE item="BlitzAbilityList_Close_HPAP_Icon" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>5</X> <Y>120</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Close_HPAP_KeyLabel" parent="BlitzkriegAbilityList_Close">	<!-- 단축키 출력:신형 방탄복 지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>121</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>	
+	<LABEL item="BlitzAbilityList_Close_HPAP_Level" parent="BlitzkriegAbilityList_Close">			<!-- 현재 레벨 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>28</X> <Y>142</Y> <W>12</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<!-- 특권 목록 닫기 : Enchant -->
+	<PICTURE item="BlitzAbilityList_Close_Enchant_Icon" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>5</X> <Y>160</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Close_Enchant_KeyLabel" parent="BlitzkriegAbilityList_Close">	<!-- 단축키 출력:신형 소이탄 지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>161</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>	
+	<LABEL item="BlitzAbilityList_Close_Enchant_Level" parent="BlitzkriegAbilityList_Close">			<!-- 현재 레벨 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>28</X> <Y>182</Y> <W>12</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<!-- 특권 목록 닫기 : Magazine -->
+	<PICTURE item="BlitzAbilityList_Close_Magazine_Icon" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>5</X> <Y>200</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Close_Magazine_KeyLabel" parent="BlitzkriegAbilityList_Close">	<!-- 단축키 출력:신형 대형탄창 지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>201</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>	
+	<LABEL item="BlitzAbilityList_Close_Magazine_Level" parent="BlitzkriegAbilityList_Close">			<!-- 현재 레벨 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>28</X> <Y>222</Y> <W>12</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<!-- 특권 목록 닫기 : Revive -->
+	<PICTURE item="BlitzAbilityList_Close_Revive_Icon" parent="BlitzkriegAbilityList_Close">
+		<BOUNDS> <X>5</X> <Y>240</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Close_Revive_KeyLabel" parent="BlitzkriegAbilityList_Close">	<!-- 단축키 출력:신형 전용의무대 지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>241</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>		
+	<LABEL item="BlitzAbilityList_Close_Revive_Level" parent="BlitzkriegAbilityList_Close">			<!-- 현재 레벨 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>28</X> <Y>262</Y> <W>12</W> <H>12</H> </BOUNDS>
+	</LABEL>
+
+	<!-- 특권 목록 열기 -->
+	<PICTURE item="BlitzAbilityList_Open" parent="BlitzkriegAbilityList">
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>258</W> <H>496</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_AbilityList_Open.png</BITMAP>
+	</PICTURE>
+	
+	<LABEL item="BlitzAbilityList_KeyLabel" parent="BlitzkriegAbilityList">	<!-- 단축키 출력:특권목록 창  -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>90</X> <Y>5</Y> <W>200</W> <H>29</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<LABEL item="BlitzAbilityList_Text" parent="BlitzAbilityList_Open">	<!-- 창은 열지 않고도 단축키로 특권 획득이 가능합니다. -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>23</Y> <W>250</W> <H>12</H> </BOUNDS>
+		<TEXT>STR:UI_BLITZ_29</TEXT> <!-- 창은 열지 않고도 단축키로 특권 획득이 가능합니다. -->
+	</LABEL>
+	
+	<!-- 특권목록 DPS -->
+	<PICTURE item="BlitzAbilityList_DPS_Icon" parent="BlitzAbilityList_Open"><!-- 아이콘 -->
+		<BOUNDS> <X>16</X> <Y>54</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_DPS_RequireHonor" parent="BlitzAbilityList_Open"><!-- 다음 단계에 요구되는 명예 포인트 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>70</X> <Y>71</Y> <W>154</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_DPS_CurrentStep" parent="BlitzAbilityList_Open"><!-- 현재 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>91</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_DPS_NextStep" parent="BlitzAbilityList_Open"><!-- 다음 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>106</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_DPS_KeyLabel" parent="BlitzAbilityList_Open">	<!-- 단축키 출력:신형무기지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>52</X> <Y>54</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- 특권목록 Delay -->
+	<PICTURE item="BlitzAbilityList_Delay_Icon" parent="BlitzAbilityList_Open"><!-- 아이콘 -->
+		<BOUNDS> <X>16</X> <Y>127</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Delay_RequireHonor" parent="BlitzAbilityList_Open"><!-- 다음 단계에 요구되는 명예 포인트 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>70</X> <Y>144</Y> <W>154</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Delay_CurrentStep" parent="BlitzAbilityList_Open"><!-- 현재 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>164</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Delay_NextStep" parent="BlitzAbilityList_Open"><!-- 다음 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>179</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Delay_KeyLabel" parent="BlitzAbilityList_Open">	<!-- 단축키 출력:신형탄환지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>52</X> <Y>127</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- 특권목록 HPAP -->
+	<PICTURE item="BlitzAbilityList_HPAP_Icon" parent="BlitzAbilityList_Open"><!-- 아이콘 -->
+		<BOUNDS> <X>16</X> <Y>200</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_HPAP_RequireHonor" parent="BlitzAbilityList_Open"><!-- 다음 단계에 요구되는 명예 포인트 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>70</X> <Y>217</Y> <W>154</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_HPAP_CurrentStep" parent="BlitzAbilityList_Open"><!-- 현재 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>237</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_HPAP_NextStep" parent="BlitzAbilityList_Open"><!-- 다음 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>252</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_HPAP_KeyLabel" parent="BlitzAbilityList_Open">	<!-- 단축키 출력:신형방탄복지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>52</X> <Y>200</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- 특권목록 Enchant  -->
+	<PICTURE item="BlitzAbilityList_Enchant_Icon" parent="BlitzAbilityList_Open"><!-- 아이콘 -->
+		<BOUNDS> <X>16</X> <Y>274</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Enchant_RequireHonor" parent="BlitzAbilityList_Open"><!-- 다음 단계에 요구되는 명예 포인트 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>70</X> <Y>291</Y> <W>154</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Enchant_CurrentStep" parent="BlitzAbilityList_Open"><!-- 현재 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>311</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Enchant_NextStep" parent="BlitzAbilityList_Open"><!-- 다음 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>326</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Enchant_KeyLabel" parent="BlitzAbilityList_Open">	<!-- 단축키 출력:소이탄지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>52</X> <Y>273</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- 특권목록 Magazine -->
+	<PICTURE item="BlitzAbilityList_Magazine_Icon" parent="BlitzAbilityList_Open"><!-- 아이콘 -->
+		<BOUNDS> <X>16</X> <Y>348</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Magazine_RequireHonor" parent="BlitzAbilityList_Open"><!-- 다음 단계에 요구되는 명예 포인트 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>70</X> <Y>365</Y> <W>154</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Magazine_CurrentStep" parent="BlitzAbilityList_Open"><!-- 현재 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>385</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Magazine_NextStep" parent="BlitzAbilityList_Open"><!-- 다음 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>400</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Magazine_KeyLabel" parent="BlitzAbilityList_Open">	<!-- 단축키 출력:대형탄창지급 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>52</X> <Y>346</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- 특권목록 Revive -->
+	<PICTURE item="BlitzAbilityList_Revive_Icon" parent="BlitzAbilityList_Open"><!-- 아이콘 -->
+		<BOUNDS> <X>16</X> <Y>421</Y> <W>32</W> <H>32</H> </BOUNDS><STRETCH/>
+	</PICTURE>
+	<LABEL item="BlitzAbilityList_Revive_RequireHonor" parent="BlitzAbilityList_Open"><!-- 다음 단계에 요구되는 명예 포인트 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>70</X> <Y>438</Y> <W>154</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Revive_CurrentStep" parent="BlitzAbilityList_Open"><!-- 현재 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>458</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Revive_NextStep" parent="BlitzAbilityList_Open"><!-- 다음 단계 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>10</X> <Y>473</Y> <W>250</W> <H>12</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="BlitzAbilityList_Revive_KeyLabel" parent="BlitzAbilityList_Open">	<!-- 단축키 출력:전용의무대 -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>52</X> <Y>419</Y> <W>200</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	
+<!-- 스코어 보드(Tap키로 On/Off) -->
+	<FRAME item="BlitzkriegScoreBoard">
+		<FRAMELOOK>NullFrameLook</FRAMELOOK>
+		<BOUNDS> <X>147</X> <Y>150</Y> <W>506</W> <H>381</H> </BOUNDS>
+		<VISIBLE>false</VISIBLE>
+	</FRAME>
+	
+	<PICTURE item="Blitz_ScoreBoard_Blue" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>506</W> <H>381</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_ScoreBoard_Blue.png</BITMAP>
+	</PICTURE>
+	<PICTURE item="Blitz_ScoreBoard_Red" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>506</W> <H>381</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_ScoreBoard_Red.png</BITMAP>
+	</PICTURE>
+
+	<!-- Label : MyTeam 1St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_MyTeam_Player1_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>72</Y> <W>18</W> <H>18</H> </BOUNDS>  
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>73</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>73</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>73</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>73</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>73</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>73</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player1_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>73</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+
+	<!-- Label : MyTeam 2St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_MyTeam_Player2_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>96</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>97</Y> <W>80</W> <H>16</H> </BOUNDS>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>97</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>97</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>97</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>97</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>97</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player2_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>97</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- Label : MyTeam 3St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_MyTeam_Player3_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>121</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>122</Y> <W>80</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>122</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>122</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>122</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>122</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>122</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player3_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>122</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- Label : MyTeam 4St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_MyTeam_Player4_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>146</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>147</Y> <W>80</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>147</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>147</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>147</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>147</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>147</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Player4_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>147</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- Label : MyTeam Total 4명점수 합계 표시 -->
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Total_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>175</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Total_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>175</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Total_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>175</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Total_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>175</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_MyTeam_Total_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>175</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+
+	
+	<!-- Label : EnemyTeam 1St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_Enemy_Player1_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>239</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>240</Y> <W>80</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>240</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>240</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>240</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>240</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>240</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player1_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>240</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+
+	<!-- Label : EnemyTeam 2St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_Enemy_Player2_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>263</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>264</Y> <W>80</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>264</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>264</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>264</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>264</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>264</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player2_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>264</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- Label : EnemyTeam 3St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_Enemy_Player3_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>288</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>289</Y> <W>80</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>289</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>289</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>289</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>289</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>289</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player3_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>289</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- Label : EnemyTeam 4St 플레이어 표시 -->
+	<PICTURE item="Blitz_ScoreBoard_Enemy_Player4_ClassIcon" parent="BlitzkriegScoreBoard">
+		<STRETCH/> <BOUNDS> <X>28</X> <Y>313</Y> <W>18</W> <H>18</H> </BOUNDS>
+	</PICTURE>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_Name" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>70</X> <Y>314</Y> <W>80</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>314</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>314</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>314</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>314</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>314</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Player4_Ping" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>440</X> <Y>314</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- Label : EnemyTeam 4St 플레이어 표시 -->
+	<LABEL item="Blitz_ScoreBoard_Enemy_Total_Kill" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>134</X> <Y>343</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Total_Assist" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>200</X> <Y>343</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Total_Death" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>260</X> <Y>343</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Total_DestroyHonorItem" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>318</X> <Y>343</Y> <W>30</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<LABEL item="Blitz_ScoreBoard_Enemy_Total_AccumHonor" parent="BlitzkriegScoreBoard">
+		<BOUNDS> <X>320</X> <Y>343</Y> <W>100</W> <H>16</H> </BOUNDS>
+		<TEXTALIGN> <HALIGN>right</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<!-- 도움말(TIP) -->
+	<PICTURE item="BlitzkriegHelp" parent="Blitzkrieg">
+		<BOUNDS> <X>622</X> <Y>64</Y> <W>178</W> <H>120</H> </BOUNDS>
+		<STRETCH/>
+		<VISIBLE>false</VISIBLE>
+		<BITMAP>Blitz_Tip_Bg.png</BITMAP>
+	</PICTURE>
+	<LABEL item="BlitzHelp_Toggle" parent="BlitzkriegHelp">	<!-- 창은 열지 않고도 단축키로 특권 획득이 가능합니다. -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>21</Y> <W>166</W> <H>12</H> </BOUNDS>
+		<TEXT></TEXT> <!-- [x]키를 이용해 도움말을 숨길 수 있습니다. -->
+	</LABEL>
+	<LABEL item="BlitzHelp_KeyLabel" parent="BlitzkriegHelp">	<!-- 단축키 출력:도움말 창  -->
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>150</X> <Y>5</Y> <W>20</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	<TEXTAREA item="BlitzHelp_TextArea" parent="BlitzkriegHelp">
+		<FONT>FONTa7</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>255</G>
+			<B>255</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>5</X>
+			<Y>45</Y>
+			<W>160</W>
+			<H>68</H>
+		</BOUNDS>
+		<VISIBLE>true</VISIBLE>
+		<EDITABLE>false</EDITABLE>
+	</TEXTAREA>
+
+	<!-- PICTURE : 바리케이트 현황판 -->
+	<PICTURE item="BlitzkriegBarricadeBg" parent="Blitzkrieg">
+		<BOUNDS> <X>622</X> <Y>64</Y> <W>178</W> <H>265</H> </BOUNDS>
+		<STRETCH/>
+		<BITMAP>Blitz_Barricade_Bg.png</BITMAP>
+	</PICTURE>
+	<LABEL item="BlitzkriegBarricade_Toggle" parent="BlitzkriegBarricadeBg">
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>3</X> <Y>21</Y> <W>166</W> <H>12</H> </BOUNDS>
+		<TEXT></TEXT> <!-- [G] 키로 도움말로 전환합니다. -->
+	</LABEL>
+	<LABEL item="BlitzkriegBarricade_KeyLabel" parent="BlitzkriegBarricadeBg">
+		<FONT>FONTa7</FONT>
+		<BOUNDS> <X>150</X> <Y>5</Y> <W>20</W> <H>30</H> </BOUNDS>
+		<TEXTCOLOR>
+			<R>10</R>
+			<G>255</G>
+			<B>10</B>
+		</TEXTCOLOR>
+		<TEXTALIGN> <HALIGN>left</HALIGN> <VALIGN>top</VALIGN> </TEXTALIGN>
+	</LABEL>
+	
+	<PICTURE item="BlitzkriegBarricade_MyTeam_0" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>36</X> <Y>195</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_1" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>52</X> <Y>195</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_2" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>70</X> <Y>193</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_9" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>88</X> <Y>193</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_10" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>106</X> <Y>195</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_11" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>122</X> <Y>195</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_3" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>26</X> <Y>162</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_4" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>42</X> <Y>162</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_5" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>70</X> <Y>167</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_6" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>88</X> <Y>167</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_7" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>115</X> <Y>162</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_8" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>130</X> <Y>162</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_0" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>35</X> <Y>89</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_1" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>51</X> <Y>89</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_2" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>70</X> <Y>91</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_9" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>88</X> <Y>91</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_10" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>106</X> <Y>89</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_11" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>122</X> <Y>89</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_3" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>26</X> <Y>123</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_4" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>42</X> <Y>123</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_5" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>70</X> <Y>117</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_6" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>88</X> <Y>117</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_7" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>115</X> <Y>123</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_8" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>130</X> <Y>123</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_MyTeam_Radar" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>80</X> <Y>224</Y> <W>17</W> <H>18</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_Enemy_Radar" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>80</X> <Y>58</Y> <W>17</W> <H>18</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_HonorItem_0" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>17</X> <Y>142</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_HonorItem_1" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>60</X> <Y>130</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_HonorItem_2" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>101</X> <Y>155</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+	<PICTURE item="BlitzkriegBarricade_HonorItem_3" parent="BlitzkriegBarricadeBg">
+		<BOUNDS> <X>145</X> <Y>142</Y> <W>13</W> <H>13</H> </BOUNDS>	<VISIBLE>true</VISIBLE>	<STRETCH/>
+	</PICTURE>
+
+</XML>

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<XML>
+	<MAP id="21" MapName="Citadel" BspFile="maps/Citadel/Citadel.rs"/>
+	<MAP id="0" MapName="Mansion" BspFile="maps/Mansion/Mansion.rs"/>
+	<MAP id="5" MapName="Town" BspFile="maps/Town/Town.rs"/>
+	<MAP id="8" MapName="Island" BspFile="maps/Island/Island.rs"/>
+	<MAP id="9" MapName="Garden" BspFile="maps/Garden/Garden.rs"/>
+	<MAP id="4" MapName="Battle Arena" BspFile="maps/Battle Arena/Battle Arena.rs"/>
+</XML>

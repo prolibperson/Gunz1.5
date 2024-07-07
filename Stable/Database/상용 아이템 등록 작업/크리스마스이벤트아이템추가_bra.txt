@@ -1,0 +1,71 @@
+﻿INSERT INTO Item (ItemID, Name) Values (400013, 'Peru de Natal')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=1000, Controllability=0, Magazine=3, ReloadTime=10, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=3, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=1, Slot=3, Weight=4, HP=0, AP=0, MAXWT=0, 
+Description='Item Especial com poderes de cura' 
+WHERE ItemID = 400013
+
+INSERT INTO Item (ItemID, Name) Values (400010, 'Doce')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=1000, Controllability=0, Magazine=5, ReloadTime=10, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=5, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=10, Slot=3, Weight=5, HP=0, AP=0, MAXWT=0, 
+Description='(Item de Evento) Doce saboroso' 
+WHERE ItemID = 400010
+
+INSERT INTO Item (ItemID, Name) Values (520013, 'Chapéu de Natal (M)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=4, Weight=3, HP=0, AP=4, MAXWT=0, 
+Description='Um item para o Natal. Para homens.' 
+WHERE ItemID = 520013
+
+INSERT INTO Item (ItemID, Name) Values (520513, 'Chapéu de Natal (F)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=4, Weight=3, HP=0, AP=4, MAXWT=0, 
+Description='Um item para o Natal. Para mulheres.' 
+WHERE ItemID = 520513
+
+INSERT INTO Item (ItemID, Name) Values (521008, 'Casaco de Natal (M)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=5, Weight=10, HP=1, AP=13, MAXWT=0, 
+Description='Um item para o Natal. Para homens.' 
+WHERE ItemID = 521008
+
+INSERT INTO Item (ItemID, Name) Values (521508, 'Casaco de Natal (F)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=5, Weight=10, HP=1, AP=13, MAXWT=0, 
+Description='Um item para o Natal. Para mulheres.' 
+WHERE ItemID = 521508
+
+INSERT INTO Item (ItemID, Name) Values (522008, 'Luvas de Natal (M)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=6, Weight=2, HP=0, AP=9, MAXWT=0, 
+Description='Um item para o Natal. Para homens.' 
+WHERE ItemID = 522008
+
+INSERT INTO Item (ItemID, Name) Values (522508, 'Luvas de Natal (F)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=6, Weight=2, HP=0, AP=9, MAXWT=0, 
+Description='Um item para o Natal. Para mulheres.' 
+WHERE ItemID = 522508
+
+INSERT INTO Item (ItemID, Name) Values (523008, 'Calças de Natal (M)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=7, Weight=10, HP=1, AP=15, MAXWT=0, 
+Description='Um item para o Natal. Para homens.' 
+WHERE ItemID = 523008
+
+INSERT INTO Item (ItemID, Name) Values (523508, 'Calças de Natal (F)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=7, Weight=10, HP=1, AP=15, MAXWT=0, 
+Description='Um item para o Natal. Para mulheres.' 
+WHERE ItemID = 523508
+
+INSERT INTO Item (ItemID, Name) Values (524008, 'Botas de Natal (M)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=0, Slot=8, Weight=2, HP=0, AP=11, MAXWT=0, 
+Description='Um item para o Natal. Para homens.' 
+WHERE ItemID = 524008
+
+INSERT INTO Item (ItemID, Name) Values (524508, 'Botas de Natal (F)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=0, Slot=8, Weight=2, HP=0, AP=11, MAXWT=0, 
+Description='Um item para o Natal. Para mulheres.' 
+WHERE ItemID = 524508

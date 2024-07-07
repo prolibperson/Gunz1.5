@@ -1,0 +1,43 @@
+INSERT INTO Item (ItemID, Name) Values (400507, '오드 건 x2')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=47, Delay=400, Controllability=80, Magazine=5, ReloadTime=4, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=40, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=25, Slot=2, Weight=15, HP=0, AP=0, MAXWT=0, 
+Description='각종 동물의 뼈와 유기체 만으로 이루어진 이상한 총. 그 작동방식은 수수께끼이다.' 
+WHERE ItemID = 400507
+
+
+
+INSERT INTO Item (ItemID, Name) Values (400508, '재앙의 날개')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=17, Delay=290, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=3, ResLevel=25, Slot=1, Weight=16, HP=0, AP=0, MAXWT=0, 
+Description='리치의 날개와 꼬리부분을 본 따 만든 소태도. 속에는 리치의 몸의 일부가 사용되었다고 전해진다.' 
+WHERE ItemID = 400508
+
+
+
+INSERT INTO Item (ItemID, Name) Values (400509, '남성용 레더 랩 슈즈')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=1, ResLevel=20, Slot=8, Weight=5, HP=6, AP=8, MAXWT=0, 
+Description='가죽을 두르고 징을 박아 단단히 고정시킴으로써 방어력을 강화시킨 신발. 남성용' 
+WHERE ItemID = 400509
+
+
+INSERT INTO Item (ItemID, Name) Values (400510, '여성용 레더 랩 슈즈')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=2, ResLevel=20, Slot=8, Weight=5, HP=6, AP=8, MAXWT=0, 
+Description='가죽을 두르고 징을 박아 단단히 고정시킴으로써 방어력을 강화시킨 신발. 여성용' 
+WHERE ItemID = 400510
+
+
+
+INSERT INTO Item (ItemID, Name) Values (400511, '남성용 어둠의군주 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=1, ResLevel=20, Slot=7, Weight=16, HP=3, AP=25, MAXWT=0, 
+Description='어둠의 군주에게 있어서 자신의 아이덴티티와 사악충만한 감성을 여과없이 드러내주는 소중한 바지. 남성용' 
+WHERE ItemID = 400511
+
+
+INSERT INTO Item (ItemID, Name) Values (400512, '여성용 어둠의군주 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=2, ResLevel=20, Slot=7, Weight=16, HP=3, AP=25, MAXWT=0, 
+Description='어둠의 군주에게 있어서 자신의 아이덴티티와 사악충만한 감성을 여과없이 드러내주는 소중한 바지. 여성용' 
+WHERE ItemID = 400512

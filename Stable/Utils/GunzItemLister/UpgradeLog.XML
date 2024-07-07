@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="GunzItemLister">
+</Property><Property Name="솔루션 파일" Value="C:\WorksLocal\GunzItemLister\GunzItemLister.sln">
+</Property><Property Name="Date" Value="2008년 8월 5일 화요일">
+</Property><Property Name="Time" Value="오후 16:15">
+</Property></Properties><Event ErrorLevel="0" Project="GunzItemLister" Source="GunzItemLister.csproj" Description="프로젝트를 변환했습니다.">
+</Event><Event ErrorLevel="3" Project="GunzItemLister" Source="GunzItemLister.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="GunzItemLister.sln" Description="솔루션을 변환했습니다.">
+</Event><Event ErrorLevel="3" Project="" Source="GunzItemLister.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="GunzItemLister" Source="GunzItemLister.csproj" Description="검사 완료: 프로젝트 파일을 업그레이드할 필요가 없습니다.">
+</Event></UpgradeLog>

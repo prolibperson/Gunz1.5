@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML xmlns="http://tempuri.org/zitem.xsd" id="zitem">
+
+	<!--
+		The buff is a buff on the item description. 
+				   - Created by HK Ltd.(2010-07-20)	-->
+
+	<BUFF id="800101" IconName="" PeriodType="short" Period="8" EffectType="dote" hp="100"/>
+	<BUFF id="800102" IconName="" PeriodType="short" Period="8" EffectType="dote" hp="3"/>
+	<BUFF id="800201" IconName="" PeriodType="short" Period="8" EffectType="dote" hp="3"/>
+	<BUFF id="800202" IconName="" PeriodType="short" Period="8" EffectType="dote" hp="3"/>
+
+	<BUFF id="800301" IconName="" PeriodType="short" Period="8" EffectType="dote" ap="3"/>
+	<BUFF id="800302" IconName="" PeriodType="short" Period="8" EffectType="dote" ap="3"/>
+	<BUFF id="800401" IconName="" PeriodType="short" Period="8" EffectType="dote" ap="3"/>
+	<BUFF id="800402" IConName="" PeriodType="short" Period="8" EffectType="dote"  ap="3"/>
+</XML>

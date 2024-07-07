@@ -1,0 +1,54 @@
+Starting BSP Export...
+object pass_pillar : pass_pillar: 326 ver / 145 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_window : pass_window: 204 ver / 159 face 
+object pass_wall : pass_wall: 96 ver / 68 face 
+object hide_box : hide_box: 56 ver / 46 face 
+object pass_pillarb003 : pass_pillarb003: 56 ver / 34 face 
+object pass_placard003 : pass_placard003: 80 ver / 60 face 
+object pass_wall006 : pass_wall006: 0 ver / 0 face 
+object pass_stuff003 : pass_stuff003: 16 ver / 9 face 
+object pass_wall007 : pass_wall007: 8 ver / 4 face 
+object pass_pillarb001 : pass_pillarb001: 56 ver / 34 face 
+object pass_placard001 : pass_placard001: 80 ver / 60 face 
+object pass_wall002 : pass_wall002: 0 ver / 0 face 
+object pass_stuff001 : pass_stuff001: 16 ver / 9 face 
+object pass_wall003 : pass_wall003: 8 ver / 4 face 
+object pass_pillarb002 : pass_pillarb002: 56 ver / 34 face 
+object pass_placard002 : pass_placard002: 80 ver / 60 face 
+object pass_wall004 : pass_wall004: 0 ver / 0 face 
+object pass_stuff002 : pass_stuff002: 16 ver / 9 face 
+object pass_wall005 : pass_wall005: 8 ver / 4 face 
+object pass_placard : pass_placard: 80 ver / 60 face 
+object pass_wall01 : pass_wall01: 0 ver / 0 face 
+object pass_stuff : pass_stuff: 16 ver / 9 face 
+object pass_pillarb : pass_pillarb: 56 ver / 34 face 
+object pass_wall : pass_wall: 8 ver / 4 face 
+object hnav_01 : hnav_01: 52 ver / 25 face 
+NaviMesh: 52 ver / 50 face 
+RSBsp Info : 821 faces
+Scene Dimension ( 2013.4 2014.7 2451.3 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 1 objects
+construct object subtree hide_box ( 46 source polygon ) : total 23 faces splitted 16 leaf nodes 75 nodes 145 polygons
+0 faces eliminated. (solid)
+46 source polygons remain
+optimized 35 polygons remain
+Generating Convex polygons...
+Optimize Polygon 821 -> 806 
+Constructing Collision BspTree. ( 35 source polygons )
+Collision Bsp Info : total 107 faces splitted 16 leaf nodes 119 nodes 267 polygons
+Constructing OcTree. ( 806 source polygons )
+Octree Info : total 217 faces splitted 6 leaf nodes 11 nodes 1023 polygons
+Constructing BspTree. ( 806 source polygons )
+RSBsp Info : total 2898 faces splitted 1736 leaf nodes 3471 nodes 3704 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+C:\Users\gabrino.MAIETDEV\Documents\받은 파일\게릴라_하드코어\2\익스포트\2.RS file saved
+C:\Users\gabrino.MAIETDEV\Documents\받은 파일\게릴라_하드코어\2\익스포트\2.RS.bsp file saved
+C:\Users\gabrino.MAIETDEV\Documents\받은 파일\게릴라_하드코어\2\익스포트\2.RS.col file saved
+Exporting takes 0 minutes and      3 seconds.
+Done.

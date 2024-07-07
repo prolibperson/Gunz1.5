@@ -1,0 +1,120 @@
+﻿INSERT INTO Item (ItemID, Name) Values (520038, '男性用フィンブルウィンターヘッドバンド')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=4, Weight=2, HP=2, AP=8, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐たえてきた民族が使っていたという手袋。 男性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 520038
+
+INSERT INTO Item (ItemID, Name) Values (520039, '男性用神のオーラヘッドセット')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=4, Weight=4, HP=3, AP=10, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使うヘッドセット。男性用 (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 520039
+
+INSERT INTO Item (ItemID, Name) Values (520538, '女性用フィンブルウィンターヘッドバンド')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=4, Weight=2, HP=2, AP=8, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたという手袋。 女性用じょせいよう (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 520538
+
+INSERT INTO Item (ItemID, Name) Values (520539, '女性用神のオーラヘッドセット')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=4, Weight=4, HP=3, AP=10, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使うヘッドセット。女性用じょせいよう (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 520539
+
+INSERT INTO Item (ItemID, Name) Values (521030, '男性用フィンブルウィンターコート')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=5, Weight=13, HP=3, AP=24, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたというコート。 男性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 521030
+
+INSERT INTO Item (ItemID, Name) Values (521031, '男性用神のオーラコート')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=5, Weight=16, HP=5, AP=26, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使うコート。男性用 (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 521031
+
+INSERT INTO Item (ItemID, Name) Values (521530, '女性用フィンブルウィンターコート')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=5, Weight=13, HP=3, AP=24, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたというコート。 女性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 521530
+
+INSERT INTO Item (ItemID, Name) Values (521531, '女性用神のオーラコート')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=5, Weight=16, HP=5, AP=26, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使うコート。女性用じょせいよう (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 521531
+
+INSERT INTO Item (ItemID, Name) Values (522025, '男性用フィンブルウィンター手袋')
+
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=6, Weight=4, HP=2, AP=16, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたという手袋てぶくろ。 男性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 522025
+
+INSERT INTO Item (ItemID, Name) Values (522026, '男性用神のオーラ手袋')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=6, Weight=5, HP=3, AP=16, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使う手袋てぶくろ。男性用 (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 522026
+
+INSERT INTO Item (ItemID, Name) Values (522525, '女性用フィンブルウィンター手袋')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=6, Weight=4, HP=2, AP=16, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたという手袋てぶくろ。 女性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 522525
+
+INSERT INTO Item (ItemID, Name) Values (522526, '女性用神のオーラ手袋')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=6, Weight=5, HP=3, AP=16, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使う手袋てぶくろ。女性用じょせいよう (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 522526
+
+INSERT INTO Item (ItemID, Name) Values (523028, '男性用フィンブルウィンターズボン')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=7, Weight=12, HP=3, AP=24, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたというズボン。 男性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 523028
+
+INSERT INTO Item (ItemID, Name) Values (523029, '男性用神のオーラズボン')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=7, Weight=15, HP=4, AP=28, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使うズボン。男性用 (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 523029
+
+INSERT INTO Item (ItemID, Name) Values (523528, '女性用フィンブルウィンターズボン')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=7, Weight=12, HP=3, AP=24, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたというズボン。 女性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 523528
+
+INSERT INTO Item (ItemID, Name) Values (523529, '女性用神のオーラスカート')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=7, Weight=15, HP=4, AP=28, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使うズボン。女性用じょせいよう (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 523529
+
+INSERT INTO Item (ItemID, Name) Values (524028, '男性用フィンブルウィンターブーツ')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=8, Weight=4, HP=2, AP=18, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたというブーツ。 男性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 524028
+
+INSERT INTO Item (ItemID, Name) Values (524029, '男性用神のオーラ靴')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=25, Slot=8, Weight=5, HP=2, AP=20, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使う靴くつ。男性用 (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 524029
+
+INSERT INTO Item (ItemID, Name) Values (524528, '女性用フィンブルウィンターブーツ')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=8, Weight=4, HP=2, AP=18, MAXWT=0, 
+Description='北きた大陸の苛酷かこくな寒さに耐えてきた民族が使っていたというブーツ。 女性用 (アメリカガンズプレイヤーAzumeさんがデザインした服)' 
+WHERE ItemID = 524528
+
+INSERT INTO Item (ItemID, Name) Values (524529, '女性用神のオーラブーツ')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=25, Slot=8, Weight=5, HP=2, AP=20, MAXWT=0, 
+Description='信仰しんこうを利用りようし勢力を拡張、 莫大な富を蓄積したギャング団だん「ブラザーフッド」。 その団員が使う靴くつ。女性用じょせいよう (アメリカのガンズプレイヤーXlllさんがデザインした服)' 
+WHERE ItemID = 524529

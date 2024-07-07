@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML>
+
+<TIPS category="0">
+
+    <MSG>Gunz is een actie spel dat je gratis kunt spelen , voor altijd.</MSG>
+    <MSG>Ga naar forum.daemonsring.com wanneer je een klacht heb.</MSG>
+    <MSG>Druk op F11 Om het spel op te nemen, Druk nogmaals op F11 om de opname te stoppen.</MSG>
+    <MSG>Dubbelklik het bestand dat wordt opgenomen om het op Windows te zien.</MSG>
+    <MSG>De route van het opslaan van een opname bestand of screenshot wordt getoond op het scherm op het moment van het opslaan.</MSG>
+    <MSG>Druk op F12 om een screenshot te maken.</MSG>
+    <MSG>Type /rapport om de details van het chatten te melden. (Functie om de gebruiker met offensief gedrag te melden)</MSG>
+    <MSG>Heeft u een gedeeld apparaat gebruiken? Probeer de port forwarding -functie . U kunt een geoptimaliseerd netwerk play ervaren.</MSG>
+    <MSG>Gunz is te traag ? Gebruik de optimalisaties van de optie menu.</MSG>
+    <MSG>"Speel nu!" : U hoeft niet te zoeken naar een lege kamer . U kunt eenvoudig deelnemen aan een spel.</MSG>
+    <MSG>De staff team zal nooit naar je wachtwoord vragen.</MSG>
+    <MSG>Bounty items worden niet gedeeld met andere personages door de Centrale Bank.</MSG>
+    <MSG>In traing mode worden kills niet gerigstreerd.</MSG>
+    <MSG>Gebruik de command /r om terug te whisperen.</MSG>
+    <MSG>Als uw een karakter heeft at level 21 of hoger is kunt u het Beginner channel niet in.</MSG>
+    
+    
+    <MSG>Elke ID die anderen kan beledigen kan worden beperkt.</MSG>
+    <MSG>Aiedereen die anderen beledigt in een spel kan worden onderworpen aan straf door de staff team.</MSG>
+
+    <MSG>Zodra jij jezelf verdedigt tegen de aanval van een slash van dichtbij, Heb je meteen de Massive Strike aanval!</MSG>
+    <MSG>Druk op CTRL+Nummer terwijl je een spel bekijkt om de relevante speler te bekijken. </MSG>
+
+</TIPS>    
+
+<TIPS category="4">
+	<MSG id="1">Druk op F1 tijdens dat de spel aan is om de beschrijving te zien.</MSG>
+</TIPS>
+
+<TIPS category="8">
+    <MSG id="1">Duel Tournament : Em caso que não finalize dentro do tempo limitado, ganhará o usuário que mais causou dano ao outro jogador.</MSG>
+</TIPS>
+
+<TIPS category="9">
+	<MSG id="1">Ataque relâmpago: Obter a honra destruindo aos inimigos, e poderá ganhar o privilégio pressionando a tecla F5.</MSG>
+	<MSG id="1">Ataque relâmpago: Se destrói os edifícios inimigos, você poderá obter a honra de toda a equipe.</MSG>
+	<MSG id="1">Ataque relâmpago: Cada certo tempo haverá caixa de armamento. Se a destrói, você poderá obter a honra para toda a equipe.</MSG>
+</TIPS>
+
+</XML>

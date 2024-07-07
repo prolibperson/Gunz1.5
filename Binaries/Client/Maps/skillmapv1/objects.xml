@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<XML>
+		<OBJECT name="Goblin" model="blitzbox" collradius="0" collwidth="200" collheight="80" moving="true" collidable="true" reverseanimation="true" sound="mt_wod">
+			<POSITION>13,-200,0</POSITION>
+			<DIRECTION>0,1,0</DIRECTION>
+			<SPEED>230</SPEED>
+			<SCALE>2,0.5,2</SCALE>
+			<MINHEIGHT>0</MINHEIGHT>
+			<MAXHEIGHT>5000</MAXHEIGHT>
+		</OBJECT>
+</XML>

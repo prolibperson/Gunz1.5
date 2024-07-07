@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<XML>
+		<OBJECT name="Goblin" model="goblinG" collradius="30" collwidth="0" collheight="110" moving="true" collidable="true" reverseanimation="true" sound="mt_wod" usepath="true">
+			<POSITION>2890.7146,-3076.026123,-729.207581</POSITION>
+			<ENDPOSITION>4305.36,-2294.52,-729.21</ENDPOSITION>
+			<DIRECTION>0,1,0</DIRECTION>
+			<SPEED>230</SPEED>
+			<SCALE>1,1,1</SCALE>
+			<MINHEIGHT>0</MINHEIGHT>
+			<MAXHEIGHT>5000</MAXHEIGHT>
+			<ANIMATION>run</ANIMATION>
+			<COLLISION>0</COLLISION>
+		</OBJECT>
+</XML>

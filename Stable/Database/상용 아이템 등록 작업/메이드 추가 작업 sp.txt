@@ -1,0 +1,75 @@
+INSERT INTO Item (ItemID, Name) Values (520031, '남성 PA 모자')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=4, Weight=3, HP=3, AP=4, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 착용하는 모자' 
+WHERE ItemID = 520031
+
+
+
+INSERT INTO Item (ItemID, Name) Values (520531, '여성 PA 헤드드레스')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=4, Weight=3, HP=3, AP=4, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 애용하는 모자' 
+WHERE ItemID = 520531
+
+
+
+INSERT INTO Item (ItemID, Name) Values (521025, '남성 PA 자켓')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=5, Weight=13, HP=2, AP=24, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 애용하고 있는 자켓' 
+WHERE ItemID = 521025
+
+
+
+INSERT INTO Item (ItemID, Name) Values (521525, '여성 PA 드레스(상의)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=5, Weight=13, HP=2, AP=24, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 입고 있는 상의' 
+WHERE ItemID = 521525
+
+
+
+INSERT INTO Item (ItemID, Name) Values (522020, '남성 PA 가죽장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=6, Weight=3, HP=1, AP=13, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 애용하는 장갑' 
+WHERE ItemID = 522020
+
+
+INSERT INTO Item (ItemID, Name) Values (522520, '여성 PA 면장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=6, Weight=3, HP=1, AP=13, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 애용하는 장갑' 
+WHERE ItemID = 522520
+
+
+INSERT INTO Item (ItemID, Name) Values (523023, '남성 PA 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=7, Weight=13, HP=3, AP=23, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 입고 있는 바지' 
+WHERE ItemID = 523023
+
+
+
+INSERT INTO Item (ItemID, Name) Values (523523, '여성 PA 드레스(하의)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=7, Weight=13, HP=3, AP=22, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 입고 있는 하의' 
+WHERE ItemID = 523523
+
+
+
+INSERT INTO Item (ItemID, Name) Values (524023, '남성 PA 구두')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=8, Weight=3, HP=1, AP=17, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 신고 있는 구두' 
+WHERE ItemID = 524023
+
+
+
+INSERT INTO Item (ItemID, Name) Values (524523, '여성 PA 구두')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=8, Weight=3, HP=1, AP=17, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 신고 있는 구두' 
+WHERE ItemID = 524523

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML>
+<!-- 에러 메시지. -->
+<STR id="100">Communicator heeft geen UID . Deze Communicator moet worden geïnitialiseerd door de Master Controller.</STR>
+<STR id="101">Communicator heeft geen UID ruimte om uw UID toewijzen.</STR>
+<STR id="110">Communicator probeert verbinding te maken met een ongeldige verbinding.</STR>
+<STR id="200">Command heeft een ongeldige ontvanger UID. Als u niet verbinding maakt met een server en het nog niet op standaart ontvanger hebt ingesteld, moet u dit eerst doen.</STR>
+<STR id="300">Zone - Server is niet aangesloten op de Master - Controller.</STR>
+<STR id="301">Zone - server probeert de Master - Controller ongeldig.</STR>
+<STR id="1000">Ongeldige object UID.</STR>
+<!--
+<STR id="1001"></STR>
+-->
+
+<STR id="2000">Map bestand openen fout.</STR>
+
+<!-- 접속, 로그인 관련 -->
+<STR id="10000">U heeft een verkeerd wachtwoord ingevoer. Controleer de hoofd en kleine letters.</STR>
+<STR id="10001">Dezelfde ID is al ingelogd.</STR>
+<STR id="10002">De versie komt niet overeen met de server.</STR>
+<STR id="10003">Je kan er niet ingaan , omdat er al te veel gebruikers zijn.</STR>
+<STR id="10004">Deze ID is niet toegestaan ​​om toegang te krijgen tot Gunz.</STR>
+<STR id="10005">Mislukt Authentication</STR>
+
+<!-- 캐릭터 관리 관련 -->
+<STR id="10100">Het karakter naam is al in gebruik.</STR>
+<STR id="10101">Je hebt tekens gebruikt die niet zijn toegestaan.</STR>
+<STR id="10102">De naam is te kort.</STR>
+<STR id="10103">De naam is te lang.</STR>
+<STR id="10104">Voer de naam in.</STR>
+<STR id="10110">De naam bestaat niet.</STR>
+<STR id="10111">Kan het personage niet verwijderen als het behoort tot een clan of cash items heeft.</STR>
+
+<!-- 아이템 관련 -->
+<STR id="20001">Onvoldoende Bounty!</STR>
+<STR id="20002">U bent niet toegestaan ​​om de apparatuur aan te schaffen(or item).</STR>
+<STR id="20003">U bent niet toegestaan ​​om te bewapenen met deze apparatuur.</STR>
+<STR id="20004">U bent niet toegestaan ​​om deze apparatuur uit te trekken.</STR>	
+<STR id="20005">U bent niet toegestaan ​​om deze apparatuur te verkopen(or item).</STR>
+<STR id="20006">Het is niet toegestaan ​​om de apparatuur (of item) te verkopen.</STR>
+<STR id="20007">Een dergelijke apparatuur is niet beschikbaar.</STR>
+<STR id="20008">Je hebt te veel apparatuur.</STR>
+<STR id="20009">De geselecteerde apparatuur bestaat niet.</STR>
+<STR id="20010">Het is te zwaar.</STR>
+<STR id="20011">Het is niet toegestaan ​​om gebruikt te worden op uw niveau.</STR>
+<STR id="20012">Kan dezelfde apparatuur (of item) niet toe te rusten in een sleuf.</STR>
+<STR id="20013">Kan het niet uitdoen vanwege te veel gewicht.</STR>
+<STR id="20014">Kan het geld uitrusting (of item) niet verkopen in een winkel.</STR>
+<STR id="20015">Cannot take the equipment(or item) as it does not match your gender. </STR>
+<STR id="20016">Dit item kan niet worden aangerokken omdat het niet past bij uw niveau. Wil je nog steeds de apparatuur (of item) kopen?.</STR>
+<STR id="20017">Kan het apparaat (of item) in de Centrale Bank niet te storten.</STR>
+<STR id="20018">U kunt alleen cash apparatuur (of items) in de Centrale Bank deponeren.</STR>
+<STR id="20019">De apparatuur (of item) wordt weggehaald als gevolg van een level down.</STR>
+<STR id="20020">Kan het apparaat (of item) niet aandoen.</STR>
+
+<STR id="30000">Je kunt niet in de kamer.</STR>
+<STR id="30001">Kan niet meer gebruikers aan.</STR>
+<STR id="30002">Verkeerd wachtwoord!</STR>
+<STR id="30003">U kunt hier niet in met uw niveau.</STR>
+<STR id="30004">Joinen is verboden.</STR>
+<STR id="30005">Uw entree is verboden.</STR>
+<STR id="30006">De kamer bestaat niet.</STR>
+<STR id="30007">De kamer bestaat al.</STR>
+<STR id="30008">Je kunt de kamer niet maken.</STR>
+<STR id="30009">Er is geen kamer voor u om te joinen.</STR>
+
+<STR id="30020">Kanniet het channel joinen.</STR>
+<STR id="30021">Kan niet meer gebruikers aan.</STR>
+<STR id="30022">U kunt hier niet in met uw niveau.</STR>
+<STR id="30023">Als uw een karakter heeft dat level 21 of hoger is, kunt u de beginner of instap channel niet betreden.</STR>
+
+<STR id="30026">Er is niemand die je kan evenaren.</STR>
+
+<!-- 클랜 관련. -->
+<STR id="30030">Kan een clan vormen geen.</STR>
+<STR id="30031">De clan kan niet worden gesloten.</STR>
+<STR id="30032">De clan bestaat al.</STR>
+<STR id="30033">Het aantal leden is niet voldoende voor de schepping van de clan.</STR>
+<STR id="30034">Dit lid behoort tot een andere clan.</STR>
+<STR id="30035">Er is geen persoon in de lobby voor de schepping van een clan.</STR>
+<STR id="30036">De clan naam is onjuist.</STR>
+<STR id="30037">Dit is geen clan meester.</STR>
+<STR id="30038">Het is geen clan meester of administrator.</STR>
+<STR id="30039">Dit lid behoort tot een andere clan.</STR>
+<STR id="30040">Abonnement wordt niet verwerkt.</STR>
+<STR id="30041">Dit lid is een lid van een andere clan.</STR>
+<STR id="30042">De lid is niet in de lobby.</STR>
+<STR id="30043">U heeft de clan niet gejoined.</STR>
+<STR id="30044">U kunt niet uit de clan.</STR>
+<STR id="30045">Er kan geen lid meer bij.</STR>
+<STR id="30046">Uw partner heeft niet ingelogd.</STR>
+<STR id="30047">Niet in dezelfde clan.</STR>
+<STR id="30048">U kunt het gezag niet wijzigen.</STR>
+<STR id="30049">De relevante clan lid is niet beschikbaar. </STR>
+<STR id="30050">Onvoldoende bounty (1000 BP) voor de schepping clan.</STR>
+<STR id="30051">Alleen die in level 10 of hoger kunnen een clan maken.</STR>
+<STR id="30052">Clan zal gesloten zijn over '%s'.</STR>
+
+<!-- 래더관련. -->
+<STR id="30070">U kunt niet meedoen met een clan oorlog.</STR>
+<STR id="30071">Verschillende teamleden.</STR>
+<STR id="30072">Het lid van het team is niet beschikbaar.</STR>
+<STR id="30073">Er is een lid die zich niet kan aanmelden voor een teamspel.</STR>
+
+<!-- 클랜전 관련. -->
+<STR id="30080">Niet in dezelfde clan.</STR>
+<STR id="30081">Geen lid.</STR>
+<STR id="30082">Er is een lid die zich niet kan aanmelden voor een clanwar.</STR>
+
+<!-- 클라이언트 관련. -->
+<STR id="30103">Nog niet ondersteund.</STR>
+<STR id="30104">Gelieve niet vulgair of grove taal gebruiken.</STR>
+<STR id="30105">U kunt dezelfde inhoud niet drie keer op een rij schrijven of meer.</STR>
+<STR id="30106">Verboden om te chatten gedurende 1 minuut.</STR>
+
+
+<STR id="90000">Geen toegang tot de server.</STR>
+<STR id="90002">Losgekoppeld van de server.</STR>
+
+<!-- 메세지 관련. -->
+<STR id="100000">U heeft zich bij de clan aangesloten.</STR>
+<STR id="100001">De clan is gemaakt.</STR>
+
+
+<!-- 따라가기 관련. -->
+<STR id="110000">U kunt niet joinen.</STR>
+
+<!-- 투표관련. -->
+<STR id="120000">U kunt niet stemmen.</STR>	
+
+
+<!-- Disconnect message -->
+<STR id="130001">Een hack-poging werd gedetecteerd . De verbinding met de game server zal binnenkort worden beëindigd. </STR>
+<STR id="130002">Dit account is geblokkeerd als gevolg van een hack-poging . Account blok zal ongeveer blijven voor een uur.</STR>
+<STR id="130003">Verbinding wordt geweigerd wegens misdemeanant status van de gebruiker. De verbinding met de game server zal binnenkort worden beëindigd.</STR>
+<STR id="130004">Er is een ongeldig bestand is gedetecteerd.</STR>
+
+
+
+<!-- 서버 관련 -->
+<STR id="200000">U kunt niet stemmen.</STR>	
+<STR id="200001">U kunt niet doorgaan van de stemming voor de spel.</STR>	
+<STR id="200002">Stemmen is al begonnen.</STR>	
+<STR id="200003">De stem is mislukt.</STR>	
+<STR id="200004">10 resterende seconden.</STR>	
+<STR id="200005">30 resterende seconden.</STR>	
+<STR id="200006">60 resterende seconden.</STR>	
+<STR id="200007">Het personeel is veel te veel.</STR>	
+<STR id="200008"> '%s' is nog niet klaar.</STR>	
+
+</XML>

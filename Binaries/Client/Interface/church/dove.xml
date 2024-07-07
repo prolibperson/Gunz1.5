@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<xml>
+
+	<AddBaseModel name="dove" filename="dove.elu"> </AddBaseModel>
+
+	<AddAnimation name="fly2"    filename="dove.elu.ani"	motion_type="0" motion_loop_type="loop"	> </AddAnimation>
+	
+</xml>

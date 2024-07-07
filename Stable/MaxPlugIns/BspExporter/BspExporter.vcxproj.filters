@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{200c73e5-9d77-4e79-8d62-1a3b3cec8d43}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{72a68e6c-f768-48b5-b2e7-f07e3dc799b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rbsexp.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RLightList.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="RMaterialList.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="RToken.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="RTypes.cpp">
+      <Filter>Libraries</Filter>
+    </ClCompile>
+    <ClCompile Include="BELog.cpp" />
+    <ClCompile Include="DialogProc.cpp" />
+    <ClCompile Include="Export.cpp" />
+    <ClCompile Include="OpenDlg.cpp" />
+    <ClCompile Include="rbsexp.CPP" />
+    <ClCompile Include="ROcclusionList.cpp" />
+    <ClCompile Include="RSBspExporter.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="rbspimp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BELog.h" />
+    <ClInclude Include="DialogProc.h" />
+    <ClInclude Include="dmath.h" />
+    <ClInclude Include="OpenDlg.h" />
+    <ClInclude Include="rbsexp.H" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RSBspExporter.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="rbspimp.h" />
+  </ItemGroup>
+</Project>

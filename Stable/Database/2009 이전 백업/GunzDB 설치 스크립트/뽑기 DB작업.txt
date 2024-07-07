@@ -1,0 +1,281 @@
+CREATE PROC dbo.spGetDBConnection  
+AS  
+BEGIN
+ SET NOCOUNT ON
+ SELECT top 1 ServerID  
+ FROM ServerStatus(NOLOCK)  
+END
+
+---------------------------------------------------------------------------------
+
+USE GunzDB
+GO
+
+IF OBJECT_ID('GambleItem') IS NOT NULL
+ DROP TABLE GambleItem;
+GO
+
+CREATE TABLE GambleItem
+(
+ GIID int NOT NULL  PRIMARY KEY CLUSTERED CHECK(GIID > 1000000)
+  FOREIGN KEY REFERENCES Item(ItemID) 
+  ON DELETE NO ACTION ON UPDATE NO ACTION
+, Name varchar(128) NOT NULL
+, Description varchar(256) NOT NULL
+, Price int NOT NULL
+, RegDate datetime NOT NULL DEFAULT(GETDATE())
+, StartDate datetime NOT NULL DEFAULT(0)
+, LifeTimeHour smallint NOT NULL DEFAULT(0)
+, IsCash tinyint NOT NULL DEFAULT(0)
+, Opened tinyint NOT NULL DEFAULT(0)
+)
+GO
+
+CREATE NONCLUSTERED INDEX IDX_GambleItem_Name ON GambleItem(Name);
+GO
+
+
+---------------------------------------------------------------------------------
+
+USE GunzDB
+GO
+
+IF OBJECT_ID('GambleRewardItem') IS NOT NULL
+ DROP TABLE GambleRewardItem;
+GO
+
+CREATE TABLE GambleRewardItem
+(
+ GRIID int NOT NULL IDENTITY PRIMARY KEY CLUSTERED
+, GIID int NOT NULL CHECK(GIID > 1000000)
+  FOREIGN KEY REFERENCES GambleItem(GIID) 
+   ON UPDATE NO ACTION ON DELETE NO ACTION
+, ItemIDMale int NOT NULL FOREIGN KEY REFERENCES Item(ItemID) 
+   ON UPDATE NO ACTION ON DELETE NO ACTION
+, ItemIDFemale int NOT NULL FOREIGN KEY REFERENCES Item(ItemID) 
+   ON UPDATE NO ACTION ON DELETE NO ACTION
+, RentHourPeriod int NOT NULL DEFAULT(0)
+, RatePerThousand smallint NOT NULL
+);
+GO
+
+CREATE NONCLUSTERED INDEX IDX_GambleRewardItem_GIID ON GambleRewardItem(GIID);
+CREATE NONCLUSTERED INDEX IDX_GambleRewardItem_ItemIDMale ON GambleRewardItem(ItemIDMale);
+CREATE NONCLUSTERED INDEX IDX_GambleRewardItem_ItemIDFemale ON GambleRewardItem(ItemIDFemale);
+GO
+
+---------------------------------------------------------------------------------
+
+USE LogDB
+GO
+
+IF OBJECT_ID('GambleLog') IS NOT NULL
+ DROP TABLE GambleLog
+GO
+
+CREATE TABLE GambleLog
+(
+ id int not null identity PRIMARY KEY CLUSTERED
+, CID int not null 
+, GIID int not null
+, RewardItemID int not null
+, RegDate datetime not null
+)
+GO
+
+CREATE NONCLUSTERED INDEX IDX_GambleLog_CID ON GambleLog(CID);
+CREATE NONCLUSTERED INDEX IDX_GambleLog_GIID ON GambleLog(GIID);
+CREATE NONCLUSTERED INDEX IDX_GambleLog_RewardItemID ON GambleLog(RewardItemID);
+CREATE NONCLUSTERED INDEX IDX_GambleLog_RegDate ON GambleLog(RegDate);
+GO
+
+---------------------------------------------------------------------------------
+
+USE GunzDB
+GO
+
+IF OBJECT_ID('spGetGambleItemList' ) IS NOT NULL
+ DROP PROC spGetGambleItemList;
+GO
+
+CREATE PROC spGetGambleItemList
+AS
+BEGIN
+ SET NOCOUNT ON
+ 
+ SELECT GIID, Name, Description, Price
+ , DATEDIFF(mi, GETDATE(), StartDate) AS 'StartDiffMin'
+ , LifeTimeHour * 60 as 'LifeTimeMin', Opened, IsCash
+ FROM GambleItem(NOLOCK) 
+END
+
+---------------------------------------------------------------------------------
+
+USE GunzDB
+GO
+
+IF OBJECT_ID('spGetGambleRewardItem' ) IS NOT NULL
+ DROP PROC spGetGambleRewardItem
+GO
+
+CREATE PROC spGetGambleRewardItem
+AS
+BEGIN
+ SET NOCOUNT ON
+ SELECT GIID, ItemIDMale, ItemIDFemale, RentHourPeriod, RatePerThousand 
+ FROM GambleRewardItem(NOLOCK)
+END 
+
+
+----------------------------------------------------------------------
+
+USE GunzDB
+GO
+
+IF OBJECT_ID('spSelectCharItem2') IS NOT NULL
+ DROP PROC spSelectCharItem2
+GO
+
+CREATE  PROC [spSelectCharItem2]  
+ @CID  int  
+AS  
+BEGIN
+ SET NOCOUNT ON
+
+ SELECT CIID, ItemID, (RentHourPeriod*60) - (DateDiff(n, RentDate, GETDATE())) AS RentPeriodRemainder
+  , ISNULL(RentHourPeriod, 0) as 'RentHourPeriod'
+ FROM CharacterItem (nolock)  
+ WHERE CID=@CID ORDER BY CIID  
+END
+GO
+
+----------------------------------------------------------------------
+USE GunzDB
+GO
+
+IF OBJECT_ID('spChangeGambleItemToRewardItem') IS NOT NULL
+ DROP PROC spChangeGambleItemToRewardItem
+GO
+
+CREATE PROC spChangeGambleItemToRewardItem
+ @CID int
+, @CIID int
+, @GIID int
+, @RewardItemID int
+AS
+BEGIN
+ SET NOCOUNT ON
+
+ DECLARE @RentHourPeriod smallint
+
+ SELECT @RentHourPeriod = RentHourPeriod
+ FROM GambleRewardItem gri(NOLOCK)
+ WHERE GIID = @GIID AND (ItemIDMale = @RewardItemID OR ItemIDFemale = @RewardItemID)
+
+ IF @RentHourPeriod IS NULL BEGIN
+  SELECT -1 as 'Ret'
+  RETURN
+ END
+
+ BEGIN TRAN
+  UPDATE CharacterItem
+  SET ItemID = @RewardItemID, RentHourPeriod = @RentHourPeriod
+   , RentDate = GETDATE()
+  WHERE CID = @CID AND CIID = @CIID AND ItemID = @GIID
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN
+   ROLLBACK TRAN
+   SELECT -2 AS 'Ret'
+   RETURN
+  END
+
+  INSERT INTO LogDB..GambleLog(CID, GIID, RewardItemID, RegDate)
+  VALUES (@CID, @GIID, @RewardItemID, GETDATE())
+  IF (0 <> @@ERROR) OR (0 = @@ROWCOUNT) BEGIN
+   ROLLBACK TRAN;
+   SELECT -3 AS 'Ret'
+   RETURN
+  END
+
+ COMMIT TRAN
+
+ SELECT 1 AS 'Ret'
+END
+GO
+
+---------------------------------------------------------------------------------
+
+USE GunzDB
+GO
+
+IF OBJECT_ID('spBuyBountyItem2') IS NOT NULL
+ DROP PROC spBuyBountyItem2
+GO
+
+CREATE PROC [spBuyBountyItem2] 
+ @CID  INT
+,  @ItemID  INT
+, @Price  INT  
+, @RentHourPeriod INT 
+AS  
+SET NOCOUNT ON  
+BEGIN  
+ DECLARE @OrderCIID int  
+ DECLARE @Bounty INT  
+  
+ BEGIN TRAN  
+  -- 잔액검사  
+  SELECT @Bounty=BP FROM Character(NOLOCK) WHERE CID=@CID  
+  IF @Bounty IS NULL OR @Bounty < @Price  
+  BEGIN  
+   ROLLBACK TRAN  
+   RETURN 0  
+  END  
+  
+  -- Bounty 감소  
+  UPDATE Character SET BP=BP-@Price WHERE CID=@CID  
+  IF 0 = @@ROWCOUNT  
+  BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  -- Item 추가  
+  INSERT INTO CharacterItem (CID, ItemID, RegDate, RentDate, RentHourPeriod) 
+  Values (@CID, @ItemID, GETDATE(), GETDATE(), @RentHourPeriod)  
+  IF 0 <> @@ERROR  
+  BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  SELECT @OrderCIID = @@IDENTITY  
+    
+  -- Item 구매로그 추가  
+  INSERT INTO ItemPurchaseLogByBounty (ItemID, CID, Date, Bounty, CharBounty, Type)  
+  VALUES (@ItemID, @CID, GETDATE(), @Price, @Bounty, 'Buy')  
+  IF 0 <> @@ERROR BEGIN  
+   ROLLBACK TRAN  
+   RETURN (-1)  
+  END  
+  
+  SELECT @OrderCIID as ORDERCIID  
+ COMMIT TRAN  
+  
+ RETURN 1  
+END  
+
+
+---------------------------------------------------------------------------------
+
+
+
+/*
+insert into GambleItem(GIID, Name, Description, Price, RegDate, StartDate, LifeTimeHour, Opened)
+values (1000001, 'test gamble', 'test', 100, getdate(), 0, 0, 1)
+
+insert into gamblerewarditem(giid, itemid, renthourperiod, rateperthousand)
+values(1000001, 1, 24, 10)
+
+insert into gamblerewarditem(giid, itemid, renthourperiod, rateperthousand)
+values(1000001, 2, 12, 15)
+*/

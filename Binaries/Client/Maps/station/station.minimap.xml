@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_station.bmp</PICTURE>
+	<LEFTTOP>
+		<X>7860</X>
+		<Y>1960</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-7860</X>
+		<Y>-1960</Y>
+	</RIGHTBOTTOM>
+</XML>

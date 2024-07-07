@@ -1,0 +1,10 @@
+user
+server
+shsrhfxkd
+binary
+cd LogFile
+cd KOREA
+lcd C:\GunzServer\MatchServer\Log
+put 1_MatchLog_2024-07-01-4.txt.dmp
+put 1_MatchLog_2024-07-01-4.txt
+bye

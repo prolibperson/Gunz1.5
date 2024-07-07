@@ -1,0 +1,13 @@
+﻿<Window x:Class="ZUpdater.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZUpdater"
+        mc:Ignorable="d"
+        Title="ZUpdater" Height="78" Width="153" WindowStyle="ToolWindow" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBox x:Name="PatcherTextBox" HorizontalAlignment="Left" Height="48" TextWrapping="Wrap" Text="Please wait, patching Launcher..." VerticalAlignment="Top" Width="145"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,36 @@
+SELECT @SKey =
+	dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND())
+	+ dbo.GetChar(RAND());
+
+
+
+CREATE FUNCTION dbo.GetChar
+(
+	@Index float
+)
+RETURNS CHAR
+WITH EXECUTE AS CALLER
+AS
+BEGIN
+	DECLARE @CharIndex INT;
+	SELECT @CharIndex = 65 + (CAST((@Index * 100) AS INT) % 26);
+	RETURN CHAR(@CharIndex);
+END

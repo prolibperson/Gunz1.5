@@ -1,0 +1,47 @@
+Starting BSP Export...
+object sky_star : sky_star: 17 ver / 16 face 
+object pass_robot : pass_robot: 2043 ver / 1449 face 
+object pass_hang : pass_hang: 460 ver / 326 face 
+object pass_pipe : pass_pipe: 222 ver / 76 face 
+object pass_wall : pass_wall: 433 ver / 270 face 
+object pass_floor01 : pass_floor01: 25 ver / 24 face 
+object pass_stair : pass_stair: 72 ver / 18 face 
+object pass_floor02 : pass_floor02: 204 ver / 192 face 
+object pass_door : pass_door: 504 ver / 324 face 
+object pass_06 : pass_06: 1276 ver / 859 face 
+object pass_start : pass_start: 39 ver / 36 face 
+object Object02 : Object02: 0 ver / 0 face 
+object pass_floor05 : pass_floor05: 48 ver / 24 face 
+object pass_floor04 : pass_floor04: 70 ver / 45 face 
+object pass_floor03 : pass_floor03: 56 ver / 27 face 
+object hnav_01 : hnav_01: 120 ver / 86 face 
+NaviMesh: 120 ver / 130 face 
+object pass_pillar02 : pass_pillar02: 482 ver / 298 face 
+object pass_pillar : pass_pillar: 1542 ver / 978 face 
+object hide_box : hide_box: 1244 ver / 1511 face 
+RSBsp Info : 6027 faces
+Scene Dimension ( 8294.0 8294.0 8825.7 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 2 objects
+construct object subtree sky_star ( 16 source polygon ) : total 0 faces splitted 1 leaf nodes 17 nodes 24 polygons
+construct object subtree hide_box ( 1999 source polygon ) : total 3133 faces splitted 1693 leaf nodes 5323 nodes 7740 polygons
+0 faces eliminated. (solid)
+1999 source polygons remain
+optimized 1967 polygons remain
+Generating Convex polygons...
+Optimize Polygon 6027 -> 5891 
+Constructing Collision BspTree. ( 1967 source polygons )
+Collision Bsp Info : total 16452 faces splitted 1679 leaf nodes 22524 nodes 27677 polygons
+Constructing OcTree. ( 5891 source polygons )
+Octree Info : total 2345 faces splitted 75 leaf nodes 149 nodes 8236 polygons
+Constructing BspTree. ( 5891 source polygons )
+RSBsp Info : total 20463 faces splitted 11807 leaf nodes 23613 nodes 26354 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+C:\Users\gabrino.MAIETDEV\Desktop\새 폴더 (3)\Client_\ChallengeQuest\Maps\R_Normal\R_Normal.RS file saved
+C:\Users\gabrino.MAIETDEV\Desktop\새 폴더 (3)\Client_\ChallengeQuest\Maps\R_Normal\R_Normal.RS.bsp file saved
+C:\Users\gabrino.MAIETDEV\Desktop\새 폴더 (3)\Client_\ChallengeQuest\Maps\R_Normal\R_Normal.RS.col file saved
+Exporting takes 0 minutes and     46 seconds.
+Done.

@@ -1,0 +1,1 @@
+zitem.xml 과 string.xml 을 읽어서 아이템 전체목록을 csv로 뽑는다.

@@ -1,0 +1,25 @@
+<STR id="ZITEM_NAME_21011">남성용 클랜 마스터 코트</STR>
+<STR id="ZITEM_DESC_21011">클랜명 변경권 아이템 구입시 지급되는 코트(남성용) 클랜의 마스터만 사용이 가능합니다.</STR>
+
+	<ITEM id="21011" name="STR:ZITEM_NAME_21011" mesh_name="eq_chest_clanmaster" totalpoint="0" type="equip"
+		res_sex="m" res_level="15" slot="chest" weight="16" bt_price="0" hp="6" ap="23" maxwt="0"
+		sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" rent_period="15" desc="STR:ZITEM_DESC_21011" />
+
+INSERT INTO Item (ItemID, Name) Values (21011, '남성용 클랜 마스터 코트')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=1, ResLevel=15, Slot=5, Weight=16, HP=6, AP=23, MAXWT=0, 
+Description='클랜명 변경권 아이템 구입시 지급되는 코트(남성용) 클랜의 마스터만 사용이 가능합니다.' 
+WHERE ItemID = 21011
+
+<STR id="ZITEM_NAME_21511">여성용 클랜 마스터 코트</STR>
+<STR id="ZITEM_DESC_21511">클랜명 변경권 아이템 구입시 지급되는 코트(여성용) 클랜의 마스터만 사용이 가능합니다.</STR>
+
+	<ITEM id="21511" name="STR:ZITEM_NAME_21511" mesh_name="eq_chest_clanmaster" totalpoint="0" type="equip"
+		res_sex="f" res_level="15" slot="chest" weight="16" bt_price="0" hp="6" ap="23" maxwt="0"
+		sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF" rent_period="15" desc="STR:ZITEM_DESC_21511" />
+
+INSERT INTO Item (ItemID, Name) Values (21511, '여성용 클랜 마스터 코트')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=0, 
+ResSex=2, ResLevel=15, Slot=5, Weight=16, HP=6, AP=23, MAXWT=0, 
+Description='클랜명 변경권 아이템 구입시 지급되는 코트(여성용) 클랜의 마스터만 사용이 가능합니다.' 
+WHERE ItemID = 21511

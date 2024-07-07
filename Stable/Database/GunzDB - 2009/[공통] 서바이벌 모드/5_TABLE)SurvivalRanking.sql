@@ -1,0 +1,15 @@
+USE GunzDB
+GO
+
+CREATE TABLE dbo.SurvivalRanking
+(
+	SID			INT NOT NULL,
+	RP			INT NOT NULL,
+	Ranking		INT NULL,
+ 
+	CONSTRAINT PK_SurvivalRanking_SID_RP PRIMARY KEY CLUSTERED 
+	(
+		SID ASC,
+		RP DESC
+	)
+)

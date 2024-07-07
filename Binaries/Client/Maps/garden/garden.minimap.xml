@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_garden.bmp</PICTURE>
+	<LEFTTOP>
+		<X>3630</X>
+		<Y>3380</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-3630</X>
+		<Y>-3890</Y>
+	</RIGHTBOTTOM>
+<!--	<LEFTTOP>
+		<X>3630</X>
+		<Y>3380</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-3630</X>
+		<Y>-3890</Y>
+	</RIGHTBOTTOM> -->
+</XML>

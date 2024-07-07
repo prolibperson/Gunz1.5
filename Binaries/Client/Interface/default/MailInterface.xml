@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML ID="main">
+	<Schema xmlns="MaietData" xmlns:dt="MaietDataTypes" />
+	
+	<FRAME item="MailFrame">
+			<FRAMELOOK>DefaultFrameLook</FRAMELOOK>
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>500</W>
+			<H>295</H>
+		</BOUNDS>
+		<ALIGN>
+			<HALIGN>center</HALIGN>
+			<VALIGN>center</VALIGN>
+		</ALIGN>
+		<RESIZABLE>false</RESIZABLE>
+		<VISIBLE>false</VISIBLE>
+		<TEXT>Mail</TEXT>
+	</FRAME>
+
+	<LISTBOX item="MailListBox" parent="MailFrame">
+		<BOUNDS>
+			<X>16</X>
+			<Y>56</Y>
+			<W>466</W>
+			<H>150</H>
+		</BOUNDS>
+		<ITEMHEIGHT>16</ITEMHEIGHT>
+	</LISTBOX>
+	
+	<BUTTON item="MailOpen" parent="MailFrame">
+		<BUTTONLOOK>DefaultButtonLook</BUTTONLOOK>
+		<ANCHORS>
+			<LEFT>true</LEFT>
+			<TOP>true</TOP>
+			<RIGHT>true</RIGHT>
+			<BOTTOM>true</BOTTOM>
+		</ANCHORS>
+		<BOUNDS>
+			<X>228</X>
+			<Y>250</Y>
+			<W>133</W>
+			<H>32</H>
+		</BOUNDS>
+		<TEXT>Open</TEXT>
+	</BUTTON>
+
+	<BUTTON item="MailClose" parent="MailFrame">
+		<BUTTONLOOK>DefaultButtonLook</BUTTONLOOK>
+		<ANCHORS>
+			<LEFT>true</LEFT>
+			<TOP>true</TOP>
+			<RIGHT>true</RIGHT>
+			<BOTTOM>true</BOTTOM>
+		</ANCHORS>
+		<BOUNDS>
+			<X>352</X>
+			<Y>250</Y>
+			<W>133</W>
+			<H>32</H>
+		</BOUNDS>
+		<DEFAULTKEY>ESC</DEFAULTKEY>
+		<TEXT>Close</TEXT>
+	</BUTTON>
+	
+	<!-- Open Mail Frame-->
+	<FRAME item="ReadMail" parent="MailFrame">
+		<FRAMELOOK>DefaultFrameLook</FRAMELOOK>
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>400</W>
+			<H>200</H>
+		</BOUNDS>
+		<ALIGN>
+			<HALIGN>center</HALIGN>
+			<VALIGN>center</VALIGN>
+		</ALIGN>
+		<RESIZABLE>false</RESIZABLE>
+		<VISIBLE>false</VISIBLE>
+	    <DEFAULTKEY>ESC</DEFAULTKEY>
+	</FRAME>
+	
+	
+
+	<EDIT item = "MailSender" parent = "ReadMail">
+		<EDITLOOK>NullEditLook</EDITLOOK>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>10</X>
+			<Y>30</Y>
+			<W>380</W>
+			<H>20</H>
+		</BOUNDS>
+		<MOVABLE>false</MOVABLE>
+		<ENABLE>false</ENABLE>
+		<MAXLENGTH>50</MAXLENGTH>
+		<FOCUSABLE>false</FOCUSABLE>
+	</EDIT>
+	
+	<!-- Lazy Border-->
+	
+	<EDIT item="MailBorder" parent="ReadMail">
+		<EDITLOOK>NullEditLook</EDITLOOK>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>10</X>
+			<Y>60</Y>
+			<W>380</W>
+			<H>120</H>
+		</BOUNDS>
+		<MOVABLE>false</MOVABLE>
+		<ENABLE>false</ENABLE>
+		<FOCUSABLE>false</FOCUSABLE>
+		<TEXT></TEXT>
+	</EDIT>
+	
+	<TEXTAREA item = "MailMessage" parent = "ReadMail">
+		<FONT>FONTa9</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>15</X>
+			<Y>65</Y>
+			<W>350</W>
+			<H>115</H>
+		</BOUNDS>
+		<TEXTALIGN>
+			<HALIGN>left</HALIGN>
+		</TEXTALIGN>
+		<MOVABLE>false</MOVABLE>
+		<EDITABLE>false</EDITABLE>
+		<MAXLENGTH>1024</MAXLENGTH>
+	</TEXTAREA>
+	
+	<BUTTON item="ReadMailClose" parent="ReadMail">
+		<BUTTONLOOK>DefaultButtonLook</BUTTONLOOK>
+		<ANCHORS>
+			<LEFT>true</LEFT>
+			<TOP>true</TOP>
+			<RIGHT>true</RIGHT>
+			<BOTTOM>true</BOTTOM>
+		</ANCHORS>
+		<BOUNDS>
+			<X>300</X>
+			<Y>180</Y>
+			<W>100</W>
+			<H>16</H>
+		</BOUNDS>
+		<DEFAULTKEY>ESC</DEFAULTKEY>
+		<TEXT>Close</TEXT>
+	</BUTTON>	
+	<!--TODO: Mail Box send window-->
+</XML>

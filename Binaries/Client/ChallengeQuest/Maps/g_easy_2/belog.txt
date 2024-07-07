@@ -1,0 +1,74 @@
+Starting BSP Export...
+object hide_1 : hide_1: 240 ver / 242 face 
+object hnav_0 : hnav_0: 140 ver / 77 face 
+NaviMesh: 140 ver / 146 face 
+object pass_pillar : pass_pillar: 688 ver / 320 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_wall : pass_wall: 148 ver / 96 face 
+object pass_window : pass_window: 344 ver / 266 face 
+object pass_stuff001 : pass_stuff001: 8 ver / 6 face 
+object pass_stuff002 : pass_stuff002: 8 ver / 6 face 
+object pass_stuff003 : pass_stuff003: 8 ver / 6 face 
+object pass_stuff : pass_stuff: 8 ver / 6 face 
+object pass_stuff004 : pass_stuff004: 8 ver / 6 face 
+object pass_stuff005 : pass_stuff005: 8 ver / 6 face 
+object pass_stuff006 : pass_stuff006: 8 ver / 6 face 
+object pass_stuff007 : pass_stuff007: 8 ver / 6 face 
+object pass_stuff008 : pass_stuff008: 8 ver / 6 face 
+object pass_stuff009 : pass_stuff009: 8 ver / 6 face 
+object pass_stuff010 : pass_stuff010: 8 ver / 6 face 
+object pass_stuff011 : pass_stuff011: 8 ver / 6 face 
+object pass_stuff012 : pass_stuff012: 8 ver / 6 face 
+object pass_stuff013 : pass_stuff013: 8 ver / 6 face 
+object pass_stuff014 : pass_stuff014: 8 ver / 6 face 
+object pass_stuff015 : pass_stuff015: 8 ver / 6 face 
+object pass_stuff016 : pass_stuff016: 8 ver / 6 face 
+object pass_stuff017 : pass_stuff017: 8 ver / 6 face 
+object pass_stuff018 : pass_stuff018: 8 ver / 6 face 
+object pass_stuff019 : pass_stuff019: 8 ver / 6 face 
+object pass_stuff020 : pass_stuff020: 8 ver / 6 face 
+object pass_stuff021 : pass_stuff021: 8 ver / 6 face 
+object pass_stuff022 : pass_stuff022: 8 ver / 6 face 
+object pass_stuff023 : pass_stuff023: 8 ver / 6 face 
+object pass_stuff024 : pass_stuff024: 8 ver / 6 face 
+object pass_stuff025 : pass_stuff025: 8 ver / 6 face 
+object pass_stuff026 : pass_stuff026: 8 ver / 6 face 
+object pass_stuff027 : pass_stuff027: 8 ver / 6 face 
+object pass_stuff028 : pass_stuff028: 8 ver / 6 face 
+object pass_stuff029 : pass_stuff029: 8 ver / 6 face 
+object pass_stuff030 : pass_stuff030: 8 ver / 6 face 
+object pass_stuff031 : pass_stuff031: 8 ver / 6 face 
+object Object02 : Object02: 0 ver / 0 face 
+object pass_pillar : pass_pillar: 0 ver / 0 face 
+object pass_wall : pass_wall: 8 ver / 4 face 
+object pass_pillar2 : pass_pillar2: 56 ver / 34 face 
+object pass_pillar : pass_pillar: 0 ver / 0 face 
+object Object02 : Object02: 0 ver / 0 face 
+object pass_placard : pass_placard: 80 ver / 60 face 
+object pass_stuff : pass_stuff: 16 ver / 9 face 
+RSBsp Info : 983 faces
+Scene Dimension ( 3016.6 3015.8 2451.4 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 1 objects
+construct object subtree hide_1 ( 242 source polygon ) : total 55 faces splitted 23 leaf nodes 97 nodes 580 polygons
+0 faces eliminated. (solid)
+242 source polygons remain
+optimized 162 polygons remain
+Generating Convex polygons...
+Optimize Polygon 983 -> 997 
+Constructing Collision BspTree. ( 162 source polygons )
+Collision Bsp Info : total 246 faces splitted 32 leaf nodes 222 nodes 743 polygons
+Constructing OcTree. ( 997 source polygons )
+Octree Info : total 557 faces splitted 10 leaf nodes 19 nodes 1554 polygons
+Constructing BspTree. ( 997 source polygons )
+RSBsp Info : total 4789 faces splitted 2189 leaf nodes 4377 nodes 5786 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_쉬움\6\G_Easy_2.RS file saved
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_쉬움\6\G_Easy_2.RS.bsp file saved
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_쉬움\6\G_Easy_2.RS.col file saved
+Exporting takes 0 minutes and      7 seconds.
+Done.

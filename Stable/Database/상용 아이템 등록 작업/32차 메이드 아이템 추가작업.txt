@@ -1,0 +1,110 @@
+<STR id="ZITEM_NAME_520031">남성 PA 모자</STR>
+<STR id="ZITEM_DESC_520031">제국 귀족들의 남성 개인비서들이 착용하는 모자</STR>
+
+<STR id="ZITEM_NAME_520531">여성 PA 헤드드레스</STR>
+<STR id="ZITEM_DESC_520531">제국 귀족들의 여성 개인비서들이 애용하는 모자</STR>
+
+INSERT INTO Item (ItemID, Name) Values (520031, '남성 PA 모자')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=4, Weight=3, HP=3, AP=4, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 착용하는 모자' 
+WHERE ItemID = 520031
+
+INSERT INTO Item (ItemID, Name) Values (520531, '여성 PA 헤드드레스')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=4, Weight=3, HP=3, AP=4, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 애용하는 모자' 
+WHERE ItemID = 520531
+
+-------------------------------------------------------
+
+<STR id="ZITEM_NAME_522020">남성 PA 가죽장갑</STR>
+<STR id="ZITEM_DESC_522020">제국 귀족들의 남성 개인비서들이 애용하는 장갑</STR>
+
+<STR id="ZITEM_NAME_522520">여성 PA 면장갑</STR>
+<STR id="ZITEM_DESC_522520">제국 귀족들의 여성 개인비서들이 애용하는 장갑</STR>
+
+INSERT INTO Item (ItemID, Name) Values (522020, '남성 PA 가죽장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=6, Weight=3, HP=1, AP=13, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 애용하는 장갑' 
+WHERE ItemID = 522020
+
+INSERT INTO Item (ItemID, Name) Values (522520, '여성 PA 면장갑')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=6, Weight=3, HP=1, AP=13, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 애용하는 장갑' 
+WHERE ItemID = 522520
+
+-------------------------------------------------------
+
+<STR id="ZITEM_NAME_524023">남성 PA 구두</STR>
+<STR id="ZITEM_DESC_524023">제국 귀족들의 남성 개인비서들이 신고 있는 구두</STR>
+
+<STR id="ZITEM_NAME_524523">여성 PA 구두</STR>
+<STR id="ZITEM_DESC_524523">제국 귀족들의 여성 개인비서들이 신고 있는 구두</STR>
+
+INSERT INTO Item (ItemID, Name) Values (524023, '남성 PA 구두')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=8, Weight=3, HP=1, AP=17, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 신고 있는 구두' 
+WHERE ItemID = 524023
+
+INSERT INTO Item (ItemID, Name) Values (524523, '여성 PA 구두')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=8, Weight=3, HP=1, AP=17, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 신고 있는 구두' 
+WHERE ItemID = 524523
+
+-------------------------------------------------------
+
+<STR id="ZITEM_NAME_521025">남성 PA 자켓</STR>
+<STR id="ZITEM_DESC_521025">제국 귀족들의 남성 개인비서들이 애용하고 있는 자켓</STR>
+
+<STR id="ZITEM_NAME_521525">여성 PA 드레스(상의)</STR>
+<STR id="ZITEM_DESC_521525">제국 귀족들의 여성 개인비서들이 입고 있는 상의 (주의: 이 아이템은 PA 하의와 함께 입지 않으면 그래픽이 깨져보일 수 있습니다.)</STR>
+
+INSERT INTO Item (ItemID, Name) Values (521025, '남성 PA 자켓')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=5, Weight=13, HP=2, AP=24, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 애용하고 있는 자켓' 
+WHERE ItemID = 521025
+
+INSERT INTO Item (ItemID, Name) Values (521525, '여성 PA 드레스(상의)')	
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=5, Weight=13, HP=2, AP=24, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 입고 있는 상의 (주의: 이 아이템은 PA 하의와 함께 입지 않으면 그래픽이 깨져보일 수 있습니다.)' 
+WHERE ItemID = 521525
+
+-------------------------------------------------------
+
+<STR id="ZITEM_NAME_523023">남성 PA 바지</STR>
+<STR id="ZITEM_DESC_523023">제국 귀족들의 남성 개인비서들이 입고 있는 바지</STR>
+
+<STR id="ZITEM_NAME_523523">여성 PA 드레스(하의)</STR>
+<STR id="ZITEM_DESC_523523">제국 귀족들의 여성 개인비서들이 입고 있는 하의 (주의: 이 아이템은 PA 상의와 함께 입지 않으면 그래픽이 깨져보일 수 있습니다.)</STR>
+
+INSERT INTO Item (ItemID, Name) Values (523023, '남성 PA 바지')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=1, ResLevel=15, Slot=7, Weight=13, HP=3, AP=23, MAXWT=0, 
+Description='제국 귀족들의 남성 개인비서들이 입고 있는 바지' 
+WHERE ItemID = 523023
+
+INSERT INTO Item (ItemID, Name) Values (523523, '여성 PA 드레스(하의)')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=0, Delay=0, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=2, ResLevel=15, Slot=7, Weight=13, HP=3, AP=22, MAXWT=0, 
+Description='제국 귀족들의 여성 개인비서들이 입고 있는 하의 (주의: 이 아이템은 PA 상의와 함께 입지 않으면 그래픽이 깨져보일 수 있습니다.)' 
+WHERE ItemID = 523523
+
+-----------------------------------------------------------
+
+update item set name = '男性用 PA シルクハット', description = '帝?貴族に仕える執事達が愛用しているシルクハット。' where itemid = 520031
+update item set name = '女性用 PA カチュ?シャ', description = '帝?貴族に仕えるメイド達が愛用しているカチュ?シャ。' where itemid = 520531
+update item set name = '男性用 PA 皮手袋', description = '帝?貴族に仕える執事達が愛用している皮手袋。' where itemid = 521025
+update item set name = '女性用 PA メイド服 (上着)', description = '帝?貴族に仕えるメイド達が愛用しているメイド服。　(注意:「PA メイド服 (スカ?ト)」と一?に着なければグラフィックが割れたように見えます。)' where itemid = 521525
+update item set name = '男性用 PA 皮手袋', description = '帝?貴族に仕える執事達が愛用している皮手袋。' where itemid = 522020
+update item set name = '女性用 PA カフス', description = '帝?貴族に仕えるメイド達が愛用しているカフス。' where itemid = 522520
+update item set name = '男性用 PA ズボン', description = '帝?貴族に仕える執事達が愛用しているズボン。' where itemid = 523023
+update item set name = '女性用 PA メイド服 (スカ?ト)', description = '帝?貴族に仕えるメイド達が愛用しているメイド服。　(注意:「PA メイド服 (上着)」と一?に着なければグラフィックが割れたように見えます。)' where itemid = 523523
+update item set name = '男性用 PA 皮靴', description = '帝?貴族に仕える執事達が愛用している皮靴。' where itemid = 524023
+update item set name = '女性用 PA ネックリボンブ?ツ', description = '帝?貴族に仕えるメイド達が愛用しているブ?ツ。' where itemid = 524523

@@ -1,0 +1,73 @@
+Starting BSP Export...
+object pass_pillar : pass_pillar: 688 ver / 320 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_wall : pass_wall: 148 ver / 96 face 
+object pass_window : pass_window: 344 ver / 266 face 
+object pass_pillarb001 : pass_pillarb001: 56 ver / 34 face 
+object pass_placard001 : pass_placard001: 80 ver / 60 face 
+object pass_wall002 : pass_wall002: 0 ver / 0 face 
+object pass_stuff001 : pass_stuff001: 16 ver / 9 face 
+object pass_wall003 : pass_wall003: 8 ver / 4 face 
+object pass_pillarb002 : pass_pillarb002: 56 ver / 34 face 
+object pass_placard002 : pass_placard002: 80 ver / 60 face 
+object pass_wall004 : pass_wall004: 0 ver / 0 face 
+object pass_stuff002 : pass_stuff002: 16 ver / 9 face 
+object pass_wall005 : pass_wall005: 8 ver / 4 face 
+object pass_pillarb003 : pass_pillarb003: 56 ver / 34 face 
+object pass_placard003 : pass_placard003: 80 ver / 60 face 
+object pass_wall006 : pass_wall006: 0 ver / 0 face 
+object pass_stuff003 : pass_stuff003: 16 ver / 9 face 
+object pass_wall007 : pass_wall007: 8 ver / 4 face 
+object pass_placard : pass_placard: 80 ver / 60 face 
+object pass_wall01 : pass_wall01: 0 ver / 0 face 
+object pass_stuff : pass_stuff: 16 ver / 9 face 
+object pass_pillarb : pass_pillarb: 56 ver / 34 face 
+object pass_wall : pass_wall: 8 ver / 4 face 
+object hide_box001 : hide_box001: 142 ver / 148 face 
+object hnav_01 : hnav_01: 86 ver / 45 face 
+NaviMesh: 86 ver / 84 face 
+object Object002 : Object002: 88 ver / 44 face 
+object Object001 : Object001: 924 ver / 627 face 
+object pass_object027 : pass_object027: 276 ver / 183 face 
+object pass_object028 : pass_object028: 184 ver / 122 face 
+object pass_object029 : pass_object029: 184 ver / 122 face 
+object pass_object030 : pass_object030: 184 ver / 122 face 
+object pass_object026 : pass_object026: 184 ver / 122 face 
+object pass_object025 : pass_object025: 184 ver / 122 face 
+object pass_object024 : pass_object024: 184 ver / 122 face 
+object pass_object022 : pass_object022: 184 ver / 122 face 
+object pass_object023 : pass_object023: 184 ver / 122 face 
+object pass_object021 : pass_object021: 276 ver / 183 face 
+object pass_object037 : pass_object037: 276 ver / 183 face 
+object pass_object038 : pass_object038: 184 ver / 122 face 
+object pass_object039 : pass_object039: 184 ver / 122 face 
+object pass_object040 : pass_object040: 184 ver / 122 face 
+object pass_object036 : pass_object036: 184 ver / 122 face 
+RSBsp Info : 5052 faces
+Scene Dimension ( 3016.6 3015.8 2455.0 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 3 objects
+construct object subtree hide_box001 ( 160 source polygon ) : total 142 faces splitted 42 leaf nodes 209 nodes 500 polygons
+construct object subtree Object002 ( 88 source polygon ) : total 0 faces splitted 33 leaf nodes 76 nodes 88 polygons
+construct object subtree Object001 ( 891 source polygon ) : total 1257 faces splitted 988 leaf nodes 2418 nodes 3339 polygons
+0 faces eliminated. (solid)
+561 source polygons remain
+optimized 366 polygons remain
+Generating Convex polygons...
+Optimize Polygon 5052 -> 4903 
+Constructing Collision BspTree. ( 366 source polygons )
+Collision Bsp Info : total 1131 faces splitted 116 leaf nodes 1437 nodes 2553 polygons
+Constructing OcTree. ( 4903 source polygons )
+Octree Info : total 1409 faces splitted 32 leaf nodes 63 nodes 6312 polygons
+Constructing BspTree. ( 4903 source polygons )
+RSBsp Info : total 15765 faces splitted 8458 leaf nodes 16915 nodes 20668 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+C:\Users\gabrino.MAIETDEV\Documents\받은 파일\게릴라_하드코어\4\4\익스포트\4.RS file saved
+C:\Users\gabrino.MAIETDEV\Documents\받은 파일\게릴라_하드코어\4\4\익스포트\4.RS.bsp file saved
+C:\Users\gabrino.MAIETDEV\Documents\받은 파일\게릴라_하드코어\4\4\익스포트\4.RS.col file saved
+Exporting takes 0 minutes and     12 seconds.
+Done.

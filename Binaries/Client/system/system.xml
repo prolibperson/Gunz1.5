@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" ?>
+<XML>
+	<XMLHEADER>version="1.0"</XMLHEADER>
+
+	<SKIN>Default</SKIN>
+
+	<DEFFONT>Arial</DEFFONT>
+
+	<IME>false</IME>
+
+	<BAREPORT>
+		<ADDR></ADDR>
+		<DIR></DIR>
+	</BAREPORT>
+
+	<EMBLEM_URL>https</EMBLEM_URL>
+	<TEMBLEM_URL></TEMBLEM_URL>
+
+	<CASHSHOP_URL></CASHSHOP_URL>
+
+	<HOMEPAGE>
+	    <URL>https://duelists.online</URL>
+	    <TITLE>Duelists</TITLE>
+	</HOMEPAGE>
+
+	<LOCATORLIST>
+		<LOCATOR id="1" IP="fuckyoubitch.smd" />
+	</LOCATORLIST>
+
+	<TLOCATORLIST>
+	<LOCATOR id="1" IP="fuckyoubitch.smd"/>
+	</TLOCATORLIST>
+</XML>

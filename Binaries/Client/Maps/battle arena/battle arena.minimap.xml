@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_arena.bmp</PICTURE>
+	<LEFTTOP>
+		<X>5320</X>
+		<Y>5320</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-5320</X>
+		<Y>-5320</Y>
+	</RIGHTBOTTOM>
+</XML>

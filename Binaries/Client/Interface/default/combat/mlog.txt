@@ -1,0 +1,3 @@
+WFog Enabled Device.
+device created.
+Video memory 2047.500000 

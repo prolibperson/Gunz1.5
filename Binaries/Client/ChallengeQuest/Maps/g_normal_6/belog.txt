@@ -1,0 +1,86 @@
+Starting BSP Export...
+object hide_0 : hide_0: 272 ver / 278 face 
+object hnav_0 : hnav_0: 192 ver / 117 face 
+NaviMesh: 192 ver / 234 face 
+object pass_pillar : pass_pillar: 688 ver / 320 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_wall : pass_wall: 148 ver / 96 face 
+object pass_window : pass_window: 344 ver / 266 face 
+object pass_placard : pass_placard: 80 ver / 60 face 
+object pass_wall01 : pass_wall01: 0 ver / 0 face 
+object pass_stuff : pass_stuff: 16 ver / 9 face 
+object pass_pillarb : pass_pillarb: 56 ver / 34 face 
+object pass_wall : pass_wall: 8 ver / 4 face 
+object pass_stuff : pass_stuff: 8 ver / 6 face 
+object pass_stuff001 : pass_stuff001: 8 ver / 6 face 
+object pass_stuff002 : pass_stuff002: 8 ver / 6 face 
+object pass_stuff003 : pass_stuff003: 8 ver / 6 face 
+object pass_stuff004 : pass_stuff004: 8 ver / 6 face 
+object pass_stuff005 : pass_stuff005: 8 ver / 6 face 
+object pass_stuff006 : pass_stuff006: 8 ver / 6 face 
+object pass_stuff007 : pass_stuff007: 8 ver / 6 face 
+object pass_pillarb001 : pass_pillarb001: 56 ver / 34 face 
+object pass_placard001 : pass_placard001: 80 ver / 60 face 
+object pass_wall002 : pass_wall002: 0 ver / 0 face 
+object pass_stuff008 : pass_stuff008: 16 ver / 9 face 
+object pass_wall003 : pass_wall003: 8 ver / 4 face 
+object pass_stuff009 : pass_stuff009: 8 ver / 6 face 
+object pass_stuff010 : pass_stuff010: 8 ver / 6 face 
+object pass_stuff011 : pass_stuff011: 8 ver / 6 face 
+object pass_stuff012 : pass_stuff012: 8 ver / 6 face 
+object pass_stuff013 : pass_stuff013: 8 ver / 6 face 
+object pass_stuff014 : pass_stuff014: 8 ver / 6 face 
+object pass_stuff015 : pass_stuff015: 8 ver / 6 face 
+object pass_stuff016 : pass_stuff016: 8 ver / 6 face 
+object pass_pillarb002 : pass_pillarb002: 56 ver / 34 face 
+object pass_placard002 : pass_placard002: 80 ver / 60 face 
+object pass_wall004 : pass_wall004: 0 ver / 0 face 
+object pass_stuff017 : pass_stuff017: 16 ver / 9 face 
+object pass_wall005 : pass_wall005: 8 ver / 4 face 
+object pass_stuff018 : pass_stuff018: 8 ver / 6 face 
+object pass_stuff019 : pass_stuff019: 8 ver / 6 face 
+object pass_stuff020 : pass_stuff020: 8 ver / 6 face 
+object pass_stuff021 : pass_stuff021: 8 ver / 6 face 
+object pass_stuff022 : pass_stuff022: 8 ver / 6 face 
+object pass_stuff023 : pass_stuff023: 8 ver / 6 face 
+object pass_stuff024 : pass_stuff024: 8 ver / 6 face 
+object pass_stuff025 : pass_stuff025: 8 ver / 6 face 
+object pass_pillarb003 : pass_pillarb003: 56 ver / 34 face 
+object pass_placard003 : pass_placard003: 80 ver / 60 face 
+object pass_wall006 : pass_wall006: 0 ver / 0 face 
+object pass_stuff026 : pass_stuff026: 16 ver / 9 face 
+object pass_wall007 : pass_wall007: 8 ver / 4 face 
+object pass_stuff027 : pass_stuff027: 8 ver / 6 face 
+object pass_stuff028 : pass_stuff028: 8 ver / 6 face 
+object pass_stuff029 : pass_stuff029: 8 ver / 6 face 
+object pass_stuff030 : pass_stuff030: 8 ver / 6 face 
+object pass_stuff031 : pass_stuff031: 8 ver / 6 face 
+object pass_stuff032 : pass_stuff032: 8 ver / 6 face 
+object pass_stuff033 : pass_stuff033: 8 ver / 6 face 
+object pass_stuff034 : pass_stuff034: 8 ver / 6 face 
+RSBsp Info : 1328 faces
+Scene Dimension ( 3016.6 3015.8 2451.4 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 1 objects
+construct object subtree hide_0 ( 314 source polygon ) : total 186 faces splitted 112 leaf nodes 409 nodes 857 polygons
+0 faces eliminated. (solid)
+314 source polygons remain
+optimized 224 polygons remain
+Generating Convex polygons...
+Optimize Polygon 1328 -> 1342 
+Constructing Collision BspTree. ( 224 source polygons )
+Collision Bsp Info : total 920 faces splitted 115 leaf nodes 1070 nodes 1796 polygons
+Constructing OcTree. ( 1342 source polygons )
+Octree Info : total 462 faces splitted 16 leaf nodes 31 nodes 1804 polygons
+Constructing BspTree. ( 1342 source polygons )
+RSBsp Info : total 5339 faces splitted 2739 leaf nodes 5477 nodes 6681 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_보통\11\G_Normal_6.RS file saved
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_보통\11\G_Normal_6.RS.bsp file saved
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_보통\11\G_Normal_6.RS.col file saved
+Exporting takes 0 minutes and     11 seconds.
+Done.

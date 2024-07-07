@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML ID="Achievement">
+	<FRAME item="AchievementUI">
+		<FRAMELOOK>DefaultFrameLook</FRAMELOOK>
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>500</W>
+			<H>295</H>
+		</BOUNDS>
+		<ALIGN>
+			<HALIGN>center</HALIGN>
+			<VALIGN>center</VALIGN>
+		</ALIGN>
+		<RESIZABLE>false</RESIZABLE>
+		<VISIBLE>false</VISIBLE>
+		<TEXT>Achievements</TEXT> <!-- 리플레이 -->
+	</FRAME>
+	
+	<LISTBOX item="AchievementListBox" parent="AchievementUI">
+		<BOUNDS>
+			<X>16</X>
+			<Y>56</Y>
+			<W>466</W>
+			<H>150</H>
+		</BOUNDS>
+		<ITEMHEIGHT>16</ITEMHEIGHT>
+	</LISTBOX>
+
+	<BUTTON item="AchievementClose" parent="AchievementUI">
+		<BUTTONLOOK>DefaultButtonLook</BUTTONLOOK>
+		<ANCHORS>
+			<LEFT>true</LEFT>
+			<TOP>true</TOP>
+			<RIGHT>true</RIGHT>
+			<BOTTOM>true</BOTTOM>
+		</ANCHORS>
+		<BOUNDS>
+			<X>352</X>
+			<Y>250</Y>
+			<W>133</W>
+			<H>32</H>
+		</BOUNDS>
+		<DEFAULTKEY>ESC</DEFAULTKEY>
+		<TEXT>Close Window</TEXT> <!-- 닫기 -->
+	</BUTTON>
+</XML>

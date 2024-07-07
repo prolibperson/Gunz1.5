@@ -1,0 +1,673 @@
+<?xml version="1.0" ?>
+<XML ID="CombatInterface_DuelTournament">
+	<Schema xmlns="MaietData" xmlns:dt="MaietDataTypes" />
+
+
+<!-- 듀얼토너먼트 화면 상단 남은 시간표시 -->
+	<FRAME item="CombatDTInfo">
+		<FRAMELOOK>NullFrameLook</FRAMELOOK>
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>800</W>
+			<H>600</H>
+		</BOUNDS>
+		<TITLEBAR>false</TITLEBAR>
+		<RESIZABLE>false</RESIZABLE>
+		<FOCUSABLE>false</FOCUSABLE>
+		<VISIBLE>false</VISIBLE>
+	</FRAME>
+	
+	<PICTURE item ="TDM_Score_TimeBack" parent="CombatDTInfo">
+		<BOUNDS>
+			<X>355</X>
+			<Y>0</Y>
+			<W>90</W>
+			<H>50</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>DuelTournament_score_timeback.tga</BITMAP>
+	</PICTURE>
+	
+	<ZBMNUMLABEL item="DT_RemainTime" parent="CombatDTInfo">
+		<BOUNDS>
+			<X>359</X>
+			<Y>10</Y>
+			<W>80</W>
+			<H>36</H>
+		</BOUNDS>
+		<BITMAP>grp_num.tga</BITMAP>
+		<FONTSIZE>
+			<W>32</W>
+			<H>32</H>
+		</FONTSIZE>
+	</ZBMNUMLABEL>
+	
+	<PICTURE item ="DM_Infinity_Time" parent="CombatDTInfo">
+		<BOUNDS>
+			<X>378</X>
+			<Y>17</Y>
+			<W>42</W>
+			<H>20</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>infinity.tga</BITMAP>
+	</PICTURE>
+	
+<!-- 듀얼토너먼트 대전자 정보 캐릭터 뷰어 -->
+	<FRAME item="CombatDT_CharacterInfo">
+		<FRAMELOOK>NullFrameLook</FRAMELOOK>
+		<BOUNDS>
+			<X>0</X>
+			<Y>0</Y>
+			<W>800</W>
+			<H>600</H>
+		</BOUNDS>
+		<TITLEBAR>false</TITLEBAR>
+		<RESIZABLE>false</RESIZABLE>
+		<FOCUSABLE>false</FOCUSABLE>
+		<VISIBLE>false</VISIBLE>
+	</FRAME>
+	
+	<PICTURE item="CombatDT_CharviewerBg" parent="CombatDT_CharacterInfo">
+		<BOUNDS>
+			<X>0</X>
+			<Y>39</Y>
+			<W>800</W>
+			<H>416</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>DuelTournament_CharInfoBack.tga</BITMAP>
+	</PICTURE>
+	
+	<PICTURE item="CombatDT_CharviewerVs" parent="CombatDT_CharacterInfo">
+		<BOUNDS>
+			<X>350</X>
+			<Y>175</Y>
+			<W>100</W>
+			<H>59</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>vs.tga</BITMAP>
+	</PICTURE>
+	
+	<LABEL item="CombatDT_MatchLevel" parent="CombatDT_CharacterInfo">
+		<FONT>FONTb11b</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>247</G>
+			<B>153</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>0</X>
+			<Y>105</Y>
+			<W>800</W>
+			<H>30</H>
+		</BOUNDS>
+	</LABEL>
+
+	<!-- CHARACTERVIEW : 왼쪽 캐릭터 뷰어 -->
+	<CHARACTERVIEW item="CombatDT_CharviewerLeft" parent="CombatDT_CharacterInfo">
+		<BOUNDS>
+			<X>100</X>
+			<Y>50</Y>
+			<W>300</W>
+			<H>390</H>
+		</BOUNDS>
+		<TEXT></TEXT>
+		<TITLEBAR>false</TITLEBAR>
+		<RESIZABLE>false</RESIZABLE>
+		<MOVABLE>false</MOVABLE>
+		<VISIBLE>true</VISIBLE>
+	</CHARACTERVIEW>
+
+	<!-- ITEMSLOT : 보조무기 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Melee" parent="CombatDT_CharacterInfo" parts="melee">
+		<BOUNDS>
+			<X>10</X>
+			<Y>80</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>			
+	</ITEMSLOT>
+
+	<!-- ITEMSLOT : 주무기 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Primary" parent="CombatDT_CharacterInfo" parts="primary">
+		<BOUNDS>
+			<X>10</X>
+			<Y>128</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+
+	<!-- ITEMSLOT : 주무기2 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Secondary" parent="CombatDT_CharacterInfo" parts="secondary">
+		<BOUNDS>
+			<X>10</X>
+			<Y>176</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>
+	</ITEMSLOT>
+
+	<!-- ITEMSLOT : 아이템1 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Custom1" parent="CombatDT_CharacterInfo" parts="custom1">
+		<BOUNDS>
+			<X>10</X>
+			<Y>224</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	<!-- ITEMSLOT : 아이템2 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Custom2" parent="CombatDT_CharacterInfo" parts="custom2">
+		<BOUNDS>
+			<X>10</X>
+			<Y>272</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	<!-- ITEMSLOT : 롱버프1 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Longbuff1" parent="CombatDT_CharacterInfo" parts="longbuff1">
+		<BOUNDS>
+			<X>10</X>
+			<Y>320</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	<!-- ITEMSLOT : 롱버프2 -->
+	<ITEMSLOT item="CombatDT_CharLeft_EquipmentSlot_Longbuff2" parent="CombatDT_CharacterInfo" parts="longbuff2">
+		<BOUNDS>
+			<X>10</X>
+			<Y>368</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+
+	<!-- CHARACTERVIEW : 오른쪽 캐릭터 뷰어 -->
+	<CHARACTERVIEW item="CombatDT_CharviewerRight" parent="CombatDT_CharacterInfo">
+		<BOUNDS>
+			<X>400</X>
+			<Y>50</Y>
+			<W>300</W>
+			<H>390</H>
+		</BOUNDS>
+		<TEXT></TEXT>
+		<TITLEBAR>false</TITLEBAR>
+		<RESIZABLE>false</RESIZABLE>
+		<MOVABLE>false</MOVABLE>
+		<VISIBLE>true</VISIBLE>
+	</CHARACTERVIEW>
+	
+	<!-- ITEMSLOT : 보조무기 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Melee" parent="CombatDT_CharacterInfo" parts="melee">
+		<BOUNDS>
+			<X>570</X>
+			<Y>80</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>			
+	</ITEMSLOT>
+
+	<!-- ITEMSLOT : 주무기 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Primary" parent="CombatDT_CharacterInfo" parts="primary">
+		<BOUNDS>
+			<X>570</X>
+			<Y>128</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+
+	<!-- ITEMSLOT : 주무기2 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Secondary" parent="CombatDT_CharacterInfo" parts="secondary">
+		<BOUNDS>
+			<X>570</X>
+			<Y>176</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>
+	</ITEMSLOT>
+
+	<!-- ITEMSLOT : 아이템1 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Custom1" parent="CombatDT_CharacterInfo" parts="custom1">
+		<BOUNDS>
+			<X>570</X>
+			<Y>224</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	<!-- ITEMSLOT : 아이템2 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Custom2" parent="CombatDT_CharacterInfo" parts="custom2">
+		<BOUNDS>
+			<X>570</X>
+			<Y>272</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	<!-- ITEMSLOT : 롱버프1 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Longbuff1" parent="CombatDT_CharacterInfo" parts="longbuff1">
+		<BOUNDS>
+			<X>570</X>
+			<Y>320</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	<!-- ITEMSLOT : 롱버프2 -->
+	<ITEMSLOT item="CombatDT_CharRight_EquipmentSlot_Longbuff2" parent="CombatDT_CharacterInfo" parts="longbuff2">
+		<BOUNDS>
+			<X>570</X>
+			<Y>368</Y>
+			<W>220</W>
+			<H>42</H>
+		</BOUNDS>
+		<STRETCH/>
+		<HORIZONTALINVERSE>true</HORIZONTALINVERSE>
+		<BITMAP>slot_empty.tga</BITMAP>	
+	</ITEMSLOT>
+	
+	
+	
+	<!-- Label : 플레이어 이름 -->
+	<LABEL item="CombatDT_PlayerInfo_Name" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>280</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_01</TEXT> <!-- 이름 -->
+	</LABEL>
+	
+	<!-- Label : 플레이어 클랜 -->
+	<LABEL item="CombatDT_PlayerInfo_Clan" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>300</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_02</TEXT> <!-- 클랜 -->
+	</LABEL>
+	
+	<!-- Label : 플레이어 레벨 -->
+	<LABEL item="CombatDT_PlayerInfo_Level" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>330</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_03</TEXT> <!-- 레벨 -->
+	</LABEL>
+	
+	<!-- Label : 플레이어 체력 -->
+	<LABEL item="CombatDT_PlayerInfo_HP" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>350</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_04</TEXT> <!-- 체력 -->
+	</LABEL>
+	
+	<!-- Label : 플레이어 방어 -->
+	<LABEL item="CombatDT_PlayerInfo_AP" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>370</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_05</TEXT> <!-- 방어 -->
+	</LABEL>
+	
+	<!-- Label : 플레이어 TP -->
+	<LABEL item="CombatDT_PlayerInfo_TP" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>400</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_06</TEXT> <!-- 현재 TP -->
+	</LABEL>
+	
+	<!-- Label : 플레이어 최근 등급 -->
+	<LABEL item="CombatDT_PlayerInfo_Grade" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>100</R>
+			<G>128</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>330</X>
+			<Y>420</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_07</TEXT> <!-- 최근 등급 -->
+	</LABEL>
+	
+	
+	<!-- Label : 왼쪽 플레이어 이름 -->
+	<LABEL item="CombatDT_PlayerInfo_Name_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTb11_b</FONT>
+		<TEXTCOLOR>
+			<R>250</R>
+			<G>140</G>
+			<B>70</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>280</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_01</TEXT> <!-- 이름 -->
+	</LABEL>
+	
+	<!-- Label : 왼쪽 플레이어 클랜 -->
+	<LABEL item="CombatDT_PlayerInfo_Clan_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>300</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_02</TEXT> <!-- 클랜 -->
+	</LABEL>
+	
+	<!-- Label : 왼쪽 플레이어 레벨 -->
+	<LABEL item="CombatDT_PlayerInfo_Level_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>230</G>
+			<B>175</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>330</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_03</TEXT> <!-- 레벨 -->
+	</LABEL>
+	
+	<!-- Label : 왼쪽 플레이어 체력 -->
+	<LABEL item="CombatDT_PlayerInfo_HP_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>350</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_04</TEXT> <!-- 체력 -->
+	</LABEL>
+	
+	<!-- Label : 왼쪽 플레이어 방어 -->
+	<LABEL item="CombatDT_PlayerInfo_AP_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>370</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_05</TEXT> <!-- 방어 -->
+	</LABEL>
+	
+	<!-- Label : 왼쪽 플레이어 TP -->
+	<LABEL item="CombatDT_PlayerInfo_TP_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>230</G>
+			<B>175</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>400</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_06</TEXT> <!-- 현재 TP -->
+	</LABEL>
+	
+	<!-- Label : 왼쪽 플레이어 최근 등급 -->
+	<LABEL item="CombatDT_PlayerInfo_Grade_Left" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>180</X>
+			<Y>420</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_07</TEXT> <!-- 최근 등급 -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 이름 -->
+	<LABEL item="CombatDT_PlayerInfo_Name_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTb11_b</FONT>
+		<TEXTCOLOR>
+			<R>250</R>
+			<G>140</G>
+			<B>70</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>280</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_01</TEXT> <!-- 이름 -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 클랜 -->
+	<LABEL item="CombatDT_PlayerInfo_Clan_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>300</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_02</TEXT> <!-- 클랜 -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 레벨 -->
+	<LABEL item="CombatDT_PlayerInfo_Level_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>230</G>
+			<B>175</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>330</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_03</TEXT> <!-- 레벨 -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 체력 -->
+	<LABEL item="CombatDT_PlayerInfo_HP_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>350</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_04</TEXT> <!-- 체력 -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 방어 -->
+	<LABEL item="CombatDT_PlayerInfo_AP_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>370</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_05</TEXT> <!-- 방어 -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 TP -->
+	<LABEL item="CombatDT_PlayerInfo_TP_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>255</R>
+			<G>230</G>
+			<B>175</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>400</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_06</TEXT> <!-- 현재 TP -->
+	</LABEL>
+	
+	<!-- Label : 오른쪽 플레이어 최근 등급 -->
+	<LABEL item="CombatDT_PlayerInfo_Grade_Right" parent="CombatDT_CharacterInfo">
+		<FONT>FONTa10b</FONT>
+		<TEXTCOLOR>
+			<R>205</R>
+			<G>205</G>
+			<B>205</B>
+		</TEXTCOLOR>
+		<BOUNDS>
+			<X>480</X>
+			<Y>420</Y>
+			<W>140</W>
+			<H>20</H>
+		</BOUNDS>
+		<TEXT>STR:UI_COMBATDT_07</TEXT> <!-- 최근 등급 -->
+	</LABEL>
+</XML>

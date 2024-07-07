@@ -1,0 +1,723 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<XML>
+<!-- chatcmds.xml -->
+<STR id="CMD_NAME_1">help</STR>
+<STR id="CMD_USAGE_1">/help of /help [command]</STR>
+<STR id="CMD_HELP_1">Laat de lijst zien van chatting commando's.</STR>
+<STR id="CMD_ALIAS_1_1">h</STR>
+<STR id="CMD_ALIAS_1_2"></STR>
+
+<STR id="CMD_NAME_2">Fluister</STR>
+<STR id="CMD_USAGE_2">/whisper [ID] [msg]</STR>
+<STR id="CMD_HELP_2">Fluister naar de gewenste partij met ID</STR>
+<STR id="CMD_ALIAS_2_1">w</STR>
+<STR id="CMD_ALIAS_2_2">say</STR>
+
+<STR id="CMD_NAME_3">raporteer</STR>
+<STR id="CMD_USAGE_3">/report</STR>
+<STR id="CMD_HELP_3">Raporteer de details van het chatten</STR>
+<STR id="CMD_ALIAS_3_1">112</STR>
+<STR id="CMD_ALIAS_3_2"></STR>
+
+<STR id="CMD_NAME_4">vriend</STR>
+<STR id="CMD_USAGE_4">/vriend [cmd] [args]</STR>
+<STR id="CMD_HELP_4">friend commands</STR>
+<STR id="CMD_ALIAS_4_1"></STR>
+<STR id="CMD_ALIAS_4_2"></STR>
+
+<STR id="CMD_NAME_5">clan</STR>
+<STR id="CMD_USAGE_5">/clan [cmd] [args]</STR>
+<STR id="CMD_HELP_5">clan commands</STR>
+<STR id="CMD_ALIAS_5_1"></STR>
+<STR id="CMD_ALIAS_5_2"></STR>
+
+<STR id="CMD_NAME_6">Volg</STR>
+<STR id="CMD_USAGE_6">/follow [ID]</STR>
+<STR id="CMD_HELP_6">Ga naar de kamer waar je vriend zit</STR>
+<STR id="CMD_ALIAS_6_1"></STR>
+<STR id="CMD_ALIAS_6_2"></STR>
+
+
+<STR id="CMD_NAME_7">qj</STR>
+<STR id="CMD_USAGE_7">/qj</STR>
+<STR id="CMD_HELP_7">Start een spel gelijk in elke kamer</STR>
+<STR id="CMD_ALIAS_7_1">go</STR>
+<STR id="CMD_ALIAS_7_2"></STR>
+
+<STR id="CMD_NAME_8">taunt</STR>
+<STR id="CMD_USAGE_8">/taunt</STR>
+<STR id="CMD_HELP_8">Maak iemand belachelijk. (Supported in games only)</STR>
+<STR id="CMD_ALIAS_8_1"></STR>
+<STR id="CMD_ALIAS_8_2"></STR>
+
+<STR id="CMD_NAME_9">salute</STR>
+<STR id="CMD_USAGE_9">/salute</STR>
+<STR id="CMD_HELP_9">Karakter buigt om te groeten. (Supported in games only)</STR>
+<STR id="CMD_ALIAS_9_1">bow</STR>
+<STR id="CMD_ALIAS_9_2"></STR>
+
+<STR id="CMD_NAME_10">wave</STR>
+<STR id="CMD_USAGE_10">/wave</STR>
+<STR id="CMD_HELP_10">Karakter zwaait hallo. (Supported in games only)</STR>
+<STR id="CMD_ALIAS_10_1"></STR>
+<STR id="CMD_ALIAS_10_2"></STR>
+
+<STR id="CMD_NAME_11">laugh</STR>
+<STR id="CMD_USAGE_11">/laugh</STR>
+<STR id="CMD_HELP_11">Karakter lacht. (Supported in games only)</STR>
+<STR id="CMD_ALIAS_11_1"></STR>
+<STR id="CMD_ALIAS_11_2"></STR>
+
+<STR id="CMD_NAME_12">cry</STR>
+<STR id="CMD_USAGE_12">/cry</STR>
+<STR id="CMD_HELP_12">Karakter huilt. (Supported in games only)</STR>
+<STR id="CMD_ALIAS_12_1"></STR>
+<STR id="CMD_ALIAS_12_2"></STR>
+
+<STR id="CMD_NAME_13">dance</STR>
+<STR id="CMD_USAGE_13">/dance</STR>
+<STR id="CMD_HELP_13">Karakter danst. (Supported in games only)</STR>
+<STR id="CMD_ALIAS_13_1"></STR>
+<STR id="CMD_ALIAS_13_2"></STR>
+
+<STR id="CMD_NAME_14">macro</STR>
+<STR id="CMD_USAGE_14">/macro</STR>
+<STR id="CMD_HELP_14">Registreer macro's</STR>
+<STR id="CMD_ALIAS_14_1"></STR>
+<STR id="CMD_ALIAS_14_2"></STR>
+
+<STR id="CMD_NAME_15">suicide</STR>
+<STR id="CMD_USAGE_15">/suicide</STR>
+<STR id="CMD_HELP_15">Je karakter pleegt zelfmoord.</STR>
+<STR id="CMD_ALIAS_15_1"></STR>
+<STR id="CMD_ALIAS_15_2"></STR>
+
+<STR id="CMD_NAME_16">vote</STR>
+<STR id="CMD_USAGE_16">/vote</STR>
+<STR id="CMD_HELP_16">Stemmen</STR>
+<STR id="CMD_ALIAS_16_1">callvote</STR>
+<STR id="CMD_ALIAS_16_2"></STR>
+
+<STR id="CMD_NAME_17">yes</STR>
+<STR id="CMD_USAGE_17">/yes</STR>
+<STR id="CMD_HELP_17">call yes</STR>
+<STR id="CMD_ALIAS_17_1"></STR>
+<STR id="CMD_ALIAS_17_2"></STR>
+
+<STR id="CMD_NAME_18">no</STR>
+<STR id="CMD_USAGE_18">/no</STR>
+<STR id="CMD_HELP_18">call no</STR>
+<STR id="CMD_ALIAS_18_1"></STR>
+<STR id="CMD_ALIAS_18_2"></STR>
+
+<STR id="CMD_NAME_19">kick</STR>
+<STR id="CMD_USAGE_19">/kick</STR>
+<STR id="CMD_HELP_19">Een player verwijderen uit het spel</STR>
+<STR id="CMD_ALIAS_19_1"></STR>
+<STR id="CMD_ALIAS_19_2"></STR>
+
+<STR id="CMD_NAME_20">chatmake</STR>
+<STR id="CMD_USAGE_20">/chatmake [roomname]</STR>
+<STR id="CMD_HELP_20">Maak een chat kamer</STR>
+<STR id="CMD_ALIAS_20_1"></STR>
+<STR id="CMD_ALIAS_20_2"></STR>
+
+<STR id="CMD_NAME_21">chatjoin</STR>
+<STR id="CMD_USAGE_21">/chatjoin [roomname]</STR>
+<STR id="CMD_HELP_21">Ga in de chat kamer</STR>
+<STR id="CMD_ALIAS_21_1"></STR>
+<STR id="CMD_ALIAS_21_2"></STR>
+
+<STR id="CMD_NAME_22">chatleave</STR>
+<STR id="CMD_USAGE_22">/chatleave [roomname]</STR>
+<STR id="CMD_HELP_22">Verlaat een chat kamer</STR>
+<STR id="CMD_ALIAS_22_1"></STR>
+<STR id="CMD_ALIAS_22_2"></STR>
+
+<STR id="CMD_NAME_23">chatselect</STR>
+<STR id="CMD_USAGE_23">/chatselect [roomname]</STR>
+<STR id="CMD_HELP_23">selecteer chat kamer</STR>
+<STR id="CMD_ALIAS_23_1"></STR>
+<STR id="CMD_ALIAS_23_2"></STR>
+
+<STR id="CMD_NAME_24">chatinvite</STR>
+<STR id="CMD_USAGE_24">/chatinvite [name]</STR>
+<STR id="CMD_HELP_24">uitnodigen</STR>
+<STR id="CMD_ALIAS_24_1"></STR>
+<STR id="CMD_ALIAS_24_2"></STR>
+
+<STR id="CMD_NAME_25">chataccept</STR>
+<STR id="CMD_USAGE_25">/chataccept</STR>
+<STR id="CMD_HELP_25">accepteren</STR>
+<STR id="CMD_ALIAS_25_1"></STR>
+<STR id="CMD_ALIAS_25_2"></STR>
+
+<STR id="CMD_NAME_26">chat</STR>
+<STR id="CMD_USAGE_26">chat [message]</STR>
+<STR id="CMD_HELP_26">chat</STR>
+<STR id="CMD_ALIAS_26_1"></STR>
+<STR id="CMD_ALIAS_26_2"></STR>
+
+<!-- notify.xml -->
+<STR id="NOTIFY_10">Netwerk initialisatie is mislukt.</STR>
+<STR id="NOTIFY_11">Netwerk poort in gebruik.</STR>
+<STR id="NOTIFY_15">NAT netwerkconfiguratie aansluitset.</STR>
+<STR id="NOTIFY_51">De gebruiker is niet gevonden.</STR>
+<STR id="NOTIFY_70">De karakter bestaat niet.</STR>
+<STR id="NOTIFY_100">De kamer bestaat al.</STR>
+<STR id="NOTIFY_101">De kamer bestaat niet.</STR>
+<STR id="NOTIFY_110">De capacisiteit voor deelnemers is vol.</STR>
+<STR id="NOTIFY_150">De chat kamer is gemaakt.</STR>
+<STR id="NOTIFY_151">Het maak van de chat kamer is mislukt.</STR>
+<STR id="NOTIFY_152">De chat kamer bestaat al.</STR>
+<STR id="NOTIFY_153">De chat kamer bestaat niet.</STR>
+<STR id="NOTIFY_154">Er is geen chat kamer om in deel te nemen.</STR>
+<STR id="NOTIFY_155">U kunt niet joinen in de chat kamer</STR>
+<STR id="NOTIFY_156">Te veel deelnemers.</STR>
+<STR id="NOTIFY_200">Het Gebruik van een snelheid hack is verklaard.</STR>
+<STR id="NOTIFY_201">Het Gebruik van geheugen hack is verklaard.</STR>
+<STR id="NOTIFY_251">Reeds geristreerd als vriend</STR>
+<STR id="NOTIFY_252">Niet gerigstreed als een vriendnd.</STR>
+<STR id="NOTIFY_253">De vriendenlijst zit vol.</STR>
+<STR id="NOTIFY_255">Geregistreerd als vriend.</STR>
+<STR id="NOTIFY_256">Vrijgelaten uit de status van een vriend.</STR>
+<STR id="NOTIFY_301">Uw tegenhanger heeft het fluisteren geweigerd.</STR>
+<STR id="NOTIFY_302">Fluisteren is geweigerd.</STR>
+<STR id="NOTIFY_311">Uw tegenhanger heeft de uitnodiging geweigerd.</STR>
+<STR id="NOTIFY_312">De uitnodiging is geweigerd.</STR>
+
+
+
+<!-- shutdown.xml -->
+<STR id="SHUTDOWN_01">SERVER NOODSTOPSYSTEEM IN 1 MINUUT VOOR PATCH</STR>
+<STR id="SHUTDOWN_02">Wilt u alstublieft nu uitloggen anders kan uw data verloren gaan.</STR>
+<STR id="SHUTDOWN_03">Sorry voor het ongemak.</STR>
+<STR id="SHUTDOWN_04">Server Shutdown na 30 seconds.</STR>
+<STR id="SHUTDOWN_05">Server Shutdown na 20 seconds.</STR>
+<STR id="SHUTDOWN_06">Server Shutdown na 10 seconds.</STR>
+<STR id="SHUTDOWN_07">Server Shutdown na 5 seconds.</STR>
+<STR id="SHUTDOWN_08">Server Shutdown na 4 seconds.</STR>
+<STR id="SHUTDOWN_09">Server Shutdown na 3 seconds.</STR>
+<STR id="SHUTDOWN_10">Server Shutdown na 2 seconds.</STR>
+<STR id="SHUTDOWN_11">Server Shutdown na 1 second.</STR>
+<STR id="SHUTDOWN_12">SHUTTING DOWN</STR>
+
+
+<!-- config_rel.xml -->
+<STR id="CONFIG_MACRO_F1">/h</STR>
+<STR id="CONFIG_MACRO_F2">/Provoke</STR>
+<STR id="CONFIG_MACRO_F3">/hi</STR>
+<STR id="CONFIG_MACRO_F4">/112</STR>
+<STR id="CONFIG_MACRO_F5">Hi~</STR>
+<STR id="CONFIG_MACRO_F6">Laten we een goedde tijd hebben en eerlijk spelen.</STR>
+<STR id="CONFIG_MACRO_F7">Goedde schot !!</STR>
+<STR id="CONFIG_MACRO_F8">Hartelijk bedankt.</STR>
+
+<!-- 공용 -->
+<STR id="UI_COMMON_OK">OK(&amp;O)</STR>
+<STR id="UI_COMMON_CANCEL">Cancel(&amp;C)</STR>
+
+<!-- Login.xml -->
+<STR id="UI_LOGIN_01">GunZ Login</STR>
+<STR id="UI_LOGIN_02">User ID</STR>
+<STR id="UI_LOGIN_03">Password</STR>
+<STR id="UI_LOGIN_04">Login(&amp;G)</STR>
+<STR id="UI_LOGIN_05">Wilt u stoppen met het spel?</STR>
+
+
+<!-- Lobby.xml -->
+<STR id="UI_LOBBY_01">Lobby</STR>
+<STR id="UI_LOBBY_02">Start Now(&amp;G)</STR>
+<STR id="UI_LOBBY_03">Find the counter clan team</STR>
+<STR id="UI_LOBBY_04">In search of the counter team...</STR>
+<STR id="UI_LOBBY_05">Cancel</STR>
+<STR id="UI_LOBBY_06">Name</STR>
+<STR id="UI_LOBBY_07">Clan :</STR>
+<STR id="UI_LOBBY_08">Level : 0 lv.</STR>
+<STR id="UI_LOBBY_09">XP : 0%</STR>
+<STR id="UI_LOBBY_10">Bounty : 0</STR>
+<STR id="UI_LOBBY_11">HP : 0</STR>
+<STR id="UI_LOBBY_12">AP : 0</STR>
+<STR id="UI_LOBBY_13">WT : 0</STR>
+<STR id="UI_LOBBY_14">Team Game</STR>
+<STR id="UI_LOBBY_15">Alleen matchen met clans die even sterk zijn.</STR>
+<STR id="UI_LOBBY_16">Selecteer de spelers.</STR>
+<STR id="UI_LOBBY_17">OK(&amp;O)</STR>
+<STR id="UI_LOBBY_18">Annuleer(&amp;C)</STR>
+<STR id="UI_LOBBY_19">De clan verlaten</STR>
+<STR id="UI_LOBBY_20">Wilt u de clan verlaten?</STR>
+<STR id="UI_LOBBY_21">Ja(&amp;Y)</STR>
+<STR id="UI_LOBBY_A01">Monster Bible</STR>
+<STR id="UI_LOBBY_A02">Wilt u het spel verlaten?</STR>
+
+
+<!-- StageCreateFrame.xml -->
+<STR id="UI_SCF_01">Game maken</STR>
+<STR id="UI_SCF_02">Game title</STR>
+<STR id="UI_SCF_03">Passwoord</STR>
+<STR id="UI_SCF_04">Zullen we Gunz spelen?</STR>
+
+<!-- Replay.xml -->
+<STR id="UI_REPLAY_01">Replays</STR>
+<STR id="UI_REPLAY_02">../My Documents/Gunz/Replay</STR>
+<STR id="UI_REPLAY_03">Je zou problemen kunnen oplopen</STR>
+<STR id="UI_REPLAY_04">replays van oudere versies.</STR>
+<STR id="UI_REPLAY_05">View(&amp;V)</STR>
+<STR id="UI_REPLAY_06">Wilt u de herhaling zien?</STR>
+<STR id="UI_REPLAY_07">Herhaling</STR>
+<STR id="UI_REPLAY_08">Wilt u het opnieuw bekijken?</STR>
+<STR id="UI_REPLAY_09">Kijk(&amp;V)</STR>
+<STR id="UI_REPLAY_10">Verlaat(&amp;X)</STR>
+<STR id="UI_REPLAY_A01">Sluit(&amp;C)</STR>
+
+<!-- PrivateStageJoinFrame.xml -->
+<STR id="UI_PSJF_01">Voer de wachtwoord in </STR>
+<STR id="UI_PSJF_02">Game Title</STR>
+<STR id="UI_PSJF_03">Passwoord</STR>
+
+<!-- NetPortConfirm.xml -->
+<STR id="UI_NPC_01">Wijzig de netwerkpoort </STR>
+<STR id="UI_NPC_02">Herstart het Gunz programma om het gemodificeerde netwerkpoort toepassing . Wil je het programma nu beïndigen?</STR>
+<STR id="UI_NPC_03">OK(&amp;O)</STR>
+<STR id="UI_NPC_04">Annuleer(&amp;C)</STR>
+
+<!-- Greter.xml -->
+<STR id="UI_GREETER_01">Start(&amp;G)</STR>
+
+<!-- CombatInterface.xml -->
+<STR id="UI_CI_01">Naar iedereen:</STR>
+<STR id="UI_CI_02">Naar team Team:</STR>
+<STR id="UI_CI_03">Game Menu</STR>
+<STR id="UI_CI_04">Opties(&amp;O)</STR>
+<STR id="UI_CI_05">Terug naar Game(&amp;X)</STR>
+<STR id="UI_CI_06">Verlaat deWaiting Room(&amp;R)</STR>
+<STR id="UI_CI_07">Spel verlaten(&amp;L)</STR>
+<STR id="UI_CI_08">Weet je zeker dat je het spel wilt verlaten?</STR>
+<STR id="UI_CI_09">Spel verlaten(&amp;Q)</STR>
+<STR id="UI_CI_10">Weet je zeker dat je het spel wilt verlaten?</STR>
+
+<!-- ChannelListFrame.xml -->
+<STR id="UI_CLF_01">Channel List</STR>
+<STR id="UI_CLF_02">Algemeen</STR>
+<STR id="UI_CLF_03">Privé</STR>
+<STR id="UI_CLF_04">Clan</STR>
+<STR id="UI_CLF_05">Enter</STR>
+<STR id="UI_CLF_06">Ga naar mijn clan channel</STR>
+
+
+<!-- BuyConfirm.xml -->
+<STR id="UI_BC_01">Totaal</STR>
+<STR id="UI_BC_02">Wil je dit kopen?</STR>
+
+<!-- 112Confirm.xml -->
+<STR id="UI_112C_01">Report</STR>
+<STR id="UI_112C_02">Selecteer het karakter en de reden voor het indienen van het verslag.</STR>
+<STR id="UI_112C_03">Kies een karakter :</STR>
+<STR id="UI_112C_04">Kies een reden :</STR>
+<STR id="UI_112C_05">Maak een keuze</STR>
+<STR id="UI_112C_06">misbruik</STR>
+<STR id="UI_112C_07">Misbruik op ouders</STR>
+<STR id="UI_112C_08">Sexuel chating</STR>
+<STR id="UI_112C_09">onwaarschijnlijkheid</STR>
+<STR id="UI_112C_10">oplichting</STR>
+<STR id="UI_112C_11">Spammen</STR>
+<STR id="UI_112C_12">Voordoen als GM</STR>
+<STR id="UI_112C_13">Schrijf de rapport zorgvol bij neppe beschuldiging kan dat oplopen tot een straf.</STR>
+
+<!-- CharCreation.xml -->
+<STR id="UI_CC_01">Creër Karakter </STR>
+<STR id="UI_CC_02">Naam</STR>
+<STR id="UI_CC_03">Geslacht</STR>
+<STR id="UI_CC_04">Haar</STR>
+<STR id="UI_CC_05">Gezicht</STR>
+<STR id="UI_CC_06">Wapens</STR>
+<STR id="UI_CC_07">Devil Slayer</STR>
+<STR id="UI_CC_08">Walcom XLx2</STR>
+<STR id="UI_CC_09">Walcom XLx2</STR>
+<STR id="UI_CC_10">Grenade FG-2</STR>
+<STR id="UI_CC_11">Medical K-11</STR>
+
+<STR id="UI_CC_LIST_01_01">Man</STR>
+<STR id="UI_CC_LIST_01_02">Vrouw</STR>
+
+<STR id="UI_CC_LIST_02_01">Type1</STR>
+<STR id="UI_CC_LIST_02_02">Type2</STR>
+<STR id="UI_CC_LIST_02_03">Type3</STR>
+<STR id="UI_CC_LIST_02_04">Type4</STR>
+
+<STR id="UI_CC_LIST_03_01">Axium Gun Knight</STR>
+<STR id="UI_CC_LIST_03_02">Travia Gun Fighter</STR>
+<STR id="UI_CC_LIST_03_03">Axium Assassin</STR>
+<STR id="UI_CC_LIST_03_04">Travia Scout</STR>
+<STR id="UI_CC_LIST_03_05">Axium Gun Priest</STR>
+<STR id="UI_CC_LIST_03_06">Travia Doctor</STR>
+
+
+<!-- CharSelection.xml -->
+<STR id="UI_CS_01">Naam</STR>
+<STR id="UI_CS_02">0 Lv.</STR>
+<STR id="UI_CS_03">Clan</STR>
+<STR id="UI_CS_04">Select(&amp;G)</STR>
+<STR id="UI_CS_05">Weet je zeker dat je Gunz wilt verlaten?</STR>
+<STR id="UI_CS_06">Verwijder karakter</STR>
+<STR id="UI_CS_07">Type Yes om het karakter te verwijderen</STR>
+<STR id="UI_CS_08">En druk op OK.</STR>
+
+<!-- Clan.xml -->
+<STR id="UI_CLAN_01">Maak een clan</STR>
+<STR id="UI_CLAN_02">Agree(&amp;A)</STR>
+<STR id="UI_CLAN_03">Deny(&amp;D)</STR>
+<STR id="UI_CLAN_04">Tijd Limiet :</STR>
+<STR id="UI_CLAN_05">Accepteer om de clan te maken</STR>
+<STR id="UI_CLAN_06">Gelieve te wachten tot de leden instemmen met de schepping clan.</STR>
+<STR id="UI_CLAN_07">Tijd limiet :</STR>
+<STR id="UI_CLAN_08">Overeenkomst van de clan leden</STR>
+<STR id="UI_CLAN_09">Wacht tot de clan leden om in te stemmen.</STR>
+<STR id="UI_CLAN_10">Clan creatie</STR>
+<STR id="UI_CLAN_11">Clan Naam</STR>
+<STR id="UI_CLAN_12">Clan creatie vereist 10 levels of meer en 1000 BP , samen met extra vier stichtende leden van een clan . Maak een unieke naam van maximaal 12 letters.</STR>
+<STR id="UI_CLAN_13">oprichting</STR>
+<STR id="UI_CLAN_14">Wachten op toestemming</STR>
+<STR id="UI_CLAN_15">toegestemd</STR>
+
+<!-- Equipment.xml -->
+<STR id="UI_EQUIPMENT_01">Filter : </STR>
+<STR id="UI_EQUIPMENT_02">Aandoen</STR>
+<STR id="UI_EQUIPMENT_03">Verzonden naar de C.Bank</STR>
+<STR id="UI_EQUIPMENT_04">Breng mijn spullen</STR>
+<STR id="UI_EQUIPMENT_05">Wil je dit item brengen?</STR>
+<STR id="UI_EQUIPMENT_06">[ Gewicht ]</STR>
+<STR id="UI_EQUIPMENT_07">0  /  0 Wt.</STR>
+<STR id="UI_EQUIPMENT_08">[ LV / HP / AP ]</STR>
+<STR id="UI_EQUIPMENT_09">0Lv.  /  0  /  0</STR>
+
+<STR id="UI_EQUIPMENT_LIST_01_01">        Show all Equipment</STR>
+<STR id="UI_EQUIPMENT_LIST_01_02">        Armor : Hoofd</STR>
+<STR id="UI_EQUIPMENT_LIST_01_03">        Armor : Lichaam</STR>
+<STR id="UI_EQUIPMENT_LIST_01_04">        Armor : Handen</STR>
+<STR id="UI_EQUIPMENT_LIST_01_05">        Armor : Benen</STR>
+<STR id="UI_EQUIPMENT_LIST_01_06">        Armor : Voeten</STR>
+<STR id="UI_EQUIPMENT_LIST_01_07">        Weapon : Melee Weapons</STR>
+<STR id="UI_EQUIPMENT_LIST_01_08">        Weapon : Ranged Weapons</STR>
+<STR id="UI_EQUIPMENT_LIST_01_09">        Item : M-R Kit / Grenade</STR>
+<STR id="UI_EQUIPMENT_LIST_01_10">        Item : Ringen</STR>
+<STR id="UI_EQUIPMENT_LIST_01_11">        Item : Quest Item</STR>
+<STR id="UI_EQUIPMENT_LIST_01_12"> 		  Artikel: Avatar </STR>
+<STR id="UI_EQUIPMENT_LIST_01_13"> 		  Artikel: Enchantment </STR>
+
+<!-- MonsterBook.xml -->
+<STR id="UI_MB_01">Monster Bible</STR>
+
+
+<!-- NetmarbleLogin.xml -->
+<STR id="UI_NL_01">Inloggen</STR>
+<STR id="UI_NL_02">Being connected to Netmarble.</STR>
+<STR id="UI_NL_03">Wil je het spel beïndigen?</STR>
+
+<!-- ResizeConfirm.xml -->
+<STR id="UI_RC_01">Verander Resolutie</STR>
+<STR id="UI_RC_02">Plaats nieuwe resolutie.</STR>
+<STR id="UI_RC_03">Als een nieuwe resolutie niet is gezet binnen 10 seconden,</STR>
+<STR id="UI_RC_04">U krijgt uw oude resolutie weer.</STR>
+<STR id="UI_RC_05">Wil je deze nieuwe resolutie?</STR>
+<STR id="UI_RC_06">Nieuwe resolutie is geplaatst.</STR>
+<STR id="UI_RC_07">Wil je deze resolutie?</STR>
+<STR id="UI_RC_08">Yes(&amp;Y)</STR>
+
+<!-- StageSettingFrame.xml -->
+<STR id="UI_SSF_01">Misc. Spel Instellingen</STR>
+<STR id="UI_SSF_02">Tijd limiet</STR>
+<STR id="UI_SSF_03">Instrusion</STR>
+<STR id="UI_SSF_04">Vriendelijk vuur</STR>
+<STR id="UI_SSF_05">Level Restrictie</STR>
+<STR id="UI_SSF_06">Observatie</STR>
+<STR id="UI_SSF_07">Voten</STR>
+<STR id="UI_SSF_08">Team Balans</STR>
+<STR id="UI_SSF_09">Vanilla</STR>
+<STR id="UI_SSF_10">Geen massive</STR>
+<STR id="UI_SSF_11">Geen flip</STR>
+<STR id="UI_SSF_12">Auto reload</STR>
+<STR id="UI_SSF_13">Oneindig ammo</STR>
+<STR id="UI_SSF_14">WireFrame</STR>
+<STR id="UI_SSF_15">Luchtcontrole</STR>
+
+<!-- Option.xml -->
+<STR id="UI_OPTION_01">Opties</STR>
+<STR id="UI_OPTION_02">Resolutie</STR>
+<STR id="UI_OPTION_03">Helderheid</STR>
+<STR id="UI_OPTION_04">Reflectie Effect</STR>
+<STR id="UI_OPTION_05">Light Map</STR>
+<STR id="UI_OPTION_06">Shader</STR>
+<STR id="UI_OPTION_07">Dynamische licht</STR>
+<STR id="UI_OPTION_08">Kwaliteit van het karakter</STR>
+<STR id="UI_OPTION_09">Kwaliteit van het achtergrond</STR>
+<STR id="UI_OPTION_10">Effect Kwaliteit</STR>
+<STR id="UI_OPTION_11">Texture Kwaliteit</STR>
+<STR id="UI_OPTION_12">Opslaan</STR>
+<STR id="UI_OPTION_13">Achtergrond Muziek</STR>
+<STR id="UI_OPTION_14">Volume van achtergrond muziek</STR>
+<STR id="UI_OPTION_15">Geluid effect</STR>
+<STR id="UI_OPTION_16">Geluid volume</STR>
+<STR id="UI_OPTION_17">3D-geluid links-rechts retroflexie</STR>
+<STR id="UI_OPTION_18">Hardware Mengen Ondersteuning</STR>
+<STR id="UI_OPTION_19">Geluid dat aangeeft dat de vijand is geraakt</STR>
+<STR id="UI_OPTION_20">Muis gevoeligheid</STR>
+<STR id="UI_OPTION_21">omgekeerde Muis</STR>
+<STR id="UI_OPTION_22">Go vooruit</STR>
+<STR id="UI_OPTION_23">Ga achteruit</STR>
+<STR id="UI_OPTION_24">Ga naar links</STR>
+<STR id="UI_OPTION_25">Ga naar rechts</STR>
+<STR id="UI_OPTION_26">Zwaard/Dolk</STR>
+<STR id="UI_OPTION_27">Wapen 1</STR>
+<STR id="UI_OPTION_28">Wapen 2</STR>
+<STR id="UI_OPTION_29">Selecteer Item1</STR>
+<STR id="UI_OPTION_30">Selecteer Item2</STR>
+<STR id="UI_OPTION_31">voorgaand Wapen</STR>
+<STR id="UI_OPTION_32">Volgende wapen</STR>
+<STR id="UI_OPTION_33">Menu</STR>
+<STR id="UI_OPTION_34">Herladen</STR>
+<STR id="UI_OPTION_35">Springen</STR>
+<STR id="UI_OPTION_36">Zie Record</STR>
+<STR id="UI_OPTION_37">Screenshot</STR>
+<STR id="UI_OPTION_38">Record/Playback</STR>
+<STR id="UI_OPTION_39">Verdedigen</STR>
+<STR id="UI_OPTION_40">Chatting Zichtbaar</STR>
+<STR id="UI_OPTION_59">Schieten</STR>
+<STR id="UI_OPTION_41">Fabrieksinstellingen</STR>
+<STR id="UI_OPTION_42">Poort Instellingen</STR>
+<STR id="UI_OPTION_43">Maximalizeer Prestatie(Reactie van de muis kan in sommige systemen worden vertraagd)</STR>
+<STR id="UI_OPTION_44">Chat Filtering Opties</STR>
+<STR id="UI_OPTION_45">Algemene chat</STR>
+<STR id="UI_OPTION_46">Team chat</STR>
+<STR id="UI_OPTION_47">Clan chat</STR>
+<STR id="UI_OPTION_48">Fluistert</STR>
+<STR id="UI_OPTION_49">Weiger clan invitaties</STR>
+<STR id="UI_OPTION_50">Crosshair type</STR>
+<STR id="UI_OPTION_51">F1 Key</STR>
+<STR id="UI_OPTION_52">F2 Key</STR>
+<STR id="UI_OPTION_53">F3 Key</STR>
+<STR id="UI_OPTION_54">F4 Key</STR>
+<STR id="UI_OPTION_55">F5 Key</STR>
+<STR id="UI_OPTION_56">F6 Key</STR>
+<STR id="UI_OPTION_57">F7 Key</STR>
+<STR id="UI_OPTION_58">F8 Key</STR>
+<STR id="UI_OPTION_90">Rendering Qualiteit verbeteren</STR>
+<STR id="UI_OPTION_91">Anti-Aliasing</STR>
+<STR id="UI_OPTION_92">ArchType</STR>
+<STR id="UI_OPTION_93">Full screen</STR>
+<STR id="UI_OPTION_94">HP/AP Overtekenen</STR>
+<STR id="UI_OPTION_95">Fps Limiet:</STR>
+<STR id="UI_OPTION_96">Sword Trail(0-50)</STR>
+<STR id="UI_OPTION_97">Permanente Kogel gaten</STR>
+<STR id="UI_OPTION_98">Geadvanceerde Effecten</STR>
+<STR id="UI_OPTION_99">3D Geluid</STR>
+<STR id="UI_OPTION_100">Camera afstand(290-650)</STR>
+<STR id="UI_OPTION_101">Dash Kleur</STR>
+<STR id="UI_OPTION_102">Taal</STR>
+<STR id="UI_OPTION_103">Auto-Opnemen</STR>
+<STR id="UI_OPTION_104">Karakter Altijd zichtbaar</STR>
+
+<STR id="UI_OPTION_LIST_01_01">High</STR>
+<STR id="UI_OPTION_LIST_01_02">Normal</STR>
+<STR id="UI_OPTION_LIST_01_03">Low</STR>
+
+<!-- Shop.xml -->
+<STR id="UI_SHOP_01">Lobby > Shop</STR>
+<STR id="UI_SHOP_02">Filter : </STR>
+<STR id="UI_SHOP_03">Kopen(&amp;B)</STR>
+<STR id="UI_SHOP_04">Wil je het geselecteerde item kopen?</STR>
+<STR id="UI_SHOP_05">Kopen(&amp;B)</STR>
+<STR id="UI_SHOP_06">Vernader naar web browser.</STR>
+<STR id="UI_SHOP_07">Verkopen(&amp;S)</STR>
+<STR id="UI_SHOP_08">Weet je zeker dat je het gelecteerde item wilt verkopen?</STR>
+<STR id="UI_SHOP_09">Verkopen(&amp;S)</STR>
+<STR id="UI_SHOP_10">[ BOUNTY ]</STR>
+<STR id="UI_SHOP_11">0 Bounty</STR>
+<STR id="UI_SHOP_12">[ LEVEL / WEIGHT ]</STR>
+<STR id="UI_SHOP_13">0Lv.  /  0 (0)</STR>
+<STR id="UI_SHOP_14">Sell item</STR>
+<STR id="UI_SHOP_15">Hoeveel wil je er verkopen.</STR>
+<STR id="UI_SHOP_16">quantity</STR>
+<STR id="UI_SHOP_17">Verkopen(&amp;S)</STR>
+
+<STR id = "UI_SHOP_LIST_01_01"> Toon alle Apparatuur </STR>
+<STR id = "UI_SHOP_LIST_01_02"> Armor: Head </STR>
+<STR id = "UI_SHOP_LIST_01_03"> Armor: Body </STR>
+<STR id = "UI_SHOP_LIST_01_04"> Armor: Handen </STR>
+<STR id = "UI_SHOP_LIST_01_05"> Armor: Benen </STR>
+<STR id = "UI_SHOP_LIST_01_06"> Armor: Voeten </STR>
+<STR id = "UI_SHOP_LIST_01_07"> Wapen: melee wapens </STR>
+<STR id = "UI_SHOP_LIST_01_08"> Wapen: ranged wapens </STR>
+<STR id = "UI_SHOP_LIST_01_09"> Artikel: MR Kit / Grenade </STR>
+<STR id = "UI_SHOP_LIST_01_10"> Artikel: Ringen </STR>
+<STR id = "UI_SHOP_LIST_01_11"> Artikel: Quest Item </STR>
+<STR id = "UI_SHOP_LIST_01_12"> Artikel: Avatar </STR>
+<STR id = "UI_SHOP_LIST_01_13"> Artikel: Enchantment </STR>
+<!-- Stage.xml -->
+<STR id="UI_STAGE_01">Name</STR>
+<STR id="UI_STAGE_02">Clan :</STR>
+<STR id="UI_STAGE_03">Level : 0 lv.</STR>
+<STR id="UI_STAGE_04">XP : -</STR>
+<STR id="UI_STAGE_05">Bounty : -</STR>
+<STR id="UI_STAGE_06">HP : -</STR>
+<STR id="UI_STAGE_07">AP : -</STR>
+<STR id="UI_STAGE_08">WT : -</STR>
+<STR id="UI_STAGE_09">Blue Team</STR>
+<STR id="UI_STAGE_10">Red Team</STR>
+<STR id="UI_STAGE_11">Intrusion(&amp;G)</STR>
+<STR id="UI_STAGE_12">Option</STR>
+<STR id="UI_STAGE_13">Match</STR>
+<STR id="UI_STAGE_14">Map</STR>
+<STR id="UI_STAGE_15">Players</STR>
+<STR id="UI_STAGE_16">Round</STR>
+<STR id="UI_STAGE_17">Members : 0</STR>
+<STR id="UI_STAGE_18">Quest Level : 0</STR>
+<STR id="UI_STAGE_19">Weet u zeker dat u het spel wilt verlaten?</STR>
+<STR id="UI_STAGE_20">Plaats boven</STR>
+<STR id="UI_STAGE_21">Daar is geen item.</STR>
+<STR id="UI_STAGE_22">Anti Lead:</STR>
+
+
+<!-- GameResult.xml -->
+<STR id="UI_ETC_01">Naam</STR>
+<STR id="UI_ETC_02">XP</STR>
+<STR id="UI_ETC_03">Kill</STR>
+<STR id="UI_ETC_04">Death</STR>
+
+<STR id="UI_WARNING_TITLE">Hacking Attempt</STR>
+<STR id="UI_WARNING_01">A hacking attempt was detected. Connection to the server will be terminated.</STR>
+
+<STR id="QITEM_NAME_200001">Torn Page 13</STR>
+<STR id="QITEM_DESC_200001">A page torn out of a book. The faint print says page 13.</STR>
+
+<STR id="QITEM_NAME_200002">Torn Page 25</STR>
+<STR id="QITEM_DESC_200002">A page torn out of a book. The faint print says page 25.</STR>
+
+<STR id="QITEM_NAME_200003">Torn Page 41</STR>
+<STR id="QITEM_DESC_200003">A page torn out of a book. The faint print says page 41.</STR>
+
+<STR id="QITEM_NAME_200004">Torn Page 65</STR>
+<STR id="QITEM_DESC_200004">A page torn out of a book. The faint print says page 65.</STR>
+
+<STR id="QITEM_NAME_200005">Small Skull</STR>
+<STR id="QITEM_DESC_200005">Mysterious Skull. It looks like it is a skull of a bird.</STR>
+
+<STR id="QITEM_NAME_200006">Large Skull</STR>
+<STR id="QITEM_DESC_200006">Mysterious Skull. Not identified, the owner of the skull seems to have had a big head.</STR>
+
+<STR id="QITEM_NAME_200007">Mysterious Skull</STR>
+<STR id="QITEM_DESC_200007">Mysterious skull whose usage is not identified.</STR>
+
+<STR id="QITEM_NAME_200008">Goblin's Skull</STR>
+<STR id="QITEM_DESC_200008">This unique item was found in a Goblin's cave. An inscription on the back reads "Fight for a new world".</STR>
+
+<STR id="QITEM_NAME_200009">Goblin King's Skull</STR>
+<STR id="QITEM_DESC_200009">Skull of the Goblin King.</STR>
+
+<STR id="QITEM_NAME_200010">Enormously Huge Skull</STR>
+<STR id="QITEM_DESC_200010">It looks like bones of a man. However, the size is equivalent to that of a dinosaur.</STR>
+
+<STR id="QITEM_NAME_200011">Raw Meat</STR>
+<STR id="QITEM_DESC_200011">Raw meat of an unknow animal. It seemed to have been used as food.</STR>
+
+<STR id="QITEM_NAME_200012">Seasoned Meat</STR>
+<STR id="QITEM_DESC_200012">Cooked seasoned meat. Looks very delicious.</STR>
+
+<STR id="QITEM_NAME_200013">Steak</STR>
+<STR id="QITEM_DESC_200013">Very delicious looking steak. It must have been the Goblin's favorite.</STR>
+
+<STR id="QITEM_NAME_200014">Iron Earring</STR>
+<STR id="QITEM_DESC_200014">Iron-made earrings for the tribe, Kobold. Humans cannot wear them.</STR>
+
+<STR id="QITEM_NAME_200015">Silver Earring</STR>
+<STR id="QITEM_DESC_200015">Silver earrings for the tribe, Kobold. Humans cannot wear them.</STR>
+
+<STR id="QITEM_NAME_200016">Gold Earring</STR>
+<STR id="QITEM_DESC_200016">Gold earrings for the tribe, Kobold. Humans cannot wear them.</STR>
+
+<STR id="QITEM_NAME_200017">Platinum Earring</STR>
+<STR id="QITEM_DESC_200017">Earrings made of special metal used by the King, Kobold. Humans cannot wear them.</STR>
+
+<STR id="QITEM_NAME_200018">Crimson's Necklace</STR>
+<STR id="QITEM_DESC_200018">A necklace worn by the trial chief of Goblin. It is highly doubtful whether humans can wear it.</STR>
+
+<STR id="QITEM_NAME_200019">Skeleton Doll</STR>
+<STR id="QITEM_DESC_200019">Doll made in the shape of the skeleton of a soldier. The taste of the maker is highly doubtful.</STR>
+
+<STR id="QITEM_NAME_200020">Kobold Doll</STR>
+<STR id="QITEM_DESC_200020">This doll looks exactly like Kobold! Will children be happy to get this doll?</STR>
+
+<STR id="QITEM_NAME_200021">Goblin Doll</STR>
+<STR id="QITEM_DESC_200021">A Goblin Doll, seems goblins like playing with dolls...</STR>
+
+<STR id="QITEM_NAME_200022">Palmpow Doll</STR>
+<STR id="QITEM_DESC_200022">Doll that just looks like the mischievous fairy, Palmpow.</STR>
+
+<STR id="QITEM_NAME_200023">Rabbit Doll</STR>
+<STR id="QITEM_DESC_200023">Cute doll shaped like rabbit. What is it for then?!</STR>
+
+<STR id="QITEM_NAME_200024">Stuffed Bear</STR>
+<STR id="QITEM_DESC_200024">Stuffed animal that kids used to have on their bed. How come it is in this...?!</STR>
+
+<STR id="QITEM_NAME_200025">Cursed Bear</STR>
+<STR id="QITEM_DESC_200025">Kids may not want to have it on their bed. How come it is here...?!</STR>
+
+<STR id="QITEM_NAME_200026">Palmpow Idol</STR>
+<STR id="QITEM_DESC_200026">Fairy shown in dreams. It just looks like Palmpow.</STR>
+
+<STR id="QITEM_NAME_200027">Cursed Palmpow Idol</STR>
+<STR id="QITEM_DESC_200027">It just looks like Palmpow.  However, it looks dreary somehow.</STR>
+
+<STR id="QITEM_NAME_200028">Devil's Dictionary</STR>
+<STR id="QITEM_DESC_200028">Dictionary that is full of strange contents.</STR>
+
+<STR id="QITEM_NAME_200029">Scrider's Register Volume I</STR>
+<STR id="QITEM_DESC_200029">A strange book full of people's names, volume I. It is said to have come from hell.</STR>
+
+<STR id="QITEM_NAME_200030">Scrider's Register Volume II</STR>
+<STR id="QITEM_DESC_200030">A strange book full of people's names, volume II. It is said to have come from hell.</STR>
+
+<STR id="QITEM_NAME_200031">Blessed Cross</STR>
+<STR id="QITEM_DESC_200031">It is similar to one that the gun priests had.</STR>
+
+<STR id="QITEM_NAME_200032">Cursed Cross</STR>
+<STR id="QITEM_DESC_200032">It is similar to one that the gun priests had. But...</STR>
+
+<STR id="QITEM_NAME_200033">Pickaxe</STR>
+<STR id="QITEM_DESC_200033">This is a pickaxe that is used in a stope. But where to mine with it?</STR>
+
+<STR id="QITEM_NAME_200034">Speaking Stone</STR>
+<STR id="QITEM_DESC_200034">This stone utters weird things from time to time. It can move, too.</STR>
+
+<STR id="QITEM_NAME_200035">Ice Crystal</STR>
+<STR id="QITEM_DESC_200035">Ice crystal that seems not to be melted by usual heat.</STR>
+
+<STR id="QITEM_NAME_200036">Broken Gear</STR>
+<STR id="QITEM_DESC_200036">Gear that has been broken. It seems no one can use it again.</STR>
+
+<STR id="QITEM_NAME_200037">High-class Gear</STR>
+<STR id="QITEM_DESC_200037">Gear that seems to have had some important function in a machine.</STR>
+
+<STR id="QITEM_NAME_200038">Goblin King's Axe</STR>
+<STR id="QITEM_DESC_200038">Frightening axe used by Goblin King. It is pity that it cannot be used by men.</STR>
+
+<STR id="QITEM_NAME_200039">Giant Lizardman's Axe</STR>
+<STR id="QITEM_DESC_200039">Frightening axe used by Giant Lizardman. It is pity that it cannot be used by men.</STR>
+
+<STR id="QITEM_NAME_200040">Superion's Sword</STR>
+<STR id="QITEM_DESC_200040">Frightening sword used by Superion. It is pity that it cannot be used by men.</STR>
+
+<STR id="QITEM_NAME_200041">Aneramon's Sword</STR>
+<STR id="QITEM_DESC_200041">The Curse Sword that was stuck in Aneramon's heart. It appears dangerous to touch.</STR>
+
+<STR id="QITEM_NAME_200042">Lich's Tail</STR>
+<STR id="QITEM_DESC_200042">The tail that Lich uses to attack. It is very sharp and flexible like a whip.</STR>
+
+<STR id="QITEM_NAME_200043">Pamlpow's Ice Sword</STR>
+<STR id="QITEM_DESC_200043">The Ice Sword used by Pamlpow when it casts magic. It seems that an unknown power is enchanted on it.</STR>
+
+<STR id="QITEM_NAME_200044">Golem's Sword</STR>
+<STR id="QITEM_DESC_200044">A sword casted with parts of destroyed Golem.  It is pity that it cannot be used by men.</STR>
+
+
+</XML>

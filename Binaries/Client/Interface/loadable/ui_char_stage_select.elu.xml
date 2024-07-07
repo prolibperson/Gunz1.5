@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML>
+    <MATERIALLIST>
+        <MATERIAL name="02 - Default">
+            <DIFFUSE>150 150 150</DIFFUSE>
+            <AMBIENT>150 150 150</AMBIENT>
+            <SPECULAR>229 229 229</SPECULAR>
+            <SPECULAR_LEVEL>0.000</SPECULAR_LEVEL>
+            <GLOSSINESS>10.000</GLOSSINESS>
+            <SELFILLUSIONSCALE>10.000</SELFILLUSIONSCALE>
+            <TEXTURELIST count="3">
+                <TEXTURELAYER index="0">
+                    <DIFFUSEMAP>UI_hexa_Textue.TGA.dds</DIFFUSEMAP>
+                    <TEX_SCALE>4.000000 4.000000</TEX_SCALE>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="1">
+                    <SELFILLUMINATIONMAP>J_Gunz2_wind.dds</SELFILLUMINATIONMAP>
+                    <TEX_ANIMATION>
+                        <TEX_ANI_SELF_FRAME>false</TEX_ANI_SELF_FRAME>
+                        <TEX_ANI_OFFSET_LOOP>true</TEX_ANI_OFFSET_LOOP>
+                        <TEX_ANI_SCALE_LOOP>true</TEX_ANI_SCALE_LOOP>
+                        <TEX_ANI_VISIBILITY_LOOP>false</TEX_ANI_VISIBILITY_LOOP>
+                        <TEX_OFFSET time="0">0.000 0.000</TEX_OFFSET>
+                        <TEX_OFFSET time="576000">1.000 0.000</TEX_OFFSET>
+                        <TEX_SCALE time="0">4.000 4.000</TEX_SCALE>
+                        <TEX_ROTATE time="0">0.000 0.000 0.000</TEX_ROTATE>
+                    </TEX_ANIMATION>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="2">
+                    <OPACITYMAP>UI_hexa_Textue.TGA.dds</OPACITYMAP>
+                    <TEX_SCALE>4.000000 4.000000</TEX_SCALE>
+                </TEXTURELAYER>
+            </TEXTURELIST>
+            <USEOPACITY />
+        </MATERIAL>
+        <MATERIAL name="04 - Default">
+            <DIFFUSE>150 150 150</DIFFUSE>
+            <AMBIENT>150 150 150</AMBIENT>
+            <SPECULAR>229 229 229</SPECULAR>
+            <SPECULAR_LEVEL>0.000</SPECULAR_LEVEL>
+            <GLOSSINESS>10.000</GLOSSINESS>
+            <SELFILLUSIONSCALE>0.000</SELFILLUSIONSCALE>
+            <TEXTURELIST count="1">
+                <TEXTURELAYER index="0">
+                    <DIFFUSEMAP>Lobby_bg.TGA.dds</DIFFUSEMAP>
+                </TEXTURELAYER>
+            </TEXTURELIST>
+        </MATERIAL>
+        <MATERIAL name="04 - Defaultsj">
+            <DIFFUSE>150 150 150</DIFFUSE>
+            <AMBIENT>150 150 150</AMBIENT>
+            <SPECULAR>229 229 229</SPECULAR>
+            <SPECULAR_LEVEL>0.000</SPECULAR_LEVEL>
+            <GLOSSINESS>10.000</GLOSSINESS>
+            <SELFILLUSIONSCALE>0.000</SELFILLUSIONSCALE>
+            <TEXTURELIST count="2">
+                <TEXTURELAYER index="0">
+                    <DIFFUSEMAP>Lobby_bg.TGA.dds</DIFFUSEMAP>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="1">
+                    <OPACITYMAP>hexa_mask.tga.dds</OPACITYMAP>
+                </TEXTURELAYER>
+            </TEXTURELIST>
+            <TWOSIDED />
+            <USEOPACITY />
+        </MATERIAL>
+        <MATERIAL name="12 - Defaulta">
+            <DIFFUSE>150 150 150</DIFFUSE>
+            <AMBIENT>150 150 150</AMBIENT>
+            <SPECULAR>229 229 229</SPECULAR>
+            <SPECULAR_LEVEL>0.000</SPECULAR_LEVEL>
+            <GLOSSINESS>10.000</GLOSSINESS>
+            <SELFILLUSIONSCALE>3.447</SELFILLUSIONSCALE>
+            <TEXTURELIST count="3">
+                <TEXTURELAYER index="0">
+                    <DIFFUSEMAP>J_gunz2_Login_electronic_sq.TGA.dds</DIFFUSEMAP>
+                    <TEX_SEQUENCE>
+                        <DIVIDE_X type="int">
+                            <int>8</int>
+                        </DIVIDE_X>
+                        <DIVIDE_Y type="int">
+                            <int>2</int>
+                        </DIVIDE_Y>
+                        <MAX_FRAME type="int">
+                            <int>16</int>
+                        </MAX_FRAME>
+                        <DELAY type="float">
+                            <float>500.000</float>
+                        </DELAY>
+                        <LOOP type="int">
+                            <int>1</int>
+                        </LOOP>
+                        <ANI_FRAME>8000</ANI_FRAME>
+                    </TEX_SEQUENCE>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="1">
+                    <SELFILLUMINATIONMAP>J_gunz2_Login_electronic_sq.TGA.dds</SELFILLUMINATIONMAP>
+                    <TEX_SEQUENCE>
+                        <DIVIDE_X type="int">
+                            <int>8</int>
+                        </DIVIDE_X>
+                        <DIVIDE_Y type="int">
+                            <int>8</int>
+                        </DIVIDE_Y>
+                        <MAX_FRAME type="int">
+                            <int>64</int>
+                        </MAX_FRAME>
+                        <DELAY type="float">
+                            <float>160.000</float>
+                        </DELAY>
+                        <LOOP type="int">
+                            <int>1</int>
+                        </LOOP>
+                        <ANI_FRAME>10240</ANI_FRAME>
+                    </TEX_SEQUENCE>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="2">
+                    <OPACITYMAP>J_gunz2_Login_electronic_sq.TGA.dds</OPACITYMAP>
+                    <TEX_SEQUENCE>
+                        <DIVIDE_X type="int">
+                            <int>8</int>
+                        </DIVIDE_X>
+                        <DIVIDE_Y type="int">
+                            <int>8</int>
+                        </DIVIDE_Y>
+                        <MAX_FRAME type="int">
+                            <int>64</int>
+                        </MAX_FRAME>
+                        <DELAY type="float">
+                            <float>160.000</float>
+                        </DELAY>
+                        <LOOP type="int">
+                            <int>1</int>
+                        </LOOP>
+                        <ANI_FRAME>10240</ANI_FRAME>
+                    </TEX_SEQUENCE>
+                </TEXTURELAYER>
+            </TEXTURELIST>
+            <TWOSIDED />
+            <USEOPACITY />
+            <USE_INDEPENDENT_ANI_FRAME />
+        </MATERIAL>
+        <MATERIAL name="12 - Default">
+            <DIFFUSE>150 150 150</DIFFUSE>
+            <AMBIENT>150 150 150</AMBIENT>
+            <SPECULAR>229 229 229</SPECULAR>
+            <SPECULAR_LEVEL>0.000</SPECULAR_LEVEL>
+            <GLOSSINESS>10.000</GLOSSINESS>
+            <SELFILLUSIONSCALE>2.141</SELFILLUSIONSCALE>
+            <TEXTURELIST count="3">
+                <TEXTURELAYER index="0">
+                    <DIFFUSEMAP>gunz2_login.tga.dds</DIFFUSEMAP>
+                    <TEX_SEQUENCE>
+                        <DIVIDE_X type="int">
+                            <int>8</int>
+                        </DIVIDE_X>
+                        <DIVIDE_Y type="int">
+                            <int>8</int>
+                        </DIVIDE_Y>
+                        <MAX_FRAME type="int">
+                            <int>64</int>
+                        </MAX_FRAME>
+                        <DELAY type="float">
+                            <float>160.000</float>
+                        </DELAY>
+                        <LOOP type="int">
+                            <int>1</int>
+                        </LOOP>
+                        <ANI_FRAME>10240</ANI_FRAME>
+                    </TEX_SEQUENCE>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="1">
+                    <SELFILLUMINATIONMAP>gunz2_login.tga.dds</SELFILLUMINATIONMAP>
+                    <TEX_SEQUENCE>
+                        <DIVIDE_X type="int">
+                            <int>8</int>
+                        </DIVIDE_X>
+                        <DIVIDE_Y type="int">
+                            <int>8</int>
+                        </DIVIDE_Y>
+                        <MAX_FRAME type="int">
+                            <int>64</int>
+                        </MAX_FRAME>
+                        <DELAY type="float">
+                            <float>160.000</float>
+                        </DELAY>
+                        <LOOP type="int">
+                            <int>1</int>
+                        </LOOP>
+                        <ANI_FRAME>10240</ANI_FRAME>
+                    </TEX_SEQUENCE>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="2">
+                    <OPACITYMAP>gunz2_login.tga.dds</OPACITYMAP>
+                    <TEX_SEQUENCE>
+                        <DIVIDE_X type="int">
+                            <int>8</int>
+                        </DIVIDE_X>
+                        <DIVIDE_Y type="int">
+                            <int>8</int>
+                        </DIVIDE_Y>
+                        <MAX_FRAME type="int">
+                            <int>64</int>
+                        </MAX_FRAME>
+                        <DELAY type="float">
+                            <float>160.000</float>
+                        </DELAY>
+                        <LOOP type="int">
+                            <int>1</int>
+                        </LOOP>
+                        <ANI_FRAME>10240</ANI_FRAME>
+                    </TEX_SEQUENCE>
+                </TEXTURELAYER>
+            </TEXTURELIST>
+            <TWOSIDED />
+            <USEOPACITY />
+            <USE_INDEPENDENT_ANI_FRAME />
+        </MATERIAL>
+        <MATERIAL name="08 - Default">
+            <DIFFUSE>150 150 150</DIFFUSE>
+            <AMBIENT>150 150 150</AMBIENT>
+            <SPECULAR>229 229 229</SPECULAR>
+            <SPECULAR_LEVEL>0.000</SPECULAR_LEVEL>
+            <GLOSSINESS>10.000</GLOSSINESS>
+            <SELFILLUSIONSCALE>3.847</SELFILLUSIONSCALE>
+            <TEXTURELIST count="3">
+                <TEXTURELAYER index="0">
+                    <DIFFUSEMAP>UI_Lobby_LineEffect001.TGA.dds</DIFFUSEMAP>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="1">
+                    <SELFILLUMINATIONMAP>UI_Lobby_LineEffect001.TGA.dds</SELFILLUMINATIONMAP>
+                </TEXTURELAYER>
+                <TEXTURELAYER index="2">
+                    <OPACITYMAP>UI_Lobby_LineEffect001.TGA.dds</OPACITYMAP>
+                </TEXTURELAYER>
+            </TEXTURELIST>
+            <USEOPACITY />
+        </MATERIAL>
+    </MATERIALLIST>
+    <COLLISION />
+    <USERPROPERTYLIST />
+    <AUTOANIMATION />
+</XML>

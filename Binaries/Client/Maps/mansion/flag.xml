@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<FLAG NAME="obj_flag_curtain_b 01.elu" DIRECTION="0" POWER="2.0">
+		<WINDTYPE TYPE="1" DELAY="10000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_curtain_b 02.elu" DIRECTION="0" POWER="2.0">
+		<WINDTYPE TYPE="1" DELAY="10000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_curtain_b 03.elu" DIRECTION="0" POWER="2.0">
+		<WINDTYPE TYPE="1" DELAY="10000"/>
+	</FLAG>
+	<FLAG NAME="obj_flag_curtain_b 04.elu" DIRECTION="0" POWER="2.0">
+		<WINDTYPE TYPE="1" DELAY="10000"/>
+	</FLAG>
+</XML>

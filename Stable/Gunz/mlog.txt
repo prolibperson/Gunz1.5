@@ -1,0 +1,10 @@
+GUNZ 1,0,0,290 launched. build (Jun 18 2024 20:12:15) 
+Succesfully loaded UpTimeFaker32.dll!
+Log time (06/18/24 20:15:43)
+Windows = 6.2 Build 9200 ,  (25063376KB) :  Windows 8..
+CPU ID = Intel(R) Core(TM) i5-4460  CPU @ 3.20GHz ( family = 0 , model = 586 , stepping = 15363 )
+Display Device = NVIDIA GeForce GTX 1060 3GB ( vendor=10de device=1c02 subsys=0 revision=0 )
+Display Driver Version = 32767.65535.65535.65535
+Load XML from memory : system/locale.xml- SUCCESS
+Country : (BRZ), Language : (BRZ)
+Load Config from file : config.xml- SUCCESS

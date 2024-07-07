@@ -1,0 +1,417 @@
+alter table ItemPurchaseLogByCash add sid varchar(20)
+alter table SetItemPurchaseLogByCash add sid varchar(20)
+alter table CashItemPresentLog add sid varchar(20)
+
+
+-------------------------------------------------------------
+
+IF OBJECT_ID('spNHNBuyCashItem') IS NOT NULL 
+ DROP PROC spNHNBuyCashItem
+GO
+
+CREATE   PROC [spNHNBuyCashItem]    
+ @UserID  varchar(20),    
+ @CSID  int,    
+ @Cash  int,    
+ @sid varchar(20),
+ @RentHourPeriod smallint = NULL,    
+ @MobileCode char(16) = NULL    
+AS    
+BEGIN
+ SET NoCount On    
+    
+ DECLARE @AID  int    
+ DECLARE @ItemID  int    
+    
+ -- Account 검사    
+ SELECT @AID = AID FROM Account WHERE UserID = @UserID    
+ IF @AID IS NULL    
+ BEGIN    
+  RETURN 0    
+ END    
+ ELSE    
+ BEGIN    
+  SELECT @ItemID = ItemID FROM CashShop cs (NOLOCK) WHERE cs.CSID = @CSID    
+    
+  IF @ItemID IS NOT NULL    
+  BEGIN     
+   DECLARE @RentDate datetime    
+    
+   -- @RentHourPeriod값을 가지고 기간제인지 검사.    
+   IF @RentHourPeriod = 0 OR @RentHourPeriod IS NULL    
+   BEGIN    
+    -- 기간제 아이템일 경우 영구 아이템 판매 여부 검사    
+    DECLARE @RentType  TINYINT    
+    DECLARE @RCSPID  INT    
+    
+    SELECT @RentType = RentType FROM CashShop WHERE CSID=@CSID    
+    IF @RentType = 1    
+    BEGIN    
+     SELECT @RCSPID = RCSPID FROM RentCashShopPrice WHERE CSID=@CSID AND RentHourPeriod is NULL    
+     IF @RCSPID IS NULL    
+     BEGIN    
+      RETURN 0    
+     END    
+    END    
+    
+    -- 일반 아이템인 경우    
+    SET @RentDate = NULL    
+   END    
+   ELSE    
+   BEGIN    
+    SET @RentDate = GETDATE()    
+   END    
+    
+    
+   BEGIN TRAN    
+       
+    -- 아이템 생성.    
+    INSERT INTO accountitem(AID, ItemID, RentDate, RentHourPeriod)     
+    VALUES (@AID, @ItemID, @RentDate, @RentHourPeriod)    
+    IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+    BEGIN    
+     ROLLBACK    
+     RETURN 0    
+    END    
+     
+    -- 아이템 거래 log생성.    
+    INSERT INTO ItemPurchaseLogByCash(AID, ItemID, Date, RentHourPeriod, Cash, MobileCode, sid)     
+    VALUES (@AID, @ItemID, GETDATE(), @RentHourPeriod, @Cash, @MobileCode, @sid)    
+    IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+    BEGIN    
+     ROLLBACK    
+     RETURN 0    
+    END    
+        
+   COMMIT TRAN    
+    
+   RETURN 1    
+    
+  END     
+  ELSE    
+  BEGIN    
+   RETURN 0    
+  END    
+ END    
+    
+ RETURN 1    
+END
+GO
+-----------------------------------------------------------------------------------
+
+IF OBJECT_ID('spNHNBuyCashSetItem') IS NOT NULL
+ DROP PROC spNHNBuyCashSetItem
+GO
+
+-- cash set shop에서 거래된 아이템을 accountitme에 추가.  
+CREATE    PROC [spNHNBuyCashSetItem]  
+ @UserID  varchar(20),  
+ @CSSID  int,  
+ @Cash  int,  
+ @sid varchar(20),
+ @RentHourPeriod smallint = NULL,  
+ @MobileCode char(16) = NULL  
+AS
+BEGIN  
+ SET NoCount On  
+  
+ DECLARE @AID  int  
+   
+ SELECT @AID = AID FROM Account WHERE UserID = @UserID  
+  
+ -- 존제하는 유저인지 검사.  
+ IF @AID IS NULL  
+ BEGIN  
+  RETURN 0  
+ END  
+ ELSE  
+ BEGIN  
+  DECLARE @RentDate  datetime     
+  
+  -- @RentHourPeriod값을 가지고 기간제인지 검사.  
+  IF @RentHourPeriod = 0 OR @RentHourPeriod IS NULL  
+  BEGIN  
+   -- 기간제 아이템일 경우 영구 아이템 판매 여부 검사  
+   DECLARE @RentType  TINYINT  
+   DECLARE @RCSSPID  INT  
+  
+   SELECT @RentType = RentType FROM CashSetShop WHERE CSSID=@CSSID  
+   IF @RentType = 1  
+   BEGIN  
+    SELECT @RCSSPID=RCSSPID FROM RentCashSetShopPrice WHERE CSSID=@CSSID AND RentHourPeriod is    
+NULL  
+    IF @RCSSPID IS NULL  
+    BEGIN  
+     RETURN 0  
+    END  
+   END  
+  
+   -- 일반 아이템일 경우  
+   SET @RentDate = NULL  
+  END  
+  ELSE  
+  BEGIN  
+   SET @RentDate = GETDATE()  
+  END  
+  
+  
+  
+  BEGIN TRAN  
+  
+   DECLARE curBuyCashSetItem  INSENSITIVE CURSOR  
+   FOR  
+    SELECT CSID FROM CashSetItem (NOLOCK) WHERE CSSID = @CSSID  
+   FOR READ ONLY  
+   
+   OPEN curBuyCashSetItem   
+   
+   DECLARE @varCSID  int  
+   DECLARE @ItemID   int  
+   
+   FETCH FROM curBuyCashSetItem INTO @varCSID  
+   
+   WHILE @@FETCH_STATUS = 0  
+   BEGIN  
+    SELECT @ItemID = cs.ItemID  
+    FROM CashShop cs (NOLOCK)   
+    WHERE cs.CSID = @varCSID   
+   
+    IF @ItemID IS NOT NULL  
+    BEGIN  
+     -- 아이템 생성.  
+     INSERT INTO AccountItem(AID, ItemID, RentDate, RentHourPeriod)  
+     VALUES (@AID, @ItemID, @RentDate, @RentHourPeriod)  
+     IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+     BEGIN  
+      ROLLBACK  
+      CLOSE curBuyCashSetItem   
+      DEALLOCATE curBuyCashSetItem   
+      RETURN 0  
+     END       
+    END  
+   
+    FETCH curBuyCashSetItem  INTO @varCSID  
+   END  
+   
+   CLOSE curBuyCashSetItem   
+   DEALLOCATE curBuyCashSetItem   
+   
+   -- 셋트 아이템 구입 로그.  
+   INSERT INTO SetItemPurchaseLogByCash (AID, CSSID, Date, RentHourPeriod, Cash, MobileCode, sid)  
+   VALUES (@AID, @CSSID, GETDATE(), @RentHourPeriod, @Cash, @MobileCode, @sid)  
+   IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+   BEGIN  
+    ROLLBACK  
+    RETURN 0  
+   END  
+         
+  COMMIT TRAN  
+  RETURN 1  
+ END  
+END
+GO
+--------------------------------------------------------------------------------
+
+IF OBJECT_ID('spNHNPresentCashItem') IS NOT NULL
+ DROP PROC spNHNPresentCashItem
+GO
+
+-- 단일 아이템 선물하기  
+CREATE  PROC [spNHNPresentCashItem]  
+ @SenderUserID varchar(20)  
+, @ReceiverUserID varchar(20)  
+, @CSID  int  
+, @Cash  int  
+, @sid varchar(20)
+, @RentHourPeriod smallint = NULL  
+, @MobileCode char(16) = NULL  
+AS  
+BEGIN
+ SET NoCount On  
+  
+ DECLARE @ItemID  int  
+ DECLARE @ReceiverAID int  
+  
+ SELECT @ReceiverAID = AID FROM Account (NOLOCK) WHERE UserID = @ReceiverUserID  
+   
+ IF @ReceiverAID IS NULL  
+ BEGIN  
+  RETURN 0  
+ END  
+ ELSE  
+ BEGIN  
+  DECLARE @RentDate datetime  
+  -- @RentHourPeriod값을 가지고 기간제인지 검사.  
+  IF @RentHourPeriod = 0 OR @RentHourPeriod IS NULL  
+  BEGIN  
+   -- 기간제 아이템일 경우 영구 아이템 판매 여부 검사  
+   DECLARE @RentType  TINYINT  
+   DECLARE @RCSPID  INT  
+  
+    SELECT @RentType = RentType FROM CashShop WHERE CSID=@CSID  
+   IF @RentType = 1  
+   BEGIN  
+    SELECT @RCSPID = RCSPID FROM RentCashShopPrice WHERE CSID=@CSID AND RentHourPeriod is NULL  
+    IF @RCSPID IS NULL  
+    BEGIN  
+     RETURN 0  
+    END  
+   END  
+  
+   -- 일반 아이템인 경우  
+   SET @RentDate = NULL  
+  END  
+  ELSE  
+  BEGIN  
+   SET @RentDate = GETDATE()  
+  END  
+  
+  
+  SELECT @ItemID = ItemID FROM CashShop (NOLOCK) WHERE CSID = @CSID  
+  
+  IF @ItemID IS NOT NULL  
+  BEGIN  
+   BEGIN TRAN  
+     
+    -- 아이템 생성.  
+    INSERT INTO AccountItem (AID, ItemID, RentDate, RentHourPeriod)  
+    VALUES (@ReceiverAID, @ItemID, @RentDate, @RentHourPeriod)  
+    IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+    BEGIN  
+     ROLLBACK  
+     RETURN 0  
+    END  
+           
+    -- 선물 로그 생성.  
+    INSERT INTO CashItemPresentLog (SenderUserID, ReceiverAID, CSID, Date, Cash, RentHourPeriod, MobileCode, sid)  
+    VALUES (@SenderUserID, @ReceiverAID, @CSID, GETDATE(), @Cash, @RentHourPeriod, @MobileCode, @sid)  
+    IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+    BEGIN  
+     ROLLBACK  
+     RETURN 0  
+    END  
+       
+   COMMIT TRAN  
+  END  
+  ELSE  
+  BEGIN  
+   RETURN 0  
+  END  
+  
+    
+  RETURN 1  
+ END  
+END
+GO
+
+---------------------------------------------------------------------------  
+
+IF OBJECT_ID('spNHNPresentCashSetItem') IS NOT NULL
+ DROP PROC spNHNPresentCashSetItem
+GO
+
+CREATE  PROC [spNHNPresentCashSetItem]  
+ @SenderUserID varchar(20)  
+, @ReceiverUserID varchar(20)  
+, @CSSID  int  
+, @Cash  int  
+, @sid varchar(20)
+, @RentHourPeriod smallint = NULL  
+,  @MobileCode char(16) = NULL  
+AS  
+BEGIN
+ SET NoCount On  
+  
+ DECLARE @ReceiverAID int  
+  
+ SELECT @ReceiverAID = AID FROM Account WHERE UserID = @ReceiverUserID  
+  
+ IF @ReceiverAID IS NOT NULL  
+ BEGIN  
+  DECLARE @RentDate  datetime     
+  
+  -- @RentHourPeriod값을 가지고 기간제인지 검사.  
+  IF @RentHourPeriod = 0 OR @RentHourPeriod IS NULL  
+  BEGIN  
+   -- 기간제 아이템일 경우 영구 아이템 판매 여부 검사  
+   DECLARE @RentType  TINYINT  
+   DECLARE @RCSSPID INT  
+  
+   SELECT @RentType = RentType FROM CashSetShop WHERE CSSID=@CSSID  
+   IF @RentType = 1  
+   BEGIN  
+    SELECT @RCSSPID = RCSSPID FROM RentCashSetShopPrice WHERE CSSID=@CSSID AND RentHourPeriod is NULL  
+    IF @RCSSPID IS NULL  
+    BEGIN  
+     RETURN 0  
+    END  
+   END  
+  
+   -- 일반 아이템일 경우  
+   SET @RentDate = NULL  
+  END  
+  ELSE  
+  BEGIN  
+   SET @RentDate = GETDATE()  
+  END  
+  
+  
+  BEGIN TRAN  
+   DECLARE curBuyCashSetItem  INSENSITIVE CURSOR  
+  
+   FOR  
+    SELECT CSID FROM CashSetItem WHERE CSSID = @CSSID  
+   FOR READ ONLY  
+  
+   OPEN curBuyCashSetItem  
+  
+   DECLARE @varCSID int  
+   DECLARE @ItemID  int  
+  
+   FETCH FROM curBuyCashSetItem INTO @varCSID  
+  
+   WHILE @@FETCH_STATUS = 0  
+   BEGIN  
+    SELECT @ItemID = ItemID FROM CashShop WHERE CSID = @varCSID  
+  
+    IF @ItemID IS NOT NULL  
+    BEGIN   
+     -- 아이템 생성.  
+     INSERT INTO AccountItem (AID, ItemID, RentDate, RentHourPeriod)  
+     VALUES (@ReceiverAID, @ItemID, @RentDate, @RentHourPeriod)  
+     IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+     BEGIN  
+      ROLLBACK  
+      CLOSE curBuyCashSetItem  
+      DEALLOCATE curBuyCashSetItem  
+      RETURN 0  
+     END       
+    END  
+      
+    FETCH FROM curBuyCashSetItem INTO @varCSID  
+   END  
+  
+  CLOSE curBuyCashSetItem  
+  DEALLOCATE curBuyCashSetItem  
+  
+  -- 셋트아이템 선물 로그 생성.  
+  INSERT INTO CashItemPresentLog (SenderUserID, ReceiverAID, CSSID, Date, RentHourPeriod, Cash, MobileCode, sid)  
+  VALUES (@SenderUserID, @ReceiverAID, @CSSID, GETDATE(), @RentHourPeriod, @Cash, @MobileCode, @sid)  
+  IF (@@ERROR <> 0) OR (0 = @@ROWCOUNT)
+  BEGIN  
+   ROLLBACK  
+   RETURN 0  
+  END  
+      
+  COMMIT TRAN  
+  RETURN 1  
+  
+ END  
+ ELSE  
+ BEGIN  
+  RETURN 0  
+ END  
+END
+GO
+  
+

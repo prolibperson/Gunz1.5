@@ -1,0 +1,108 @@
+Starting BSP Export...
+object hide_1 : hide_1: 312 ver / 326 face 
+object hnav_0 : hnav_0: 120 ver / 77 face 
+NaviMesh: 120 ver / 154 face 
+object pass_ceiling : pass_ceiling: 60 ver / 48 face 
+object Object14 : Object14: 0 ver / 0 face 
+object Object15 : Object15: 0 ver / 0 face 
+object Object23 : Object23: 0 ver / 0 face 
+object pass_shelf : pass_shelf: 8 ver / 4 face 
+object pass_pillar : pass_pillar: 8 ver / 4 face 
+object pass_ceiling002 : pass_ceiling002: 60 ver / 48 face 
+object Object024 : Object024: 0 ver / 0 face 
+object Object025 : Object025: 0 ver / 0 face 
+object Object026 : Object026: 0 ver / 0 face 
+object pass_shelf001 : pass_shelf001: 8 ver / 4 face 
+object pass_pillar002 : pass_pillar002: 8 ver / 4 face 
+object pass_ceiling003 : pass_ceiling003: 60 ver / 48 face 
+object Object027 : Object027: 0 ver / 0 face 
+object Object028 : Object028: 0 ver / 0 face 
+object Object029 : Object029: 0 ver / 0 face 
+object pass_shelf002 : pass_shelf002: 8 ver / 4 face 
+object pass_pillar003 : pass_pillar003: 8 ver / 4 face 
+object pass_ceiling004 : pass_ceiling004: 60 ver / 48 face 
+object Object030 : Object030: 0 ver / 0 face 
+object Object031 : Object031: 0 ver / 0 face 
+object Object032 : Object032: 0 ver / 0 face 
+object pass_shelf003 : pass_shelf003: 8 ver / 4 face 
+object pass_pillar004 : pass_pillar004: 8 ver / 4 face 
+object pass_ceiling005 : pass_ceiling005: 60 ver / 48 face 
+object Object033 : Object033: 0 ver / 0 face 
+object Object034 : Object034: 0 ver / 0 face 
+object Object035 : Object035: 0 ver / 0 face 
+object pass_shelf004 : pass_shelf004: 8 ver / 4 face 
+object pass_pillar005 : pass_pillar005: 8 ver / 4 face 
+object pass_pillar006 : pass_pillar006: 8 ver / 4 face 
+object pass_ceiling006 : pass_ceiling006: 60 ver / 48 face 
+object Object036 : Object036: 0 ver / 0 face 
+object Object037 : Object037: 0 ver / 0 face 
+object Object038 : Object038: 0 ver / 0 face 
+object pass_shelf005 : pass_shelf005: 8 ver / 4 face 
+object pass_ceiling007 : pass_ceiling007: 60 ver / 48 face 
+object Object039 : Object039: 0 ver / 0 face 
+object Object040 : Object040: 0 ver / 0 face 
+object Object041 : Object041: 0 ver / 0 face 
+object pass_shelf006 : pass_shelf006: 8 ver / 4 face 
+object pass_pillar007 : pass_pillar007: 8 ver / 4 face 
+object pass_pillar008 : pass_pillar008: 8 ver / 4 face 
+object pass_ceiling008 : pass_ceiling008: 60 ver / 48 face 
+object Object042 : Object042: 0 ver / 0 face 
+object Object043 : Object043: 0 ver / 0 face 
+object Object044 : Object044: 0 ver / 0 face 
+object pass_shelf007 : pass_shelf007: 8 ver / 4 face 
+object pass_pillar : pass_pillar: 32 ver / 24 face 
+object pass_pillar : pass_pillar: 330 ver / 139 face 
+object pass_ceiling : pass_ceiling: 4 ver / 1 face 
+object pass_floowh : pass_floowh: 4 ver / 1 face 
+object pass_window : pass_window: 204 ver / 156 face 
+object pass_wall : pass_wall: 106 ver / 66 face 
+object pass_pillar001 : pass_pillar001: 330 ver / 139 face 
+object pass_ceiling001 : pass_ceiling001: 4 ver / 1 face 
+object pass_floowh001 : pass_floowh001: 4 ver / 1 face 
+object pass_window001 : pass_window001: 204 ver / 156 face 
+object pass_wall001 : pass_wall001: 106 ver / 66 face 
+object pass_placard : pass_placard: 80 ver / 60 face 
+object pass_wall01 : pass_wall01: 0 ver / 0 face 
+object pass_stuff : pass_stuff: 16 ver / 9 face 
+object pass_pillarb : pass_pillarb: 56 ver / 34 face 
+object pass_wall : pass_wall: 8 ver / 4 face 
+object pass_placard001 : pass_placard001: 80 ver / 60 face 
+object pass_wall002 : pass_wall002: 0 ver / 0 face 
+object pass_stuff001 : pass_stuff001: 16 ver / 9 face 
+object pass_pillarb001 : pass_pillarb001: 56 ver / 34 face 
+object pass_wall003 : pass_wall003: 8 ver / 4 face 
+object pass_placard002 : pass_placard002: 80 ver / 60 face 
+object pass_wall004 : pass_wall004: 0 ver / 0 face 
+object pass_stuff002 : pass_stuff002: 16 ver / 9 face 
+object pass_pillarb002 : pass_pillarb002: 56 ver / 34 face 
+object pass_wall005 : pass_wall005: 8 ver / 4 face 
+object pass_placard003 : pass_placard003: 80 ver / 60 face 
+object pass_wall006 : pass_wall006: 0 ver / 0 face 
+object pass_stuff003 : pass_stuff003: 16 ver / 9 face 
+object pass_pillarb003 : pass_pillarb003: 56 ver / 34 face 
+object pass_wall007 : pass_wall007: 8 ver / 4 face 
+RSBsp Info : 1680 faces
+Scene Dimension ( 2274.3 4244.5 2451.3 )
+Export Objects.
+Export description.. 
+Saving Source Data.
+CSG union - 1 objects
+construct object subtree hide_1 ( 326 source polygon ) : total 68 faces splitted 41 leaf nodes 194 nodes 769 polygons
+0 faces eliminated. (solid)
+326 source polygons remain
+optimized 223 polygons remain
+Generating Convex polygons...
+Optimize Polygon 1680 -> 1640 
+Constructing Collision BspTree. ( 223 source polygons )
+Collision Bsp Info : total 262 faces splitted 36 leaf nodes 343 nodes 958 polygons
+Constructing OcTree. ( 1640 source polygons )
+Octree Info : total 608 faces splitted 12 leaf nodes 23 nodes 2248 polygons
+Constructing BspTree. ( 1640 source polygons )
+RSBsp Info : total 5607 faces splitted 3077 leaf nodes 6153 nodes 7247 polygons
+Constructing Bsp Bounding Volumes.
+Saving Bsp information.
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_쉬움\16\G_Easy_6.RS file saved
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_쉬움\16\G_Easy_6.RS.bsp file saved
+D:\Gunz\기획서\GunZ\레벨디자인\게릴라_쉬움\16\G_Easy_6.RS.col file saved
+Exporting takes 0 minutes and     12 seconds.
+Done.

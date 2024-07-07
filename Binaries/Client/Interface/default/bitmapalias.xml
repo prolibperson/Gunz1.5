@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XML ID="BitmapAlias">
+
+<!-- 로비 페이지 선택 1~6 버튼 -->
+  <BITMAPALIAS name="pagea1_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea1_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>16</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea2_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea2_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>48</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea3_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea3_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>80</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea4_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea4_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>112</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea5_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea5_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>144</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea6_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>160</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea6_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>176</X>
+  		<Y>0</Y>
+  		<W>16</W>
+  		<H>16</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  
+<!-- 스테이지 플레이어 상태 아이콘 -->
+
+  <!-- Red -->
+  <BITMAPALIAS name="stg_status_member_red_ready.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>16</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_member_red_equip.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>16</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_member_red.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>16</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_red_ready.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>16</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_red_equip.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>16</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_red.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>160</X>
+  		<Y>16</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+
+  <!-- normal -->
+  <BITMAPALIAS name="stg_status_member_normal_ready.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_member_normal_equip.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_member_normal.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_normal_ready.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_normal_equip.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_normal.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>160</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+
+  <!-- Blue -->
+  <BITMAPALIAS name="stg_status_member_blue_ready.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>80</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_member_blue_equip.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>80</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_member_blue.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>80</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_blue_ready.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>80</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_blue_equip.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>80</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_blue.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>160</X>
+  		<Y>80</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+
+  <!-- Observer -->
+  <BITMAPALIAS name="stg_status_member_observer.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="stg_status_master_observer.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>160</X>
+  		<Y>48</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  
+<!-- 로비 페이지 화살표 -->
+  <BITMAPALIAS name="player_cursor_t_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="player_cursor_t_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="player_cursor_b_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="player_cursor_b_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea_cursor_r_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea_cursor_r_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>160</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea_cursor_l_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>192</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="pagea_cursor_l_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>224</X>
+  		<Y>112</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+
+<!-- 로비 플레이어 상태 -->
+  <BITMAPALIAS name="player_status_stage.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>192</X>
+  		<Y>0</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="player_status_player.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>224</X>
+  		<Y>0</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="player_status_lobby.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>192</X>
+  		<Y>32</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="player_status_game.tga">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>224</X>
+  		<Y>32</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+
+<!-- 스크롤바 버튼 및 thumb -->
+  <BITMAPALIAS name="scrollbtn_up_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_up_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>22</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_dn_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>44</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_dn_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>66</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_rt_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>88</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_rt_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>110</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_lt_off.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>132</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_lt_on.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>154</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="scrollbtn_thumb.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>176</X>
+  		<Y>144</Y>
+  		<W>22</W>
+  		<H>22</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+
+  
+<!-- 듀얼 토너먼트 계급장 아이콘 -->
+  <BITMAPALIAS name="dt_grade10.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>166</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade9.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>166</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade8.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>166</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade7.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>166</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade6.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>166</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade5.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>0</X>
+  		<Y>198</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade4.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>32</X>
+  		<Y>198</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade3.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>64</X>
+  		<Y>198</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade2.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>96</X>
+  		<Y>198</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  <BITMAPALIAS name="dt_grade1.png">
+  	<SOURCE>interface.tga</SOURCE>
+  	<BOUNDS>
+  		<X>128</X>
+  		<Y>198</Y>
+  		<W>32</W>
+  		<H>32</H>
+  	</BOUNDS>
+  </BITMAPALIAS>
+  
+  <!--SpyMode-->
+	<BITMAPALIAS name="Spy_EventMsg_ComingSoonOpenSpy.png">
+		<SOURCE>Spy_EventMsg.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>1024</W> <H>72</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Spy_EventMsg_Survive.png">
+		<SOURCE>Spy_EventMsg.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>72</Y> <W>1024</W> <H>72</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Spy_EventMsg_EliminateSpy.png">
+		<SOURCE>Spy_EventMsg.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>144</Y> <W>1024</W> <H>72</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Spy_Notice_Wait_OtherPlayer.png">
+		<SOURCE>Spy_EventMsg.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>753</Y> <W>675</W> <H>109</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Spy_Notice_Tracer.png">
+		<SOURCE>Spy_EventMsg.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>862</Y> <W>390</W> <H>80</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Spy_Notice_Spy.png">
+		<SOURCE>Spy_EventMsg.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>943</Y> <W>390</W> <H>80</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<!--BLitzKrieg-->
+	
+ 	<BITMAPALIAS name="BlitzKriegClassSelect_Frame_Blue.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>665</W> <H>490</H> </BOUNDS>
+	</BITMAPALIAS>
+	 <BITMAPALIAS name="BlitzKriegClassSelect_Frame_Red.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>510</Y> <W>665</W> <H>490</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<!-- 전격전 Combat UI -->	
+	<BITMAPALIAS name="Blitz_Top_UI.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>1024</W> <H>90</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="BlueTeam_Logo.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>430</X> <Y>100</Y> <W>40</W> <H>40</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="RedTeam_Logo.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>552</X> <Y>100</Y> <W>40</W> <H>40</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Hunter_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>  0</X> <Y> 0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Slaughter_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Trickster_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Gladiator_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>384</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Duelist_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Incinerator_blue.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="CombatOfficer_blue.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>768</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Assassin_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>896</X> <Y>0</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Terrorist_blue.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>   0</X> <Y>640</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	
+	<BITMAPALIAS name="Hunter_Red.png"> 		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>  0</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Slaughter_Red.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Trickster_Red.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Gladiator_Red.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>384</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Duelist_Red.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Incinerator_Red.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="CombatOfficer_Red.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>768</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Assassin_Red.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>896</X> <Y>128</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Terrorist_Red.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>640</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	
+	<BITMAPALIAS name="Hunter_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>  0</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Slaughter_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Trickster_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Gladiator_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>384</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Duelist_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Incinerator_over.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="CombatOfficer_over.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>768</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Assassin_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>896</X> <Y>256</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Terrorist_over.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>640</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	
+	<BITMAPALIAS name="Hunter_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>  0</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Slaughter_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Trickster_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Gladiator_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>384</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Duelist_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Incinerator_down.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="CombatOfficer_down.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>768</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Assassin_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>896</X> <Y>384</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Terrorist_down.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>384</X> <Y>640</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	
+	<BITMAPALIAS name="Hunter_disable.png">		<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>  0</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Slaughter_disable.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Trickster_disable.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Gladiator_disable.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>384</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Duelist_disable.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Incinerator_disable.png"><SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="CombatOfficer_disable.png"><SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>768</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Assassin_disable.png">	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>896</X> <Y>512</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Terrorist_disable.png"> 	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>640</Y> <W>128</W> <H>128</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Focus_Blue.png">
+		<SOURCE>Blitz_Icon.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>960</Y> <W>64</W> <H>64</H> </BOUNDS>
+	</BITMAPALIAS>	
+	
+	<BITMAPALIAS name="Blitz_Focus_Red.png">
+		<SOURCE>Blitz_Icon.png</SOURCE>
+		<BOUNDS> <X>65</X> <Y>960</Y> <W>64</W> <H>64</H> </BOUNDS>
+	</BITMAPALIAS>	
+	
+	<BITMAPALIAS name="Blitz_Player_hp.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>318</X> <Y>145</Y> <W>125</W> <H>9</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Player_hp_Frame.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>318</X> <Y>165</Y> <W>125</W> <H>11</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_Player_ap.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>458</X> <Y>145</Y> <W>125</W> <H>9</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Player_ap_Frame.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>458</X> <Y>165</Y> <W>125</W> <H>11</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_Red_HP.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>598</X> <Y>145</Y> <W>145</W> <H>10</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Red_HP_Frame.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>598</X> <Y>169</Y> <W>145</W> <H>12</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_Blue_HP.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>598</X> <Y>195</Y> <W>145</W> <H>10</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Blue_HP_Frame.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>598</X> <Y>219</Y> <W>145</W> <H>12</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_TimeNum_Blue.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>760</Y> <W>512</W> <H>128</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_TimeNum_Red.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>888</Y> <W>512</W> <H>128</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_AbilityList_Open.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>91</Y> <W>310</W> <H>635</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_AbilityList_Close.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>0</X> <Y>730</Y> <W>310</W> <H>25</H> </BOUNDS>
+	</BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Ability_DPS_Icon_Level1.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>64</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_DPS_Icon_Level2.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_DPS_Icon_Level3.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>192</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_DPS_Icon_Level4.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_DPS_Icon_Level5.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>320</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Ability_Delay_Icon_Level1.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>448</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Delay_Icon_Level2.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Delay_Icon_Level3.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>576</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Delay_Icon_Level4.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Delay_Icon_Level5.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>704</X> <Y>768</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Ability_HPAP_Icon_Level1.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>64</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_HPAP_Icon_Level2.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_HPAP_Icon_Level3.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>192</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_HPAP_Icon_Level4.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_HPAP_Icon_Level5.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>320</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Ability_Enchant_Icon_Level1.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>64</X> <Y>892</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Enchant_Icon_Level2.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>128</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Enchant_Icon_Level3.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>192</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Enchant_Icon_Level4.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Enchant_Icon_Level5.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>320</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Ability_Magazine_Icon_Level1.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>448</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Magazine_Icon_Level2.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Magazine_Icon_Level3.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>576</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Magazine_Icon_Level4.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Magazine_Icon_Level5.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>704</X> <Y>832</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Ability_Revive_Icon_Level1.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>448</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Revive_Icon_Level2.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>512</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Revive_Icon_Level3.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>576</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Revive_Icon_Level4.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>640</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Ability_Revive_Icon_Level5.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>704</X> <Y>896</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>	
+
+
+	<BITMAPALIAS name="Blitz_Grade_Gold.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>192</X> <Y>960</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Grade_Silver.png"> <SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>256</X> <Y>960</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Grade_Bronze.png"> 	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>320</X> <Y>960</Y> <W>64</W> <H>64</H> </BOUNDS> </BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_Resuld_MVP.png"> 	<SOURCE>Blitz_Icon.png</SOURCE> <BOUNDS> <X>386</X> <Y>974</Y> <W>62</W> <H>40</H> </BOUNDS> </BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_ScoreBoard_Blue.png"> 
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE> 
+		<BOUNDS> <X>0</X> <Y>0</Y> <W>648</W> <H>488</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_ScoreBoard_Red.png"> 
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE> 
+		<BOUNDS> <X>0</X> <Y>503</Y> <W>648</W> <H>488</H> </BOUNDS>
+	</BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Result_Blue_Win.png"> 
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE> 
+		<BOUNDS> <X>676</X> <Y>1</Y> <W>184</W> <H>50</H> </BOUNDS>
+	</BITMAPALIAS>
+		<BITMAPALIAS name="Blitz_Result_Blue_Lose.png"> 
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE> 
+		<BOUNDS> <X>676</X> <Y>55</Y> <W>237</W> <H>50</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Result_Red_Win.png"> 
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE> 
+		<BOUNDS> <X>676</X> <Y>109</Y> <W>184</W> <H>50</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Result_Red_Lose.png"> 
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE> 
+		<BOUNDS> <X>676</X> <Y>163</Y> <W>237</W> <H>50</H> </BOUNDS>
+	</BITMAPALIAS>
+
+	<BITMAPALIAS name="Blitz_Lobby_Match_Button_On.png">
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE>
+		<BOUNDS> <X>680</X> <Y>246</Y> <W>197</W> <H>50</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Lobby_Match_Button_Down.png">
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE>
+		<BOUNDS> <X>680</X> <Y>299</Y> <W>197</W> <H>50</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Lobby_Match_Search_Desc.png">
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE>
+		<BOUNDS> <X>648</X> <Y>442</Y> <W>375</W> <H>169</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Lobby_Team_Member_BG.png">
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE>
+		<BOUNDS> <X>648</X> <Y>674</Y> <W>375</W> <H>169</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Lobby_Team_Member.png">
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE>
+		<BOUNDS> <X>664</X> <Y>628</Y> <W>359</W> <H>31</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Lobby_Char_Info.png">
+		<SOURCE>Blitz_ScoreBoard_UI.png</SOURCE>
+		<BOUNDS> <X>648</X> <Y>854</Y> <W>375</W> <H>169</H> </BOUNDS>
+	</BITMAPALIAS>
+
+
+	<BITMAPALIAS name="Blitz_EventMsg_0.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>5</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_1.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>54</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_2.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>103</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_3.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>152</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_4.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>201</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_5.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>250</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_6.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>299</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_7.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>348</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_8.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>397</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_9.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>446</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_10.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>495</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_11.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>544</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_12.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>593</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_13.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>642</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_14.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>691</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_EventMsg_15.png">
+		<SOURCE>Blitz_Class_Select_UI.png</SOURCE>
+		<BOUNDS> <X>667</X> <Y>740</Y> <W>357</W> <H>42</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_Tip_Bg.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>806</X> <Y>91</Y> <W>218</W> <H>143</H> </BOUNDS>
+	</BITMAPALIAS>
+	
+	<BITMAPALIAS name="Blitz_Barricade_Bg.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>806</X> <Y>244</Y> <W>218</W> <H>316</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Radar_Blue.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>804</X> <Y>563</Y> <W>21</W> <H>22</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Radar_Red.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>826</X> <Y>563</Y> <W>21</W> <H>22</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Barricade_Blue.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>850</X> <Y>566</Y> <W>16</W> <H>16</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Barricade_Blue_Destroy.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>870</X> <Y>566</Y> <W>16</W> <H>16</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Barricade_Red.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>891</X> <Y>566</Y> <W>16</W> <H>16</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_Barricade_Red_Destroy.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>912</X> <Y>566</Y> <W>16</W> <H>16</H> </BOUNDS>
+	</BITMAPALIAS>
+	<BITMAPALIAS name="Blitz_HonorItem.png">
+		<SOURCE>Blitz_Combat_UI.png</SOURCE>
+		<BOUNDS> <X>933</X> <Y>566</Y> <W>16</W> <H>16</H> </BOUNDS>
+	</BITMAPALIAS>
+  
+</XML>

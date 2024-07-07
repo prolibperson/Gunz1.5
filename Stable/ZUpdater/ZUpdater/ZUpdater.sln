@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZUpdater", "ZUpdater\ZUpdater.csproj", "{EE864C53-E5FC-495D-A722-3051F3E83F74}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE864C53-E5FC-495D-A722-3051F3E83F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE864C53-E5FC-495D-A722-3051F3E83F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE864C53-E5FC-495D-A722-3051F3E83F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE864C53-E5FC-495D-A722-3051F3E83F74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9DDE164B-F32F-45C0-872E-66F8D8F61CCB}
+	EndGlobalSection
+EndGlobal

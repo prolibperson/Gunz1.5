@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<XML>
+		<!-- collheight originally 80, pos y originally -200-->
+		<OBJECT name="platform" model="tresure_idle.elu" collradius="0" collwidth="200" collheight="60" moving="true" collidable="true" reverseanimation="true" sound="mt_wod" usepath="false">
+			<POSITION>13,0,0</POSITION>
+			<ENDPOSITION>13,-400,1500</ENDPOSITION>
+			<DIRECTION>0,1,0</DIRECTION>
+			<SPEED>230</SPEED>
+			<SCALE>5,0.5,2</SCALE> <!-- 2,0.5,2-->
+			<MINHEIGHT>0</MINHEIGHT>
+			<MAXHEIGHT>1500</MAXHEIGHT>
+			<COLLISION>1</COLLISION>
+		</OBJECT>
+		
+		<OBJECT name="Rock" model="gzd_map_DG_rock.elu" collradius="110" collwidth="0" collheight="260" moving="false" collidable="true">
+			<POSITION>30,-400,0</POSITION>
+			<DIRECTION>0,1,0</DIRECTION>
+			<SPEED>0</SPEED>
+			<SCALE>2,2,2</SCALE>
+			<COLLISION>0</COLLISION>
+		</OBJECT>
+
+	<!--	<OBJECT name="MansionLightning" model="ef_lighteningball.elu" moving="true" collidable="false" sound="mt_wod" usepath="false">
+			<POSITION>13,-50,-0</POSITION>
+			<ENDPOSITION>0,-50,550</ENDPOSITION>
+			<DIRECTION>0,1,0</DIRECTION>
+			<SPEED>50</SPEED>
+			<SCALE>1.5,1,1</SCALE>
+			<MINHEIGHT>0</MINHEIGHT>
+			<MAXHEIGHT>1500</MAXHEIGHT>
+			<COLLISION>1</COLLISION>
+		</OBJECT>-->
+	
+</XML>

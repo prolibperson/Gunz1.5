@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<PICTURE>minimap_town.bmp</PICTURE>
+	<LEFTTOP>
+		<X>5580</X>
+		<Y>4360</Y>
+	</LEFTTOP>
+	<RIGHTBOTTOM>
+		<X>-4730</X>
+		<Y>-5960</Y>
+	</RIGHTBOTTOM>
+</XML>

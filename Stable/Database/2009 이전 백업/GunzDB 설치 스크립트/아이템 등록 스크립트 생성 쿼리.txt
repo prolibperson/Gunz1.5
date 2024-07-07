@@ -1,0 +1,30 @@
+SELECT 'INSERT INTO Item(ItemID, Name, TotalPoint, ResSex, ResRace, ResLevel, Slot, Weight, BountyPrice, Damage, Delay
+	, EffectID, Controllability, Magazine, ReloadTime, SlugOutput, Gadget, HP, AP, MaxWT, Description, MaxBullet
+	, LimitSpeed, IsCashItem) VALUES ('
+	+ CAST(ItemID AS VARCHAR(125)) + ','
+	+ '''' + Name + ''','
+	+ CAST(ISNULL(TotalPoint, 0) AS VARCHAR(125)) + ','
+	+ cast(ISNULL(ressex, 0) as varchar(125)) + ','
+	+ cast(ISNULL(resrace, 0) as varchar(125)) + ','
+	+ cast(ISNULL(reslevel, 0) as varchar(125)) + ','
+	+ cast(ISNULL(slot, 0) as varchar(125)) + ','
+	+ cast(ISNULL(weight, 0) as varchar(125)) + ','
+	+ cast(ISNULL(bountyprice, 0) as varchar(125)) + ','
+	+ cast(ISNULL(Damage, 0) as varchar(125)) + ','
+	+ cast(ISNULL(Delay, 0) as varchar(125)) + ','
+	+ cast(ISNULL(EffectID, 0) as varchar(125)) + ','
+	+ cast(ISNULL(Controllability, 0) as varchar(125)) + ','
+	+ cast(ISNULL(Magazine, 0) as varchar(125)) + ','
+	+ cast(ISNULL(ReloadTime, 0) as varchar(125)) + ','
+	+ cast(ISNULL(SlugOutput, 0) as varchar(125)) + ','
+	+ cast(ISNULL(Gadget, 0) as varchar(125)) + ','
+	+ cast(ISNULL(HP, 0) as varchar(125)) + ','
+	+ cast(ISNULL(AP, 0) as varchar(125)) + ','
+	+ cast(ISNULL(MaxWT, 0) as varchar(125)) + ','
+	+ 'NULL,'
+	+ cast(ISNULL(MaxBullet, 0) as varchar(125)) + ','
+	+ cast(ISNULL(LimitSpeed, 0) as varchar(125)) + ','
+	+ cast(ISNULL(IsCashItem, 0) as varchar(125)) + ')'
+FROM Item(NOLOCK)
+
+

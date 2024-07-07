@@ -1,0 +1,65 @@
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_502006">새크리파이스</STR>
+<STR id="ZITEM_DESC_502006">고대, 의식에 사용되었을 것이라 여겨지는 검. 검신은 쇠가 아닌 수수께끼의 금속이 사용되었으며, 그 날은 수세기 전의 물건임에도 전혀 무뎌짐이 없다.</STR>
+
+	<ITEM id="502006" name="STR:ZITEM_NAME_502006" mesh_name="katana18" totalpoint="0" type="melee"
+		res_sex="a" res_level="40" slot="melee" weapon="katana" weight="11" bt_price="500000"
+		delay="450" damage="26" ctrl_ability="0" magazine="0" reloadtime="0" slug_output="false"
+		gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0" lr="0" color="#FFFFFFFF"
+		image_id="0" bullet_image_id="0" magazine_image_id="0" iscashitem="true" desc="STR:ZITEM_DESC_502006"/>
+
+INSERT INTO Item (ItemID, Name) Values (502006, '새크리파이스')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=26, Delay=450, Controllability=0, Magazine=0, ReloadTime=0, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=0, LimitSpeed=100, IsCashItem=1, 
+ResSex=3, ResLevel=40, Slot=1, Weight=11, HP=0, AP=0, MAXWT=0, 
+Description='고대, 의식에 사용되었을 것이라 여겨지는 검. 검신은 쇠가 아닌 수수께끼의 금속이 사용되었으며, 그 날은 수세기 전의 물건임에도 전혀 무뎌짐이 없다.' 
+WHERE ItemID = 502006
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_504504">피스메이커 x2</STR>
+<STR id="ZITEM_DESC_504504">매그넘 탄환을 사용하여 화력을 보강한 두자루의 리볼버. 반동을 줄이고 연사력을 높이기 위해 무게를 높이다 보니 총이 대형화되었다.</STR>
+
+	<ITEM id="504504" name="STR:ZITEM_NAME_504504" mesh_name="pistol11x2" totalpoint="0" type="range"
+		res_sex="a" res_level="40" slot="range" weapon="revolverx2" weight="17" bt_price="500000"
+		delay="400" damage="50" ctrl_ability="90" magazine="6" maxbullet="48" reloadtime="8"
+		slug_output="true" gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0"
+		lr="0" color="#FFFFFFFF" image_id="1" bullet_image_id="0" magazine_image_id="0" snd_reload="we_revolver_reload"
+		snd_fire="we_revolver_fire" snd_dryfire="357magrevolver_dryfire" desc="STR:ZITEM_DESC_504504" effect_id="4" />
+
+INSERT INTO Item (ItemID, Name) Values (504504, '피스메이커 x2')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=50, Delay=400, Controllability=90, Magazine=6, ReloadTime=8, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=48, LimitSpeed=100, IsCashItem=1, 
+ResSex=3, ResLevel=40, Slot=2, Weight=17, HP=0, AP=0, MAXWT=0, 
+Description='매그넘 탄환을 사용하여 화력을 보강한 두자루의 리볼버. 반동을 줄이고 연사력을 높이기 위해 무게를 높이다 보니 총이 대형화되었다.' 
+WHERE ItemID = 504504
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_506005">파이오니어</STR>
+<STR id="ZITEM_DESC_506005">총의 내부 구조를 크게 변경하여 보다 빠른 연사와 높은 장탄수를 확보하도록 한 샷건. 그 선구적인 시도로 인해 '개척자'라는 이름이 붙게 되었다.</STR>
+
+	<ITEM id="506005" name="STR:ZITEM_NAME_506005" mesh_name="shotgun11" totalpoint="0" type="range"
+		res_sex="a" res_level="40" slot="range" weapon="shotgun" weight="18" bt_price="0"
+		delay="1000" damage="9" ctrl_ability="70" magazine="6" maxbullet="30" reloadtime="5"
+		slug_output="true" gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0"
+		lr="0" color="#FFFFFFFF" image_id="2" bullet_image_id="0" magazine_image_id="0" snd_reload="we_shotgunpa_reload"
+		snd_fire="we_shotgunpa_fire" snd_dryfire="762arifle_dryfire" desc="STR:ZITEM_DESC_506005"
+		effect_id="7" />
+
+INSERT INTO Item (ItemID, Name) Values (506005, '파이오니어')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=9, Delay=1000, Controllability=70, Magazine=6, ReloadTime=5, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=30, LimitSpeed=100, IsCashItem=1, 
+ResSex=3, ResLevel=40, Slot=2, Weight=18, HP=0, AP=0, MAXWT=0, 
+Description='총의 내부 구조를 크게 변경하여 보다 빠른 연사와 높은 장탄수를 확보하도록 한 샷건. 그 선구적인 시도로 인해 ''개척자''라는 이름이 붙게 되었다.' 
+WHERE ItemID = 506005
+--------------------------------------------------------------------------------------
+<STR id="ZITEM_NAME_507004">가룸</STR>
+<STR id="ZITEM_DESC_507004">월콤사에서 비밀리에 개발중이던 테스트 모델. 무게를 줄이고 장탄수를 늘리기 위해 최신의 기술이 총에 도입되었다.</STR>
+
+	<ITEM id="507004" name="STR:ZITEM_NAME_507004" mesh_name="rifle17" totalpoint="0" type="range"
+		res_sex="a" res_level="40" slot="range" weapon="rifle" weight="18" bt_price="0"
+		delay="100" damage="19" ctrl_ability="30" magazine="36" maxbullet="180" reloadtime="6"
+		slug_output="true" gadget_id="0" hp="0" ap="0" maxwt="0" sf="0" fr="0" cr="0" pr="0"
+		lr="0" color="#FFFFFFFF" image_id="2" bullet_image_id="0" magazine_image_id="0" snd_reload="we_rifle_reload"
+		snd_fire="we_rifle_fire" snd_dryfire="762arifle_dryfire" desc="STR:ZITEM_DESC_507004"
+		effect_id="8" />
+
+INSERT INTO Item (ItemID, Name) Values (507004, '가룸')
+UPDATE Item SET TotalPoint=0, BountyPrice=0, Damage=19, Delay=100, Controllability=30, Magazine=36, ReloadTime=6, SlugOutput=0, Gadget=0, SF=0, FR=0,CR=0,PR=0,LR=0, BlendColor=0, ModelName='', MaxBullet=180, LimitSpeed=100, IsCashItem=1, 
+ResSex=3, ResLevel=40, Slot=2, Weight=18, HP=0, AP=0, MAXWT=0, 
+Description='월콤사에서 비밀리에 개발중이던 테스트 모델. 무게를 줄이고 장탄수를 늘리기 위해 최신의 기술이 총에 도입되었다.' 
+WHERE ItemID = 507004

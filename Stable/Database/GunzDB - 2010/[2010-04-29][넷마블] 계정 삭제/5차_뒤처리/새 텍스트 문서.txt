@@ -1,0 +1,13 @@
+AccountDeleteTargetNotExist
+
+	SELECT 	t.AID, t.UserID, t.cn, a.LastLogoutTime
+	FROM 	Temp_baduser_nothing t
+			, Account a(NOLOCK)
+	WHERE 	a.AID = t.AID
+	AND 	a.LastLogoutTime IS NOT NULL
+
+
+
+
+--DROP TABLE Temp_baduser_nothing;
+--DROP TABLE Temp_baduser_active;

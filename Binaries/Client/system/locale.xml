@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<XML>
+	<LOCALE>
+ 		<COUNTRY>BRZ</COUNTRY>
+		<LANGUAGE>BRZ</LANGUAGE>
+		<MAXPLAYERS>64</MAXPLAYERS>
+		<SELECTABLE_LANGUAGES> <!-- Hard-Coded via Source -->
+				<LANGUAGE id="USA" name="English" />
+				<LANGUAGE id="DUT" name="Dutch" />
+				<LANGUAGE id="SPA" name="Spanish"/>
+				<LANGUAGE id="POR" name="Portugeuse" />
+				<LANGUAGE id="GER" name="German"/>
+				<LANGUAGE id="KOR" name="Korean"/>
+				<LANGUAGE id="JAP" name="Japanese"/>
+		</SELECTABLE_LANGUAGES> 
+	</LOCALE>
+</XML>
