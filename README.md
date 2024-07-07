@@ -15,7 +15,8 @@ Damage Counter counts both HP and AP damage,
 FOV Option, 
 UI Changes, 
 FPS Counter updates every .25 seconds (hopefully), 
-Can read from unpacked MRSES (gets enabled and disabled in config.h)
+Can read from unpacked MRSES (gets enabled and disabled in config.h),
+UpTimeFaker to fix an uptime related issue
 
 I probably forgot some stuff I did T-T
 
