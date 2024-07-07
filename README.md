@@ -1,3 +1,8 @@
+# prolib's Gunz1.5 
+This source is made by Jetman, but the state it got released in isnt the greatest.
+So, since I'm very nice and pro, here is a better "Jetman Source".
+
+# original readme
 # Gunz1.5
 
 This source contains all official game modes, as well as 
