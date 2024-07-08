@@ -2,6 +2,8 @@
 This source is made by Jetman, but the state it got released in isnt the greatest.
 So, since I'm very nice, here is a better "Jetman Source".
 
+Compile this in Release Win32.
+
 Features:
 Achievement system commented out (its unfinished and causes a deathmatch matchserver crash... zz), 
 Quest Fixes from Jetman, 
