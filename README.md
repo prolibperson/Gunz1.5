@@ -6,35 +6,33 @@ Compile this in Release Win32.
 
 Features:
 
-Achievement system commented out (its unfinished and causes a deathmatch matchserver crash... zz), 
+    Achievement system commented out (its unfinished and causes a deathmatch matchserver crash... zz), 
 
-Quest Fixes from Jetman, 
+    Quest Fixes from Jetman, 
 
-Ammo Bar works properly, 
+    Ammo Bar works properly, 
 
-Medkits fixed, 
+    Medkits fixed, 
 
-Sword Reload Fix (checks for nullptr unlike my old fix, credits to Lotus), 
+    Sword Reload Fix (checks for nullptr unlike my old fix, credits to Lotus), 
 
-Compiles with C++17, 
+    Compiles with C++17, 
 
-FPS Limiter improvements, 
+    FPS Limiter improvements, 
 
-Duel Tournament should be functional (make sure to set DB up properly), 
+    Duel Tournament should be functional (make sure to set DB up properly), 
 
-Damage Counter counts both HP and AP damage, 
+    Damage Counter counts both HP and AP damage, 
 
-FOV Option, 
+    FOV Option, 
 
-UI Changes, 
+    UI Changes, 
 
-FPS Counter updates every .25 seconds (hopefully), 
+    FPS Counter updates every .25 seconds (hopefully), 
 
-Can read from unpacked MRSES (gets enabled and disabled in config.h),
+    Can read from unpacked MRSES (gets enabled and disabled in config.h),
 
-UpTimeFaker to fix an uptime related issue,
-
-No Locator
+    UpTimeFaker to fix an uptime related issue,
 
 I probably forgot some stuff I did T-T
 
