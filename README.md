@@ -5,20 +5,35 @@ So, since I'm very nice, here is a better "Jetman Source".
 Compile this in Release Win32.
 
 Features:
+
 Achievement system commented out (its unfinished and causes a deathmatch matchserver crash... zz), 
+
 Quest Fixes from Jetman, 
+
 Ammo Bar works properly, 
+
 Medkits fixed, 
+
 Sword Reload Fix (checks for nullptr unlike my old fix, credits to Lotus), 
+
 Compiles with C++17, 
+
 FPS Limiter improvements, 
+
 Duel Tournament should be functional (make sure to set DB up properly), 
+
 Damage Counter counts both HP and AP damage, 
+
 FOV Option, 
+
 UI Changes, 
+
 FPS Counter updates every .25 seconds (hopefully), 
+
 Can read from unpacked MRSES (gets enabled and disabled in config.h),
+
 UpTimeFaker to fix an uptime related issue,
+
 No Locator
 
 I probably forgot some stuff I did T-T
