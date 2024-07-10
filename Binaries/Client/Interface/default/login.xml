@@ -60,7 +60,7 @@
 
 	<!-- 프레임 생성 : LoginFrame -->
 	<FRAME item="LoginFrame" parent="Login">
-		<FRAMELOOK>DefaultFrameLook</FRAMELOOK>
+		<FRAMELOOK>nullFrameLook</FRAMELOOK>
 		<BOUNDS>
 			<X>50</X>
 			<Y>60</Y>
@@ -94,7 +94,7 @@
 
 	<!-- 서버 선택 -->
 	<!-- PICTURE : Gunz -->
-	<PICTURE item ="Login_Panel" parent="LoginFrame">
+	<!--<PICTURE item ="Login_Panel" parent="LoginFrame">
 		<BOUNDS>
 			<X>110</X>
 			<Y>75</Y>
@@ -103,7 +103,7 @@
 		</BOUNDS>
 		<STRETCH/>
 		<BITMAP></BITMAP>
-	</PICTURE>	
+	</PICTURE>-->	
 
 	<!-- Picture : 레이블 바탕 -->
 	<!--<PICTURE item ="nullPicture" parent="LoginFrame">

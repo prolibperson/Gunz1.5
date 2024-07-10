@@ -489,62 +489,29 @@ bool RCloseDisplay()
 	return true;
 }
 
-//void RAdjustWindow(const RMODEPARAMS* pModeParams)
-//{
-//	if ((GetWindowLong(g_hWnd, GWL_STYLE) & WS_CHILD) != 0)
-//		return;
-//
-//	if (pModeParams->bFullScreen)
-//	{
-//		SetWindowLong(g_hWnd, GWL_STYLE, WS_POPUP | WS_SYSMENU);
-//	}
-//	else
-//		SetWindowLong(g_hWnd, GWL_STYLE, WS_POPUP | WS_CAPTION | WS_SYSMENU);
-//
-//	RECT rt = { 0,0,pModeParams->nWidth,pModeParams->nHeight };
-//	if (!pModeParams->bFullScreen)
-//	{
-//		AdjustWindowRect(&rt, GetWindowLong(g_hWnd, GWL_STYLE), FALSE);
-//		SetWindowPos(g_hWnd, HWND_NOTOPMOST, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_SHOWWINDOW);
-//	}
-//}
-
 void RAdjustWindow(const RMODEPARAMS* pModeParams)
 {
 	if ((GetWindowLong(g_hWnd, GWL_STYLE) & WS_CHILD) != 0)
 		return;
 
-	if (pModeParams->bFullScreen)
-	{
-		SetWindowLong(g_hWnd, GWL_STYLE, WS_POPUP | WS_SYSMENU);
+	if (pModeParams->bFullScreen) // Fullscreen
+		SetWindowLong(g_hWnd, GWL_STYLE, WS_VISIBLE | WS_POPUP);
+	else//windowed
+		SetWindowLong(g_hWnd, GWL_STYLE, WS_VISIBLE | WS_OVERLAPPED | WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_MAXIMIZEBOX | WS_MINIMIZEBOX);
 
-		// Get the client area coordinates
-		RECT clientRect;
-		GetClientRect(g_hWnd, &clientRect);
-
-		// Convert client area coordinates to screen coordinates
-		POINT upperLeft = { clientRect.left, clientRect.top };
-		POINT lowerRight = { clientRect.right, clientRect.bottom };
-		MapWindowPoints(g_hWnd, NULL, &upperLeft, 1);
-		MapWindowPoints(g_hWnd, NULL, &lowerRight, 1);
-
-		// Set the cursor clipping rectangle
-		RECT clipRect = { upperLeft.x, upperLeft.y, lowerRight.x, lowerRight.y };
-		ClipCursor(&clipRect);
-
-	}
-	else
-	{
-		SetWindowLong(g_hWnd, GWL_STYLE, WS_POPUP | WS_CAPTION | WS_SYSMENU);
-
-		// Release cursor clip when switching to windowed mode
-		ClipCursor(NULL);
-	}
-	RECT rt = { 0,0,pModeParams->nWidth,pModeParams->nHeight };
 	if (!pModeParams->bFullScreen)
 	{
+		int iDpi = GetDpiForWindow(g_hWnd);
+		int dpiScaledWidth = MulDiv(pModeParams->nWidth, iDpi, 96);
+		int dpiScaledHeight = MulDiv(pModeParams->nHeight, iDpi, 96);
+		RECT rt = { 0,0,dpiScaledWidth,dpiScaledHeight };
+
 		AdjustWindowRect(&rt, GetWindowLong(g_hWnd, GWL_STYLE), FALSE);
-		SetWindowPos(g_hWnd, HWND_NOTOPMOST, 0, 0, rt.right - rt.left, rt.bottom - rt.top, SWP_SHOWWINDOW);
+
+		int adjustedWidth = rt.right - rt.left;
+		int adjustedHeight = rt.bottom - rt.top;
+
+		SetWindowPos(g_hWnd, HWND_NOTOPMOST, 0, 0, adjustedWidth, adjustedHeight, SWP_SHOWWINDOW);
 	}
 }
 

@@ -6,6 +6,10 @@
 #ifndef _STDAFX_H
 #define _STDAFX_H
 
+// my eyes
+#define _CRT_SECURE_NO_WARNINGS
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
