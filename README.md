@@ -36,9 +36,6 @@ Features:
 
 I probably forgot some stuff I did T-T
 
-Note:
-Changing resolutions might be a bit messed up, will be fixed in the future
-
 shoutout to ini because without her there wouldnt be any ini files
 
 # original readme
