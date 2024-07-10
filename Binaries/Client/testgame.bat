@@ -1,1 +1,1 @@
-Gunz.exe dummy prolib 0
+Gunz.exe dummy town 0
