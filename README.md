@@ -34,6 +34,8 @@ Features:
 
     UpTimeFaker to fix an uptime related issue,
 
+    Fixed Jetman's broken DPI Fix
+
 I probably forgot some stuff I did T-T
 
 shoutout to ini because without her there wouldnt be any ini files
