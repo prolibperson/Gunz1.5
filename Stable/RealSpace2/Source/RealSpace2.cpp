@@ -1,4 +1,4 @@
-#include "stdafx.h"
+๏ปฟ#include "stdafx.h"
 #include "RealSpace2.h"
 #include "MDebug.h"
 #include "RParticleSystem.h"
@@ -104,18 +104,38 @@ HRESULT RError(int nErrCode)
 	return R_OK;
 }
 
+//typedef HRESULT(WINAPI* Direct3DCreate9Func)(UINT, IDirect3D9**);
+typedef HRESULT(WINAPI* Direct3DCreate9ExFunc)(UINT, IDirect3D9Ex**);
+
+bool isDXVK = true;
+
 bool CreateDirect3D9()
 {
 	if (!g_pD3D)
 	{
+		HMODULE hD3D9 = LoadLibrary("DXVK\\d3d9.dll");
+		if (!hD3D9)
+		{
+			return false;
+		}
+
+		Direct3DCreate9ExFunc dxvkDirect3DCreate9Ex =
+			(Direct3DCreate9ExFunc)GetProcAddress(hD3D9, "Direct3DCreate9Ex");
+
+		//Direct3DCreate9Func dxvkDirect3DCreate9 =
+			//(Direct3DCreate9Func)GetProcAddress(hD3D9, "Direct3DCreate9");
+
 		if (g_isDirect3D9ExEnabled)
 		{
-			HRESULT result = Direct3DCreate9Ex(D3D_SDK_VERSION, &g_pD3D);
+			if(isDXVK)
+				HRESULT result = dxvkDirect3DCreate9Ex(D3D_SDK_VERSION, &g_pD3D);
+			else
+				HRESULT result = Direct3DCreate9Ex(D3D_SDK_VERSION, &g_pD3D);
 		}
-		else
+		/*else
 		{
 			(LPDIRECT3D9&)g_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
-		}
+		}*/
 	}
 
 	g_pD3D->GetAdapterIdentifier(0,0,&g_DeviceID);
@@ -145,7 +165,7 @@ void RSetFileSystem(MZFileSystem *pFileSystem) { g_pFileSystem=pFileSystem; }
 
 RParticleSystem *RGetParticleSystem() { return &g_ParticleSystem; }
 
-// รสฑโศญ & มพทแ
+// รรยฑรขรยญ & รยพยทรก
 
 /*
 #include <ddraw.h>
@@ -269,7 +289,7 @@ bool RInitDisplay(HWND hWnd, const RMODEPARAMS *params)
 		RError(RERROR_CANNOT_CREATE_D3D);
 		return false;
 	}
-	// ฐกดษวั ฑืทกวศฤซตๅ ต๐นูภฬฝบ รผลฉ
+	// ยฐยกยดรรร‘ ยฑร—ยทยกรรรยซยตรฅ ยตรฐยนรร€รยฝยบ รยผร…ยฉ
 	if (CheckVideoAdapterSupported()==false)
 	{
 		if (RError(RERROR_INVALID_DEVICE) != R_OK) return false;
@@ -277,7 +297,7 @@ bool RInitDisplay(HWND hWnd, const RMODEPARAMS *params)
 
 	D3DCAPS9 d3dcaps;
 	g_pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT , D3DDEVTYPE_HAL , &d3dcaps );
-	g_pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT , D3DDEVTYPE_HAL , &g_d3dcaps );	// ฤณฦÛ ภüฟชบฏผ๖ทฮ ภ๚ภๅ
+	g_pD3D->GetDeviceCaps(D3DADAPTER_DEFAULT , D3DDEVTYPE_HAL , &g_d3dcaps );	// รยณรร ร€รผยฟยชยบยฏยผรถยทร ร€รบร€รฅ
 	
 	g_bHardwareTNL = (d3dcaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT ) != 0;
 
@@ -376,7 +396,7 @@ bool RInitDisplay(HWND hWnd, const RMODEPARAMS *params)
 #ifdef _MT
 //	mlog("multithread.\n");
 
-	// ภฬ วรทกฑืดย device ธฆ ฟฉทฏ พฒทนตๅฟกผญ พตถง ป็ฟ๋วัดู. ฦÛฦ๗ธีฝบ ภ๚วฯฐก ภึดู.
+	// ร€ร รรยทยกยฑร—ยดร device ยธยฆ ยฟยฉยทยฏ ยพยฒยทยนยตรฅยฟยกยผยญ ยพยตยถยง ยปรงยฟรซรร‘ยดร. รรรรทยธร•ยฝยบ ร€รบรรยฐยก ร€ร–ยดร.
 	BehaviorFlags|=D3DCREATE_MULTITHREADED;
 #endif
 
@@ -411,11 +431,11 @@ bool RInitDisplay(HWND hWnd, const RMODEPARAMS *params)
 		}
 	}
 #else
-	// ต๐ฦ๚ฦฎ ผผฦร
+	// ยตรฐรรบรยฎ ยผยผรร
 	UINT AdapterToUse = D3DADAPTER_DEFAULT;
 	D3DDEVTYPE DeviceType = D3DDEVTYPE_HAL;
 
-	// 'NVIDIA NVPerfHUD' พ๎ด๐ลอธฆ รฃพฦบธฐํ, ภึภธธ้ ต๐ฦ๚ฦฎ ผผฦร ด๋ฝล ฑืฐอภป ป็ฟ๋วัดู.
+	// 'NVIDIA NVPerfHUD' ยพรฎยดรฐร…รยธยฆ รยฃยพรยบยธยฐรญ, ร€ร–ร€ยธยธรฉ ยตรฐรรบรยฎ ยผยผรร ยดรซยฝร… ยฑร—ยฐรร€ยป ยปรงยฟรซรร‘ยดร.
 	for( UINT Adapter = 0; Adapter < g_pD3D->GetAdapterCount(); Adapter++ ) 
 	{    
 		D3DADAPTER_IDENTIFIER9 Identifier;    
@@ -515,7 +535,7 @@ void RAdjustWindow(const RMODEPARAMS* pModeParams)
 	}
 }
 
-// ธ๐ตๅภüศฏ & วรธฎวฮฐüทร
+// ยธรฐยตรฅร€รผรยฏ & รรยธยฎรรยฐรผยทร
 
 //void ResetFont();
 
@@ -625,7 +645,7 @@ void RResetDevice(const RMODEPARAMS* params)
 		//		mlog("device reset failed : %s\n",DXGetErrorString(hr));
 			//	mlog("device reset error %s\n", DXGetErrorDescription(hr));
 		int* a = 0;
-		*a = 1;	// นÝตๅฝร รผลฉวุบธภฺ
+		*a = 1;	// ๋ฐ๋“์ ์ฒดํฌํ•ด๋ณด์
 	}
 
 	InitDevice();
@@ -790,7 +810,7 @@ rvector RGetTransformCoord(rvector &coord)
 	return ret;
 }
 
-// ธÞธ๐ธฎธฆ ป๕ทฮ วาด็วฯนวทฮ ดู พฒธ้ ม๖ฟ๖มเพ฿วัดู.
+// ยธรยธรฐยธยฎยธยฆ ยปรตยทร รร’ยดรงรรยนรยทร ยดร ยพยฒยธรฉ รรถยฟรถรร ยพรรร‘ยดร.
 bool SaveMemoryBmp(int x,int y,void *data,void **retmemory,int *nsize)
 {
 	unsigned char *memory=NULL,*dest=NULL;
@@ -895,7 +915,7 @@ bool SaveMemoryBmp(int x,int y,void *data,void **retmemory,int *nsize)
 		return -1;  // Failure
 	} // GetCodecClsid
 
-	// data ดย ARGB 32bit ฦ๗ธห
+	// data ยดร ARGB 32bit รรทยธร
 	bool RSaveAsJpeg(int x, int y, void *data, const char *szFilename)
 	{
 		// Setting up RAW Data
@@ -937,7 +957,7 @@ bool SaveMemoryBmp(int x,int y,void *data,void **retmemory,int *nsize)
 	}
 #endif	// _USE_GDIPLUS
 
-// data ดย ARGB 32bit ฦ๗ธห
+// data ยดร ARGB 32bit รรทยธร
 bool RSaveAsBmp(int x,int y,void *data,const char *szFilename)
 {
 	void *memory;
@@ -958,7 +978,7 @@ bool RSaveAsBmp(int x,int y,void *data,const char *szFilename)
 	return true;
 }
 
-// data ดย ARGB 32bit ฦ๗ธห
+// data ยดร ARGB 32bit รรทยธร
 bool RScreenShot(int x, int y, void *data, const char *szFilename)
 {
 	char szFullFileName[_MAX_DIR];
@@ -1068,7 +1088,7 @@ LPDIRECT3DSURFACE9 RCreateImageSurface(const char *filename)
 	return pSurface;
 }
 
-// ฐจธถฐช มถภý - ฑโบปฐช = 255
+// ยฐยจยธยถยฐยช รยถร€รฝ - ยฑรขยบยปยฐยช = 255
 void RSetGammaRamp(unsigned short nGammaValue)
 {
 	D3DCAPS9 caps; 
@@ -1089,7 +1109,7 @@ void RSetGammaRamp(unsigned short nGammaValue)
 }
 
 void RSetFrameLimitPerSeceond(unsigned short nFrameLimit)
-{ // 1รสด็ วมทนภำ มฆวั (มฆวั มพท๙: นซมฆวั, 60fps, 120fps, 240fps)
+{ // 1รรยดรง รรยทยนร€ร“ รยฆรร‘ (รยฆรร‘ รยพยทรน: ยนยซรยฆรร‘, 60fps, 120fps, 240fps)
 	if (nFrameLimit >= 60 && nFrameLimit <= 1500)
 		g_nFrameLimitValue = nFrameLimit;
 	else
@@ -1155,8 +1175,8 @@ void RDrawCorn(rvector center,rvector pole,float fRadius,int nSegment)
 		rvector a=fRadius*(x*cos(fAngle)+y*sin(fAngle))+center;
 		rvector b=fRadius*(x*cos(fAngle2)+y*sin(fAngle2))+center;
 
-		RDrawLine(a,pole,0xffff0000);	// ฟทธ้
-		RDrawLine(a,b,0xffff0000);	// นุธ้
+		RDrawLine(a,pole,0xffff0000);	// ยฟยทยธรฉ
+		RDrawLine(a,b,0xffff0000);	// ยนรยธรฉ
 	}
 }
 
@@ -1187,7 +1207,7 @@ void RDrawSphere(rvector origin,float fRadius,int nSegment)
 	}
 }
 
-// ณชม฿ฟก ศญป์วฅณช ฑืทมมึธ้ มมฐฺดู -_-;
+// ยณยชรรยฟยก รยญยปรฌรยฅยณยช ยฑร—ยทรรร–ยธรฉ รรยฐรยดร -_-;
 void RDrawAxis(rvector origin,float fSize)
 {
 	RGetDevice()->SetTexture(0,NULL);
@@ -1325,12 +1345,12 @@ bool CheckVideoAdapterSupported()
 		if (ai->DeviceId == 0x7125)	// 82810E
 			bSupported = false;
 
-		// intel 810 , 815  ฝรธฎม๎
+		// intel 810 , 815  ยฝรยธยฎรรฎ
 		//if(ai->DeviceId==0x7800 || ai->DeviceId==0x7121 || ai->DeviceId==0x7123 || ai->DeviceId==0x7125 || ai->DeviceId==0x1132)
 		//	bSupported=false;
 	}
 	/*
-		if(ai->VendorId==0x1039)	// SiS ฤจผย
+		if(ai->VendorId==0x1039)	// SiS รยจยผร
 		{
 		bSupported=false;
 		}
@@ -1338,12 +1358,12 @@ bool CheckVideoAdapterSupported()
 		if(ai->DeviceId==0x8a22)
 		bSupported=false;
 		}
-		if(ai->VendorId==0x10de) {	// NVidia ฤซตๅต้
+		if(ai->VendorId==0x10de) {	// NVidia รยซยตรฅยตรฉ
 		if(ai->DeviceId==0x2c || ai->DeviceId==0x2d)
 		bSupported=false;
 		}
 		*/
-	if (ai->VendorId == 0x121a) {	// 3dfx ฤซตๅต้
+	if (ai->VendorId == 0x121a) {	// 3dfx รยซยตรฅยตรฉ
 		bSupported = false;
 	}
 

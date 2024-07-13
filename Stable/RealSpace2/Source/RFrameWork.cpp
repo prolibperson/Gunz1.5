@@ -340,7 +340,7 @@ int RMain(const char* AppName, HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR c
 
 using namespace std::chrono;
 
-int frameTimeShit1sec = 0;
+int frameTimeShithalfsec = 0;
 bool isFirstTime = true;
 
 void RFrame_UpdateRender(double& lastUpdateTime, double& lastRenderTime)
@@ -349,20 +349,17 @@ void RFrame_UpdateRender(double& lastUpdateTime, double& lastRenderTime)
 	const double maxRenderPeriod = 1000.0 / static_cast<double>(g_nFrameLimitValue);
 	double deltaTime = duration<double>(thisTime - lastRenderTime).count();
 
-	auto start = steady_clock::now();
-	auto last_time = start;
-
 	if(g_nFrameLimitValue != 0)
 	{
 		if (deltaTime >= maxRenderPeriod)
 		{
-			if (frameTimeShit1sec++ >= (g_nFrameLimitValue / 4) || isFirstTime) {
+			lastRenderTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+			if (frameTimeShithalfsec++ >= (g_nFrameLimitValue / 2) || isFirstTime) {
 				g_fFPS = deltaTime;
-				frameTimeShit1sec = 0;
+				frameTimeShithalfsec = 0;
 				if (isFirstTime)
 					isFirstTime = false;
 			}
-			lastRenderTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
 
 			RFrame_Update();
 			RFrame_Render();
@@ -376,13 +373,13 @@ void RFrame_UpdateRender(double& lastUpdateTime, double& lastRenderTime)
 	{
 		if (deltaTime >= (1000.0 / 30.f))
 		{
-			if (frameTimeShit1sec++ >= g_nFrameLimitValue || isFirstTime) {
+			lastRenderTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
+			if (frameTimeShithalfsec++ >= g_nFrameLimitValue || isFirstTime) {
 				g_fFPS = deltaTime;
-				frameTimeShit1sec = 0;
+				frameTimeShithalfsec = 0;
 				if (isFirstTime)
 					isFirstTime = false;
 			}
-			lastRenderTime = duration<double, std::ratio<1, 1000>>(high_resolution_clock::now().time_since_epoch()).count();
 
 			RFrame_Update();
 			RFrame_Render();
