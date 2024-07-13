@@ -1099,7 +1099,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 	InitLog(MLOGSTYLE_DEBUGSTRING|MLOGSTYLE_FILE);
 	mlog("GUNZ " STRFILEVER " launched. build (" __DATE__" " __TIME__") \n");
 
-	HMODULE hUptimeFaker = LoadLibrary(TEXT("Resources/UptimeFaker/UptimeFaker32.dll"));
+	HMODULE hUptimeFaker = LoadLibrary("Resources/UptimeFaker/UptimeFaker32.dll");
 	if (!hUptimeFaker)
 	{
 		mlog("Failed to load UptimeFaker32.dll, continuing without\n");
@@ -1111,39 +1111,6 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 #ifndef DEVELOPER_MODE
 	ZInitAnticheat();
 #endif
-
-	//std::ifstream infile("DXVK/dxvk.txt");
-	//if (infile || !infile.fail()) {
-	//	int value;
-	//	infile >> value;
-
-	//	infile.close();
-
-	//	// Get the current executable directory
-	//	char buffer[256];
-	//	GetModuleFileName(NULL, buffer, 256);
-	//	std::string exePath(buffer);
-	//	std::string::size_type pos = exePath.find_last_of("\\/");
-	//	std::string exeDir = exePath.substr(0, pos);
-
-	//	std::string dllPath = exeDir + "\\d3d9.dll";
-	//	std::string sourceDllPath = exeDir + "\\DXVK\\d3d9.dll";
-
-	//	if (value == 1) {
-	//		// Duplicate the DXVK/d3d9.dll to the executable directory
-	//		if (std::filesystem::exists(sourceDllPath)) {
-	//			std::string command = "copy \"" + sourceDllPath + "\" \"" + dllPath + "\"";
-	//			system(command.c_str());
-	//		}
-	//	}
-	//	else if (value == 0) {
-	//		// Check if d3d9.dll exists in the executable directory and remove it
-	//		if (std::filesystem::exists(dllPath)) {
-	//			std::string command = "del " + dllPath;
-	//			system(command.c_str());
-	//		}
-	//	}
-	//}
 
 	g_fpOnCrcFail = CrcFailExitApp;
 
