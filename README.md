@@ -36,6 +36,8 @@ Features:
 
     Fixed Jetman's broken DPI Fix
 
+    Proper DXVK Support (toggle in the source for now)
+
 I probably forgot some stuff I did T-T
 
 shoutout to ini because without her there wouldnt be any ini files

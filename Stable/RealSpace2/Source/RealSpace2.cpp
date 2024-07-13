@@ -104,7 +104,6 @@ HRESULT RError(int nErrCode)
 	return R_OK;
 }
 
-//typedef HRESULT(WINAPI* Direct3DCreate9Func)(UINT, IDirect3D9**);
 typedef HRESULT(WINAPI* Direct3DCreate9ExFunc)(UINT, IDirect3D9Ex**);
 
 bool isDXVK = true;
@@ -122,20 +121,13 @@ bool CreateDirect3D9()
 		Direct3DCreate9ExFunc dxvkDirect3DCreate9Ex =
 			(Direct3DCreate9ExFunc)GetProcAddress(hD3D9, "Direct3DCreate9Ex");
 
-		//Direct3DCreate9Func dxvkDirect3DCreate9 =
-			//(Direct3DCreate9Func)GetProcAddress(hD3D9, "Direct3DCreate9");
-
-		if (g_isDirect3D9ExEnabled)
-		{
+		//if (g_isDirect3D9ExEnabled)
+		//{
 			if(isDXVK)
 				HRESULT result = dxvkDirect3DCreate9Ex(D3D_SDK_VERSION, &g_pD3D);
 			else
 				HRESULT result = Direct3DCreate9Ex(D3D_SDK_VERSION, &g_pD3D);
-		}
-		/*else
-		{
-			(LPDIRECT3D9&)g_pD3D = Direct3DCreate9(D3D_SDK_VERSION);
-		}*/
+		//}
 	}
 
 	g_pD3D->GetAdapterIdentifier(0,0,&g_DeviceID);
