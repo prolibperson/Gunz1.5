@@ -91,10 +91,10 @@ HRESULT GetDirectXVersionViaDxDiag( DWORD* pdwDirectXVersionMajor, DWORD* pdwDir
 
 void zexit(int returnCode)
 {
-	// °ÔÀÓ°¡µå´Â Á¦´ë·Î deleteµÇ¾î¾ß ¿À·ù¹ß»ı½Ã ÀÚÃ¼ ·Î±×¸¦ ¿Ã¹Ù¸£°Ô ³²±æ ¼ö ÀÖ´Ù.
-	// ±×³É exit()ÇØµµ ZGameGuard¸¦ ½Ì±ÛÅÏÀ¸·Î ¸¸µé¾ú±â ¶§¹®¿¡ ¼Ò¸êÀÚ¿¡¼­ °ÔÀÓ°¡µå°¡ deleteµÇÁö¸¸ ¾îÂ°¼­ÀÎÁö ±×¶§ Å©·¡½Ã°¡ ÀÏ¾î³­´Ù.
-	// exit()ÇÏ±â Àü¿¡ °ÔÀÓ°¡µå¸¦ ¼öµ¿À¸·Î ÇØÁ¦ÇÏ¸é ±×·± ¹®Á¦°¡ ÀÏ¾î³ªÁö ¾Ê´Â´Ù.
-	// ÇØÅ· °ËÃâ µîÀÇ ÀÌÀ¯·Î Å¬¶óÀÌ¾ğÆ® Á¾·á½Ã exitÇÏÁö¸»°í zexit¸¦ ¾²ÀÚ.
+	// ê²Œì„ê°€ë“œëŠ” ì œëŒ€ë¡œ deleteë˜ì–´ì•¼ ì˜¤ë¥˜ë°œìƒì‹œ ìì²´ ë¡œê·¸ë¥¼ ì˜¬ë°”ë¥´ê²Œ ë‚¨ê¸¸ ìˆ˜ ìˆë‹¤.
+	// ê·¸ëƒ¥ exit()í•´ë„ ZGameGuardë¥¼ ì‹±ê¸€í„´ìœ¼ë¡œ ë§Œë“¤ì—ˆê¸° ë•Œë¬¸ì— ì†Œë©¸ìì—ì„œ ê²Œì„ê°€ë“œê°€ deleteë˜ì§€ë§Œ ì–´ì§¸ì„œì¸ì§€ ê·¸ë•Œ í¬ë˜ì‹œê°€ ì¼ì–´ë‚œë‹¤.
+	// exit()í•˜ê¸° ì „ì— ê²Œì„ê°€ë“œë¥¼ ìˆ˜ë™ìœ¼ë¡œ í•´ì œí•˜ë©´ ê·¸ëŸ° ë¬¸ì œê°€ ì¼ì–´ë‚˜ì§€ ì•ŠëŠ”ë‹¤.
+	// í•´í‚¹ ê²€ì¶œ ë“±ì˜ ì´ìœ ë¡œ í´ë¼ì´ì–¸íŠ¸ ì¢…ë£Œì‹œ exití•˜ì§€ë§ê³  zexitë¥¼ ì“°ì.
 	exit(returnCode);
 }
 
@@ -323,8 +323,8 @@ RRESULT OnDestroy(void *pParam)
 	mlog("Bitmap manager destroy Animation bitmap.\n");
 
 
-	// ¸Ş¸ğ¸®Ç® ÇìÁ¦
-	ZBasicInfoItem::Release(); // ÇÒ´çµÇ¾î ÀÖ´Â ¸Ş¸ğ¸® ÇØÁ¦
+	// ë©”ëª¨ë¦¬í’€ í—¤ì œ
+	ZBasicInfoItem::Release(); // í• ë‹¹ë˜ì–´ ìˆëŠ” ë©”ëª¨ë¦¬ í•´ì œ
 //	ZHPInfoItem::Release();
 
 	ZGetStencilLight()->Destroy();
@@ -381,7 +381,7 @@ RRESULT OnRender(void* pParam)
 	}
 
 	if (ZIsActionKeyPressed(ZACTION_MOVING_PICTURE))
-	{	// µ¿¿µ»ó Ä¸ÃÄ...2008.10.02
+	{	// ë™ì˜ìƒ ìº¡ì³...2008.10.02
 		if (g_App.GetGameInterface())
 			g_App.GetGameInterface()->GetBandiCapturer()->ToggleStart();
 	}
@@ -539,7 +539,7 @@ void ResetAppResource()
 	ZGetGameInterface()->m_sbRemainClientConnectionForResetApp = false;
 }
 
-// ´À·Áµµ °ü°è¾ø´Ù~~ -.-
+// ëŠë ¤ë„ ê´€ê³„ì—†ë‹¤~~ -.-
 
 int FindStringPos(char* str,char* word)
 {
@@ -594,13 +594,13 @@ bool FindCrashFunc(char* pName)
 
 	fclose(fp);
 
-	// ¿ì¸® ½î½º¿¡¼­ Ã£´Â´Ù.
+	// ìš°ë¦¬ ì˜ìŠ¤ì—ì„œ ì°¾ëŠ”ë‹¤.
 	int posSource = FindStringPos(pBuffer,"ublish");
 	if(posSource==-1) return false;
 
 	int posA = FindStringPos(pBuffer+posSource,"Function Name");
 //	int posB = FindStringPos(pBuffer,"File Name");	
-	// filename ÀÌ ¾ø´Â °æ¿ìµµ ÀÖ¾î¼­ ÀÌ·¸°Ô ¹Ù²å´Ù
+	// filename ì´ ì—†ëŠ” ê²½ìš°ë„ ìˆì–´ì„œ ì´ë ‡ê²Œ ë°”ê¿¨ë‹¤
 	int posB = posA + FindStringPos(pBuffer+posSource+posA,"\n");
 
 	if(posA==-1) return false;
@@ -631,14 +631,14 @@ void HandleExceptionLog()
 
 	extern char* logfilename;	// Instance on MDebug.cpp
 
-	// ERROR_REPORT_FOLDER Á¸ÀçÇÏ´ÂÁö °Ë»çÇÏ°í, ¾øÀ¸¸é »ı¼º
+	// ERROR_REPORT_FOLDER ì¡´ì¬í•˜ëŠ”ì§€ ê²€ì‚¬í•˜ê³ , ì—†ìœ¼ë©´ ìƒì„±
 	WIN32_FIND_DATA FindFileData;
 	HANDLE hFind;
 
 	hFind = FindFirstFile(ERROR_REPORT_FOLDER, &FindFileData);
 	if (hFind == INVALID_HANDLE_VALUE) {
 		if (!CreateDirectory("ReportError", NULL)) {
-			MessageBox(g_hWnd, "ReportError Æú´õ¸¦ »ı¼ºÇÒ ¼ö ¾ø½À´Ï´Ù.", APPLICATION_NAME , MB_ICONERROR|MB_OK);
+			MessageBox(g_hWnd, "ReportError í´ë”ë¥¼ ìƒì„±í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.", APPLICATION_NAME , MB_ICONERROR|MB_OK);
 			return;
 		}
 	} else 	{
@@ -646,10 +646,10 @@ void HandleExceptionLog()
 	}
 
 
-//2007³â 2¿ù 13ÀÏ BAReport ´õÀÌ»ó »ç¿ë ¸øÇÏ°Ô ¸·À½
+//2007ë…„ 2ì›” 13ì¼ BAReport ë”ì´ìƒ ì‚¬ìš© ëª»í•˜ê²Œ ë§‰ìŒ
 
 
-	// mlog.txt ¸¦ ERROR_REPORT_FOLDER ·Î º¹»ç
+	// mlog.txt ë¥¼ ERROR_REPORT_FOLDER ë¡œ ë³µì‚¬
 
 	//acesaga_0928_911_moanus_rslog.txt
 	//USAGE_EX) BAReport app=acesaga;addr=moon.maiet.net;port=21;id=ftp;passwd=ftp@;gid=10;user=moanus;localfile=rslog.txt;remotefile=remote_rslog.txt;
@@ -705,7 +705,7 @@ void HandleExceptionLog()
 		{
 			CopyFile("Gunz.dmp", szDumpFullFileName, TRUE);
 
-			 //BAReport ½ÇÇà
+			 //BAReport ì‹¤í–‰
 			char szCmd[4048];
 			char szRemoteFileName[_MAX_DIR], szRemoteDumpFileName[_MAX_DIR];
 			wsprintf(szRemoteFileName, "%s/%s/%s", ZGetConfiguration()->GetBAReportDir(), "gunzlog", szFileName);
@@ -757,9 +757,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			return TRUE; // prevent Windows from setting cursor to window class cursor
 		}break;
 		case WM_ENTERIDLE:
-			// ¸ğ´Ş ´ëÈ­»óÀÚ°¡ ÄÚµå¸¦ ºí·°ÇÏ°í ÀÖÀ» ¶§ ºÎ¸ğ¿¡°Ô º¸³»´Â idle ÅëÁö¸Ş½ÃÁö
-			// (ÀÏº» IME¿¡ ¸ğ´Ş ´ëÈ­»óÀÚ°¡ ÀÖ¾î¼­ ³Ö¾úÀ½)
-			// ¸ğ´Ş ´ëÈ­»óÀÚ·Î ¾÷µ¥ÀÌÆ® ·çÇÁ¸¦ ºí·°ÇØ¼­ ¹«Àû ¾îºäÁî·Î ¾Ç¿ëµÇ±â ¶§¹®¿¡ ¿©±â¼­ ¾÷µ¥ÀÌÆ®¸¦ ½ÇÇàÇÑ´Ù
+			// ëª¨ë‹¬ ëŒ€í™”ìƒìê°€ ì½”ë“œë¥¼ ë¸”ëŸ­í•˜ê³  ìˆì„ ë•Œ ë¶€ëª¨ì—ê²Œ ë³´ë‚´ëŠ” idle í†µì§€ë©”ì‹œì§€
+			// (ì¼ë³¸ IMEì— ëª¨ë‹¬ ëŒ€í™”ìƒìê°€ ìˆì–´ì„œ ë„£ì—ˆìŒ)
+			// ëª¨ë‹¬ ëŒ€í™”ìƒìë¡œ ì—…ë°ì´íŠ¸ ë£¨í”„ë¥¼ ë¸”ëŸ­í•´ì„œ ë¬´ì  ì–´ë·°ì¦ˆë¡œ ì•…ìš©ë˜ê¸° ë•Œë¬¸ì— ì—¬ê¸°ì„œ ì—…ë°ì´íŠ¸ë¥¼ ì‹¤í–‰í•œë‹¤
 			RFrame_UpdateRender();
 			break;
 
@@ -852,7 +852,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		return 0;
 	}
 
-	// thread safeÇÏ±âÀ§ÇØ ³ÖÀ½
+	// thread safeí•˜ê¸°ìœ„í•´ ë„£ìŒ
 	if (message == WM_CHANGE_GAMESTATE)
 	{
 		_ZChangeGameState(wParam);
@@ -994,17 +994,17 @@ bool CheckFont()
 	//	if (_access(FontNames,0) != -1)	{ g_font[RBASE_FONT_BATANG] = 1; }
 	//	else							{ g_font[RBASE_FONT_BATANG] = 0; }
 
-	if(g_base_font[RBASE_FONT_GULIM]==0 && g_base_font[RBASE_FONT_BATANG]==0) {//µÑ´Ù¾øÀ¸¸é..
+	if(g_base_font[RBASE_FONT_GULIM]==0 && g_base_font[RBASE_FONT_BATANG]==0) {//ë‘˜ë‹¤ì—†ìœ¼ë©´..
 
-		if( _access("_Font",0) != -1) { // ÀÌ¹Ì ±â·ÏµÇ¾î ÀÖ´Ù¸é..
+		if( _access("_Font",0) != -1) { // ì´ë¯¸ ê¸°ë¡ë˜ì–´ ìˆë‹¤ë©´..
 			_GetFileFontName( g_UserDefineFont );
 		}
 		else {
 
 			int hr = IDOK;
 
-			//hr = ::MessageBox(NULL,"±ÍÇÏÀÇ ÄÄÇ»ÅÍ¿¡´Â °ÇÁî°¡ »ç¿ëÇÏ´Â (±¼¸²,µ¸¿ò) ÆùÆ®°¡ ¾ø´Â °Í °°½À´Ï´Ù.\n ´Ù¸¥ ÆùÆ®¸¦ ¼±ÅÃ ÇÏ½Ã°Ú½À´Ï±î?","¾Ë¸²",MB_OKCANCEL);
-			//hr = ::MessageBox(NULL,"±ÍÇÏÀÇ ÄÄÇ»ÅÍ¿¡´Â °ÇÁî°¡ »ç¿ëÇÏ´Â (±¼¸²,µ¸¿ò) ÆùÆ®°¡ ¾ø´Â °Í °°½À´Ï´Ù.\n °è¼Ó ÁøÇà ÇÏ½Ã°Ú½À´Ï±î?","¾Ë¸²",MB_OKCANCEL);
+			//hr = ::MessageBox(NULL,"ê·€í•˜ì˜ ì»´í“¨í„°ì—ëŠ” ê±´ì¦ˆê°€ ì‚¬ìš©í•˜ëŠ” (êµ´ë¦¼,ë‹ì›€) í°íŠ¸ê°€ ì—†ëŠ” ê²ƒ ê°™ìŠµë‹ˆë‹¤.\n ë‹¤ë¥¸ í°íŠ¸ë¥¼ ì„ íƒ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?","ì•Œë¦¼",MB_OKCANCEL);
+			//hr = ::MessageBox(NULL,"ê·€í•˜ì˜ ì»´í“¨í„°ì—ëŠ” ê±´ì¦ˆê°€ ì‚¬ìš©í•˜ëŠ” (êµ´ë¦¼,ë‹ì›€) í°íŠ¸ê°€ ì—†ëŠ” ê²ƒ ê°™ìŠµë‹ˆë‹¤.\n ê³„ì† ì§„í–‰ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?","ì•Œë¦¼",MB_OKCANCEL);
 
 			if(hr==IDOK) {
 				/*			
@@ -1013,7 +1013,7 @@ bool CheckFont()
 				CString facename = dlg.GetFaceName();
 				lstrcpy((LPSTR)g_UserDefineFont,(LPSTR)facename.operator const char*());
 
-				hr = ::MessageBox(NULL,"¼±ÅÃÇÏ½Å ÆùÆ®¸¦ ÀúÀå ÇÏ½Ã°Ú½À´Ï±î?","¾Ë¸²",MB_OKCANCEL);
+				hr = ::MessageBox(NULL,"ì„ íƒí•˜ì‹  í°íŠ¸ë¥¼ ì €ì¥ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?","ì•Œë¦¼",MB_OKCANCEL);
 
 				if(hr==IDOK)
 				_SetFileFontName(g_UserDefineFont);
@@ -1035,7 +1035,7 @@ void CheckFileAssociation()
 {
 #define GUNZ_REPLAY_CLASS_NAME	"GunzReplay"
 
-	// Ã¼Å©ÇØºÁ¼­ µî·ÏÀÌ ¾ÈµÇ¾îÀÖÀ¸¸é µî·ÏÇÑ´Ù. »ç¿ëÀÚ¿¡°Ô ¹°¾îº¼¼öµµ ÀÖ°Ú´Ù.
+	// ì²´í¬í•´ë´ì„œ ë“±ë¡ì´ ì•ˆë˜ì–´ìˆìœ¼ë©´ ë“±ë¡í•œë‹¤. ì‚¬ìš©ìì—ê²Œ ë¬¼ì–´ë³¼ìˆ˜ë„ ìˆê² ë‹¤.
 	char szValue[256];
 	if(!MRegistry::Read(HKEY_CLASSES_ROOT,"." GUNZ_REC_FILE_EXT,NULL,szValue))
 	{
@@ -1108,10 +1108,6 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 		mlog("Succesfully loaded UpTimeFaker32.dll!\n");
 	}
 
-#ifndef DEVELOPER_MODE
-	ZInitAnticheat();
-#endif
-
 	g_fpOnCrcFail = CrcFailExitApp;
 
 	g_dwMainThreadID = GetCurrentThreadId();
@@ -1122,7 +1118,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	//_CrtSetBreakAlloc(994464);
 
-	// Current Directory¸¦ ¸ÂÃá´Ù.
+	// Current Directoryë¥¼ ë§ì¶˜ë‹¤.
 	char szModuleFileName[_MAX_DIR] = {0,};
 	GetModuleFileName(NULL, szModuleFileName, _MAX_DIR);
 	PathRemoveFileSpec(szModuleFileName);
@@ -1130,7 +1126,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 #ifndef _GAMEGUARD
 	#ifdef _PUBLISH
-		// Áßº¹ ½ÇÇà ±İÁö
+		// ì¤‘ë³µ ì‹¤í–‰ ê¸ˆì§€
 		//Mutex = CreateMutex(NULL, TRUE, "Gunz");
 		//if (GetLastError() == ERROR_ALREADY_EXISTS)
 		//{
@@ -1147,7 +1143,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	//#ifndef _DEBUG
 #ifdef _PUBLISH
-		// GunzLockÀ» ¶ç¿ö³õ°í Gunz.exe¸¦ ½ÇÇàÇÏ¸é Á¾·áÁ÷Àü ´ë±âÇÑ´Ù. (XProtector ÇÁ·Î¼¼½ºÀÌ¹ÌÁö½ºÄµ ÀÛ¾÷¿ë)
+		// GunzLockì„ ë„ì›Œë†“ê³  Gunz.exeë¥¼ ì‹¤í–‰í•˜ë©´ ì¢…ë£Œì§ì „ ëŒ€ê¸°í•œë‹¤. (XProtector í”„ë¡œì„¸ìŠ¤ì´ë¯¸ì§€ìŠ¤ìº” ì‘ì—…ìš©)
 	/*	HANDLE hMutexGunzLock = CreateMutex(NULL, TRUE, "GunzLock");
 		if (GetLastError() == ERROR_ALREADY_EXISTS)
 		{
@@ -1156,7 +1152,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 		}*/
 #endif
 
-	// ·Î±× ½ÃÀÛ
+	// ë¡œê·¸ ì‹œì‘
 	//mlog("GUNZ " STRFILEVER " launched. build (" __DATE__" " __TIME__") \n");
 	char szDateRun[128]="";
 	char szTimeRun[128]="";
@@ -1170,7 +1166,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 #endif
 
 #ifndef _LAUNCHER
-	UpgradeMrsFile();// mrs1 ÀÌ¶ó¸é mrs2·Î ¾÷±×·¡ÀÌµå ÇÑ´Ù..
+	UpgradeMrsFile();// mrs1 ì´ë¼ë©´ mrs2ë¡œ ì—…ê·¸ë˜ì´ë“œ í•œë‹¤..
 #endif
 
 	MSysInfoLog();
@@ -1196,7 +1192,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 //	#endif
 #endif
 
-	// config¿Í string ·Îµù
+	// configì™€ string ë¡œë”©
 	ZGetConfiguration()->Load();
 
 	if (os.dwMajorVersion >= 6 && Z_VIDEO_D3D9EX) {
@@ -1213,7 +1209,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	ZGetConfiguration()->Load_StringResDependent();
 
-	// ¿©±â¼­ ¸ŞÅ©·Î ÄÁ¹öÆÃ... ¸Õ°¡ ±¸¸®±¸¸®~~ -by SungE.
+	// ì—¬ê¸°ì„œ ë©”í¬ë¡œ ì»¨ë²„íŒ…... ë¨¼ê°€ êµ¬ë¦¬êµ¬ë¦¬~~ -by SungE.
 	if( !ZGetConfiguration()->LateStringConvert() )
 	{
 		MLog( "main.cpp - Late string convert fale.\n" );
@@ -1257,10 +1253,10 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 		mlog( "InitializeNotify ok.\n" );
 	}
 
-	// font ÀÖ´Â°¡ °Ë»ç..
+	// font ìˆëŠ”ê°€ ê²€ì‚¬..
 
 	if(CheckFont()==false) {
-		MLog("ÆùÆ®°¡ ¾ø´Â À¯Àú°¡ ÆùÆ® ¼±ÅÃÀ» Ãë¼Ò\n");
+		MLog("í°íŠ¸ê°€ ì—†ëŠ” ìœ ì €ê°€ í°íŠ¸ ì„ íƒì„ ì·¨ì†Œ\n");
 		return 0;
 	}
 
@@ -1312,8 +1308,8 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 
 	const int nRRunReturn = RRun();
 
-	//Á¾·á½Ã °ÔÀÓ°¡µå°¡ XfireÀÇ ¸Ş¸ğ¸®¾²±â ¿¡·¯¸¦ À¯¹ßÇÏ´Âµ¥ ÀÌ¶§ ¿À·ùÃ¢ÀÌ Ç®½ºÅ©¸° µÚ¿¡ ¶ß´Â °Í ¹æÁöÇÏ±â À§ÇØ
-	//Á¾·áÀü¿¡ °ÇÁî¸¦ ÃÖ¼ÒÈ­/ºñÈ°¼ºÈ­ ½ÃÄÑ³õ´Â´Ù. xfireÀÇ Áï°¢ÀûÀÎ ¹®Á¦ ÇØ°áÀ» ±â´ëÇÏ±â ¾î·Á¿ì¹Ç·Î ÀÌ·¸°Ô Ã³¸®
+	//ì¢…ë£Œì‹œ ê²Œì„ê°€ë“œê°€ Xfireì˜ ë©”ëª¨ë¦¬ì“°ê¸° ì—ëŸ¬ë¥¼ ìœ ë°œí•˜ëŠ”ë° ì´ë•Œ ì˜¤ë¥˜ì°½ì´ í’€ìŠ¤í¬ë¦° ë’¤ì— ëœ¨ëŠ” ê²ƒ ë°©ì§€í•˜ê¸° ìœ„í•´
+	//ì¢…ë£Œì „ì— ê±´ì¦ˆë¥¼ ìµœì†Œí™”/ë¹„í™œì„±í™” ì‹œì¼œë†“ëŠ”ë‹¤. xfireì˜ ì¦‰ê°ì ì¸ ë¬¸ì œ í•´ê²°ì„ ê¸°ëŒ€í•˜ê¸° ì–´ë ¤ìš°ë¯€ë¡œ ì´ë ‡ê²Œ ì²˜ë¦¬
 	ShowWindow(g_hWnd, SW_MINIMIZE);
 
 #ifdef _MTRACEMEMORY
@@ -1355,7 +1351,7 @@ int PASCAL WinMain(HINSTANCE this_inst, HINSTANCE prev_inst, LPSTR cmdline, int 
 //	__except(CrashExceptionDump(GetExceptionInformation(), szDumpFileName, true))
 //	{
 //		//HandleExceptionLog();
-////		MessageBox(g_hWnd, "¿¹»óÄ¡ ¸øÇÑ ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.", APPLICATION_NAME , MB_ICONERROR|MB_OK);
+////		MessageBox(g_hWnd, "ì˜ˆìƒì¹˜ ëª»í•œ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤.", APPLICATION_NAME , MB_ICONERROR|MB_OK);
 //	}
 #endif
 
