@@ -115,12 +115,6 @@
     <Filter Include="WorldObjects">
       <UniqueIdentifier>{e6a75737-768e-4a31-9c40-c279044e631d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AntiCheat">
-      <UniqueIdentifier>{59b1d87a-ae96-45a8-8b18-3e503ae85ce3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AntiCheat\Anti">
-      <UniqueIdentifier>{9975d0ea-4b13-43a9-9be3-9c4bdd4d61e8}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ZActionDef.h">
@@ -927,15 +921,6 @@
     <ClInclude Include="ZWorldObject_Navigation.h">
       <Filter>WorldObjects</Filter>
     </ClInclude>
-    <ClInclude Include="AntiHook.h">
-      <Filter>AntiCheat\Anti</Filter>
-    </ClInclude>
-    <ClInclude Include="AntiShotbot.h">
-      <Filter>AntiCheat\Anti</Filter>
-    </ClInclude>
-    <ClInclude Include="AnticheatMain.h">
-      <Filter>AntiCheat</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZBandiCapturer.cpp">
@@ -1681,15 +1666,6 @@
     </ClCompile>
     <ClCompile Include="ZWorldObject_Navigation.cpp">
       <Filter>WorldObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="AnticheatMain.cpp">
-      <Filter>AntiCheat</Filter>
-    </ClCompile>
-    <ClCompile Include="AntiHook.cpp">
-      <Filter>AntiCheat\Anti</Filter>
-    </ClCompile>
-    <ClCompile Include="AntiShotbot.cpp">
-      <Filter>AntiCheat\Anti</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

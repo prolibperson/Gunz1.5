@@ -212,9 +212,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AnticheatMain.h" />
-    <ClInclude Include="AntiHook.h" />
-    <ClInclude Include="AntiShotbot.h" />
     <ClInclude Include="ZActionDef.h" />
     <ClInclude Include="ZActorAction.h" />
     <ClInclude Include="ZActorActionManager.h" />
@@ -487,9 +484,6 @@
     <ClInclude Include="ZWorldObject_Navigation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnticheatMain.cpp" />
-    <ClCompile Include="AntiHook.cpp" />
-    <ClCompile Include="AntiShotbot.cpp" />
     <ClCompile Include="ZActorAction.cpp" />
     <ClCompile Include="ZActorActionManager.cpp" />
     <ClCompile Include="ZActorBase.cpp" />
